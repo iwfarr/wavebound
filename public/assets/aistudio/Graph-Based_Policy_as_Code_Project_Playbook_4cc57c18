@@ -1,0 +1,190 @@
+﻿Trusted Research Environment (TRE) Policy-as-Code Project Playbook
+1. Project Overview & Objectives
+This playbook provides a step-by-step operational guide for implementing, deploying, and maintaining a machine-readable, graph-navigable Policy-as-Code (PaC) platform for Trusted Research Environments (TRE) / Secure Data Environments (SDE).
+Key Goals:
+* Semantic Transparency: Build an auditable OWL 2 / RDF ontology mapping clinical data governance, hospital operational tiers, and research project access (aligned with the Five Safes Framework and SATRE pillars).
+* Deterministic Enforcement: Resolve the Open-World Assumption (OWA) into Closed-World Assumption (CWA) security checks via SHACL shapes and compile them into low-latency Open Policy Agent (OPA) Rego rules.
+* Dual-Persona Public Portal: Expose a clean, plain-English Governance Atlas alongside an interactive Cytoscape knowledge graph viewer for researchers, auditors, and the public.
+* AI & MCP Governance: Incorporate EU AI Act risk tiers and Model Context Protocol (MCP) tool-use boundaries for autonomous analytics agents.
+
+
+________________
+
+
+2. Project Architecture & Repository Structure
+Organize your Git repository using the following modular structure:
+
+
+tre-policy-as-code/
+
+
+├── .github/
+
+
+│   └── workflows/
+
+
+│       └── ci.yml                 # CI: SHACL validation, graph build & GitHub Pages deploy
+
+
+├── compiler/
+
+
+│   ├── build_graph.py             # Generates JSON-LD & Cytoscape graph data from RDF/OWL
+
+
+│   ├── generate_opa.py            # Compiles semantic rules into OPA Rego policy
+
+
+│   ├── generate_docs.py           # Synthesizes human-readable FOI / Governance Markdown
+
+
+│   └── rdf_to_rego.py             # Full compiler for OWL/SDC to production Rego
+
+
+├── ontology/
+
+
+│   ├── tre-core.ttl               # Core OWL 2 ontology (Five Safes, NHS Caldicott, Tiers)
+
+
+│   ├── governance_core.ttl        # Extended NHS s251, SATRE pillars, and legal bases
+
+
+│   ├── sdc_rules.ttl              # Quantitative SDC thresholds (ONS, SAIL, k-anonymity)
+
+
+│   ├── agent_mcp.ttl              # Autonomous agent boundaries & MCP tools
+
+
+│   └── shapes/
+
+
+│       ├── access-shapes.ttl      # SHACL constraints for runtime validation
+
+
+│       └── sdc_shapes.ttl         # Output compliance & small-cell disclosure checks
+
+
+├── security/
+
+
+│   └── opa/
+
+
+│       ├── policy.rego            # Target PDP Rego policy for workspace admission
+
+
+│       └── authz.rego             # Production compiled rules (Five Safes + SDC + MCP)
+
+
+├── tests/
+
+
+│   ├── fixtures/
+
+
+│   │   ├── valid-session.ttl      # Compliant test instance
+
+
+│   │   └── noncompliant-session.ttl # Non-compliant test instance
+
+
+│   └── test_shapes.py             # PySHACL automated test harness
+
+
+├── web/
+
+
+│   ├── index.html                 # Dual-persona public interface (Governance Atlas + Graph)
+
+
+│   ├── app.js                     # Cytoscape visualization and node inspection engine
+
+
+│   └── style.css                  # Modern dashboard styling
+
+
+├── Makefile                       # Dev automation (install, test, build, serve)
+
+
+├── requirements.txt               # Python dependencies
+
+
+└── README.md                      # Operational handbook
+
+
+________________
+
+
+3. Implementation Roadmap & Phases
+Phase 1: Knowledge Modeling & Baseline Ontology (Weeks 1–4)
+* Define Scope: Distinguish Policy Metadata (roles, data tiers, retention limits) from Runtime State (active pods, network connections).
+* Ontology Authoring: Build modular Turtle (.ttl) definitions covering:
+   * Five Safes: Safe Person, Safe Project, Safe Setting, Safe Data, Safe Output.
+   * SATRE Pillars: Information Governance, Computing Infrastructure, Data Management, Software Operations.
+   * Quantitative SDC: Primary cell suppression ($k \ge 10$) and dominance rules ($k% \le 80%$).
+   * AI Governance: EU AI Act risk categorization and Model Context Protocol (MCP) tool bounds (mcp:ExecuteSQL, mcp:ExportSummary).
+* GitOps Setup: Establish a version-controlled repository with semantic linting tools (pyshacl, rdfpipe) in CI.
+Phase 2: Validation Logic & Graph Test Suite (Weeks 5–8)
+* SHACL Shapes: Formalize policies into SHACL node and property shapes for deterministic pass/fail outcomes.
+* Test Fixtures: Construct unit test graphs for positive cases (accredited researcher, active ethics, egress-disabled enclave) and negative cases (expired IG training, un-isolated subnets).
+* Automated Testing: Run pytest harness (tests/test_shapes.py) to validate graphs against constraints in CI.
+Phase 3: Public Documentation & Exploration Interface (Weeks 9–12)
+* Automated Documentation: Run compiler/generate_docs.py to extract governance metadata into GOVERNANCE_CHARTER.md for Trust boards and Freedom of Information (FOI) requests.
+* Dual-Persona Web Portal: Deploy the static web UI (web/index.html) featuring:
+   * Plain-English Governance Atlas: High-level cards and compliance summaries for public visitors and clinical staff.
+   * Interactive Graph Explorer: Cytoscape.js rendering of OWL classes, properties, and MCP tool relationships with sidebar inspectors.
+* Static Deployment: Publish compiled assets to GitHub Pages or cloud static storage via CI/CD workflows.
+Phase 4: Runtime Enforcement Integration (Weeks 13–16)
+* OPA Compilation: Execute compiler/rdf_to_rego.py to translate semantic Turtle definitions and SDC thresholds into executable Open Policy Agent (OPA) Rego rules.
+* Policy Enforcement Points (PEP):
+   * Workspace Admission: Integrate OPA with Kubernetes admission controllers or API gateways to intercept workspace provisioning.
+   * Network & Egress Controls: Enforce enclave isolation and automate airlock egress reviews using quantitative SHACL/SDC checks.
+   * Audit Lineage: Emit W3C PROV-O RDF triples on every major event (project provisioned, access revoked, egress granted) to an append-only audit log.
+
+
+________________
+
+
+4. Verification & Developer Workflow Commands
+To build, test, and run the project locally:
+
+
+# 1. Install Python dependencies
+
+
+pip install -r requirements.txt
+
+
+# or via Makefile:
+
+
+make install
+
+
+# 2. Run SHACL closed-world tests (verifies Five Safes, MCP scopes, and SDC limits)
+
+
+pytest tests/test_shapes.py -v
+
+
+# 3. Generate human-readable FOI & Governance Report
+
+
+python compiler/generate_docs.py
+
+
+# 4. Compile ontology and SDC rules into native OPA Rego policies & Cytoscape JSON
+
+
+make build
+
+
+# 5. Launch the public interface locally
+
+
+make serve
+
+
+Access the local web interface at http://localhost:8000 to explore the dual-persona Governance Atlas and interactive knowledge graph.
