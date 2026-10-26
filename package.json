@@ -9,7 +9,10 @@
     "start": "node server.ts",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "claims:update": "node scripts/claim-inventory.mjs",
+    "claims:check": "node scripts/claim-inventory.mjs --check",
+    "claims:test": "node --test scripts/claim-inventory.test.mjs"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
