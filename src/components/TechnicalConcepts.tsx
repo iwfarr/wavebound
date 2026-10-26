@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PLAYBOOK_MODULES, ConceptModule, SATRE_PILLARS, EXTERNAL_RESOURCES, SatrePillarDetail } from '../data/playbookContent';
 import { useUserProgress } from '../context/ProgressContext';
+import { SeawaterLogo } from './SeawaterLogo';
 import {
   ShieldCheck,
   Binary,
@@ -80,12 +81,9 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
       <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="space-y-1">
-            <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
-              <BookOpen className="w-3.5 h-3.5" />
-              <span>Core Concept Deep Dives</span>
-            </span>
+            <SeawaterLogo variant="badge" size="xs" className="mb-0.5" />
             <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-              Playbook Architectural Pillars
+              Project Seawater: Architectural Pillars &amp; Deep Dives
             </h2>
           </div>
 

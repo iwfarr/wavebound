@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useUserProgress } from '../context/ProgressContext';
 import { GLOSSARY_TERMS } from '../data/glossaryData';
 import { PLAYBOOK_MODULES } from '../data/playbookContent';
+import { SeawaterLogo } from './SeawaterLogo';
 import {
   Shield,
   BookOpen,
@@ -90,19 +91,10 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center gap-3">
             <button
               onClick={() => onSelectTab('playbook')}
-              className="flex items-center gap-2.5 text-left group"
+              className="flex items-center text-left group transition-transform active:scale-95"
+              title="Project Seawater · Policy-as-Code Engine"
             >
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-600 to-blue-500 flex items-center justify-center text-slate-950 shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-                <Shield className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <div className="font-extrabold text-sm sm:text-base text-white tracking-tight leading-none flex items-center gap-1.5">
-                  <span>TRE Policy-as-Code</span>
-                </div>
-                <div className="text-[10px] text-slate-400 font-mono tracking-wider">
-                  PLAYBOOK PLATFORM
-                </div>
-              </div>
+              <SeawaterLogo variant="horizontal" size="md" />
             </button>
           </div>
 

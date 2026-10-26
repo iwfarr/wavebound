@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useUserProgress } from '../context/ProgressContext';
 import { GLOSSARY_TERMS, GlossaryTerm } from '../data/glossaryData';
+import { SeawaterLogo } from './SeawaterLogo';
 import {
   Search,
   BookOpen,
@@ -467,18 +468,23 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
     <div className="max-w-6xl mx-auto px-4 py-8 space-y-8" ref={contentContainerRef}>
       {/* Title & Reading Progress Bar Header */}
       <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 relative overflow-hidden">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs font-semibold text-cyan-400 uppercase tracking-wider">
-              <BookOpen className="w-4 h-4" />
-              <span>Dynamic Deployable Governance Policy • SemVer 2.4.0-prod</span>
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <SeawaterLogo variant="badge" size="sm" />
+              <div className="flex items-center gap-1.5 text-xs font-semibold text-cyan-400 uppercase tracking-wider">
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>SemVer 2.4.0-prod</span>
+              </div>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Graph-Based Policy-as-Code Project Playbook
-            </h1>
-            <p className="text-slate-300 text-sm max-w-2xl leading-relaxed">
-              An active, version-controlled governance policy engine for Trusted Research Environments (TRE) / Secure Data Environments (SDE)—<span className="text-cyan-300 font-semibold">not a static SDC specification</span>. Compiles semantic graph ontologies into real-time Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs).
-            </p>
+            <div className="space-y-1">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                Project Seawater: Policy-as-Code Playbook
+              </h1>
+              <p className="text-slate-300 text-sm max-w-2xl leading-relaxed">
+                An active, version-controlled governance policy engine for Trusted Research Environments (TRE) / Secure Data Environments (SDE)—<span className="text-cyan-300 font-semibold">not a static SDC specification</span>. Compiles semantic graph ontologies into real-time Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs).
+              </p>
+            </div>
           </div>
 
           {/* Reading Tracker Widget */}

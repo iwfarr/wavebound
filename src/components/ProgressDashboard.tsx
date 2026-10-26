@@ -16,6 +16,7 @@ import {
   ShieldCheck,
   AlertCircle
 } from 'lucide-react';
+import { SeawaterLogo } from './SeawaterLogo';
 import confetti from 'canvas-confetti';
 
 interface ProgressDashboardProps {
@@ -86,18 +87,17 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
       <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs font-semibold text-cyan-400 uppercase tracking-wider">
-              <TrendingUp className="w-4 h-4" />
-              <span>User Learning & Verification Progress</span>
+          <div className="space-y-3">
+            <SeawaterLogo variant="badge" size="sm" />
+            <div className="space-y-1">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                Project Seawater: Mastery Dashboard
+              </h1>
+              <p className="text-slate-400 text-sm max-w-2xl leading-relaxed">
+                Track your journey through the Seawater Policy-as-Code Playbook. Review your section completion,
+                quiz attempt history, highest test scores, and earned certifications.
+              </p>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Progress & Quiz Mastery Dashboard
-            </h1>
-            <p className="text-slate-400 text-sm max-w-2xl leading-relaxed">
-              Track your journey through the TRE Policy-as-Code Playbook. Review your section completion,
-              quiz attempt history, highest test scores, and earned certifications.
-            </p>
           </div>
 
           {/* User Rank Card */}
@@ -467,13 +467,15 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
             </button>
 
             <div className="border-2 border-dashed border-cyan-500/40 p-8 rounded-xl text-center space-y-4 bg-slate-950/60">
-              <ShieldCheck className="w-12 h-12 text-cyan-400 mx-auto" />
+              <div className="flex justify-center">
+                <SeawaterLogo variant="icon" size="xl" />
+              </div>
               <div className="space-y-1">
                 <div className="text-xs uppercase tracking-widest text-cyan-400 font-bold">
                   Certificate of Professional Achievement
                 </div>
                 <h2 className="text-2xl font-black tracking-tight text-white">
-                  Trusted Research Environment Policy-as-Code
+                  Project Seawater: Policy-as-Code
                 </h2>
               </div>
 
