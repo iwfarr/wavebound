@@ -16,7 +16,8 @@ import {
   Sparkles,
   ArrowRight,
   ShieldCheck,
-  FolderTree
+  FolderTree,
+  Workflow
 } from 'lucide-react';
 
 interface PlaybookSection {
@@ -57,15 +58,16 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
     title: 'Phase 1: Knowledge Modeling — Scope & Policy Metadata vs. Runtime State',
     subtitle: 'Weeks 1–2: Distinguishing immutable governance assertions from ephemeral infrastructure state',
     content: [
-      '• Defining the Architectural Boundary: In a Trusted Research Environment (TRE) or Secure Data Environment (SDE), systems fail when static governance declarations are conflated with live infrastructure telemetry.',
-      '• Policy Metadata (Ontological Domain): Stored in versioned RDF/OWL graphs. Includes researcher accreditation status, institutional affiliations, NHS Section 251 exemption certificates, project ethics protocol numbers, approved clinical data sensitivity tiers, and retention horizons.',
-      '• Runtime State (Operational Domain): Dynamic observations managed by Kubernetes, Calico CNI, and API gateways. Includes active pod IPs, CPU/GPU utilization, ephemeral egress connections, and transient session tokens.',
-      '• GitOps Repository Setup: Establish modular Git structure (`ontology/`, `compiler/`, `security/opa/`, `tests/`) with automated pre-commit linters for RDF and Turtle serialization syntax.'
+      '• Plain-English Architecture Principle: Systems break when enduring governance laws are conflated with ephemeral infrastructure plumbing.',
+      '• 1. Governance Metadata (The Ontological Law): Enduring, legal, human-negotiated truths about the research project. Examples include: researcher accreditation status, institutional identity, NHS Section 251 exemption certificates, project REC ethics protocol numbers, approved clinical data sensitivity tiers, and retention horizons. This information is authored by governance officers, version-controlled in Git, and formally serialized in RDF/OWL ontologies (tre-core.ttl). It changes only when ethics approvals, laws, or institutional agreements change.',
+      '• 2. Ephemeral Runtime State (The Cluster Plumbing): Transient, mechanical facts of the live compute fabric managed by Kubernetes, Calico CNI, and Linux kernels. Examples include: pod IP addresses (10.244.2.14), ephemeral network sockets, container process IDs, CPU/GPU quotas, and transient JWT bearer tokens. This state is spun up, scaled, rescheduled, and recycled continuously.',
+      '• 3. The Classic Infrastructure Trap: Traditional IT configurations mistakenly hardcode governance rules directly into cluster network rules or pod name whitelists (e.g. "allow IP 10.244.2.14 to access clinical database X"). When a container crashes, restarts, or migrates to a different worker node, the IP changes—causing immediate outages or leaving behind orphaned, unverified permissions.',
+      '• 4. The Seawater Decoupled Solution: Clean separation of concerns. Kubernetes Admission Webhooks intercept pod launch requests and extract only the researcher and project claims. The Open Policy Agent (OPA) evaluates these claims against the versioned, compiled governance graph. If the governance metadata says Dr. Smith has active IG training and Project 102 has approved Tier 2 ethics, admission is granted—completely agnostic of which server, container ID, or IP the orchestrator assigns.'
     ],
     keyTakeaways: [
-      'Policy metadata lives in version-controlled RDF ontologies; runtime state lives in orchestrators.',
-      'Decoupling policy definition from cluster state eliminates brittle hardcoded security configurations.',
-      'Enables continuous compliance auditing without interrogating production database clusters.'
+      'Governance metadata lives in version-controlled RDF ontologies; runtime state lives in Kubernetes orchestrators.',
+      'Decoupling policy definition from ephemeral cluster state prevents brittle hardcoded IPs and zombie privileges.',
+      'Enables continuous statutory compliance auditing without interrogating or restarting live database clusters.'
     ]
   },
   {
@@ -324,6 +326,7 @@ interface PlaybookReaderProps {
   onNavigateToGlossaryTerm: (termId: string) => void;
   onNavigateToConcept: (conceptId: string) => void;
   onNavigateToQuiz: (category?: string) => void;
+  onNavigateToImplementationTrack?: () => void;
   targetSectionId?: string | null;
   targetHighlightTerm?: string;
 }
@@ -332,6 +335,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
   onNavigateToGlossaryTerm,
   onNavigateToConcept,
   onNavigateToQuiz,
+  onNavigateToImplementationTrack,
   targetSectionId,
   targetHighlightTerm,
 }) => {
@@ -513,6 +517,35 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
               )}
             </div>
           </div>
+        </div>
+
+        {/* Operational Bridge Banner to Implementation Track */}
+        <div className="bg-slate-950/90 border border-cyan-900/60 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-cyan-950 border border-cyan-800 flex items-center justify-center shrink-0">
+              <Workflow className="w-5 h-5 text-cyan-400" />
+            </div>
+            <div>
+              <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                <span>Operational Implementation &amp; Safe Rollout Track</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono font-bold">
+                  Non-Breaking
+                </span>
+              </div>
+              <p className="text-[11px] sm:text-xs text-slate-400 mt-0.5">
+                Moving from this overview into code? Review the <strong>granular 16-week sprint deliverables</strong>, <strong>evaluate-only/shadow rollout stages</strong>, and <strong>Decision Register (D-001–D-009)</strong>.
+              </p>
+            </div>
+          </div>
+          {onNavigateToImplementationTrack && (
+            <button
+              onClick={onNavigateToImplementationTrack}
+              className="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold flex items-center gap-2 transition-all shrink-0 shadow-sm shadow-cyan-500/20 active:scale-95"
+            >
+              <span>Explore Implementation Track</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
 
         {/* Search Bar with Matches Counter and Navigation */}

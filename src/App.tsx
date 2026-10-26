@@ -16,6 +16,7 @@ import { ProgressDashboard } from './components/ProgressDashboard';
 import { GovernanceAtlas } from './components/GovernanceAtlas';
 import { ResourcesPage } from './components/ResourcesPage';
 import { LLMSecurityEnclave } from './components/LLMSecurityEnclave';
+import { ImplementationTrack } from './components/ImplementationTrack';
 import { getSectionIdForGlossaryTerm } from './data/glossaryData';
 import { ShieldCheck, BookOpen, Layers, Cpu, HelpCircle, Bookmark, TrendingUp } from 'lucide-react';
 
@@ -88,6 +89,10 @@ export default function App() {
               onNavigateToGlossaryTerm={handleNavigateToGlossaryTerm}
               onNavigateToConcept={handleNavigateToConcept}
               onNavigateToQuiz={handleNavigateToQuiz}
+              onNavigateToImplementationTrack={() => {
+                setActiveTab('implementation-track');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               targetSectionId={targetSectionId}
               targetHighlightTerm={targetHighlightTerm}
             />
@@ -98,6 +103,13 @@ export default function App() {
               initialModuleId={activeModuleId}
               onNavigateToQuiz={handleNavigateToQuiz}
               onNavigateToGlossaryTerm={handleNavigateToGlossaryTerm}
+            />
+          )}
+
+          {activeTab === 'implementation-track' && (
+            <ImplementationTrack
+              onNavigateToSection={handleNavigateToSection}
+              onNavigateToGlossary={handleNavigateToGlossaryTerm}
             />
           )}
 

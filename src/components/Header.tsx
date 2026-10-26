@@ -17,12 +17,14 @@ import {
   FileText,
   Bookmark,
   ExternalLink,
-  Bot
+  Bot,
+  Workflow
 } from 'lucide-react';
 
 export type ActiveTab =
   | 'playbook'
   | 'concepts'
+  | 'implementation-track'
   | 'graph'
   | 'sandbox'
   | 'llm-security'
@@ -72,6 +74,7 @@ export const Header: React.FC<HeaderProps> = ({
   const navItems: { id: ActiveTab; label: string; icon: React.ReactNode }[] = [
     { id: 'playbook', label: 'Playbook & Search', icon: <FileText className="w-4 h-4" /> },
     { id: 'concepts', label: 'Key Concepts', icon: <BookOpen className="w-4 h-4" /> },
+    { id: 'implementation-track', label: 'Implementation & Rollout', icon: <Workflow className="w-4 h-4" /> },
     { id: 'graph', label: 'Cytoscape Graph', icon: <Layers className="w-4 h-4" /> },
     { id: 'sandbox', label: 'Policy Sandbox', icon: <Cpu className="w-4 h-4" /> },
     { id: 'llm-security', label: 'LLM & Enclave Security', icon: <Bot className="w-4 h-4" /> },

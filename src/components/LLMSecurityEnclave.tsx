@@ -417,6 +417,195 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
                 </div>
               </div>
             </div>
+
+            {/* Section 3: The NHS VPN Split-Tunneling Illusion vs. True Air-Gapped TRE Enclaves */}
+            <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border border-amber-900/40 space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-wider">
+                    <AlertTriangle className="w-4 h-4 text-amber-400" />
+                    <span>Information Governance &amp; Network Topology Analysis</span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                    The NHS VPN Split-Tunneling Illusion vs. True Air-Gapped TRE Enclaves
+                  </h3>
+                  <p className="text-slate-300 text-xs sm:text-sm max-w-3xl leading-relaxed">
+                    Addressing developer LLM/CLI use: Why working over an NHS Trust VPN connection creates a deceptive false sense of security, and how true Trusted Research Environments (TREs) physically and cryptographically prevent data exfiltration.
+                  </p>
+                </div>
+                <div className="p-3 bg-slate-950 rounded-xl border border-amber-900/60 text-right shrink-0">
+                  <span className="text-[10px] text-slate-500 uppercase font-mono block">Governance Warning</span>
+                  <span className="text-xs font-bold text-amber-300 font-mono">NHS VPN ≠ TRE Security</span>
+                  <span className="text-[10px] text-slate-400 block">Outbound WAN egress remains active</span>
+                </div>
+              </div>
+
+              {/* Explanatory Context: Why NHS VPN Oddly Allows Internet Access */}
+              <div className="p-4 rounded-xl bg-amber-950/20 border border-amber-800/40 space-y-2">
+                <h4 className="text-sm font-bold text-amber-300 flex items-center gap-2">
+                  <span>The Core Hazard: Split-Tunneling &amp; Developer AI Tooling</span>
+                </h4>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  NHS Trust, ICB, and regional health board VPNs (e.g., Cisco AnyConnect, FortiClient, Pulse Secure) are configured to authenticate trusted clinical staff and grant access to internal intranet portals, pathology databases, and electronic patient records (EPRs).
+                  Crucially, <strong>most NHS VPN configurations permit split-tunneling or route general internet egress through an outbound corporate web gateway</strong> to allow standard web browsing, package installations (<code>pip</code>, <code>npm</code>), and email.
+                </p>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  When a data scientist or software engineer runs modern AI-assisted coding extensions (such as <strong>GitHub Copilot, Cursor, Cline, or Claude Code</strong>) on a laptop connected to the NHS VPN, <strong>the IDE silently transmits active editor buffers, open diagnostic files, SQL queries, and terminal logs across external commercial LLM APIs</strong> hosted on public cloud infrastructure outside the NHS sovereign boundary.
+                </p>
+              </div>
+
+              {/* Side-by-Side Architectural Contrast Table */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Left Card: NHS VPN Workstation Scenario */}
+                <div className="p-5 rounded-xl bg-slate-950 border border-red-900/50 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-red-400 uppercase tracking-wider flex items-center gap-1.5">
+                      <XCircle className="w-4 h-4 text-red-400" />
+                      <span>Developer Laptop on NHS VPN (High Risk)</span>
+                    </span>
+                    <span className="text-[10px] font-mono bg-red-950/80 text-red-300 px-2 py-0.5 rounded border border-red-800">
+                      Uncontrolled Egress
+                    </span>
+                  </div>
+
+                  <div className="space-y-3 text-xs">
+                    <div className="space-y-1">
+                      <span className="font-semibold text-slate-300 block">Network Perimeter:</span>
+                      <p className="text-slate-400 text-[11px] leading-relaxed">
+                        VPN grants access to internal NHS shares, but local workstation retains active default route to the public internet (split-tunneling) or permits HTTPS port 443 egress to arbitrary web domains.
+                      </p>
+                    </div>
+
+                    <div className="space-y-1">
+                      <span className="font-semibold text-slate-300 block">AI Coding Tool Behavior:</span>
+                      <p className="text-slate-400 text-[11px] leading-relaxed">
+                        Cursor, Copilot, or Cline automatically scan open tabs, local <code>.env</code> files, and SQL extracts for context window indexing, sending payloads directly to <code>api.openai.com</code>, <code>api.anthropic.com</code>, or Microsoft telemetry servers.
+                      </p>
+                    </div>
+
+                    <div className="space-y-1">
+                      <span className="font-semibold text-slate-300 block">Data Protection Impact:</span>
+                      <p className="text-slate-400 text-[11px] leading-relaxed">
+                        Person-level NHS numbers, unmasked patient demographics, and confidential cohort definitions leave the UK sovereign boundary without DPA/DSA coverage.
+                      </p>
+                    </div>
+
+                    <div className="space-y-1">
+                      <span className="font-semibold text-slate-300 block">Inspection &amp; Auditability:</span>
+                      <p className="text-slate-400 text-[11px] leading-relaxed">
+                        Zero prompt inspection. No Caldicott oversight. No record of which patient records were ingested into commercial LLM model context caches.
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-slate-900 flex items-center justify-between text-[11px] text-red-400 font-mono font-semibold">
+                      <span>Status: Non-Compliant</span>
+                      <span>UK GDPR Art. 32 / 33 Breach Risk</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Card: True Air-Gapped TRE Enclave */}
+                <div className="p-5 rounded-xl bg-slate-950 border border-emerald-900/50 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                      <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                      <span>Seawater TRE Enclave (Zero-Egress Isolation)</span>
+                    </span>
+                    <span className="text-[10px] font-mono bg-emerald-950/80 text-emerald-300 px-2 py-0.5 rounded border border-emerald-800">
+                      SATRE 2.0 Compliant
+                    </span>
+                  </div>
+
+                  <div className="space-y-3 text-xs">
+                    <div className="space-y-1">
+                      <span className="font-semibold text-slate-300 block">Network Perimeter:</span>
+                      <p className="text-slate-400 text-[11px] leading-relaxed">
+                        Calico CNI <code>GlobalNetworkPolicy</code> drops all outbound WAN packets at the Linux kernel level. No external IP routing exists; internet DNS queries are sinkholed.
+                      </p>
+                    </div>
+
+                    <div className="space-y-1">
+                      <span className="font-semibold text-slate-300 block">AI Coding Tool Behavior:</span>
+                      <p className="text-slate-400 text-[11px] leading-relaxed">
+                        IDE extensions are reconfigured with <code>baseURL</code> pointed exclusively to an <strong>in-enclave vLLM / Triton cluster</strong> running open-weight models (Llama-3, DeepSeek-Coder) over private mTLS.
+                      </p>
+                    </div>
+
+                    <div className="space-y-1">
+                      <span className="font-semibold text-slate-300 block">Data Protection Impact:</span>
+                      <p className="text-slate-400 text-[11px] leading-relaxed">
+                        Data remains within the certified enclave boundary. No token, prompt buffer, or gradient can ever traverse beyond the private cluster subnets.
+                      </p>
+                    </div>
+
+                    <div className="space-y-1">
+                      <span className="font-semibold text-slate-300 block">Inspection &amp; Auditability:</span>
+                      <p className="text-slate-400 text-[11px] leading-relaxed">
+                        Pre-prompt PEP AST validator scrubs any residual direct PII before inference; all prompt requests and model completions are logged in immutable, cryptographically sealed audit ledgers.
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-slate-900 flex items-center justify-between text-[11px] text-emerald-400 font-mono font-semibold">
+                      <span>Status: Fully Compliant</span>
+                      <span>Goldacre Review Rec 1 &amp; SATRE Standard</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Network Packet Route Comparison Visual */}
+              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+                <div className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                  <Terminal className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Packet Egress Trace Comparison</span>
+                </div>
+                <div className="space-y-3">
+                  <div className="p-3 rounded-lg bg-red-950/20 border border-red-900/40 text-[11px] font-mono space-y-1">
+                    <span className="text-red-400 font-bold block">[VULNERABLE] Laptop over NHS VPN (Split-Tunneling Active):</span>
+                    <div className="text-slate-300 flex flex-wrap items-center gap-2">
+                      <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">IDE Editor / Terminal</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-red-400" />
+                      <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Local OS Network Stack</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-red-400" />
+                      <span className="px-2 py-0.5 rounded bg-slate-900 border border-amber-800 text-amber-300">NHS VPN Adapter (Bypassed)</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-red-400" />
+                      <span className="px-2 py-0.5 rounded bg-red-950 text-red-200 border border-red-700 font-bold">Public Cloud LLM API (Data Exfiltrated)</span>
+                    </div>
+                  </div>
+
+                  <div className="p-3 rounded-lg bg-emerald-950/20 border border-emerald-900/40 text-[11px] font-mono space-y-1">
+                    <span className="text-emerald-400 font-bold block">[SECURE] Seawater Air-Gapped TRE Enclave Architecture:</span>
+                    <div className="text-slate-300 flex flex-wrap items-center gap-2">
+                      <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Air-Gapped VDI Session</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-emerald-400" />
+                      <span className="px-2 py-0.5 rounded bg-slate-900 border border-purple-800 text-purple-300">Pre-Prompt PEP Proxy (AST Scrubber)</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-emerald-400" />
+                      <span className="px-2 py-0.5 rounded bg-slate-900 border border-emerald-800 text-emerald-300">In-Enclave vLLM Cluster</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-emerald-400" />
+                      <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-200 border border-emerald-700 font-bold">Local Ephemeral Memory (0% Egress)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Guidance for Institutional Governance Boards */}
+              <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+                <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider block">
+                  Actionable Policy Directive for NHS Trusts &amp; Research Sponsors:
+                </span>
+                <ul className="text-xs text-slate-300 space-y-1.5 list-disc list-inside leading-relaxed">
+                  <li>
+                    <strong>Prohibit raw patient cohort extracts on developer laptops:</strong> Never download or decompress patient-level datasets onto local machines, regardless of active VPN status.
+                  </li>
+                  <li>
+                    <strong>Enforce domain-level egress blocks at the corporate gateway:</strong> Configure trust DNS firewalls to deny developer IDE telemetry endpoints (<code>*.cursor.sh</code>, <code>api.githubcopilot.com</code>, <code>api.openai.com</code>) unless explicitly piped through an auditing data scrubbing proxy.
+                  </li>
+                  <li>
+                    <strong>Mandate self-hosted in-enclave inference:</strong> If researchers require LLM coding assistance, provide in-enclave open-weight model endpoints inside the accredited TRE boundary as specified in this reference manual.
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       )}
