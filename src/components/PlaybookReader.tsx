@@ -40,7 +40,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
     subtitle: 'Machine-Executable Policy Architecture with Semantic Versioning (SemVer 2.4.0) — Not a Static SDC Spec',
     content: [
       'Clarification of Intent & Scope:',
-      '• Dynamic & Deployable Policy Architecture: This playbook is NOT merely a static technical specification or descriptive checklist for Statistical Disclosure Control (SDC). Rather, it defines an active, version-controlled, and machine-executable governance policy platform.',
+      '• Dynamic & Deployable Policy Architecture: This playbook defines an active, version-controlled, and machine-executable governance policy platform.',
       '• Semantic Versioning (SemVer 2.4.0): Every policy ontology, SHACL constraint, and OPA Rego rule is versioned as immutable code releases (e.g. v2.4.0-prod). Changes to legal bases, ethics clearances, or SDC thresholds follow strict GitOps PR review, PySHACL validation, and automated continuous deployment.',
       '• Compilation from Knowledge Graph to Microsecond Enforcement: High-level human governance concepts (Caldicott Principles, NHS Section 251, SATRE Pillars, EU AI Act risk tiers) are formalized in OWL 2 ontologies, verified against Closed-World SHACL shapes, and automatically compiled by compiler/rdf_to_rego.py into native OPA Rego policies running at Policy Enforcement Points (PEPs) in sub-millisecond evaluation times.',
       '• Auditable Dual-Persona Lineage: Emits immutable W3C PROV-O cryptographic audit triples for every access grant or rejection, while generating plain-English charters for Trust boards and patient advocacy committees.'
@@ -482,7 +482,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                 Project Seawater: Policy-as-Code Playbook
               </h1>
               <p className="text-slate-300 text-sm max-w-2xl leading-relaxed">
-                An active, version-controlled governance policy engine for Trusted Research Environments (TRE) / Secure Data Environments (SDE)—<span className="text-cyan-300 font-semibold">not a static SDC specification</span>. Compiles semantic graph ontologies into real-time Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs).
+                An active, version-controlled governance policy engine for Trusted Research Environments (TRE) / Secure Data Environments (SDE). Compiles semantic graph ontologies into real-time Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs).
               </p>
             </div>
           </div>
