@@ -318,22 +318,30 @@ mcp:ExecuteSQLReadOnly a mcp:MCPTool ;
   },
   {
     id: 'architecture-gitops-roadmap',
-    title: 'Architecture, GitOps & 4-Phase Roadmap',
-    shortDesc: 'Repository structure, automated build pipeline, PySHACL tests, and 16-week delivery roadmap.',
+    title: 'Architecture, GitOps & Operational Delivery Roadmap',
+    shortDesc: 'Granular 16-week sprint schedule, non-breaking rollout stages, decision register (D-001–D-009), and GitOps toolchain.',
     category: 'Roadmap',
     icon: 'GitBranch',
     playbookSection: 'Section 2, 3 & 4',
-    plainEnglishSummary: 'A complete blueprint and 16-week timeline taking an institution from blank ontologies to production automated security enforcement and public transparency reports.',
-    summary: 'The TRE Policy-as-Code repository structure coordinates compiler scripts, Turtle ontologies, SHACL shapes, OPA Rego policies, and PySHACL tests in a streamlined GitOps workflow.',
+    plainEnglishSummary: 'A granular 16-week operational blueprint taking an institution from blank ontologies to production security enforcement—without risking outages or false lockouts through a staged Evaluate-Only, Shadow, and Canary rollout.',
+    summary: 'The Seawater Policy-as-Code architecture coordinates compiler scripts, Turtle ontologies, SHACL shapes, OPA Rego policies, and PySHACL tests in a safe, non-breaking rollout framework backed by an auditable Decision Register (D-001 through D-009).',
     keyPrinciples: [
-      'Phase 1 (Weeks 1–4): Knowledge Modeling & Baseline Ontology (Five Safes, SATRE, SDC, MCP, CI linting).',
-      'Phase 2 (Weeks 5–8): Validation Logic & Graph Test Suite (SHACL node/property shapes, PySHACL unit test harness).',
-      'Phase 3 (Weeks 9–12): Public Documentation & Exploration Interface (Automated FOI reports, Cytoscape graph portal).',
-      'Phase 4 (Weeks 13–16): Runtime Enforcement Integration (OPA Rego compiler, K8s PEPs, W3C PROV-O audit lineage).'
+      'Sprint 1 (Weeks 1–2): Inception & Boundary Scope (D-001 sign-off, offline synthetic fixtures, CI linting).',
+      'Sprint 2 (Weeks 3–4): Baseline Ontologies (tre-core.ttl, governance_core.ttl, D-002 statutory authority).',
+      'Sprint 3 (Weeks 5–6): Closed-World Constraint Shapes (access-shapes.ttl, sdc_shapes.ttl, D-004 decision semantics).',
+      'Sprint 4 (Weeks 7–8): PySHACL Test Suite & Rigor Verification (Compliant/non-compliant fixtures, D-005 SDC rules).',
+      'Sprint 5 (Weeks 9–10): Automated Governance Portals (generate_docs.py, FOI reporting, public Governance Atlas).',
+      'Sprint 6 (Weeks 11–12): OPA Rego Compiler Toolchain (rdf_to_rego.py, D-006 source of truth, parity testing).',
+      'Sprint 7 (Weeks 13–14): PEP Shadow-Mode Integration (Evaluate-only K8s webhook, discrepancy logging, zero live disruption).',
+      'Sprint 8 (Weeks 15–16): Canary Enforcement & Rollback Drills (D-007 to D-009, W3C PROV-O audit triples, emergency bypass runbook).'
     ],
     technicalDetails: [
       {
-        heading: 'Repository Directory Layout',
+        heading: 'Safe Transition from Overview into Production Without Breaking Deployed Services',
+        body: 'Moving from an educational overview into live enforcement without service disruption requires four strict technical layers: 1) Evaluate-Only Mode (K8s webhook runs OPA in passive observation; failurePolicy: Ignore ensures zero blocked users); 2) Parallel Shadow Auditing (Seawater Rego verdicts are compared side-by-side against legacy authorization tickets; discrepancies generate Slack/PagerDuty alerts until discrepancy rate reaches 0.00% over 14 days); 3) Canary Scoping (enforcement is activated exclusively on a single non-clinical test namespace or synthetic cohort with an automated circuit breaker); 4) Fail-Safe Defaults (internal workspace admission fails open with alerts during OPA partitions, while external airlock export fails closed to prevent data leakage).'
+      },
+      {
+        heading: 'Repository Directory Layout & Operational Separation',
         body: 'Clean separation of concerns between semantic ontology, compilation toolchain, security policies, tests, and public web interface.',
         codeSnippet: {
           language: 'bash',
@@ -359,13 +367,14 @@ mcp:ExecuteSQLReadOnly a mcp:MCPTool ;
         }
       },
       {
-        heading: 'Verification & Developer Workflow Commands',
-        body: 'Developers use simple Make targets: `make install`, `pytest tests/test_shapes.py -v`, `python compiler/generate_docs.py`, `make build`, and `make serve`.'
+        heading: 'The 9 Binding Decision Gates (D-001 through D-009)',
+        body: 'No policy threshold or legal interpretation is assumed or deployed into active enforcement without a recorded sign-off: D-001 (First Production Decision Scope), D-002 (Statutory Authority & Interpretation), D-003 (Trusted Inputs & Provenance), D-004 (Decision Semantics & Missing Input Defaults), D-005 (Quantitative SDC Rules), D-006 (Runtime Engine & Source of Truth), D-007 (Enforcement Point & Mode), D-008 (Audit & Retention Horizon), and D-009 (Change Governance & Emergency Rollback).'
       }
     ],
     commonPitfalls: [
-      'Coupling policy metadata directly to ephemeral runtime pod names rather than role and tier abstractions.',
-      'Neglecting W3C PROV-O audit lineage generation on admission grant/deny events.'
+      'Big-bang activation: switching from legacy authorization to active OPA blocking without a 14-day shadow discrepancy evaluation.',
+      'Treating example playbook numbers (e.g. k >= 10 or 80%) as approved institutional policy before closing Decision Gate D-005.',
+      'Failing to test emergency rollback procedures in staging under simulated network partitions.'
     ]
   }
 ];

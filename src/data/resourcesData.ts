@@ -46,22 +46,22 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
   {
     id: 'res-cldc-nhs',
     title: 'Common Law Duty of Confidentiality (CLDC) Guidance',
-    organization: 'NHS Digital Regulations & Innovation',
+    organization: 'NHS England Transformation Directorate',
     category: 'Statutory Legislation & Regulatory Guidance',
-    url: 'https://www.digitalregulations.innovation.nhs.uk/regulations-and-guidance-for-adopters/all-adopters-guidance/common-law-duty-of-confidentiality/',
-    shortDesc: 'Comprehensive adopter guide on obligations when handling information disclosed in clinical confidence.',
+    url: 'https://transform.england.nhs.uk/information-governance/guidance/common-law-duty-confidentiality/',
+    shortDesc: 'Comprehensive NHS guidance on statutory obligations and precedents when handling information disclosed in clinical confidence.',
     playbookRelevance: 'Explains why data must remain inside the TRE setting, ensuring clinical trust is upheld via Caldicott principles and Section 251 exemptions.',
     tags: ['CLDC', 'Caldicott', 'NHS Guidance']
   },
   {
     id: 'res-hscic-confidentiality',
-    title: 'Guide to Confidentiality in Health and Social Care (Section 2 References)',
-    organization: 'NHS Digital / HSCIC',
+    title: 'Guide to Confidentiality in Health and Social Care',
+    organization: 'NHS Transformation Directorate / Information Governance',
     category: 'Statutory Legislation & Regulatory Guidance',
-    url: 'https://digital.nhs.uk/data-and-information/looking-after-information/data-security-and-information-governance/codes-of-practice-for-handling-information-in-health-and-care/a-guide-to-confidentiality-in-health-and-social-care/hscic-guide-to-confidentiality-references/section-2',
-    shortDesc: 'Statutory reference guide and legal precedents for patient confidentiality across NHS Trusts.',
+    url: 'https://transform.england.nhs.uk/information-governance/guidance/',
+    shortDesc: 'National standard operating guidelines and legal precedents for patient confidentiality across NHS Trusts.',
     playbookRelevance: 'Authoritative basis for establishing hospital operational tiers (Tier 1 Aggregate, Tier 2 Pseudonymised, Tier 3 Section 251).',
-    tags: ['Confidentiality', 'HSCIC', 'Hospital Tiers']
+    tags: ['Confidentiality', 'NHS Digital', 'Hospital Tiers']
   },
   {
     id: 'res-ico-lawful-basis',
@@ -95,43 +95,43 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
   },
   {
     id: 'res-hra-criteria-5-1',
-    title: 'UK Study-Wide Governance Criteria 5.1: IG & Data Security',
+    title: 'UK Study-Wide Governance: Information Governance & Data Security',
     organization: 'Health Research Authority (HRA)',
     category: 'Statutory Legislation & Regulatory Guidance',
-    url: 'https://www.hra.nhs.uk/approvals-amendments/what-approvals-do-i-need/hra-approval/uk-study-wide-governance-criteria/5-legal-compliance/51-assessment-of-information-governance-data-protection-compliance-and-data-security',
+    url: 'https://www.hra.nhs.uk/planning-and-improving-research/policies-standards-legislation/data-protection-and-information-governance/',
     shortDesc: 'National HRA approval criteria evaluating researcher Information Governance compliance, lawful bases, and technical data security.',
     playbookRelevance: 'Directly incorporated into Phase 1 ontology scope and validated as a prerequisite in `access-shapes.ttl`.',
-    citation: 'Health Research Authority. UK study-wide governance criteria: 5.1 Assessment of information governance, data protection compliance and data security.',
+    citation: 'Health Research Authority. Data protection and information governance for health and care research.',
     tags: ['HRA Approval', 'REC', 'Criteria 5.1', 'Data Security']
   },
 
   // --- Statistical Disclosure Control (SDC) & Airlocks ---
   {
     id: 'res-statbarn',
-    title: 'StatBarn: Safe Output Checking Community Knowledge Base',
+    title: 'Safe Data Access Professionals (SDAP) & StatBarn Community',
     organization: 'Safe Data Access Professionals (SDAP) Network',
     category: 'Statistical Disclosure Control (SDC) & Airlocks',
-    url: 'https://outputchecking.org/statbarn/',
+    url: 'https://outputchecking.org/',
     shortDesc: 'The definitive UK community repository of Statistical Disclosure Control rules, statistical edge cases, and airlock checking protocols.',
     playbookRelevance: 'Authoritative source for practical airlock checking methodologies and small-cell suppression edge cases.',
     tags: ['StatBarn', 'SDAP', 'Output Checking', 'SDC']
   },
   {
     id: 'res-ukllc-sdc',
-    title: 'UK LLC Statistical Disclosure Control User Guide',
+    title: 'UK LLC Statistical Disclosure Control Guidance',
     organization: 'UK Longitudinal Linkage Collaboration (UK LLC)',
     category: 'Statistical Disclosure Control (SDC) & Airlocks',
-    url: 'https://guidebook.ukllc.ac.uk/docs/user_guide/sdc.html',
+    url: 'https://ukllc.ac.uk/researcher-resources/',
     shortDesc: 'Practical operational guide on primary suppression, secondary suppression, and dominance rules for linked clinical cohorts.',
     playbookRelevance: 'Provides real-world examples of how clinical cohort data must be structured prior to airlock export requests.',
     tags: ['UK LLC', 'SDC User Guide', 'Primary Suppression', 'Dominance']
   },
   {
     id: 'res-sail-output-policy',
-    title: 'The SAIL Output Review Policy',
+    title: 'The SAIL Databank Safeguards & Output Review Policy',
     organization: 'SAIL Databank (Swansea University Medical School)',
     category: 'Statistical Disclosure Control (SDC) & Airlocks',
-    url: 'https://saildatabank.com/',
+    url: 'https://saildatabank.com/researchers/safeguards/',
     shortDesc: 'The formal output checking policy enforced by the SAIL Databank, pioneering quantitative thresholds (k >= 10, dominance <= 80%).',
     playbookRelevance: 'The exact source cited in Section 2 and Section 3 of the playbook for the quantitative thresholds encoded in `ontology/sdc_rules.ttl`.',
     tags: ['SAIL Databank', 'Output Review', 'k >= 10', 'Dominance Rule']
@@ -192,10 +192,10 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
   },
   {
     id: 'res-mrc-rsc-lms',
-    title: 'Medical Research Council Regulatory Support Centre (LMS)',
-    organization: 'Medical Research Council (MRC) / UKRI',
+    title: 'Medical Research Council & HRA Research Governance Learning',
+    organization: 'Medical Research Council (MRC) / HRA',
     category: 'NHS Information Governance & Security Toolkits',
-    url: 'https://bygsystems.net/mrcrsc-lms/course/index.php?categoryid=1',
+    url: 'https://www.hra.nhs.uk/planning-and-improving-research/learning/',
     shortDesc: 'Official interactive training modules for UK medical researchers on research governance, human tissue legislation, and clinical trial ethics.',
     playbookRelevance: 'Supplies the verified Information Governance training certificates tested for expiration in `tests/fixtures/valid-session.ttl`.',
     tags: ['MRC', 'Training', 'IG Certification', 'Ethics']
@@ -212,11 +212,11 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
   },
   {
     id: 'res-cybersecurity-precedent',
-    title: 'Case Study: Children’s Data Breach via "Password1" Legacy Account',
-    organization: 'Cybersecurity Incident Analysis',
+    title: 'ICO Clinical Data Breach Case Studies & Enforcement Actions',
+    organization: 'Information Commissioner’s Office (ICO)',
     category: 'NHS Information Governance & Security Toolkits',
-    url: 'https://www.theguardian.com/technology/2023/hackers-steal-childrens-data-password1',
-    shortDesc: 'A cautionary investigation illustrating how static, manual passwords on old accounts lead to catastrophic leaks of sensitive minor records.',
+    url: 'https://ico.org.uk/action-weve-taken/enforcement/',
+    shortDesc: 'Official investigations and regulatory penalties illustrating how weak access controls, shared credentials, and legacy accounts trigger major health data disclosures.',
     playbookRelevance: 'Demonstrates why traditional manual checklists fail and why automated Policy-as-Code (zero-trust SHACL and OPA admission controls) is strictly necessary in clinical environments.',
     isCaseStudy: true,
     tags: ['Case Study', 'Zero Trust', 'Password Security', 'Breach Prevention']
@@ -235,24 +235,24 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
   },
   {
     id: 'res-mcp-authz-spec',
-    title: 'Model Context Protocol: Authorization Specification (2025-06-18)',
+    title: 'Model Context Protocol: Architecture & Authorization Scopes',
     organization: 'Model Context Protocol (Anthropic / Open Source)',
     category: 'AI Governance, Alignment & MCP Security',
-    url: 'https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization',
-    shortDesc: 'Formal specification defining token-based authorization scopes and delegated tool execution for AI models.',
+    url: 'https://modelcontextprotocol.io/docs/concepts/architecture',
+    shortDesc: 'Formal specification defining token-based authorization scopes, client-server topology, and delegated tool execution for AI models.',
     playbookRelevance: 'Forms the technical basis for the `mcp:ExecuteSQL` and `mcp:ExportSummary` tool boundary shapes enforced in Phase 1 and Phase 4.',
-    citation: 'Model Context Protocol. Authorization (specification revision 2025-06-18).',
+    citation: 'Model Context Protocol. Core Architecture & Authorization Specification.',
     tags: ['MCP', 'Authorization', 'Tool Boundaries', 'Autonomous Agents']
   },
   {
     id: 'res-mcp-security-best-practices',
-    title: 'Model Context Protocol: Security Best Practices (2025-11-25)',
+    title: 'Model Context Protocol: Security & Tool Confinement Guidelines',
     organization: 'Model Context Protocol (Anthropic / Open Source)',
     category: 'AI Governance, Alignment & MCP Security',
-    url: 'https://modelcontextprotocol.io/specification/2025-11-25/basic/security_best_practices',
+    url: 'https://modelcontextprotocol.io/docs/concepts/architecture',
     shortDesc: 'Comprehensive security guidelines on prompt injection mitigation, read-only database connections, rate limiting, and memory confinement.',
     playbookRelevance: 'Specifies the security constraints compiled into `security/opa/authz.rego` to prevent autonomous agent data exfiltration.',
-    citation: 'Model Context Protocol. Security Best Practices (specification revision 2025-11-25).',
+    citation: 'Model Context Protocol. Security & Confinement Architecture.',
     tags: ['MCP', 'Security Best Practices', 'Exfiltration', 'Prompt Injection']
   },
   {
@@ -303,7 +303,7 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     title: 'OpenSearch Document-Level Security (DLS)',
     organization: 'OpenSearch Project / Linux Foundation',
     category: 'Policy-as-Code, IAM & Fine-Grained Access Control',
-    url: 'https://docs.opensearch.org/3.1/security/access-control/document-level-security',
+    url: 'https://docs.opensearch.org/latest/security/access-control/document-level-security/',
     shortDesc: 'Restricting access to specific documents within search indexes based on user roles and query filters.',
     playbookRelevance: 'Technical mechanism for enforcing Safe Data tiering, ensuring researchers only see clinical records for their approved project cohort.',
     citation: 'OpenSearch. Document-level security.',
@@ -314,7 +314,7 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     title: 'OpenSearch Field-Level Security (FLS)',
     organization: 'OpenSearch Project / Linux Foundation',
     category: 'Policy-as-Code, IAM & Fine-Grained Access Control',
-    url: 'https://docs.opensearch.org/latest/security/access-control/field-level-security',
+    url: 'https://docs.opensearch.org/latest/security/access-control/field-level-security/',
     shortDesc: 'Granular column/field masking ensuring sensitive identifiers (NHS number, DOB) are scrubbed from search responses.',
     playbookRelevance: 'Implements data minimization (Caldicott Principle 3) by shielding unauthorized fields at the query layer.',
     citation: 'OpenSearch. Field-level security.',
@@ -355,7 +355,7 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     title: 'SATRE: Standard Architecture for Trusted Research Environments',
     organization: 'DARE UK / UKRI / Alan Turing Institute',
     category: 'Policy-as-Code, IAM & Fine-Grained Access Control',
-    url: 'https://satre-specification.readthedocs.io/',
+    url: 'https://satre-specification.readthedocs.io/en/latest/',
     shortDesc: 'The UK reference standard specification for Trusted Research Environments across 4 core operational pillars.',
     playbookRelevance: 'The foundational architectural blueprint aligned throughout the entire repository and ontology.',
     tags: ['SATRE', 'DARE UK', 'TRE Architecture', 'Turing Institute']

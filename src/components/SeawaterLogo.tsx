@@ -1,5 +1,5 @@
 import React from 'react';
-import logoImage from '../assets/images/seawater_logo_1792936354525.jpg';
+import logoImage from '../assets/images/seawater_wave_logo.png';
 
 interface SeawaterLogoProps {
   variant?: 'icon' | 'horizontal' | 'badge' | 'hero';
@@ -14,13 +14,13 @@ export const SeawaterLogo: React.FC<SeawaterLogoProps> = ({
   className = '',
   showSubtitle = true,
 }) => {
-  // Dimensions for the wave icon
+  // Dimensions for the wave icon - scaled to fill container boldly
   const sizeClasses = {
-    xs: 'w-6 h-6',
+    xs: 'w-7 h-7',
     sm: 'w-8 h-8',
-    md: 'w-9 h-9',
-    lg: 'w-12 h-12',
-    xl: 'w-20 h-20 sm:w-24 sm:h-24',
+    md: 'w-10 h-10',
+    lg: 'w-14 h-14',
+    xl: 'w-24 h-24 sm:w-28 sm:h-28',
   }[size];
 
   // Font sizes for typography
@@ -40,69 +40,69 @@ export const SeawaterLogo: React.FC<SeawaterLogoProps> = ({
     xl: 'text-sm',
   }[size];
 
-  // Minimal vector wave fallback SVG if image is still loading or for vector rendering
+  // Vector SVG mirroring the Seawater curling wave emblem
   const WaveVector = (
     <svg
-      viewBox="0 0 48 48"
+      viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full drop-shadow-[0_0_8px_rgba(6,182,212,0.4)]"
+      className="w-full h-full drop-shadow-[0_0_12px_rgba(6,182,212,0.4)]"
     >
       <defs>
-        <linearGradient id="seawaterGradPrimary" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#06b6d4" />
-          <stop offset="50%" stopColor="#0ea5e9" />
-          <stop offset="100%" stopColor="#3b82f6" />
+        <linearGradient id="silverWave" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#e2e8f0" />
+          <stop offset="50%" stopColor="#94a3b8" />
+          <stop offset="100%" stopColor="#64748b" />
         </linearGradient>
-        <linearGradient id="seawaterGradSecondary" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#22d3ee" />
-          <stop offset="100%" stopColor="#1d4ed8" />
+        <linearGradient id="cyanInnerWave" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#0891b2" />
+          <stop offset="50%" stopColor="#06b6d4" />
+          <stop offset="100%" stopColor="#22d3ee" />
         </linearGradient>
       </defs>
-      {/* Outer flowing curl */}
+      {/* Dark Navy Background */}
+      <rect width="100" height="100" rx="16" fill="#0b172a" />
+      {/* Soft rounded frame */}
+      <rect x="18" y="14" width="64" height="72" rx="12" stroke="#64748b" strokeWidth="2.2" strokeOpacity="0.75" />
+      
+      {/* Outer Silvery-Blue Wave Arch */}
       <path
-        d="M6 31C11 31 16 28 20 23C24 18 29 13 36 14C41 15 44 19 44 24C44 32 37 38 29 38C20 38 12 36 6 31Z"
-        fill="url(#seawaterGradSecondary)"
-        fillOpacity="0.25"
+        d="M12 59 C28 59, 24 23, 48 23 C68 23, 80 48, 92 73 C78 68, 64 50, 56 36 C46 29, 32 32, 28 46 C25 56, 34 60, 42 58 C32 60, 20 60, 12 59 Z"
+        fill="url(#silverWave)"
       />
+      
+      {/* Inner Vibrant Cyan Wave Spiral */}
       <path
-        d="M6 30C13 30 18 26 23 20C27 15 32 12 38 15C42 17 44 22 43 27C42 34 35 39 27 39C19 39 12 36 6 30Z"
-        stroke="url(#seawaterGradPrimary)"
-        strokeWidth="2.5"
-        strokeLinecap="round"
+        d="M18 64 C28 64, 38 63, 44 56 C49 50, 46 41, 38 41 C34 41, 32 44, 35 48 C38 43, 43 45, 41 51 C39 55, 33 58, 26 59 C22 59, 19 62, 18 64 Z"
+        fill="url(#cyanInnerWave)"
       />
-      {/* Inner crest break */}
+      {/* Lower Cyan Swell Ribbon */}
       <path
-        d="M26 18C28 14 32 13 35 15C38 17 38 21 35 24C32 27 27 28 24 30C21 32 16 33 11 32"
-        stroke="#38bdf8"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
-      {/* Secondary accent droplet wave */}
-      <path
-        d="M29 27C32 26 35 27 36 29C37 31 36 33 33 34C30 35 26 35 23 34"
-        stroke="#67e8f9"
-        strokeWidth="2"
-        strokeLinecap="round"
+        d="M28 71 C40 73, 50 67, 56 59 C59 66, 68 73, 76 75 C68 70, 62 64, 60 58 C52 64, 42 68, 28 71 Z"
+        fill="url(#cyanInnerWave)"
       />
     </svg>
   );
 
   const LogoIcon = (
     <div
-      className={`relative rounded-xl overflow-hidden bg-slate-950 border border-cyan-500/30 flex items-center justify-center p-0.5 shadow-md shadow-cyan-950/40 group-hover:border-cyan-400/60 transition-all ${sizeClasses}`}
+      className={`relative rounded-xl overflow-hidden bg-[#0b172a] border border-cyan-500/40 flex items-center justify-center shadow-lg shadow-cyan-950/60 group-hover:border-cyan-400 transition-all ${sizeClasses}`}
+      title="Seawater: Dual Crest Wave Engine (Inward Security & Outward Governance)"
     >
       <img
         src={logoImage}
-        alt="Seawater Logo"
-        className="w-full h-full object-cover rounded-lg transform group-hover:scale-105 transition-transform duration-300"
+        alt="Seawater Wave Logo"
+        className="w-full h-full object-contain p-0.5 transform scale-110 group-hover:scale-115 transition-transform duration-300"
         onError={(e) => {
-          // In case image fails to load, gracefully fallback to inline vector
           e.currentTarget.style.display = 'none';
         }}
       />
-      {/* Subtle overlay glow */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 to-transparent pointer-events-none" />
+      {/* Fallback container if image fails to render */}
+      <div className="absolute inset-0 flex items-center justify-center p-0.5 pointer-events-none opacity-0 img-fallback:opacity-100">
+        {WaveVector}
+      </div>
+      {/* Subtle atmospheric edge vignette */}
+      <div className="absolute inset-0 ring-1 ring-inset ring-cyan-400/20 rounded-xl pointer-events-none" />
     </div>
   );
 
@@ -113,16 +113,16 @@ export const SeawaterLogo: React.FC<SeawaterLogoProps> = ({
   if (variant === 'badge') {
     return (
       <div
-        className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/30 text-slate-200 shadow-sm ${className}`}
+        className={`inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/40 text-slate-200 shadow-sm hover:border-cyan-400 transition-colors ${className}`}
       >
-        <div className="w-5 h-5 rounded-md overflow-hidden bg-slate-950 border border-cyan-400/30 shrink-0">
-          <img src={logoImage} alt="Seawater" className="w-full h-full object-cover" />
+        <div className="w-6 h-6 rounded-lg overflow-hidden bg-[#0b172a] border border-cyan-400/40 shrink-0 flex items-center justify-center">
+          <img src={logoImage} alt="Seawater" className="w-full h-full object-contain p-0.5 transform scale-110" />
         </div>
         <div className="flex items-center gap-1.5">
           <span className="font-extrabold tracking-wider text-xs uppercase bg-gradient-to-r from-cyan-300 via-sky-300 to-blue-400 bg-clip-text text-transparent">
             Seawater
           </span>
-          <span className="text-[10px] text-cyan-400/80 font-mono">v2.4.0</span>
+          <span className="text-[10px] text-cyan-400 font-mono font-semibold">v2.4.0</span>
         </div>
       </div>
     );
@@ -132,17 +132,17 @@ export const SeawaterLogo: React.FC<SeawaterLogoProps> = ({
     return (
       <div className={`flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 ${className}`}>
         <div className="relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl blur-lg opacity-40 group-hover:opacity-75 transition duration-500" />
-          <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-slate-950 border-2 border-cyan-400/50 p-1 shadow-2xl">
+          <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl blur-xl opacity-50 group-hover:opacity-85 transition duration-500" />
+          <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-[#0b172a] border-2 border-cyan-400/60 shadow-2xl flex items-center justify-center">
             <img
               src={logoImage}
-              alt="Seawater Logo"
-              className="w-full h-full object-cover rounded-xl"
+              alt="Seawater Wave Logo"
+              className="w-full h-full object-contain p-1 transform scale-110 group-hover:scale-115 transition-transform duration-300"
             />
           </div>
         </div>
-        <div className="text-center sm:text-left space-y-1">
-          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-md bg-cyan-950/70 border border-cyan-800 text-[11px] font-mono font-semibold text-cyan-300 uppercase tracking-wider mb-1">
+        <div className="text-center sm:text-left space-y-1.5">
+          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-md bg-cyan-950/70 border border-cyan-800 text-[11px] font-mono font-semibold text-cyan-300 uppercase tracking-wider mb-0.5">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
             Project Seawater · Policy-as-Code Engine
           </div>
@@ -152,8 +152,8 @@ export const SeawaterLogo: React.FC<SeawaterLogoProps> = ({
             </span>
           </h1>
           {showSubtitle && (
-            <p className="text-slate-400 text-xs sm:text-sm font-medium max-w-xl">
-              Graph-Based Policy-as-Code Platform for Trusted Research Environments (TRE) &amp; Secure Data Environments (SDE)
+            <p className="text-slate-300 text-xs sm:text-sm font-medium max-w-xl leading-relaxed">
+              Dual-Wave Policy-as-Code Architecture: Harmonizing <strong>Inward Enclave Security</strong> (data isolation, admission PEPs) with <strong>Outward Governance</strong> (airlock verification, public transparency).
             </p>
           )}
         </div>
@@ -163,7 +163,7 @@ export const SeawaterLogo: React.FC<SeawaterLogoProps> = ({
 
   // Default: 'horizontal'
   return (
-    <div className={`flex items-center gap-2.5 ${className}`}>
+    <div className={`flex items-center gap-3 ${className}`}>
       {LogoIcon}
       <div className="flex flex-col text-left">
         <div className="flex items-center gap-1.5 leading-none">
@@ -172,12 +172,12 @@ export const SeawaterLogo: React.FC<SeawaterLogoProps> = ({
           >
             Seawater
           </span>
-          <span className="text-[9px] px-1.5 py-0.2 font-mono font-bold bg-cyan-950/80 text-cyan-300 border border-cyan-800/60 rounded">
+          <span className="text-[9px] px-1.5 py-0.5 font-mono font-bold bg-cyan-950/90 text-cyan-300 border border-cyan-700/80 rounded">
             PaC
           </span>
         </div>
         {showSubtitle && (
-          <span className={`text-slate-400 font-mono tracking-wider font-semibold uppercase ${subtextClasses}`}>
+          <span className={`text-slate-400 font-mono tracking-wider font-semibold uppercase mt-0.5 ${subtextClasses}`}>
             Policy-as-Code Engine
           </span>
         )}
