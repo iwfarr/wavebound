@@ -24,7 +24,7 @@ export type GraphLayoutType = 'preset' | 'breadthfirst' | 'concentric' | 'cose';
 
 const LAYOUT_GUIDES: Record<GraphLayoutType, { title: string; rationale: string; bestFor: string }> = {
   preset: {
-    title: 'Pipeline DAG (Tiered Flow — Recommended)',
+    title: 'Pipeline DAG (Tiered Flow: Recommended)',
     rationale: 'Mathematically ordered 4-tier compilation architecture (Policy → SHACL Shapes → OPA Rego → W3C PROV-O) with guaranteed zero node overlapping.',
     bestFor: 'Visualizing how abstract clinical governance compiles directly into sub-millisecond Kubernetes admission and airlock gatekeepers.'
   },
@@ -339,7 +339,7 @@ export const CytoscapeGraph: React.FC<CytoscapeGraphProps> = ({
                 onChange={(e) => setSelectedLayout(e.target.value as any)}
                 className="bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 font-medium"
               >
-                <option value="preset">Pipeline DAG (Tiered Flow — Recommended)</option>
+                <option value="preset">Pipeline DAG (Tiered Flow: Recommended)</option>
                 <option value="breadthfirst">Hierarchical Tree (Top-Down)</option>
                 <option value="concentric">Enforcement Rings (Orbital)</option>
                 <option value="cose">Force-Directed (Physics Spring)</option>

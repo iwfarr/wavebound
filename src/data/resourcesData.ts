@@ -7,7 +7,8 @@ export interface ResourceItem {
     | 'Statistical Disclosure Control (SDC) & Airlocks'
     | 'NHS Information Governance & Security Toolkits'
     | 'AI Governance, Alignment & MCP Security'
-    | 'Policy-as-Code, IAM & Fine-Grained Access Control';
+    | 'Policy-as-Code, IAM & Fine-Grained Access Control'
+    | 'International Standards (ISO) & Clinical Safety (DCB)';
   url: string;
   shortDesc: string;
   playbookRelevance: string;
@@ -42,6 +43,76 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     isStatutory: true,
     citation: 'UK Government. National Health Service Act 2006, section 251: Control of patient information.',
     tags: ['Section 251', 'CAG', 'HRA', 'Confidentiality']
+  },
+  {
+    id: 'res-dea-2017',
+    title: 'Digital Economy Act 2017 (Part 5, Chapter 5: Research)',
+    organization: 'UK Parliament / The Stationery Office',
+    category: 'Statutory Legislation & Regulatory Guidance',
+    url: 'https://www.legislation.gov.uk/ukpga/2017/30/part/5/chapter/5',
+    shortDesc: 'Statutory legal gateway enabling UK public authorities to disclose de-identified data to accredited researchers for public-benefit research.',
+    playbookRelevance: 'Directly formalized in ontology/governance_core.ttl as a primary statutory gateway alongside DPA 2018 and Section 251. Establishes the legal requirement for Accredited Processors and RAP approval in Safe Project checks.',
+    isStatutory: true,
+    citation: 'UK Parliament. Digital Economy Act 2017, c. 30, Part 5, Chapter 5: Research. London: TSO; 2017.',
+    tags: ['DEA 2017', 'Statutory Gateway', 'UKSA', 'Accredited Research', 'Public Benefit']
+  },
+  {
+    id: 'res-uksa-code-practice',
+    title: 'UKSA Research Code of Practice and Accreditation Criteria',
+    organization: 'UK Statistics Authority (UKSA) / Research Accreditation Panel (RAP)',
+    category: 'Statutory Legislation & Regulatory Guidance',
+    url: 'https://uksa.statisticsauthority.gov.uk/digitaleconomyact/research-code-of-practice-and-accreditation-criteria/',
+    shortDesc: 'Statutory code approved under Section 70 of DEA 2017 governing accreditation criteria for researchers, projects, and secure processing environments.',
+    playbookRelevance: 'Supplies the canonical audit criteria for Safe Person (Accredited Researcher), Safe Project (RAP Ethics & Feasibility), and Safe Setting (Accredited Processor/TRE) mapped to SHACL admission shapes.',
+    isStatutory: true,
+    citation: 'UK Statistics Authority. Research Code of Practice and Accreditation Criteria. Approved by UK Parliament; 2018 (revised 2022).',
+    tags: ['DEA 2017', 'UKSA', 'RAP', 'Accredited Processor', 'Code of Practice']
+  },
+  {
+    id: 'res-adruk-framework',
+    title: 'ADR UK Research Governance & DEA Data Linkage Guidelines',
+    organization: 'Administrative Data Research UK (ADR UK) / ESRC',
+    category: 'Statutory Legislation & Regulatory Guidance',
+    url: 'https://www.adruk.org/our-work/browse-all-projects/the-digital-economy-act-and-adr-uk/',
+    shortDesc: 'Operational standards and governance protocols for de-identifying, linking, and hosting cross-departmental public authority data under the DEA.',
+    playbookRelevance: 'Informs cross-domain linkage rules, privacy preserving record linkage (PPRL), and mandatory disclosure thresholds enforced by the airlock proxy.',
+    tags: ['DEA 2017', 'ADR UK', 'Data Linkage', 'PPRL', 'Five Safes']
+  },
+  {
+    id: 'res-uksa-accreditation-policy',
+    title: 'UKSA Research Accreditation Policy (V1.4)',
+    organization: 'UK Statistics Authority (UKSA) / Research Accreditation Panel (RAP)',
+    category: 'Statutory Legislation & Regulatory Guidance',
+    url: 'https://s42615.pcdn.co/wp-content/uploads/Accreditation-Policy-V1.4-1.pdf',
+    shortDesc: 'Overarching UKSA statutory policy establishing the legal scope, core accreditation principles, review cycles, and governance responsibilities for researchers, projects, and processing environments under the Digital Economy Act 2017.',
+    playbookRelevance: 'Supplies the formal statutory governance hierarchy and multi-stakeholder accountability model codified into ontology/governance_core.ttl.',
+    isStatutory: true,
+    citation: 'UK Statistics Authority. Research Accreditation Policy (V1.4). Approved by the UK Statistics Authority Board; 2023.',
+    tags: ['Accreditation Policy', 'Policy V1.4', 'UKSA', 'RAP', 'DEA 2017', 'Statutory Authority']
+  },
+  {
+    id: 'res-uksa-tre-sop',
+    title: 'Accreditation of a Trusted Research Environment SOP (V1.4)',
+    organization: 'UK Statistics Authority (UKSA) / Research Accreditation Service',
+    category: 'Statutory Legislation & Regulatory Guidance',
+    url: 'https://s42615.pcdn.co/wp-content/uploads/Accreditation-of-a-Trusted-Research-Environment-standard-operating-procedure-V1.4-1.pdf',
+    shortDesc: 'Official UKSA statutory operating procedure detailing the end-to-end accreditation workflow, technical assessment, and governance criteria for certifying TREs and SDEs as DEA Accredited Processors under Section 71.',
+    playbookRelevance: 'Directly informs Seawater’s Phase 1-4 milestone gates and decision records (D-001–D-009), ensuring the policy-as-code architecture satisfies UKSA accreditation auditors.',
+    isStatutory: true,
+    citation: 'UK Statistics Authority. Accreditation of a Trusted Research Environment Standard Operating Procedure (V1.4). UKSA Research Accreditation Service; 2023.',
+    tags: ['TRE Accreditation', 'SOP V1.4', 'UKSA', 'Accredited Processor', 'DEA 2017', 'SDE']
+  },
+  {
+    id: 'res-uksa-tre-saq',
+    title: 'TRE Accreditation Self-Assessment Questionnaire (SAQ V3.1)',
+    organization: 'UK Statistics Authority (UKSA) / Research Accreditation Panel (RAP)',
+    category: 'Statutory Legislation & Regulatory Guidance',
+    url: 'https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fs42615.pcdn.co%2Fwp-content%2Fuploads%2FTRE-Accreditation-Self-Assessment-Questionnaire-V3.1.xlsx&wdOrigin=BROWSELINK',
+    shortDesc: 'The canonical audit instrument used by UKSA to evaluate technical controls across the Five Safes, including network egress containment, compute sandboxing, airlock SDC, and cryptographic audit logging.',
+    playbookRelevance: 'Mapped directly to Seawater’s automated SHACL shape validations and OPA Rego webhooks in Tab 4 (Checklist) and Tab 5 (Code) of the Implementation Track.',
+    isStatutory: true,
+    citation: 'UK Statistics Authority. TRE Accreditation Self-Assessment Questionnaire (SAQ V3.1). UKSA Research Accreditation Panel; 2023.',
+    tags: ['SAQ V3.1', 'Audit Checklist', 'Five Safes', 'UKSA', 'TRE Accreditation', 'Compliance Matrix']
   },
   {
     id: 'res-cldc-nhs',
@@ -359,5 +430,98 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     shortDesc: 'The UK reference standard specification for Trusted Research Environments across 4 core operational pillars.',
     playbookRelevance: 'The foundational architectural blueprint aligned throughout the entire repository and ontology.',
     tags: ['SATRE', 'DARE UK', 'TRE Architecture', 'Turing Institute']
+  },
+
+  // --- International Standards (ISO) & Clinical Safety (DCB) ---
+  {
+    id: 'res-iso-42001',
+    title: 'ISO/IEC 42001:2023: Artificial Intelligence Management System (AIMS)',
+    organization: 'International Organization for Standardization (ISO / IEC)',
+    category: 'International Standards (ISO) & Clinical Safety (DCB)',
+    url: 'https://www.iso.org/standard/81230.html',
+    shortDesc: 'The premier international certifiable standard specifying requirements for establishing, implementing, maintaining, and continually improving an Artificial Intelligence Management System (AIMS) across analytics platforms.',
+    playbookRelevance: 'Governs AI model training and inferencing inside data analysis & intelligence platforms, establishing auditable controls for model risk classification, algorithmic bias evaluation, and continuous drift monitoring.',
+    citation: 'ISO/IEC 42001:2023. Information technology - Artificial intelligence - Management system. Geneva: ISO; 2023.',
+    tags: ['ISO 42001', 'AIMS', 'AI Management', 'Algorithmic Risk', 'International Standards']
+  },
+  {
+    id: 'res-iso-27001-27701',
+    title: 'ISO/IEC 27001:2022 & ISO/IEC 27701:2019: ISMS & Privacy Information Management',
+    organization: 'International Organization for Standardization (ISO / IEC)',
+    category: 'International Standards (ISO) & Clinical Safety (DCB)',
+    url: 'https://www.iso.org/standard/27001',
+    shortDesc: 'Foundational information security management system (ISMS) controls augmented by ISO 27701 for privacy information management (PIMS) and PII processing.',
+    playbookRelevance: 'Mandatory technical baseline required for DEA Accredited Processors and NHS DSPT accreditation; directly mapped to Safe Setting network isolation and cryptographic audit logging.',
+    citation: 'ISO/IEC 27001:2022. Information security, cybersecurity and privacy protection - Information security management systems. Geneva: ISO; 2022.',
+    tags: ['ISO 27001', 'ISO 27701', 'ISMS', 'PIMS', 'Cybersecurity']
+  },
+  {
+    id: 'res-dcb-0129',
+    title: 'DCB0129: Clinical Risk Management in the Deployment and Use of Health IT Systems (Manufacturers)',
+    organization: 'NHS England / Health and Social Care Information Standards Board',
+    category: 'International Standards (ISO) & Clinical Safety (DCB)',
+    url: 'https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-deployment-and-use-of-health-it-systems',
+    shortDesc: 'Mandatory statutory clinical safety standard in England requiring software manufacturers, analytical platform creators, and health algorithm developers to establish a formal Clinical Risk Management Plan and Hazard Log.',
+    playbookRelevance: 'Directly verified at the airlock before releasing diagnostic or predictive algorithms trained inside data analysis & intelligence platforms. Requires Clinical Safety Officer (CSO) sign-off.',
+    isStatutory: true,
+    citation: 'NHS England. DCB0129: Clinical Risk Management: Its Application in the Deployment and Use of Health IT Systems. London: NHS England; 2021.',
+    tags: ['DCB0129', 'Clinical Safety', 'CSO', 'Hazard Log', 'NHS Standard']
+  },
+  {
+    id: 'res-dcb-0160',
+    title: 'DCB0160: Clinical Risk Management in Healthcare Organisations (Deploying Health IT)',
+    organization: 'NHS England / Health and Social Care Information Standards Board',
+    category: 'International Standards (ISO) & Clinical Safety (DCB)',
+    url: 'https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0160-clinical-risk-management-its-application-in-the-deployment-and-use-of-health-it-systems',
+    shortDesc: 'Mandatory standard governing health organisations deploying data analysis platforms, AI tools, and clinical systems, ensuring organizational safety cases and incident management procedures.',
+    playbookRelevance: 'Enforced during Phase 4 deployment and Decision Gate D-006 to ensure the host Trust or healthcare institution maintains operational clinical safety governance.',
+    isStatutory: true,
+    citation: 'NHS England. DCB0160: Clinical Risk Management: Its Application in the Deployment and Use of Health IT Systems. London: NHS England; 2021.',
+    tags: ['DCB0160', 'Clinical Safety', 'Deployer Standard', 'NHS Trust', 'Risk Management']
+  },
+  {
+    id: 'res-iso-13485',
+    title: 'ISO 13485:2016: Medical Devices - Quality Management Systems (QMS)',
+    organization: 'International Organization for Standardization (ISO)',
+    category: 'International Standards (ISO) & Clinical Safety (DCB)',
+    url: 'https://www.iso.org/standard/59752.html',
+    shortDesc: 'Harmonized international QMS standard for medical device design and manufacture, applicable to Software as a Medical Device (SaMD) pipelines developed inside secure research enclaves.',
+    playbookRelevance: 'Provides design controls, document traceability, and validation records for AI and predictive analytics transitioning into regulated clinical software.',
+    citation: 'ISO 13485:2016. Medical devices - Quality management systems - Requirements for regulatory purposes. Geneva: ISO; 2016.',
+    tags: ['ISO 13485', 'SaMD', 'Medical Devices', 'QMS', 'Regulatory Compliance']
+  },
+  {
+    id: 'res-iso-14971',
+    title: 'ISO 14971:2019: Application of Risk Management to Medical Devices',
+    organization: 'International Organization for Standardization (ISO)',
+    category: 'International Standards (ISO) & Clinical Safety (DCB)',
+    url: 'https://www.iso.org/standard/72704.html',
+    shortDesc: 'Comprehensive framework for estimating, evaluating, controlling, and monitoring risks associated with medical devices and Software as a Medical Device (SaMD).',
+    playbookRelevance: 'Coupled with DCB0129 to structure algorithmic risk matrices, clinical harm assessments, and risk/benefit ratios for AI models tested in intelligence platforms.',
+    citation: 'ISO 14971:2019. Medical devices - Application of risk management to medical devices. Geneva: ISO; 2019.',
+    tags: ['ISO 14971', 'Risk Management', 'Medical Devices', 'SaMD', 'Harm Mitigation']
+  },
+  {
+    id: 'res-uk-mdr-samd',
+    title: 'UK Medical Devices Regulations 2002 & MHRA Software as a Medical Device (SaMD) Guidance',
+    organization: 'Medicines and Healthcare products Regulatory Agency (MHRA)',
+    category: 'International Standards (ISO) & Clinical Safety (DCB)',
+    url: 'https://www.gov.uk/government/publications/software-and-artificial-intelligence-ai-as-a-medical-device',
+    shortDesc: 'Statutory framework and regulatory guidance governing whether health software, diagnostic algorithms, or AI applications qualify as medical devices in the UK.',
+    playbookRelevance: 'Formalized in Seawater airlock shapes to verify CE/UKCA marking prerequisites and clinical investigation approvals before algorithmic weights can egress the platform.',
+    isStatutory: true,
+    citation: 'MHRA. Software and Artificial Intelligence (AI) as a Medical Device. London: Department of Health and Social Care; 2023.',
+    tags: ['UK MDR 2002', 'MHRA', 'SaMD', 'Medical Device Regulation', 'UKCA']
+  },
+  {
+    id: 'res-iso-5259-22989',
+    title: 'ISO/IEC 5259 Series & ISO/IEC 22989: Data Quality for Analytics & ML',
+    organization: 'International Organization for Standardization (ISO / IEC)',
+    category: 'International Standards (ISO) & Clinical Safety (DCB)',
+    url: 'https://www.iso.org/standard/81289.html',
+    shortDesc: 'Standards for data quality management in analytics, data science, and machine learning pipelines, ensuring completeness, accuracy, and representativeness.',
+    playbookRelevance: 'Guides Phase 1 and 2 semantic data profiling, ensuring datasets meet quality thresholds before training sensitive health intelligence algorithms.',
+    citation: 'ISO/IEC 5259-1:2024. Artificial intelligence - Data quality for analytics and machine learning (ML). Geneva: ISO; 2024.',
+    tags: ['ISO 5259', 'ISO 22989', 'Data Quality', 'Machine Learning', 'Data Governance']
   }
 ];

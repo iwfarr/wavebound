@@ -143,22 +143,34 @@ export const Header: React.FC<HeaderProps> = ({
             )}
           </div>
 
-          {/* Persona Switcher / View Mode */}
+          {/* Switcher Button: Public Atlas vs Technical Atlas */}
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => onSelectTab(isAtlasMode ? 'playbook' : 'governance-atlas')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors border ${
-                isAtlasMode
-                  ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-bold'
-                  : 'bg-slate-900 hover:bg-slate-800 text-emerald-300 border-emerald-500/30'
-              }`}
-              title="Toggle between Public Governance Atlas and Technical Platform"
-            >
-              <HeartHandshake className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">
-                {isAtlasMode ? 'Public Atlas Active' : 'Public Atlas View'}
-              </span>
-            </button>
+            <div className="flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800 shadow-sm">
+              <button
+                onClick={() => onSelectTab('governance-atlas')}
+                className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
+                  isAtlasMode
+                    ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
+                    : 'text-slate-400 hover:text-emerald-300'
+                }`}
+                title="Switch to Public Governance Atlas (Citizen & Board View)"
+              >
+                <HeartHandshake className="w-3.5 h-3.5" />
+                <span>Public Atlas</span>
+              </button>
+              <button
+                onClick={() => onSelectTab('playbook')}
+                className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
+                  !isAtlasMode
+                    ? 'bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20'
+                    : 'text-slate-400 hover:text-cyan-300'
+                }`}
+                title="Switch to Technical Atlas (Engineers & Researchers View)"
+              >
+                <Shield className="w-3.5 h-3.5" />
+                <span>Technical Atlas</span>
+              </button>
+            </div>
 
             {/* Quick Mastery Badge */}
             <button
@@ -205,7 +217,33 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Mobile Navigation Dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-slate-800 space-y-1">
+          <div className="md:hidden py-4 border-t border-slate-800 space-y-2">
+            <div className="grid grid-cols-2 gap-2 pb-2 border-b border-slate-800">
+              <button
+                onClick={() => {
+                  onSelectTab('governance-atlas');
+                  setMobileMenuOpen(false);
+                }}
+                className={`py-2 px-3 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 ${
+                  isAtlasMode ? 'bg-emerald-500 text-slate-950' : 'bg-slate-900 text-slate-300 border border-slate-800'
+                }`}
+              >
+                <HeartHandshake className="w-3.5 h-3.5" />
+                <span>Public Atlas</span>
+              </button>
+              <button
+                onClick={() => {
+                  onSelectTab('playbook');
+                  setMobileMenuOpen(false);
+                }}
+                className={`py-2 px-3 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 ${
+                  !isAtlasMode ? 'bg-cyan-500 text-slate-950' : 'bg-slate-900 text-slate-300 border border-slate-800'
+                }`}
+              >
+                <Shield className="w-3.5 h-3.5" />
+                <span>Technical Atlas</span>
+              </button>
+            </div>
             {navItems.map((item) => (
               <button
                 key={item.id}

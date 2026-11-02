@@ -10,11 +10,13 @@ import {
   Cpu,
   FileCheck2,
   Lock,
-  Layers
+  Layers,
+  Sparkles
 } from 'lucide-react';
+import { AIPolicyGenerator } from './AIPolicyGenerator';
 
 export const PolicySandbox: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'sdc' | 'admission'>('sdc');
+  const [activeTab, setActiveTab] = useState<'generator' | 'sdc' | 'admission'>('generator');
 
   // SDC Simulator State
   const [cells, setCells] = useState<{ id: string; name: string; count: number; spend: number }[]>([
@@ -52,23 +54,33 @@ export const PolicySandbox: React.FC = () => {
           <div className="space-y-1">
             <div className="flex items-center gap-2 text-xs font-semibold text-cyan-400 uppercase tracking-wider">
               <Cpu className="w-4 h-4" />
-              <span>Interactive PEP & PDP Simulator</span>
+              <span>Interactive PEP &amp; PDP Simulator &amp; Policy Synthesizer</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
               Policy Enforcement Sandbox
             </h1>
             <p className="text-slate-400 text-xs sm:text-sm max-w-2xl">
-              Test how the compiled Open Policy Agent (OPA) rules and SHACL shapes behave against live inputs.
-              Switch between the Quantitative SDC Airlock Evaluator and Workspace Session Admission PDP.
+              Synthesize production-grade SHACL shapes and OPA Rego rules from natural language, or test live PEP/PDP evaluation in the Quantitative SDC Airlock and Workspace Admission simulators.
             </p>
           </div>
 
           <div className="flex bg-slate-950 p-1 rounded-xl border border-slate-800 shrink-0">
             <button
+              onClick={() => setActiveTab('generator')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+                activeTab === 'generator'
+                  ? 'bg-cyan-500 text-slate-950 font-bold'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>AI Policy Generator</span>
+            </button>
+            <button
               onClick={() => setActiveTab('sdc')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === 'sdc'
-                  ? 'bg-cyan-500 text-slate-950'
+                  ? 'bg-cyan-500 text-slate-950 font-bold'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
@@ -76,9 +88,9 @@ export const PolicySandbox: React.FC = () => {
             </button>
             <button
               onClick={() => setActiveTab('admission')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
                 activeTab === 'admission'
-                  ? 'bg-cyan-500 text-slate-950'
+                  ? 'bg-cyan-500 text-slate-950 font-bold'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
@@ -88,7 +100,9 @@ export const PolicySandbox: React.FC = () => {
         </div>
       </div>
 
-      {activeTab === 'sdc' ? (
+      {activeTab === 'generator' && <AIPolicyGenerator />}
+
+      {activeTab === 'sdc' && (
         /* Tab 1: SDC Airlock Simulator */
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Table Editor */}
@@ -273,7 +287,9 @@ export const PolicySandbox: React.FC = () => {
             </div>
           </div>
         </div>
-      ) : (
+      )}
+
+      {activeTab === 'admission' && (
         /* Tab 2: Workspace Admission Simulator */
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Controls */}

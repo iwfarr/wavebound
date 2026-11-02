@@ -41,6 +41,7 @@ const CATEGORY_HUBS = [
   { id: 'hub-sdc', label: 'Disclosure Control (SDC)', color: '#f59e0b', category: 'Disclosure Control (SDC)' },
   { id: 'hub-ai', label: 'AI & Autonomous Agents', color: '#ec4899', category: 'AI & Autonomous Agents' },
   { id: 'hub-ops', label: 'Operations & Testing', color: '#3b82f6', category: 'Operations & Testing' },
+  { id: 'hub-std', label: 'Standards & Clinical Safety', color: '#14b8a6', category: 'Standards & Clinical Safety' },
 ];
 
 export const GlossaryPage: React.FC<GlossaryPageProps> = ({

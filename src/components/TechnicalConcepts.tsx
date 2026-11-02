@@ -28,12 +28,14 @@ interface TechnicalConceptsProps {
   initialModuleId?: string | null;
   onNavigateToQuiz: (category?: string) => void;
   onNavigateToGlossaryTerm: (termId: string) => void;
+  onNavigateToImplementationTrack?: () => void;
 }
 
 export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
   initialModuleId,
   onNavigateToQuiz,
-  onNavigateToGlossaryTerm
+  onNavigateToGlossaryTerm,
+  onNavigateToImplementationTrack
 }) => {
   const { completedModules, toggleModuleComplete } = useUserProgress();
   const [activeModuleId, setActiveModuleId] = useState<string>(
@@ -278,25 +280,38 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
           </div>
         )}
 
-        {/* Quick Quiz CTA */}
+        {/* Quick Actions & Navigation CTA */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-800">
           <div className="text-xs text-slate-400">
-            Ready to test your comprehension of this pillar?
+            {activeModule.id === 'architecture-gitops-roadmap'
+              ? 'Ready to inspect the operational timeline, non-breaking rollout modes, or take the quiz?'
+              : 'Ready to test your comprehension of this pillar?'}
           </div>
-          <button
-            onClick={() => onNavigateToQuiz(
-              activeModule.id === 'five-safes' ? 'Five Safes & Governance'
-              : activeModule.id === 'owa-to-cwa-shacl' ? 'Semantic Modeling & SHACL'
-              : activeModule.id === 'opa-rego-compilation' ? 'OPA Rego & Enforcement'
-              : activeModule.id === 'quantitative-sdc' ? 'Quantitative SDC & Airlock'
-              : activeModule.id === 'ai-mcp-governance' ? 'AI & MCP Governance'
-              : 'Repository & Architecture'
+          <div className="flex flex-wrap items-center gap-3">
+            {activeModule.id === 'architecture-gitops-roadmap' && onNavigateToImplementationTrack && (
+              <button
+                onClick={onNavigateToImplementationTrack}
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 text-xs font-bold rounded-xl flex items-center gap-2 transition-colors cursor-pointer"
+              >
+                <span>Full 16-Week Implementation &amp; Rollout Track</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
             )}
-            className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold rounded-xl flex items-center gap-2 transition-colors shadow-sm"
-          >
-            <span>Take Module Quiz</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+            <button
+              onClick={() => onNavigateToQuiz(
+                activeModule.id === 'five-safes' ? 'Five Safes & Governance'
+                : activeModule.id === 'owa-to-cwa-shacl' ? 'Semantic Modeling & SHACL'
+                : activeModule.id === 'opa-rego-compilation' ? 'OPA Rego & Enforcement'
+                : activeModule.id === 'quantitative-sdc' ? 'Quantitative SDC & Airlock'
+                : activeModule.id === 'ai-mcp-governance' ? 'AI & MCP Governance'
+                : 'Repository & Architecture'
+              )}
+              className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold rounded-xl flex items-center gap-2 transition-colors shadow-sm cursor-pointer"
+            >
+              <span>Take Module Quiz</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
       </div>
 

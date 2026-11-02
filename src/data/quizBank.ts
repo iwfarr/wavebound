@@ -140,7 +140,7 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
       'Within the patient hospital wristband scanner'
     ],
     correctIndex: 1,
-    explanation: 'Policy Enforcement Points (PEPs)—specifically Kubernetes admission controllers or API gateways—intercept requests in real-time and query OPA (the Policy Decision Point, PDP) before provisioning workspaces.',
+    explanation: 'Policy Enforcement Points (PEPs), specifically Kubernetes admission controllers or API gateways, intercept requests in real-time and query OPA (the Policy Decision Point, PDP) before provisioning workspaces.',
     citation: 'Playbook Section 3 (Phase 4: Policy Enforcement Points)',
     tags: ['PEP', 'PDP', 'Kubernetes']
   },
@@ -549,5 +549,69 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
     explanation: '`security/opa/authz.rego` is the compiled target policy file containing evaluated rules for workspace admission, egress airlocks, and MCP tool boundaries.',
     citation: 'Section 0 & Phase 4 (Section 4.1)',
     tags: ['authz.rego', 'Repository Layout', 'OPA']
+  },
+  {
+    id: 'q-iso-42001',
+    category: 'AI & MCP Governance',
+    difficulty: 'Advanced',
+    question: 'Under ISO/IEC 42001:2023 (Artificial Intelligence Management System) and ISO/IEC 5259 series, what is mandatory before an AI model training workload is orchestrated inside a data analysis & intelligence platform?',
+    options: [
+      'The model weights must be pre-published on a public registry and training data must be transferred to external developer laptops.',
+      'A formal model risk tier classification must be documented, cryptographic training data provenance verified under ISO 5259, algorithmic bias audits passed, and egress network isolation enforced.',
+      'Only unaccredited researchers may initiate model training provided they do not use GPU accelerators.',
+      'ISO 42001 permits complete exemption from Five Safes governance provided the model parameters exceed 70 billion tokens.'
+    ],
+    correctIndex: 1,
+    explanation: 'ISO/IEC 42001:2023 requires rigorous lifecycle governance for AI systems: establishing explicit risk tier classifications, validating data quality and cryptographic provenance via ISO/IEC 5259, conducting bias audits, and enforcing closed-world network egress isolation.',
+    citation: 'Section 3. Phase 3: AI & Dual-Persona Enclave Governance & ISO 42001',
+    tags: ['ISO 42001', 'ISO 5259', 'AIMS', 'AI Governance']
+  },
+  {
+    id: 'q-dcb-0129-0160',
+    category: 'Five Safes & Governance',
+    difficulty: 'Advanced',
+    question: 'What statutory role and artifact are legally required under NHS Information Standards DCB0129 and DCB0160 before an algorithmic health software tool developed in the platform can be deployed in clinical NHS care?',
+    options: [
+      'An unverified self-declaration from the lead machine learning researcher without clinical input.',
+      'A registered Clinical Safety Officer (CSO) must sign off on a formal Clinical Safety Case Report and Hazard Log with acceptable residual risk (hazard index <= 2).',
+      'A verbal agreement from any hospital IT technician at the time of pod deployment.',
+      'DCB0129 only applies to paper medical record filing systems and does not govern health software or ML algorithms.'
+    ],
+    correctIndex: 1,
+    explanation: 'DCB0129 is a mandatory NHS Information Standard requiring health software manufacturers to employ an accredited Clinical Safety Officer (CSO) who oversees hazard identification and approves the formal Clinical Safety Case Report before deployment.',
+    citation: 'Section 3 (Phase 4 Runtime Enforcement) & DCB0129 / DCB0160 Standard',
+    tags: ['DCB0129', 'DCB0160', 'CSO', 'Clinical Risk Management']
+  },
+  {
+    id: 'q-samd-uk-mdr',
+    category: 'AI & MCP Governance',
+    difficulty: 'Intermediate',
+    question: 'When an AI model trained within a data analysis & intelligence platform provides diagnostic predictions or influences clinical decision-making, which UK regulation governs its medical device classification?',
+    options: [
+      'UK Medical Devices Regulations 2002 (UK MDR 2002, as amended) and MHRA Software as a Medical Device (SaMD) guidance.',
+      'The Open Source Initiative (OSI) Apache 2.0 license exclusively.',
+      'The W3C Semantic Web RDF Primer.',
+      'Local hospital procurement guidelines with no statutory regulatory standing.'
+    ],
+    correctIndex: 0,
+    explanation: 'Software that processes clinical data to provide diagnostic, prognostic, or treatment recommendations is classified as Software as a Medical Device (SaMD) regulated by the MHRA under the UK MDR 2002.',
+    citation: 'Section 3. Phase 3 & MHRA SaMD Guidance',
+    tags: ['UK MDR 2002', 'SaMD', 'MHRA', 'Medical Devices']
+  },
+  {
+    id: 'q-seawater-metaphor',
+    category: 'Repository & Architecture',
+    difficulty: 'Foundation',
+    question: 'How does Project Seawater model the clinical research data problem space through its tidal navigation metaphor?',
+    options: [
+      'As a completely static, isolated offline pond where data never enters and results never leave.',
+      'As an open, turbulent sea where vessels (research workloads) navigate the flood tide of data ingress and the ebb tide of model egress, protected by SHACL and OPA breakwaters.',
+      'As an uncontrolled open internet torrent with zero privacy or disclosure control locks.',
+      'As a submarine cable that bypasses all NHS Information Governance approvals.'
+    ],
+    correctIndex: 1,
+    explanation: 'Project Seawater models clinical data governance as navigating an open maritime problem space: incoming data enters on the flood tide (ingress) through salinity gatekeepers, while outgoing models and statistics exit on the ebb tide (egress) through mathematical sea-locks and breakwaters.',
+    citation: 'Section 0. Executive Summary & Problem Space',
+    tags: ['Project Seawater', 'Tidal Metaphor', 'Ingress', 'Egress']
   }
 ];

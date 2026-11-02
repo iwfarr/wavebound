@@ -329,7 +329,7 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
                 </div>
                 <h4 className="text-base font-bold text-white">Metadata &amp; Script Synthesis</h4>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  The in-enclave model receives only table schemas, column types, and data dictionary descriptions—excluding row instances and records.
+                  The in-enclave model receives only table schemas, column types, and data dictionary descriptions (excluding row instances and records).
                 </p>
                 <div className="pt-2 border-t border-slate-900 space-y-1.5 text-xs">
                   <div className="text-slate-300 font-semibold text-[11px]">Operational Workflow:</div>
@@ -388,7 +388,7 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
                 <span>Defense-in-Depth Specification: Layered Isolation vs. Advisory Client Filters</span>
               </div>
               <p className="text-xs text-slate-300 leading-relaxed">
-                In a production TRE/SDE, security boundaries must be structured hierarchically. Client-side ignore files (<code>.clineignore</code>, <code>.copilotignore</code>, <code>.cursorignore</code>) are advisory developer hints—not cryptographic or security guarantees:
+                In a production data analysis platform, security boundaries must be structured hierarchically. Client-side ignore files (<code>.clineignore</code>, <code>.copilotignore</code>, <code>.cursorignore</code>) are advisory developer hints, not cryptographic or security guarantees:
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs pt-1">
                 <div className="p-3 bg-slate-900/90 rounded-lg border border-slate-800 space-y-1">

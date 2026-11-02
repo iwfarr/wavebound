@@ -8,7 +8,8 @@ export interface GlossaryTerm {
     | 'Policy Enforcement & Security'
     | 'Disclosure Control (SDC)'
     | 'AI & Autonomous Agents'
-    | 'Operations & Testing';
+    | 'Operations & Testing'
+    | 'Standards & Clinical Safety';
   shortDefinition: string;
   fullDefinition: string;
   playbookContext: string;
@@ -25,11 +26,22 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     term: 'Trusted Research Environment',
     acronym: 'TRE / SDE',
     category: 'Governance & Frameworks',
-    shortDefinition: 'A secure cloud computing enclave enabling authorized researchers to analyze sensitive patient data without raw data leaving the environment.',
-    fullDefinition: 'A Trusted Research Environment (TRE), also designated as a Secure Data Environment (SDE) across the NHS and UK health data space, provides remote virtual access to health and administrative microdata under strict, auditable governance controls. Rather than sending data out to researchers, the TRE brings researchers and their code into a locked digital facility adhering to the Five Safes framework.',
-    playbookContext: 'The core operational subject of this playbook, which specifies a graph-based policy-as-code automation platform for managing TRE admission and data egress.',
+    shortDefinition: 'A secure cloud computing enclave within data analysis & intelligence platforms enabling authorized researchers to analyze sensitive patient data without raw data leaving the environment.',
+    fullDefinition: 'A Trusted Research Environment (TRE), designated alongside Secure Data Environments (SDE) as modern data analysis & intelligence platforms across the NHS and UK health data space, provides remote virtual access to health and administrative microdata under strict, auditable governance controls. Rather than sending data out to researchers, the platform brings researchers and their approved code into a locked digital facility adhering to the Five Safes framework and statutory accreditation standards.',
+    playbookContext: 'The core operational subject of this playbook, which specifies a graph-based policy-as-code automation platform for managing data analysis & intelligence platforms such as TREs and SDEs.',
     playbookSection: 'Section 1. Project Overview & Objectives',
-    relatedTerms: ['five-safes', 'satre', 'pac', 'safe-setting']
+    relatedTerms: ['data-analysis-intelligence-platform', 'five-safes', 'satre', 'pac', 'safe-setting']
+  },
+  {
+    id: 'data-analysis-intelligence-platform',
+    term: 'Data Analysis & Intelligence Platform',
+    acronym: 'TRE / SDE / DAIP',
+    category: 'Governance & Frameworks',
+    shortDefinition: 'Modern analytics, AI, and intelligence platforms (including TREs and SDEs) that bring algorithms to partitioned data rather than distributing sensitive microdata.',
+    fullDefinition: 'Modern data analysis & intelligence platforms such as Trusted Research Environments (TREs) and Secure Data Environments (SDEs) combine high-performance computing (CPUs/GPUs), ontological knowledge graphs, and rigorous perimeter security. These platforms host sensitive multi-modal patient datasets (EHR, genomics, imaging, registries) and enforce zero-trust data access, cryptographic auditability, and automated disclosure control across exploratory and AI workloads.',
+    playbookContext: 'The overarching architectural class defining the scope of Project Seawater: transforming traditional manual governance into continuous, microsecond-latency policy-as-code validation.',
+    playbookSection: 'Section 1. Project Overview & Objectives',
+    relatedTerms: ['tre', 'five-safes', 'seawater-problem-space', 'satre']
   },
   {
     id: 'five-safes',
@@ -110,6 +122,50 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     playbookContext: 'Modeled in governance_core.ttl as an explicit legal basis for accessing Tier 3 clinical data.',
     playbookSection: 'Section 2 & Section 3 (Phase 1)',
     relatedTerms: ['caldicott', 'safe-project', 'safe-data', 'rec-hra']
+  },
+  {
+    id: 'dea-2017',
+    term: 'Digital Economy Act 2017 (Part 5, Chapter 5: Research)',
+    acronym: 'DEA 2017',
+    category: 'Governance & Frameworks',
+    shortDefinition: 'Statutory UK gateway enabling public authorities to disclose de-identified data for public-benefit research.',
+    fullDefinition: 'Part 5, Chapter 5 of the Digital Economy Act 2017 provides a statutory mechanism for UK public authorities to share non-identifying data for approved research projects that serve the public interest. Overseen by the UK Statistics Authority and the Research Accreditation Panel (RAP), it sets high legal standards, severe criminal penalties for unlawful re-identification or disclosure under Section 67, and mandates accredited safe settings.',
+    playbookContext: 'Formalized in ontology/governance_core.ttl as a first-class legal gateway alongside NHS s251 and DPA 2018 Section 19.',
+    playbookSection: 'Section 2 & Section 3 (Phase 1)',
+    relatedTerms: ['rap-uksa', 'dea-accredited-researcher', 'dea-accredited-processor', 'five-safes', 'safe-project']
+  },
+  {
+    id: 'rap-uksa',
+    term: 'Research Accreditation Panel (RAP)',
+    acronym: 'RAP / UKSA',
+    category: 'Governance & Frameworks',
+    shortDefinition: 'Independent statutory committee of the UK Statistics Authority approving projects, researchers, and TRE processors under the DEA.',
+    fullDefinition: 'The independent statutory body established under Section 70 of the Digital Economy Act 2017. RAP is responsible for accrediting researchers, evaluating project public benefit and methodology, and accrediting secure data processing facilities (TREs).',
+    playbookContext: 'Represented in access-shapes.ttl as `tre:accreditedByRAP true` to validate project and institutional eligibility for public data linkages.',
+    playbookSection: 'Section 2 & Section 3 (Phase 1)',
+    relatedTerms: ['dea-2017', 'dea-accredited-researcher', 'dea-accredited-processor', 'safe-project']
+  },
+  {
+    id: 'dea-accredited-researcher',
+    term: 'DEA Accredited Researcher',
+    acronym: 'DEA Researcher',
+    category: 'Governance & Frameworks',
+    shortDefinition: 'Individual researcher accredited by UKSA/RAP who has completed Safe Researcher Training and signed statutory agreements.',
+    fullDefinition: 'An individual certified under the UK Statistics Authority Research Accreditation Framework. Researchers must demonstrate qualifications, complete UKSA Safe Researcher Training, verify employer sponsorship, and sign legally binding commitments subject to statutory penalties for data misuse.',
+    playbookContext: 'Directly mapped to the Safe Person verification shape (`tre:hasAccreditedResearcher`) in access-shapes.ttl.',
+    playbookSection: 'Section 2 & Section 3 (Phase 1)',
+    relatedTerms: ['safe-person', 'dea-2017', 'rap-uksa', 'five-safes']
+  },
+  {
+    id: 'dea-accredited-processor',
+    term: 'DEA Accredited Processor (Secure Processing Environment)',
+    acronym: 'Accredited Processor',
+    category: 'Governance & Frameworks',
+    shortDefinition: 'Secure computing environment (TRE) accredited by UKSA under DEA 2017 Section 71 for hosting and linking public authority data.',
+    fullDefinition: 'An organization or technological platform formally accredited by the UK Statistics Authority to prepare, link, store, or provide access to de-identified data. Requires verified compliance with ISO 27001, NHS DSPT, airlock egress controls, and full audit logging.',
+    playbookContext: 'Corresponds to the `tre:SecureEnclave` and `tre:AirlockGate` classes verified by Seawater admission webhooks and egress controllers.',
+    playbookSection: 'Section 2 & Section 3 (Phase 1 & 4)',
+    relatedTerms: ['tre', 'safe-setting', 'dea-2017', 'satre', 'airlock']
   },
   {
     id: 'rec-hra',
@@ -377,7 +433,7 @@ allow {
     term: 'Quasi-Identifiers & Longitudinal Linkage',
     category: 'Disclosure Control (SDC)',
     shortDefinition: 'Indirect attributes (e.g. appointment dates, birth month, partial postcode) that, when combined, uniquely identify individuals despite absence of names.',
-    fullDefinition: 'Indirect identifying variables—including appointment timestamps, hospital admission/discharge dates, birth year/month, partial postcode districts (e.g. SW1A), sex, ethnicity, and rare clinical diagnosis codes. Sweeney’s landmark theorem demonstrated that 87% of the US/UK population is uniquely identifiable by just 5-digit ZIP code/postcode, gender, and date of birth. In healthcare research, removing patient names does not confer true anonymity: linking multiple quasi-identifiers against voter registries, local news, or obituary notices can immediately re-identify patients. Under UK GDPR and Caldicott Principle 1, such row-level datasets remain confidential personal data requiring strict airlock suppression, k-anonymity grouping, and AST scrubbing.',
+    fullDefinition: 'Indirect identifying variables (including appointment timestamps, hospital admission/discharge dates, birth year/month, partial postcode districts e.g. SW1A, sex, ethnicity, and rare clinical diagnosis codes). Sweeney’s landmark theorem demonstrated that 87% of the US/UK population is uniquely identifiable by just 5-digit ZIP code/postcode, gender, and date of birth. In healthcare research, removing patient names does not confer true anonymity: linking multiple quasi-identifiers against voter registries, local news, or obituary notices can immediately re-identify patients. Under UK GDPR and Caldicott Principle 1, such row-level datasets remain confidential personal data requiring strict airlock suppression, k-anonymity grouping, and AST scrubbing.',
     playbookContext: 'Enforced through strict tiering in governance_core.ttl, SHACL validation in sdc_shapes.ttl, and pre-prompt AST scrubbing for LLM queries.',
     playbookSection: 'Phase 1 (Section 1.xx) & Phase 3 (Section 3.xx)',
     exampleSnippet: `# Quasi-Identifier Linkage Risk Vector:
@@ -648,12 +704,99 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     playbookContext: 'Mandatory statutory and governance prerequisite in `governance_core.ttl` before approving any external cloud model adapter.',
     playbookSection: 'Section 1 & Section 3 (Phase 1)',
     relatedTerms: ['in-enclave-llm', 'llm-prompt-leakage', 'uk-gdpr']
+  },
+  // --- Seawater Problem Space & Flow Governance ---
+  {
+    id: 'seawater-problem-space',
+    term: 'Seawater Problem Space & Tidal Flow Model',
+    acronym: 'Project Seawater',
+    category: 'Standards & Clinical Safety',
+    shortDefinition: 'The governance model for data analysis & intelligence platforms: managing dynamic data flows where ingress enforces access controls, Safe People, and Safe Projects, and egress enforces statistical disclosure control.',
+    fullDefinition: 'Clinical and genomic research takes place within an active, continuous data problem space dubbed "Seawater". Analytics workloads (ranging from exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, clinical governance channels, and patient confidentiality thresholds. The tide flows cyclically across two managed boundaries: Ingress and Egress. Ingress enforces gateway access controls, researcher accreditation, institutional identity verification, and Information Governance training (Safe People), alongside approved REC ethics protocols and Section 251 CAG exemptions (Safe Projects). Inbound clinical datasets, multi-omics records, and container workloads are verified at the boundary using W3C SHACL shape validation before admission. Egress regulates the export of derived analytical findings, statistical summaries, and model parameters, requiring automated Statistical Disclosure Control (SDC) checks, k-anonymity (k >= 10), and sub-millisecond Open Policy Agent (OPA) Rego policy evaluations to prevent patient re-identification.',
+    playbookContext: 'The overarching architectural concept of Project Seawater: transforming traditional manual governance into continuous, microsecond-latency policy-as-code navigation.',
+    playbookSection: 'Section 0. Executive Summary & Problem Space',
+    relatedTerms: ['data-analysis-intelligence-platform', 'tre', 'five-safes', 'pac', 'shacl', 'opa']
+  },
+  // --- International Standards (ISO) & Clinical Safety (DCB) ---
+  {
+    id: 'iso-42001',
+    term: 'ISO/IEC 42001:2023 Artificial Intelligence Management System',
+    acronym: 'ISO/IEC 42001 (AIMS)',
+    category: 'Standards & Clinical Safety',
+    shortDefinition: 'The international standard specifying requirements for establishing, implementing, maintaining, and continually improving an Artificial Intelligence Management System (AIMS).',
+    fullDefinition: 'ISO/IEC 42001:2023 is the world’s first certifiable standard for AI management. Within data analysis & intelligence platforms such as TREs and SDEs, it provides the governance architecture for managing AI risks, algorithmic transparency, automated continuous monitoring, data provenance, and ethical accountability across predictive and generative AI lifecycles.',
+    playbookContext: 'Directly mapped into Section 3 (Phase 3 AI Governance) and compiled into SHACL node shapes validating model risk classification and training data lineage.',
+    playbookSection: 'Section 3. Implementation Phases (Phase 3: AI & Dual-Persona Enclave Governance)',
+    relatedTerms: ['eu-ai-act', 'iso-5259', 'dcb-0129-0160', 'samd-uk-mdr']
+  },
+  {
+    id: 'iso-13485',
+    term: 'ISO 13485:2016 Medical Devices Quality Management',
+    acronym: 'ISO 13485 (QMS)',
+    category: 'Standards & Clinical Safety',
+    shortDefinition: 'Harmonized standard specifying requirements for a quality management system where an organization designs and develops medical devices and software (SaMD).',
+    fullDefinition: 'ISO 13485 establishes strict quality management system (QMS) requirements for medical device design, risk control, software verification, and traceability. When research algorithms in data analysis & intelligence platforms transition toward clinical decision support or SaMD, compliance with ISO 13485 ensures reproducible pipelines, strict configuration management, and audited deployment controls.',
+    playbookContext: 'Governs the transition of models trained in the platform into clinical trials or health technology deployments.',
+    playbookSection: 'Section 3. Implementation Phases (Phase 3 & Phase 4)',
+    relatedTerms: ['iso-14971', 'samd-uk-mdr', 'dcb-0129-0160']
+  },
+  {
+    id: 'iso-14971',
+    term: 'ISO 14971:2019 Medical Device Risk Management',
+    acronym: 'ISO 14971',
+    category: 'Standards & Clinical Safety',
+    shortDefinition: 'The international standard for the application of risk management to medical devices, estimating hazards and evaluating clinical risks throughout the AI/ML lifecycle.',
+    fullDefinition: 'ISO 14971 provides the formal methodology for identifying hazards, estimating clinical risks, evaluating risk acceptability, implementing risk control measures, and monitoring post-market effectiveness. In the context of Project Seawater, it aligns with DCB0129 clinical hazard logs for models exiting the airlock.',
+    playbookContext: 'Required risk management framework when evaluating egressed algorithms intended for clinical decision influence.',
+    playbookSection: 'Section 3. Implementation Phases (Phase 4: Policy Compilation & Runtime Enforcement)',
+    relatedTerms: ['iso-13485', 'dcb-0129-0160', 'samd-uk-mdr']
+  },
+  {
+    id: 'dcb-0129-0160',
+    term: 'DCB0129 & DCB0160 Clinical Risk Management',
+    acronym: 'DCB0129 / DCB0160',
+    category: 'Standards & Clinical Safety',
+    shortDefinition: 'Mandatory NHS clinical safety standards: DCB0129 governs health software manufacturers; DCB0160 governs deploying healthcare organizations, led by a nominated Clinical Safety Officer (CSO).',
+    fullDefinition: 'Under the Health and Social Care Act 2012, DCB0129 and DCB0160 are legally mandatory Information Standards in the NHS. DCB0129 requires software developers to conduct formal Clinical Safety Case Reports and Hazard Logs under a registered clinician acting as Clinical Safety Officer (CSO). DCB0160 requires NHS deployment organizations to evaluate local deployment risks before enabling clinical software or algorithmic tools in care pathways.',
+    playbookContext: 'Enforced at the airlock for any analytic tool or clinical algorithm egressed from the platform destined for NHS Trust deployment.',
+    playbookSection: 'Section 3. Implementation Phases (Phase 4: Policy Compilation & Runtime Enforcement)',
+    relatedTerms: ['samd-uk-mdr', 'caldicott', 'iso-14971', 'iso-42001']
+  },
+  {
+    id: 'samd-uk-mdr',
+    term: 'Software as a Medical Device & UK MDR 2002',
+    acronym: 'SaMD / UK MDR 2002',
+    category: 'Standards & Clinical Safety',
+    shortDefinition: 'Statutory regulation under UK Medical Devices Regulations 2002 (as amended) and MHRA guidance for health software and AI intended for diagnostic, prognostic, or therapeutic clinical decision-making.',
+    fullDefinition: 'Software as a Medical Device (SaMD) encompasses software intended to be used for diagnostic or therapeutic purposes without being part of a hardware medical device. In the UK, SaMD is regulated by the Medicines and Healthcare products Regulatory Agency (MHRA) under the UK MDR 2002. Research models developed in data analysis & intelligence platforms that provide diagnostic or risk prediction outputs must be assessed against SaMD classification rules before clinical deployment.',
+    playbookContext: 'Informed by the dual-persona governance model to separate exploratory research models from regulated clinical decision tools.',
+    playbookSection: 'Section 3. Implementation Phases (Phase 3 & Phase 4)',
+    relatedTerms: ['iso-13485', 'iso-14971', 'dcb-0129-0160', 'iso-42001']
+  },
+  {
+    id: 'iso-5259',
+    term: 'ISO/IEC 5259 Data Quality for Analytics & ML',
+    acronym: 'ISO/IEC 5259',
+    category: 'Standards & Clinical Safety',
+    shortDefinition: 'The ISO standard series defining data quality measures, data governance, and data lifecycle management specifically for machine learning, model training, and analytical pipelines.',
+    fullDefinition: 'ISO/IEC 5259 provides benchmark quality dimensions (including completeness, representativeness, bias minimization, and feature consistency) for datasets used in AI model training. Within data analysis & intelligence platforms, it establishes data ingestion quality gates that prevent downstream algorithmic drift and hallucination.',
+    playbookContext: 'Modes of data quality verification encoded into SHACL shapes for safe data ingestion.',
+    playbookSection: 'Section 2. Architecture: The Policy-as-Code Pipeline',
+    relatedTerms: ['iso-42001', 'safe-data', 'owl2', 'shacl']
   }
 ];
 
 export const GLOSSARY_SECTION_MAP: Record<string, string> = {
   // Foundations & Statutory Frameworks -> Phase 1 Baseline Ontologies & SATRE
   'tre': 'sec-phase-1-2',
+  'data-analysis-intelligence-platform': 'sec-phase-1-2',
+  'seawater-problem-space': 'sec-front-matter',
+  'iso-42001': 'sec-phase-3-2',
+  'iso-13485': 'sec-phase-4-1',
+  'iso-14971': 'sec-phase-4-1',
+  'dcb-0129-0160': 'sec-phase-4-1',
+  'samd-uk-mdr': 'sec-phase-3-2',
+  'iso-5259': 'sec-phase-1-1',
   'five-safes': 'sec-phase-1-2',
   'safe-person': 'sec-phase-1-2',
   'safe-project': 'sec-phase-1-2',
@@ -662,6 +805,10 @@ export const GLOSSARY_SECTION_MAP: Record<string, string> = {
   'safe-output': 'sec-phase-2-1',
   'caldicott': 'sec-phase-1-2',
   's251': 'sec-phase-1-2',
+  'dea-2017': 'sec-phase-1-2',
+  'rap-uksa': 'sec-phase-1-2',
+  'dea-accredited-researcher': 'sec-phase-1-2',
+  'dea-accredited-processor': 'sec-phase-1-2',
   'rec-hra': 'sec-phase-1-2',
   'uk-gdpr': 'sec-phase-1-2',
   'satre': 'sec-phase-1-2',

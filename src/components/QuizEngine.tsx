@@ -52,10 +52,8 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
   const [selectedDifficulty, setSelectedDifficulty] = useState<'All' | 'Foundation' | 'Intermediate' | 'Advanced'>('All');
   const [questionCount, setQuestionCount] = useState<number>(5);
 
-  // AI Generator state
-  const [isAiGenerating, setIsAiGenerating] = useState(false);
-  const [customAiPrompt, setCustomAiPrompt] = useState('');
-  const [aiNotice, setAiNotice] = useState<string | null>(null);
+  // Status Notice
+  const [notice, setNotice] = useState<string | null>(null);
 
   // Active Quiz State
   const [quizActive, setQuizActive] = useState(false);
@@ -98,7 +96,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
   }, [selectedCategory, selectedDifficulty]);
 
   // Start Standard / Filtered Curated Quiz with robust fallback
-  const handleStartCuratedQuiz = () => {
+  const handleStartCuratedQuiz = (countOverride?: number) => {
     let pool = CURATED_QUIZ_BANK.filter((q) => {
       const matchCat = selectedCategory === 'All Categories (Comprehensive Exam)' || q.category === selectedCategory;
       const matchDiff = selectedDifficulty === 'All' || q.difficulty === selectedDifficulty;
@@ -132,7 +130,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
 
     // Shuffle and slice
     const shuffled = [...pool].sort(() => Math.random() - 0.5);
-    const selected = shuffled.slice(0, Math.min(questionCount, shuffled.length));
+    const selected = shuffled.slice(0, Math.min(countOverride || questionCount, shuffled.length));
 
     setActiveQuestions(selected);
     setCurrentIndex(0);
@@ -142,63 +140,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
     setElapsedSeconds(0);
     setStartTime(Date.now());
     setQuizActive(true);
-    setAiNotice(notice);
-  };
-
-  // Generate on-demand dynamic AI quiz via server endpoint
-  const handleGenerateAiQuiz = async () => {
-    setIsAiGenerating(true);
-    setAiNotice(null);
-
-    try {
-      const res = await fetch('/api/generate-quiz', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          category: selectedCategory === 'All Categories (Comprehensive Exam)' ? 'Comprehensive TRE Playbook' : selectedCategory,
-          difficulty: selectedDifficulty === 'All' ? 'intermediate' : selectedDifficulty.toLowerCase(),
-          count: questionCount,
-          customPrompt: customAiPrompt
-        })
-      });
-
-      const data = await res.json();
-
-      if (data.success && Array.isArray(data.questions) && data.questions.length > 0) {
-        // Map questions into QuizQuestion format
-        const formatted: QuizQuestion[] = data.questions.map((q: any, idx: number) => ({
-          id: `ai-gen-${Date.now()}-${idx}`,
-          category: q.category || selectedCategory,
-          difficulty: (q.difficulty ? q.difficulty.charAt(0).toUpperCase() + q.difficulty.slice(1) : 'Intermediate') as any,
-          question: q.question,
-          options: q.options,
-          correctIndex: q.correctIndex,
-          explanation: q.explanation,
-          citation: q.citation || 'Playbook Specification',
-          tags: ['AI-Generated', 'Dynamic']
-        }));
-
-        setActiveQuestions(formatted);
-        setCurrentIndex(0);
-        setUserAnswers({});
-        setSubmittedIndex(null);
-        setQuizCompleted(false);
-        setElapsedSeconds(0);
-        setStartTime(Date.now());
-        setQuizActive(true);
-        setAiNotice('Dynamic AI Quiz generated with Gemini 3.8 Flash!');
-      } else {
-        // Graceful fallback to rich curated bank
-        setAiNotice(data.message || 'Switched to curated technical test bank.');
-        handleStartCuratedQuiz();
-      }
-    } catch (err: any) {
-      console.warn('AI Quiz Generation failed, falling back to curated bank', err);
-      setAiNotice('Generated from verified technical question bank.');
-      handleStartCuratedQuiz();
-    } finally {
-      setIsAiGenerating(false);
-    }
+    setNotice(notice);
   };
 
   // Submit answer for current question
@@ -277,7 +219,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
             </h1>
             <p className="text-slate-400 text-xs sm:text-sm max-w-xl">
               Challenge yourself on Five Safes governance, SHACL closed-world validation,
-              quantitative SDC math ($k \ge 10$), and OPA Rego compilation.
+              quantitative SDC math ($k \ge 10$), OPA Rego compilation, and international standards (ISO 42001, DCB0129/0160).
             </p>
           </div>
 
@@ -290,10 +232,10 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
           </button>
         </div>
 
-        {aiNotice && (
+        {notice && (
           <div className="text-xs text-cyan-300 bg-cyan-950/60 border border-cyan-800/60 p-2.5 rounded-lg flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>{aiNotice}</span>
+            <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+            <span>{notice}</span>
           </div>
         )}
       </div>
@@ -359,28 +301,10 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
             </div>
           </div>
 
-          {/* AI Generator Optional Focus Input */}
-          <div className="p-4 bg-slate-950/70 rounded-xl border border-slate-800 space-y-2">
-            <div className="flex items-center justify-between text-xs">
-              <span className="font-semibold text-cyan-300 flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>On-Demand AI Question Synthesis (Gemini 3.8 Flash)</span>
-              </span>
-              <span className="text-[11px] text-slate-500">Optional custom prompt</span>
-            </div>
-            <input
-              type="text"
-              placeholder="e.g. Focus on OWA vs CWA math and PySHACL CI fixtures..."
-              value={customAiPrompt}
-              onChange={(e) => setCustomAiPrompt(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-cyan-500"
-            />
-          </div>
-
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <button
-              onClick={handleStartCuratedQuiz}
+              onClick={() => handleStartCuratedQuiz()}
               className="flex-1 py-3 px-6 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2"
             >
               <Zap className="w-4 h-4" />
@@ -388,21 +312,11 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
             </button>
 
             <button
-              onClick={handleGenerateAiQuiz}
-              disabled={isAiGenerating}
-              className="py-3 px-6 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
+              onClick={() => handleStartCuratedQuiz(3)}
+              className="py-3 px-6 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2"
             >
-              {isAiGenerating ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Synthesizing Questions with AI...</span>
-                </>
-              ) : (
-                <>
-                  <Sparkles className="w-4 h-4" />
-                  <span>Generate AI Scenario Quiz</span>
-                </>
-              )}
+              <RotateCcw className="w-4 h-4" />
+              <span>3-Question Quick Drill</span>
             </button>
           </div>
         </div>
@@ -560,7 +474,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
 
             <div className="flex flex-wrap justify-center gap-3 pt-3">
               <button
-                onClick={handleStartCuratedQuiz}
+                onClick={() => handleStartCuratedQuiz()}
                 className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold rounded-xl flex items-center gap-1.5 transition-colors"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
