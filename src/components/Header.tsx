@@ -153,7 +153,7 @@ export const Header: React.FC<HeaderProps> = ({
                     ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
                     : 'text-slate-400 hover:text-emerald-300'
                 }`}
-                title="Switch to Public Governance Atlas (Citizen & Board View)"
+                title="Switch to Public Governance Atlas (Citizen & Public View)"
               >
                 <HeartHandshake className="w-3.5 h-3.5" />
                 <span>Public Atlas</span>

@@ -42,6 +42,7 @@ const CATEGORY_HUBS = [
   { id: 'hub-ai', label: 'AI & Autonomous Agents', color: '#ec4899', category: 'AI & Autonomous Agents' },
   { id: 'hub-ops', label: 'Operations & Testing', color: '#3b82f6', category: 'Operations & Testing' },
   { id: 'hub-std', label: 'Standards & Clinical Safety', color: '#14b8a6', category: 'Standards & Clinical Safety' },
+  { id: 'hub-gmm', label: 'Governance Maturity Model', color: '#6366f1', category: 'Governance Maturity Model' },
 ];
 
 export const GlossaryPage: React.FC<GlossaryPageProps> = ({

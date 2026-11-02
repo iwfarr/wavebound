@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { COMPREHENSIVE_RESOURCES, ResourceItem } from '../data/resourcesData';
+import { SDCMethodsGuide } from './SDCMethodsGuide';
 import {
   ExternalLink,
   Search,
@@ -13,10 +14,12 @@ import {
   Sparkles,
   Tag,
   Building2,
-  AlertTriangle
+  AlertTriangle,
+  Calculator
 } from 'lucide-react';
 
 export const ResourcesPage: React.FC = () => {
+  const [activeView, setActiveView] = useState<'sdc-guide' | 'compendium'>('sdc-guide');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
@@ -58,29 +61,60 @@ export const ResourcesPage: React.FC = () => {
             Authoritative Resources &amp; Technical Guidelines
           </h1>
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Statutory UK legislation, ISO standards (ISO 42001, ISO 27001, ISO 13485, ISO 14971), NHS clinical safety standards (DCB0129 &amp; DCB0160), Medical Device Regulations (UK MDR 2002 SaMD), and SDC rulebooks governing data analysis &amp; intelligence platforms such as TREs and SDEs.
-            and real-world security case studies supporting the Trusted Research Environment Policy-as-Code platform.
+            Statutory legislation, international standards (ISO 42001, ISO 27001, ISO 5259), algorithmic risk management (DCB0129 &amp; DCB0160), and SDC rulebooks governing data analysis &amp; intelligence platforms, secure research enclaves, and policy-as-code architectures.
           </p>
 
           <div className="flex items-center gap-3 pt-2 text-xs text-slate-400">
             <span>Total Catalogued Resources: <strong className="text-white">{COMPREHENSIVE_RESOURCES.length}</strong></span>
             <span>·</span>
-            <span>Primary Sources from UK Parliament, NHS, ONS, W3C, and CNCF</span>
+            <span>Primary Sources from UK Parliament, ONS, W3C, and Cloud Native Computing Foundation</span>
           </div>
         </div>
       </div>
 
-      {/* Real-World Cybersecurity Precedent Highlight Callout */}
-      <div className="p-5 rounded-2xl bg-amber-950/20 border border-amber-500/40 space-y-2.5">
-        <div className="flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-wider">
-          <AlertTriangle className="w-4 h-4 text-amber-400" />
-          <span>Why Automated Policy-as-Code Is Critical: Real-World Lessons</span>
-        </div>
-        <p className="text-xs sm:text-sm text-amber-100 leading-relaxed">
-          In historical healthcare breaches (such as instances where legacy accounts protected only by &ldquo;Password1&rdquo; led to unauthorized extraction of sensitive patient and children&rsquo;s data), the root cause was relying on manual audits and unenforced static policies.
-          <strong> Policy-as-Code fundamentally eliminates this vulnerability</strong> by encoding authorization directly into Kubernetes admission controllers and microsecond OPA Rego rules. If institutional accreditation, annual IG training, or enclave zero-egress checks fail, access is structurally blocked at the network perimeter.
-        </p>
+      {/* View Switcher: SDC & Low-Count Methods Guide vs. Statutory Compendium */}
+      <div className="flex items-center gap-2 p-1.5 bg-slate-950 rounded-2xl border border-slate-800 w-full sm:w-auto">
+        <button
+          onClick={() => setActiveView('sdc-guide')}
+          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+            activeView === 'sdc-guide'
+              ? 'bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold shadow-lg shadow-cyan-500/20'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+          }`}
+        >
+          <Calculator className="w-4 h-4" />
+          <span>SDC &amp; Low-Count Methods Guide (Interactive SOP)</span>
+        </button>
+
+        <button
+          onClick={() => setActiveView('compendium')}
+          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+            activeView === 'compendium'
+              ? 'bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold shadow-lg shadow-cyan-500/20'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+          }`}
+        >
+          <BookOpen className="w-4 h-4" />
+          <span>Statutory Compendium ({COMPREHENSIVE_RESOURCES.length})</span>
+        </button>
       </div>
+
+      {/* Conditionally Render SDC Methods Guide or Compendium */}
+      {activeView === 'sdc-guide' ? (
+        <SDCMethodsGuide />
+      ) : (
+        <>
+          {/* Real-World Cybersecurity Precedent Highlight Callout */}
+          <div className="p-5 rounded-2xl bg-amber-950/20 border border-amber-500/40 space-y-2.5">
+            <div className="flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-wider">
+              <AlertTriangle className="w-4 h-4 text-amber-400" />
+              <span>Why Automated Policy-as-Code Is Critical: Real-World Lessons</span>
+            </div>
+            <p className="text-xs sm:text-sm text-amber-100 leading-relaxed">
+              In historical organizational breaches (such as instances where legacy accounts protected only by &ldquo;Password1&rdquo; led to unauthorized extraction of sensitive population records), the root cause was relying on manual audits and unenforced static policies.
+              <strong> Policy-as-Code fundamentally eliminates this vulnerability</strong> by encoding authorization directly into Kubernetes admission controllers and microsecond OPA Rego rules. If institutional accreditation, annual IG training, or enclave zero-egress checks fail, access is structurally blocked at the network perimeter.
+            </p>
+          </div>
 
       {/* Search and Filters */}
       <div className="space-y-4">
@@ -191,6 +225,8 @@ export const ResourcesPage: React.FC = () => {
           ))}
         </div>
       </div>
+        </>
+      )}
     </div>
   );
 };

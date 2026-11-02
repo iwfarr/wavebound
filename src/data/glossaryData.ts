@@ -9,7 +9,8 @@ export interface GlossaryTerm {
     | 'Disclosure Control (SDC)'
     | 'AI & Autonomous Agents'
     | 'Operations & Testing'
-    | 'Standards & Clinical Safety';
+    | 'Standards & Clinical Safety'
+    | 'Governance Maturity Model';
   shortDefinition: string;
   fullDefinition: string;
   playbookContext: string;
@@ -783,6 +784,91 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     playbookContext: 'Modes of data quality verification encoded into SHACL shapes for safe data ingestion.',
     playbookSection: 'Section 2. Architecture: The Policy-as-Code Pipeline',
     relatedTerms: ['iso-42001', 'safe-data', 'owl2', 'shacl']
+  },
+  // --- Governance Maturity Model (Population Data & Epidemiology) ---
+  {
+    id: 'governance-maturity-model',
+    term: 'Governance Maturity Model for Population Data',
+    acronym: 'GMM',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'A 5-level operational framework measuring an organization\'s progression from ad-hoc manual data handling to automated, policy-as-code research enclaves.',
+    fullDefinition: 'The Governance Maturity Model (GMM) provides population data organizations, health registries, and epidemiological research platforms with a structured path to evaluate and advance their Information Governance capabilities. The model defines five progressive tiers: Level 1 (Ad-hoc: fragmented files, bespoke permissions, manual approval bottlenecks); Level 2 (Repeatable: standardized Data Sharing Agreements and manual DPIAs); Level 3 (Defined: formal institutional baselines adhering to the Five Safes, Caldicott Principles, and SATRE specifications); Level 4 (Managed: automated policy-as-code enforcement, quantitative disclosure control, and real-time metric tracking); Level 5 (Optimizing: continuous semantic graph validation, W3C PROV-O audit trails, and automated regulatory drift adaptation).',
+    playbookContext: 'Structures the 16-Week Implementation Track, allowing organizations to benchmark their transition toward Level 4 and Level 5 machine-executable governance.',
+    playbookSection: 'Section 1. Project Overview & Implementation Track',
+    relatedTerms: ['data-stewardship', 'dpia', 'dsa', 'five-safes', 'pac']
+  },
+  {
+    id: 'dpia',
+    term: 'Data Protection Impact Assessment',
+    acronym: 'DPIA',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'A mandatory statutory process under UK GDPR Article 35 evaluating necessity, proportionality, and privacy risks in population data processing.',
+    fullDefinition: 'A Data Protection Impact Assessment (DPIA) is a formal risk management process mandated under UK GDPR Article 35 and the Data Protection Act 2018 whenever processing is likely to result in a high risk to the rights and freedoms of individuals. In population data research and epidemiology, DPIAs systematically analyze: (1) the lawful basis for processing (e.g. Article 6(1)(e) public interest task and Article 9(2)(j) research exemption); (2) necessity and proportionality relative to research objectives; (3) measures to mitigate re-identification, longitudinal linkage, and inference risks; (4) privacy-enhancing technologies (PETs) deployed; and (5) formal consultation with the Data Protection Officer (DPO) and affected community representatives.',
+    playbookContext: 'Formalized within governance ontologies and validated prior to cohort provisioning; serves as a prerequisite for Phase 1 baseline certification.',
+    playbookSection: 'Section 1. Foundations & Statutory Compliance',
+    relatedTerms: ['dsa', 'data-stewardship', 'uk-gdpr', 'safe-project']
+  },
+  {
+    id: 'dsa',
+    term: 'Data Sharing Agreement & Transfer Protocol',
+    acronym: 'DSA / DTA / ISA',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'A legally binding contract governing the terms, lawful basis, purpose limitations, and liabilities under which data is shared between organizations.',
+    fullDefinition: 'A Data Sharing Agreement (DSA), also referred to as a Data Transfer Agreement (DTA) or Information Sharing Agreement (ISA), is a legal instrument established between data controllers and processors before any multi-institutional population research commences. A compliant DSA defines: (1) the specific parties and their statutory controller/processor designations; (2) explicit purpose limitation strictly bounding analytical scope; (3) data categories, pseudonymization standards, and transmission security; (4) data retention horizons and secure destruction protocols; (5) intellectual property rights and publication clearances; and (6) breach notification SLAs and legal liability allocation.',
+    playbookContext: 'Compiled into machine-readable shape constraints in tre-core.ttl to guarantee that only projects with signed, active DSAs can receive data partitions.',
+    playbookSection: 'Section 1. Core Ontologies & Phase 1 Implementation',
+    relatedTerms: ['dpia', 'data-stewardship', 'safe-project', 'purpose-limitation']
+  },
+  {
+    id: 'data-stewardship',
+    term: 'Data Stewardship & Fiduciary Custodianship',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'The institutional responsibility and operational practices ensuring data integrity, ethical curation, access governance, and lifecycle preservation.',
+    fullDefinition: 'Data Stewardship represents the active management, governance, and ethical custodianship of population, administrative, and epidemiological data assets throughout their entire lifecycle. Unlike traditional IT administration, data stewards act as trusted fiduciaries for research participants and public authorities. Key responsibilities include maintaining FAIR (Findable, Accessible, Interoperable, Reusable) data standards, curating standardized semantic data dictionaries (OMOP CDM, ICD-10, SNOMED CT), ensuring data minimization at ingress, managing project-specific role assignments, and enforcing ethical boundary conditions.',
+    playbookContext: 'Modeled in tre-core.ttl as tre:DataSteward, linking human custodians to W3C SHACL shape validation rules and access review gates.',
+    playbookSection: 'Section 1.2 & Section 3.1',
+    relatedTerms: ['governance-maturity-model', 'ethical-framework', 'dsa', 'five-safes']
+  },
+  {
+    id: 'ethical-framework',
+    term: 'Ethical Framework & Public Interest Test',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'A structured assessment methodology balancing the public health and scientific benefits of research against individual privacy intrusion.',
+    fullDefinition: 'The Ethical Framework for population and health research provides principles and decision heuristics for evaluating whether secondary data linkage and analysis are morally and socially justified. Anchored by the UNESCO Universal Declaration on Bioethics and Human Rights, the Belmont Report, and national data guardian principles, the framework evaluates four core pillars: (1) Beneficence (clear societal value, disease mitigation, or policy improvement); (2) Non-maleficence (robust mathematical safeguards preventing group stigma, discriminatory profiling, or re-identification); (3) Autonomy (respect for statutory opt-outs, transparent public registers, and citizen dialogue); and (4) Justice (fair distribution of research benefits across diverse population strata).',
+    playbookContext: 'Integrated into the Playbook front matter and encoded into the governance graph to enforce public benefit criteria as machine-checkable preconditions.',
+    playbookSection: 'Section 0. Executive Front Matter & Section 1.2',
+    relatedTerms: ['data-stewardship', 'caldicott', 'purpose-limitation', 'five-safes']
+  },
+  {
+    id: 'longitudinal-cohort-linkage',
+    term: 'Longitudinal Cohort Linkage Protocol',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'A privacy-preserving methodology for combining records across disparate administrative and epidemiological registries over time without exposing identity.',
+    fullDefinition: 'Longitudinal Cohort Linkage is the systematic process of connecting multiple datasets (such as birth cohorts, census returns, health encounters, educational attainment, and environmental exposures) for the same individuals across multi-decade observation periods. To maintain compliance with UK GDPR and the Digital Economy Act 2017, linkage protocols employ privacy-preserving record linkage (PPRL), deterministic cryptographic hash tokens (e.g. Salted HMAC-SHA256), and trusted third-party separation of identity from analytical attributes (the split-file model).',
+    playbookContext: 'Encoded into SHACL ingress rules to verify that linkage tokens are irreversible and that row-level datasets cannot be joined without active ethical authorization.',
+    playbookSection: 'Section 2. Architecture & Ingress Governance',
+    relatedTerms: ['data-stewardship', 'quasi-identifiers', 'dea-2017']
+  },
+  {
+    id: 'purpose-limitation',
+    term: 'Purpose Limitation & Secondary Use Controls',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'The statutory principle restricting data use strictly to the approved research question, prohibiting mission creep or commercial repurposing.',
+    fullDefinition: 'Under UK GDPR Article 5(1)(b) and statutory research gateways, data collected for specific administrative, health, or statistical purposes must not be further processed in a manner incompatible with those legitimate purposes. Within data analysis & intelligence platforms, purpose limitation is enforced mechanically through container sandboxing, read-only data mounts, and automated query analysis. Any analytical workload attempting to join unauthorized tables, train unapproved models, or explore variables outside the declared protocol is flagged and aborted.',
+    playbookContext: 'Directly enforced by OPA Rego admission webhooks that verify incoming query tokens against approved project claim graphs.',
+    playbookSection: 'Section 1.1 & Section 3 (Phase 4)',
+    relatedTerms: ['ethical-framework', 'dsa', 'safe-project', 'opa']
+  },
+  {
+    id: 'trusted-data-intermediary',
+    term: 'Trusted Data Intermediary',
+    acronym: 'TDI',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'An independent, accredited entity facilitating secure data linkage and exchange between data providers and researchers without holding analytical data.',
+    fullDefinition: 'A Trusted Data Intermediary (TDI), recognized under the EU Data Governance Act and the UK Data (Use and Access) legislative framework, is an impartial organization that operates sovereign linkage and identity resolution services between public data custodians and research platforms. TDIs perform pseudonymization, match key generation, and validation of research credentials while remaining legally and technologically barred from accessing either the underlying personal identifiers or the resulting research insights.',
+    playbookContext: 'Reflected in the Seawater architectural ingress tier to ensure independent, cryptographically audited data ingestion into secure enclaves.',
+    playbookSection: 'Section 2. Architecture: The Policy-as-Code Pipeline',
+    relatedTerms: ['data-stewardship', 'longitudinal-cohort-linkage', 'dea-2017', 'tre']
   }
 ];
 
@@ -813,6 +899,16 @@ export const GLOSSARY_SECTION_MAP: Record<string, string> = {
   'uk-gdpr': 'sec-phase-1-2',
   'satre': 'sec-phase-1-2',
   'foi': 'sec-phase-3-1',
+
+  // Governance Maturity Model & Stewardship
+  'governance-maturity-model': 'sec-phase-1-1',
+  'dpia': 'sec-phase-1-2',
+  'dsa': 'sec-phase-1-2',
+  'data-stewardship': 'sec-phase-1-2',
+  'ethical-framework': 'sec-front-matter',
+  'longitudinal-cohort-linkage': 'sec-phase-2-1',
+  'purpose-limitation': 'sec-phase-4-1',
+  'trusted-data-intermediary': 'sec-phase-1-2',
 
   // Semantic Graph Primitives -> Phase 1 Knowledge Modeling & Phase 2 SHACL
   'pac': 'sec-front-matter',

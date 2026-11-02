@@ -500,7 +500,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                 Project Seawater: Policy-as-Code Playbook
               </h1>
               <p className="text-slate-300 text-sm max-w-2xl leading-relaxed">
-                An educational resource based on available literature and resources. From this, the playbook for implementing a governance policy engine for data analysis &amp; intelligence platforms is presented, compiling semantic graph ontologies into real-time Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs).
+                This playbook provides a Policy as Code (PaC) framework, bridging regulatory compliance documentation and real-time execution by compiling human- and machine-readable semantic graph ontologies into Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) across data intelligence platforms.
               </p>
             </div>
           </div>
