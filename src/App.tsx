@@ -103,6 +103,10 @@ export default function App() {
               initialModuleId={activeModuleId}
               onNavigateToQuiz={handleNavigateToQuiz}
               onNavigateToGlossaryTerm={handleNavigateToGlossaryTerm}
+              onNavigateToImplementationTrack={() => {
+                setActiveTab('implementation-track');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
             />
           )}
 
@@ -167,6 +171,10 @@ export default function App() {
             <GovernanceAtlas
               onNavigateToGlossary={() => setActiveTab('glossary')}
               onNavigateToSection={handleNavigateToSection}
+              onSwitchToTechnicalAtlas={() => {
+                setActiveTab('playbook');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
             />
           )}
         </main>

@@ -318,22 +318,20 @@ mcp:ExecuteSQLReadOnly a mcp:MCPTool ;
   },
   {
     id: 'architecture-gitops-roadmap',
-    title: 'Architecture, GitOps & Operational Delivery Roadmap',
-    shortDesc: 'Granular 16-week sprint schedule, non-breaking rollout stages, decision register (D-001–D-009), and GitOps toolchain.',
+    title: 'GitOps Architecture & Safe Transition Patterns',
+    shortDesc: 'Non-breaking rollout patterns, evaluate-only webhooks, shadow auditing, and the Decision Register (D-001–D-009).',
     category: 'Roadmap',
     icon: 'GitBranch',
-    playbookSection: 'Section 2, 3 & 4',
-    plainEnglishSummary: 'A granular 16-week operational blueprint taking an institution from blank ontologies to production security enforcement—without risking outages or false lockouts through a staged Evaluate-Only, Shadow, and Canary rollout.',
+    playbookSection: 'Section 1.1, Section 4.2 & Implementation Track',
+    plainEnglishSummary: 'How to transition an institution from high-level governance concepts to automated security enforcement without causing outages, downtime, or false lockouts for researchers.',
     summary: 'The Seawater Policy-as-Code architecture coordinates compiler scripts, Turtle ontologies, SHACL shapes, OPA Rego policies, and PySHACL tests in a safe, non-breaking rollout framework backed by an auditable Decision Register (D-001 through D-009).',
     keyPrinciples: [
-      'Sprint 1 (Weeks 1–2): Inception & Boundary Scope (D-001 sign-off, offline synthetic fixtures, CI linting).',
-      'Sprint 2 (Weeks 3–4): Baseline Ontologies (tre-core.ttl, governance_core.ttl, D-002 statutory authority).',
-      'Sprint 3 (Weeks 5–6): Closed-World Constraint Shapes (access-shapes.ttl, sdc_shapes.ttl, D-004 decision semantics).',
-      'Sprint 4 (Weeks 7–8): PySHACL Test Suite & Rigor Verification (Compliant/non-compliant fixtures, D-005 SDC rules).',
-      'Sprint 5 (Weeks 9–10): Automated Governance Portals (generate_docs.py, FOI reporting, public Governance Atlas).',
-      'Sprint 6 (Weeks 11–12): OPA Rego Compiler Toolchain (rdf_to_rego.py, D-006 source of truth, parity testing).',
-      'Sprint 7 (Weeks 13–14): PEP Shadow-Mode Integration (Evaluate-only K8s webhook, discrepancy logging, zero live disruption).',
-      'Sprint 8 (Weeks 15–16): Canary Enforcement & Rollback Drills (D-007 to D-009, W3C PROV-O audit triples, emergency bypass runbook).'
+      'Zero-Disruption Transition: Kubernetes ValidatingAdmissionWebhooks run in evaluate-only mode (failurePolicy: Ignore) to observe real traffic without blocking pods.',
+      'Parallel Shadow Auditing: Seawater Rego verdicts are evaluated side-by-side with legacy authorization reviews until achieving a 0.00% discrepancy rate over 14 consecutive days.',
+      'Canary Scope Gating: Active enforcement is turned on exclusively in isolated non-clinical test namespaces with automatic circuit breakers.',
+      'Fail-Safe Dual Semantics: Internal workspace compute fails open with alerts during OPA partitions; external airlock export fails closed to prevent data leakage.',
+      'Auditable Decision Gates (D-001–D-009): Formal sign-offs by accountable owners (Caldicott, IG, SRE) before any rule is activated.',
+      'Authoritative 16-Week Schedule: The complete week-by-week sprint deliverables and operational checklist are consolidated in the Implementation & Rollout Track.'
     ],
     technicalDetails: [
       {

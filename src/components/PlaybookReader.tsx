@@ -17,7 +17,13 @@ import {
   ArrowRight,
   ShieldCheck,
   FolderTree,
-  Workflow
+  Workflow,
+  Users,
+  Compass,
+  Layers,
+  Scale,
+  Server,
+  Info
 } from 'lucide-react';
 
 interface PlaybookSection {
@@ -38,31 +44,38 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
     id: 'sec-front-matter',
     number: '0',
     title: 'Executive Front Matter: Dynamic & Deployable Governance Policy',
-    subtitle: 'Machine-Executable Policy Architecture with Semantic Versioning (SemVer 2.4.0) — Not a Static SDC Spec',
+    subtitle: 'Machine-Executable Policy Architecture with Semantic Versioning (SemVer 2.4.0): Deployable Policy-as-Code Rather Than a Static Spec',
     content: [
       'Clarification of Intent & Scope:',
-      '• Dynamic & Deployable Policy Architecture: This playbook defines an active, version-controlled, and machine-executable governance policy platform.',
+      '• The Seawater Problem Space & Tidal Flow: Clinical and genomic research operates within a dynamic problem space dubbed "Seawater". Analytics workloads (ranging from lightweight exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, clinical governance channels, and patient confidentiality thresholds. The tide flows cyclically across two managed boundaries: Ingress and Egress.',
+      '• Ingress Governance (Access Controls, Safe People & Safe Projects): Inbound flow enforces mandatory access controls, verified institutional identity, researcher accreditation, and Information Governance (IG) training (Safe People), alongside approved NHS REC ethics protocols, research purpose justification, and Section 251 CAG exemptions (Safe Projects). Inbound clinical datasets, multi-omics records, and container workloads are verified at the boundary using W3C SHACL shape validation before admission.',
+      '• Egress Governance (Safe Outputs & Disclosure Control): Outbound flow regulates the export of derived analytical findings, statistical summaries, and model parameters. Outputs must satisfy automated Statistical Disclosure Control (SDC) rules, k-anonymity (k >= 10), and sub-millisecond Open Policy Agent (OPA) Rego policy evaluations.',
+      '• Scope: Data Analysis & Intelligence Platforms: This playbook applies across modern data analysis & intelligence platforms such as Trusted Research Environments (TREs) and Secure Data Environments (SDEs), federated clinical analytics hubs, and autonomous AI sandbox enclaves.',
+      '• International Standards (ISO) & Clinical Safety (DCB): Formally compiles statutory compliance and standards architectures into runtime gates: ISO/IEC 42001:2023 (Artificial Intelligence Management System), ISO/IEC 5259 (Data quality for ML/analytics), ISO/IEC 27001:2022 & ISO 27701:2019 (ISMS/PIMS), ISO 13485 & ISO 14971 (Medical Devices QMS and Risk Management), DCB0129 / DCB0160 (NHS Clinical Risk Management), and UK MDR 2002 / MHRA Software as a Medical Device (SaMD) clearances.',
+      '• Dynamic & Deployable Policy Architecture: This playbook is not merely a static technical specification or descriptive checklist for Statistical Disclosure Control (SDC). Rather, it defines an active, version-controlled, and machine-executable governance policy platform.',
       '• Semantic Versioning (SemVer 2.4.0): Every policy ontology, SHACL constraint, and OPA Rego rule is versioned as immutable code releases (e.g. v2.4.0-prod). Changes to legal bases, ethics clearances, or SDC thresholds follow strict GitOps PR review, PySHACL validation, and automated continuous deployment.',
-      '• Compilation from Knowledge Graph to Microsecond Enforcement: High-level human governance concepts (Caldicott Principles, NHS Section 251, SATRE Pillars, EU AI Act risk tiers) are formalized in OWL 2 ontologies, verified against Closed-World SHACL shapes, and automatically compiled by compiler/rdf_to_rego.py into native OPA Rego policies running at Policy Enforcement Points (PEPs) in sub-millisecond evaluation times.',
+      '• Compilation from Knowledge Graph to Microsecond Enforcement: High-level human governance concepts (Caldicott Principles, NHS Section 251, SATRE Pillars, EU AI Act risk tiers, ISO 42001 AIMS) are formalized in OWL 2 ontologies, verified against Closed-World SHACL shapes, and automatically compiled by compiler/rdf_to_rego.py into native OPA Rego policies running at Policy Enforcement Points (PEPs) in sub-millisecond evaluation times.',
       '• Auditable Dual-Persona Lineage: Emits immutable W3C PROV-O cryptographic audit triples for every access grant or rejection, while generating plain-English charters for Trust boards and patient advocacy committees.'
     ],
     keyTakeaways: [
-      'Not a static PDF or isolated SDC checklist, but a dynamic, deployable policy-as-code engine.',
-      'Semantic versioning (SemVer) guarantees verifiable policy drift detection across releases.',
-      'Translates philosophical governance charters into sub-millisecond Kubernetes and Airlock gatekeepers.'
+      'Models research data governance as navigating the Seawater problem space with tidal ingress and egress control.',
+      'Ingress explicitly enforces access controls, Safe People (accreditation and training), and Safe Projects (ethics and Section 251).',
+      'Broadens scope to all data analysis & intelligence platforms such as TREs, SDEs, and AI enclaves.',
+      'Formally compiles ISO 42001 (AIMS), ISO 5259, DCB0129/0160 clinical safety, and UK MDR 2002 SaMD into microsecond policy-as-code.',
+      'Semantic versioning (SemVer 2.4.0) guarantees verifiable policy drift detection across releases.'
     ]
   },
   {
     id: 'sec-phase-1-1',
     number: '1.1',
-    title: 'Phase 1: Knowledge Modeling — Scope & Policy Metadata vs. Runtime State',
-    subtitle: 'Weeks 1–2: Distinguishing immutable governance assertions from ephemeral infrastructure state',
+    title: 'Foundational Architecture: Governance Metadata vs. Ephemeral Runtime State',
+    subtitle: 'Decoupling immutable statutory governance assertions from transient Kubernetes cluster plumbing',
     content: [
       '• Plain-English Architecture Principle: Systems break when enduring governance laws are conflated with ephemeral infrastructure plumbing.',
       '• 1. Governance Metadata (The Ontological Law): Enduring, legal, human-negotiated truths about the research project. Examples include: researcher accreditation status, institutional identity, NHS Section 251 exemption certificates, project REC ethics protocol numbers, approved clinical data sensitivity tiers, and retention horizons. This information is authored by governance officers, version-controlled in Git, and formally serialized in RDF/OWL ontologies (tre-core.ttl). It changes only when ethics approvals, laws, or institutional agreements change.',
       '• 2. Ephemeral Runtime State (The Cluster Plumbing): Transient, mechanical facts of the live compute fabric managed by Kubernetes, Calico CNI, and Linux kernels. Examples include: pod IP addresses (10.244.2.14), ephemeral network sockets, container process IDs, CPU/GPU quotas, and transient JWT bearer tokens. This state is spun up, scaled, rescheduled, and recycled continuously.',
-      '• 3. The Classic Infrastructure Trap: Traditional IT configurations mistakenly hardcode governance rules directly into cluster network rules or pod name whitelists (e.g. "allow IP 10.244.2.14 to access clinical database X"). When a container crashes, restarts, or migrates to a different worker node, the IP changes—causing immediate outages or leaving behind orphaned, unverified permissions.',
-      '• 4. The Seawater Decoupled Solution: Clean separation of concerns. Kubernetes Admission Webhooks intercept pod launch requests and extract only the researcher and project claims. The Open Policy Agent (OPA) evaluates these claims against the versioned, compiled governance graph. If the governance metadata says Dr. Smith has active IG training and Project 102 has approved Tier 2 ethics, admission is granted—completely agnostic of which server, container ID, or IP the orchestrator assigns.'
+      '• 3. The Classic Infrastructure Trap: Traditional IT configurations mistakenly hardcode governance rules directly into cluster network rules or pod name whitelists (e.g. "allow IP 10.244.2.14 to access clinical database X"). When a container crashes, restarts, or migrates to a different worker node, the IP changes, causing immediate outages or leaving behind orphaned, unverified permissions.',
+      '• 4. The Seawater Decoupled Solution: Clean separation of concerns. Kubernetes Admission Webhooks intercept pod launch requests and extract only the researcher and project claims. The Open Policy Agent (OPA) evaluates these claims against the versioned, compiled governance graph. If the governance metadata says Dr. Smith has active IG training and Project 102 has approved Tier 2 ethics, admission is granted, completely agnostic of which server, container ID, or IP the orchestrator assigns.'
     ],
     keyTakeaways: [
       'Governance metadata lives in version-controlled RDF ontologies; runtime state lives in Kubernetes orchestrators.',
@@ -73,8 +86,8 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
   {
     id: 'sec-phase-1-2',
     number: '1.2',
-    title: 'Phase 1: Baseline Ontologies — Five Safes & SATRE Formalization',
-    subtitle: 'Weeks 3–4: Authoring tre-core.ttl and governance_core.ttl across hospital operational tiers',
+    title: 'Core Ontologies: Formalizing the Five Safes & SATRE Framework',
+    subtitle: 'Authoring tre-core.ttl and governance_core.ttl across hospital operational tiers',
     content: [
       '• Five Safes Formalization: Expresses the 5 core dimensions in ontology/tre-core.ttl:',
       '   - Safe People: tre:SafePerson with mandatory institutional accreditation and active Information Governance (IG) training.',
@@ -116,8 +129,8 @@ tre:SafeData a owl:Class ;
   {
     id: 'sec-phase-2-1',
     number: '2.1',
-    title: 'Phase 2: Validation Logic — Resolving OWA to CWA via SHACL Shapes',
-    subtitle: 'Weeks 5–6: Enforcing Closed-World security constraints in access-shapes.ttl and sdc_shapes.ttl',
+    title: 'Validation Logic: Resolving OWA to CWA via SHACL Shapes',
+    subtitle: 'Enforcing Closed-World security constraints in access-shapes.ttl and sdc_shapes.ttl',
     content: [
       '• The Open-World Assumption (OWA) Vulnerability: In standard semantic web systems (OWL 2/RDF), the absence of a statement is assumed unknown, NOT false. For security, OWA is disastrous: an unstated accreditation would simply pass unverified.',
       '• Closed-World Assumption (CWA) via SHACL: W3C SHACL (Shapes Constraint Language) turns graph definitions into strict, deterministic pass/fail validation shapes. If any required property is missing or out of bounds, validation immediately aborts.',
@@ -157,8 +170,8 @@ tre:WorkspaceAdmissionShape a sh:NodeShape ;
   {
     id: 'sec-phase-2-2',
     number: '2.2',
-    title: 'Phase 2: Graph Test Suite — Automated PySHACL Test Fixtures in CI',
-    subtitle: 'Weeks 7–8: Running pytest harnesses against positive and negative session graphs',
+    title: 'Automated Verification: PySHACL CI Test Harnesses & Fixtures',
+    subtitle: 'Executing continuous pytest validation suites against compliant and non-compliant session graphs',
     content: [
       '• Unit Testing Semantic Policies: Just like application code, governance policies require comprehensive automated unit tests in CI/CD before deployment.',
       '• Test Fixtures (`tests/fixtures/`):',
@@ -194,8 +207,8 @@ def test_noncompliant_session_rejected():
   {
     id: 'sec-phase-3-1',
     number: '3.1',
-    title: 'Phase 3: Public Documentation — Automated FOI Markdown Generation',
-    subtitle: 'Weeks 9–10: Synthesizing machine-readable Turtle ontologies into human-readable governance charters',
+    title: 'Public Transparency: Automated FOI Governance Charters',
+    subtitle: 'Synthesizing machine-readable Turtle ontologies into human-readable trust documentation',
     content: [
       '• Bridging Engineers, Trust Boards, and the Public: A major challenge in clinical research governance is communicating technical code rules to Caldicott Guardians, NHS Trust Boards, ethics committees, and patient participants.',
       '• Automated Markdown Synthesizer (`compiler/generate_docs.py`): Traverses the RDF graphs and SHACL shape definitions to produce an up-to-date, transparent `GOVERNANCE_CHARTER.md`.',
@@ -210,8 +223,8 @@ def test_noncompliant_session_rejected():
   {
     id: 'sec-phase-3-2',
     number: '3.2',
-    title: 'Phase 3: Dual-Persona Portal — Patient Governance Atlas & Knowledge Graph',
-    subtitle: 'Weeks 11–12: Interactive Cytoscape network explorer alongside simplified patient journey maps',
+    title: 'Dual-Persona Architecture: Patient Atlas & Knowledge Graph',
+    subtitle: 'Interactive Cytoscape network explorer paired with public-facing patient journey maps',
     content: [
       '• Dual-Persona UX Architecture:',
       '   - Public / Patient View (Governance Atlas): A calm, non-technical, 5-step journey explaining how personal health data is guarded (Caldicott Principles, tiered de-identification, and strict export airlocks).',
@@ -227,8 +240,8 @@ def test_noncompliant_session_rejected():
   {
     id: 'sec-phase-4-1',
     number: '4.1',
-    title: 'Phase 4: Runtime Enforcement Pipeline — OPA Rego Compilation',
-    subtitle: 'Weeks 13–14: Translating semantic ontologies into microsecond PDP decision rules',
+    title: 'Runtime Decision Engine: OPA Rego Policy Compilation',
+    subtitle: 'Translating semantic graph constraints into sub-millisecond PDP decision rules',
     content: [
       '• The Compilation Pipeline (`compiler/rdf_to_rego.py`): While RDF/OWL is ideal for knowledge representation, graph queries are too computationally heavy for real-time packet filtering and container admission. The compiler translates SHACL constraints and SDC math into optimized Open Policy Agent (OPA) Rego rules (`security/opa/authz.rego`).',
       '• Decoupled Policy Decision Point (PDP): OPA operates as a high-performance daemon evaluating incoming JSON context documents against compiled Rego logic in sub-millisecond latency.',
@@ -273,13 +286,13 @@ any_unmasked_pii(columns) {
   {
     id: 'sec-phase-4-2',
     number: '4.2',
-    title: 'Phase 4: Policy Enforcement Points (PEP) — Admission, Network & Airlock',
-    subtitle: 'Weeks 15–16: Integrating OPA with Kubernetes Admission Webhooks, VPC Firewalls, and Airlock Gates',
+    title: 'Policy Enforcement Points (PEP): Admission, Network & Airlock',
+    subtitle: 'Integrating OPA with Kubernetes Admission Webhooks, VPC Firewalls, and Airlock Gates',
     content: [
       '• PEP Architectural Distribution:',
       '   - Workspace Admission PEP: Kubernetes ValidatingAdmissionWebhooks intercept pod creation events (e.g., launching researcher JupyterLab containers). The webhook queries OPA; if `allow == false`, pod scheduling is aborted.',
       '   - Network & Zero-Egress PEP: Calico CNI GlobalNetworkPolicies block all outbound egress traffic from researcher namespaces to external IP addresses.',
-      '   - Automated Airlock Egress PEP: When researchers submit tables or models for release, the airlock service executes automated SDC checks ($k \ge 10$, dominance $\le 80\%$) before alerting human airlock reviewers.'
+      '   - Automated Airlock Egress PEP: When researchers submit tables or models for release, the airlock service executes automated SDC checks ($k \\ge 10$, dominance $\\le 80\%$) before alerting human airlock reviewers.'
     ],
     keyTakeaways: [
       'PEPs intercept actions at the perimeter before any unauthorized compute can execute.',
@@ -290,8 +303,8 @@ any_unmasked_pii(columns) {
   {
     id: 'sec-phase-4-3',
     number: '4.3',
-    title: 'Phase 4: Audit Lineage & Verification Workflow — W3C PROV-O Triples',
-    subtitle: 'Continuous Operations: Emitting cryptographic provenance records and running developer build commands',
+    title: 'Cryptographic Audit Lineage: W3C PROV-O Triples & Tooling',
+    subtitle: 'Emitting immutable provenance records tied to versioned policy Git commit hashes',
     content: [
       '• Immutable W3C PROV-O Audit Lineage: On every major event (workspace admission permitted, access revoked, airlock export approved or blocked), the PEP emits an immutable W3C PROV-O RDF triple to an append-only audit stream.',
       '• Cryptographic Policy Hash: Every audit record contains the SHA-256 hash of the exact policy commit and Rego ruleset that evaluated the decision, guaranteeing non-repudiation.',
@@ -344,6 +357,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
   const [activeTooltipTerm, setActiveTooltipTerm] = useState<GlossaryTerm | null>(null);
   const [copiedCodeId, setCopiedCodeId] = useState<string | null>(null);
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
+  const [expandedIntro, setExpandedIntro] = useState(true);
   const contentContainerRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll and highlight when targetSectionId is received
@@ -486,7 +500,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                 Project Seawater: Policy-as-Code Playbook
               </h1>
               <p className="text-slate-300 text-sm max-w-2xl leading-relaxed">
-                An active, version-controlled governance policy engine for Trusted Research Environments (TRE) / Secure Data Environments (SDE). Compiles semantic graph ontologies into real-time Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs).
+                An educational resource based on available literature and resources. From this, the playbook for implementing a governance policy engine for data analysis &amp; intelligence platforms is presented, compiling semantic graph ontologies into real-time Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs).
               </p>
             </div>
           </div>
@@ -517,6 +531,188 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
               )}
             </div>
           </div>
+        </div>
+
+        {/* Executive Summary & Introduction to the Playbook itself */}
+        <div className="bg-slate-950/90 border border-slate-800 rounded-2xl p-5 sm:p-7 space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800/80">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-950/80 px-2.5 py-0.5 rounded border border-cyan-800/60">
+                  Executive Brief &amp; Overview
+                </span>
+                <span className="text-xs text-slate-400">Governance &amp; Engineering Guide</span>
+              </div>
+              <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+                Introduction to the Seawater Playbook
+              </h2>
+            </div>
+            <button
+              onClick={() => setExpandedIntro(!expandedIntro)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-medium border border-slate-700/80 transition-colors self-start sm:self-auto cursor-pointer"
+            >
+              <span>{expandedIntro ? 'Hide Overview' : 'Show Overview'}</span>
+              {expandedIntro ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+            </button>
+          </div>
+
+          {expandedIntro && (
+            <div className="space-y-6 text-xs sm:text-sm text-slate-300 leading-relaxed">
+              {/* Context & Seawater Problem Space */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                <div className="lg:col-span-2 space-y-3">
+                  <h3 className="text-sm sm:text-base font-semibold text-white flex items-center gap-2">
+                    <Compass className="w-4 h-4 text-cyan-400" />
+                    <span>The Seawater Problem Space &amp; Tidal Flow Model</span>
+                  </h3>
+                  <p>
+                    <strong>Project Seawater</strong> models healthcare analytics and clinical research through a structured tidal navigation framework. Modern data platforms do not operate in a static vacuum: analytical workloads (from exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, clinical governance channels, and patient confidentiality thresholds.
+                  </p>
+                  <p>
+                    Governance operates across two coordinated directional flows:
+                  </p>
+                  <div className="space-y-2 pl-1">
+                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
+                      <span className="font-semibold text-cyan-300 block">
+                        • Ingress (Inward Flow): Access Controls, Safe People &amp; Safe Projects
+                      </span>
+                      <p className="text-slate-300 text-xs leading-relaxed">
+                        Inbound flow enforces gateway access controls, researcher accreditation, institutional identity verification, and mandatory Information Governance training (Safe People), alongside approved NHS REC ethics protocols, research purpose justification, and Section 251 CAG exemptions (Safe Projects). Inbound datasets, multi-omics records, and container workloads are verified at the boundary using W3C SHACL shape validation before entering the enclave.
+                      </p>
+                    </div>
+                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
+                      <span className="font-semibold text-emerald-300 block">
+                        • Egress (Outward Flow): Disclosure Control &amp; Safe Outputs
+                      </span>
+                      <p className="text-slate-300 text-xs leading-relaxed">
+                        Outbound flow regulates the export of derived analytical findings, statistical summaries, and model parameters. Outputs must pass automated Statistical Disclosure Control (SDC) checks, k-anonymity cell suppression ($k \ge 10$), and sub-millisecond Open Policy Agent (OPA) Rego policy evaluations to prevent patient re-identification.
+                      </p>
+                    </div>
+                  </div>
+                  <p>
+                    This architecture governs modern <strong>data analysis &amp; intelligence platforms</strong>, mathematically executing the Five Safes, ISO/IEC 42001:2023 (AIMS), ISO 27001/27701, ISO/IEC 5259 data quality, DCB0129 / DCB0160 clinical safety, and UK MDR 2002 SaMD regulations.
+                  </p>
+                </div>
+
+                <div className="bg-slate-900/90 border border-slate-800/90 rounded-xl p-4 space-y-2.5">
+                  <span className="text-[11px] font-mono uppercase text-cyan-400 font-bold block">
+                    Architecture at a Glance
+                  </span>
+                  <div className="space-y-2 text-xs">
+                    <div className="flex justify-between items-center py-1 border-b border-slate-800/60">
+                      <span className="text-slate-400">Release Version</span>
+                      <span className="font-mono text-cyan-300 font-bold">v2.4.0-prod</span>
+                    </div>
+                    <div className="flex justify-between items-center py-1 border-b border-slate-800/60">
+                      <span className="text-slate-400">Decision Latency</span>
+                      <span className="font-mono text-emerald-400 font-bold">&lt; 1.2 ms (OPA PDP)</span>
+                    </div>
+                    <div className="flex justify-between items-center py-1 border-b border-slate-800/60">
+                      <span className="text-slate-400">Disclosure Rule</span>
+                      <span className="font-mono text-amber-300 font-bold">k &ge; 10, Dom &le; 80%</span>
+                    </div>
+                    <div className="flex justify-between items-center py-1">
+                      <span className="text-slate-400">Audit Protocol</span>
+                      <span className="font-mono text-purple-300 font-bold">W3C PROV-O Triples</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 4 Architectural Layers */}
+              <div className="space-y-3 pt-2">
+                <h3 className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                  <Layers className="w-4 h-4 text-cyan-400" />
+                  <span>The Four Architectural Layers</span>
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                  <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                    <div className="text-xs font-mono font-bold text-cyan-400">1. Ontological Law</div>
+                    <div className="text-xs text-white font-semibold">RDF / OWL 2 Knowledge Graph</div>
+                    <p className="text-[11px] text-slate-400 leading-normal">
+                      Formalizes Five Safes and Caldicott principles into machine-readable classes (<code className="text-cyan-300 font-mono">tre-core.ttl</code>, <code className="text-cyan-300 font-mono">governance_core.ttl</code>).
+                    </p>
+                  </div>
+                  <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                    <div className="text-xs font-mono font-bold text-purple-400">2. Deterministic Verification</div>
+                    <div className="text-xs text-white font-semibold">Closed-World SHACL &amp; PySHACL</div>
+                    <p className="text-[11px] text-slate-400 leading-normal">
+                      Converts open-world assumptions into deterministic pass/fail constraints with automated pytest CI regression suites.
+                    </p>
+                  </div>
+                  <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                    <div className="text-xs font-mono font-bold text-emerald-400">3. Microsecond PDP</div>
+                    <div className="text-xs text-white font-semibold">Compiled OPA Rego Engine</div>
+                    <p className="text-[11px] text-slate-400 leading-normal">
+                      The compiler (<code className="text-cyan-300 font-mono">compiler/rdf_to_rego.py</code>) compiles semantic rules into native high-speed Rego policies evaluated in microseconds.
+                    </p>
+                  </div>
+                  <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                    <div className="text-xs font-mono font-bold text-amber-400">4. Interception PEPs</div>
+                    <div className="text-xs text-white font-semibold">Admission, Zero-Egress &amp; Airlock</div>
+                    <p className="text-[11px] text-slate-400 leading-normal">
+                      K8s Admission Webhooks, Calico zero-egress VPC routing, and SDC airlock gates intercept operations, emitting W3C PROV-O audit trails.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Stakeholder Reading Pathways */}
+              <div className="space-y-3 pt-2">
+                <h3 className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                  <Users className="w-4 h-4 text-cyan-400" />
+                  <span>How to Navigate This Playbook By Role</span>
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 space-y-1">
+                    <span className="font-bold text-white flex items-center gap-1.5">
+                      <Scale className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>Caldicott Guardians &amp; Information Governance (IG) Leads</span>
+                    </span>
+                    <p className="text-slate-400 leading-normal">
+                      Start with <strong>Section 0</strong> (Front Matter), <strong>Section 1.2</strong> (Five Safes &amp; SATRE ontologies), and <strong>Section 3.1</strong> (Automated FOI Charters) to review how statutory compliance and ethical approvals are formalized without technical ambiguity.
+                    </p>
+                  </div>
+                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 space-y-1">
+                    <span className="font-bold text-white flex items-center gap-1.5">
+                      <Server className="w-3.5 h-3.5 text-purple-400" />
+                      <span>DevOps, Cloud Engineers &amp; Platform Architects</span>
+                    </span>
+                    <p className="text-slate-400 leading-normal">
+                      Focus on <strong>Section 1.1</strong> (Decoupled Metadata vs Runtime State), <strong>Section 4.1</strong> (OPA Rego compilation), and <strong>Section 4.2</strong> (Admission PEPs). Then jump directly to the <strong>Implementation &amp; Rollout Track</strong> for non-breaking evaluate-only webhook deployment patterns.
+                    </p>
+                  </div>
+                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 space-y-1">
+                    <span className="font-bold text-white flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Airlock Reviewers &amp; Output Disclosure Officers</span>
+                    </span>
+                    <p className="text-slate-400 leading-normal">
+                      Examine <strong>Section 2.1</strong> (SDC Shapes) and <strong>Section 4.2</strong> (Airlock PEP) for exact quantitative primary suppression rules (<code className="text-cyan-300 font-mono">k &ge; 10</code>), dominance checks (<code className="text-cyan-300 font-mono">&le; 80%</code>), and secondary masking.
+                    </p>
+                  </div>
+                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 space-y-1">
+                    <span className="font-bold text-white flex items-center gap-1.5">
+                      <Code2 className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>Security Auditors &amp; Compliance Inspectors</span>
+                    </span>
+                    <p className="text-slate-400 leading-normal">
+                      Inspect <strong>Section 2.2</strong> (PySHACL CI test harnesses) and <strong>Section 4.3</strong> (W3C PROV-O audit triples and SHA-256 policy commit signatures) for non-repudiation and post-incident forensic replay capabilities.
+                    </p>
+                  </div>
+                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 space-y-1 md:col-span-2">
+                    <span className="font-bold text-white flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-teal-400" />
+                      <span>Clinical Safety Officers (CSO) &amp; AI Governance Leads</span>
+                    </span>
+                    <p className="text-slate-400 leading-normal">
+                      Review <strong>Section 3.2</strong> (AI Workload Bounds &amp; ISO 42001 AIMS), <strong>Section 4.1</strong> (DCB0129 Hazard Log rules), and <strong>Section 4.2</strong> (UK MDR 2002 SaMD airlock clearance) for integrating clinical risk management with algorithmic model training and egress.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Operational Bridge Banner to Implementation Track */}

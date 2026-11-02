@@ -23,6 +23,7 @@ export const ResourcesPage: React.FC = () => {
   const categories = [
     'All',
     'Statutory Legislation & Regulatory Guidance',
+    'International Standards (ISO) & Clinical Safety (DCB)',
     'Statistical Disclosure Control (SDC) & Airlocks',
     'NHS Information Governance & Security Toolkits',
     'AI Governance, Alignment & MCP Security',
@@ -51,13 +52,13 @@ export const ResourcesPage: React.FC = () => {
         <div className="relative z-10 max-w-3xl space-y-3">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-cyan-400">
             <BookOpen className="w-4 h-4" />
-            <span>Statutory Compendium & External Architecture Specifications</span>
+            <span>Statutory Compendium &amp; International Engineering Standards</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Authoritative Resources & Technical Guidelines
+            Authoritative Resources &amp; Technical Guidelines
           </h1>
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Direct statutory legislation, NHS standards, SDC rulebooks, Model Context Protocol (MCP) specifications,
+            Statutory UK legislation, ISO standards (ISO 42001, ISO 27001, ISO 13485, ISO 14971), NHS clinical safety standards (DCB0129 &amp; DCB0160), Medical Device Regulations (UK MDR 2002 SaMD), and SDC rulebooks governing data analysis &amp; intelligence platforms such as TREs and SDEs.
             and real-world security case studies supporting the Trusted Research Environment Policy-as-Code platform.
           </p>
 
