@@ -50,28 +50,28 @@ interface PublicJourneyStep {
 const PUBLIC_STEPS: PublicJourneyStep[] = [
   {
     step: 1,
-    title: 'Hospital Care Records',
+    title: 'Primary & Population Registries',
     badge: 'Confidentiality at Source',
-    summary: 'When you visit an NHS hospital or clinic, your health records are securely recorded. Direct personal details like names, addresses, and NHS numbers remain protected within the hospital database.',
-    patientAssurance: 'No researcher is ever given direct access to your hospital medical record or direct contact details.',
+    summary: 'When population surveys, public administrative registers, census records, or healthcare encounters are collected, direct personal details (names, addresses, national identifiers) are segregated at source.',
+    patientAssurance: 'No researcher is ever given direct access to identifiable records, personal contact details, or unsegregated datasets.',
     caldicottLink: 'Principle 1 & 2: Purpose justified and personal identifiers avoided.',
     color: 'from-cyan-500/20 to-blue-500/10 border-cyan-500/40 text-cyan-400'
   },
   {
     step: 2,
-    title: 'Independent Ethics Review',
+    title: 'Independent Ethics & Purpose Review',
     badge: 'Safe People & Projects',
-    summary: 'Before any medical research begins, an independent NHS Research Ethics Committee (REC) reviews the project to ensure it delivers clear public health benefit. Scientists must undergo rigorous background checks and annual Information Governance training.',
-    patientAssurance: 'Commercial advertisers and insurance companies are strictly prohibited from accessing the environment.',
+    summary: 'Before any population or epidemiological research begins, independent committees (such as Research Ethics Committees and the UKSA Research Accreditation Panel) verify that the study delivers demonstrable public interest benefit. Researchers must hold accredited credentials and verified Information Governance training.',
+    patientAssurance: 'Commercial marketing, unauthorized advertising, and predatory profiling are strictly prohibited by law.',
     caldicottLink: 'Principle 4 & 5: Strict need-to-know access and legal accountability.',
     color: 'from-emerald-500/20 to-teal-500/10 border-emerald-500/40 text-emerald-400'
   },
   {
     step: 3,
-    title: 'The Digital Safe Room',
+    title: 'The Partitioned Safe Room',
     badge: 'Safe Settings & Data',
-    summary: 'Researchers work inside a digital room where external internet access is completely blocked. They cannot download data to USB drives, email records, or copy files to personal laptops.',
-    patientAssurance: 'Data stays in the hospital cloud. Only de-identified codes are visible, with all names permanently removed.',
+    summary: 'Researchers and epidemiologists work inside a secure, air-gapped digital workspace where external internet access and local downloading are completely blocked. Analysts cannot copy data to USB drives, email datasets, or extract records.',
+    patientAssurance: 'Data never leaves the sovereign secure enclave. Only de-identified research datasets are accessible, with all personal identifiers removed.',
     caldicottLink: 'Principle 3: Minimum necessary data provided for the specific study.',
     color: 'from-purple-500/20 to-indigo-500/10 border-purple-500/40 text-purple-400'
   },
@@ -79,18 +79,18 @@ const PUBLIC_STEPS: PublicJourneyStep[] = [
     step: 4,
     title: 'Automated Airlock Filter',
     badge: 'Safe Outputs (k >= 10)',
-    summary: 'When scientists finish analyzing a question, their summary tables and charts must pass through an automated digital airlock. Mathematical filters verify that small groups (fewer than 10 patients) are permanently suppressed.',
-    patientAssurance: 'No individual patient can ever be identified or singled out in any published medical paper.',
+    summary: 'When scientists and epidemiologists finish analyzing a cohort, their summary tables and regression models must pass through an automated digital airlock. Mathematical filters verify that low-frequency groups (fewer than 10 individuals) and high-dominance cells are permanently suppressed.',
+    patientAssurance: 'No individual or household can ever be singled out or re-identified in any published study or statistical report.',
     caldicottLink: 'Principle 6 & 7: Complying with law while enabling safe, life-saving sharing.',
     color: 'from-amber-500/20 to-orange-500/10 border-amber-500/40 text-amber-400'
   },
   {
     step: 5,
-    title: 'Medical Breakthroughs',
-    badge: 'Public Health Benefit',
-    summary: 'Only anonymous statistical findings leave the environment, helping develop earlier cancer detection, personalized medicines, and improved clinical treatments for future patients.',
-    patientAssurance: 'Your data contributes to medical science without ever compromising your privacy.',
-    caldicottLink: 'Principle 8: Openness with patients about how confidential data protects society.',
+    title: 'Epidemiological Breakthroughs',
+    badge: 'Public & Social Benefit',
+    summary: 'Only anonymous statistical findings leave the environment, helping develop earlier disease prevention, public health policies, epidemiological interventions, and evidence-based societal improvements.',
+    patientAssurance: 'Data contributes to scientific discoveries and evidence-based policy without ever compromising individual privacy.',
+    caldicottLink: 'Principle 8: Openness with the public about how confidential data protects society.',
     color: 'from-pink-500/20 to-rose-500/10 border-pink-500/40 text-pink-400'
   }
 ];
@@ -109,38 +109,38 @@ interface TrustNode {
 const TRUST_NODES: TrustNode[] = [
   {
     id: 'node-citizen',
-    label: 'NHS Patients & Citizens',
+    label: 'Citizens & Study Participants',
     category: 'citizen',
-    shortDesc: 'Individuals receiving clinical care across the NHS whose confidential records are protected.',
-    safeguard: 'Direct identifiers never leave NHS custody. National Data Opt-Out is respected in full.',
-    legalBasis: 'Common Law Duty of Confidentiality & UK GDPR Art. 9(2)(j)',
+    shortDesc: 'Individuals whose demographic, cohort survey, or longitudinal data are protected.',
+    safeguard: 'Direct identifiers never leave sovereign custody. Statutory opt-outs and privacy rights are respected in full.',
+    legalBasis: 'Common Law Duty of Confidentiality & UK GDPR Art. 6(1)(e) / Art. 9(2)(j)',
     color: '#38bdf8'
   },
   {
     id: 'node-hospital',
-    label: 'Hospital Cloud Database',
+    label: 'Population Data Registries',
     category: 'citizen',
-    shortDesc: 'Confidential Electronic Health Records (EHR), genomic profiles, and clinical imaging.',
-    safeguard: 'Zero direct external internet connections; direct patient contact details permanently quarantined.',
-    legalBasis: 'Health and Social Care Act 2012 & Caldicott Principle 1',
+    shortDesc: 'Longitudinal cohorts, census registries, administrative databases, and multi-modal records.',
+    safeguard: 'Zero direct external internet connections; direct identifying attributes permanently segregated at source.',
+    legalBasis: 'Digital Economy Act 2017 & Caldicott Principle 1',
     color: '#06b6d4'
   },
   {
     id: 'node-caldicott',
-    label: 'Caldicott Guardian & SIRO',
+    label: 'Confidentiality Guardian & SIRO',
     category: 'legal',
-    shortDesc: 'Senior clinician and board officer with personal statutory responsibility for patient confidentiality.',
-    safeguard: 'Must personally authorize any sensitive data linkage or emergency access protocol.',
+    shortDesc: 'Lead officer with personal statutory responsibility for confidentiality and information risk.',
+    safeguard: 'Must personally authorize sensitive data linkages or high-tier project access protocols.',
     legalBasis: 'Eight Caldicott Principles & National Data Guardian Standards',
     color: '#10b981'
   },
   {
     id: 'node-ethics',
-    label: 'NHS Research Ethics Committee (REC)',
+    label: 'Ethics & Accreditation (REC / RAP)',
     category: 'legal',
-    shortDesc: 'Independent committee of doctors, patients, and ethicists reviewing research intent.',
-    safeguard: 'Commercial marketing and predatory profiling are strictly prohibited by law.',
-    legalBasis: 'NHS Health Research Authority (HRA) & Section 251 CAG Approvals',
+    shortDesc: 'Independent committee reviewing research intent, public benefit, and researcher accreditation.',
+    safeguard: 'Commercial marketing, predatory profiling, and unauthorized surveillance are prohibited by law.',
+    legalBasis: 'UKSA RAP Accreditation & NHS Health Research Authority (HRA)',
     color: '#34d399'
   },
   {
@@ -163,10 +163,10 @@ const TRUST_NODES: TrustNode[] = [
   },
   {
     id: 'node-iso-dcb',
-    label: 'ISO 42001 & DCB0129 / DCB0160 Standards',
+    label: 'ISO 42001 & Clinical Safety Standards',
     category: 'legal',
-    shortDesc: 'Clinical Safety Officer (CSO) hazard logging and international AI management governance.',
-    safeguard: 'Ensures AI tools do not cause clinical harm before models touch patient care pathways.',
+    shortDesc: 'Hazard logging, data quality, and international AI management governance.',
+    safeguard: 'Ensures predictive and analytical models meet safety cases before deployment in societal or care pathways.',
     legalBasis: 'Health & Social Care Act 2012 DCB0129 & ISO/IEC 42001:2023',
     color: '#a855f7'
   },
@@ -192,33 +192,33 @@ const TRUST_NODES: TrustNode[] = [
     id: 'node-sdc',
     label: 'Statistical Disclosure Control (k >= 10)',
     category: 'defense',
-    shortDesc: 'Mathematical privacy threshold guaranteeing that small patient cohorts cannot be re-identified.',
-    safeguard: 'Any result table cell representing fewer than 10 patients is permanently masked.',
+    shortDesc: 'Mathematical privacy threshold guaranteeing that low-frequency counts cannot be re-identified.',
+    safeguard: 'Any result table cell representing fewer than 10 individuals is permanently masked.',
     legalBasis: 'ONS & SAIL Databank Statistical Disclosure Control Standards',
     color: '#ec4899'
   },
   {
     id: 'node-benefit',
-    label: 'Anonymous Medical Breakthroughs',
+    label: 'Epidemiological Breakthroughs',
     category: 'benefit',
-    shortDesc: 'Published statistical models, disease biomarkers, and public health improvements.',
-    safeguard: 'Only fully de-identified mathematical aggregates leave; patient identities remain forever safe.',
+    shortDesc: 'Published statistical models, population health indicators, and evidence-based policy.',
+    safeguard: 'Only fully de-identified mathematical aggregates leave; individual identities remain forever safe.',
     legalBasis: 'UK GDPR Recital 26 (Anonymous Data Out of Scope)',
     color: '#10b981'
   }
 ];
 
 const TRUST_EDGES = [
-  { source: 'node-citizen', target: 'node-hospital', label: 'Clinical Care Records' },
-  { source: 'node-hospital', target: 'node-seawater', label: 'Flood Tide Ingress' },
+  { source: 'node-citizen', target: 'node-hospital', label: 'Population Data Registries' },
+  { source: 'node-hospital', target: 'node-seawater', label: 'Tidal Ingress' },
   { source: 'node-caldicott', target: 'node-seawater', label: 'Confidentiality Mandate' },
   { source: 'node-ethics', target: 'node-enclave', label: 'Approved Study Protocol' },
   { source: 'node-seawater', target: 'node-enclave', label: 'Partitioned Workspace' },
-  { source: 'node-iso-dcb', target: 'node-enclave', label: 'Clinical Safety Case' },
+  { source: 'node-iso-dcb', target: 'node-enclave', label: 'Safety Case Verification' },
   { source: 'node-enclave', target: 'node-shacl', label: 'Egress Airlock Request' },
   { source: 'node-shacl', target: 'node-opa', label: 'Compiled Rego Decision' },
   { source: 'node-opa', target: 'node-sdc', label: 'k >= 10 Verification' },
-  { source: 'node-sdc', target: 'node-benefit', label: 'Ebb Tide Safe Egress' }
+  { source: 'node-sdc', target: 'node-benefit', label: 'Safe Egress' }
 ];
 
 export const GovernanceAtlas: React.FC<GovernanceAtlasProps> = ({
@@ -241,48 +241,113 @@ export const GovernanceAtlas: React.FC<GovernanceAtlasProps> = ({
   const cyRef = useRef<cytoscape.Core | null>(null);
   const [selectedGraphNode, setSelectedGraphNode] = useState<TrustNode | null>(TRUST_NODES[0]);
 
-  const COMPREHENSIVE_CHARTER_MD = `# TRUSTED RESEARCH ENVIRONMENT (TRE) CLINICAL DATA GOVERNANCE CHARTER
-*Standard Operating Protocol & Statutory Compliance Specification*
-*Document Reference: TRE-PAC-GOV-2026-V4 | Approved by Trust Board & Caldicott Guardian*
+  const COMPREHENSIVE_CHARTER_MD = `# PUBLIC INTEREST DATA GOVERNANCE & POPULATION RESEARCH CHARTER
+*Standard Operating Protocol & Statutory Compliance Specification for Data Analysis & Intelligence Platforms*
+*Document Reference: SEAWATER-PAC-GOV-2026-V4 | Authorized by the Data Governance & Ethics Oversight Committee*
 
 ---
 
-## 1. Statutory Mandate & Legal Framework
-This platform operates in strict accordance with UK health data legislation and international standards:
+## 1. Purpose & Scope
+This Charter establishes the mandatory governance policy, ethical safeguards, and machine-executable controls for modern data analysis and intelligence platforms (including Trusted Research Environments [TREs], Secure Data Environments [SDEs], and AI sandbox enclaves). 
+
+The platform supports high-impact research across population data science, epidemiology, public health, demographic analysis, social statistics, and approved commercial health life-sciences partnerships. All analytical workloads operate under an overarching principle: data subjects and citizens must remain completely protected against individual re-identification, surveillance, or unauthorized exploitation.
+
+---
+
+## 2. Statutory Mandates & Legal Processing Gateways
+Processing across this platform is authorized and governed under statutory legislation:
+- **Digital Economy Act 2017 (Part 5, Chapter 5: Research)**:
+  - Section 64: Disclosure of public authority data for research in the public interest.
+  - Section 70 & 71: Statutory Code of Practice and accreditation of processors, environments, and researchers under UK Statistics Authority (UKSA) oversight.
+  - Section 67: Strict criminal penalties for unlawful or unauthorized disclosure of identifying data.
 - **UK General Data Protection Regulation (UK GDPR)**:
+  - Article 5: Principles of data minimization, purpose limitation, integrity, and confidentiality.
   - Article 6(1)(e): Processing is necessary for the performance of a task carried out in the public interest.
-  - Article 9(2)(j): Processing of special category health data is necessary for archiving and scientific research purposes in the public interest.
-- **Data Protection Act 2018 (DPA 2018)**: Part 2 and Section 19 safeguards for scientific research.
-- **National Health Service Act 2006 (Section 251)**: Statutory exemption granted on advice of the Confidentiality Advisory Group (CAG).
-- **ISO/IEC 42001:2023**: Artificial Intelligence Management System (AIMS) governance.
-- **DCB0129 & DCB0160**: NHS Clinical Risk Management for Health Software and Deployment.
-- **UK MDR 2002 & MHRA SaMD**: Software as a Medical Device risk control and classification.
-- **Common Law Duty of Confidentiality (CLDC)**: Enforced via the Eight Caldicott Principles.
+  - Article 9(2)(j): Processing of special category data is lawful for archiving and scientific research in the public interest.
+  - Article 89(1): Technical and organizational safeguards for research and statistical analysis.
+- **Data Protection Act 2018 (DPA 2018)**: Part 2 statutory provisions and Section 19 research safeguards.
+- **Statistics and Registration Service Act 2007 (SRSA 2007)**: Authorizing statistical research and linkage under public interest mandates.
+- **National Health Service Act 2006 (Section 251)**: Statutory exemption granted on advice of the Confidentiality Advisory Group (CAG) where clinical data linkage is required without consent.
+- **Common Law Duty of Confidentiality & The Eight Caldicott Principles**: Ensuring that duty to share for public benefit is balanced with strict confidentiality.
 
 ---
 
-## 2. Institutional Roles & Oversight Structure
-- **Caldicott Guardian**: Responsible for championing confidentiality and reviewing all Tier 3 data access requests.
-- **Senior Information Risk Owner (SIRO)**: Board-level accountability for technical and cyber risks across the cloud enclave.
-- **Clinical Safety Officer (CSO)**: Registered clinician responsible for DCB0129 Hazard Logs and Safety Cases.
-- **Data Protection Officer (DPO)**: Conducts Data Protection Impact Assessments (DPIA) and audits compliance with UK GDPR.
-- **Research Ethics Committee (REC)**: Independent health ethics body reviewing all research questions for demonstrable public benefit.
+## 3. Standards Architecture & Quality Frameworks
+The platform compiles and verifies compliance against national and international standards:
+- **ISO/IEC 42001:2023**: Artificial Intelligence Management System (AIMS) governing predictive models and in-enclave machine learning.
+- **ISO/IEC 27001:2022 & ISO/IEC 27701:2019**: Information Security and Privacy Information Management Systems (ISMS/PIMS).
+- **ISO/IEC 5259 Series**: Data quality and bias minimization standards for machine learning and analytical pipelines.
+- **DCB0129 & DCB0160**: Statutory clinical risk management standards for health software manufacturers and deploying health organizations.
+- **UK Medical Devices Regulations 2002 & MHRA SaMD**: Design and risk controls for Software as a Medical Device developed within enclaves.
 
 ---
 
-## 3. The Seawater Tidal Model & Five Safes
-- **Flood Tide (Ingress)**: Partitioned EHR and genomic data ingest through cryptographically audited pipelines.
-- **Safe Setting**: Airgapped digital safe room; no USB copying, no local downloads, zero outbound internet.
-- **Ebb Tide (Egress)**: Safe outputs pass through mathematical airlocks enforcing cell suppression ($k \\ge 10$) and dominance masking.
+## 4. Operational Five Safes Framework
+Every analytical project is partitioned and controlled across the Five Safes:
 
-*Published by the Clinical Information Governance Board.*`;
+### 4.1 Safe People
+- Mandatory accreditation by statutory bodies (e.g., UKSA Research Accreditation Panel [RAP] or equivalent).
+- Verified institutional identity and background checks.
+- Annual certification in Information Governance (IG), data protection, and disclosure control methods.
+
+### 4.2 Safe Projects
+- Demonstrable public interest benefit test evaluated by an independent review committee.
+- Validated ethics clearances (NHS REC, university ethics, or statutory research panels).
+- Clear purpose limitation: use of data is restricted exclusively to the approved research question.
+- Strict prohibition on commercial marketing, advertising, insurance underwriting, or individual credit assessment.
+
+### 4.3 Safe Settings
+- Fully air-gapped, zero-trust cloud workspaces with no outbound internet access.
+- Ephemeral, containerized compute instances isolated per project.
+- Prevention of local downloads, copy-paste exfiltration, and removable USB storage.
+
+### 4.4 Safe Data
+- Primary data minimization: only fields strictly necessary for the research protocol are provisioned.
+- Deterministic pseudonymization and separation of direct personal identifiers at source.
+- Multi-tier data classification (Tier 1: Aggregate/Synthetic, Tier 2: De-identified microdata, Tier 3: Controlled sensitive linkage).
+
+### 4.5 Safe Outputs
+- Quantitative Statistical Disclosure Control (SDC) enforced on all files leaving the environment.
+- Mandatory primary cell suppression: any table cell with frequency fewer than 10 individuals ($k \\ge 10$) is suppressed.
+- Dominance rule masking ($p\\% / (n, k)$) to prevent high-contribution values from disclosing individual identities.
+- Abstract Syntax Tree (AST) scanning and weight inspection for machine learning model artifacts.
+
+---
+
+## 5. Flow Governance Architecture (Ingress & Egress)
+Project Seawater regulates the continuous movement of data through policy-as-code:
+- **Ingress Governance (Inbound Flow)**:
+  - Enforces perimeter access control, Safe People accreditation, and Safe Projects ethics validation.
+  - Automatically verifies inbound schemas and cohort definitions against W3C SHACL shapes to prevent corrupted or unapproved datasets.
+- **Egress Governance (Outbound Flow)**:
+  - Evaluates all candidate export tables, plots, and model parameters through Open Policy Agent (OPA) Rego rules.
+  - Sub-millisecond execution ensures immediate fail-closed protection: if any privacy threshold is breached, export is blocked.
+
+---
+
+## 6. Institutional Oversight & Roles
+Accountability is distributed across independent roles without reliance on single-party decisions:
+- **Senior Information Risk Owner (SIRO)**: Executive accountability for organizational information risk and cybersecurity.
+- **Lead Confidentiality Guardian (Caldicott Officer)**: Independent authority safeguarding citizen confidentiality and reviewing high-tier requests.
+- **Data Protection Officer (DPO)**: Monitors regulatory compliance, audits Data Protection Impact Assessments (DPIAs), and interfaces with the ICO.
+- **Independent Data Access Committee (DAC)**: Multidisciplinary panel of scientists, ethicists, and public representatives approving project access.
+- **Clinical Safety Officer (CSO)**: Registered clinician managing Hazard Logs and Safety Cases for algorithmic tools touching health pathways.
+
+---
+
+## 7. Public Transparency & Auditability
+- **W3C PROV-O Lineage**: Every access request, policy decision, and export clearance emits an immutable cryptographic audit record.
+- **Public Register of Approved Projects**: Full lay summaries of all research studies are published openly to ensure civic transparency.
+- **National Opt-Out Respect**: The platform enforces statutory opt-outs (including the NHS National Data Opt-Out in England), ensuring that individuals who opt out are systematically excluded from secondary research linkage.
+
+*Published by the Data Governance & Access Oversight Authority.*`;
 
   const handleDownloadCharter = () => {
     const blob = new Blob([COMPREHENSIVE_CHARTER_MD], { type: 'text/markdown' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'CLINICAL_DATA_GOVERNANCE_CHARTER_2026.md';
+    a.download = 'POPULATION_DATA_GOVERNANCE_CHARTER_2026.md';
     a.click();
     URL.revokeObjectURL(url);
     setDownloaded(true);
@@ -410,39 +475,6 @@ This platform operates in strict accordance with UK health data legislation and 
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
-      {/* Top Atlas Switcher Banner */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-900/90 border border-emerald-500/30 rounded-2xl p-4 sm:px-6">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
-            <HeartHandshake className="w-5 h-5" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
-                Public Governance Atlas
-              </span>
-              <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 text-[10px] font-semibold border border-emerald-500/20">
-                Citizen & Board View
-              </span>
-            </div>
-            <p className="text-xs text-slate-300">
-              Patient safeguards, ethical guarantees, and interactive governance knowledge graphs.
-            </p>
-          </div>
-        </div>
-
-        {/* Clear Toggle to Technical Atlas */}
-        <button
-          onClick={onSwitchToTechnicalAtlas}
-          className="w-full sm:w-auto px-4 py-2.5 bg-slate-800 hover:bg-slate-750 text-cyan-300 hover:text-cyan-200 border border-cyan-500/40 hover:border-cyan-400 font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-sm active:scale-95 shrink-0"
-          title="Switch to the Engineering & Policy-as-Code Platform"
-        >
-          <Code2 className="w-4 h-4 text-cyan-400" />
-          <span>Switch to Technical Atlas (Engineers & Researchers)</span>
-          <ArrowRight className="w-3.5 h-3.5 text-cyan-400" />
-        </button>
-      </div>
-
       {/* Main Public Atlas Navigation Tabs */}
       <div className="flex items-center gap-2 border-b border-slate-800 pb-2 overflow-x-auto">
         <button
@@ -454,7 +486,7 @@ This platform operates in strict accordance with UK health data legislation and 
           }`}
         >
           <Activity className="w-4 h-4" />
-          <span>Patient Journey & Safeguards</span>
+          <span>Population Data Journey &amp; Safeguards</span>
         </button>
 
         <button
@@ -491,14 +523,14 @@ This platform operates in strict accordance with UK health data legislation and 
             <div className="relative z-10 max-w-3xl space-y-4">
               <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-wider">
                 <HeartHandshake className="w-4 h-4" />
-                <span>Public, Patient & NHS Trust Board Portal</span>
+                <span>Public, Citizen &amp; Research Oversight Portal</span>
               </div>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                How Your Health Data Is Protected in Research
+                How Population &amp; Individual Data Is Protected
               </h1>
               <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                A guide to the safety principles, clinical laws, and computer safeguards
-                governing modern data analysis & intelligence platforms such as TREs and SDEs, enabling vital medical discoveries while keeping confidential health records strictly anonymous.
+                A guide to the safety principles, statutory laws, and computer safeguards
+                governing modern data analysis &amp; intelligence platforms such as TREs and SDEs, enabling vital epidemiological, demographic, and scientific discoveries while keeping confidential records strictly anonymous.
               </p>
 
               <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -515,7 +547,7 @@ This platform operates in strict accordance with UK health data legislation and 
                   className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-xl flex items-center gap-2 text-xs transition-colors border border-slate-700"
                 >
                   <FileText className="w-4 h-4 text-cyan-400" />
-                  <span>Read Full Board Charter Online</span>
+                  <span>Read Full Governance Charter Online</span>
                 </button>
               </div>
             </div>
@@ -537,7 +569,7 @@ This platform operates in strict accordance with UK health data legislation and 
                   <span>The Dynamic Problem Space</span>
                 </div>
                 <p>
-                  Clinical and genomic research does not take place in an isolated, static vacuum. It operates across an active problem space where diverse workloads (from single query scripts to foundation model pipelines) must navigate regulatory requirements, clinical governance channels, and patient confidentiality thresholds.
+                  Population data science, epidemiology, and health research do not operate in an isolated, static vacuum. They function across an active problem space where diverse workloads (from single query scripts to multi-cohort foundation model pipelines) must navigate statutory requirements, data linkage rules, and confidentiality thresholds.
                 </p>
               </div>
 
@@ -547,7 +579,7 @@ This platform operates in strict accordance with UK health data legislation and 
                   <span>Ingress: Access, Safe People &amp; Projects</span>
                 </div>
                 <p>
-                  The inward tide enforces perimeter access controls, Safe People, and Safe Projects. Before data or compute enters the enclave, the gateway verifies researcher identity, institutional accreditation, mandatory Information Governance training, and REC ethics approvals (including NHS Section 251 exemptions). Inbound data schemas and workloads are validated using W3C SHACL shapes to prevent unauthorized inputs.
+                  The inward flow enforces perimeter access controls, Safe People, and Safe Projects. Before data or compute enters the enclave, the gateway verifies researcher identity, institutional accreditation (e.g. UKSA RAP credentials), mandatory Information Governance training, and ethical approvals. Inbound data schemas, cohort criteria, and query payloads are validated using W3C SHACL shapes to prevent unauthorized inputs.
                 </p>
               </div>
 
@@ -557,7 +589,7 @@ This platform operates in strict accordance with UK health data legislation and 
                   <span>Egress: Disclosure Control &amp; Safe Outputs</span>
                 </div>
                 <p>
-                  The outward tide governs analytical results leaving the secure boundary. Derived statistical aggregates, trained model parameters, and research summaries pass through automated Statistical Disclosure Control (SDC) checks and microsecond OPA Rego policies enforcing k &ge; 10 cell suppression and dominance masking, ensuring zero confidential patient data leaks outward.
+                  The outward flow governs analytical results leaving the secure boundary. Derived statistical aggregates, trained model parameters, and epidemiological summaries pass through automated Statistical Disclosure Control (SDC) checks and microsecond OPA Rego policies enforcing k &ge; 10 cell suppression and dominance masking, ensuring zero confidential individual data leaks outward.
                 </p>
               </div>
             </div>
@@ -568,13 +600,13 @@ This platform operates in strict accordance with UK health data legislation and 
             <div className="space-y-1">
               <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider">
                 <Activity className="w-4 h-4" />
-                <span>Interactive Patient Data Journey Map</span>
+                <span>Interactive Data Journey &amp; Safeguards Map</span>
               </div>
               <h2 className="text-2xl font-bold text-white tracking-tight">
-                The 5 Steps from Hospital Bedside to Medical Discovery
+                The 5 Steps from Source Records to Public Benefit Discoveries
               </h2>
               <p className="text-xs sm:text-sm text-slate-400">
-                Click any stage along the path to learn how your privacy is protected by Caldicott principles and digital locks.
+                Click any stage along the path to learn how individual privacy is protected by statutory principles and digital locks.
               </p>
             </div>
 
@@ -769,7 +801,7 @@ This platform operates in strict accordance with UK health data legislation and 
             </div>
 
             <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-              {['All', 'Governance & Frameworks', 'Standards & Clinical Safety', 'Disclosure Control (SDC)', 'AI & Autonomous Agents'].map((cat) => (
+              {['All', 'Governance & Frameworks', 'Governance Maturity Model', 'Standards & Clinical Safety', 'Disclosure Control (SDC)', 'AI & Autonomous Agents'].map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setGlossaryCategory(cat)}
@@ -1018,7 +1050,7 @@ This platform operates in strict accordance with UK health data legislation and 
               <div className="flex items-center gap-2">
                 <FileText className="w-5 h-5 text-cyan-400" />
                 <h3 className="font-bold text-white text-base">
-                  Official TRE Clinical Data Governance Charter (Full Text)
+                  Public Interest Data Governance &amp; Population Research Charter (Full Text)
                 </h3>
               </div>
               <div className="flex items-center gap-2">

@@ -841,12 +841,12 @@ allow {
     setError(null);
 
     try {
-      // Deterministic Client-Side Policy Synthesizer (100% static GitHub Pages compatible)
+      // Deterministic Client-Side Policy Synthesizer
       const policy = synthesizeClientSidePolicy(promptToUse, enforcementPoint, strictness);
       setGeneratedPolicy(policy);
       setModeNotice({
         mode: 'static-fallback',
-        message: 'Deterministic Static Engine Active (100% GitHub Pages Compatible · Instant Microsecond Synthesis)'
+        message: 'Deterministic Static Engine Active (Instant Microsecond Synthesis)'
       });
       const initialJson = JSON.stringify(policy.sampleCompliantInput, null, 2);
       setEvaluatorInputJson(initialJson);
@@ -1150,7 +1150,7 @@ allow {
               <Code2 className="w-3.5 h-3.5 text-cyan-400" />
               <span>Deterministic Policy-as-Code Synthesizer</span>
             </span>
-            <span className="text-xs text-emerald-400 font-mono">100% Static GitHub Pages Compatible · Microsecond Latency</span>
+            <span className="text-xs text-slate-400 font-mono">Deterministic Engine · Microsecond Latency</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
@@ -1159,8 +1159,21 @@ allow {
 
           <p className="text-slate-300 text-xs sm:text-sm max-w-3xl leading-relaxed">
             Specify a research data governance requirement, clinical disclosure threshold, or compute isolation rule in plain English.
-            The engine deterministically synthesizes closed-world <strong>W3C SHACL shapes</strong>, compiles high-performance <strong>OPA Rego authorization rules</strong>, and generates live test fixtures for instant sandbox verification across data analysis & intelligence platforms such as TREs and SDEs.
+            The engine deterministically synthesizes closed-world <strong>W3C SHACL shapes</strong>, compiles high-performance <strong>OPA Rego authorization rules</strong>, and generates live test fixtures for instant sandbox verification across data analysis &amp; intelligence platforms and secure research enclaves.
           </p>
+
+          {/* Educational Purpose & Point-of-Implementation Responsibility Disclaimer */}
+          <div className="p-3.5 sm:p-4 rounded-xl bg-amber-950/30 border border-amber-500/40 text-amber-200 text-xs flex items-start gap-3">
+            <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+            <div className="space-y-1">
+              <strong className="text-amber-300 font-semibold uppercase tracking-wider block">
+                Educational &amp; Reference Notice
+              </strong>
+              <p className="text-amber-100/90 leading-relaxed">
+                This policy synthesizer and its generated shapes and rules are provided strictly for educational and reference purposes. This playbook is deliberately organisationally agnostic and as such should be reviewed and approved by relevant decision makers at an organisational level. All regulatory risks, legal basis determinations, and deployment decisions are the responsibility of the adopting organization at the point of implementation. Generated rules must be independently reviewed, audited, and tested against organizational security baselines before production deployment.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 

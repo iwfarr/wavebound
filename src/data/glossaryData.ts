@@ -9,7 +9,8 @@ export interface GlossaryTerm {
     | 'Disclosure Control (SDC)'
     | 'AI & Autonomous Agents'
     | 'Operations & Testing'
-    | 'Standards & Clinical Safety';
+    | 'Standards & Clinical Safety'
+    | 'Governance Maturity Model';
   shortDefinition: string;
   fullDefinition: string;
   playbookContext: string;
@@ -26,22 +27,11 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     term: 'Trusted Research Environment',
     acronym: 'TRE / SDE',
     category: 'Governance & Frameworks',
-    shortDefinition: 'A secure cloud computing enclave within data analysis & intelligence platforms enabling authorized researchers to analyze sensitive patient data without raw data leaving the environment.',
+    shortDefinition: 'A secure computing environment enabling authorized researchers to analyze sensitive population data without raw data leaving the protected environment.',
     fullDefinition: 'A Trusted Research Environment (TRE), designated alongside Secure Data Environments (SDE) as modern data analysis & intelligence platforms across the NHS and UK health data space, provides remote virtual access to health and administrative microdata under strict, auditable governance controls. Rather than sending data out to researchers, the platform brings researchers and their approved code into a locked digital facility adhering to the Five Safes framework and statutory accreditation standards.',
     playbookContext: 'The core operational subject of this playbook, which specifies a graph-based policy-as-code automation platform for managing data analysis & intelligence platforms such as TREs and SDEs.',
     playbookSection: 'Section 1. Project Overview & Objectives',
-    relatedTerms: ['data-analysis-intelligence-platform', 'five-safes', 'satre', 'pac', 'safe-setting']
-  },
-  {
-    id: 'data-analysis-intelligence-platform',
-    term: 'Data Analysis & Intelligence Platform',
-    acronym: 'TRE / SDE / DAIP',
-    category: 'Governance & Frameworks',
-    shortDefinition: 'Modern analytics, AI, and intelligence platforms (including TREs and SDEs) that bring algorithms to partitioned data rather than distributing sensitive microdata.',
-    fullDefinition: 'Modern data analysis & intelligence platforms such as Trusted Research Environments (TREs) and Secure Data Environments (SDEs) combine high-performance computing (CPUs/GPUs), ontological knowledge graphs, and rigorous perimeter security. These platforms host sensitive multi-modal patient datasets (EHR, genomics, imaging, registries) and enforce zero-trust data access, cryptographic auditability, and automated disclosure control across exploratory and AI workloads.',
-    playbookContext: 'The overarching architectural class defining the scope of Project Seawater: transforming traditional manual governance into continuous, microsecond-latency policy-as-code validation.',
-    playbookSection: 'Section 1. Project Overview & Objectives',
-    relatedTerms: ['tre', 'five-safes', 'seawater-problem-space', 'satre']
+    relatedTerms: ['five-safes', 'satre', 'pac', 'safe-setting']
   },
   {
     id: 'five-safes',
@@ -715,7 +705,7 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'Clinical and genomic research takes place within an active, continuous data problem space dubbed "Seawater". Analytics workloads (ranging from exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, clinical governance channels, and patient confidentiality thresholds. The tide flows cyclically across two managed boundaries: Ingress and Egress. Ingress enforces gateway access controls, researcher accreditation, institutional identity verification, and Information Governance training (Safe People), alongside approved REC ethics protocols and Section 251 CAG exemptions (Safe Projects). Inbound clinical datasets, multi-omics records, and container workloads are verified at the boundary using W3C SHACL shape validation before admission. Egress regulates the export of derived analytical findings, statistical summaries, and model parameters, requiring automated Statistical Disclosure Control (SDC) checks, k-anonymity (k >= 10), and sub-millisecond Open Policy Agent (OPA) Rego policy evaluations to prevent patient re-identification.',
     playbookContext: 'The overarching architectural concept of Project Seawater: transforming traditional manual governance into continuous, microsecond-latency policy-as-code navigation.',
     playbookSection: 'Section 0. Executive Summary & Problem Space',
-    relatedTerms: ['data-analysis-intelligence-platform', 'tre', 'five-safes', 'pac', 'shacl', 'opa']
+    relatedTerms: ['tre', 'five-safes', 'pac', 'shacl', 'opa']
   },
   // --- International Standards (ISO) & Clinical Safety (DCB) ---
   {
@@ -783,13 +773,159 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     playbookContext: 'Modes of data quality verification encoded into SHACL shapes for safe data ingestion.',
     playbookSection: 'Section 2. Architecture: The Policy-as-Code Pipeline',
     relatedTerms: ['iso-42001', 'safe-data', 'owl2', 'shacl']
+  },
+  // --- Governance Maturity Model (Population Data & Epidemiology) ---
+  {
+    id: 'governance-maturity-model',
+    term: 'Governance Maturity Model for Population Data',
+    acronym: 'GMM',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'A 5-level operational framework measuring an organization\'s progression from ad-hoc manual data handling to automated, policy-as-code research enclaves.',
+    fullDefinition: 'The Governance Maturity Model (GMM) provides population data organizations, health registries, and epidemiological research platforms with a structured path to evaluate and advance their Information Governance capabilities. The model defines five progressive tiers: Level 1 (Ad-hoc: fragmented files, bespoke permissions, manual approval bottlenecks); Level 2 (Repeatable: standardized Data Sharing Agreements and manual DPIAs); Level 3 (Defined: formal institutional baselines adhering to the Five Safes, Caldicott Principles, and SATRE specifications); Level 4 (Managed: automated policy-as-code enforcement, quantitative disclosure control, and real-time metric tracking); Level 5 (Optimizing: continuous semantic graph validation, W3C PROV-O audit trails, and automated regulatory drift adaptation).',
+    playbookContext: 'Structures the 16-Week Implementation Track, allowing organizations to benchmark their transition toward Level 4 and Level 5 machine-executable governance.',
+    playbookSection: 'Section 1. Project Overview & Implementation Track',
+    relatedTerms: ['data-stewardship', 'dpia', 'dsa', 'five-safes', 'pac']
+  },
+  {
+    id: 'dpia',
+    term: 'Data Protection Impact Assessment',
+    acronym: 'DPIA',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'A mandatory statutory process under UK GDPR Article 35 evaluating necessity, proportionality, and privacy risks in population data processing.',
+    fullDefinition: 'A Data Protection Impact Assessment (DPIA) is a formal risk management process mandated under UK GDPR Article 35 and the Data Protection Act 2018 whenever processing is likely to result in a high risk to the rights and freedoms of individuals. In population data research and epidemiology, DPIAs systematically analyze: (1) the lawful basis for processing (e.g. Article 6(1)(e) public interest task and Article 9(2)(j) research exemption); (2) necessity and proportionality relative to research objectives; (3) measures to mitigate re-identification, longitudinal linkage, and inference risks; (4) privacy-enhancing technologies (PETs) deployed; and (5) formal consultation with the Data Protection Officer (DPO) and affected community representatives.',
+    playbookContext: 'Formalized within governance ontologies and validated prior to cohort provisioning; serves as a prerequisite for Phase 1 baseline certification.',
+    playbookSection: 'Section 1. Foundations & Statutory Compliance',
+    relatedTerms: ['dsa', 'data-stewardship', 'uk-gdpr', 'safe-project']
+  },
+  {
+    id: 'dsa',
+    term: 'Data Sharing Agreement & Transfer Protocol',
+    acronym: 'DSA / DTA / ISA',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'A legally binding contract governing the terms, lawful basis, purpose limitations, and liabilities under which data is shared between organizations.',
+    fullDefinition: 'A Data Sharing Agreement (DSA), also referred to as a Data Transfer Agreement (DTA) or Information Sharing Agreement (ISA), is a legal instrument established between data controllers and processors before any multi-institutional population research commences. A compliant DSA defines: (1) the specific parties and their statutory controller/processor designations; (2) explicit purpose limitation strictly bounding analytical scope; (3) data categories, pseudonymization standards, and transmission security; (4) data retention horizons and secure destruction protocols; (5) intellectual property rights and publication clearances; and (6) breach notification SLAs and legal liability allocation.',
+    playbookContext: 'Compiled into machine-readable shape constraints in tre-core.ttl to guarantee that only projects with signed, active DSAs can receive data partitions.',
+    playbookSection: 'Section 1. Core Ontologies & Phase 1 Implementation',
+    relatedTerms: ['dpia', 'data-stewardship', 'safe-project', 'purpose-limitation']
+  },
+  {
+    id: 'data-stewardship',
+    term: 'Data Stewardship & Fiduciary Custodianship',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'The institutional responsibility and operational practices ensuring data integrity, ethical curation, access governance, and lifecycle preservation.',
+    fullDefinition: 'Data Stewardship represents the active management, governance, and ethical custodianship of population, administrative, and epidemiological data assets throughout their entire lifecycle. Unlike traditional IT administration, data stewards act as trusted fiduciaries for research participants and public authorities. Key responsibilities include maintaining FAIR (Findable, Accessible, Interoperable, Reusable) data standards, curating standardized semantic data dictionaries (OMOP CDM, ICD-10, SNOMED CT), ensuring data minimization at ingress, managing project-specific role assignments, and enforcing ethical boundary conditions.',
+    playbookContext: 'Modeled in tre-core.ttl as tre:DataSteward, linking human custodians to W3C SHACL shape validation rules and access review gates.',
+    playbookSection: 'Section 1.2 & Section 3.1',
+    relatedTerms: ['governance-maturity-model', 'ethical-framework', 'dsa', 'five-safes']
+  },
+  {
+    id: 'ethical-framework',
+    term: 'Ethical Framework & Public Interest Test',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'A structured assessment methodology balancing the public health and scientific benefits of research against individual privacy intrusion.',
+    fullDefinition: 'The Ethical Framework for population and health research provides principles and decision heuristics for evaluating whether secondary data linkage and analysis are morally and socially justified. Anchored by the UNESCO Universal Declaration on Bioethics and Human Rights, the Belmont Report, and national data guardian principles, the framework evaluates four core pillars: (1) Beneficence (clear societal value, disease mitigation, or policy improvement); (2) Non-maleficence (robust mathematical safeguards preventing group stigma, discriminatory profiling, or re-identification); (3) Autonomy (respect for statutory opt-outs, transparent public registers, and citizen dialogue); and (4) Justice (fair distribution of research benefits across diverse population strata).',
+    playbookContext: 'Integrated into the Playbook front matter and encoded into the governance graph to enforce public benefit criteria as machine-checkable preconditions.',
+    playbookSection: 'Section 0. Executive Front Matter & Section 1.2',
+    relatedTerms: ['data-stewardship', 'caldicott', 'purpose-limitation', 'five-safes']
+  },
+  {
+    id: 'longitudinal-cohort-linkage',
+    term: 'Longitudinal Cohort Linkage Protocol',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'A privacy-preserving methodology for combining records across disparate administrative and epidemiological registries over time without exposing identity.',
+    fullDefinition: 'Longitudinal Cohort Linkage is the systematic process of connecting multiple datasets (such as birth cohorts, census returns, health encounters, educational attainment, and environmental exposures) for the same individuals across multi-decade observation periods. To maintain compliance with UK GDPR and the Digital Economy Act 2017, linkage protocols employ privacy-preserving record linkage (PPRL), deterministic cryptographic hash tokens (e.g. Salted HMAC-SHA256), and trusted third-party separation of identity from analytical attributes (the split-file model).',
+    playbookContext: 'Encoded into SHACL ingress rules to verify that linkage tokens are irreversible and that row-level datasets cannot be joined without active ethical authorization.',
+    playbookSection: 'Section 2. Architecture & Ingress Governance',
+    relatedTerms: ['data-stewardship', 'quasi-identifiers', 'dea-2017']
+  },
+  {
+    id: 'purpose-limitation',
+    term: 'Purpose Limitation & Secondary Use Controls',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'The statutory principle restricting data use strictly to the approved research question, prohibiting mission creep or commercial repurposing.',
+    fullDefinition: 'Under UK GDPR Article 5(1)(b) and statutory research gateways, data collected for specific administrative, health, or statistical purposes must not be further processed in a manner incompatible with those legitimate purposes. Within data analysis & intelligence platforms, purpose limitation is enforced mechanically through container sandboxing, read-only data mounts, and automated query analysis. Any analytical workload attempting to join unauthorized tables, train unapproved models, or explore variables outside the declared protocol is flagged and aborted.',
+    playbookContext: 'Directly enforced by OPA Rego admission webhooks that verify incoming query tokens against approved project claim graphs.',
+    playbookSection: 'Section 1.1 & Section 3 (Phase 4)',
+    relatedTerms: ['ethical-framework', 'dsa', 'safe-project', 'opa']
+  },
+  {
+    id: 'trusted-data-intermediary',
+    term: 'Trusted Data Intermediary',
+    acronym: 'TDI',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'An independent, accredited entity facilitating secure data linkage and exchange between data providers and researchers without holding analytical data.',
+    fullDefinition: 'A Trusted Data Intermediary (TDI), recognized under the EU Data Governance Act and the UK Data (Use and Access) legislative framework, is an impartial organization that operates sovereign linkage and identity resolution services between public data custodians and research platforms. TDIs perform pseudonymization, match key generation, and validation of research credentials while remaining legally and technologically barred from accessing either the underlying personal identifiers or the resulting research insights.',
+    playbookContext: 'Reflected in the Seawater architectural ingress tier to ensure independent, cryptographically audited data ingestion into secure enclaves.',
+    playbookSection: 'Section 2. Architecture: The Policy-as-Code Pipeline',
+    relatedTerms: ['data-stewardship', 'longitudinal-cohort-linkage', 'dea-2017', 'tre']
+  },
+  {
+    id: 'data-access-committee',
+    term: 'Data Access Committee & IG Review Panel',
+    acronym: 'DAC / IGRP',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'An independent multidisciplinary body evaluating population health data access requests against statutory, ethical, and scientific criteria.',
+    fullDefinition: 'A Data Access Committee (DAC), often functioning alongside an Information Governance Review Panel (IGRP), serves as the institutional gatekeeper for population health cohorts and linked epidemiological registries. Comprising data stewards, Caldicott guardians, methodologists, public representatives, and legal advisers, the DAC evaluates: (1) whether the research question delivers tangible public health benefit; (2) whether the data requested is strictly minimized; (3) whether the analytical team holds requisite accreditations; and (4) whether the risk of deductive re-identification has been controlled. In a mature organization, DAC approvals produce cryptographically signed assertions that activate Policy Enforcement Points (PEPs) automatically.',
+    playbookContext: 'Modeled in tre-core.ttl as tre:DataAccessCommittee, emitting decision assertions that unlock enclave workspace provisioning.',
+    playbookSection: 'Section 1.1 & Section 1.2',
+    relatedTerms: ['data-stewardship', 'dsa', 'dpia', 'caldicott']
+  },
+  {
+    id: 'caldicott-guardian-role',
+    term: 'Caldicott Guardian & SIRO Oversight',
+    acronym: 'CG / SIRO',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'Senior organizational leaders appointed to champion confidentiality, oversee clinical information risk, and validate proportionate data sharing.',
+    fullDefinition: 'Mandated across public health, social care, and population research organizations in the UK, the Caldicott Guardian acts as the conscience of the organization regarding the handling of confidential patient and population information. Working in partnership with the Senior Information Risk Owner (SIRO) and Data Protection Officer (DPO), the Caldicott Guardian arbitrates complex data-sharing decisions, tests proposed secondary uses against the 8 Caldicott Principles, and ensures that citizen confidentiality is never compromised for administrative expediency.',
+    playbookContext: 'Represented as an authoritative approval gate (D-001 through D-009) in the implementation transition track.',
+    playbookSection: 'Section 1.2 & Section 3.1',
+    relatedTerms: ['caldicott', 'data-stewardship', 'dpia', 'dsa']
+  },
+  {
+    id: 'ai-non-personhood',
+    term: 'AI Non-Personhood & Delegated Sponsorship',
+    category: 'AI & Autonomous Agents',
+    shortDefinition: 'The legal and architectural doctrine establishing that AI models cannot be "Safe People" and must operate under delegated human sponsorship.',
+    fullDefinition: 'Under statutory research frameworks (UK Digital Economy Act 2017, ONS SRS, and Caldicott Principles), a "Safe Person" must be an accredited natural person bearing direct legal and criminal liability. An AI model, agent, or LLM possesses no legal personhood, cannot sign statutory undertakings, and cannot be prosecuted. Architecturally, AI operates strictly as a delegated machine workload under the custody of an Accredited Human Researcher (Human Sponsor) who retains 100% legal and ethical accountability.',
+    playbookContext: 'Enforced via SHACL shapes rejecting tre:SafePerson status for AI workloads and requiring tre:sponsoredByHumanResearcher with an active accreditation URI.',
+    playbookSection: 'Section 2 & Section 3 (Phase 3 & Phase 4)',
+    relatedTerms: ['safe-person', 'mcp', 'stanford-agentic-framework', 'five-safes']
+  },
+  {
+    id: 'model-weights-data-asset',
+    term: 'Model Weights & Checkpoints as Data Assets',
+    category: 'AI & Autonomous Agents',
+    shortDefinition: 'Classifying neural network weights, embeddings, and vector stores as Data Assets subject to disclosure control due to training data memorization.',
+    fullDefinition: 'Pre-trained foundation models imported into a TRE, fine-tuned weights, embeddings, and vector databases are formally categorized as "Data Assets" within the Safe Data pillar. Because deep learning models can memorize private training records (vulnerable to membership inference and model inversion attacks), exporting model weights across the airlock requires statistical disclosure control, differential privacy verification (epsilon <= 1.0), and DCB0129 clinical hazard log sign-off.',
+    playbookContext: 'Catalogued under dcat:Dataset / tre:DataAsset and evaluated at the airlock via sdc_shapes.ttl before egress authorization.',
+    playbookSection: 'Section 2 & Section 3 (Phase 1 & Phase 4)',
+    relatedTerms: ['safe-data', 'safe-output', 'sdc', 'differential-privacy']
+  },
+  {
+    id: 'stanford-agentic-framework',
+    term: 'Stanford UIT Agentic AI Security Framework',
+    category: 'AI & Autonomous Agents',
+    shortDefinition: 'Cybersecurity framework requiring automated near-instantaneous token revocation, blast radius containment, and human sponsor accountability.',
+    fullDefinition: 'Published by Stanford University IT Information Security Office, this framework establishes essential guardrails for autonomous agents: (1) machine identities must be revocable near-instantaneously in an automated manner without long-lived credentials, (2) agents must operate within a bounded blast radius without direct write access to systems of record, and (3) all agents must have an identified human sponsor (Principal) who is accountable for actions taken by the workload.',
+    playbookContext: 'Directly compiled into Seawater OPA admission controllers (authz.rego) and SHACL agent boundaries (agent-sponsor-shapes.ttl).',
+    playbookSection: 'Section 3 (Phase 3 & Phase 4)',
+    relatedTerms: ['ai-non-personhood', 'stanford-risk-tiers', 'mcp', 'pep']
+  },
+  {
+    id: 'stanford-risk-tiers',
+    term: 'Stanford UIT Agentic AI Risk Classifications',
+    category: 'AI & Autonomous Agents',
+    shortDefinition: 'Four-tier risk evaluation (Low, Moderate, High #8702, Very High #8938) governing autonomous agent access to sensitive population data.',
+    fullDefinition: 'Categorizes agentic AI workloads into four risk levels based on autonomy, target data classification, and potential harm. Section 8702 specifies that High Risk agents operating on pseudonymised microdata require human-in-the-loop approvals, short-lived tokens (<= 2 hours), and read-only tools. Section 8938 mandates that Very High Risk operations (e.g., cross-registry linkage, raw re-identifiable demographic queries) are strictly prohibited from autonomous execution.',
+    playbookContext: 'Governs the admission control rules enforced by OPA PDPs when agents attempt tool execution in the research enclave.',
+    playbookSection: 'Section 3 (Phase 3 & Phase 4)',
+    relatedTerms: ['stanford-agentic-framework', 'ai-non-personhood', 'eu-ai-act', 'mcp-sql']
   }
 ];
 
 export const GLOSSARY_SECTION_MAP: Record<string, string> = {
   // Foundations & Statutory Frameworks -> Phase 1 Baseline Ontologies & SATRE
   'tre': 'sec-phase-1-2',
-  'data-analysis-intelligence-platform': 'sec-phase-1-2',
   'seawater-problem-space': 'sec-front-matter',
   'iso-42001': 'sec-phase-3-2',
   'iso-13485': 'sec-phase-4-1',
@@ -813,6 +949,18 @@ export const GLOSSARY_SECTION_MAP: Record<string, string> = {
   'uk-gdpr': 'sec-phase-1-2',
   'satre': 'sec-phase-1-2',
   'foi': 'sec-phase-3-1',
+
+  // Governance Maturity Model & Stewardship
+  'governance-maturity-model': 'sec-phase-1-1',
+  'dpia': 'sec-phase-1-2',
+  'dsa': 'sec-phase-1-2',
+  'data-stewardship': 'sec-phase-1-2',
+  'ethical-framework': 'sec-front-matter',
+  'longitudinal-cohort-linkage': 'sec-phase-2-1',
+  'purpose-limitation': 'sec-phase-4-1',
+  'trusted-data-intermediary': 'sec-phase-1-2',
+  'data-access-committee': 'sec-phase-1-2',
+  'caldicott-guardian-role': 'sec-phase-1-2',
 
   // Semantic Graph Primitives -> Phase 1 Knowledge Modeling & Phase 2 SHACL
   'pac': 'sec-front-matter',
@@ -855,6 +1003,10 @@ export const GLOSSARY_SECTION_MAP: Record<string, string> = {
   'copilot-ignore': 'sec-phase-3-2',
   'ast-scrubbing': 'sec-phase-3-2',
   'zdr-baa': 'sec-phase-3-2',
+  'ai-non-personhood': 'sec-phase-3-2',
+  'model-weights-data-asset': 'sec-phase-3-2',
+  'stanford-agentic-framework': 'sec-phase-3-2',
+  'stanford-risk-tiers': 'sec-phase-3-2',
 
   // Operations, Provenance & Infrastructure
   'provo': 'sec-phase-4-3',

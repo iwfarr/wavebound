@@ -5,6 +5,7 @@
 
 import React, { useState } from 'react';
 import { ProgressProvider } from './context/ProgressContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { Header, ActiveTab } from './components/Header';
 import { PlaybookReader } from './components/PlaybookReader';
 import { TechnicalConcepts } from './components/TechnicalConcepts';
@@ -17,6 +18,7 @@ import { GovernanceAtlas } from './components/GovernanceAtlas';
 import { ResourcesPage } from './components/ResourcesPage';
 import { LLMSecurityEnclave } from './components/LLMSecurityEnclave';
 import { ImplementationTrack } from './components/ImplementationTrack';
+import { FeedbackModal } from './components/FeedbackModal';
 import { getSectionIdForGlossaryTerm } from './data/glossaryData';
 import { ShieldCheck, BookOpen, Layers, Cpu, HelpCircle, Bookmark, TrendingUp } from 'lucide-react';
 
@@ -27,6 +29,7 @@ export default function App() {
   const [activeModuleId, setActiveModuleId] = useState<string | null>(null);
   const [targetSectionId, setTargetSectionId] = useState<string | null>(null);
   const [targetHighlightTerm, setTargetHighlightTerm] = useState<string | undefined>(undefined);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
   const handleNavigateToGlossaryTerm = (termId: string) => {
     setActiveGlossaryTermId(termId);
@@ -54,32 +57,26 @@ export default function App() {
     setTargetSectionId(resolvedSectionId);
     setTargetHighlightTerm(highlightKeyword || rawSectionId);
     setActiveTab('playbook');
-
-    setTimeout(() => {
-      const el = document.getElementById(`section-${resolvedSectionId}`);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Pulse ring highlight to guide the user's focus immediately
-        el.classList.add('ring-2', 'ring-cyan-400', 'bg-cyan-950/30');
-        setTimeout(() => {
-          el.classList.remove('ring-2', 'ring-cyan-400', 'bg-cyan-950/30');
-        }, 3200);
-      }
-    }, 150);
   };
 
   return (
-    <ProgressProvider>
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+    <ThemeProvider>
+      <ProgressProvider>
+        <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col transition-colors duration-200">
         {/* Main Header with Global Search and Navigation */}
         <Header
           activeTab={activeTab}
           onSelectTab={(tab) => {
+            if (tab === 'playbook') {
+              setTargetSectionId(null);
+              setTargetHighlightTerm(undefined);
+            }
             setActiveTab(tab);
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
           onNavigateToGlossaryTerm={handleNavigateToGlossaryTerm}
           onNavigateToSection={handleNavigateToSection}
+          onOpenFeedback={() => setIsFeedbackOpen(true)}
         />
 
         {/* Main View Area */}
@@ -95,6 +92,7 @@ export default function App() {
               }}
               targetSectionId={targetSectionId}
               targetHighlightTerm={targetHighlightTerm}
+              onClearTargetSection={() => setTargetSectionId(null)}
             />
           )}
 
@@ -226,7 +224,14 @@ export default function App() {
             </div>
           </div>
         </footer>
+
+        {/* Global Feedback & Issue Submission Modal */}
+        <FeedbackModal
+          isOpen={isFeedbackOpen}
+          onClose={() => setIsFeedbackOpen(false)}
+        />
       </div>
-    </ProgressProvider>
+      </ProgressProvider>
+    </ThemeProvider>
   );
 }

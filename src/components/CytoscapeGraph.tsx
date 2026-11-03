@@ -36,7 +36,7 @@ const LAYOUT_GUIDES: Record<GraphLayoutType, { title: string; rationale: string;
   concentric: {
     title: 'Enforcement Rings (Orbital)',
     rationale: 'Radial defense-in-depth geometry placing core governance at the center nucleus with validation shapes and runtime PEPs in outer orbital shells.',
-    bestFor: 'Evaluating architectural blast radius and verifying that core clinical safety sits at the gravitational center of the system.'
+    bestFor: 'Evaluating architectural blast radius and verifying that core statutory governance and data safety sit at the gravitational center of the system.'
   },
   cose: {
     title: 'Force-Directed (Physics Spring)',
@@ -198,17 +198,25 @@ export const CytoscapeGraph: React.FC<CytoscapeGraphProps> = ({
           };
         }
         if (selectedLayout === 'breadthfirst') {
-          const roots = filteredNodes
-            .filter((n) => n.data.tier === 'Policy Layer')
-            .map((n) => '#' + n.data.id);
+          // Root tree specifically at Five Safes governance core, with fallback to all policy nodes
+          const hasFiveSafes = filteredNodes.some((n) => n.data.id === 'pol_FiveSafes');
+          const rootsSelector = hasFiveSafes
+            ? '#pol_FiveSafes'
+            : filteredNodes
+                .filter((n) => n.data.tier === 'Policy Layer')
+                .map((n) => '#' + n.data.id)
+                .join(', ');
+
           return {
             name: 'breadthfirst',
             directed: true,
-            roots: roots.length > 0 ? roots : undefined,
-            spacingFactor: 1.8,
+            roots: rootsSelector || undefined,
+            circle: false,
+            grid: false,
+            spacingFactor: 2.4, // Generous spacing to create a tall, fanning top-down DAG rather than a flat band
             avoidOverlap: true,
             nodeDimensionsIncludeLabels: true,
-            padding: 50,
+            padding: 60,
             animate: true,
             animationDuration: 400
           };
@@ -224,8 +232,14 @@ export const CytoscapeGraph: React.FC<CytoscapeGraphProps> = ({
               return 1;
             },
             levelWidth: () => 1,
-            padding: 50,
+            padding: 60,
+            spacingFactor: 2.4, // Substantially widens ring radii to prevent orbital crowding
+            minNodeSpacing: 65, // Enforces 65px clearance between nodes on the same orbit
+            nodeDimensionsIncludeLabels: true, // Prevents label text from colliding
             avoidOverlap: true,
+            equidistant: false,
+            clockwise: true,
+            startAngle: (3 / 2) * Math.PI,
             animate: true,
             animationDuration: 400
           };

@@ -23,7 +23,8 @@ import {
   Layers,
   Scale,
   Server,
-  Info
+  Info,
+  Database
 } from 'lucide-react';
 
 interface PlaybookSection {
@@ -90,11 +91,12 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
     subtitle: 'Authoring tre-core.ttl and governance_core.ttl across hospital operational tiers',
     content: [
       '• Five Safes Formalization: Expresses the 5 core dimensions in ontology/tre-core.ttl:',
-      '   - Safe People: tre:SafePerson with mandatory institutional accreditation and active Information Governance (IG) training.',
+      '   - Safe People: tre:SafePerson with mandatory institutional accreditation and active Information Governance (IG) training. Note: AI models and agents are NEVER Safe People; they operate strictly as delegated machine workloads under an accredited human researcher sponsor.',
       '   - Safe Projects: tre:SafeProject with NHS Research Ethics Committee (REC) approvals and Section 251 exemption bindings.',
       '   - Safe Settings: tre:SafeSetting mandating zero-egress VPC subnets, air-gapped compute, and multi-factor authentication.',
-      '   - Safe Data: tre:SafeData classifying records into Hospital Operational Tiers (Tier 1: Aggregate/Synthetic, Tier 2: De-identified Pseudonymous, Tier 3: Sensitive Clinical/Identifiable under s251).',
-      '   - Safe Outputs: tre:SafeOutput requiring quantitative SDC clearance before airlock egress.',
+      '   - Safe Data: tre:SafeData classifying records into Hospital Operational Tiers (Tier 1: Aggregate/Synthetic, Tier 2: De-identified Pseudonymous, Tier 3: Sensitive Clinical/Identifiable under s251). Pre-trained foundation models, embeddings, and fine-tuned checkpoints ARE Data Assets subject to disclosure controls.',
+      '   - Safe Outputs: tre:SafeOutput requiring quantitative SDC clearance and differential privacy / memorization verification before airlock egress.',
+      '• Stanford UIT Agentic AI Security Framework Integration: Formally aligns agentic workloads with Stanford UIT cybersecurity mandates: automated near-instantaneous token revocation, blast radius containment, read-only SELECT permissions, and risk categorization (Section 8702 High Risk vs Section 8938 Very High Risk).',
       '• SATRE Pillars Integration: Aligns tre-core.ttl with the 4 pillars of the Standard Architecture for Trusted Research Environments (Information Governance, Computing Infrastructure, Data Management, Software Operations).'
     ],
     codeBlock: {
@@ -342,6 +344,7 @@ interface PlaybookReaderProps {
   onNavigateToImplementationTrack?: () => void;
   targetSectionId?: string | null;
   targetHighlightTerm?: string;
+  onClearTargetSection?: () => void;
 }
 
 export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
@@ -351,6 +354,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
   onNavigateToImplementationTrack,
   targetSectionId,
   targetHighlightTerm,
+  onClearTargetSection,
 }) => {
   const { readSections, markSectionRead, markAllSectionsRead } = useUserProgress();
   const [searchQuery, setSearchQuery] = useState('');
@@ -363,7 +367,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
   // Auto-scroll and highlight when targetSectionId is received
   useEffect(() => {
     if (targetSectionId) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         const el = document.getElementById(`section-${targetSectionId}`);
         if (el) {
           el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -372,9 +376,13 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
             el.classList.remove('ring-2', 'ring-cyan-400', 'bg-cyan-950/40');
           }, 3500);
         }
+        if (onClearTargetSection) {
+          onClearTargetSection();
+        }
       }, 150);
+      return () => clearTimeout(timer);
     }
-  }, [targetSectionId]);
+  }, [targetSectionId, onClearTargetSection]);
 
   // Search match statistics across all sections
   const searchMatches = useMemo(() => {
@@ -500,7 +508,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                 Project Seawater: Policy-as-Code Playbook
               </h1>
               <p className="text-slate-300 text-sm max-w-2xl leading-relaxed">
-                An educational resource based on available literature and resources. From this, the playbook for implementing a governance policy engine for data analysis &amp; intelligence platforms is presented, compiling semantic graph ontologies into real-time Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs).
+                This playbook provides a Policy as Code (PaC) framework, bridging regulatory compliance documentation and real-time execution by compiling human- and machine-readable semantic graph ontologies into Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) across data intelligence platforms. Please note that this project is a work in progress.
               </p>
             </div>
           </div>
@@ -742,6 +750,53 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           )}
+        </div>
+
+        {/* Specialized Governance Deep Dives: Caldicott & Data Catalogue */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-slate-950/90 border border-purple-900/50 rounded-xl p-4 flex flex-col justify-between gap-3 shadow-sm">
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2 text-xs font-bold text-purple-400 uppercase tracking-wider">
+                <Scale className="w-4 h-4" />
+                <span>Statutory Compliance Architecture</span>
+              </div>
+              <h3 className="text-sm font-bold text-white">
+                The 8 Caldicott Principles in Policy-as-Code
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Disaggregated breakdown of all 8 Caldicott principles into population research applications, SHACL shape validation rules, and OPA Rego policies with gatekeeper checklists.
+              </p>
+            </div>
+            <button
+              onClick={() => onNavigateToConcept('caldicott')}
+              className="px-3.5 py-1.5 rounded-lg bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 text-xs font-semibold flex items-center justify-between transition-colors self-start w-full sm:w-auto"
+            >
+              <span>Explore 8 Caldicott Principles</span>
+              <ArrowRight className="w-3.5 h-3.5 ml-2" />
+            </button>
+          </div>
+
+          <div className="bg-slate-950/90 border border-emerald-900/50 rounded-xl p-4 flex flex-col justify-between gap-3 shadow-sm">
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-wider">
+                <Database className="w-4 h-4" />
+                <span>Data Governance &amp; Metadata Engine</span>
+              </div>
+              <h3 className="text-sm font-bold text-white">
+                Data Catalogue: Metadata &amp; Dependent Constraints
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                6 real-world population data assets (GP EHR, Census, Mortality, HES APC, Genomics, Prescribing) with specific cell suppression rules ($k \ge 10$), dominance limits, and SHACL targets.
+              </p>
+            </div>
+            <button
+              onClick={() => onNavigateToConcept('catalogue')}
+              className="px-3.5 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-semibold flex items-center justify-between transition-colors self-start w-full sm:w-auto"
+            >
+              <span>Explore Data Catalogue Assets</span>
+              <ArrowRight className="w-3.5 h-3.5 ml-2" />
+            </button>
+          </div>
         </div>
 
         {/* Search Bar with Matches Counter and Navigation */}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useUserProgress } from '../context/ProgressContext';
+import { useTheme } from '../context/ThemeContext';
 import { GLOSSARY_TERMS } from '../data/glossaryData';
 import { PLAYBOOK_MODULES } from '../data/playbookContent';
 import { SeawaterLogo } from './SeawaterLogo';
@@ -18,7 +19,10 @@ import {
   Bookmark,
   ExternalLink,
   Bot,
-  Workflow
+  Workflow,
+  MessageSquarePlus,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 export type ActiveTab =
@@ -39,15 +43,18 @@ interface HeaderProps {
   onSelectTab: (tab: ActiveTab) => void;
   onNavigateToGlossaryTerm: (termId: string) => void;
   onNavigateToSection: (sectionId: string) => void;
+  onOpenFeedback?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   activeTab,
   onSelectTab,
   onNavigateToGlossaryTerm,
-  onNavigateToSection
+  onNavigateToSection,
+  onOpenFeedback
 }) => {
   const { stats } = useUserProgress();
+  const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [globalSearch, setGlobalSearch] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
@@ -153,7 +160,7 @@ export const Header: React.FC<HeaderProps> = ({
                     ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
                     : 'text-slate-400 hover:text-emerald-300'
                 }`}
-                title="Switch to Public Governance Atlas (Citizen & Board View)"
+                title="Switch to Public Governance Atlas (Citizen & Public View)"
               >
                 <HeartHandshake className="w-3.5 h-3.5" />
                 <span>Public Atlas</span>
@@ -175,11 +182,51 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Quick Mastery Badge */}
             <button
               onClick={() => onSelectTab('progress')}
-              className="bg-slate-900 border border-slate-800 px-2.5 py-1.5 rounded-lg text-xs font-mono text-cyan-300 hover:bg-slate-850 transition-colors hidden sm:flex items-center gap-1"
+              className="bg-slate-900 border border-slate-800 px-2.5 py-1.5 rounded-lg text-xs font-mono text-cyan-300 hover:bg-slate-850 transition-colors hidden lg:flex items-center gap-1"
               title="Overall Mastery Progress"
             >
               <TrendingUp className="w-3.5 h-3.5 text-cyan-400" />
               <span>{stats.overallProgressPercentage}%</span>
+            </button>
+
+            {/* GitHub Repository Link */}
+            <a
+              href="https://github.com/iwfarr/seawater-playbook"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-slate-900 border border-slate-800 p-2 rounded-lg text-slate-300 hover:text-white hover:border-slate-700 transition-colors hidden sm:flex items-center gap-1.5 text-xs shadow-sm"
+              title="View on GitHub (Repository & Documentation)"
+            >
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+              <span className="hidden xl:inline font-mono">GitHub</span>
+            </a>
+
+            {/* Raise Issue / Feedback Button */}
+            {onOpenFeedback && (
+              <button
+                onClick={onOpenFeedback}
+                className="bg-slate-900 border border-slate-800 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-amber-300 hover:text-amber-200 hover:border-amber-500/40 transition-colors flex items-center gap-1.5 shadow-sm"
+                title="Submit Feedback or Raise an Issue"
+              >
+                <MessageSquarePlus className="w-3.5 h-3.5 text-amber-400" />
+                <span className="hidden sm:inline">Raise Issue</span>
+              </button>
+            )}
+
+            {/* Theme Toggle Button (Light/Dark Mode) */}
+            <button
+              onClick={toggleTheme}
+              className="bg-slate-900 border border-slate-800 p-2 rounded-lg text-slate-300 hover:text-white hover:border-slate-700 transition-colors flex items-center justify-center shadow-sm"
+              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400" />
+              ) : (
+                <Moon className="w-4 h-4 text-cyan-500" />
+              )}
             </button>
 
             {/* Mobile Menu Button */}
@@ -261,6 +308,46 @@ export const Header: React.FC<HeaderProps> = ({
                 <span>{item.label}</span>
               </button>
             ))}
+
+            <div className="pt-2 border-t border-slate-800 space-y-2">
+              {onOpenFeedback && (
+                <button
+                  onClick={() => {
+                    onOpenFeedback();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-amber-300 hover:bg-slate-900 flex items-center gap-2 border border-amber-500/20"
+                >
+                  <MessageSquarePlus className="w-4 h-4 text-amber-400" />
+                  <span>Raise Issue / Feedback</span>
+                </button>
+              )}
+
+              <button
+                onClick={() => {
+                  toggleTheme();
+                }}
+                className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-900 flex items-center justify-between border border-slate-800"
+              >
+                <span className="flex items-center gap-2">
+                  {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-cyan-500" />}
+                  <span>Appearance</span>
+                </span>
+                <span className="text-[11px] font-mono text-cyan-400 uppercase">
+                  {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
+                </span>
+              </button>
+
+              <a
+                href="https://github.com/iwfarr/seawater-playbook"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-900 flex items-center gap-2 border border-slate-800"
+              >
+                <ExternalLink className="w-4 h-4 text-cyan-400" />
+                <span>GitHub Repository</span>
+              </a>
+            </div>
           </div>
         )}
       </div>

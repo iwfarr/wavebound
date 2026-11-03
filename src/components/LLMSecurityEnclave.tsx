@@ -29,7 +29,7 @@ export const LLMSecurityEnclave: React.FC<LLMSecurityEnclaveProps> = ({
   onNavigateToGlossaryTerm,
   onNavigateToSandbox
 }) => {
-  const [activeTab, setActiveTab] = useState<'in-enclave-inference' | 'simulator' | 'safeguards' | 'taxonomy' | 'config-generator'>('in-enclave-inference');
+  const [activeTab, setActiveTab] = useState<'in-enclave-inference' | 'simulator' | 'safeguards' | 'config-generator'>('in-enclave-inference');
 
   // Interactive Prompt Sanitizer Simulator State
   const [inputCode, setInputCode] = useState<string>(`# Data analysis script for Cohort 12
@@ -154,7 +154,6 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
               { id: 'in-enclave-inference', label: 'In-Enclave Inference & Policy Modes', icon: <Server className="w-3.5 h-3.5" /> },
               { id: 'simulator', label: 'Interactive Pre-Prompt PEP Simulator', icon: <Terminal className="w-3.5 h-3.5" /> },
               { id: 'safeguards', label: '5 Core Enclave Safeguards', icon: <Lock className="w-3.5 h-3.5" /> },
-              { id: 'taxonomy', label: 'Safe Enclave Taxonomy (TRE, VDE, DCR, TEE)', icon: <Layers className="w-3.5 h-3.5" /> },
               { id: 'config-generator', label: 'IDE & Ignore Config Generator', icon: <FileCode2 className="w-3.5 h-3.5" /> }
             ].map((tab) => (
               <button
@@ -198,6 +197,58 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
                 <span className="text-[10px] text-slate-500 uppercase font-mono block">Compute Fabric</span>
                 <span className="text-xs font-bold text-emerald-400 font-mono">Dedicated In-Enclave Accelerator Cluster</span>
                 <span className="text-[10px] text-slate-400 block">Air-gapped private subnet · Zero WAN gateway</span>
+              </div>
+            </div>
+
+            {/* Stanford UIT Agentic AI Security Framework & Five Safes Doctrine */}
+            <div className="p-5 bg-slate-950/90 rounded-2xl border border-sky-900/60 space-y-3">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2 text-xs font-bold text-sky-300 uppercase tracking-wider">
+                  <ShieldCheck className="w-4 h-4 text-sky-400 shrink-0" />
+                  <span>Stanford UIT Agentic AI Security Framework &amp; Five Safes Governance Resolution</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs font-mono">
+                  <a
+                    href="https://uit.stanford.edu/security/agenticai/security-framework"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sky-400 hover:text-sky-300 flex items-center gap-1 hover:underline"
+                  >
+                    <span>Stanford Security Framework</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                  <span className="text-slate-600">·</span>
+                  <a
+                    href="https://uit.stanford.edu/security/agenticai/riskclassifications#section_8702"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-amber-400 hover:text-amber-300 flex items-center gap-1 hover:underline"
+                  >
+                    <span>Section 8702 (High Risk)</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <div className="p-3 bg-slate-900 rounded-xl border border-slate-800 space-y-1">
+                  <span className="font-bold text-amber-300 block">1. AI is NEVER a Safe Person</span>
+                  <p className="text-slate-300 leading-relaxed text-[11px]">
+                    Under DEA 2017 &amp; UK GDPR, a Safe Person requires natural personhood and criminal liability. AI runs strictly as a delegated machine workload under an accredited human sponsor.
+                  </p>
+                </div>
+                <div className="p-3 bg-slate-900 rounded-xl border border-slate-800 space-y-1">
+                  <span className="font-bold text-purple-300 block">2. Model Weights ARE Data Assets</span>
+                  <p className="text-slate-300 leading-relaxed text-[11px]">
+                    Neural weights memorize training records. Fine-tuned checkpoints sit in Safe Data and must undergo differential privacy and airlock verification before egress.
+                  </p>
+                </div>
+                <div className="p-3 bg-slate-900 rounded-xl border border-slate-800 space-y-1">
+                  <span className="font-bold text-sky-300 block">3. Automated Near-Instant Revocation</span>
+                  <p className="text-slate-300 leading-relaxed text-[11px]">
+                    Following Stanford UIT standards, agent identities must be revocable near-instantaneously without long-lived keys. Database tools are confined to read-only SELECT statements.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -871,82 +922,6 @@ def process(data): return data.mean()`)
                 and be backed by a <strong>Business Associate Agreement (BAA) / NHS Data Processing Addendum</strong>.
               </p>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 3: SAFE DIGITAL DATA ENCLAVES TAXONOMY */}
-      {activeTab === 'taxonomy' && (
-        <div className="space-y-6">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider">
-              <Layers className="w-4 h-4" />
-              <span>Domain Terminology</span>
-            </div>
-            <h2 className="text-2xl font-bold text-white tracking-tight">
-              Safe Digital Data Enclaves: Architectural Taxonomy
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-400 max-w-2xl">
-              Understanding the broader landscape of secure processing environments beyond healthcare TREs and SDEs.
-            </p>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs border-collapse bg-slate-900 rounded-2xl overflow-hidden border border-slate-800">
-              <thead>
-                <tr className="border-b border-slate-800 text-slate-300 bg-slate-950/70">
-                  <th className="py-3 px-4 font-bold">Enclave Term</th>
-                  <th className="py-3 px-4 font-bold">Acronym</th>
-                  <th className="py-3 px-4 font-bold">Primary Domain</th>
-                  <th className="py-3 px-4 font-bold">Core Defining Characteristic</th>
-                  <th className="py-3 px-4 font-bold">Enforcement Level</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-800/80 text-slate-300">
-                <tr className="hover:bg-slate-950/40">
-                  <td className="py-3 px-4 font-bold text-white">Trusted Research Environment</td>
-                  <td className="py-3 px-4 font-mono text-cyan-400">TRE</td>
-                  <td className="py-3 px-4">NHS & Clinical Research</td>
-                  <td className="py-3 px-4">Five Safes, SATRE pillars, zero-egress VPC, automated SDC airlocks.</td>
-                  <td className="py-3 px-4 text-emerald-400 font-semibold">Policy-as-Code & Network</td>
-                </tr>
-                <tr className="hover:bg-slate-950/40">
-                  <td className="py-3 px-4 font-bold text-white">Secure Data Environment</td>
-                  <td className="py-3 px-4 font-mono text-cyan-400">SDE</td>
-                  <td className="py-3 px-4">NHS England Data Space</td>
-                  <td className="py-3 px-4">Regional health data platforms, standardized national data access agreements.</td>
-                  <td className="py-3 px-4 text-emerald-400 font-semibold">Statutory & Access Tiering</td>
-                </tr>
-                <tr className="hover:bg-slate-950/40">
-                  <td className="py-3 px-4 font-bold text-white">Virtual Data Enclave</td>
-                  <td className="py-3 px-4 font-mono text-purple-400">VDE</td>
-                  <td className="py-3 px-4">Census, Social Sciences, Economics</td>
-                  <td className="py-3 px-4">Remote virtual desktops preventing export of raw census or survey microdata.</td>
-                  <td className="py-3 px-4 text-cyan-400 font-semibold">Virtual Machine Isolation</td>
-                </tr>
-                <tr className="hover:bg-slate-950/40">
-                  <td className="py-3 px-4 font-bold text-white">Data Clean Room</td>
-                  <td className="py-3 px-4 font-mono text-amber-400">DCR</td>
-                  <td className="py-3 px-4">Commercial, Marketing & Health Partnerships</td>
-                  <td className="py-3 px-4">Multi-party computation where parties query combined data without viewing raw rows.</td>
-                  <td className="py-3 px-4 text-purple-400 font-semibold">Cryptographic & Query-Level</td>
-                </tr>
-                <tr className="hover:bg-slate-950/40">
-                  <td className="py-3 px-4 font-bold text-white">Data Safe Haven</td>
-                  <td className="py-3 px-4 font-mono text-sky-400">DSH</td>
-                  <td className="py-3 px-4">NHS Scotland & Regional Trusts</td>
-                  <td className="py-3 px-4">Accredited regional repositories operating under the SHIP governance charter.</td>
-                  <td className="py-3 px-4 text-cyan-400 font-semibold">Five Safes & Institutional</td>
-                </tr>
-                <tr className="hover:bg-slate-950/40">
-                  <td className="py-3 px-4 font-bold text-white">Confidential Computing / TEE</td>
-                  <td className="py-3 px-4 font-mono text-pink-400">TEE</td>
-                  <td className="py-3 px-4">Cloud Infrastructure & Silicon Security</td>
-                  <td className="py-3 px-4">Hardware memory encryption protecting data in use from hypervisors and root admins.</td>
-                  <td className="py-3 px-4 text-amber-400 font-semibold">Silicon CPU Register Encryption</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       )}
