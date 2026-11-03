@@ -4,7 +4,7 @@
 [![Build Status](https://img.shields.io/badge/build-passing-emerald.svg)](https://github.com/iwfarr/seawater-playbook/actions)
 [![GitHub Pages](https://img.shields.io/badge/deploy-GitHub%20Pages-blue.svg)](https://iwfarr.github.io/seawater-playbook/)
 [![License](https://img.shields.io/badge/license-MIT-purple.svg)](LICENSE)
-[![Standards](https://img.shields.io/badge/standards-ISO%2042001%20%7C%20DCB0129%20%7C%20DEA%202017-amber.svg)](#standards--regulatory-frameworks)
+
 
 > **An educational resource based on available literature and resources.**  
 > From this, the playbook for implementing a governance policy engine for data analysis & intelligence platforms is presented, compiling semantic graph ontologies into real-time Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs).
