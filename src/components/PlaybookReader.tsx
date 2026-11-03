@@ -48,10 +48,10 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
     subtitle: 'Machine-Executable Policy Architecture with Semantic Versioning (SemVer 2.4.0): Deployable Policy-as-Code Rather Than a Static Spec',
     content: [
       'Clarification of Intent & Scope:',
-      '• The Seawater Problem Space & Tidal Flow: Clinical and genomic research operates within a dynamic problem space dubbed "Seawater". Analytics workloads (ranging from lightweight exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, governance channels, and population confidentiality and privacy thresholds. The tide flows cyclically across two managed boundaries: Ingress and Egress.',
+      '• The Seawater Problem Space & Tidal Flow: Population data  research operates within a dynamic problem space dubbed "Seawater". Analytics workloads (ranging from lightweight exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, governance channels, and population confidentiality and privacy thresholds. The tide flows cyclically across two managed boundaries: Ingress and Egress.',
       '• Ingress Governance (Access Controls, Safe People & Safe Projects): Inbound flow enforces mandatory access controls, verified institutional identity, researcher accreditation, and Information Governance (IG) training (Safe People), alongside approved NHS REC ethics protocols, research purpose justification, and Section 251 CAG exemptions (Safe Projects). Inbound clinical datasets, multi-omics records, and container workloads are verified at the boundary using W3C SHACL shape validation before admission.',
       '• Egress Governance (Safe Outputs & Disclosure Control): Outbound flow regulates the export of derived analytical findings, statistical summaries, and model parameters. Outputs must satisfy automated Statistical Disclosure Control (SDC) rules, k-anonymity (k >= 10), and sub-millisecond Open Policy Agent (OPA) Rego policy evaluations.',
-      '• Scope: Data Analysis & Intelligence Platforms: This playbook applies across modern data analysis & intelligence platforms such as Trusted Research Environments (TREs) and Secure Data Environments (SDEs), federated clinical analytics hubs, and autonomous AI sandbox enclaves.',
+      '• Scope: Data Analysis & Intelligence Platforms: This playbook applies across modern data analysis & intelligence platforms such as Trusted Research Environments (TREs) and Secure Data Environments (SDEs), federated analytics hubs, and autonomous AI sandbox enclaves.',
       '• International Standards (ISO) & Clinical Safety (DCB): Formally compiles statutory compliance and standards architectures into runtime gates: ISO/IEC 42001:2023 (Artificial Intelligence Management System), ISO/IEC 5259 (Data quality for ML/analytics), ISO/IEC 27001:2022 & ISO 27701:2019 (ISMS/PIMS), ISO 13485 & ISO 14971 (Medical Devices QMS and Risk Management), DCB0129 / DCB0160 (NHS Clinical Risk Management), and UK MDR 2002 / MHRA Software as a Medical Device (SaMD) clearances.',
       '• Dynamic & Deployable Policy Architecture: This playbook is not merely a static technical specification or descriptive checklist for Statistical Disclosure Control (SDC). Rather, it defines an active, version-controlled, and machine-executable governance policy platform.',
       '• Semantic Versioning (SemVer 2.4.0): Every policy ontology, SHACL constraint, and OPA Rego rule is versioned as immutable code releases (e.g. v2.4.0-prod). Changes to legal bases, ethics clearances, or SDC thresholds follow strict GitOps PR review, PySHACL validation, and automated continuous deployment.',
@@ -73,7 +73,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
     subtitle: 'Decoupling immutable statutory governance assertions from transient Kubernetes cluster plumbing',
     content: [
       '• Plain-English Architecture Principle: Systems break when enduring governance laws are conflated with ephemeral infrastructure plumbing.',
-      '• 1. Governance Metadata (The Ontological Law): Enduring, legal, human-negotiated truths about the research project. Examples include: researcher accreditation status, institutional identity, NHS Section 251 exemption certificates, project REC ethics protocol numbers, approved clinical data sensitivity tiers, and retention horizons. This information is authored by governance officers, version-controlled in Git, and formally serialized in RDF/OWL ontologies (tre-core.ttl). It changes only when ethics approvals, laws, or institutional agreements change.',
+      '• 1. Governance Metadata (The Ontological Law): Enduring, legal, human-negotiated truths about the research project. Examples include: researcher accreditation status, institutional identity, NHS Section 251 exemption certificates, project REC ethics protocol numbers, approved population data sensitivity tiers, and retention horizons. This information is authored by governance officers, version-controlled in Git, and formally serialized in RDF/OWL ontologies (tre-core.ttl). It changes only when ethics approvals, laws, or institutional agreements change.',
       '• 2. Ephemeral Runtime State (The Cluster Plumbing): Transient, mechanical facts of the live compute fabric managed by Kubernetes, Calico CNI, and Linux kernels. Examples include: pod IP addresses (10.244.2.14), ephemeral network sockets, container process IDs, CPU/GPU quotas, and transient JWT bearer tokens. This state is spun up, scaled, rescheduled, and recycled continuously.',
       '• 3. The Classic Infrastructure Trap: Traditional IT configurations mistakenly hardcode governance rules directly into cluster network rules or pod name whitelists (e.g. "allow IP 10.244.2.14 to access clinical database X"). When a container crashes, restarts, or migrates to a different worker node, the IP changes, causing immediate outages or leaving behind orphaned, unverified permissions.',
       '• 4. The Seawater Decoupled Solution: Clean separation of concerns. Kubernetes Admission Webhooks intercept pod launch requests and extract only the researcher and project claims. The Open Policy Agent (OPA) evaluates these claims against the versioned, compiled governance graph. If the governance metadata says Dr. Smith has active IG training and Project 102 has approved Tier 2 ethics, admission is granted, completely agnostic of which server, container ID, or IP the orchestrator assigns.'
@@ -212,7 +212,7 @@ def test_noncompliant_session_rejected():
     title: 'Public Transparency: Automated FOI Governance Charters',
     subtitle: 'Synthesizing machine-readable Turtle ontologies into human-readable trust documentation',
     content: [
-      '• Bridging Engineers, Trust Boards, and the Public: A major challenge in clinical research governance is communicating technical code rules to Caldicott Guardians, NHS Trust Boards, ethics committees, and patient participants.',
+      '• Bridging Engineers, Trust Boards, and the Public: A major challenge in population data research governance is communicating technical code rules to Caldicott Guardians, NHS Trust Boards, ethics committees, and patient participants.',
       '• Automated Markdown Synthesizer (`compiler/generate_docs.py`): Traverses the RDF graphs and SHACL shape definitions to produce an up-to-date, transparent `GOVERNANCE_CHARTER.md`.',
       '• Freedom of Information (FOI) Readiness: When external audits or FOI queries arrive, the generated charter provides an exact, cryptographic summary of all active data safeguards, data tiering criteria, and disclosure thresholds.'
     ],
@@ -574,7 +574,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                     <span>The Seawater Problem Space &amp; Tidal Flow Model</span>
                   </h3>
                   <p>
-                    <strong>Project Seawater</strong> models healthcare analytics and clinical research through a structured tidal navigation framework. Modern data platforms do not operate in a static vacuum: analytical workloads (from exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, clinical governance channels, and patient confidentiality thresholds.
+                    <strong>Project Seawater</strong> models population analytics and research through a structured tidal navigation framework. Modern data platforms do not operate in a static vacuum: analytical workloads (from exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, information governance channels, and personal privacy and confidentiality thresholds.
                   </p>
                   <p>
                     Governance operates across two coordinated directional flows:
@@ -598,7 +598,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                     </div>
                   </div>
                   <p>
-                    This architecture governs modern <strong>data analysis &amp; intelligence platforms</strong>, mathematically executing the Five Safes, ISO/IEC 42001:2023 (AIMS), ISO 27001/27701, ISO/IEC 5259 data quality, DCB0129 / DCB0160 clinical safety, and UK MDR 2002 SaMD regulations.
+                    This architecture governs modern <strong>data analysis &amp; intelligence platforms</strong>, algorithmically administering the Five Safes, ISO/IEC 42001:2023 (AIMS), ISO 27001/27701, ISO/IEC 5259 data quality, DCB0129 / DCB0160 clinical safety, and UK MDR 2002 SaMD regulations.
                   </p>
                 </div>
 
@@ -714,7 +714,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                       <span>Clinical Safety Officers (CSO) &amp; AI Governance Leads</span>
                     </span>
                     <p className="text-slate-400 leading-normal">
-                      Review <strong>Section 3.2</strong> (AI Workload Bounds &amp; ISO 42001 AIMS), <strong>Section 4.1</strong> (DCB0129 Hazard Log rules), and <strong>Section 4.2</strong> (UK MDR 2002 SaMD airlock clearance) for integrating clinical risk management with algorithmic model training and egress.
+                      Review <strong>Section 3.2</strong> (AI Workload Bounds &amp; ISO 42001 AIMS), <strong>Section 4.1</strong> (DCB0129 Hazard Log rules), and <strong>Section 4.2</strong> (UK MDR 2002 SaMD airlock clearance) for integrating information risk management with algorithmic model training and egress.
                     </p>
                   </div>
                 </div>
