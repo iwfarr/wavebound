@@ -202,7 +202,7 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     title: 'The SAIL Databank Safeguards & Output Review Policy',
     organization: 'SAIL Databank (Swansea University Medical School)',
     category: 'Statistical Disclosure Control (SDC) & Airlocks',
-    url: 'https://saildatabank.com/researchers/safeguards/',
+    url: 'https://saildatabank.com/wp-content/uploads/2022/08/SAIL-POL-024-Output-Review-Policy-v1.2-3.pdf',
     shortDesc: 'The formal output checking policy enforced by the SAIL Databank, pioneering quantitative thresholds (k >= 10, dominance <= 80%).',
     playbookRelevance: 'The exact source cited in Section 2 and Section 3 of the playbook for the quantitative thresholds encoded in `ontology/sdc_rules.ttl`.',
     tags: ['SAIL Databank', 'Output Review', 'k >= 10', 'Dominance Rule']
@@ -335,6 +335,28 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     shortDesc: 'Curriculum exploring differential privacy, model inversion attacks, membership inference, and clinical data governance in AI.',
     playbookRelevance: 'Informs output airlock checks for trained machine learning models leaving the TRE safe output boundary.',
     tags: ['AI Privacy', 'Differential Privacy', 'Membership Inference', 'Datacise']
+  },
+  {
+    id: 'res-stanford-agentic-ai-framework',
+    title: 'Stanford UIT Agentic AI Security Framework',
+    organization: 'Stanford University Information Technology (UIT)',
+    category: 'AI Governance, Alignment & MCP Security',
+    url: 'https://uit.stanford.edu/security/agenticai/security-framework',
+    shortDesc: 'Institutional cybersecurity framework for autonomous and agentic AI systems, mandating revocable machine workload identities, blast radius containment, least-privilege tool execution, and clear human accountability.',
+    playbookRelevance: 'Authoritative resolution to the Safe Person dilemma: AI cannot hold legal personhood or statutory researcher accreditation under DEA 2017. AI operates strictly under short-lived, automated-revocable workload identities sponsored by an accredited human researcher.',
+    citation: 'Stanford University IT. Agentic AI Security Framework. Stanford: Stanford UIT Information Security Office; 2024.',
+    tags: ['Stanford UIT', 'Agentic AI', 'Revocable Identity', 'Security Framework', 'AI Governance']
+  },
+  {
+    id: 'res-stanford-agentic-ai-risk-classifications',
+    title: 'Stanford UIT Agentic AI Risk Classifications (Sections 8702 & 8938)',
+    organization: 'Stanford University Information Technology (UIT)',
+    category: 'AI Governance, Alignment & MCP Security',
+    url: 'https://uit.stanford.edu/security/agenticai/riskclassifications',
+    shortDesc: 'Four-tier classification matrix (Low, Moderate, High, Very High) evaluating autonomous agent autonomy, target data classification, blast radius, and potential harm.',
+    playbookRelevance: 'Sections 8702 & 8938 mandate that High and Very High risk agents processing sensitive health or population data require mandatory human-in-the-loop approvals, no direct write access to systems of record, and cryptographic auditability.',
+    citation: 'Stanford University IT. Agentic AI Risk Classifications. Stanford: Stanford UIT Information Security Office; 2024.',
+    tags: ['Stanford UIT', 'Risk Classification', 'Section 8702', 'Section 8938', 'High-Risk AI']
   },
   {
     id: 'res-ibm-ai-alignment',

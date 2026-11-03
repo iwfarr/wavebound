@@ -27,22 +27,11 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     term: 'Trusted Research Environment',
     acronym: 'TRE / SDE',
     category: 'Governance & Frameworks',
-    shortDefinition: 'A secure cloud computing enclave within data analysis & intelligence platforms enabling authorized researchers to analyze sensitive patient data without raw data leaving the environment.',
+    shortDefinition: 'A secure computing environment enabling authorized researchers to analyze sensitive population data without raw data leaving the protected environment.',
     fullDefinition: 'A Trusted Research Environment (TRE), designated alongside Secure Data Environments (SDE) as modern data analysis & intelligence platforms across the NHS and UK health data space, provides remote virtual access to health and administrative microdata under strict, auditable governance controls. Rather than sending data out to researchers, the platform brings researchers and their approved code into a locked digital facility adhering to the Five Safes framework and statutory accreditation standards.',
     playbookContext: 'The core operational subject of this playbook, which specifies a graph-based policy-as-code automation platform for managing data analysis & intelligence platforms such as TREs and SDEs.',
     playbookSection: 'Section 1. Project Overview & Objectives',
-    relatedTerms: ['data-analysis-intelligence-platform', 'five-safes', 'satre', 'pac', 'safe-setting']
-  },
-  {
-    id: 'data-analysis-intelligence-platform',
-    term: 'Data Analysis & Intelligence Platform',
-    acronym: 'TRE / SDE / DAIP',
-    category: 'Governance & Frameworks',
-    shortDefinition: 'Modern analytics, AI, and intelligence platforms (including TREs and SDEs) that bring algorithms to partitioned data rather than distributing sensitive microdata.',
-    fullDefinition: 'Modern data analysis & intelligence platforms such as Trusted Research Environments (TREs) and Secure Data Environments (SDEs) combine high-performance computing (CPUs/GPUs), ontological knowledge graphs, and rigorous perimeter security. These platforms host sensitive multi-modal patient datasets (EHR, genomics, imaging, registries) and enforce zero-trust data access, cryptographic auditability, and automated disclosure control across exploratory and AI workloads.',
-    playbookContext: 'The overarching architectural class defining the scope of Project Seawater: transforming traditional manual governance into continuous, microsecond-latency policy-as-code validation.',
-    playbookSection: 'Section 1. Project Overview & Objectives',
-    relatedTerms: ['tre', 'five-safes', 'seawater-problem-space', 'satre']
+    relatedTerms: ['five-safes', 'satre', 'pac', 'safe-setting']
   },
   {
     id: 'five-safes',
@@ -716,7 +705,7 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'Clinical and genomic research takes place within an active, continuous data problem space dubbed "Seawater". Analytics workloads (ranging from exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, clinical governance channels, and patient confidentiality thresholds. The tide flows cyclically across two managed boundaries: Ingress and Egress. Ingress enforces gateway access controls, researcher accreditation, institutional identity verification, and Information Governance training (Safe People), alongside approved REC ethics protocols and Section 251 CAG exemptions (Safe Projects). Inbound clinical datasets, multi-omics records, and container workloads are verified at the boundary using W3C SHACL shape validation before admission. Egress regulates the export of derived analytical findings, statistical summaries, and model parameters, requiring automated Statistical Disclosure Control (SDC) checks, k-anonymity (k >= 10), and sub-millisecond Open Policy Agent (OPA) Rego policy evaluations to prevent patient re-identification.',
     playbookContext: 'The overarching architectural concept of Project Seawater: transforming traditional manual governance into continuous, microsecond-latency policy-as-code navigation.',
     playbookSection: 'Section 0. Executive Summary & Problem Space',
-    relatedTerms: ['data-analysis-intelligence-platform', 'tre', 'five-safes', 'pac', 'shacl', 'opa']
+    relatedTerms: ['tre', 'five-safes', 'pac', 'shacl', 'opa']
   },
   // --- International Standards (ISO) & Clinical Safety (DCB) ---
   {
@@ -869,13 +858,74 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     playbookContext: 'Reflected in the Seawater architectural ingress tier to ensure independent, cryptographically audited data ingestion into secure enclaves.',
     playbookSection: 'Section 2. Architecture: The Policy-as-Code Pipeline',
     relatedTerms: ['data-stewardship', 'longitudinal-cohort-linkage', 'dea-2017', 'tre']
+  },
+  {
+    id: 'data-access-committee',
+    term: 'Data Access Committee & IG Review Panel',
+    acronym: 'DAC / IGRP',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'An independent multidisciplinary body evaluating population health data access requests against statutory, ethical, and scientific criteria.',
+    fullDefinition: 'A Data Access Committee (DAC), often functioning alongside an Information Governance Review Panel (IGRP), serves as the institutional gatekeeper for population health cohorts and linked epidemiological registries. Comprising data stewards, Caldicott guardians, methodologists, public representatives, and legal advisers, the DAC evaluates: (1) whether the research question delivers tangible public health benefit; (2) whether the data requested is strictly minimized; (3) whether the analytical team holds requisite accreditations; and (4) whether the risk of deductive re-identification has been controlled. In a mature organization, DAC approvals produce cryptographically signed assertions that activate Policy Enforcement Points (PEPs) automatically.',
+    playbookContext: 'Modeled in tre-core.ttl as tre:DataAccessCommittee, emitting decision assertions that unlock enclave workspace provisioning.',
+    playbookSection: 'Section 1.1 & Section 1.2',
+    relatedTerms: ['data-stewardship', 'dsa', 'dpia', 'caldicott']
+  },
+  {
+    id: 'caldicott-guardian-role',
+    term: 'Caldicott Guardian & SIRO Oversight',
+    acronym: 'CG / SIRO',
+    category: 'Governance Maturity Model',
+    shortDefinition: 'Senior organizational leaders appointed to champion confidentiality, oversee clinical information risk, and validate proportionate data sharing.',
+    fullDefinition: 'Mandated across public health, social care, and population research organizations in the UK, the Caldicott Guardian acts as the conscience of the organization regarding the handling of confidential patient and population information. Working in partnership with the Senior Information Risk Owner (SIRO) and Data Protection Officer (DPO), the Caldicott Guardian arbitrates complex data-sharing decisions, tests proposed secondary uses against the 8 Caldicott Principles, and ensures that citizen confidentiality is never compromised for administrative expediency.',
+    playbookContext: 'Represented as an authoritative approval gate (D-001 through D-009) in the implementation transition track.',
+    playbookSection: 'Section 1.2 & Section 3.1',
+    relatedTerms: ['caldicott', 'data-stewardship', 'dpia', 'dsa']
+  },
+  {
+    id: 'ai-non-personhood',
+    term: 'AI Non-Personhood & Delegated Sponsorship',
+    category: 'AI & Autonomous Agents',
+    shortDefinition: 'The legal and architectural doctrine establishing that AI models cannot be "Safe People" and must operate under delegated human sponsorship.',
+    fullDefinition: 'Under statutory research frameworks (UK Digital Economy Act 2017, ONS SRS, and Caldicott Principles), a "Safe Person" must be an accredited natural person bearing direct legal and criminal liability. An AI model, agent, or LLM possesses no legal personhood, cannot sign statutory undertakings, and cannot be prosecuted. Architecturally, AI operates strictly as a delegated machine workload under the custody of an Accredited Human Researcher (Human Sponsor) who retains 100% legal and ethical accountability.',
+    playbookContext: 'Enforced via SHACL shapes rejecting tre:SafePerson status for AI workloads and requiring tre:sponsoredByHumanResearcher with an active accreditation URI.',
+    playbookSection: 'Section 2 & Section 3 (Phase 3 & Phase 4)',
+    relatedTerms: ['safe-person', 'mcp', 'stanford-agentic-framework', 'five-safes']
+  },
+  {
+    id: 'model-weights-data-asset',
+    term: 'Model Weights & Checkpoints as Data Assets',
+    category: 'AI & Autonomous Agents',
+    shortDefinition: 'Classifying neural network weights, embeddings, and vector stores as Data Assets subject to disclosure control due to training data memorization.',
+    fullDefinition: 'Pre-trained foundation models imported into a TRE, fine-tuned weights, embeddings, and vector databases are formally categorized as "Data Assets" within the Safe Data pillar. Because deep learning models can memorize private training records (vulnerable to membership inference and model inversion attacks), exporting model weights across the airlock requires statistical disclosure control, differential privacy verification (epsilon <= 1.0), and DCB0129 clinical hazard log sign-off.',
+    playbookContext: 'Catalogued under dcat:Dataset / tre:DataAsset and evaluated at the airlock via sdc_shapes.ttl before egress authorization.',
+    playbookSection: 'Section 2 & Section 3 (Phase 1 & Phase 4)',
+    relatedTerms: ['safe-data', 'safe-output', 'sdc', 'differential-privacy']
+  },
+  {
+    id: 'stanford-agentic-framework',
+    term: 'Stanford UIT Agentic AI Security Framework',
+    category: 'AI & Autonomous Agents',
+    shortDefinition: 'Cybersecurity framework requiring automated near-instantaneous token revocation, blast radius containment, and human sponsor accountability.',
+    fullDefinition: 'Published by Stanford University IT Information Security Office, this framework establishes essential guardrails for autonomous agents: (1) machine identities must be revocable near-instantaneously in an automated manner without long-lived credentials, (2) agents must operate within a bounded blast radius without direct write access to systems of record, and (3) all agents must have an identified human sponsor (Principal) who is accountable for actions taken by the workload.',
+    playbookContext: 'Directly compiled into Seawater OPA admission controllers (authz.rego) and SHACL agent boundaries (agent-sponsor-shapes.ttl).',
+    playbookSection: 'Section 3 (Phase 3 & Phase 4)',
+    relatedTerms: ['ai-non-personhood', 'stanford-risk-tiers', 'mcp', 'pep']
+  },
+  {
+    id: 'stanford-risk-tiers',
+    term: 'Stanford UIT Agentic AI Risk Classifications',
+    category: 'AI & Autonomous Agents',
+    shortDefinition: 'Four-tier risk evaluation (Low, Moderate, High #8702, Very High #8938) governing autonomous agent access to sensitive population data.',
+    fullDefinition: 'Categorizes agentic AI workloads into four risk levels based on autonomy, target data classification, and potential harm. Section 8702 specifies that High Risk agents operating on pseudonymised microdata require human-in-the-loop approvals, short-lived tokens (<= 2 hours), and read-only tools. Section 8938 mandates that Very High Risk operations (e.g., cross-registry linkage, raw re-identifiable demographic queries) are strictly prohibited from autonomous execution.',
+    playbookContext: 'Governs the admission control rules enforced by OPA PDPs when agents attempt tool execution in the research enclave.',
+    playbookSection: 'Section 3 (Phase 3 & Phase 4)',
+    relatedTerms: ['stanford-agentic-framework', 'ai-non-personhood', 'eu-ai-act', 'mcp-sql']
   }
 ];
 
 export const GLOSSARY_SECTION_MAP: Record<string, string> = {
   // Foundations & Statutory Frameworks -> Phase 1 Baseline Ontologies & SATRE
   'tre': 'sec-phase-1-2',
-  'data-analysis-intelligence-platform': 'sec-phase-1-2',
   'seawater-problem-space': 'sec-front-matter',
   'iso-42001': 'sec-phase-3-2',
   'iso-13485': 'sec-phase-4-1',
@@ -909,6 +959,8 @@ export const GLOSSARY_SECTION_MAP: Record<string, string> = {
   'longitudinal-cohort-linkage': 'sec-phase-2-1',
   'purpose-limitation': 'sec-phase-4-1',
   'trusted-data-intermediary': 'sec-phase-1-2',
+  'data-access-committee': 'sec-phase-1-2',
+  'caldicott-guardian-role': 'sec-phase-1-2',
 
   // Semantic Graph Primitives -> Phase 1 Knowledge Modeling & Phase 2 SHACL
   'pac': 'sec-front-matter',
@@ -951,6 +1003,10 @@ export const GLOSSARY_SECTION_MAP: Record<string, string> = {
   'copilot-ignore': 'sec-phase-3-2',
   'ast-scrubbing': 'sec-phase-3-2',
   'zdr-baa': 'sec-phase-3-2',
+  'ai-non-personhood': 'sec-phase-3-2',
+  'model-weights-data-asset': 'sec-phase-3-2',
+  'stanford-agentic-framework': 'sec-phase-3-2',
+  'stanford-risk-tiers': 'sec-phase-3-2',
 
   // Operations, Provenance & Infrastructure
   'provo': 'sec-phase-4-3',

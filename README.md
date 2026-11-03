@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/license-MIT-purple.svg)](LICENSE)
 [![Standards](https://img.shields.io/badge/standards-ISO%2042001%20%7C%20DCB0129%20%7C%20DEA%202017-amber.svg)](#standards--regulatory-frameworks)
 
-> **This playbook provides a Policy as Code (PaC) framework, bridging regulatory compliance documentation and real-time execution by compiling human- and machine-readable semantic graph ontologies into Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) across data intelligence platforms.**
+> **This playbook provides a Policy as Code (PaC) framework, bridging regulatory compliance documentation and real-time execution by compiling human- and machine-readable semantic graph ontologies into Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) across data intelligence platforms. Please note that this project is a work in progress.**
 
 ---
 
@@ -22,7 +22,7 @@
 
 ## 🧭 Executive Overview
 
-This playbook provides a Policy as Code (PaC) framework, bridging regulatory compliance documentation and real-time execution by compiling human- and machine-readable semantic graph ontologies into Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) across data intelligence platforms.
+This playbook provides a Policy as Code (PaC) framework, bridging regulatory compliance documentation and real-time execution by compiling human- and machine-readable semantic graph ontologies into Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) across data intelligence platforms. Please note that this project is a work in progress.
 
 Information Governance (IG) can often be a confusing, complex, and burdensome, resource-intensive legal necessity. For population data research organizations, epidemiologists, public institutions, and commercial partners, navigating statutory mandates (including UK GDPR, Data Protection Act 2018, Digital Economy Act 2017, and Section 251) across heterogeneous cohorts frequently creates operational friction, administrative paralysis, and high regulatory overhead.
 

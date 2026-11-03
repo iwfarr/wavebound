@@ -1,109 +1,139 @@
-# Implementation Plan: Seawater Architecture & Visual Polish
+# Implementation Plan: Curated Multi-Lens Cytoscape Knowledge Graph (Option A)
 
-Establish authoritative architectural references, fix resource links and UI rendering bugs, implement the horizontal interlinked wave logo, and deliver an in-depth reference guide contrasting NHS VPN security risks with air-gapped TRE enclaves for AI coding assistants.
+Expand the Cytoscape knowledge graph from a single Five Safes policy compiler into a **user-friendly, educational multi-lens explorer** of the Trusted Research Environment (TRE) ecosystem. Rather than overwhelming learners with an exhaustive 50-node network, this plan curates **5 focused lenses with 5–8 high-impact nodes each**, prioritizing visual clarity, intuitive comprehension, and zero clutter.
+
+---
 
 ## User Review & Critical Decisions
 
 > [!IMPORTANT]
-> The following decisions were confirmed with the user during Phase 1:
-> - **Confirmed Decision 1 (NHS VPN Scope)**: Include a dedicated reference section in the LLM Security Enclave contrasting the real-world risks of developer LLM usage on NHS VPN connections (which often permit external internet access) versus air-gapped TRE enclaves.
-> - **Confirmed Decision 2 (Logo Presentation)**: The interlinked yin-yang wave logo will feature horizontal opposing wave crests meeting and hooking in the center along a horizontal axis (evoking interlinked index fingers).
+> - **Confirmed Approach (Option A - Multi-Faceted Subsystem Switcher)**: Users navigate between distinct, curated perspectives using a clean top-bar lens switcher.
+> - **Educational Focus (Not Exhaustive)**: To prevent visual clutter and cognitive fatigue, each lens is deliberately curated to **5–8 essential nodes** with clear plain-English definitions and intuitive relationship labels.
+> - **Curated Subsystem Lenses**:
+>   1. **Policy-as-Code Pipeline** *(The existing 4-tier flow: Policy → SHACL → OPA → PROV-O)*
+>   2. **Cloud & Computing Fabric** *(VDI Bastion, Zero-Egress VPC, Ephemeral Storage, In-Enclave AI Cluster)*
+>   3. **Data Lifecycle & Linkage** *(Secure Ingest, De-ID Engine, Data Catalogue, Honest Broker, Airlock Egress)*
+>   4. **Human Roles, Decision Gates & PPIE** *(Data Access Committee, Caldicott Guardian, Patient/Public Panel, 2-Person Airlock Panel)*
+>   5. **Unified TRE Overview** *(An interconnected macro-view linking all 4 domains)*
+> - **Zero Code Modification in this Turn**: Following planning mode guidelines for `Plan action: revise`, source code is untouched pending plan confirmation.
 
 ---
 
 ## 1. Overview & Core Concept
 
-This milestone addresses five interrelated user requirements across functional clarity, visual identity, and security architecture:
-1. **Broken Resource Links Repair**: Audit and restore external URLs in `src/data/resourcesData.ts` (SATRE, ONS, SAIL Databank, NHS Caldicott, ICO codes).
-2. **Conceptual Explanatory Reference**: Add a visual explanation of *"Formal definitions of research governance metadata versus ephemeral Kubernetes runtime state"* to the Playbook and Implementation Track.
-3. **Checkbox Entity Rendering Fix**: Eliminate raw `&check;` and `&bull;` entity strings in `ImplementationTrack.tsx` by replacing them with clean Unicode glyphs (`✓`, `•`) and Lucide icon components.
-4. **Horizontal Interlinked Yin-Yang Wave Logo**: Redesign `SeawaterLogo.tsx` with dual wave crests flowing toward each other horizontally and interlocking in the center (left wave: inward security/ingress; right wave: outward transparency/egress).
-5. **NHS VPN vs. TRE Enclave Reference Standard**: Create an architectural guide in `LLMSecurityEnclave.tsx` analyzing the "NHS VPN Split-Tunneling Illusion" where developers assume VPN connectivity protects against cloud LLM prompt leaks.
+### What It Does
+Transforms the Cytoscape canvas from a static, compiler-skewed view into an interactive **TRE Systems & Governance Explorer**. A prominent lens toolbar allows students, researchers, policy makers, and auditors to view the exact facet of the TRE they care about without visual tangle.
+
+### Target Personas
+* **Epidemiologists & Population Researchers**: Understand how their code runs inside isolated VPCs and how outputs pass disclosure control.
+* **Information Governance & Caldicott Guardians**: Inspect decision gates (DAC, Caldicott, PPIE, Airlock).
+* **Data Engineers & Platform Architects**: Trace data flows from quarantined ingest through de-identification, linkage, and workspace provisioning.
+* **Citizens & Patient Advocates**: View how patient safeguards and National Data Opt-Outs are preserved.
 
 ---
 
 ## 2. User Experience & Visual Design
 
-### A. Horizontal Interlinked Wave Logo
-- **Geometry**: Two opposing ocean waves along a horizontal axis. The left wave (glowing cyan `#22d3ee` to `#06b6d4`) flows inward from the left; the right wave (deep azure `#2563eb` to `#3b82f6`) flows inward from the right. The two crests interlock in the center like hooked index fingers, symbolizing the harmony between inward clinical data protection and outward research transparency.
-- **Precision SVG Implementation**: Created in `SeawaterLogo.tsx` with clean cubic Bezier curves, crisp gradient fills, and responsive scaling across `icon`, `badge`, `horizontal`, and `hero` modes.
+### Key User Flows
+1. **Lens Selection**: User clicks one of 5 perspective tabs at the top of the Cytoscape component:
+   * 🛡️ `Policy Compilation Pipeline`
+   * ☁️ `Cloud & Infrastructure Fabric`
+   * 🔄 `Data Lifecycle & Linkage`
+   * 👥 `Human Roles & Patient Panels (PPIE)`
+   * 🌐 `Full TRE Ecosystem Overview`
+2. **Instant Focused Transition**: Cytoscape smoothly animates nodes and edges into a curated, non-overlapping preset layout tailored for that lens.
+3. **Node Inspection**: Clicking any node opens the side inspector panel displaying:
+   * Plain-English title and summary
+   * Role in the TRE ecosystem
+   * Technical / Governance details
+   * Executable code snippet or policy rule
+   * Direct deep links to Glossary terms and Playbook sections
+4. **Layout Freedom**: Learners can toggle between **Curated Flow (Preset DAG)**, **Hierarchical Tree**, **Orbital Rings (Concentric)**, or **Physics Force (COSE)** for any active lens.
 
-### B. "Metadata vs. Runtime State" Visual Explainer
-- **Location**: Embedded in `TechnicalConcepts.tsx` (under GitOps & Architecture) and `PlaybookReader.tsx` (Phase 1.1).
-- **Format**: An interactive comparative panel contrasting:
-  - **Governance Metadata (The Ontological Law)**: Who is accredited, what ethics approvals exist, approved data sensitivity tiers, retention horizons. Immutable, version-controlled in Git, machine-readable in RDF/OWL.
-  - **Cluster Runtime State (The Infrastructure Telemetry)**: Pod IP addresses, node CPU/GPU quotas, ephemeral egress sockets, container IDs. Dynamic, managed by Kubernetes and Calico CNI, disposable.
-  - **The "Why"**: Explaining why coupling policy directly to cluster state causes brittle configurations, false lockouts, and compliance blind spots.
-
-### C. NHS VPN vs. Air-Gapped TRE Enclave Reference
-- **Location**: Added as a primary tab/section in `LLMSecurityEnclave.tsx`: *"Architectural Analysis: The NHS VPN Illusion vs. True TRE Enclave Isolation"*.
-- **Visuals**: A structured comparison matrix and network flow diagram highlighting:
-  - Why standard Trust VPNs do not stop Copilot/Cursor/Cline from streaming code to external endpoints.
-  - How split tunneling and default outbound routing allow data exfiltration while appearing "on-network".
-  - Defense-in-depth mitigations: in-enclave inference, zero-WAN CNI policies, and local proxy sanitizers.
-
----
-
-## 3. Key Product Decisions & Trade-Offs
-
-### Decision 1: Dedicated NHS VPN Reference vs. Pure Enclave Focus
-- **Chosen Approach**: Add a dedicated reference subsection with a clear architectural diagram and risk matrix.
-- **Why**: Many NHS and university developers mistakenly believe being connected to an NHS Trust VPN protects patient data when using cloud LLM plugins. Demystifying this prevents critical compliance breaches.
-- **Alternative Considered**: Merely adding a 1-sentence warning bullet (rejected as insufficient to explain the network routing reality).
-
-### Decision 2: SVG Vector Geometry for Interlinked Wave
-- **Chosen Approach**: Author a bespoke, mathematically precise SVG component for the interlinked horizontal waves in `SeawaterLogo.tsx`, paired with an updated generated asset.
-- **Why**: SVG guarantees pixel-perfect vector rendering at 16px, 24px, 48px, and 128px without compression artifacts, fuzziness, or loading latency.
+### Color-Coded Domain Tokens (High Contrast & Theme Compatible)
+* **Cyan (`#06b6d4`)**: Statutory Policies & Governance Standards
+* **Purple (`#8b5cf6`)**: SHACL Constraint Shapes & Closed-World Validation
+* **Indigo (`#6366f1`)**: Cloud Infrastructure & VDI Workspace Fabrics
+* **Emerald (`#10b981`)**: Data Lifecycle, De-ID & Honest Broker Linkage
+* **Amber (`#f59e0b`)**: Human Decision Gates, Caldicott Guardians & SIRO
+* **Rose (`#f43f5e`)**: Public & Patient Involvement (PPIE) & Citizen Safeguards
+* **Sky (`#0ea5e9`)**: Autonomous AI Workloads & MCP Boundaries
 
 ---
 
-## 4. Technical Architecture & Component Structure
+## 3. Curated Node Topology per Lens (5–8 Nodes Each)
 
 ```
-┌────────────────────────────────────────────────────────────────────────┐
-│                        PROJECT SEAWATER PLATFORM                       │
-└───────────────────────────────────┬────────────────────────────────────┘
-                                    │
-       ┌────────────────────────────┼────────────────────────────┐
-       ▼                            ▼                            ▼
-┌───────────────────┐    ┌─────────────────────┐    ┌─────────────────────┐
-│   Header & Logo   │    │  Implementation &   │    │ LLM Security Enclave│
-│ (SeawaterLogo.tsx)│    │   Rollout Track     │    │(LLMSecurityEnclave) │
-├───────────────────┤    ├─────────────────────┤    ├─────────────────────┤
-│ • Horizontal      │    │ • Fix &check; bug   │    │ • NHS VPN vs TRE    │
-│   interlocking    │    │ • Sprint schedule   │    │   enclave analysis  │
-│   wave crests     │    │ • Decision register │    │ • Split-tunnel risk │
-│ • Dual-color      │    │ • Metadata vs State │    │ • Zero-WAN CNI rules│
-│   cyan/azure flow │    │   architecture card │    │ • Prompt sanitizers │
-└───────────────────┘    └─────────────────────┘    └─────────────────────┘
-                                    │
-                         ┌──────────┴──────────┐
-                         ▼                     ▼
-              ┌─────────────────────┐ ┌─────────────────────┐
-              │ Resources Compendium│ │   Playbook Reader   │
-              │ (resourcesData.ts)  │ │ (PlaybookReader.tsx)│
-              ├─────────────────────┤ ├─────────────────────┤
-              │ • Validated URLs    │ │ • Section 1.1 note  │
-              │ • Active SATRE/ONS  │ │ • Non-breaking track│
-              │ • Fallback archives │ │ • Term deep links   │
-              └─────────────────────┘ └─────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                              5 CURATED EDUCATIONAL LENSES                              │
+├────────────────────────────────┬───────────────────────────────────────────────────────┤
+│ Lens 1: Policy Pipeline        │ Policy Core → SHACL Shape → OPA Rule → PROV-O Audit   │
+│ Lens 2: Cloud Infrastructure   │ VDI Bastion → Zero-Egress VPC → Scratch Disk → AI GPU  │
+│ Lens 3: Data Lifecycle        │ Secure Ingest → Salted De-ID → Catalogue → Egress Gate│
+│ Lens 4: Human Roles & PPIE     │ DAC Gate → Caldicott Guardian → PPIE Panel → Airlock  │
+│ Lens 5: Unified Macro-Overview │ The 4 Hubs Interconnected at Major Transition Points  │
+└────────────────────────────────┴───────────────────────────────────────────────────────┘
 ```
 
-### Planned File Changes
-1. `src/components/SeawaterLogo.tsx`: Implement the horizontal interlocking dual-wave SVG and branding layout.
-2. `src/components/ImplementationTrack.tsx`: Replace raw `&check;` and `&bull;` HTML entities with Unicode `✓` / `•` and icon components.
-3. `src/data/resourcesData.ts`: Audit and update all resource URLs to active, verified endpoints.
-4. `src/data/playbookContent.ts`: Add explicit explanations of Governance Metadata vs. Runtime State.
-5. `src/components/LLMSecurityEnclave.tsx`: Add the dedicated architectural reference section on NHS VPN vs. TRE Enclave risks for LLM assistants.
+### Lens 1: Policy-as-Code Compilation (Existing Refined)
+* `pol_FiveSafes`: Root statutory governance framework.
+* `pol_SafePerson` / `pol_SafeSetting` / `pol_SafeData` / `pol_SafeOutput`: 4 policy dimensions.
+* `shacl_WorkspaceAdmission` / `shacl_SDCOutput`: Closed-world validation shapes.
+* `opa_AdmissionRule` / `opa_AirlockRule`: Sub-millisecond runtime PDP evaluators.
+* `provo_AuditTriple`: Append-only audit trail.
+
+### Lens 2: Cloud & Computing Infrastructure Fabric (New)
+* `infra_VDI`: Virtual Desktop (Guacamole) streaming pixels only with copy-paste blocked.
+* `infra_ZeroEgressVPC`: Hardened private cloud subnet with external internet routes severed.
+* `infra_CalicoPEP`: eBPF/Calico network policy blocking all outbound WAN traffic.
+* `infra_WorkspacePod`: Ephemeral Jupyter/RStudio container runtime.
+* `infra_EncryptedStorage`: Project-scoped encrypted storage with ephemeral scratch wipe.
+* `infra_GPUCluster`: Air-gapped accelerator fabric hosting in-enclave LLMs.
+
+### Lens 3: End-to-End Data Lifecycle (New)
+* `data_SecureLandzone`: Quarantine zone for incoming SFTP transfers with virus/checksum scanning.
+* `data_DeIDEngine`: Cryptographic pseudonymisation pipeline replacing NHS numbers with salted IDs.
+* `data_HonestBroker`: Independent linkage agent joining disparate datasets (e.g., GP records + Census).
+* `data_Catalogue`: DCAT-AP metadata catalogue indexing data dictionaries and sensitivity tiers.
+* `data_ResearchEnclave`: Active research workspace containing approved analytical cohort partitions.
+* `data_AirlockEgress`: Secure export gateway verifying statistical disclosure control ($k \ge 10$).
+
+### Lens 4: Human Roles, Decision Gates & PPIE (New)
+* `role_DAC`: Data Access Committee approving research ethics and demonstrative public benefit.
+* `role_PPIEPanel`: Lay citizen and patient advisory group testing public value.
+* `role_OptOutRegistry`: National Data Opt-Out service verifying patient research choices.
+* `role_CaldicottGuardian`: Senior conscience overseeing confidentiality and proportionate sharing.
+* `role_HumanSponsor`: Accredited researcher legally accountable for AI agent workloads.
+* `role_AirlockPanel`: Independent 2-person review team inspecting statistical output tables.
+
+### Lens 5: Unified TRE Ecosystem Overview
+* Connects the 4 primary hubs with cross-cutting bridges:
+  * `Human Approval (DAC)` $\rightarrow$ unlocks $\rightarrow$ `Policy Rules (SHACL/OPA)`
+  * `Policy Rules` $\rightarrow$ configures $\rightarrow$ `VPC Infrastructure`
+  * `Data Pipeline` $\rightarrow$ loads cohort into $\rightarrow$ `Workspace Pod`
+  * `Airlock Panel` $\rightarrow$ verifies output with $\rightarrow$ `OPA Egress Rule`
 
 ---
 
-## 5. Verification Plan
+## 4. Technical Implementation Steps
 
-- Run `npm run lint` (`lint_applet`) to verify zero TypeScript errors.
-- Run `npm run build` (`compile_applet`) to confirm clean bundle generation.
-- Verify in browser preview:
-  - Checkbox icons render cleanly without raw `&check;` text.
-  - Resource links open verified destinations with `rel="noopener noreferrer"`.
-  - The horizontal interlocking wave logo renders crisply across navbar, badges, and hero.
-  - The NHS VPN reference section displays clear network diagrams and actionable mitigations.
+1. **`src/data/graphData.ts`**:
+   * Add a `subsystem` attribute to `GraphNodeData`: `'policy' | 'infrastructure' | 'data-lifecycle' | 'governance' | 'unified'`.
+   * Add curated nodes and edges for Infrastructure, Data Lifecycle, and Human Roles/PPIE.
+   * Provide pre-calculated `preset` coordinates for each lens to guarantee zero overlap.
+2. **`src/components/CytoscapeGraph.tsx`**:
+   * Add a responsive lens selection toolbar at the top:
+     * `Policy Compilation` | `Infrastructure` | `Data Lifecycle` | `Human Roles & PPIE` | `Full Ecosystem`
+   * Filter visible elements based on the active lens before initializing or updating the Cytoscape graph.
+   * Update node style selectors to support the new domain colors (Indigo for Infra, Emerald for Data, Amber for Roles, Rose for PPIE).
+   * Ensure node selection, inspection sidebar, copy code snippets, and layout resets update smoothly.
+3. **Verification**:
+   * Run `lint_applet` (`tsc --noEmit`) to verify zero type mismatches.
+   * Run `compile_applet` (`npm run build`) to ensure clean bundle production.
+
+---
+
+## 5. Summary of Benefits
+* **Educational & Approachable**: Each view presents a coherent story with 5–8 clear concepts instead of overwhelming newcomers.
+* **Zero Visual Clutter**: Eliminates overlapping nodes and intersecting edge spaghetti.
+* **Multi-Audience Appeal**: Researchers, engineers, clinical leaders, and patient advocates can immediately find their respective domain.

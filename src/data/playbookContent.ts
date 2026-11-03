@@ -390,7 +390,7 @@ export interface SatrePillarDetail {
 export interface ExternalResource {
   title: string;
   organization: string;
-  category: 'Standards & Architecture' | 'Governance & Caldicott' | 'Disclosure Control' | 'Policy as Code & Web Standards';
+  category: 'Standards & Architecture' | 'Governance & Caldicott' | 'Disclosure Control' | 'Policy as Code & Web Standards' | 'AI & Autonomous Agents';
   url: string;
   description: string;
 }
@@ -496,7 +496,7 @@ export const EXTERNAL_RESOURCES: ExternalResource[] = [
     title: 'SAIL Databank Output Review Protocol',
     organization: 'Secure Anonymised Information Linkage (Swansea University)',
     category: 'Disclosure Control',
-    url: 'https://saildatabank.com/',
+    url: 'https://saildatabank.com/wp-content/uploads/2022/08/SAIL-POL-024-Output-Review-Policy-v1.2-3.pdf',
     description: 'World-leading clinical TRE output disclosure control standard operating procedures and airlock guidelines.'
   },
   {
@@ -526,5 +526,19 @@ export const EXTERNAL_RESOURCES: ExternalResource[] = [
     category: 'Policy as Code & Web Standards',
     url: 'https://modelcontextprotocol.io/',
     description: 'Open standard protocol enabling safe, structured tool discovery and execution boundaries for AI models and autonomous agents.'
+  },
+  {
+    title: 'Stanford UIT Agentic AI Security Framework',
+    organization: 'Stanford University Information Technology (UIT)',
+    category: 'AI & Autonomous Agents',
+    url: 'https://uit.stanford.edu/security/agenticai/security-framework',
+    description: 'Foundational framework mandating automated near-instantaneous token revocation, blast radius containment, and human sponsor accountability.'
+  },
+  {
+    title: 'Stanford UIT Agentic AI Risk Classifications (Sections 8702 & 8938)',
+    organization: 'Stanford University Information Technology (UIT)',
+    category: 'AI & Autonomous Agents',
+    url: 'https://uit.stanford.edu/security/agenticai/riskclassifications',
+    description: 'Four-tier risk classification for autonomous AI agents, mandating human-in-the-loop approvals for High Risk workflows (#8702) and prohibiting autonomous Very High Risk execution (#8938).'
   }
 ];

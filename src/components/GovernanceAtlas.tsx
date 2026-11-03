@@ -475,39 +475,6 @@ Accountability is distributed across independent roles without reliance on singl
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
-      {/* Top Atlas Switcher Banner */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-900/90 border border-emerald-500/30 rounded-2xl p-4 sm:px-6">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
-            <HeartHandshake className="w-5 h-5" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
-                Public Governance Atlas
-              </span>
-              <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 text-[10px] font-semibold border border-emerald-500/20">
-                Citizen &amp; Public View
-              </span>
-            </div>
-            <p className="text-xs text-slate-300">
-              Patient safeguards, ethical guarantees, and interactive governance knowledge graphs.
-            </p>
-          </div>
-        </div>
-
-        {/* Clear Toggle to Technical Atlas */}
-        <button
-          onClick={onSwitchToTechnicalAtlas}
-          className="w-full sm:w-auto px-4 py-2.5 bg-slate-800 hover:bg-slate-750 text-cyan-300 hover:text-cyan-200 border border-cyan-500/40 hover:border-cyan-400 font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition-all shadow-sm active:scale-95 shrink-0"
-          title="Switch to the Engineering & Policy-as-Code Platform"
-        >
-          <Code2 className="w-4 h-4 text-cyan-400" />
-          <span>Switch to Technical Atlas (Engineers & Researchers)</span>
-          <ArrowRight className="w-3.5 h-3.5 text-cyan-400" />
-        </button>
-      </div>
-
       {/* Main Public Atlas Navigation Tabs */}
       <div className="flex items-center gap-2 border-b border-slate-800 pb-2 overflow-x-auto">
         <button
@@ -834,7 +801,7 @@ Accountability is distributed across independent roles without reliance on singl
             </div>
 
             <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-              {['All', 'Governance & Frameworks', 'Standards & Clinical Safety', 'Disclosure Control (SDC)', 'AI & Autonomous Agents'].map((cat) => (
+              {['All', 'Governance & Frameworks', 'Governance Maturity Model', 'Standards & Clinical Safety', 'Disclosure Control (SDC)', 'AI & Autonomous Agents'].map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setGlossaryCategory(cat)}
