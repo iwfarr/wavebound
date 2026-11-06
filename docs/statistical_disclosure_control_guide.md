@@ -139,3 +139,36 @@ allow {
     input.review.human_reviewer_approved == true
 }
 ```
+
+---
+
+## 7. SDC for Graphical Visualisations & Plots (Evaluated via the Same Policy Engine)
+
+A critical failure point in research data environments occurs when researchers assume that Statistical Disclosure Control applies exclusively to numeric tables. **Graphical visualisations carry identical disclosure liabilities under UK GDPR and national research governance standards.**
+
+### 7.1 Common Visual Disclosure Vectors
+1. **Scatter Plots & Dot Plots**: An unbinned scatter plot of age vs. biomarker concentration plots single individual data points. An adversary possessing partial knowledge (e.g., patient age 94 with a specific condition) can instantly identify their exact value.
+2. **Survival Curves (Kaplan-Meier)**: When the right tail of a survival curve drops to low numbers of patients at risk ($N < 10$), each vertical drop directly exposes the exact timestamp of an individual patient death or censoring event.
+3. **Box-and-Whisker Outliers**: Outlier points plotted individually beyond $1.5 \times \text{IQR}$ expose extreme patients.
+4. **Heatmaps & Small-Area Choropleths**: Dense spatial tiles representing fewer than 10 individuals create granular geographic disclosure.
+
+### 7.2 Can Plots Go Through the Same Policy-as-Code Engine?
+**Yes.** The Seawater Policy-as-Code engine evaluates visualisations using the exact same OPA PDP daemon through an automated plot metadata extraction pipeline:
+
+```
++------------------+      +---------------------------+      +----------------------+
+|  R (ggplot2) /   | ---> | Plot Metadata Extractor   | ---> | Seawater OPA PDP     |
+| Python (seaborn) |      | (Parses SVG/Data Pipeline)|      | (sdc.plots.rego)     |
++------------------+      +---------------------------+      +----------------------+
+                                                                        |
+                                                Permit / Block Decision v
+                                                - Point count >= 10 per bin
+                                                - No raw (x,y) coordinates
+                                                - Truncated tail at k < 10
+```
+
+### 7.3 Prescribed Visual Transformation Rules
+- **Scatter Plots**: Must be converted to 2D hexagonal binning (`hexbin`), 2D kernel density heatmaps, or aggregated centroid contours where every rendered bin represents $k \ge 10$ subjects.
+- **Kaplan-Meier Curves**: The plot must truncate the horizontal time axis once the risk table falls below $N = 10$, or suppress the at-risk row values below 10.
+- **Box Plots**: Outliers must not be plotted as individual dots; fences should stop at the percentiles or be suppressed.
+- **Vector vs. Raster Inspection**: Vector outputs (PDF, SVG) that embed individual datapoints in their underlying DOM/paths are blocked; airlock pipelines require rasterised flattened PNG formats or validated aggregated geometries.

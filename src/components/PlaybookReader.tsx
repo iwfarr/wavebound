@@ -32,9 +32,15 @@ interface PlaybookSection {
   title: string;
   subtitle: string;
   number: string;
+  executiveSummary?: string;
   content: string[];
   codeBlock?: {
     language: string;
+    code: string;
+  };
+  technicalImplementation?: {
+    format: string;
+    title: string;
     code: string;
   };
   keyTakeaways: string[];
@@ -46,6 +52,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
     number: '0',
     title: 'Executive Front Matter: Dynamic & Deployable Governance Policy',
     subtitle: 'Machine-Executable Policy Architecture with Semantic Versioning (SemVer 2.4.0): Deployable Policy-as-Code Rather Than a Static Spec',
+    executiveSummary: 'Defines an enterprise-grade Policy-as-Code architecture that translates complex statutory regulations into version-controlled, sub-millisecond enforcement gates. Replaces static text checklists with executable W3C SHACL and OPA Rego rules running across data intelligence environments.',
     content: [
       'Clarification of Intent & Scope:',
       '• The Seawater Problem Space & Tidal Flow: Population data  research operates within a dynamic problem space dubbed "Seawater". Analytics workloads (ranging from lightweight exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, governance channels, and population confidentiality and privacy thresholds. The tide flows cyclically across two managed boundaries: Ingress and Egress.',
@@ -71,6 +78,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
     number: '1.1',
     title: 'Foundational Architecture: Governance Metadata vs. Ephemeral Runtime State',
     subtitle: 'Decoupling immutable statutory governance assertions from transient Kubernetes cluster plumbing',
+    executiveSummary: 'Decouples enduring statutory legal truths (accreditations, Section 251 CAG exemptions, REC ethics protocols) from transient Kubernetes cluster state (pod IPs, container IDs, ephemeral sockets). This separation eliminates configuration fragility and prevents orphaned access privileges.',
     content: [
       '• Plain-English Architecture Principle: Systems break when enduring governance laws are conflated with ephemeral infrastructure plumbing.',
       '• 1. Governance Metadata (The Ontological Law): Enduring, legal, human-negotiated truths about the research project. Examples include: researcher accreditation status, institutional identity, NHS Section 251 exemption certificates, project REC ethics protocol numbers, approved population data sensitivity tiers, and retention horizons. This information is authored by governance officers, version-controlled in Git, and formally serialized in RDF/OWL ontologies (tre-core.ttl). It changes only when ethics approvals, laws, or institutional agreements change.',
@@ -89,6 +97,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
     number: '1.2',
     title: 'Core Ontologies: Formalizing the Five Safes & SATRE Framework',
     subtitle: 'Authoring tre-core.ttl and governance_core.ttl across hospital operational tiers',
+    executiveSummary: 'Formalizes the Five Safes and SATRE Specification v1.1 into machine-readable W3C OWL 2 ontologies. Establishes unambiguous class hierarchies linking research project identities to hospital clinical sensitivity tiers and airlock egress controls.',
     content: [
       '• Five Safes Formalization: Expresses the 5 core dimensions in ontology/tre-core.ttl:',
       '   - Safe People: tre:SafePerson with mandatory institutional accreditation and active Information Governance (IG) training. Note: AI models and agents are NEVER Safe People; they operate strictly as delegated machine workloads under an accredited human researcher sponsor.',
@@ -362,6 +371,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
   const [copiedCodeId, setCopiedCodeId] = useState<string | null>(null);
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
   const [expandedIntro, setExpandedIntro] = useState(true);
+  const [expandedTechnicalSchemas, setExpandedTechnicalSchemas] = useState<Record<string, boolean>>({});
   const contentContainerRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll and highlight when targetSectionId is received
@@ -923,6 +933,17 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                 </button>
               </div>
 
+              {/* 2-Sentence Executive Summary Banner */}
+              {section.executiveSummary && (
+                <div className="p-3.5 rounded-xl bg-slate-950 border border-cyan-900/30 flex items-start gap-2.5">
+                  <Sparkles className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                  <div className="text-xs text-slate-300 leading-relaxed">
+                    <strong className="text-cyan-300 font-mono uppercase text-[10px] block tracking-wider">Executive Summary:</strong>
+                    {section.executiveSummary}
+                  </div>
+                </div>
+              )}
+
               {/* Text Paragraphs with Term Highlighting */}
               <div className="space-y-3 text-slate-300 text-sm sm:text-base leading-relaxed">
                 {section.content.map((paragraph, pIdx) => {
@@ -946,34 +967,64 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                 })}
               </div>
 
-              {/* Code Snippet if present */}
+              {/* Collapsible Technical Implementation (OWL/RDF/Code) Accordion */}
               {section.codeBlock && (
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs text-slate-400 px-1">
-                    <span className="font-mono flex items-center gap-1.5">
+                <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-950">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setExpandedTechnicalSchemas((prev) => ({
+                        ...prev,
+                        [section.id]: !prev[section.id]
+                      }));
+                    }}
+                    className="w-full px-4 py-3 bg-slate-900/80 hover:bg-slate-900 flex items-center justify-between text-xs font-semibold text-slate-300 transition-colors cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2 font-mono">
                       <Code2 className="w-3.5 h-3.5 text-cyan-400" />
-                      {section.id === 'sec-architecture' ? 'Repository Directory Tree' : 'CLI Execution'}
-                    </span>
-                    <button
-                      onClick={() => handleCopyCode(section.id, section.codeBlock!.code)}
-                      className="flex items-center gap-1 text-slate-400 hover:text-cyan-300 bg-slate-950 px-2.5 py-1 rounded border border-slate-800 transition-colors"
-                    >
-                      {copiedCodeId === section.id ? (
-                        <>
-                          <Check className="w-3.5 h-3.5 text-emerald-400" />
-                          <span className="text-emerald-400">Copied!</span>
-                        </>
+                      <span>View Technical Implementation (OWL / RDF / Shapes)</span>
+                      <span className="text-[10px] text-slate-500 uppercase px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">
+                        {section.codeBlock.language}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-cyan-400 text-[11px] font-mono">
+                      <span>{expandedTechnicalSchemas[section.id] ? 'Collapse' : 'Expand Schema'}</span>
+                      {expandedTechnicalSchemas[section.id] ? (
+                        <ChevronUp className="w-4 h-4" />
                       ) : (
-                        <>
-                          <Copy className="w-3.5 h-3.5" />
-                          <span>Copy</span>
-                        </>
+                        <ChevronDown className="w-4 h-4" />
                       )}
-                    </button>
-                  </div>
-                  <pre className="p-4 sm:p-5 rounded-xl bg-slate-950 border border-slate-800/90 text-xs sm:text-sm font-mono text-cyan-300 overflow-x-auto leading-relaxed shadow-inner">
-                    <code>{section.codeBlock.code}</code>
-                  </pre>
+                    </div>
+                  </button>
+
+                  {expandedTechnicalSchemas[section.id] && (
+                    <div className="p-4 border-t border-slate-800 space-y-2">
+                      <div className="flex items-center justify-between text-xs text-slate-400">
+                        <span className="font-mono text-[11px]">
+                          {section.id === 'sec-architecture' ? 'Repository Directory Tree' : 'Executable Syntax'}
+                        </span>
+                        <button
+                          onClick={() => handleCopyCode(section.id, section.codeBlock!.code)}
+                          className="flex items-center gap-1 text-slate-400 hover:text-cyan-300 bg-slate-900 px-2.5 py-1 rounded border border-slate-700 text-[11px] font-mono transition-colors cursor-pointer"
+                        >
+                          {copiedCodeId === section.id ? (
+                            <>
+                              <Check className="w-3.5 h-3.5 text-emerald-400" />
+                              <span className="text-emerald-400 font-bold">Copied!</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3.5 h-3.5" />
+                              <span>Copy Schema</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                      <pre className="p-4 rounded-xl bg-slate-950 text-xs sm:text-sm font-mono text-cyan-300 overflow-x-auto leading-relaxed border border-slate-800/80 shadow-inner">
+                        <code>{section.codeBlock.code}</code>
+                      </pre>
+                    </div>
+                  )}
                 </div>
               )}
 

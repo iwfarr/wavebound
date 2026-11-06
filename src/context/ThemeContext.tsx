@@ -11,44 +11,29 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    try {
-      const stored = localStorage.getItem('seawater_theme');
-      if (stored === 'light' || stored === 'dark') {
-        return stored;
-      }
-    } catch {
-      // Ignore localStorage access failures
-    }
-    return 'dark';
-  });
+  const [theme] = useState<Theme>('dark');
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === 'light') {
-      root.classList.add('light');
-      root.classList.remove('dark');
-    } else {
-      root.classList.add('dark');
-      root.classList.remove('light');
-    }
+    root.classList.add('dark');
+    root.classList.remove('light');
     try {
-      localStorage.setItem('seawater_theme', theme);
+      localStorage.setItem('seawater_theme', 'dark');
     } catch {
-      // Ignore localStorage write failures
+      // Ignore
     }
-  }, [theme]);
+  }, []);
 
   const toggleTheme = () => {
-    setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    // Light mode removed per enterprise design requirements
   };
 
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
+  const setTheme = () => {
+    // Always dark
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme: 'dark', toggleTheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

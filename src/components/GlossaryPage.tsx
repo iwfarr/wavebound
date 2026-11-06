@@ -54,6 +54,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
   const [viewMode, setViewMode] = useState<'cards' | 'graph'>('cards');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [selectedTrack, setSelectedTrack] = useState<'All' | 'govern-assure' | 'build-deploy'>('All');
   const [selectedLetter, setSelectedLetter] = useState<string>('All');
   const [activeTermId, setActiveTermId] = useState<string | null>(initialTermId || 'tre');
   const [edgeDensity, setEdgeDensity] = useState<'clean' | 'bridges'>('clean');
@@ -93,7 +94,14 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
     const matchesCategory = selectedCategory === 'All' || term.category === selectedCategory;
     const matchesLetter = selectedLetter === 'All' || term.term.toUpperCase().startsWith(selectedLetter);
 
-    return matchesSearch && matchesCategory && matchesLetter;
+    const matchesTrack =
+      selectedTrack === 'All'
+        ? true
+        : selectedTrack === 'govern-assure'
+        ? ['Governance & Frameworks', 'Standards & Clinical Safety', 'Governance Maturity Model', 'Disclosure Control (SDC)'].includes(term.category)
+        : ['Semantic Web & Ontologies', 'Policy Enforcement & Security', 'AI & Autonomous Agents', 'Operations & Testing', 'Standards & Clinical Safety'].includes(term.category);
+
+    return matchesSearch && matchesCategory && matchesLetter && matchesTrack;
   });
 
   const activeTerm = GLOSSARY_TERMS.find((t) => t.id === activeTermId) || GLOSSARY_TERMS[0];
@@ -436,8 +444,33 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
         )}
       </div>
 
-      {/* Search and Category Filter Bar */}
+      {/* Search, Track and Category Filter Bar */}
       <div className="space-y-4">
+        {/* Track Filter: All vs Govern & Assure vs Build & Deploy */}
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-xs font-mono text-slate-400 font-semibold mr-1">Audience Track:</span>
+          {[
+            { id: 'All', label: 'All Cards', badge: 'Complete' },
+            { id: 'govern-assure', label: 'Govern & Assure Track', badge: 'IG / Ethics' },
+            { id: 'build-deploy', label: 'Build & Deploy Track', badge: 'Architects / Dev' }
+          ].map((track) => (
+            <button
+              key={track.id}
+              onClick={() => setSelectedTrack(track.id as any)}
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+                selectedTrack === track.id
+                  ? 'bg-cyan-500 text-slate-950 font-bold shadow-sm'
+                  : 'bg-slate-900 hover:bg-slate-850 text-slate-300 border border-slate-800'
+              }`}
+            >
+              <span>{track.label}</span>
+              <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${selectedTrack === track.id ? 'bg-slate-950/20 text-slate-950 font-bold' : 'bg-slate-950 text-slate-400'}`}>
+                {track.badge}
+              </span>
+            </button>
+          ))}
+        </div>
+
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -566,20 +599,33 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
               </div>
             )}
 
-            {/* Playbook Section Link */}
-            <div className="pt-2 border-t border-slate-800 flex items-center justify-between gap-3 text-xs">
-              <div className="space-y-0.5">
-                <span className="text-[10px] uppercase font-mono text-slate-500 block">Playbook Section</span>
-                <span className="text-slate-300 font-semibold text-[11px]">{activeTerm.playbookSection}</span>
+            {/* Playbook Section Link & External Resource */}
+            <div className="pt-2 border-t border-slate-800 space-y-2">
+              <div className="flex items-center justify-between gap-3 text-xs">
+                <div className="space-y-0.5">
+                  <span className="text-[10px] uppercase font-mono text-slate-500 block">Playbook Section</span>
+                  <span className="text-slate-300 font-semibold text-[11px]">{activeTerm.playbookSection}</span>
+                </div>
+                {onNavigateToSection && (
+                  <button
+                    onClick={() => onNavigateToSection(activeTerm.id, activeTerm.term)}
+                    className="px-3 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-1 transition-colors shadow-sm shrink-0"
+                  >
+                    <span>Read In Context</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                )}
               </div>
-              {onNavigateToSection && (
-                <button
-                  onClick={() => onNavigateToSection(activeTerm.id, activeTerm.term)}
-                  className="px-3 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-1 transition-colors shadow-sm shrink-0"
+              {activeTerm.externalUrl && (
+                <a
+                  href={activeTerm.externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 font-medium"
                 >
-                  <span>Read In Context</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>Authoritative Guidance / Framework Reference</span>
+                </a>
               )}
             </div>
 
@@ -756,10 +802,24 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                 </div>
 
                 {/* Footer Meta & Action Links */}
-                <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-                  <span className="text-[11px] text-slate-400 line-clamp-1 max-w-[180px]">
-                    {term.playbookSection}
-                  </span>
+                <div className="pt-3 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] text-slate-400 line-clamp-1 max-w-[150px]">
+                      {term.playbookSection}
+                    </span>
+                    {term.externalUrl && (
+                      <a
+                        href={term.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-cyan-400 hover:text-cyan-300 p-1 rounded hover:bg-slate-800"
+                        title="Open statutory/framework documentation"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                  </div>
 
                   {onNavigateToSection && (
                     <button
@@ -767,7 +827,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                         e.stopPropagation();
                         onNavigateToSection(term.id, term.term);
                       }}
-                      className="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1 shrink-0 ml-2 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 hover:border-cyan-500/40 transition-colors"
+                      className="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1 shrink-0 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 hover:border-cyan-500/40 transition-colors"
                     >
                       <span>Read in Context</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -845,6 +905,37 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                 </div>
               )}
 
+              {/* Statutory Basis & Authority if present */}
+              {modalTerm.statutoryBasis && (
+                <div className="space-y-1.5 p-3.5 bg-blue-950/30 rounded-xl border border-blue-800/40">
+                  <span className="text-[11px] uppercase font-mono tracking-wider text-blue-400 block font-semibold flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <span>Statutory Authority &amp; National Standards Basis</span>
+                  </span>
+                  <p className="text-xs text-blue-200/90 leading-relaxed font-mono">
+                    {modalTerm.statutoryBasis}
+                  </p>
+                </div>
+              )}
+
+              {/* Key Governance Safeguards if present */}
+              {modalTerm.governanceSafeguards && modalTerm.governanceSafeguards.length > 0 && (
+                <div className="space-y-2 p-3.5 bg-slate-950 rounded-xl border border-slate-800">
+                  <span className="text-[11px] uppercase font-mono tracking-wider text-emerald-400 block font-semibold flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    <span>Mandated Governance Safeguards</span>
+                  </span>
+                  <ul className="space-y-1.5">
+                    {modalTerm.governanceSafeguards.map((safeguard, idx) => (
+                      <li key={idx} className="text-xs text-slate-300 flex items-start gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 shrink-0" />
+                        <span>{safeguard}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {/* Enclave Implementation Context */}
               <div className="space-y-2">
                 <span className="text-[11px] uppercase font-mono tracking-wider text-slate-400 block font-semibold">
@@ -854,6 +945,21 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                   {modalTerm.playbookContext}
                 </p>
               </div>
+
+              {/* External Resource Link */}
+              {modalTerm.externalUrl && (
+                <div className="pt-2">
+                  <a
+                    href={modalTerm.externalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-950 hover:bg-slate-850 text-cyan-300 border border-slate-800 hover:border-cyan-500/40 text-xs font-semibold transition-colors"
+                  >
+                    <ExternalLink className="w-4 h-4 text-cyan-400" />
+                    <span>Open Authoritative Guidance &amp; Reference</span>
+                  </a>
+                </div>
+              )}
 
               {/* Related terms */}
               {modalTerm.relatedTerms && modalTerm.relatedTerms.length > 0 && (

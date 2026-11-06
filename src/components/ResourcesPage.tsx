@@ -18,9 +18,17 @@ import {
   Calculator
 } from 'lucide-react';
 
-export const ResourcesPage: React.FC = () => {
-  const [activeView, setActiveView] = useState<'sdc-guide' | 'compendium'>('sdc-guide');
-  const [searchQuery, setSearchQuery] = useState('');
+interface ResourcesPageProps {
+  initialSearchQuery?: string;
+  initialView?: 'sdc-guide' | 'compendium';
+}
+
+export const ResourcesPage: React.FC<ResourcesPageProps> = ({
+  initialSearchQuery = '',
+  initialView = 'compendium'
+}) => {
+  const [activeView, setActiveView] = useState<'sdc-guide' | 'compendium'>(initialView);
+  const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
   const categories = [

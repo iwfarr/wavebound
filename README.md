@@ -20,13 +20,22 @@
 
 ---
 
-## 🧭 Executive Overview
+## 🧭 Executive Overview: The Three Pillars of Seawater
 
-This playbook provides a Policy as Code (PaC) framework, bridging regulatory compliance documentation and real-time execution by compiling human- and machine-readable semantic graph ontologies into Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) across data intelligence platforms. Please note that this project is a work in progress.
+To navigate this repository effectively, understand the distinction between the three core elements of the project:
 
-Information Governance (IG) can often be a confusing, complex, and burdensome, resource-intensive legal necessity. For population data research organizations, epidemiologists, public institutions, and commercial partners, navigating statutory mandates (including UK GDPR, Data Protection Act 2018, Digital Economy Act 2017, and Section 251) across heterogeneous cohorts frequently creates operational friction, administrative paralysis, and high regulatory overhead.
+1. **Seawater (The Policy-as-Code Approach & Runtime Engine)**:
+   *Everything goes through Seawater.* Seawater is the automated Policy-as-Code (PaC) enforcement architecture. It compiles human-readable governance ontologies into machine-executable Open Policy Agent (OPA) Rego rules and W3C SHACL validation shapes, running as line-rate Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) in Kubernetes admission webhooks, Envoy proxies, and airlock export pipelines.
+2. **The Seawater Playbook (The Instructions & Engineering Guide)**:
+   The comprehensive, step-by-step implementation manual, architectural blueprints, boundary matrices, decision registers, and 16-week phased deployment tracks for platform engineers, data stewards, and DevOps teams.
+3. **The Seawater IG Quick Guide (The Non-Technical Governance Handbook)**:
+   A dedicated, accessible reference handbook for executive stakeholders, HRA officials, Caldicott Guardians, Information Governance leads, clinical researchers, and the general public. It contains zero technical code or ontology jargon, focusing 100% on UK health data laws, ethics, human approval workflows, and privacy safeguards.
 
-The **Seawater Playbook** directly addresses this legal necessity. It brings dense statutory codes and institutional policies into an accessible, human- and machine-readable resource designed for practical comprehension, institutional onboarding, and workforce knowledge training. Simultaneously, it delivers a production-grade **policy-as-code engine** that compiles semantic governance ontologies into real-time Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) to deploy a provably safe and compliant data architecture. Rather than replacing human governance, **key human decisions and actions** (including Research Ethics Committee approvals, Caldicott Guardian determinations, Data Access Committee evaluations, and Data Stewardship signing events) are formally documented, structured, and audited as foundational milestones of the playbook.
+> **Work in Progress Notice**: This platform is an evolving open-source reference architecture. Active contributions, governance reviews, and practitioner feedback from across the UK health data research community are warmly welcomed.
+
+Information Governance (IG) can often be a confusing, complex, and resource-intensive legal necessity. For population data research organizations, epidemiologists, public institutions, and commercial partners, navigating statutory mandates (including UK GDPR, Data Protection Act 2018, Digital Economy Act 2017, and Section 251) across heterogeneous cohorts frequently creates operational friction, administrative paralysis, and high regulatory overhead.
+
+The **Seawater Playbook** directly addresses this challenge. It translates dense statutory codes and institutional policies into an accessible, human- and machine-readable resource designed for practical comprehension, institutional onboarding, and workforce knowledge training. Simultaneously, it delivers a production-grade **policy-as-code engine** that compiles semantic governance ontologies into real-time Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) to deploy a provably safe and compliant data architecture across data intelligence environments such as TRE and SDEs. Rather than replacing human governance, **key human decisions and actions** (including Research Ethics Committee approvals, Caldicott Guardian determinations, Data Access Committee evaluations, and Data Stewardship signing events) are formally documented, structured, and audited as foundational milestones of the playbook.
 
 Modern population data research, longitudinal cohorts, epidemiology, and multi-source analytics are transitioning away from static data distribution toward federated **data analysis & intelligence platforms** (such as secure cloud enclaves, partitioned analytical sandboxes, and sovereign data repositories). Rather than copying sensitive microdata across institutional boundaries, algorithms and accredited researchers are brought into partitioned, secure cloud enclaves.
 
@@ -102,21 +111,29 @@ The interactive web application includes five integrated modules:
 
 ---
 
-## 📜 Standards & Regulatory Frameworks
+## 📜 Standards & Regulatory Frameworks (Exhaustive Compendium)
 
-Project Seawater incorporates and formalizes requirements from:
+Project Seawater incorporates, maps, and formalizes requirements across statutory UK legislation, NHS Information Governance standards, and international security specifications:
 
-| Standard / Statutory Mandate | Domain | Enforcement Mechanism |
+| Standard / Statutory Mandate | Legal / Regulatory Domain | Machine Enforcement & Audit Mechanism |
 | :--- | :--- | :--- |
-| **Digital Economy Act 2017 (Part 5)** | Public Interest Data Research | UKSA RAP accreditation & accredited processor checks |
-| **The Five Safes Framework** | Enclave Governance | People, Projects, Settings, Data, and Outputs gates |
-| **8 Caldicott Principles** | Confidentiality & Proportional Sharing | Justified purpose, strict need-to-know, and duty to share |
-| **NHS Section 251 (NHS Act 2006)** | Confidential Data Governance | CAG exemption binding verified at container admission |
-| **ISO/IEC 42001:2023** | AI Management System (AIMS) | Model risk tier classification and training data lineage |
-| **ISO/IEC 27001 / ISO 27701** | ISMS & Privacy Information (PIMS) | Network boundary isolation and cryptographic audit trails |
-| **ISO/IEC 5259 Series** | Data Quality for Analytics & ML | Data ingestion quality shapes (completeness and bias) |
-| **DCB0129 / DCB0160** | Algorithmic Risk Management | Clinical Safety Officer (CSO) sign-off and Hazard Log |
-| **UK MDR 2002 / MHRA SaMD** | Software as a Medical Device | Classification gate prior to model egress |
+| **UK GDPR & Data Protection Act 2018** | Lawful Basis (Art. 6(1)(e)), Special Category Processing (Art. 9(2)(j)), & Section 19 Research Safeguards | Prohibits substantial damage/distress; validates non-commercial research exemptions; requires pseudonymisation & Caldicott justification |
+| **Common Law Duty of Confidentiality (CLDC)** | Patient & Participant Confidential Information | CAG Section 251 exemption binding or explicit consent validation at workspace admission |
+| **Section 251 (NHS Act 2006 / SI 2002/1438)** | Statutory exemption for unconsented confidential health data | Confidentiality Advisory Group (CAG) clearance identifier validated in project metadata shape |
+| **Digital Economy Act 2017 (Part 5)** | Public Interest Data Research & Inter-Agency Linkage | UKSA Research Accreditation Panel (RAP) credentials & accredited processor gate verification |
+| **The Five Safes Framework** | Enclave Governance Standard | Deterministic multi-dimensional checks: Safe People, Projects, Settings, Data, and Outputs |
+| **8 Caldicott Principles** | National Data Guardian Information Governance | 8 disaggregated gates: justification, minimum necessary data, strict need-to-know, and duty to share |
+| **NHS Data Security & Protection Toolkit (DSPT)** | Annual NHS Information Governance Baseline | Mandatory verification of annual DSPT 'Standards Met' status for sponsoring institutions |
+| **HRA & NHS Research Ethics Committee (REC)** | Ethical Research Protocol Clearance | Integrated Research Application System (IRAS) approval identifier bound to project shape |
+| **SATRE Specification v1.1** | Standard Architecture for Trusted Research Environments | ISO/IEC 27001 baseline, zero-egress VPC routing, ephemeral workspace lifecycles, and audit logging |
+| **DCB0129 / DCB0160** | Clinical Risk Management for Health IT Systems | Nominated Clinical Safety Officer (CSO) sign-off, Hazard Log maintenance, and Safety Case Reports |
+| **Stanford UIT Agentic AI Security Framework** | Autonomous AI & Agent Workload Governance | Classification of machine identity; agents barred as Safe Persons; mandatory human sponsor liability |
+| **ISO/IEC 42001:2023** | Artificial Intelligence Management System (AIMS) | Algorithmic risk tiering, training data lineage tracking, and explainability evidence dossiers |
+| **ISO/IEC 27001 / ISO 27701** | ISMS & Privacy Information Management (PIMS) | Network perimeter segmentation, zero-trust token verification, and cryptographic audit records |
+| **ISO/IEC 5259 Series** | Data Quality for Analytics & Machine Learning | Data ingestion validation shapes verifying completeness, timeliness, and representativeness |
+| **UK MDR 2002 / MHRA SaMD** | Software as a Medical Device Regulatory Gates | Intended medical purpose screening gate prior to model or code egress from the enclave |
+| **W3C PROV-O** | Provenance Ontology & Cryptographic Audit Trails | Every policy decision records input hash, policy commit SHA, and PDP timestamp |
+| **DCAT-AP v2.1** | Data Catalog Vocabulary Application Profile | Standardized metadata binding for dataset sensitivity tiers, custodians, and suppression rules |
 
 ---
 
@@ -182,16 +199,27 @@ Open your browser to `http://localhost:3000`.
 
 ---
 
-## 🚢 Deployment to GitHub Pages
+## 🚢 Deployment Targets: Playbook Web Portal vs. Cluster PaC Engine
 
-The repository is configured for automated, zero-cost deployment to GitHub Pages using GitHub Actions:
+It is crucial to distinguish between the two distinct deployment dimensions supported by this repository:
 
+### Target A: Deploying the Playbook Documentation & Interactive Web Portal (GitHub Pages)
+The GitHub Actions workflow in `.github/workflows/deploy-pages.yml` deploys the **client-side React application** (the interactive Playbook, IG Quick Guide, Quiz Engine, and Cytoscape Atlas) to GitHub Pages or any static CDN:
 1. Push your repository to GitHub.
 2. In your repository on GitHub, navigate to **Settings > Pages**.
 3. Under **Build and deployment > Source**, select **GitHub Actions**.
 4. The workflow in `.github/workflows/deploy-pages.yml` will automatically build the static bundle and deploy it to `https://<your-username>.github.io/<your-repo>/`.
 
-For complete configuration instructions, custom domain setup, and troubleshooting, read the [GitHub Pages Deployment Instructions (deploy_instructions.md)](deploy_instructions.md).
+For complete web portal configuration instructions, custom domain setup, and troubleshooting, read [deploy_instructions.md](deploy_instructions.md).
+
+### Target B: Deploying the Seawater Policy-as-Code Engine into an Organization's Cluster
+When an organization (NHS Trust, TRE provider, or university safe haven) deploys the **Seawater Policy-as-Code Runtime Engine** into their secure cloud or on-premise infrastructure, they deploy:
+1. **OPA PDP Microservices**: Open Policy Agent instances mounted with compiled Rego policy bundles (`policy-as-code/`).
+2. **Kubernetes ValidatingAdmissionWebhook**: Intercepting pod launch requests to verify researcher accreditation and session tokens.
+3. **Envoy / Istio Egress PEPs**: Sidecar proxies terminating outbound network connections and logging W3C PROV-O audit trails.
+4. **Airlock SDC Filter Microservice**: Automated parser evaluating exported tabular files and graphical plots against cell size thresholds ($k \ge 10$).
+
+For production Kubernetes and cluster integration manifests, see [policy-as-code/README.md](policy-as-code/README.md) and [docs/architecture/boundary-matrix.md](docs/architecture/boundary-matrix.md).
 
 ---
 

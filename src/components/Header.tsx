@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useUserProgress } from '../context/ProgressContext';
-import { useTheme } from '../context/ThemeContext';
 import { GLOSSARY_TERMS } from '../data/glossaryData';
 import { PLAYBOOK_MODULES } from '../data/playbookContent';
 import { SeawaterLogo } from './SeawaterLogo';
@@ -20,12 +19,15 @@ import {
   ExternalLink,
   Bot,
   Workflow,
-  MessageSquarePlus,
-  Sun,
-  Moon
+  Scale,
+  Code2,
+  MessageSquarePlus
 } from 'lucide-react';
 
 export type ActiveTab =
+  | 'gateway'
+  | 'govern-assure'
+  | 'build-deploy'
   | 'playbook'
   | 'concepts'
   | 'implementation-track'
@@ -54,7 +56,6 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenFeedback
 }) => {
   const { stats } = useUserProgress();
-  const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [globalSearch, setGlobalSearch] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
@@ -79,7 +80,10 @@ export const Header: React.FC<HeaderProps> = ({
   }, [globalSearch]);
 
   const navItems: { id: ActiveTab; label: string; icon: React.ReactNode }[] = [
-    { id: 'playbook', label: 'Playbook & Search', icon: <FileText className="w-4 h-4" /> },
+    { id: 'gateway', label: 'Overview & Navigation', icon: <Shield className="w-4 h-4 text-cyan-400" /> },
+    { id: 'govern-assure', label: 'Govern & Assure', icon: <Scale className="w-4 h-4 text-amber-400" /> },
+    { id: 'build-deploy', label: 'Build & Deploy', icon: <Code2 className="w-4 h-4 text-cyan-400" /> },
+    { id: 'playbook', label: 'Playbook', icon: <FileText className="w-4 h-4" /> },
     { id: 'concepts', label: 'Key Concepts', icon: <BookOpen className="w-4 h-4" /> },
     { id: 'implementation-track', label: 'Implementation & Rollout', icon: <Workflow className="w-4 h-4" /> },
     { id: 'graph', label: 'Cytoscape Graph', icon: <Layers className="w-4 h-4" /> },
@@ -100,7 +104,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Logo & Platform Name */}
           <div className="flex items-center gap-3">
             <button
-              onClick={() => onSelectTab('playbook')}
+              onClick={() => onSelectTab('gateway')}
               className="flex items-center text-left group transition-transform active:scale-95"
               title="Project Seawater · Policy-as-Code Engine"
             >
@@ -150,24 +154,24 @@ export const Header: React.FC<HeaderProps> = ({
             )}
           </div>
 
-          {/* Switcher Button: Public Atlas vs Technical Atlas */}
+          {/* Switcher Button: IG Quick Guide vs Technical Atlas */}
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800 shadow-sm">
               <button
                 onClick={() => onSelectTab('governance-atlas')}
-                className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
+                className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                   isAtlasMode
                     ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
                     : 'text-slate-400 hover:text-emerald-300'
                 }`}
-                title="Switch to Public Governance Atlas (Citizen & Public View)"
+                title="Switch to Information Governance Quick Guide & Handbook"
               >
                 <HeartHandshake className="w-3.5 h-3.5" />
-                <span>Public Atlas</span>
+                <span>IG Quick Guide</span>
               </button>
               <button
                 onClick={() => onSelectTab('playbook')}
-                className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
+                className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                   !isAtlasMode
                     ? 'bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20'
                     : 'text-slate-400 hover:text-cyan-300'
@@ -214,20 +218,6 @@ export const Header: React.FC<HeaderProps> = ({
                 <span className="hidden sm:inline">Raise Issue</span>
               </button>
             )}
-
-            {/* Theme Toggle Button (Light/Dark Mode) */}
-            <button
-              onClick={toggleTheme}
-              className="bg-slate-900 border border-slate-800 p-2 rounded-lg text-slate-300 hover:text-white hover:border-slate-700 transition-colors flex items-center justify-center shadow-sm"
-              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-              aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            >
-              {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-amber-400" />
-              ) : (
-                <Moon className="w-4 h-4 text-cyan-500" />
-              )}
-            </button>
 
             {/* Mobile Menu Button */}
             <button
@@ -322,21 +312,6 @@ export const Header: React.FC<HeaderProps> = ({
                   <span>Raise Issue / Feedback</span>
                 </button>
               )}
-
-              <button
-                onClick={() => {
-                  toggleTheme();
-                }}
-                className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-900 flex items-center justify-between border border-slate-800"
-              >
-                <span className="flex items-center gap-2">
-                  {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-cyan-500" />}
-                  <span>Appearance</span>
-                </span>
-                <span className="text-[11px] font-mono text-cyan-400 uppercase">
-                  {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
-                </span>
-              </button>
 
               <a
                 href="https://github.com/iwfarr/seawater-playbook"

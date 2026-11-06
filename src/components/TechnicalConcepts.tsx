@@ -21,6 +21,7 @@ import {
   BookOpen,
   Sparkles,
   ExternalLink,
+  Info,
   Scale,
   Server,
   Database,
@@ -1163,11 +1164,33 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
               <span>Data Governance &amp; Asset Metadata Schema</span>
             </div>
             <h2 className="text-2xl font-bold text-white tracking-tight">
-              Data Catalogue Assets: Governance Metadata &amp; Dependent Constraints
+              Data Catalogue Assets: Policy-as-Code Metadata &amp; Dependent Constraints
             </h2>
             <p className="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
-              In population data research and trusted enclaves, datasets are not generic files. Each asset in the Data Catalogue possesses specific metadata constraints, including primary cell suppression thresholds (k &gt;= 10 or k &gt;= 5), dominance limits, role-based access tiers, and SHACL validation shapes.
+              In population data intelligence environments, datasets are not generic files. Each asset in the Data Catalogue possesses specific metadata constraints, including primary cell suppression thresholds (such as k &ge; 10 or k &ge; 5 based on custodian rules), dominance limits, role-based access tiers, and SHACL validation shapes.
             </p>
+          </div>
+
+          {/* Architectural Distinction Callout: Metadata Binding vs National Discovery Portal */}
+          <div className="p-4 bg-emerald-950/20 border border-emerald-800/40 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div className="space-y-1">
+              <span className="font-bold text-emerald-300 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+                <Info className="w-4 h-4 text-emerald-400" />
+                <span>Architectural Scope: Policy-as-Code Constraint Binding vs. National Discovery Portals</span>
+              </span>
+              <p className="text-slate-300 leading-relaxed max-w-3xl">
+                This explorer demonstrates how dataset governance metadata (DCAT schemas + SHACL shapes) compiles directly into runtime OPA PDP policy gates. For discovering population health datasets, cohort exploration, and formal data access requests, use dedicated national catalogues like the <strong>Health Data Research Innovation Gateway</strong>.
+              </p>
+            </div>
+            <a
+              href="https://healthdatagateway.org/en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3.5 py-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-semibold text-xs inline-flex items-center gap-1.5 shrink-0 transition-colors"
+            >
+              <span>HDR UK Gateway</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
           </div>
 
           {/* Tier Filter Bar */}

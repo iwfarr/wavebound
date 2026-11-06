@@ -314,6 +314,37 @@ When presenting aggregate tables or public reports containing small cell counts,
               </div>
             </div>
           </div>
+
+          {/* Graphical Plots & Visualisations SDC Mandate Callout */}
+          <div className="p-5 rounded-2xl bg-gradient-to-r from-amber-950/30 via-slate-900 to-slate-950 border border-amber-500/40 space-y-3">
+            <div className="flex items-center gap-2 text-xs font-bold text-amber-300 uppercase tracking-wider">
+              <AlertTriangle className="w-4 h-4 text-amber-400" />
+              <span>Critical Mandate: SDC Applies Equally to Graphical Plots &amp; Visualisations</span>
+            </div>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              Disclosure control does not stop at tabular numbers. Visualisations such as <strong>scatter plots</strong>, <strong>Kaplan-Meier survival curves</strong>, and <strong>box plots</strong> carry identical re-identification liabilities under UK GDPR if they render single patient points or tail events with fewer than 10 patients at risk.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 text-xs">
+              <div className="p-3 bg-slate-950/80 rounded-xl border border-slate-800 space-y-1">
+                <span className="text-amber-300 font-semibold block text-[11px]">Scatter Plots</span>
+                <span className="text-slate-400 text-[11px] leading-relaxed block">
+                  Individual (x, y) coordinates must be converted to 2D hexbins or density contours where every bin represents &ge; 10 patients.
+                </span>
+              </div>
+              <div className="p-3 bg-slate-950/80 rounded-xl border border-slate-800 space-y-1">
+                <span className="text-amber-300 font-semibold block text-[11px]">Survival Curves</span>
+                <span className="text-slate-400 text-[11px] leading-relaxed block">
+                  Right-censored tails must be truncated or blurred once the at-risk patient count falls below 10, preventing death date extraction.
+                </span>
+              </div>
+              <div className="p-3 bg-slate-950/80 rounded-xl border border-slate-800 space-y-1">
+                <span className="text-emerald-300 font-semibold block text-[11px]">Same PaC Engine</span>
+                <span className="text-slate-400 text-[11px] leading-relaxed block">
+                  The Seawater OPA PDP parses plot metadata ASTs and enforces identical $k \ge 10$ rules prior to airlock export sign-off.
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 

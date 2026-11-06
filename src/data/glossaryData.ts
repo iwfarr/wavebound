@@ -18,6 +18,10 @@ export interface GlossaryTerm {
   targetSectionId?: string;
   exampleSnippet?: string;
   relatedTerms: string[];
+  furtherResourceId?: string;
+  externalUrl?: string;
+  statutoryBasis?: string;
+  governanceSafeguards?: string[];
 }
 
 export const GLOSSARY_TERMS: GlossaryTerm[] = [
@@ -167,6 +171,42 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     playbookContext: 'Enforced via `tre:hasEthicsApproval true` in `ontology/shapes/access-shapes.ttl`.',
     playbookSection: 'Section 2 & Section 3 (Phase 1 & 2)',
     relatedTerms: ['safe-project', 's251']
+  },
+  {
+    id: 'iras-ig-assurances',
+    term: 'IRAS Information Governance Assurances',
+    acronym: 'IRAS IG',
+    category: 'Governance & Frameworks',
+    shortDefinition: 'Statutory Information Governance assurances submitted via IRAS demonstrating lawful bases, transparency, and data protection compliance for ethical approval.',
+    fullDefinition: 'Under the Health Research Authority (HRA) framework and the pilot guide to effective IG assurances, researchers applying through the Integrated Research Application System (IRAS) must demonstrate clear evidence across core IG domains: (1) lawful processing bases under UK GDPR Articles 6 and 9; (2) Common Law Duty of Confidentiality compliance (via consent or Section 251 CAG support); (3) Data Protection Impact Assessment (DPIA) completion; (4) institutional controller/processor designations; and (5) robust technical security safeguards conforming to NHS Data Security & Protection Toolkit (DSPT) baselines.',
+    playbookContext: 'Directly validated by Seawater Phase 1 admission shapes, ensuring that no study partition is mounted without verified IRAS IG assurances.',
+    playbookSection: 'Section 2 & Section 3 (Phase 1 & Phase 2)',
+    statutoryBasis: 'HRA Approval Framework; UK GDPR Art. 5, 6, 9 & 35; NHS Act 2006 s251',
+    governanceSafeguards: [
+      'Documented evidence of lawful processing basis and public interest justification.',
+      'Explicit confirmation of Caldicott Guardian approval or Section 251 CAG exemption.',
+      'Annual institutional NHS DSPT self-assessment compliance.'
+    ],
+    furtherResourceId: 'res-hra-iras-ig-guide',
+    externalUrl: 'https://www.hra.nhs.uk/planning-and-improving-research/policies-standards-legislation/data-protection-and-information-governance/pilot-a-draft-guide-to-providing-effective-ig-assurances-in-iras-submissions/',
+    relatedTerms: ['rec-hra', 's251', 'uk-gdpr', 'dpia', 'five-safes']
+  },
+  {
+    id: 'federated-analysis',
+    term: 'Federated Data Analysis & Distributed Analytics',
+    acronym: 'FDA',
+    category: 'Governance & Frameworks',
+    shortDefinition: 'A collaborative research paradigm where analytical code or models travel to distributed, sovereign data custodians, or data is harmonized into secure virtual workspaces without transferring raw microdata.',
+    fullDefinition: 'Federated Data Analysis enables multi-institutional health and population research across distinct sovereign data custodians while upholding data residency and statutory confidentiality rules. In practice, federated analysis operates across two principal models: (1) Distributed Algorithm Dispatch: Rather than centralizing sensitive records, approved analytical queries, containerized algorithms, or machine learning model parameters travel to each local secure repository (bringing computation to the data); results are aggregated centrally using mathematical disclosure control or federated averaging; (2) Sovereign Workspace Federation: Disparate custodians harmonize governance metadata and ontologies, enabling accredited researchers to execute standardized analytical pipelines across distributed enclaves via a unified control plane without raw microdata leaving local institutional custody.',
+    playbookContext: 'Enforced by Seawater Policy-as-Code to ensure consistent SHACL admission checks and OPA Rego egress filtering across all federated enclave nodes.',
+    playbookSection: 'Section 1. Project Overview & Objectives',
+    statutoryBasis: 'UK GDPR Article 28 / 26 (Joint Controllers / Processors); SATRE Specification v1.1',
+    governanceSafeguards: [
+      'Raw microdata remains in local institutional custody with sovereign perimeter controls.',
+      'Only aggregated mathematical parameters or privacy-preserved model updates travel across nodes.',
+      'Unified Policy-as-Code enforcement across all participating federated environments.'
+    ],
+    relatedTerms: ['tre', 'vde', 'dcr', 'safe-setting', 'sdc']
   },
   {
     id: 'uk-gdpr',
@@ -750,7 +790,90 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'Under the Health and Social Care Act 2012, DCB0129 and DCB0160 are legally mandatory Information Standards in the NHS. DCB0129 requires software developers to conduct formal Clinical Safety Case Reports and Hazard Logs under a registered clinician acting as Clinical Safety Officer (CSO). DCB0160 requires NHS deployment organizations to evaluate local deployment risks before enabling clinical software or algorithmic tools in care pathways.',
     playbookContext: 'Enforced at the airlock for any analytic tool or clinical algorithm egressed from the platform destined for NHS Trust deployment.',
     playbookSection: 'Section 3. Implementation Phases (Phase 4: Policy Compilation & Runtime Enforcement)',
-    relatedTerms: ['samd-uk-mdr', 'caldicott', 'iso-14971', 'iso-42001']
+    relatedTerms: ['samd-uk-mdr', 'caldicott', 'iso-14971', 'iso-42001', 'cso', 'cscr', 'hazard-log'],
+    furtherResourceId: 'res-dcb-0129',
+    externalUrl: 'https://digital.nhs.uk/data-and-information/information-standards/governance/latest-activity/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems',
+    statutoryBasis: 'Health and Social Care Act 2012; NHS Information Standards DCB0129 & DCB0160',
+    governanceSafeguards: [
+      'Statutory clinical risk management compliance mandatory for deploying health software.',
+      'Nominated Clinical Safety Officer oversight across manufacture and deployment lifecycles.',
+      'Living Clinical Hazard Log with quantified clinical severity and probability ratings.'
+    ]
+  },
+  {
+    id: 'cso',
+    term: 'Clinical Safety Officer (CSO)',
+    acronym: 'CSO',
+    category: 'Standards & Clinical Safety',
+    shortDefinition: 'A clinician registered with a UK regulatory body (GMC, NMC, GPhC, HCPC) holding personal statutory accountability for clinical risk management under DCB0129 and DCB0160.',
+    fullDefinition: 'Under NHS Digital Information Standards DCB0129 and DCB0160, the Clinical Safety Officer (CSO) is a suitably qualified, experienced, and actively registered healthcare professional (holding current registration with GMC, NMC, GPhC, or HCPC) who has completed accredited NHS clinical safety training. The CSO holds personal statutory accountability for ensuring that clinical risk management is rigorously conducted throughout the lifecycle of health software. The CSO operates with clinical independence and cannot be overruled by commercial managers or technical leads; they oversee hazard identification, assess clinical consequences, review the Hazard Log, and formally sign off the Clinical Safety Case Report (CSCR) prior to production deployment.',
+    playbookContext: 'Enforces clinical accountability for algorithmic tools and data pipelines; CSO sign-off is a prerequisite for Milestone Gate D-006 before health analytics tools deploy to NHS Trusts.',
+    playbookSection: 'Section 3. Implementation Phases (Phase 4: Policy Compilation & Runtime Enforcement)',
+    statutoryBasis: 'Health and Social Care Act 2012; NHS Information Standards DCB0129 § 3.2 & DCB0160 § 3.2',
+    governanceSafeguards: [
+      'Active UK clinical registration (GMC/NMC/GPhC/HCPC) with accredited NHS clinical risk training.',
+      'Unconditional statutory right of veto on clinical deployment regardless of executive or commercial pressure.',
+      'Personal sign-off required on Clinical Safety Case Reports and residual risk acceptance.'
+    ],
+    furtherResourceId: 'res-dcb-0129',
+    externalUrl: 'https://digital.nhs.uk/data-and-information/information-standards/governance/latest-activity/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems',
+    relatedTerms: ['dcb-0129-0160', 'cscr', 'hazard-log', 'samd-uk-mdr', 'iso-14971']
+  },
+  {
+    id: 'cscr',
+    term: 'Clinical Safety Case Report (CSCR)',
+    acronym: 'CSCR',
+    category: 'Standards & Clinical Safety',
+    shortDefinition: 'A structured, evidence-based safety argument presenting the clinical risk profile, mitigations, and justification for deploying health software or analytics pipelines into clinical pathways.',
+    fullDefinition: 'Mandated under DCB0129 Section 3.4 and DCB0160 Section 3.4, the Clinical Safety Case Report (CSCR) is the formal deliverable synthesizing all clinical risk management activities undertaken during health software development and deployment. The CSCR articulates a structured, evidence-based argument demonstrating that the software or algorithmic pipeline is acceptably safe for its intended clinical use. Key elements include: (1) definition of clinical scope, patient cohort, and intended clinical environment; (2) identification of all potential hazardous situations and failure modes; (3) clinical risk evaluation linking directly to the Hazard Log; (4) evidence verifying that mitigations are effective in practice; and (5) residual risk assessment confirming clinical benefits outweigh acceptable residual risks, personally endorsed by the Clinical Safety Officer (CSO).',
+    playbookContext: 'Compiled as an auditable compliance artifact accompanying any machine learning model or analytical tool egressed from the airlock destined for clinical care pathways.',
+    playbookSection: 'Section 3. Implementation Phases (Phase 4: Policy Compilation & Runtime Enforcement)',
+    statutoryBasis: 'NHS Information Standards DCB0129 § 3.4 & DCB0160 § 3.4',
+    governanceSafeguards: [
+      'Evidence-based safety argument backed by verified test logs and clinical evaluation trials.',
+      'Mandatory living document updated whenever code, dependencies, or clinical pathways change.',
+      'Must be formally approved and signed by the nominated Clinical Safety Officer before release.'
+    ],
+    furtherResourceId: 'res-dcb-0129',
+    externalUrl: 'https://digital.nhs.uk/data-and-information/information-standards/governance/latest-activity/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems',
+    relatedTerms: ['cso', 'hazard-log', 'dcb-0129-0160', 'iso-14971']
+  },
+  {
+    id: 'hazard-log',
+    term: 'Clinical Hazard Log (DCB0129/0160)',
+    category: 'Standards & Clinical Safety',
+    shortDefinition: 'A live, version-controlled risk register tracking every identified clinical hazard, clinical consequence, risk score, mitigation measure, and residual risk rating across the health IT lifecycle.',
+    fullDefinition: 'Mandated under DCB0129 Section 3.3 and DCB0160 Section 3.3, the Clinical Hazard Log is a continuous, dynamic record that must be initiated during early system architecture and maintained throughout the operational life of health software. For every hazard identified (e.g. demographic model performance disparity, truncated laboratory ranges, alert fatigue, network timeout during critical data transfer), the log records: (1) hazard ID and clinical description; (2) potential clinical causes and failure modes; (3) worst-case clinical consequences to patient care; (4) initial clinical risk rating (Severity × Likelihood); (5) explicit risk control and architectural mitigation measures; and (6) residual risk rating with formal sign-off by the Clinical Safety Officer (CSO).',
+    playbookContext: 'Directly linked to Policy-as-Code test suites to guarantee that technical safety bounds (e.g. SDC thresholds, input validation shapes) mirror documented clinical mitigations.',
+    playbookSection: 'Section 3. Implementation Phases (Phase 4: Policy Compilation & Runtime Enforcement)',
+    statutoryBasis: 'NHS Information Standards DCB0129 § 3.3 & DCB0160 § 3.3; ISO 14971:2019',
+    governanceSafeguards: [
+      'Version-controlled tracking of every potential patient safety hazard throughout the software lifecycle.',
+      'Quantitative severity and likelihood scoring with verified mitigation traceability.',
+      'No hazard may be closed or residual risk accepted without explicit Clinical Safety Officer endorsement.'
+    ],
+    furtherResourceId: 'res-dcb-0129',
+    externalUrl: 'https://digital.nhs.uk/data-and-information/information-standards/governance/latest-activity/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems',
+    relatedTerms: ['cso', 'cscr', 'dcb-0129-0160', 'iso-14971']
+  },
+  {
+    id: 'dtac',
+    term: 'Digital Technology Assessment Criteria (DTAC)',
+    acronym: 'DTAC',
+    category: 'Standards & Clinical Safety',
+    shortDefinition: 'The national NHS baseline assessment framework evaluating digital health technologies across Clinical Safety, Data Protection, Technical Security, Interoperability, and Usability.',
+    fullDefinition: 'Mandated by NHS England Transformation Directorate, the Digital Technology Assessment Criteria (DTAC) gives healthcare organizations, integrated care systems (ICS), and research platforms confidence that digital tools and analytical services meet essential standards. DTAC is divided into five core sections: (1) Clinical Safety (assessing DCB0129 compliance, Clinical Safety Officer sign-off, Hazard Log, and Clinical Safety Case Report); (2) Data Protection (verifying UK GDPR, statutory lawful basis, Data Protection Impact Assessment sign-off, and NHS DSPT "Standards Met" assertion); (3) Technical Security (requiring independent Cyber Essentials Plus accreditation and annual CREST/CHECK penetration testing); (4) Interoperability (adherence to HL7 FHIR, SNOMED CT, NHS login, and Open APIs); and (5) Usability and Accessibility (conformance with WCAG 2.1 Level AA and NHS Service Standards).',
+    playbookContext: 'Acts as the unified baseline standard bridging clinical safety, technical cybersecurity, and Information Governance before deploying analytical microservices into research enclaves.',
+    playbookSection: 'Section 3. Implementation Phases (Phase 4: Policy Compilation & Runtime Enforcement)',
+    statutoryBasis: 'NHS England Transformation Directorate DTAC Framework; Health and Care Act 2022',
+    governanceSafeguards: [
+      'Mandatory pre-procurement verification across clinical safety, data protection, security, and interoperability.',
+      'Enforces DCB0129 clinical safety case reports under registered Clinical Safety Officers.',
+      'Demands annual Cyber Essentials Plus certification and verified NHS DSPT compliance.'
+    ],
+    furtherResourceId: 'res-nhs-dtac',
+    externalUrl: 'https://digital.nhs.uk/services/digital-technology-assessment-criteria-dtac',
+    relatedTerms: ['dcb-0129-0160', 'cso', 'cscr', 'hazard-log', 'satre', 'tre']
   },
   {
     id: 'samd-uk-mdr',
@@ -983,6 +1106,12 @@ export const GLOSSARY_SECTION_MAP: Record<string, string> = {
   'k8s-admission': 'sec-phase-4-2',
   'airlock': 'sec-phase-4-2',
   'zero-egress': 'sec-phase-4-2',
+  'cso': 'sec-phase-4-1',
+  'cscr': 'sec-phase-4-1',
+  'hazard-log': 'sec-phase-4-1',
+  'dtac': 'sec-phase-4-1',
+  'iras-ig-assurances': 'sec-phase-1-2',
+  'federated-analysis': 'sec-front-matter',
 
   // SDC & Disclosure Controls -> Phase 2 Validation Logic & Shapes
   'sdc': 'sec-phase-2-1',

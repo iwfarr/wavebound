@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { ProgressProvider } from './context/ProgressContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { Header, ActiveTab } from './components/Header';
+import { GatewayPortal } from './components/GatewayPortal';
 import { PlaybookReader } from './components/PlaybookReader';
 import { TechnicalConcepts } from './components/TechnicalConcepts';
 import { CytoscapeGraph } from './components/CytoscapeGraph';
@@ -14,21 +15,24 @@ import { PolicySandbox } from './components/PolicySandbox';
 import { QuizEngine } from './components/QuizEngine';
 import { GlossaryPage } from './components/GlossaryPage';
 import { ProgressDashboard } from './components/ProgressDashboard';
-import { GovernanceAtlas } from './components/GovernanceAtlas';
+import { IGQuickGuide } from './components/IGQuickGuide';
 import { ResourcesPage } from './components/ResourcesPage';
 import { LLMSecurityEnclave } from './components/LLMSecurityEnclave';
 import { ImplementationTrack } from './components/ImplementationTrack';
+import { GovernAssureWorkspace } from './components/GovernAssureWorkspace';
+import { BuildDeployWorkspace } from './components/BuildDeployWorkspace';
 import { FeedbackModal } from './components/FeedbackModal';
 import { getSectionIdForGlossaryTerm } from './data/glossaryData';
 import { ShieldCheck, BookOpen, Layers, Cpu, HelpCircle, Bookmark, TrendingUp } from 'lucide-react';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<ActiveTab>('playbook');
+  const [activeTab, setActiveTab] = useState<ActiveTab>('gateway');
   const [activeGlossaryTermId, setActiveGlossaryTermId] = useState<string | null>(null);
   const [activeQuizCategory, setActiveQuizCategory] = useState<string | undefined>(undefined);
   const [activeModuleId, setActiveModuleId] = useState<string | null>(null);
   const [targetSectionId, setTargetSectionId] = useState<string | null>(null);
   const [targetHighlightTerm, setTargetHighlightTerm] = useState<string | undefined>(undefined);
+  const [targetDecisionId, setTargetDecisionId] = useState<string | null>(null);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
   const handleNavigateToGlossaryTerm = (termId: string) => {
@@ -81,12 +85,68 @@ export default function App() {
 
         {/* Main View Area */}
         <main className="flex-1 pb-16">
+          {activeTab === 'gateway' && (
+            <GatewayPortal
+              onSelectTab={(tab) => {
+                setActiveTab(tab);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onNavigateToConcept={handleNavigateToConcept}
+              onNavigateToSection={handleNavigateToSection}
+              onNavigateToGlossary={handleNavigateToGlossaryTerm}
+            />
+          )}
+
+          {activeTab === 'govern-assure' && (
+            <GovernAssureWorkspace
+              onNavigateToBuildDeploy={() => {
+                setActiveTab('build-deploy');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onNavigateToDecisionRegister={(decisionId) => {
+                setTargetDecisionId(decisionId || 'D-001');
+                setActiveTab('implementation-track');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onNavigateToSandbox={() => {
+                setActiveTab('sandbox');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onNavigateToPlaybook={(secId) => {
+                handleNavigateToSection(secId || 'sec-caldicott');
+              }}
+            />
+          )}
+
+          {activeTab === 'build-deploy' && (
+            <BuildDeployWorkspace
+              onNavigateToGovernAssure={() => {
+                setActiveTab('govern-assure');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onNavigateToImplementation={() => {
+                setTargetDecisionId(null);
+                setActiveTab('implementation-track');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onNavigateToGraph={() => {
+                setActiveTab('graph');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onNavigateToSandbox={() => {
+                setActiveTab('sandbox');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            />
+          )}
+
           {activeTab === 'playbook' && (
             <PlaybookReader
               onNavigateToGlossaryTerm={handleNavigateToGlossaryTerm}
               onNavigateToConcept={handleNavigateToConcept}
               onNavigateToQuiz={handleNavigateToQuiz}
               onNavigateToImplementationTrack={() => {
+                setTargetDecisionId(null);
                 setActiveTab('implementation-track');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
@@ -102,6 +162,7 @@ export default function App() {
               onNavigateToQuiz={handleNavigateToQuiz}
               onNavigateToGlossaryTerm={handleNavigateToGlossaryTerm}
               onNavigateToImplementationTrack={() => {
+                setTargetDecisionId(null);
                 setActiveTab('implementation-track');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
@@ -112,6 +173,8 @@ export default function App() {
             <ImplementationTrack
               onNavigateToSection={handleNavigateToSection}
               onNavigateToGlossary={handleNavigateToGlossaryTerm}
+              initialTab={targetDecisionId ? 'decisions' : 'timeline'}
+              targetDecisionId={targetDecisionId}
             />
           )}
 
@@ -166,11 +229,12 @@ export default function App() {
           )}
 
           {activeTab === 'governance-atlas' && (
-            <GovernanceAtlas
-              onNavigateToGlossary={() => setActiveTab('glossary')}
+            <IGQuickGuide
+              onNavigateToGlossary={(termId) => handleNavigateToGlossaryTerm(termId)}
               onNavigateToSection={handleNavigateToSection}
-              onSwitchToTechnicalAtlas={() => {
-                setActiveTab('playbook');
+              onNavigateToQuiz={handleNavigateToQuiz}
+              onNavigateToGovernAssure={() => {
+                setActiveTab('govern-assure');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             />

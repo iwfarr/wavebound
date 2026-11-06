@@ -38,30 +38,64 @@ import {
   Globe,
   Cloud,
   Sparkles,
-  Undo2
+  Undo2,
+  Info
 } from 'lucide-react';
 
 interface ImplementationTrackProps {
   onNavigateToSection?: (sectionId: string) => void;
   onNavigateToGlossary?: (termId: string) => void;
+  initialTab?: 'timeline' | 'rollout' | 'decisions' | 'checklist' | 'architecture-code' | 'deployment-hosting';
+  targetDecisionId?: string | null;
 }
 
 export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
   onNavigateToSection,
-  onNavigateToGlossary
+  onNavigateToGlossary,
+  initialTab = 'timeline',
+  targetDecisionId
 }) => {
-  const [activeTab, setActiveTab] = useState<'timeline' | 'rollout' | 'decisions' | 'checklist' | 'architecture-code' | 'deployment-hosting'>('timeline');
+  const [activeTab, setActiveTab] = useState<'timeline' | 'rollout' | 'decisions' | 'checklist' | 'architecture-code' | 'deployment-hosting'>(initialTab);
   const [copiedSnippetId, setCopiedSnippetId] = useState<string | null>(null);
   const [selectedSprint, setSelectedSprint] = useState<SprintSchedule>(GRANULAR_16_WEEK_TIMELINE[0]);
   const [selectedStage, setSelectedStage] = useState<RolloutStage>(ROLLOUT_STAGES[1]); // Default to Evaluate-only
   const [decisionFilter, setDecisionFilter] = useState<'ALL' | 'OPEN' | 'IN_REVIEW' | 'APPROVED'>('ALL');
   const [checklistFilter, setChecklistFilter] = useState<'ALL' | 'SETUP' | 'DECISION REQUIRED' | 'IMPLEMENT' | 'VERIFY'>('ALL');
-  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({
-    'chk-0-1': true,
-    'chk-0-2': true
+  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>(() => {
+    try {
+      const saved = localStorage.getItem('seawater_checklist_progress');
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch {
+      // Fallback if localStorage is inaccessible
+    }
+    return {
+      'chk-0-1': true,
+      'chk-0-2': true
+    };
   });
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(targetDecisionId ? targetDecisionId : '');
   const [expandedSprintIndex, setExpandedSprintIndex] = useState<number | null>(0);
+
+  // Persist checklist progress per visitor
+  React.useEffect(() => {
+    try {
+      localStorage.setItem('seawater_checklist_progress', JSON.stringify(checkedItems));
+    } catch {
+      // Ignore storage errors in restricted iframes
+    }
+  }, [checkedItems]);
+
+  React.useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+    if (targetDecisionId) {
+      setSearchQuery(targetDecisionId);
+      setActiveTab('decisions');
+    }
+  }, [initialTab, targetDecisionId]);
 
   const handleCopyCode = (id: string, text: string) => {
     navigator.clipboard.writeText(text);
@@ -119,7 +153,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
           </h1>
 
           <p className="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed">
-            A comprehensive, battle-tested operational engineering roadmap taking an institution from blank ontologies
+            A comprehensive, rigorous operational engineering roadmap taking an institution from blank ontologies
             to automated Kubernetes admission controls and airlock enforcement. Combines a granular <strong>16-week sprint schedule</strong>,
             staged <strong>non-breaking rollout modes (Evaluate-Only &rarr; Shadow &rarr; Canary &rarr; Active)</strong>, and an accountable <strong>Decision Register (D-001 &ndash; D-009)</strong>.
           </p>
@@ -1192,7 +1226,7 @@ kubectl get pods -n tre-workspaces`}</code>
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-4">
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">
-                Dual-Mode Architecture
+                Documentation &amp; Portal Publishing
               </span>
               <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">
                 GitHub Pages Ready
@@ -1203,11 +1237,42 @@ kubectl get pods -n tre-workspaces`}</code>
             </div>
 
             <h3 className="text-2xl font-black text-white tracking-tight">
-              Hosting Flexibility: Pure Static GitHub Pages &amp; Full-Stack Cloud Run
+              Publishing the Public Playbook Portal: Static GitHub Pages vs Full-Stack Cloud Run
             </h3>
 
+            {/* Clear Scope Boundary Callout */}
+            <div className="p-4 rounded-xl bg-cyan-950/40 border border-cyan-800/80 text-xs text-cyan-100 space-y-2">
+              <div className="flex items-center gap-2 font-bold text-cyan-300 text-sm">
+                <Info className="w-4 h-4 shrink-0 text-cyan-400" />
+                <span>Scope Clarification: Policy-as-Code Cluster Engine vs Public Playbook Web Portal</span>
+              </div>
+              <p className="leading-relaxed text-slate-200">
+                It is vital to distinguish between two distinct deployments in Seawater:
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+                <div className="bg-slate-950/70 p-3 rounded-lg border border-cyan-900/60">
+                  <div className="font-bold text-white flex items-center gap-1.5 mb-1">
+                    <Server className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>1. Seawater Policy Engine (Internal Cluster)</span>
+                  </div>
+                  <p className="text-[11px] text-slate-300 leading-normal">
+                    Covered in <strong>Tabs 1–5</strong>: This is the operational OPA PDP, Envoy sidecar PEP, and W3C SHACL admission webhook deployed directly into your enterprise Kubernetes TRE/SDE cluster behind hospital firewalls. It enforces runtime data boundaries and audits egress.
+                  </p>
+                </div>
+                <div className="bg-slate-950/70 p-3 rounded-lg border border-purple-900/60">
+                  <div className="font-bold text-white flex items-center gap-1.5 mb-1">
+                    <Globe className="w-3.5 h-3.5 text-purple-400" />
+                    <span>2. Seawater Playbook Web Portal (Public / Extranet)</span>
+                  </div>
+                  <p className="text-[11px] text-slate-300 leading-normal">
+                    Covered in <strong>Tab 6</strong>: This is the user-facing knowledge portal, decision register, interactive data dictionary, and IG Quick Guide. Publishing this openly fulfills <strong>Caldicott Principle 8 (Public Transparency)</strong> and enables external academic researchers to draft compliant IRAS/DAC applications without needing VPN access.
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-4xl">
-              Seawater is architected with dual-mode resilience. You can publish this platform as a <strong>100% free static site on GitHub Pages</strong> (where the Policy-as-Code synthesizer, 16-week timeline, knowledge graph visualizer, and curated quiz engine execute entirely client-side without any backend servers), or deploy it as a <strong>full-stack enterprise service on Cloud Run / Node.js</strong> with live generative AI capabilities via Gemini 3.8 Flash.
+              Why publish the Playbook as an open public resource? Academic researchers, clinical investigators, and partner health boards frequently plan research protocols months before receiving TRE account credentials. By hosting the Seawater Playbook as a <strong>100% free static site on GitHub Pages</strong> (where all policy synthesizers, statutory guides, and interactive calculators execute in-browser), institutions eliminate friction, publish transparent governance registers, and offer zero-cost public accountability. Alternatively, enterprise environments can deploy the portal to <strong>Google Cloud Run</strong> with full-stack Node.js and Gemini 3.8 Flash live policy synthesis.
             </p>
           </div>
 
