@@ -1,4 +1,4 @@
-# Project Seawater: Policy-as-Code Playbook
+# Wavebound: Policy-as-Code Playbook
 
 [![Release Version](https://img.shields.io/badge/version-v2.4.0--prod-06b6d4.svg)](https://github.com/iwfarr/seawater-playbook)
 [![Build Status](https://img.shields.io/badge/build-passing-emerald.svg)](https://github.com/iwfarr/seawater-playbook/actions)
@@ -13,7 +13,7 @@
 ## 🌐 Live Platform & Documentation
 
 - **Interactive Public Site**: [https://iwfarr.github.io/seawater-playbook/](https://iwfarr.github.io/seawater-playbook/)
-- **GitHub Repository**: [https://github.com/iwfarr/seawater-playbook](https://github.com/iwfarr/seawater-playbook)
+- **GitHub Repository**: [https://github.com/iwfarr/wavebound](https://github.com/iwfarr/wavebound)
 - **SDC & Low-Count Methods Guide**: See [docs/statistical_disclosure_control_guide.md](docs/statistical_disclosure_control_guide.md) for small cell disclosure controls and sparse data methodologies.
 - **Deployment Guide**: See [deploy_instructions.md](deploy_instructions.md) for step-by-step GitHub Pages instructions.
 - **Implementation Guide**: See [policy-as-code/README.md](policy-as-code/README.md) for production cluster integration patterns.
