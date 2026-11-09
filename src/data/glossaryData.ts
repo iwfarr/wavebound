@@ -412,11 +412,11 @@ allow {
     id: 'k8s-admission',
     term: 'Kubernetes Admission Controller',
     category: 'Policy Enforcement & Security',
-    shortDefinition: 'Kubernetes webhook that intercepts API requests to create or mutate pods before they are persisted in etcd.',
-    fullDefinition: 'ValidatingAdmissionWebhooks act as the Policy Enforcement Point (PEP) in Phase 4. When a researcher requests a Jupyter notebook or analytics container, Kubernetes sends an AdmissionReview to OPA. If `allow` is false, pod creation is rejected.',
-    playbookContext: 'Intercepts workspace provisioning requests in Phase 4.',
+    shortDefinition: 'Restricted-namespace admission controller that evaluates pod creation against OPA rules using an audit-and-alert pattern.',
+    fullDefinition: 'Operates as a Policy Enforcement Point (PEP) within scoped research namespaces (e.g., research-sandbox) under least-privilege RBAC. It avoids fragile cluster-wide blocking webhooks by using an audit-and-alert pattern (`failurePolicy: Ignore`), logging any policy discrepancies for IG committee review without risking cluster instability.',
+    playbookContext: 'Audits workspace provisioning requests in Phase 4.',
     playbookSection: 'Section 3 (Phase 4: Workspace Admission)',
-    relatedTerms: ['pep', 'opa', 'rego']
+    relatedTerms: ['pep', 'opa', 'rego', 'least-privilege']
   },
   {
     id: 'airlock',

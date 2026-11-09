@@ -255,9 +255,9 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
               TRE Policy-as-Code Quiz Engine
             </h1>
-            <p className="text-slate-400 text-xs sm:text-sm max-w-xl">
+            <p className="text-slate-300 text-xs sm:text-sm max-w-xl">
               Challenge yourself on Five Safes governance, SHACL closed-world validation,
-              quantitative SDC math ($k \ge 10$), OPA Rego compilation, and international standards (ISO 42001, DCB0129/0160).
+              quantitative SDC math (<span className="font-mono text-cyan-300 font-semibold">k &ge; 10</span>), OPA Rego compilation, and international standards (ISO 42001, DCB0129/0160).
             </p>
           </div>
 
@@ -658,7 +658,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
                 className="bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 border-2 border-cyan-500/50 rounded-2xl p-8 sm:p-10 space-y-6 text-center relative print:border-black print:bg-white print:text-black shadow-xl"
               >
                 <div className="space-y-1">
-                  <div className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-cyan-400 bg-cyan-950/80 px-3 py-1 rounded-full border border-cyan-800/60 print:bg-transparent print:text-black">
+                  <div className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-cyan-400 bg-cyan-950/80 px-3 py-1 rounded-md border border-cyan-800/60 print:bg-transparent print:text-black">
                     <ShieldCheck className="w-3.5 h-3.5 text-cyan-400 print:text-black" />
                     <span>Seawater Policy-as-Code Enclave Assurance</span>
                   </div>

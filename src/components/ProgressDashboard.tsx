@@ -83,17 +83,17 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
-      {/* Header Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Header Banner - Clean Editorial Card */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-8 relative overflow-hidden shadow-xs">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-3">
             <SeawaterLogo variant="badge" size="sm" />
             <div className="space-y-1">
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                Project Seawater: Mastery Dashboard
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                Project Seawater: Progress Tracker &amp; Mastery
               </h1>
-              <p className="text-slate-400 text-sm max-w-2xl leading-relaxed">
+              <p className="text-slate-700 dark:text-slate-300 text-sm max-w-2xl leading-relaxed">
                 Track your journey through the Seawater Policy-as-Code Playbook. Review your section completion,
                 quiz attempt history, highest test scores, and earned certifications.
               </p>
@@ -107,58 +107,58 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
                 <Award className="w-4 h-4" />
                 {userRank.badge}
               </span>
-              <span className="font-mono text-cyan-300 font-bold">{stats.overallProgressPercentage}% Mastery</span>
+              <span className="font-mono font-bold">{stats.overallProgressPercentage}% Mastery</span>
             </div>
-            <h3 className="text-base font-bold text-white">{userRank.title}</h3>
-            <p className="text-[11px] text-slate-400 leading-snug">{userRank.desc}</p>
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">{userRank.title}</h3>
+            <p className="text-[11px] text-slate-700 dark:text-slate-300 leading-snug">{userRank.desc}</p>
           </div>
         </div>
 
         {/* Overall Progress Bar */}
-        <div className="mt-6 pt-6 border-t border-slate-800/80 space-y-3">
+        <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-800 space-y-3">
           <div className="flex items-center justify-between text-xs font-medium">
-            <span className="text-slate-300 font-bold">Overall Playbook Mastery Score</span>
-            <span className="text-cyan-400 font-mono font-bold text-base">{stats.overallProgressPercentage}%</span>
+            <span className="text-slate-800 dark:text-slate-300 font-bold">Overall Playbook Mastery Score</span>
+            <span className="text-teal-700 dark:text-cyan-400 font-mono font-bold text-base">{stats.overallProgressPercentage}%</span>
           </div>
-          <div className="w-full bg-slate-950 h-3.5 rounded-full overflow-hidden border border-slate-800">
+          <div className="w-full bg-slate-100 dark:bg-slate-950 h-3.5 rounded-full overflow-hidden border border-slate-200 dark:border-slate-800">
             <div
-              className="bg-gradient-to-r from-cyan-500 via-blue-500 to-emerald-400 h-full rounded-full transition-all duration-700"
+              className="bg-gradient-to-r from-teal-500 via-blue-500 to-emerald-500 h-full rounded-full transition-all duration-700"
               style={{ width: `${stats.overallProgressPercentage}%` }}
             />
           </div>
 
           {/* 4 Pillars Scoring Explanation */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 pt-2 text-[11px] text-slate-400">
-            <div className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800 space-y-1">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 pt-2 text-[11px]">
+            <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
               <div className="flex justify-between">
-                <span>Playbook Reading</span>
-                <span className="font-mono text-cyan-400 font-bold">30% Max</span>
+                <span className="text-slate-700 dark:text-slate-400">Playbook Reading</span>
+                <span className="font-mono text-teal-700 dark:text-cyan-400 font-bold">30% Max</span>
               </div>
-              <div className="text-slate-300">{stats.playbookSectionsReadCount}/{stats.totalPlaybookSections} sections read</div>
+              <div className="text-slate-900 dark:text-slate-200 font-medium">{stats.playbookSectionsReadCount}/{stats.totalPlaybookSections} sections read</div>
             </div>
 
-            <div className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800 space-y-1">
+            <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
               <div className="flex justify-between">
-                <span>Concept Pillars</span>
-                <span className="font-mono text-purple-400 font-bold">30% Max</span>
+                <span className="text-slate-700 dark:text-slate-400">Concept Pillars</span>
+                <span className="font-mono text-purple-700 dark:text-purple-400 font-bold">30% Max</span>
               </div>
-              <div className="text-slate-300">{stats.modulesCompletedCount}/{stats.totalModules} mastered</div>
+              <div className="text-slate-900 dark:text-slate-200 font-medium">{stats.modulesCompletedCount}/{stats.totalModules} mastered</div>
             </div>
 
-            <div className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800 space-y-1">
+            <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
               <div className="flex justify-between">
-                <span>Glossary Explored</span>
-                <span className="font-mono text-emerald-400 font-bold">15% Max</span>
+                <span className="text-slate-700 dark:text-slate-400">Glossary Explored</span>
+                <span className="font-mono text-[#047857] dark:text-emerald-400 font-bold">15% Max</span>
               </div>
-              <div className="text-slate-300">{viewedGlossaryTerms.length} terms visited</div>
+              <div className="text-slate-900 dark:text-slate-200 font-medium">{viewedGlossaryTerms.length} terms visited</div>
             </div>
 
-            <div className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800 space-y-1">
+            <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
               <div className="flex justify-between">
-                <span>Quizzes & Exams</span>
-                <span className="font-mono text-amber-400 font-bold">25% Max</span>
+                <span className="text-slate-700 dark:text-slate-400">Quizzes &amp; Exams</span>
+                <span className="font-mono text-amber-700 dark:text-amber-400 font-bold">25% Max</span>
               </div>
-              <div className="text-slate-300">{stats.totalPassed} passed ({stats.totalAttempts} taken)</div>
+              <div className="text-slate-900 dark:text-slate-200 font-medium">{stats.totalPassed} passed ({stats.totalAttempts} taken)</div>
             </div>
           </div>
 
@@ -166,13 +166,13 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
           <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
             <button
               onClick={markAllSectionsRead}
-              className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-cyan-300 rounded-md border border-slate-700 transition-colors"
+              className="px-3 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-teal-800 dark:text-cyan-300 rounded-md border border-slate-300 dark:border-slate-700 font-medium transition-colors cursor-pointer"
             >
               Mark All Sections Read
             </button>
             <button
               onClick={markAllModulesComplete}
-              className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-purple-300 rounded-md border border-slate-700 transition-colors"
+              className="px-3 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-purple-800 dark:text-purple-300 rounded-md border border-slate-300 dark:border-slate-700 font-medium transition-colors cursor-pointer"
             >
               Mark All Concept Pillars Mastered
             </button>
@@ -182,46 +182,46 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
 
       {/* 4 Stat Overview Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-slate-900/90 border border-slate-800 p-5 rounded-xl space-y-1">
-          <div className="flex items-center justify-between text-slate-400 text-xs">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl space-y-1 shadow-xs">
+          <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs font-medium">
             <span>Total Quiz Attempts</span>
-            <History className="w-4 h-4 text-cyan-400" />
+            <History className="w-4 h-4 text-teal-600 dark:text-cyan-400" />
           </div>
-          <div className="text-2xl font-bold text-white">{stats.totalAttempts}</div>
-          <div className="text-[11px] text-slate-500">Across all categories</div>
+          <div className="text-2xl font-bold text-slate-900 dark:text-white">{stats.totalAttempts}</div>
+          <div className="text-[11px] text-slate-600 dark:text-slate-400">Across all categories</div>
         </div>
 
-        <div className="bg-slate-900/90 border border-slate-800 p-5 rounded-xl space-y-1">
-          <div className="flex items-center justify-between text-slate-400 text-xs">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl space-y-1 shadow-xs">
+          <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs font-medium">
             <span>Highest Score</span>
-            <Trophy className="w-4 h-4 text-amber-400" />
+            <Trophy className="w-4 h-4 text-amber-500" />
           </div>
-          <div className="text-2xl font-bold text-amber-400">
+          <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">
             {stats.highestScore > 0 ? `${stats.highestScore}%` : 'N/A'}
           </div>
-          <div className="text-[11px] text-slate-500">Personal best</div>
+          <div className="text-[11px] text-slate-600 dark:text-slate-400">Personal best</div>
         </div>
 
-        <div className="bg-slate-900/90 border border-slate-800 p-5 rounded-xl space-y-1">
-          <div className="flex items-center justify-between text-slate-400 text-xs">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl space-y-1 shadow-xs">
+          <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs font-medium">
             <span>Average Score</span>
-            <TrendingUp className="w-4 h-4 text-emerald-400" />
+            <TrendingUp className="w-4 h-4 text-[#047857] dark:text-emerald-400" />
           </div>
-          <div className="text-2xl font-bold text-white">
+          <div className="text-2xl font-bold text-slate-900 dark:text-white">
             {stats.averageScore > 0 ? `${stats.averageScore}%` : 'N/A'}
           </div>
-          <div className="text-[11px] text-slate-500">Across completed exams</div>
+          <div className="text-[11px] text-slate-600 dark:text-slate-400">Across completed exams</div>
         </div>
 
-        <div className="bg-slate-900/90 border border-slate-800 p-5 rounded-xl space-y-1">
-          <div className="flex items-center justify-between text-slate-400 text-xs">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl space-y-1 shadow-xs">
+          <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs font-medium">
             <span>Glossary Terms Explored</span>
-            <BookOpen className="w-4 h-4 text-cyan-400" />
+            <BookOpen className="w-4 h-4 text-[#005EB8] dark:text-cyan-400" />
           </div>
-          <div className="text-2xl font-bold text-cyan-300">
+          <div className="text-2xl font-bold text-[#005EB8] dark:text-cyan-300">
             {viewedGlossaryTerms.length}
           </div>
-          <div className="text-[11px] text-slate-500">Scanned and verified</div>
+          <div className="text-[11px] text-slate-600 dark:text-slate-400">Scanned and verified</div>
         </div>
       </div>
 
@@ -230,18 +230,18 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
         {/* Left Column: Category Performance & Reading Checklist */}
         <div className="lg:col-span-5 space-y-6">
           {/* Category Performance Breakdown */}
-          <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <Award className="w-4 h-4 text-cyan-400" />
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-4 shadow-xs">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <Award className="w-4 h-4 text-teal-600 dark:text-cyan-400" />
               <span>Category Performance Breakdown</span>
             </h3>
 
             {Object.keys(stats.attemptsByCategory).length === 0 ? (
-              <div className="p-6 text-center text-xs text-slate-400 bg-slate-950/50 rounded-xl border border-slate-800">
+              <div className="p-6 text-center text-xs text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-950/50 rounded-xl border border-slate-200 dark:border-slate-800">
                 <p>No quiz attempts recorded yet.</p>
                 <button
                   onClick={() => onNavigateToQuiz()}
-                  className="mt-3 text-cyan-400 hover:text-cyan-300 font-semibold inline-flex items-center gap-1"
+                  className="mt-3 text-teal-700 dark:text-cyan-400 hover:underline font-semibold inline-flex items-center gap-1 cursor-pointer"
                 >
                   Start your first quiz <ChevronRight className="w-3.5 h-3.5" />
                 </button>
@@ -249,18 +249,18 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
             ) : (
               <div className="space-y-3">
                 {Object.entries(stats.attemptsByCategory).map(([catName, catData]) => (
-                  <div key={catName} className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80 space-y-2">
+                  <div key={catName} className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="font-semibold text-slate-200">{catName}</span>
-                      <span className="font-mono text-cyan-300 font-bold">{catData.bestScore}% Best</span>
+                      <span className="font-semibold text-slate-900 dark:text-slate-200">{catName}</span>
+                      <span className="font-mono text-teal-700 dark:text-cyan-300 font-bold">{catData.bestScore}% Best</span>
                     </div>
-                    <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                    <div className="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
                       <div
-                        className="bg-cyan-500 h-full rounded-full"
+                        className="bg-[#00A389] h-full rounded-full"
                         style={{ width: `${catData.bestScore}%` }}
                       />
                     </div>
-                    <div className="flex items-center justify-between text-[11px] text-slate-400">
+                    <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400">
                       <span>{catData.attempts} attempt{catData.attempts !== 1 ? 's' : ''}</span>
                       <span>Latest: {catData.latestScore}%</span>
                     </div>
@@ -271,16 +271,16 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
 
             <button
               onClick={() => onNavigateToQuiz()}
-              className="w-full py-2.5 px-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold transition-colors shadow-sm"
+              className="w-full py-2.5 px-4 rounded-xl bg-[#00A389] hover:bg-[#008f77] text-white text-xs font-bold transition-colors shadow-xs cursor-pointer"
             >
               Take Another Quiz
             </button>
           </div>
 
           {/* Playbook Reading Section Status */}
-          <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <BookOpen className="w-4 h-4 text-cyan-400" />
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-4 shadow-xs">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-[#005EB8] dark:text-cyan-400" />
               <span>Playbook Section Tracker</span>
             </h3>
 
@@ -299,17 +299,17 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
                   <div
                     key={item.id}
                     onClick={() => onNavigateToSection(item.id)}
-                    className="p-2.5 rounded-lg bg-slate-950/50 border border-slate-800/80 flex items-center justify-between hover:border-slate-700 cursor-pointer transition-colors"
+                    className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex items-center justify-between hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
                   >
-                    <span className={isRead ? 'text-slate-200' : 'text-slate-400'}>
+                    <span className={isRead ? 'text-slate-900 dark:text-slate-200 font-medium' : 'text-slate-600 dark:text-slate-400'}>
                       {item.label}
                     </span>
                     {isRead ? (
-                      <span className="flex items-center gap-1 text-[11px] text-emerald-400 font-medium">
+                      <span className="flex items-center gap-1 text-[11px] text-[#047857] dark:text-emerald-400 font-semibold">
                         <CheckCircle2 className="w-3.5 h-3.5" /> Read
                       </span>
                     ) : (
-                      <span className="text-[11px] text-slate-500">Unread</span>
+                      <span className="text-[11px] text-slate-500 font-mono">Unread</span>
                     )}
                   </div>
                 );
@@ -320,14 +320,14 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
 
         {/* Right Column: Quiz Attempts History Table */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-4 shadow-xs">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
               <div className="space-y-0.5">
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <History className="w-4 h-4 text-cyan-400" />
+                <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <History className="w-4 h-4 text-teal-600 dark:text-cyan-400" />
                   <span>Recorded Quiz Attempts ({quizAttempts.length})</span>
                 </h3>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-600 dark:text-slate-400">
                   Every quiz you take records scores, accuracy, and timestamps.
                 </p>
               </div>
@@ -335,7 +335,7 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
               {quizAttempts.length > 0 && (
                 <button
                   onClick={() => setShowCertificate(true)}
-                  className="text-xs font-semibold text-cyan-400 hover:text-cyan-300 bg-cyan-950/60 hover:bg-cyan-900/60 px-3 py-1.5 rounded-lg border border-cyan-800/50 flex items-center gap-1.5 transition-colors"
+                  className="text-xs font-semibold text-teal-800 dark:text-cyan-400 bg-teal-50 dark:bg-cyan-950/60 px-3 py-1.5 rounded-lg border border-teal-200 dark:border-cyan-800/50 flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <FileCheck2 className="w-3.5 h-3.5" />
                   <span>Certificate</span>
@@ -344,15 +344,15 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
             </div>
 
             {quizAttempts.length === 0 ? (
-              <div className="p-12 text-center bg-slate-950/50 rounded-xl border border-slate-800 text-slate-400 space-y-3">
-                <Clock className="w-8 h-8 mx-auto text-slate-600" />
-                <h4 className="font-semibold text-slate-200">No attempts yet</h4>
-                <p className="text-xs max-w-sm mx-auto text-slate-400">
+              <div className="p-12 text-center bg-slate-50 dark:bg-slate-950/50 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 space-y-3">
+                <Clock className="w-8 h-8 mx-auto text-slate-400" />
+                <h4 className="font-semibold text-slate-900 dark:text-slate-200">No attempts yet</h4>
+                <p className="text-xs max-w-sm mx-auto text-slate-600 dark:text-slate-400">
                   Complete an interactive quiz to see your scores, time spent, and pass/fail audit history here.
                 </p>
                 <button
                   onClick={() => onNavigateToQuiz()}
-                  className="mt-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold rounded-lg transition-colors"
+                  className="mt-2 px-4 py-2 bg-[#00A389] hover:bg-[#008f77] text-white text-xs font-bold rounded-lg transition-colors cursor-pointer"
                 >
                   Launch Quiz Engine
                 </button>
@@ -370,18 +370,18 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
                   return (
                     <div
                       key={attempt.id}
-                      className="p-4 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-slate-700 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                      className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3"
                     >
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                          <span className="font-semibold text-slate-100 text-sm">
+                          <span className="font-semibold text-slate-900 dark:text-slate-100 text-sm">
                             {attempt.category}
                           </span>
-                          <span className="text-[10px] font-mono text-slate-400 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">
+                          <span className="text-[10px] font-mono text-slate-700 dark:text-slate-400 bg-white dark:bg-slate-900 px-1.5 py-0.5 rounded border border-slate-200 dark:border-slate-800 font-semibold">
                             {attempt.difficulty}
                           </span>
                         </div>
-                        <div className="flex items-center gap-3 text-xs text-slate-400">
+                        <div className="flex items-center gap-3 text-xs text-slate-600 dark:text-slate-400">
                           <span>{dateStr}</span>
                           <span>·</span>
                           <span>{attempt.score}/{attempt.totalQuestions} questions correct</span>
@@ -397,19 +397,19 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
                       <div className="flex items-center gap-3 shrink-0">
                         <div className="text-right">
                           <div className={`text-base font-extrabold font-mono ${
-                            attempt.passed ? 'text-emerald-400' : 'text-amber-400'
+                            attempt.passed ? 'text-[#047857] dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'
                           }`}>
                             {attempt.percentage}%
                           </div>
-                          <div className="text-[10px] text-slate-400">
+                          <div className="text-[10px] text-slate-600 dark:text-slate-400 font-semibold">
                             {attempt.passed ? 'PASSED (>=80%)' : 'NEEDS REVIEW'}
                           </div>
                         </div>
 
                         {attempt.passed ? (
-                          <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                          <CheckCircle2 className="w-5 h-5 text-[#047857] dark:text-emerald-400" />
                         ) : (
-                          <AlertCircle className="w-5 h-5 text-amber-400" />
+                          <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                         )}
                       </div>
                     </div>
@@ -420,7 +420,7 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
           </div>
 
           {/* Reset Progress Section */}
-          <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
             <div>
               <span>Want to start fresh or retest from scratch?</span>
             </div>
@@ -431,13 +431,13 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
                     resetAllProgress();
                     setShowResetConfirm(false);
                   }}
-                  className="px-2.5 py-1 bg-red-950 text-red-300 hover:bg-red-900 rounded font-semibold border border-red-800 transition-colors"
+                  className="px-2.5 py-1 bg-red-100 hover:bg-red-200 dark:bg-red-950 dark:hover:bg-red-900 text-red-800 dark:text-red-300 rounded font-semibold border border-red-300 dark:border-red-800 transition-colors cursor-pointer"
                 >
                   Confirm Reset
                 </button>
                 <button
                   onClick={() => setShowResetConfirm(false)}
-                  className="px-2.5 py-1 bg-slate-800 text-slate-300 hover:bg-slate-700 rounded transition-colors"
+                  className="px-2.5 py-1 bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-300 hover:bg-slate-300 rounded transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -445,7 +445,7 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
             ) : (
               <button
                 onClick={() => setShowResetConfirm(true)}
-                className="flex items-center gap-1.5 text-slate-400 hover:text-red-300 transition-colors"
+                className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-300 transition-colors cursor-pointer"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Reset All History</span>

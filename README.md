@@ -25,7 +25,7 @@
 To navigate this repository effectively, understand the distinction between the three core elements of the project:
 
 1. **Seawater (The Policy-as-Code Approach & Runtime Engine)**:
-   *Everything goes through Seawater.* Seawater is the automated Policy-as-Code (PaC) enforcement architecture. It compiles human-readable governance ontologies into machine-executable Open Policy Agent (OPA) Rego rules and W3C SHACL validation shapes, running as line-rate Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) in Kubernetes admission webhooks, Envoy proxies, and airlock export pipelines.
+   *Everything goes through Seawater.* Seawater is the Policy-as-Code (PaC) decision-support architecture. It compiles human-readable governance ontologies into machine-executable Open Policy Agent (OPA) Rego rules and W3C SHACL validation shapes, running as Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) in namespaced admission audit controllers, direct analytical data-plane policies, and airlock export pipelines to compile standardized evidence packs for human approval.
 2. **The Seawater Playbook (The Instructions & Engineering Guide)**:
    The comprehensive, step-by-step implementation manual, architectural blueprints, boundary matrices, decision registers, and 16-week phased deployment tracks for platform engineers, data stewards, and DevOps teams.
 3. **The Seawater IG Quick Guide (The Non-Technical Governance Handbook)**:

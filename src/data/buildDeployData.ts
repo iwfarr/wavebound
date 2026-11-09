@@ -497,20 +497,27 @@ permit_mcp_tool {
 
 export const DEPLOYMENT_ENDPOINTS: DeploymentEndpointSnippet[] = [
   {
-    id: 'k8s-admission-pep',
-    title: 'Kubernetes ValidatingAdmissionWebhook (Production PEP)',
+    id: 'k8s-namespaced-admission-audit',
+    title: 'Kubernetes Namespaced Audit & Alert Controller (Least-Privilege PEP)',
     category: 'Kubernetes Admission',
     language: 'yaml',
-    summary: 'Intercepts research pod launches in real-time, querying the Seawater OPA PDP to enforce accredited researcher admission before containers schedule.',
-    runtimeLocation: 'deploy/k8s/admission-webhook-prod.yaml',
+    summary: 'Least-privilege admission controller running in restricted namespaces. Emits non-blocking audit annotations and Prometheus alert events without risking pod launch timeouts or cluster disruption.',
+    runtimeLocation: 'deploy/k8s/namespaced-audit-controller.yaml',
     code: `apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
-  name: seawater-tre-admission-controller
+  name: seawater-tre-audit-webhook
   labels:
     tre.governance: policy-as-code
+    deployment.scope: least-privilege
 webhooks:
-  - name: validate.tre.seawater.internal
+  - name: audit.tre.seawater.internal
+    # Scoped strictly to research sandbox namespaces to avoid cluster disruption
+    namespaceSelector:
+      matchExpressions:
+        - key: tre.environment/scope
+          operator: In
+          values: ["research-sandbox", "sde-analytics"]
     rules:
       - apiGroups: [""]
         apiVersions: ["v1"]
@@ -521,20 +528,122 @@ webhooks:
       service:
         name: seawater-opa-pdp
         namespace: tre-security
-        path: "/v1/data/tre/authz/allow_session"
+        path: "/v1/data/tre/authz/evaluate_pod"
         port: 8443
       caBundle: LS0tLS1CRUdJTi... # Internal PKI CA Certificate
     admissionReviewVersions: ["v1"]
     sideEffects: None
-    timeoutSeconds: 3
-    failurePolicy: Fail # Tiered fail-safe; fail-open circuit breaker available`
+    timeoutSeconds: 2
+    # Non-blocking audit-and-alert pattern to satisfy NHS IT least-privilege stability requirements
+    failurePolicy: Ignore`
+  },
+  {
+    id: 'airgap-package-mirrors',
+    title: 'Air-Gapped Package Mirrors (CRAN, PyPI, Harbor OCI Registry)',
+    category: 'eBPF / Calico VPC',
+    language: 'yaml',
+    summary: 'Provisions maintained internal package mirrors on isolated subnets, allowing researchers to install accredited R packages and Python wheels without outbound internet connectivity.',
+    runtimeLocation: 'deploy/network/airgap-package-mirrors.yaml',
+    code: `apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: internal-package-mirrors
+  namespace: tre-isolated-infra
+  labels:
+    app.kubernetes.io/component: package-mirror
+    satre.pillar: safe-setting
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: internal-package-mirrors
+  template:
+    metadata:
+      labels:
+        app: internal-package-mirrors
+    spec:
+      containers:
+        # 1. Maintained CRAN Mirror for R analytical workloads
+        - name: cran-mirror
+          image: internal-harbor.local/mirrors/r-cran:4.3-hardened
+          ports:
+            - containerPort: 8080
+              name: cran-http
+          volumeMounts:
+            - mountPath: /var/mirrors/cran
+              name: cran-storage
+              readOnly: true
+        # 2. Maintained PyPI Wheel Mirror for Python analytical workloads
+        - name: pypi-nexus-mirror
+          image: internal-harbor.local/mirrors/pypi-nexus:3.64-hardened
+          ports:
+            - containerPort: 8081
+              name: pypi-http
+          volumeMounts:
+            - mountPath: /var/mirrors/pypi
+              name: pypi-storage
+              readOnly: true
+      volumes:
+        - name: cran-storage
+          persistentVolumeClaim:
+            claimName: pvc-cran-validated-packages
+        - name: pypi-storage
+          persistentVolumeClaim:
+            claimName: pvc-pypi-validated-wheels`
+  },
+  {
+    id: 'analytics-plane-direct-routing',
+    title: 'Direct Analytical Data Plane (DuckDB & PostgreSQL Direct Line)',
+    category: 'REST / PDP Proxy',
+    language: 'yaml',
+    summary: 'Direct data-plane routing for heavy analytical queries (DuckDB, PostgreSQL, Arrow), avoiding userspace Envoy proxies that exhaust TCP connection pools under parallel load.',
+    runtimeLocation: 'deploy/network/analytics-plane-direct-routing.yaml',
+    code: `apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: direct-analytics-data-plane
+  namespace: tre-analytics-workspace
+spec:
+  podSelector:
+    matchLabels:
+      tre.workload: research-notebook
+  policyTypes:
+    - Egress
+  egress:
+    # 1. Direct high-throughput analytical query connection (Bypasses userspace Envoy)
+    - to:
+        - podSelector:
+            matchLabels:
+              app: postgresql-lake-node
+      ports:
+        - protocol: TCP
+          port: 5432
+    # 2. Direct internal object store query access (Parquet / Arrow / DuckDB files)
+    - to:
+        - podSelector:
+            matchLabels:
+              app: minio-internal-lake
+      ports:
+        - protocol: TCP
+          port: 9000
+    # 3. Lightweight PDP policy evaluation (Metadata only through OPA daemon)
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: tre-security
+          podSelector:
+            matchLabels:
+              app: seawater-opa-pdp
+      ports:
+        - protocol: TCP
+          port: 8443`
   },
   {
     id: 'calico-zero-egress',
     title: 'Zero-Egress Calico CNI NetworkPolicy (Air-Gapped Subnet)',
     category: 'eBPF / Calico VPC',
     language: 'yaml',
-    summary: 'Hardens research namespaces by dropping all outbound WAN egress routing at the eBPF layer, satisfying SATRE Pillar 2 isolation.',
+    summary: 'Hardens research namespaces by dropping all outbound WAN egress routing at the eBPF layer, satisfying SATRE Pillar 2 isolation while permitting internal mirror access.',
     runtimeLocation: 'deploy/network/calico-zero-egress.yaml',
     code: `apiVersion: projectcalico.org/v3
 kind: GlobalNetworkPolicy
@@ -552,29 +661,40 @@ spec:
       destination:
         ports: [53]
         selector: k8s-app == "kube-dns"
-    # 2. Permit internal object store data ingestion
+    # 2. Permit internal package mirror access (CRAN / PyPI)
+    - action: Allow
+      protocol: TCP
+      destination:
+        selector: app == "internal-package-mirrors"
+        ports: [8080, 8081]
+    # 3. Permit direct internal object store data ingestion
     - action: Allow
       protocol: TCP
       destination:
         selector: app == "minio-internal-lake"
         ports: [9000]
-    # 3. Deny and log all other outbound traffic (WAN airlock sever)
+    # 4. Deny and audit all other outbound traffic (WAN airlock severed)
     - action: Log
     - action: Deny`
   },
   {
     id: 'airlock-sdc-validator',
-    title: 'Automated Airlock SDC Evaluation Daemon (Python / PySHACL)',
+    title: 'Airlock SDC Evaluation Daemon & Evidence Compiler (PySHACL)',
     category: 'Airlock SDC',
     language: 'python',
-    summary: 'Evaluates candidate aggregate tables against primary suppression (k >= 10) and dominance ceilings (< 80%) using W3C SHACL graph validation.',
+    summary: 'Compiles a standardized statistical disclosure evidence pack for human airlock reviewers, testing candidate tables against k >= 10 and dominance ceilings.',
     runtimeLocation: 'deploy/airlock/sdc_evaluator.py',
     code: `import pyshacl
 import rdflib
 import sys
 import json
 
-def validate_candidate_table(data_graph_ttl: str, shapes_graph_ttl: str) -> dict:
+def compile_sdc_evidence_pack(data_graph_ttl: str, shapes_graph_ttl: str) -> dict:
+    """
+    Evaluates candidate aggregate tables to compile a standardized evidence pack
+    for human review panels (Caldicott Guardians and Airlock Officers).
+    Technology provides decision-support; it does not replace human accountability.
+    """
     g_data = rdflib.Graph().parse(data=data_graph_ttl, format="turtle")
     g_shapes = rdflib.Graph().parse(data=shapes_graph_ttl, format="turtle")
     
@@ -587,12 +707,13 @@ def validate_candidate_table(data_graph_ttl: str, shapes_graph_ttl: str) -> dict
     
     return {
         "conforms": conforms,
-        "verdict": "APPROVED_FOR_RELEASE" if conforms else "SDC_SUPPRESSION_VIOLATION",
-        "report_summary": report_text if not conforms else "All k >= 10 and dominance constraints satisfied."
+        "recommendation": "RECOMMEND_APPROVAL" if conforms else "SDC_FLAGGED_FOR_HUMAN_REVIEW",
+        "evidence_summary": report_text if not conforms else "All k >= 10 and dominance constraints verified.",
+        "statutory_basis": "ONS SDC Protocol v2.1; Caldicott Principle 2 & 8."
     }
 
 if __name__ == "__main__":
-    result = validate_candidate_table(sys.stdin.read(), open("ontology/access-shapes.ttl").read())
+    result = compile_sdc_evidence_pack(sys.stdin.read(), open("ontology/access-shapes.ttl").read())
     print(json.dumps(result, indent=2))`
   },
   {

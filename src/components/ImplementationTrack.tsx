@@ -142,7 +142,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
         <div className="relative z-10 space-y-4">
           <div className="flex flex-wrap items-center gap-3">
             <SeawaterLogo variant="badge" size="sm" />
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-800 text-cyan-300 text-xs font-mono font-semibold">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-cyan-950/80 border border-cyan-800 text-cyan-300 text-xs font-mono font-semibold">
               <Workflow className="w-3.5 h-3.5" />
               <span>Implementation &amp; Non-Breaking Rollout Framework</span>
             </div>
@@ -415,7 +415,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-cyan-950 text-cyan-300 border border-cyan-800">
+                  <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold bg-cyan-950 text-cyan-300 border border-cyan-800">
                     STAGE {selectedStage.stage}
                   </span>
                   <span className="text-xs font-mono uppercase text-slate-400">Mode: {selectedStage.mode}</span>
@@ -548,7 +548,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
 
                   <div className="flex items-center gap-2">
                     <span
-                      className={`text-[11px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-full border ${
+                      className={`text-[11px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-md border ${
                         dec.status === 'APPROVED'
                           ? 'bg-emerald-950 text-emerald-300 border-emerald-700'
                           : dec.status === 'IN_REVIEW'
@@ -1256,7 +1256,7 @@ kubectl get pods -n tre-workspaces`}</code>
                     <span>1. Seawater Policy Engine (Internal Cluster)</span>
                   </div>
                   <p className="text-[11px] text-slate-300 leading-normal">
-                    Covered in <strong>Tabs 1–5</strong>: This is the operational OPA PDP, Envoy sidecar PEP, and W3C SHACL admission webhook deployed directly into your enterprise Kubernetes TRE/SDE cluster behind hospital firewalls. It enforces runtime data boundaries and audits egress.
+                    Covered in <strong>Tabs 1–5</strong>: This is the operational OPA PDP, namespaced admission audit controller, direct analytical data plane, and W3C SHACL evaluators deployed directly into your enterprise Kubernetes SDE/TRE cluster under least-privilege RBAC. It compiles standardized evidence packs to support human panel oversight.
                   </p>
                 </div>
                 <div className="bg-slate-950/70 p-3 rounded-lg border border-purple-900/60">
@@ -1272,7 +1272,7 @@ kubectl get pods -n tre-workspaces`}</code>
             </div>
 
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-4xl">
-              Why publish the Playbook as an open public resource? Academic researchers, clinical investigators, and partner health boards frequently plan research protocols months before receiving TRE account credentials. By hosting the Seawater Playbook as a <strong>100% free static site on GitHub Pages</strong> (where all policy synthesizers, statutory guides, and interactive calculators execute in-browser), institutions eliminate friction, publish transparent governance registers, and offer zero-cost public accountability. Alternatively, enterprise environments can deploy the portal to <strong>Google Cloud Run</strong> with full-stack Node.js and Gemini 3.8 Flash live policy synthesis.
+              Why publish the Playbook as an open public resource? Academic researchers, clinical investigators, and partner health boards frequently plan research protocols months before receiving TRE account credentials. By hosting the Seawater Playbook as a <strong>100% free static site on GitHub Pages</strong> (where all policy synthesizers, statutory guides, and interactive calculators execute in-browser), institutions streamline onboarding, publish transparent governance registers, and offer zero-cost public accountability. Alternatively, enterprise environments can deploy the portal to <strong>Google Cloud Run</strong> with full-stack Node.js and Gemini live policy synthesis.
             </p>
           </div>
 

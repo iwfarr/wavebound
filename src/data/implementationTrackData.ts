@@ -403,7 +403,7 @@ export const ROLLOUT_STAGES: RolloutStage[] = [
     tagline: 'End-to-end automated enforcement across Kubernetes admission, network, and airlock egress',
     productionImpact: 'Authoritative (Seawater Rego is the authoritative gatekeeper)',
     trafficPercentage: '100% of research workspace admissions and airlock releases',
-    trafficHandling: 'Full production PEP integration: Kubernetes ValidatingAdmissionWebhook blocks un-accredited researchers; airlock service blocks tabular outputs violating $k \\ge 10$ or dominance $\\le 80\\%$.',
+    trafficHandling: 'Full production PEP integration: Namespaced Admission Controller audits researcher credentials and session attributes (failurePolicy: Ignore); airlock service compiles standardized evidence packs for human sign-off on outputs violating k >= 10 or dominance <= 80%.',
     failureMode: 'Tiered Fail-Safe: Internal workspace admission fails OPEN with high-priority PagerDuty alert if OPA cluster is partitioned; Airlock egress fails CLOSED (zero data ever leaves without verified policy grant).',
     exitCriteria: [
       'Continuous compliance verified with automated weekly governance report exports.',
@@ -517,15 +517,15 @@ export const DECISION_REGISTER: DecisionRecord[] = [
     status: 'OPEN',
     accountableOwner: 'Service Owner and Platform Operations Lead',
     requiredReviewers: ['Security Operations Center (SOC)', 'DevOps Lead'],
-    decisionStatement: 'Select exact control point (Kubernetes ValidatingAdmissionWebhook, Istio Service Mesh, or Envoy API Gateway); determine staged progression from evaluate-only to shadow, canary, and full enforcement.',
+    decisionStatement: 'Select scoped namespaced control points (Namespaced Admission Controller with Audit & Alert, Direct Analytical Routing, and Airlock Egress Gateway); determine staged progression from evaluate-only to shadow, canary, and full enforcement under least-privilege RBAC.',
     optionsConsidered: [
-      'Option A: Kubernetes ValidatingAdmissionWebhook with Istio Egress Gateway',
-      'Option B: Reverse Proxy API Gateway (Envoy/Kong)',
+      'Option A: Namespaced Admission Controller (failurePolicy: Ignore / Audit-and-Alert) with Direct Analytical Data Plane',
+      'Option B: Reverse Proxy API Gateway for control plane metadata only',
       'Option C: Application-Level Middleware inside researcher notebooks (Insecure: bypassable)'
     ],
-    rationaleAndEvidence: 'Kubernetes admission webhooks intercept pod provisioning before containers are scheduled on worker nodes, making bypass impossible from within user code.',
-    blocks: 'Production deployment manifests, cluster RBAC bindings, and fail-safe circuit breaker.',
-    nonBreakingImpact: 'Webhook starts in `failurePolicy: Ignore` (evaluate-only mode); live services operate without interruption.'
+    rationaleAndEvidence: 'Namespaced admission controllers operate within restricted namespaces without requiring high-risk cluster-admin rights, avoiding cluster-wide admission failures while intercepting pod provisioning before compute mounts sensitive data.',
+    blocks: 'Production deployment manifests, namespace RBAC bindings, and fail-safe circuit breaker.',
+    nonBreakingImpact: 'Admission controller runs in `failurePolicy: Ignore` (evaluate-only mode); live pods operate without interruption.'
   },
   {
     id: 'D-008',
@@ -708,8 +708,8 @@ export const IMPLEMENTATION_CHECKLIST: ChecklistItem[] = [
     phaseName: 'Enforcement Integration',
     type: 'IMPLEMENT',
     text: 'Integrate policy at selected server-side control point in non-breaking evaluate-only mode.',
-    details: 'Deploy ValidatingAdmissionWebhook with `failurePolicy: Ignore` and discrepancy logging.',
-    verificationEvidence: 'Kubernetes webhook active in cluster; zero requests blocked; logs flowing to telemetry.'
+    details: 'Deploy Namespaced Admission Controller with `failurePolicy: Ignore` and discrepancy audit logging.',
+    verificationEvidence: 'Namespaced admission controller active in research-sandbox; zero pods blocked; discrepancy logs flowing to SIEM/audit telemetry.'
   },
   {
     id: 'chk-3-3',

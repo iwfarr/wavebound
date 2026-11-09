@@ -479,37 +479,37 @@ Accountability is distributed across independent roles without reliance on singl
       <div className="flex items-center gap-2 border-b border-slate-800 pb-2 overflow-x-auto">
         <button
           onClick={() => setActiveAtlasTab('journey')}
-          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap ${
+          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
             activeAtlasTab === 'journey'
-              ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
+              ? 'bg-[#0c2340] text-cyan-300 border border-cyan-500/50 shadow-md shadow-cyan-950/40'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
           }`}
         >
-          <Activity className="w-4 h-4" />
+          <Activity className="w-4 h-4 text-teal-400" />
           <span>Population Data Journey &amp; Safeguards</span>
         </button>
 
         <button
           onClick={() => setActiveAtlasTab('glossary')}
-          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap ${
+          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
             activeAtlasTab === 'glossary'
-              ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
+              ? 'bg-[#0c2340] text-cyan-300 border border-cyan-500/50 shadow-md shadow-cyan-950/40'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
           }`}
         >
-          <BookOpen className="w-4 h-4" />
+          <BookOpen className="w-4 h-4 text-teal-400" />
           <span>Public Glossary</span>
         </button>
 
         <button
           onClick={() => setActiveAtlasTab('graph')}
-          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap ${
+          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
             activeAtlasTab === 'graph'
-              ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
+              ? 'bg-[#0c2340] text-cyan-300 border border-cyan-500/50 shadow-md shadow-cyan-950/40'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
           }`}
         >
-          <Network className="w-4 h-4" />
+          <Network className="w-4 h-4 text-teal-400" />
           <span>Knowledge Graph View</span>
         </button>
       </div>
@@ -620,7 +620,7 @@ Accountability is distributed across independent roles without reliance on singl
                     className={`p-4 rounded-2xl border text-left transition-all flex flex-col justify-between relative group ${
                       isSelected
                         ? `bg-slate-900 border-cyan-400 ring-2 ring-cyan-500/30 shadow-lg`
-                        : 'bg-slate-900/60 border-slate-800/80 hover:bg-slate-850 hover:border-slate-700'
+                        : 'bg-slate-900/60 border-slate-800/80 hover:bg-slate-800 hover:border-slate-700'
                     }`}
                   >
                     <div className="space-y-2">
@@ -808,7 +808,7 @@ Accountability is distributed across independent roles without reliance on singl
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors ${
                     glossaryCategory === cat
                       ? 'bg-emerald-500 text-slate-950'
-                      : 'bg-slate-900 text-slate-400 hover:bg-slate-850 hover:text-slate-200 border border-slate-800'
+                      : 'bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-slate-200 border border-slate-800'
                   }`}
                 >
                   {cat}
@@ -836,7 +836,7 @@ Accountability is distributed across independent roles without reliance on singl
                       </span>
                     )}
                   </div>
-                  <span className="px-2 py-0.5 rounded-full bg-slate-800 text-[10px] text-slate-400 font-mono border border-slate-700">
+                  <span className="px-2 py-0.5 rounded-md bg-slate-800 text-[10px] text-slate-400 font-mono border border-slate-700">
                     {term.category}
                   </span>
                 </div>

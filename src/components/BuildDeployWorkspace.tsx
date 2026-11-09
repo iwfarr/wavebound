@@ -5,6 +5,8 @@
 
 import React, { useState } from 'react';
 import { SeawaterLogo } from './SeawaterLogo';
+import { AirGapArchitectureHub } from './AirGapArchitectureHub';
+import { LeastPrivilegeEnclaveHub } from './LeastPrivilegeEnclaveHub';
 import {
   ONTOLOGY_CLASSES,
   DEPLOYMENT_ENDPOINTS,
@@ -28,9 +30,11 @@ import {
   FileCode,
   ArrowRight,
   RotateCcw,
-  Sparkles,
   BookOpen,
-  Filter
+  Filter,
+  CheckCircle2,
+  Lock,
+  WifiOff
 } from 'lucide-react';
 
 interface BuildDeployWorkspaceProps {
@@ -46,11 +50,14 @@ export const BuildDeployWorkspace: React.FC<BuildDeployWorkspaceProps> = ({
   onNavigateToGraph,
   onNavigateToSandbox
 }) => {
+  // Sub-workspace Navigation: Semantic Ontology & SHACL (Primary) vs Manifests vs Air-Gap Reference
+  const [workspaceTab, setWorkspaceTab] = useState<'ontology' | 'manifests' | 'airgap'>('ontology');
+
   // Navigation & selection state
   const [selectedClassId, setSelectedClassId] = useState<string>(ONTOLOGY_CLASSES[0].id);
   const [activeCodeFormat, setActiveCodeFormat] = useState<'jsonld' | 'shacl' | 'rego'>('jsonld');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [namespaceFilter, setNamespaceFilter] = useState<'ALL' | 'tre' | 'sdc' | 'agent'>('ALL');
+  const [namespaceFilter, setNamespaceFilter] = useState<'ALL' | 'tre' | 'sdc' | 'agent' | 'caldicott' | 'prov'>('ALL');
   const [selectedSnippetId, setSelectedSnippetId] = useState<string>(DEPLOYMENT_ENDPOINTS[0].id);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
@@ -85,67 +92,204 @@ export const BuildDeployWorkspace: React.FC<BuildDeployWorkspaceProps> = ({
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 space-y-10">
-      {/* 1. HERO HEADER */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 space-y-3 max-w-3xl">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-mono font-bold text-cyan-300 bg-cyan-950/80 px-2.5 py-0.5 rounded border border-cyan-800 flex items-center gap-1.5">
+    <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
+      {/* 1. EDITORIAL HEADER & PROCUREMENT BASELINE */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 shadow-xs">
+        <div className="space-y-4 max-w-4xl">
+          <div className="flex flex-wrap items-center gap-2 text-xs">
+            <span className="font-semibold text-[#005EB8] dark:text-sky-400 bg-sky-50 dark:bg-sky-950/60 px-2.5 py-0.5 rounded border border-sky-200 dark:border-sky-800 flex items-center gap-1.5">
               <Code2 className="w-3.5 h-3.5" />
-              <span>Phase 4: Build &amp; Deploy Workspace</span>
+              <span>Phases 4 &amp; 5: Air-Gapped Mirrors &amp; Least-Privilege Enclave Manifests</span>
             </span>
-            <span className="text-xs font-mono text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
-              W3C OWL 2 · SHACL · OPA Rego · Kubernetes PEP
+            <span className="font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700">
+              Zero-Egress · Audit-and-Alert · Namespaced RBAC · SHACL Shapes
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Developer Documentation &amp; Ontology Explorer
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
+            Developer Documentation &amp; Enterprise Governance Topology
           </h1>
 
-          <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-            Stripe-level developer ergonomics for technical architects and platform engineers. Explore semantic classes, inspect formal W3C RDF schemas, test real-time OPA Rego translations, and copy production Kubernetes admission manifests.
+          <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
+            Engineered for NHS Integrated Care Board (ICB) IT environments, university research clusters, and national SDEs/TREs. Rather than re-architecting infrastructure from scratch, this workspace demonstrates how to apply graph-navigated, audited Information Governance (IG)—coupling formal W3C RDF/OWL ontologies, closed-world SHACL shapes, and microsecond OPA Rego policies to existing enclaves.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-3 text-xs">
             {onNavigateToImplementation && (
               <button
                 onClick={onNavigateToImplementation}
-                className="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold flex items-center gap-2 shadow-md shadow-cyan-500/20 transition-all cursor-pointer"
+                className="px-3.5 py-2 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white font-medium flex items-center gap-2 transition-colors cursor-pointer"
               >
-                <Server className="w-4 h-4" />
-                <span>Open 16-Week Rollout Blueprint</span>
+                <Server className="w-3.5 h-3.5" />
+                <span>16-Week Implementation Track</span>
+              </button>
+            )}
+            {onNavigateToGovernAssure && (
+              <button
+                onClick={onNavigateToGovernAssure}
+                className="px-3.5 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-750 text-slate-800 dark:text-slate-200 font-medium border border-slate-200 dark:border-slate-700 flex items-center gap-1.5 transition-colors cursor-pointer"
+              >
+                <span>View Compliance Dossier Evaluator</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             )}
           </div>
         </div>
+
+        {/* 4 Architectural Realities Strip */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 text-xs">
+          <button
+            onClick={() => setWorkspaceTab('ontology')}
+            className={`p-3 rounded-lg text-left transition-all border cursor-pointer ${
+              workspaceTab === 'ontology'
+                ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-600 ring-1 ring-amber-600'
+                : 'bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 hover:border-slate-300'
+            }`}
+          >
+            <div className="font-bold text-slate-900 dark:text-white flex items-center justify-between">
+              <span className="flex items-center gap-1.5">
+                <Lock className="w-3.5 h-3.5 text-amber-600" />
+                <span>Decoupled IG Tags</span>
+              </span>
+              <ArrowRight className="w-3 h-3 text-slate-400" />
+            </div>
+            <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1">
+              Decoupled from volatile EHR/SNOMED schemas; scoped to Caldicott 1–8 and S251 under closed-world logic.
+            </p>
+          </button>
+
+          <button
+            onClick={() => setWorkspaceTab('manifests')}
+            className={`p-3 rounded-lg text-left transition-all border cursor-pointer ${
+              workspaceTab === 'manifests'
+                ? 'bg-sky-50 dark:bg-sky-950/40 border-[#005EB8] ring-1 ring-[#005EB8]'
+                : 'bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 hover:border-slate-300'
+            }`}
+          >
+            <div className="font-bold text-slate-900 dark:text-white flex items-center justify-between">
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#005EB8]" />
+                <span>Workload Isolation</span>
+              </span>
+              <ArrowRight className="w-3 h-3 text-slate-400" />
+            </div>
+            <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1">
+              No cluster-admin rights; operates within restricted namespaces with audit-and-alert controllers.
+            </p>
+          </button>
+
+          <button
+            onClick={() => setWorkspaceTab('manifests')}
+            className={`p-3 rounded-lg text-left transition-all border cursor-pointer ${
+              workspaceTab === 'manifests'
+                ? 'bg-purple-50 dark:bg-purple-950/40 border-purple-600 ring-1 ring-purple-600'
+                : 'bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 hover:border-slate-300'
+            }`}
+          >
+            <div className="font-bold text-slate-900 dark:text-white flex items-center justify-between">
+              <span className="flex items-center gap-1.5">
+                <Database className="w-3.5 h-3.5 text-purple-600" />
+                <span>Direct Analytics Plane</span>
+              </span>
+              <ArrowRight className="w-3 h-3 text-slate-400" />
+            </div>
+            <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1">
+              Heavy queries (DuckDB/PostgreSQL) bypass userspace Envoy proxies to eliminate TCP pool exhaustion.
+            </p>
+          </button>
+
+          <button
+            onClick={() => setWorkspaceTab('airgap')}
+            className={`p-3 rounded-lg text-left transition-all border cursor-pointer ${
+              workspaceTab === 'airgap'
+                ? 'bg-emerald-50 dark:bg-emerald-950/40 border-[#047857] ring-1 ring-[#047857]'
+                : 'bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 hover:border-slate-300'
+            }`}
+          >
+            <div className="font-bold text-slate-900 dark:text-white flex items-center justify-between">
+              <span className="flex items-center gap-1.5">
+                <WifiOff className="w-3.5 h-3.5 text-[#047857]" />
+                <span>Air-Gap Reference</span>
+              </span>
+              <ArrowRight className="w-3 h-3 text-slate-400" />
+            </div>
+            <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1">
+              Internal CRAN, PyPI, and Harbor mirrors with 4-stage diode for locked-down clinical infrastructure.
+            </p>
+          </button>
+        </div>
       </div>
 
-      {/* 2. STRIPE-STYLE THREE-COLUMN ONTOLOGY EXPLORER */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+      {/* SUB-NAVIGATION TABS (ONTOLOGY & SHACL FIRST) */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-2">
+        <div className="flex flex-wrap bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-800 gap-1">
+          <button
+            onClick={() => setWorkspaceTab('ontology')}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              workspaceTab === 'ontology'
+                ? 'bg-[#005EB8] text-white shadow-xs'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+            }`}
+          >
+            <Layers className="w-3.5 h-3.5" />
+            <span>Semantic Graph Ontology &amp; SHACL Shapes</span>
+          </button>
+          <button
+            onClick={() => setWorkspaceTab('manifests')}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              workspaceTab === 'manifests'
+                ? 'bg-[#005EB8] text-white shadow-xs'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+            }`}
+          >
+            <Server className="w-3.5 h-3.5" />
+            <span>Least-Privilege Kubernetes Manifests &amp; Admission-and-Alert</span>
+          </button>
+          <button
+            onClick={() => setWorkspaceTab('airgap')}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              workspaceTab === 'airgap'
+                ? 'bg-[#005EB8] text-white shadow-xs'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+            }`}
+          >
+            <WifiOff className="w-3.5 h-3.5" />
+            <span>Air-Gapped Package Ingestion (Reference)</span>
+          </button>
+        </div>
+
+        <span className="text-[11px] font-mono text-slate-500">
+          Enclave Mode: <strong className="text-[#047857] dark:text-emerald-400">Zero-Egress Airlocked</strong>
+        </span>
+      </div>
+
+      {/* AIR-GAPPED PACKAGE MIRROR ARCHITECTURE (PHASE 4) */}
+      {workspaceTab === 'airgap' && <AirGapArchitectureHub />}
+
+      {/* 2. THREE-COLUMN ONTOLOGY EXPLORER */}
+      {workspaceTab === 'ontology' && (
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-6 shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-4">
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider font-mono">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider">
               <Database className="w-4 h-4" />
-              <span>Interactive Data Dictionary</span>
+              <span>Statutory Data Dictionary</span>
             </div>
-            <h2 className="text-xl font-bold text-white tracking-tight">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
               Semantic Graph Ontology Explorer
             </h2>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-400 font-mono">Format:</span>
+            <span className="text-xs text-slate-500 font-medium">Target Format:</span>
             {(['jsonld', 'shacl', 'rego'] as const).map((fmt) => (
               <button
                 key={fmt}
                 onClick={() => setActiveCodeFormat(fmt)}
-                className={`px-3 py-1 rounded-lg text-xs font-mono font-bold uppercase transition-all cursor-pointer ${
+                className={`px-3 py-1 rounded text-xs font-semibold uppercase transition-colors cursor-pointer ${
                   activeCodeFormat === fmt
-                    ? 'bg-cyan-500 text-slate-950 shadow-sm'
-                    : 'bg-slate-950 text-slate-400 hover:text-slate-200 border border-slate-800'
+                    ? 'bg-[#005EB8] text-white'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-750'
                 }`}
               >
                 {fmt === 'jsonld' ? 'JSON-LD' : fmt === 'shacl' ? 'SHACL' : 'OPA Rego'}
@@ -154,32 +298,32 @@ export const BuildDeployWorkspace: React.FC<BuildDeployWorkspaceProps> = ({
           </div>
         </div>
 
-        {/* The 3-Column Stripe-Style Layout Grid */}
+        {/* The 3-Column Layout Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* COLUMN 1: LEFT NAVIGATION & CLASS SELECTOR (lg:col-span-3) */}
           <div className="lg:col-span-3 space-y-3">
             {/* Search Input */}
             <div className="relative">
-              <Search className="w-3.5 h-3.5 absolute left-3 top-3 text-slate-500" />
+              <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search classes..."
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-[#005EB8]"
               />
             </div>
 
             {/* Namespace Filter Tabs */}
-            <div className="flex items-center gap-1 text-[11px] font-mono">
-              {(['ALL', 'tre', 'sdc', 'agent'] as const).map((ns) => (
+            <div className="flex flex-wrap items-center gap-1 text-[11px] font-mono">
+              {(['ALL', 'tre', 'sdc', 'agent', 'caldicott', 'prov'] as const).map((ns) => (
                 <button
                   key={ns}
                   onClick={() => setNamespaceFilter(ns)}
                   className={`px-2 py-0.5 rounded transition-colors cursor-pointer ${
                     namespaceFilter === ns
-                      ? 'bg-cyan-950 text-cyan-300 font-bold border border-cyan-800'
-                      : 'text-slate-400 hover:text-slate-200'
+                      ? 'bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
                   {ns}
@@ -195,19 +339,19 @@ export const BuildDeployWorkspace: React.FC<BuildDeployWorkspaceProps> = ({
                   <button
                     key={cls.id}
                     onClick={() => setSelectedClassId(cls.id)}
-                    className={`w-full text-left p-3 rounded-xl border transition-all cursor-pointer ${
+                    className={`w-full text-left p-3 rounded-lg border transition-colors cursor-pointer ${
                       isSelected
-                        ? 'bg-cyan-950/60 border-cyan-500 text-white shadow-sm'
-                        : 'bg-slate-950/80 border-slate-800/80 text-slate-400 hover:bg-slate-850 hover:text-slate-200'
+                        ? 'bg-sky-50 dark:bg-sky-950/60 border-[#005EB8] text-slate-900 dark:text-white shadow-xs'
+                        : 'bg-white dark:bg-slate-800/60 border-slate-200 dark:border-slate-700/80 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-mono font-bold text-xs">{cls.label}</span>
-                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400">
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
                         {cls.namespace}
                       </span>
                     </div>
-                    <p className="text-[11px] text-slate-400 line-clamp-1 mt-1">{cls.description}</p>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mt-1">{cls.description}</p>
                   </button>
                 );
               })}
@@ -215,164 +359,176 @@ export const BuildDeployWorkspace: React.FC<BuildDeployWorkspaceProps> = ({
           </div>
 
           {/* COLUMN 2: CENTER CONCEPT & ATTRIBUTE DICTIONARY (lg:col-span-4) */}
-          <div className="lg:col-span-4 space-y-4 bg-slate-950 p-5 rounded-2xl border border-slate-800">
+          <div className="lg:col-span-4 space-y-4 bg-slate-50 dark:bg-slate-800/60 p-5 rounded-lg border border-slate-200 dark:border-slate-700">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono font-bold text-cyan-400">{selectedClass.label}</span>
+                <span className="text-xs font-mono font-bold text-[#005EB8] dark:text-sky-400">{selectedClass.label}</span>
                 {selectedClass.subClassOf && (
                   <span className="text-[10px] font-mono text-slate-500">
                     &sube; {selectedClass.subClassOf}
                   </span>
                 )}
               </div>
-              <h3 className="text-lg font-bold text-white">{selectedClass.name} Entity</h3>
-              <p className="text-xs text-slate-300 leading-relaxed pt-1">{selectedClass.description}</p>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">{selectedClass.name} Entity</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pt-1">{selectedClass.description}</p>
             </div>
 
             {/* Properties & Cardinality Table */}
-            <div className="space-y-2 pt-2 border-t border-slate-800">
-              <span className="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider block">
+            <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-700">
+              <span className="text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider block">
                 Class Properties &amp; Constraints:
               </span>
 
               <div className="space-y-2">
                 {selectedClass.properties.map((prop, idx) => (
-                  <div key={idx} className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 space-y-1">
+                  <div key={idx} className="p-2.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
                     <div className="flex items-center justify-between">
-                      <span className="font-mono text-cyan-300 text-xs font-semibold">{prop.name}</span>
+                      <span className="font-mono text-[#005EB8] dark:text-sky-300 text-xs font-semibold">{prop.name}</span>
                       <div className="flex items-center gap-1.5 font-mono text-[10px]">
-                        <span className="text-amber-400 bg-amber-950/60 px-1 rounded">{prop.type}</span>
+                        <span className="text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 px-1 rounded border border-amber-200 dark:border-amber-800">
+                          {prop.type}
+                        </span>
                         {prop.cardinality && (
-                          <span className="text-slate-400 bg-slate-950 px-1 rounded border border-slate-800">
+                          <span className="text-slate-500 bg-slate-100 dark:bg-slate-800 px-1 rounded border border-slate-200 dark:border-slate-700">
                             [{prop.cardinality}]
                           </span>
                         )}
                       </div>
                     </div>
-                    <p className="text-[11px] text-slate-400">{prop.description}</p>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400">{prop.description}</p>
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* COLUMN 3: RIGHT INTERACTIVE CODE & SNIPPET VIEWER (lg:col-span-5) */}
+          {/* COLUMN 3: RIGHT DARK TERMINAL CODE & SNIPPET VIEWER (lg:col-span-5) */}
           <div className="lg:col-span-5 space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <FileCode className="w-4 h-4 text-cyan-400" />
-                <span className="text-xs font-mono font-bold text-slate-300 uppercase">
+                <FileCode className="w-4 h-4 text-[#005EB8] dark:text-sky-400" />
+                <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300 uppercase">
                   {activeCodeFormat === 'jsonld' ? 'JSON-LD Schema' : activeCodeFormat === 'shacl' ? 'SHACL Validation Shape' : 'OPA Rego Policy'}
                 </span>
               </div>
 
               <button
                 onClick={() => handleCopy(`class-code-${selectedClass.id}-${activeCodeFormat}`, getActiveCode())}
-                className="px-3 py-1 rounded-lg bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 {copiedId === `class-code-${selectedClass.id}-${activeCodeFormat}` ? (
                   <>
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
-                    <span className="text-emerald-400 font-bold">Copied!</span>
+                    <Check className="w-3.5 h-3.5 text-[#047857]" />
+                    <span className="text-[#047857] font-bold">Copied!</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-3.5 h-3.5 text-slate-400" />
+                    <Copy className="w-3.5 h-3.5 text-slate-500" />
                     <span>Copy Snippet</span>
                   </>
                 )}
               </button>
             </div>
 
-            <div className="rounded-2xl border border-slate-800 bg-slate-950 overflow-hidden shadow-xl">
-              <div className="bg-slate-900/90 px-4 py-2 border-b border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-400">
-                <span>{selectedClass.id}.{getCodeLanguage()}</span>
-                <span className="text-[10px] text-slate-500 uppercase">Deterministic Target</span>
+            {/* Scoped Dark Terminal Mode Container for Code Viewing */}
+            <div className="rounded-xl border border-slate-800 bg-slate-950 overflow-hidden shadow-md">
+              <div className="bg-slate-900 px-4 py-2 border-b border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                <span className="text-slate-200">{selectedClass.id}.{getCodeLanguage()}</span>
+                <span className="text-[10px] text-slate-400 uppercase">Deterministic Target</span>
               </div>
-              <pre className="p-4 text-xs font-mono text-cyan-200 overflow-x-auto leading-relaxed max-h-[460px]">
+              <pre className="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed max-h-[460px]">
                 <code>{getActiveCode()}</code>
               </pre>
             </div>
           </div>
         </div>
       </div>
+      )}
 
-      {/* 3. COPY-PASTE DEPLOYMENT & INTEGRATION ENDPOINTS */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider font-mono">
-              <Server className="w-4 h-4" />
-              <span>Production Enclave Manifests</span>
-            </div>
-            <h2 className="text-xl font-bold text-white tracking-tight">
-              Deployment Endpoints &amp; PEP Integration Snippets
-            </h2>
-          </div>
+      {/* 3. LEAST-PRIVILEGE ENCLAVE HUBS & ARCHITECTURAL MANIFESTS (PHASE 5) */}
+      {workspaceTab === 'manifests' && (
+        <div className="space-y-8">
+          <LeastPrivilegeEnclaveHub />
 
-          <span className="text-xs text-slate-400 font-mono">
-            Zero-Downtime Infrastructure Glue
-          </span>
-        </div>
-
-        {/* Snippet Selector Pills */}
-        <div className="flex flex-wrap items-center gap-2">
-          {DEPLOYMENT_ENDPOINTS.map((snippet) => (
-            <button
-              key={snippet.id}
-              onClick={() => setSelectedSnippetId(snippet.id)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer ${
-                selectedSnippetId === snippet.id
-                  ? 'bg-cyan-500 text-slate-950 font-bold shadow-md'
-                  : 'bg-slate-950 text-slate-400 hover:text-slate-200 border border-slate-800'
-              }`}
-            >
-              <Terminal className="w-3.5 h-3.5" />
-              <span>{snippet.title.split('(')[0]}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Active Snippet Display */}
-        <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="space-y-0.5">
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-bold text-white">{selectedSnippet.title}</span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 text-cyan-400 border border-slate-800">
-                  {selectedSnippet.category}
-                </span>
+          {/* Reference Architectural Manifests Library */}
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-6 shadow-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-4">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider">
+                  <Server className="w-4 h-4" />
+                  <span>Deployment Endpoints Library</span>
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">
+                  Reference Manifests &amp; Operational Configurations
+                </h3>
               </div>
-              <span className="text-[11px] text-slate-400 font-mono block">
-                Target File: {selectedSnippet.runtimeLocation}
+
+              <span className="text-xs text-slate-500 font-mono">
+                Static Reference Templates
               </span>
             </div>
 
-            <button
-              onClick={() => handleCopy(`snippet-${selectedSnippet.id}`, selectedSnippet.code)}
-              className="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-2 transition-all cursor-pointer shrink-0"
-            >
-              {copiedId === `snippet-${selectedSnippet.id}` ? (
-                <>
-                  <Check className="w-3.5 h-3.5 text-slate-950" />
-                  <span>Manifest Copied!</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3.5 h-3.5 text-slate-950" />
-                  <span>Copy Configuration</span>
-                </>
-              )}
-            </button>
+            {/* Snippet Selector Buttons */}
+            <div className="flex flex-wrap items-center gap-2">
+              {DEPLOYMENT_ENDPOINTS.map((snippet) => (
+                <button
+                  key={snippet.id}
+                  onClick={() => setSelectedSnippetId(snippet.id)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors cursor-pointer ${
+                    selectedSnippetId === snippet.id
+                      ? 'bg-[#005EB8] text-white shadow-xs'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700'
+                  }`}
+                >
+                  <Terminal className="w-3.5 h-3.5" />
+                  <span>{snippet.title.split('(')[0]}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Active Snippet Display */}
+            <div className="p-5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold text-slate-900 dark:text-white">{selectedSnippet.title}</span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white dark:bg-slate-900 text-[#005EB8] dark:text-sky-400 border border-slate-200 dark:border-slate-700">
+                      {selectedSnippet.category}
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-slate-500 font-mono block">
+                    Target Manifest: {selectedSnippet.runtimeLocation}
+                  </span>
+                </div>
+
+                <button
+                  onClick={() => handleCopy(`snippet-${selectedSnippet.id}`, selectedSnippet.code)}
+                  className="px-3.5 py-1.5 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white font-medium text-xs flex items-center gap-2 transition-colors cursor-pointer shrink-0"
+                >
+                  {copiedId === `snippet-${selectedSnippet.id}` ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>Manifest Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5 text-slate-300" />
+                      <span>Copy Configuration</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">{selectedSnippet.summary}</p>
+
+              {/* Scoped Dark Terminal View for Manifests */}
+              <pre className="p-4 bg-slate-950 rounded-xl border border-slate-800 text-slate-200 font-mono text-xs overflow-x-auto leading-relaxed">
+                <code>{selectedSnippet.code}</code>
+              </pre>
+            </div>
           </div>
-
-          <p className="text-xs text-slate-300 leading-relaxed">{selectedSnippet.summary}</p>
-
-          <pre className="p-4 bg-slate-900/90 rounded-xl border border-slate-800 text-sky-200 font-mono text-xs overflow-x-auto leading-relaxed">
-            <code>{selectedSnippet.code}</code>
-          </pre>
         </div>
-      </div>
+      )}
     </div>
   );
 };

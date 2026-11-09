@@ -1,33 +1,29 @@
 import React, { useState } from 'react';
-import { COMPREHENSIVE_RESOURCES, ResourceItem } from '../data/resourcesData';
-import { SDCMethodsGuide } from './SDCMethodsGuide';
+import { COMPREHENSIVE_RESOURCES } from '../data/resourcesData';
+import { QuantitativeSDCHub } from './QuantitativeSDCHub';
+import { ProcurementReadinessHub } from './ProcurementReadinessHub';
 import {
   ExternalLink,
   Search,
   BookOpen,
-  Scale,
-  ShieldAlert,
-  FileCheck2,
-  Lock,
-  Cpu,
-  Bookmark,
-  Sparkles,
-  Tag,
-  Building2,
   AlertTriangle,
-  Calculator
+  Calculator,
+  Tag,
+  FileCheck2,
+  CheckCircle2,
+  Award
 } from 'lucide-react';
 
 interface ResourcesPageProps {
   initialSearchQuery?: string;
-  initialView?: 'sdc-guide' | 'compendium';
+  initialView?: 'sdc-guide' | 'compendium' | 'procurement';
 }
 
 export const ResourcesPage: React.FC<ResourcesPageProps> = ({
   initialSearchQuery = '',
   initialView = 'compendium'
 }) => {
-  const [activeView, setActiveView] = useState<'sdc-guide' | 'compendium'>(initialView);
+  const [activeView, setActiveView] = useState<'sdc-guide' | 'compendium' | 'procurement'>(initialView);
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
@@ -57,37 +53,39 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
-      {/* Header Banner */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Header Banner - Clean Dark Navy Card */}
+      <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl p-6 sm:p-8 shadow-xl relative overflow-hidden text-white">
         <div className="relative z-10 max-w-3xl space-y-3">
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-cyan-400">
-            <BookOpen className="w-4 h-4" />
-            <span>Statutory Compendium &amp; International Engineering Standards</span>
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-cyan-300">
+            <BookOpen className="w-4 h-4 text-cyan-400" />
+            <span>Statutory Compendium &amp; Technical Standards</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
             Authoritative Resources &amp; Technical Guidelines
           </h1>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Statutory legislation, international standards (ISO 42001, ISO 27001, ISO 5259), algorithmic risk management (DCB0129 &amp; DCB0160), and SDC rulebooks governing data analysis &amp; intelligence platforms, secure research enclaves, and policy-as-code architectures.
+          <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
+            Statutory legislation, international standards, algorithmic risk management, and SDC rulebooks governing data intelligence environments, secure research enclaves, and policy-as-code architectures.
           </p>
 
-          <div className="flex items-center gap-3 pt-2 text-xs text-slate-400">
-            <span>Total Catalogued Resources: <strong className="text-white">{COMPREHENSIVE_RESOURCES.length}</strong></span>
+          <div className="flex flex-wrap items-center gap-3 pt-2 text-xs text-slate-300">
+            <span className="inline-flex items-center gap-1.5 font-medium">
+              <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
+              Total Catalogued Resources: <strong className="text-white font-semibold">{COMPREHENSIVE_RESOURCES.length}</strong>
+            </span>
             <span>·</span>
-            <span>Primary Sources from UK Parliament, ONS, W3C, and Cloud Native Computing Foundation</span>
+            <span>Primary Sources: UK Parliament, ONS, W3C, and Cloud Native Computing Foundation</span>
           </div>
         </div>
       </div>
 
-      {/* View Switcher: SDC & Low-Count Methods Guide vs. Statutory Compendium */}
-      <div className="flex items-center gap-2 p-1.5 bg-slate-950 rounded-2xl border border-slate-800 w-full sm:w-auto">
+      {/* View Switcher: SDC Methods Guide vs Statutory Compendium */}
+      <div className="flex items-center gap-2 p-1.5 bg-[#0c2340] rounded-xl border border-cyan-900/50 w-full sm:w-auto">
         <button
           onClick={() => setActiveView('sdc-guide')}
-          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
             activeView === 'sdc-guide'
-              ? 'bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold shadow-lg shadow-cyan-500/20'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+              ? 'bg-[#00A389] text-white shadow-md font-bold'
+              : 'text-slate-300 hover:text-white hover:bg-[#07192f]'
           }`}
         >
           <Calculator className="w-4 h-4" />
@@ -96,143 +94,159 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
 
         <button
           onClick={() => setActiveView('compendium')}
-          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
             activeView === 'compendium'
-              ? 'bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold shadow-lg shadow-cyan-500/20'
-              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+              ? 'bg-[#00A389] text-white shadow-md font-bold'
+              : 'text-slate-300 hover:text-white hover:bg-[#07192f]'
           }`}
         >
           <BookOpen className="w-4 h-4" />
           <span>Statutory Compendium ({COMPREHENSIVE_RESOURCES.length})</span>
         </button>
+
+        <button
+          onClick={() => setActiveView('procurement')}
+          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+            activeView === 'procurement'
+              ? 'bg-[#00A389] text-white shadow-md font-bold'
+              : 'text-slate-300 hover:text-white hover:bg-[#07192f]'
+          }`}
+        >
+          <Award className="w-4 h-4 text-teal-400" />
+          <span>Procurement &amp; SATRE Matrix</span>
+        </button>
       </div>
 
-      {/* Conditionally Render SDC Methods Guide or Compendium */}
+      {/* Conditionally Render SDC Methods Guide, Procurement Matrix, or Compendium */}
       {activeView === 'sdc-guide' ? (
-        <SDCMethodsGuide />
+        <QuantitativeSDCHub />
+      ) : activeView === 'procurement' ? (
+        <ProcurementReadinessHub />
       ) : (
         <>
-          {/* Real-World Cybersecurity Precedent Highlight Callout */}
-          <div className="p-5 rounded-2xl bg-amber-950/20 border border-amber-500/40 space-y-2.5">
-            <div className="flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-wider">
-              <AlertTriangle className="w-4 h-4 text-amber-400" />
-              <span>Why Automated Policy-as-Code Is Critical: Real-World Lessons</span>
+          {/* Architectural Governance Precedent Highlight Callout */}
+          <div className="p-5 rounded-xl bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 space-y-2.5 shadow-xs">
+            <div className="flex items-center gap-2 text-xs font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider">
+              <AlertTriangle className="w-4 h-4 text-amber-600" />
+              <span>Standardised Evidence &amp; Policy Enforcement in Safe Settings</span>
             </div>
-            <p className="text-xs sm:text-sm text-amber-100 leading-relaxed">
-              In historical organizational breaches (such as instances where legacy accounts protected only by &ldquo;Password1&rdquo; led to unauthorized extraction of sensitive population records), the root cause was relying on manual audits and unenforced static policies.
-              <strong> Policy-as-Code fundamentally eliminates this vulnerability</strong> by encoding authorization directly into Kubernetes admission controllers and microsecond OPA Rego rules. If institutional accreditation, annual IG training, or enclave zero-egress checks fail, access is structurally blocked at the network perimeter.
+            <p className="text-xs sm:text-sm text-slate-800 dark:text-amber-100 leading-relaxed">
+              In historical security assessments, reliance on manual paperwork audits and unenforced static policies introduces compliance blind spots.
+              <strong> Policy-as-Code provides automated decision-support</strong> by encoding authorization directly into zero-trust admission controllers and deterministic OPA Rego rules. If institutional accreditation, annual IG training, or safe setting zero-egress checks fail, access requests are flagged before researchers access the analytical enclave.
             </p>
           </div>
 
-      {/* Search and Filters */}
-      <div className="space-y-4">
-        <div className="relative">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-          <input
-            type="text"
-            placeholder="Search external resources by keyword, law, or author (e.g. Section 251, OpenSearch, StatBarn, Keycloak, DSPT, MCP)..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
-          />
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500 hover:text-slate-300"
-            >
-              Clear
-            </button>
-          )}
-        </div>
-
-        {/* Category Pills */}
-        <div className="flex flex-wrap items-center gap-2">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors text-left ${
-                selectedCategory === cat
-                  ? 'bg-cyan-500 text-slate-950 font-semibold shadow-sm'
-                  : 'bg-slate-900 text-slate-400 hover:text-slate-200 hover:bg-slate-850 border border-slate-800'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Resources Cards Grid */}
-      <div className="space-y-3">
-        <div className="text-xs text-slate-400 px-1">
-          Showing {filteredResources.length} of {COMPREHENSIVE_RESOURCES.length} resources
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredResources.map((res) => (
-            <div
-              key={res.id}
-              className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between space-y-4"
-            >
-              <div className="space-y-2">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-[11px] font-mono text-cyan-400 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/60 font-semibold">
-                    {res.organization}
-                  </span>
-                  {res.isStatutory && (
-                    <span className="text-[10px] font-bold text-amber-400 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-800/60">
-                      Statutory Act
-                    </span>
-                  )}
-                  {res.isCaseStudy && (
-                    <span className="text-[10px] font-bold text-red-400 bg-red-950/80 px-2 py-0.5 rounded border border-red-800/60">
-                      Security Precedent
-                    </span>
-                  )}
-                </div>
-
-                <a
-                  href={res.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-bold text-slate-100 hover:text-cyan-300 text-base flex items-start justify-between gap-2 group transition-colors"
+          {/* Search and Filters */}
+          <div className="space-y-4">
+            <div className="relative">
+              <Search className="w-4 h-4 text-cyan-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                placeholder="Search external resources by keyword, law, or author (e.g. Section 251, OpenSearch, StatBarn, Keycloak, DSPT, MCP)..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-[#0c2340] border border-cyan-900/60 rounded-xl pl-10 pr-12 py-2.5 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 transition-colors shadow-lg"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-white cursor-pointer"
                 >
-                  <span className="leading-snug">{res.title}</span>
-                  <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-cyan-400 shrink-0 mt-1 transition-colors" />
-                </a>
-
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  {res.shortDesc}
-                </p>
-
-                {res.citation && (
-                  <div className="text-[11px] font-mono text-slate-400 bg-slate-950 p-2 rounded border border-slate-800">
-                    {res.citation}
-                  </div>
-                )}
-              </div>
-
-              <div className="pt-3 border-t border-slate-800/80 space-y-2">
-                <div className="text-[11px] text-slate-400 leading-snug">
-                  <strong className="text-cyan-400">Playbook Mapping:</strong> {res.playbookRelevance}
-                </div>
-
-                <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                  {res.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[10px] font-mono text-slate-400 bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+                  Clear
+                </button>
+              )}
             </div>
-          ))}
-        </div>
-      </div>
+
+            {/* Category Pills */}
+            <div className="flex flex-wrap items-center gap-2">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors text-left cursor-pointer ${
+                    selectedCategory === cat
+                      ? 'bg-[#00A389] text-white font-bold shadow-sm'
+                      : 'bg-[#0c2340] text-slate-300 hover:text-white hover:bg-[#07192f] border border-cyan-900/50'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Resources Cards Grid */}
+          <div className="space-y-3">
+            <div className="text-xs text-slate-300 px-1 font-medium">
+              Showing {filteredResources.length} of {COMPREHENSIVE_RESOURCES.length} resources
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {filteredResources.map((res) => (
+                <div
+                  key={res.id}
+                  className="p-5 rounded-xl bg-[#0c2340] border border-cyan-900/60 hover:border-cyan-500/60 transition-all flex flex-col justify-between space-y-4 shadow-md text-white"
+                >
+                  <div className="space-y-2.5">
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                      <span className="text-[11px] font-mono text-[#005EB8] dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 px-2 py-0.5 rounded border border-sky-200 dark:border-sky-800 font-semibold">
+                        {res.organization}
+                      </span>
+                      <div className="flex items-center gap-1.5">
+                        {res.isStatutory && (
+                          <span className="text-[10px] font-bold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded border border-amber-200 dark:border-amber-800">
+                            Statutory Act
+                          </span>
+                        )}
+                        {res.isCaseStudy && (
+                          <span className="text-[10px] font-bold text-purple-900 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/60 px-2 py-0.5 rounded border border-purple-200 dark:border-purple-800">
+                            Governance Baseline
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    <a
+                      href={res.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-bold text-white hover:text-cyan-300 text-base flex items-start justify-between gap-2 group transition-colors"
+                    >
+                      <span className="leading-snug">{res.title}</span>
+                      <ExternalLink className="w-4 h-4 text-cyan-400 group-hover:text-cyan-200 shrink-0 mt-1 transition-colors" />
+                    </a>
+
+                    <p className="text-xs text-slate-200 leading-relaxed">
+                      {res.shortDesc}
+                    </p>
+
+                    {res.citation && (
+                      <div className="text-[11px] font-mono text-cyan-200 bg-[#07192f] p-2 rounded border border-cyan-900/60">
+                        {res.citation}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="pt-3 border-t border-cyan-900/40 space-y-2">
+                    <div className="text-[11px] text-slate-300 leading-snug">
+                      <strong className="text-cyan-300 font-semibold">Playbook Mapping:</strong> {res.playbookRelevance}
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                      {res.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] font-mono text-cyan-200 bg-[#07192f] px-1.5 py-0.5 rounded border border-cyan-900/50"
+                        >
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </>
       )}
     </div>

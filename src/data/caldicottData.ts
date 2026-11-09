@@ -58,7 +58,7 @@ export const CALDICOTT_PRINCIPLES: CaldicottPrincipleDetail[] = [
     tagline: 'Only individuals who need access to confidential data should have access to it.',
     officialDefinition: 'Only those individuals who need access to confidential information should have access to it, and they should only have access to the information items that they need to see. This may mean introducing access controls or splitting information into separate components.',
     populationResearchApplication: 'Multi-tenant research enclaves isolate projects into distinct Linux network namespaces and private storage volumes. Analysts working on Study A cannot discover, query, or mount data assets assigned to Study B, even within the same institutional platform.',
-    technicalEnforcementMechanism: 'Attribute-Based Access Control (ABAC) and Kubernetes ValidatingAdmissionWebhooks that enforce multi-tenant isolation, ephemeral storage tokens, and mutual TLS between pods.',
+    technicalEnforcementMechanism: 'Attribute-Based Access Control (ABAC) and namespaced admission controllers that enforce multi-tenant isolation, ephemeral storage tokens, and mutual TLS between pods.',
     shaclShapeRule: 'tre:EnclaveAccessShape sh:property [ sh:path tre:authorizedUser ; sh:hasValue tre:CurrentResearcher ]',
     opaRegoPolicy: 'default allow = false\nallow if {\n  input.user.assigned_projects[_] == input.target_dataset.project_id\n  input.user.active_session == true\n  input.session.mfa_authenticated == true\n}',
     accountableRole: 'Security Operations & Enclave Infrastructure SRE',

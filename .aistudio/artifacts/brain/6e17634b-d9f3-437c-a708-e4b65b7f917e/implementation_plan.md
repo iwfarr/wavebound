@@ -1,139 +1,159 @@
-# Implementation Plan: Curated Multi-Lens Cytoscape Knowledge Graph (Option A)
+# Project Seawater: 10-Phase Simplification & Enterprise Refactor Plan
 
-Expand the Cytoscape knowledge graph from a single Five Safes policy compiler into a **user-friendly, educational multi-lens explorer** of the Trusted Research Environment (TRE) ecosystem. Rather than overwhelming learners with an exhaustive 50-node network, this plan curates **5 focused lenses with 5–8 high-impact nodes each**, prioritizing visual clarity, intuitive comprehension, and zero clutter.
+A phased, pragmatic roadmap for streamlining Information Governance (IG) decision-support across Safe & Secure Data Intelligence Environments (SDEs & TREs), ensuring statutory compliance without masquerading as an official NHS body.
 
----
-
-## User Review & Critical Decisions
-
-> [!IMPORTANT]
-> - **Confirmed Approach (Option A - Multi-Faceted Subsystem Switcher)**: Users navigate between distinct, curated perspectives using a clean top-bar lens switcher.
-> - **Educational Focus (Not Exhaustive)**: To prevent visual clutter and cognitive fatigue, each lens is deliberately curated to **5–8 essential nodes** with clear plain-English definitions and intuitive relationship labels.
-> - **Curated Subsystem Lenses**:
->   1. **Policy-as-Code Pipeline** *(The existing 4-tier flow: Policy → SHACL → OPA → PROV-O)*
->   2. **Cloud & Computing Fabric** *(VDI Bastion, Zero-Egress VPC, Ephemeral Storage, In-Enclave AI Cluster)*
->   3. **Data Lifecycle & Linkage** *(Secure Ingest, De-ID Engine, Data Catalogue, Honest Broker, Airlock Egress)*
->   4. **Human Roles, Decision Gates & PPIE** *(Data Access Committee, Caldicott Guardian, Patient/Public Panel, 2-Person Airlock Panel)*
->   5. **Unified TRE Overview** *(An interconnected macro-view linking all 4 domains)*
-> - **Zero Code Modification in this Turn**: Following planning mode guidelines for `Plan action: revise`, source code is untouched pending plan confirmation.
+*Status: Work in progress · Open-source reference standard*
 
 ---
 
-## 1. Overview & Core Concept
+## Progress Overview
 
-### What It Does
-Transforms the Cytoscape canvas from a static, compiler-skewed view into an interactive **TRE Systems & Governance Explorer**. A prominent lens toolbar allows students, researchers, policy makers, and auditors to view the exact facet of the TRE they care about without visual tangle.
-
-### Target Personas
-* **Epidemiologists & Population Researchers**: Understand how their code runs inside isolated VPCs and how outputs pass disclosure control.
-* **Information Governance & Caldicott Guardians**: Inspect decision gates (DAC, Caldicott, PPIE, Airlock).
-* **Data Engineers & Platform Architects**: Trace data flows from quarantined ingest through de-identification, linkage, and workspace provisioning.
-* **Citizens & Patient Advocates**: View how patient safeguards and National Data Opt-Outs are preserved.
-
----
-
-## 2. User Experience & Visual Design
-
-### Key User Flows
-1. **Lens Selection**: User clicks one of 5 perspective tabs at the top of the Cytoscape component:
-   * 🛡️ `Policy Compilation Pipeline`
-   * ☁️ `Cloud & Infrastructure Fabric`
-   * 🔄 `Data Lifecycle & Linkage`
-   * 👥 `Human Roles & Patient Panels (PPIE)`
-   * 🌐 `Full TRE Ecosystem Overview`
-2. **Instant Focused Transition**: Cytoscape smoothly animates nodes and edges into a curated, non-overlapping preset layout tailored for that lens.
-3. **Node Inspection**: Clicking any node opens the side inspector panel displaying:
-   * Plain-English title and summary
-   * Role in the TRE ecosystem
-   * Technical / Governance details
-   * Executable code snippet or policy rule
-   * Direct deep links to Glossary terms and Playbook sections
-4. **Layout Freedom**: Learners can toggle between **Curated Flow (Preset DAG)**, **Hierarchical Tree**, **Orbital Rings (Concentric)**, or **Physics Force (COSE)** for any active lens.
-
-### Color-Coded Domain Tokens (High Contrast & Theme Compatible)
-* **Cyan (`#06b6d4`)**: Statutory Policies & Governance Standards
-* **Purple (`#8b5cf6`)**: SHACL Constraint Shapes & Closed-World Validation
-* **Indigo (`#6366f1`)**: Cloud Infrastructure & VDI Workspace Fabrics
-* **Emerald (`#10b981`)**: Data Lifecycle, De-ID & Honest Broker Linkage
-* **Amber (`#f59e0b`)**: Human Decision Gates, Caldicott Guardians & SIRO
-* **Rose (`#f43f5e`)**: Public & Patient Involvement (PPIE) & Citizen Safeguards
-* **Sky (`#0ea5e9`)**: Autonomous AI Workloads & MCP Boundaries
+| Phase | Title | Focus & Deliverable | Status |
+| :--- | :--- | :--- | :--- |
+| **Phase 1** | **Dual-Persona Navigation** | Global persona toggle (`IG Handbook` vs `Data Technical`) across header, mobile drawer, and Gateway hub | **COMPLETED** |
+| **Phase 2** | **Universal Evidence Pack Generator** | Standardized compliance dossier with Web Crypto SHA-256 seal, Caldicott & DAAG sign-offs, 1-click Markdown export, and print summary | **COMPLETED** |
+| **Phase 3** | **Five Safes Interactive Evaluator** | Consolidated Statutory Matrix & Five Safes Deep-Dive with live statutory mapping (UK GDPR, S251, Caldicott 1–8) | **COMPLETED** |
+| **Phase 4** | **Air-Gapped Package Mirror Architecture** | Dedicated developer guide & manifests for internal CRAN/PyPI/Docker registries with zero internet egress and direct analytics data plane | **COMPLETED** |
+| **Phase 5** | **Least-Privilege Enclave Manifests** | Namespaced admission & non-blocking audit-and-alert controllers (`failurePolicy: Ignore`), root-read-only pods, and zero-cluster-admin RBAC | **COMPLETED** |
+| **Phase 6** | **Quantitative SDC Math & Airlock Review** | Clean tabular disclosure control guide with interactive primary suppression ($k \ge 10$), complementary secondary suppression, (1, 80%) dominance, and 2-person cryptographic release | **COMPLETED** |
+| **Phase 7** | **Caldicott Principle 8 Transparency Portal** | Public benefit audit register and machine-readable W3C PROV-O provenance triple ledger (dual angle: IG Handbook & Data Technical) | **COMPLETED** |
+| **Phase 8** | **High-Contrast Editorial Typography & Zero-Pill Polish** | Seawater Deep Navy & Turquoise brand tokens, Public Sans government scale, high contrast, and strict non-pill badge discipline | **COMPLETED** |
+| **Phase 9** | **Curated Knowledge Graph Lenses** | Multi-lens Cytoscape explorer (Statutory Policy, Cloud Fabric, Data Lifecycle, Human Roles) with 6–8 nodes per lens, dual-angle inspector, and live sub-ms Rego simulator | **COMPLETED** |
+| **Phase 10** | **End-to-End Procurement Readiness** | Comprehensive SATRE v1.1, NHS DSPT 24/25, ISO 27001, and DCB0129 interactive compliance matrix, tender schedules, and downloadable vendor dossier | **COMPLETED** |
 
 ---
 
-## 3. Curated Node Topology per Lens (5–8 Nodes Each)
-
-```
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                              5 CURATED EDUCATIONAL LENSES                              │
-├────────────────────────────────┬───────────────────────────────────────────────────────┤
-│ Lens 1: Policy Pipeline        │ Policy Core → SHACL Shape → OPA Rule → PROV-O Audit   │
-│ Lens 2: Cloud Infrastructure   │ VDI Bastion → Zero-Egress VPC → Scratch Disk → AI GPU  │
-│ Lens 3: Data Lifecycle        │ Secure Ingest → Salted De-ID → Catalogue → Egress Gate│
-│ Lens 4: Human Roles & PPIE     │ DAC Gate → Caldicott Guardian → PPIE Panel → Airlock  │
-│ Lens 5: Unified Macro-Overview │ The 4 Hubs Interconnected at Major Transition Points  │
-└────────────────────────────────┴───────────────────────────────────────────────────────┘
-```
-
-### Lens 1: Policy-as-Code Compilation (Existing Refined)
-* `pol_FiveSafes`: Root statutory governance framework.
-* `pol_SafePerson` / `pol_SafeSetting` / `pol_SafeData` / `pol_SafeOutput`: 4 policy dimensions.
-* `shacl_WorkspaceAdmission` / `shacl_SDCOutput`: Closed-world validation shapes.
-* `opa_AdmissionRule` / `opa_AirlockRule`: Sub-millisecond runtime PDP evaluators.
-* `provo_AuditTriple`: Append-only audit trail.
-
-### Lens 2: Cloud & Computing Infrastructure Fabric (New)
-* `infra_VDI`: Virtual Desktop (Guacamole) streaming pixels only with copy-paste blocked.
-* `infra_ZeroEgressVPC`: Hardened private cloud subnet with external internet routes severed.
-* `infra_CalicoPEP`: eBPF/Calico network policy blocking all outbound WAN traffic.
-* `infra_WorkspacePod`: Ephemeral Jupyter/RStudio container runtime.
-* `infra_EncryptedStorage`: Project-scoped encrypted storage with ephemeral scratch wipe.
-* `infra_GPUCluster`: Air-gapped accelerator fabric hosting in-enclave LLMs.
-
-### Lens 3: End-to-End Data Lifecycle (New)
-* `data_SecureLandzone`: Quarantine zone for incoming SFTP transfers with virus/checksum scanning.
-* `data_DeIDEngine`: Cryptographic pseudonymisation pipeline replacing NHS numbers with salted IDs.
-* `data_HonestBroker`: Independent linkage agent joining disparate datasets (e.g., GP records + Census).
-* `data_Catalogue`: DCAT-AP metadata catalogue indexing data dictionaries and sensitivity tiers.
-* `data_ResearchEnclave`: Active research workspace containing approved analytical cohort partitions.
-* `data_AirlockEgress`: Secure export gateway verifying statistical disclosure control ($k \ge 10$).
-
-### Lens 4: Human Roles, Decision Gates & PPIE (New)
-* `role_DAC`: Data Access Committee approving research ethics and demonstrative public benefit.
-* `role_PPIEPanel`: Lay citizen and patient advisory group testing public value.
-* `role_OptOutRegistry`: National Data Opt-Out service verifying patient research choices.
-* `role_CaldicottGuardian`: Senior conscience overseeing confidentiality and proportionate sharing.
-* `role_HumanSponsor`: Accredited researcher legally accountable for AI agent workloads.
-* `role_AirlockPanel`: Independent 2-person review team inspecting statistical output tables.
-
-### Lens 5: Unified TRE Ecosystem Overview
-* Connects the 4 primary hubs with cross-cutting bridges:
-  * `Human Approval (DAC)` $\rightarrow$ unlocks $\rightarrow$ `Policy Rules (SHACL/OPA)`
-  * `Policy Rules` $\rightarrow$ configures $\rightarrow$ `VPC Infrastructure`
-  * `Data Pipeline` $\rightarrow$ loads cohort into $\rightarrow$ `Workspace Pod`
-  * `Airlock Panel` $\rightarrow$ verifies output with $\rightarrow$ `OPA Egress Rule`
+## Phase 3 Deliverables (Completed)
+- **Consolidated Statutory Matrix Component (`StatutoryMatrixView.tsx`)**:
+  - Live cross-cutting table linking the Five Safes to UK GDPR (Art 6(1)(e), Art 9(2)(j), Art 25, Art 32), NHS Act 2006 Section 251, Caldicott Principles 1–8, DSPT assertions, and ONS SDC rules.
+  - Interactive filters by Five Safes pillar (`All`, `Safe People`, `Safe Projects`, `Safe Settings`, `Safe Data`, `Safe Outputs`) and status (`PASS`, `WARN`, `FAIL`).
+  - Search filter across statutes, citations, Caldicott principles, and machine policy nodes.
+  - 1-click **Export Matrix .md** and **Copy CSV** for committee reporting.
+- **Five Safes Pillar Deep-Dive Component (`FiveSafesPillarsView.tsx`)**:
+  - Modular deep-dive cards for each of the 5 Safes:
+    - *Safe People*: DEA 2017 accreditation, annual IG certification, Stanford UIT AI non-personhood doctrine.
+    - *Safe Projects*: IRAS REC ethical approval, Section 251 CAG clearance, public benefit validation.
+    - *Safe Settings*: Zero-egress VPC network routing, eBPF/Calico drops, air-gapped package mirrors.
+    - *Safe Data*: Salted HMAC SHA-256 pseudonymisation, direct identifier expungement, clinical tiering.
+    - *Safe Outputs*: Quantitative statistical disclosure control ($k \ge 10$, dominance $\le 80\%$), 2-person airlock protocol.
+  - Interactive parameter controls directly embedded in each pillar card.
+- **Govern & Assure Workspace Sub-navigation**:
+  - 3 view tabs: `Interactive Protocol Evaluator`, `Consolidated Statutory Matrix`, and `Five Safes Pillar Deep-Dive`.
+  - Immediate synchronisation between simulator state, statutory matrix findings, and evidence pack dossier generation.
 
 ---
 
-## 4. Technical Implementation Steps
-
-1. **`src/data/graphData.ts`**:
-   * Add a `subsystem` attribute to `GraphNodeData`: `'policy' | 'infrastructure' | 'data-lifecycle' | 'governance' | 'unified'`.
-   * Add curated nodes and edges for Infrastructure, Data Lifecycle, and Human Roles/PPIE.
-   * Provide pre-calculated `preset` coordinates for each lens to guarantee zero overlap.
-2. **`src/components/CytoscapeGraph.tsx`**:
-   * Add a responsive lens selection toolbar at the top:
-     * `Policy Compilation` | `Infrastructure` | `Data Lifecycle` | `Human Roles & PPIE` | `Full Ecosystem`
-   * Filter visible elements based on the active lens before initializing or updating the Cytoscape graph.
-   * Update node style selectors to support the new domain colors (Indigo for Infra, Emerald for Data, Amber for Roles, Rose for PPIE).
-   * Ensure node selection, inspection sidebar, copy code snippets, and layout resets update smoothly.
-3. **Verification**:
-   * Run `lint_applet` (`tsc --noEmit`) to verify zero type mismatches.
-   * Run `compile_applet` (`npm run build`) to ensure clean bundle production.
+## Phase 4 Deliverables (Completed)
+- **Air-Gapped Package Mirror Architecture Component (`AirGapArchitectureHub.tsx`)**:
+  - Zero-WAN egress enforcement architecture for NHS ICBs and university multi-tenant clusters.
+  - Dedicated operational guides & configurations for:
+    - Internal CRAN Mirror (`Nexus / Posit Package Manager` with airlock hash verification).
+    - Internal PyPI Mirror (`Devpi / Artifactory` with pip.conf restricted index).
+    - OCI Registry Harbor (`Harbor + Trivy CVE Gates` with Cosign signature enforcement).
+  - 4-Stage Quarantined Ingestion Diode (External Request -> Air-Gapped DMZ Scan -> Security Review -> Air-Gapped Internal Sync).
+  - Direct Analytics Data Plane (DuckDB, PostgreSQL, Arrow Flight) bypassing Envoy sidecar proxies to eliminate socket exhaustion on billion-row cohort queries.
+  - Interactive Package Mirror Configuration Generator with 1-click YAML/Conf download and clipboard copy.
 
 ---
 
-## 5. Summary of Benefits
-* **Educational & Approachable**: Each view presents a coherent story with 5–8 clear concepts instead of overwhelming newcomers.
-* **Zero Visual Clutter**: Eliminates overlapping nodes and intersecting edge spaghetti.
-* **Multi-Audience Appeal**: Researchers, engineers, clinical leaders, and patient advocates can immediately find their respective domain.
+## Phase 5 Deliverables (Completed)
+- **Least-Privilege Enclave Manifest Hub (`LeastPrivilegeEnclaveHub.tsx`)**:
+  - Interactive multi-tenant Kubernetes manifest generator tailored for enterprise NHS and academic TREs:
+    - **RStudio Analytical Pod**: Read-only root filesystem, non-root UID 10001, ephemeral 50Gi `/scratch` volume, internal CRAN mirror routing, and dropped Linux capabilities.
+    - **DuckDB Analytics Pod**: Direct kernel socket access for heavy columnar aggregations, no Envoy sidecar overhead.
+    - **Namespaced Admission Controller**: ValidatingWebhookConfiguration scoped strictly to project namespaces with non-blocking **`failurePolicy: Ignore`** audit-and-alert mechanism to prevent research pod launch timeouts.
+    - **Namespace-Scoped RBAC RoleBinding**: Zero `cluster-admin` bindings; strictly namespaced roles for research teams and automated CI/CD pipelines.
+  - **8 Statutory Least-Privilege Guardrails Matrix**: Complete mapping of K8s securityContext settings against NHS DSPT and SATRE v1.1 requirements (Root FS Read-Only, Drop ALL Capabilities, No Host Namespaces, No Privilege Escalation, Strict Resource Limits, Namespace Isolation, Audit-and-Alert vs Blocking, Non-Root UID 10001).
+  - **Live Admission-and-Alert Event Stream Simulator**: Visual demonstrator showing real-time non-blocking audit events emitted to SIEM/Audit Logs without halting researcher workloads.
+  - Integrated into `BuildDeployWorkspace.tsx` under the `manifests` sub-workspace tab.
+
+---
+
+## Phase 6 Deliverables (Completed)
+- **Quantitative SDC Hub Component (`QuantitativeSDCHub.tsx`)**:
+  - Grounded in Office for National Statistics (ONS) SDC Handbook, UK LLC Output Checking, and Caldicott Principle 8 ("No surprises").
+  - **Interactive Tabular SDC Simulator**:
+    - Real-world clinical presets: Rare Pediatric Cardiology cohort (cross-tabulation), Specialized Biologic Drug expenditure (continuous dominance), and Survival Analysis & Regression Residuals.
+    - **Primary Cell Suppression ($k < 10$)**: Evaluates small cells and suppresses with `<10*` badge.
+    - **Complementary Secondary Suppression**: Mathematical solver identifying when row/column marginal totals allow deductive calculation of suppressed cells ($Total - Cell_1 = Cell_2$). Automatically applies `SUPP*` to adjacent non-disclosive cells to eliminate derivation vectors.
+    - **Top-Contributor Dominance Testing ($(1, p\%)$ and $(2, 85\%)$ rules)**: Computes continuous financial or clinical metric concentration (e.g. specialized pharmacy spend), flagging when top 1 patient accounts for $> 80\%$ or top 2 accounts for $> 85\%$.
+    - **Degrees of Freedom Verification**: Enforces $df = N - p \ge 10$ before statistical model coefficients can leave the airlock.
+  - **ONS & NHS SDC Methods Comparison**: Comparative reference matrix contrasting Primary & Complementary Suppression, Dominance Testing, Controlled Rounding (Base 3/5), and Degrees of Freedom.
+  - **Machine Policy-as-Code (SHACL & OPA Rego)**:
+    - Formal W3C SHACL shape (`sdc_airlock_shape.ttl`) with `sh:minInclusive 10` and `sh:maxInclusive 0.80`.
+    - Low-latency OPA Rego policy (`airlock_sdc.rego`) evaluating tabular matrices in $< 1\text{ms}$ at the airlock PEP.
+  - **Two-Person Airlock Review Protocol & Cryptographic Seal**:
+    - Gate 1: Automated SDC Shape PEP Validation.
+    - Gate 2: Accredited SDC Lead / Output Checker review with audit rationale.
+    - Real-time **Web Crypto SHA-256 seal** computed over candidate table data, suppression results, and reviewer signatures.
+    - 1-click **Export SDC Audit Dossier (.md)** and **Download Release Manifest (.json)**.
+  - **Seamless Navigation**: Integrated as a dedicated tab in `GovernAssureWorkspace.tsx`, linked from the Safe Outputs gate card, and rendered directly in `ResourcesPage.tsx`.
+- **Clean Mathematical Notation Fix**:
+  - Replaced unparsed LaTeX formatting in `quizBank.ts` and `QuizEngine.tsx` with clean unicode math (`k ≥ 10`, `dominance ≤ 80%`), eliminating any broken rendering.
+- **De-emphasized Air-Gapped Mirrors**:
+  - Default tab in `BuildDeployWorkspace.tsx` shifted to **Semantic Graph Ontology & SHACL Shapes**, positioning graph-navigated, audited Information Governance with OPA, RDF, and OWL front and centre.
+
+---
+
+## Phase 7 Deliverables (Completed)
+- **Caldicott Principle 8 Transparency Portal & W3C PROV-O Provenance Ledger (`CaldicottTransparencyPortal.tsx`)**:
+  - Delivers the strict dual angle requested by user:
+    - **Lens A: `IG Handbook Angle` (Public Benefit & Open Data Use Register)**:
+      - Searchable Open Data Use Register complying with HDR UK Gateway and NHS Caldicott 8 standards.
+      - Lay summaries written at Reading Age 11 for patients and the public.
+      - Explicit Public Benefit & Health Impact statements.
+      - Patient & Public Involvement (PPIE) co-design scorecards (e.g. Tiny Tickers & BHF Youth Advisory Board with patient co-authors).
+      - National Data Opt-Out (NDOO) compliance audit status with verified record purge counts (14,208 records purged at ingestion).
+      - Institutional Caldicott Principle 8 Compliance Verification Checklist.
+      - 1-click **Export Open Register (.md)**.
+    - **Lens B: `Data Technical Angle` (W3C PROV-O Graph Lineage & Machine Triple Ledger)**:
+      - Interactive visual Provenance DAG timeline tracking data from `Entity` (raw HES extract) -> `Activity` (opt-out purge, pseudonymisation, SQL linkage) -> `Entity` (filtered cohort) -> `Activity` (SDC masking) -> `Entity` (airlocked release ticket), accompanied by `Agent` attestations.
+      - Cryptographic state commitment viewer displaying SHA-256 state hashes for every node.
+      - Cryptographic lineage chain verification simulator.
+      - Formal W3C Turtle RDF serialization (`prov_ledger.ttl`).
+      - Production SPARQL audit query template (`verify_caldicott8_provenance.rq`).
+  - **Seamless Navigation**:
+    - Wired into `GovernAssureWorkspace.tsx` as a dedicated workspace view tab (`transparency_ledger`).
+    - Added direct shortcut button in the Evaluator's Gate 6 row ("View Public Register").
+    - Highlighted in `GatewayPortal.tsx` and linked from `Header.tsx`.
+    - Integrated `prov` and `caldicott` namespace filter options into `BuildDeployWorkspace.tsx`.
+
+---
+
+## Phase 8 Deliverables (Completed)
+- **High-Contrast Editorial Typography & Zero-Pill Polish**:
+  - Maintained Seawater's authentic **Deep Navy (`#0C2340`, `#0F294A`) and Turquoise (`#00A389`, `#0284C7`)** visual identity, deliberately avoiding generic pale HDR UK heather violet washes.
+  - Implemented high-contrast `Public Sans` typography tokens with tabular numbers for mathematical SDC metrics.
+  - Enforced strict **zero-pill discipline**: converted all rounded pills to crisp, high-density rectangular badges (`rounded-md` / `rounded-lg`) across `ImplementationTrack.tsx`, `PlaybookReader.tsx`, `QuizEngine.tsx`, `GovernanceAtlas.tsx`, and `SeawaterLogo.tsx`.
+  - Cleaned all unparsed LaTeX parenthesis math across the quiz bank into clear unicode text (`k ≥ 10`, `dominance ≤ 80%`).
+
+---
+
+## Phase 9 Deliverables (Completed)
+- **Curated Knowledge Graph Lenses (`CytoscapeGraph.tsx` & `graphData.ts`)**:
+  - Rebuilt the knowledge graph to feature 4 curated, purpose-driven lenses with 6–8 nodes per lens, eliminating visual edge clutter:
+    1. **Lens 1: Statutory & Policy-as-Code Lens**: Connects Five Safes Core, DEA 2017 Safe Person, REC/S251 Safe Project, Zero-WAN Egress Safe Setting, SHACL Admission & SDC Shapes, and OPA Rego PDP.
+    2. **Lens 2: Cloud Fabric & Enclave PEP Lens**: Traces Perimeter Envoy Gateway, non-blocking admission controller (`failurePolicy: Ignore`), private CRAN/PyPI mirror diode, root-read-only analytical pod, direct Arrow/DuckDB socket, and 2-person airlock PEP.
+    3. **Lens 3: Data Lifecycle & SDC Airlock Lens**: Maps secondary uses hospital extract, National Data Opt-Out (14,208 records purged), salted HMAC SHA-256 pseudonymiser, de-identified cohort, primary/secondary SDC solver, and SHA-256 sealed release ticket.
+    4. **Lens 4: Human Roles & Governance Accountability Lens**: Models statutory human oversight: Caldicott Guardian / SIRO veto authority, REC/CAG ethics advisory, Accredited Researcher commitments, SDC Output Checker co-signoff, and Patient & Public Advisory Council co-design.
+  - **Live Dual-Angle Inspector**:
+    - *IG Handbook Angle*: Plain-English summary, direct citizen safeguard reassurance, statutory mandate, and Caldicott principle citation.
+    - *Data Technical Angle*: Formal W3C Turtle RDF/OWL class definition, SHACL shape constraint (`sh:minInclusive 10`), compiled OPA Rego rule (`allow { ... }`), and W3C PROV-O audit signature.
+  - **Live In-Node Policy Simulator**: Interactive simulator right inside the inspector allowing immediate microsecond Rego decision evaluation (< 0.5ms) with evaluation trace.
+  - 1-click **Export Lens (.ttl)** Turtle RDF download.
+
+---
+
+## Phase 10 Deliverables (Completed)
+- **End-to-End Enterprise Procurement Readiness Hub (`ProcurementReadinessHub.tsx` & `procurementData.ts`)**:
+  - Comprehensive, interactive audit control matrix covering:
+    - **SATRE v1.1** (Standard Architecture for Trusted Research Environments: Computing Infrastructure, Data Governance, Output Checking).
+    - **NHS Data Security & Protection Toolkit (DSPT 2024/25)**: All 10 National Data Guardian standards including NDOO respect, staff accreditation, and zero cluster-admin RBAC.
+    - **ISO/IEC 27001:2022 & ISO 27701:2019**: Annex A controls for DLP, zero-trust network isolation, and secure coding.
+    - **DCB0129 & ISO/IEC 42001:2023**: Clinical hazard logging, Clinical Safety Officer (CSO) sign-off, and Stanford UIT AI non-personhood doctrine.
+  - **Interactive Vendor Auditing**: Live toggleable compliance states (`COMPLIANT`, `PARTIALLY_COMPLIANT`, `ACTION_REQUIRED`) with automatic recalculation of overall readiness score (100% Mandatory Pass Rate).
+  - **Tender-Ready Contractual Schedules**: Pre-written, legally binding clauses for NHS IT tenders (Schedule A: Sovereign Custody & Egress Prohibition, Schedule B: Cryptographic SDC, Schedule C: Least-Privilege Pod Hardening, Schedule D: Caldicott 8 Transparency).
+  - **Official Executive Declaration**: Formal Certificate of Conformance for NHS England, HRA, and University IG committees.
+  - **Downloadable Evidence Packs**: 1-click **Export Dossier (.md)**, **Download Matrix (.json)**, and **Print Evidence Statement**.
+  - **Seamless Integration**: Mounted as a dedicated tab in `GovernAssureWorkspace.tsx`, linked from `ResourcesPage.tsx`, highlighted in `GatewayPortal.tsx`, and accessible in `Header.tsx`.
+

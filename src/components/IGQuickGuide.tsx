@@ -818,23 +818,23 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
-      {/* 1. HERO BANNER */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+      {/* 1. HERO BANNER - Unified Deep Navy & Turquoise Card */}
+      <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-10 relative overflow-hidden shadow-xl text-white">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 space-y-3 max-w-3xl">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-mono font-bold text-emerald-300 bg-emerald-950/80 px-2.5 py-0.5 rounded border border-emerald-800 flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5" />
+            <span className="text-xs font-mono font-bold text-teal-300 bg-[#07192f] px-2.5 py-1 rounded border border-teal-500/40 flex items-center gap-1.5 shadow-xs">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#00A389]" />
               <span>Official Reference Handbook</span>
             </span>
-            <span className="text-xs font-mono text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
-              UK GDPR · Caldicott · NHS Act 2006 s251 · DEA 2017
+            <span className="text-xs font-mono text-slate-300 bg-[#07192f] px-2.5 py-1 rounded border border-cyan-900/60 font-semibold">
+              UK GDPR · Caldicott Principles 1–8 · NHS Act 2006 s251 · DEA 2017
             </span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Information Governance Quick Guide &amp; Desk Reference
+            IG Handbook: Information Governance &amp; Statutory Desk Reference
           </h1>
 
           <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
@@ -845,9 +845,9 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
             {onNavigateToGovernAssure && (
               <button
                 onClick={onNavigateToGovernAssure}
-                className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold flex items-center gap-2 shadow-md shadow-amber-500/20 transition-all cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold flex items-center gap-2 shadow-md shadow-teal-500/20 transition-colors cursor-pointer"
               >
-                <Scale className="w-4 h-4" />
+                <Scale className="w-4 h-4 text-slate-950" />
                 <span>Open Scenario Evaluator &amp; Assurance Engine</span>
               </button>
             )}
@@ -856,7 +856,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
       </div>
 
       {/* 2. SUB-NAVIGATION TABS */}
-      <div className="flex items-center gap-2 border-b border-slate-800 pb-2 overflow-x-auto">
+      <div className="flex items-center gap-2 border-b border-cyan-900/40 pb-2 overflow-x-auto">
         {[
           { id: 'handbook', label: '1. Compliance Handbook', icon: <BookOpen className="w-4 h-4" /> },
           { id: 'schematic', label: '2. Governance Decision Schematic', icon: <Network className="w-4 h-4" /> },
@@ -869,8 +869,8 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
             onClick={() => setActiveTab(tab.id as any)}
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
               activeTab === tab.id
-                ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+                ? 'bg-[#00A389] text-white shadow-md shadow-teal-950/40 font-bold border border-teal-400'
+                : 'bg-[#0c2340] border border-cyan-900/50 text-slate-300 hover:text-white hover:border-cyan-500/40 hover:bg-[#112f54]'
             }`}
           >
             {tab.icon}
@@ -894,20 +894,20 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                   <button
                     key={ch.id}
                     onClick={() => setSelectedChapterId(ch.id)}
-                    className={`w-full text-left p-4 rounded-2xl border transition-all cursor-pointer ${
+                    className={`w-full text-left p-4 rounded-xl border transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-emerald-950/60 border-emerald-500 text-white shadow-sm'
-                        : 'bg-slate-900/80 border-slate-800/80 text-slate-400 hover:bg-slate-850 hover:text-slate-200'
+                        ? 'bg-[#0c2340] border-2 border-[#00A389] text-white shadow-lg shadow-teal-950/50'
+                        : 'bg-slate-950/80 border-cyan-900/40 text-slate-300 hover:bg-[#0c2340] hover:border-cyan-500/40 hover:text-white'
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono font-bold text-emerald-400">Chapter {ch.number}</span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-950 border border-slate-800 text-slate-400">
+                      <span className="text-xs font-mono font-bold text-teal-400">Chapter {ch.number}</span>
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#07192f] border border-cyan-900/60 text-slate-300 font-semibold">
                         {ch.badge.split('&')[0]}
                       </span>
                     </div>
                     <strong className="text-sm font-bold block text-white mt-1">{ch.title}</strong>
-                    <p className="text-xs text-slate-400 line-clamp-2 mt-1">{ch.shortDesc}</p>
+                    <p className="text-xs text-slate-300 line-clamp-2 mt-1 leading-relaxed">{ch.shortDesc}</p>
                   </button>
                 );
               })}
@@ -915,75 +915,75 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
           </div>
 
           {/* Chapter Details (Right 8 cols) */}
-          <div className="lg:col-span-8 bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
-            <div className="space-y-2 border-b border-slate-800 pb-5">
+          <div className="lg:col-span-8 bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xl text-white">
+            <div className="space-y-2 border-b border-cyan-900/60 pb-5">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-950/80 px-2.5 py-0.5 rounded border border-emerald-800">
+                <span className="text-xs font-mono font-bold text-teal-300 bg-[#07192f] px-2.5 py-0.5 rounded border border-teal-500/40">
                   Chapter {selectedChapter.number}
                 </span>
-                <span className="text-xs font-mono text-slate-400">{selectedChapter.badge}</span>
+                <span className="text-xs font-mono text-cyan-300 font-medium">{selectedChapter.badge}</span>
               </div>
               <h2 className="text-2xl font-bold text-white tracking-tight">{selectedChapter.title}</h2>
-              <p className="text-xs text-slate-400 font-mono">Statutory Authority: {selectedChapter.statutoryBasis}</p>
+              <p className="text-xs text-cyan-300 font-mono font-medium">Statutory Authority: {selectedChapter.statutoryBasis}</p>
             </div>
 
-            {/* Key Safeguards Callout */}
+            {/* Key Safeguards Callout - Dark Navy & Turquoise Container */}
             <div className="space-y-3">
-              <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider font-mono flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+              <h3 className="text-xs font-bold text-teal-300 uppercase tracking-wider font-mono flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#00A389]" />
                 <span>Foundational Information Governance Safeguards &amp; Core Rules</span>
               </h3>
               <div className="space-y-2">
                 {selectedChapter.keySafeguards.map((item, idx) => (
-                  <div key={idx} className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex items-start gap-3">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <p className="text-xs text-slate-300 leading-relaxed">{item}</p>
+                  <div key={idx} className="p-3.5 rounded-xl bg-slate-950/80 border border-teal-500/40 flex items-start gap-3 shadow-xs">
+                    <CheckCircle2 className="w-4 h-4 text-[#00A389] shrink-0 mt-0.5" />
+                    <p className="text-xs text-slate-200 leading-relaxed font-medium">{item}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Step-by-Step Human Workflow */}
+            {/* Step-by-Step Human Workflow - Deep Slate Box with Cyan Accents */}
             <div className="space-y-3 pt-2">
-              <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider font-mono flex items-center gap-2">
+              <h3 className="text-xs font-bold text-cyan-300 uppercase tracking-wider font-mono flex items-center gap-2">
                 <FileCheck2 className="w-4 h-4 text-cyan-400" />
                 <span>Procedural Approval Hand-offs</span>
               </h3>
               <div className="space-y-2.5">
                 {selectedChapter.workflowSteps.map((wf, idx) => (
-                  <div key={idx} className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+                  <div key={idx} className="p-3.5 rounded-xl bg-slate-950/80 border border-[#1b3f68] space-y-1 shadow-xs">
                     <div className="flex items-center justify-between">
-                      <strong className="text-white text-xs">{wf.title}</strong>
-                      <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/80">
+                      <strong className="text-cyan-200 text-xs font-bold">{wf.title}</strong>
+                      <span className="text-[10px] font-mono text-cyan-300 bg-[#07192f] px-2 py-0.5 rounded border border-cyan-700/60 font-semibold">
                         Role: {wf.responsibleParty}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-400 leading-relaxed">{wf.description}</p>
+                    <p className="text-xs text-slate-300 leading-relaxed">{wf.description}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Executive Callout */}
-            <div className="p-4 rounded-2xl bg-amber-950/40 border border-amber-900/60 flex items-start gap-3">
+            {/* Executive Callout - Amber Border on Dark Slate */}
+            <div className="p-4 rounded-xl bg-slate-950/90 border border-amber-500/40 flex items-start gap-3 shadow-xs">
               <Info className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
               <div className="space-y-1 text-xs">
-                <strong className="text-amber-300 font-mono uppercase text-[10px] block tracking-wider">
+                <strong className="text-amber-400 font-mono uppercase text-[10px] block tracking-wider font-bold">
                   Caldicott &amp; DPO Executive Directive:
                 </strong>
-                <p className="text-slate-300 leading-relaxed italic">{selectedChapter.executiveCallout}</p>
+                <p className="text-amber-200 leading-relaxed italic font-medium">{selectedChapter.executiveCallout}</p>
               </div>
             </div>
           </div>
 
           {/* COMPREHENSIVE EXECUTIVE DESK REFERENCE: 4 FOUNDATIONAL PILLARS (COL-SPAN 12) */}
-          <div className="lg:col-span-12 bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 mt-4">
-            <div className="border-b border-slate-800 pb-4 space-y-1">
+          <div className="lg:col-span-12 bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 space-y-6 mt-4 shadow-xl text-white">
+            <div className="border-b border-cyan-900/60 pb-4 space-y-1">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider bg-emerald-950 px-2.5 py-0.5 rounded border border-emerald-800">
+                <span className="text-xs font-mono font-bold text-teal-300 uppercase tracking-wider bg-[#07192f] px-2.5 py-0.5 rounded border border-teal-500/40">
                   Comprehensive Desk Reference
                 </span>
-                <span className="text-xs font-mono text-slate-400">Statutory &amp; Ethical Foundations</span>
+                <span className="text-xs font-mono text-slate-400 font-medium">Statutory &amp; Ethical Foundations</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Information Governance Principles &amp; Privacy Safeguards Reference
@@ -995,13 +995,13 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Pillar 1: The 8 Caldicott Principles */}
-              <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3 flex flex-col justify-between">
+              <div className="p-5 rounded-xl bg-slate-950/80 border border-purple-900/60 space-y-3 flex flex-col justify-between shadow-md">
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-xs font-bold text-purple-400 uppercase tracking-wider font-mono">
-                    <Scale className="w-4 h-4" />
+                  <div className="flex items-center gap-2 text-xs font-bold text-purple-300 uppercase tracking-wider font-mono">
+                    <Scale className="w-4 h-4 text-purple-400" />
                     <span>The 8 Caldicott Principles</span>
                   </div>
-                  <h4 className="text-sm font-bold text-white">National Data Guardian Baseline</h4>
+                  <h4 className="text-sm font-bold text-purple-200">National Data Guardian Baseline</h4>
                   <ul className="text-xs text-slate-300 space-y-1.5 leading-relaxed">
                     <li><strong className="text-purple-300">1. Justify Purpose:</strong> Every proposed use must be formally justified.</li>
                     <li><strong className="text-purple-300">2. Essential PCD Only:</strong> Do not use personal confidential data unless essential.</li>
@@ -1015,49 +1015,49 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                 </div>
               </div>
 
-              {/* Pillar 2: Five Safes Framework */}
-              <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3 flex flex-col justify-between">
+              {/* Pillar 2: Five Safes Framework - Turquoise Accent */}
+              <div className="p-5 rounded-xl bg-slate-950/80 border border-teal-500/40 space-y-3 flex flex-col justify-between shadow-md">
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider font-mono">
-                    <ShieldCheck className="w-4 h-4" />
+                  <div className="flex items-center gap-2 text-xs font-bold text-teal-300 uppercase tracking-wider font-mono">
+                    <ShieldCheck className="w-4 h-4 text-teal-400" />
                     <span>Five Safes Architecture</span>
                   </div>
-                  <h4 className="text-sm font-bold text-white">Safe Data Intelligence Model</h4>
+                  <h4 className="text-sm font-bold text-teal-200">Safe Data Intelligence Model</h4>
                   <ul className="text-xs text-slate-300 space-y-2 leading-relaxed">
-                    <li><strong className="text-cyan-300">Safe People:</strong> Vetted researchers with annual accredited Information Governance training and institutional sponsorship.</li>
-                    <li><strong className="text-cyan-300">Safe Projects:</strong> Protocols evaluated by HRA Research Ethics Committees for valid public interest benefit.</li>
-                    <li><strong className="text-cyan-300">Safe Settings:</strong> Air-gapped, zero-egress enclaves where clipboard, external USB, and outbound internet are permanently severed.</li>
-                    <li><strong className="text-cyan-300">Safe Data:</strong> Direct identifiers permanently expunged at source; linkage via salted one-way tokens.</li>
-                    <li><strong className="text-cyan-300">Safe Outputs:</strong> Mandatory statistical disclosure control (k &ge; 10) and two-person airlock reviews.</li>
+                    <li><strong className="text-teal-300">Safe People:</strong> Vetted researchers with annual accredited Information Governance training and institutional sponsorship.</li>
+                    <li><strong className="text-teal-300">Safe Projects:</strong> Protocols evaluated by HRA Research Ethics Committees for valid public interest benefit.</li>
+                    <li><strong className="text-teal-300">Safe Settings:</strong> Air-gapped, zero-egress enclaves where clipboard, external USB, and outbound internet are permanently severed.</li>
+                    <li><strong className="text-teal-300">Safe Data:</strong> Direct identifiers permanently expunged at source; linkage via salted one-way tokens.</li>
+                    <li><strong className="text-teal-300">Safe Outputs:</strong> Mandatory statistical disclosure control (k &ge; 10) and two-person airlock reviews.</li>
                   </ul>
                 </div>
               </div>
 
-              {/* Pillar 3: Lawful Basis & Statutory Exemptions */}
-              <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3 flex flex-col justify-between">
+              {/* Pillar 3: Lawful Basis & Statutory Exemptions - Deep Navy / Sky */}
+              <div className="p-5 rounded-xl bg-slate-950/80 border border-sky-800/60 space-y-3 flex flex-col justify-between shadow-md">
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-wider font-mono">
-                    <Building2 className="w-4 h-4" />
+                  <div className="flex items-center gap-2 text-xs font-bold text-sky-300 uppercase tracking-wider font-mono">
+                    <Building2 className="w-4 h-4 text-sky-400" />
                     <span>Lawful Grounds &amp; Gateway</span>
                   </div>
-                  <h4 className="text-sm font-bold text-white">UK GDPR &amp; Section 251</h4>
+                  <h4 className="text-sm font-bold text-sky-200">UK GDPR &amp; Section 251</h4>
                   <ul className="text-xs text-slate-300 space-y-2 leading-relaxed">
-                    <li><strong className="text-emerald-300">UK GDPR Article 6(1)(e):</strong> Processing is necessary for the performance of a task carried out in the public interest.</li>
-                    <li><strong className="text-emerald-300">UK GDPR Article 9(2)(j):</strong> Scientific research condition under DPA 2018 Section 19 safeguards.</li>
-                    <li><strong className="text-emerald-300">NHS Act 2006 s251:</strong> Statutory exemption advised by the Confidentiality Advisory Group (CAG) when direct patient consent is impracticable.</li>
-                    <li><strong className="text-emerald-300">National Data Opt-Out:</strong> Citizens who register their opt-out preference are systematically purged prior to analytical extraction.</li>
+                    <li><strong className="text-sky-300">UK GDPR Article 6(1)(e):</strong> Processing is necessary for the performance of a task carried out in the public interest.</li>
+                    <li><strong className="text-sky-300">UK GDPR Article 9(2)(j):</strong> Scientific research condition under DPA 2018 Section 19 safeguards.</li>
+                    <li><strong className="text-sky-300">NHS Act 2006 s251:</strong> Statutory exemption advised by the Confidentiality Advisory Group (CAG) when direct patient consent is impracticable.</li>
+                    <li><strong className="text-sky-300">National Data Opt-Out:</strong> Citizens who register their opt-out preference are systematically purged prior to analytical extraction.</li>
                   </ul>
                 </div>
               </div>
 
-              {/* Pillar 4: AI & Autonomous Agent Governance */}
-              <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3 flex flex-col justify-between">
+              {/* Pillar 4: AI & Autonomous Agent Governance - Warm Ochre */}
+              <div className="p-5 rounded-xl bg-slate-950/80 border border-amber-600/40 space-y-3 flex flex-col justify-between shadow-md">
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-wider font-mono">
-                    <Bot className="w-4 h-4" />
+                  <div className="flex items-center gap-2 text-xs font-bold text-amber-300 uppercase tracking-wider font-mono">
+                    <Bot className="w-4 h-4 text-amber-400" />
                     <span>AI &amp; Autonomous Agents</span>
                   </div>
-                  <h4 className="text-sm font-bold text-white">Stanford UIT Doctrine</h4>
+                  <h4 className="text-sm font-bold text-amber-200">Stanford UIT Doctrine</h4>
                   <ul className="text-xs text-slate-300 space-y-2 leading-relaxed">
                     <li><strong className="text-amber-300">Non-Personhood Doctrine:</strong> AI algorithms possess no legal personhood, cannot sign undertakings, and can NEVER be &ldquo;Safe People&rdquo;.</li>
                     <li><strong className="text-amber-300">Human Sponsor Liability:</strong> Every automated AI workload must be legally bound to an accredited human researcher bearing statutory liability.</li>
@@ -1074,19 +1074,19 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
       {/* TAB 2: SCHEMATIC */}
       {activeTab === 'schematic' && (
         <div className="space-y-6">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+          <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 space-y-4 shadow-xl text-white">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cyan-900/60 pb-4">
               <div>
-                <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
+                <span className="text-xs font-mono font-bold text-teal-300 uppercase tracking-wider">
                   Governance Process Architecture
                 </span>
                 <h2 className="text-xl font-bold text-white tracking-tight">
                   End-to-End Information Governance &amp; Ethics Schematic
                 </h2>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-xs text-slate-300 mt-0.5">
                   Click any stage node below to inspect statutory hand-offs, responsible roles, and privacy safeguards.
                 </p>
-                <div className="mt-2 p-2.5 rounded-xl bg-amber-950/30 border border-amber-800/40 text-[11px] text-amber-200/90 leading-relaxed flex items-start gap-2">
+                <div className="mt-2 p-2.5 rounded-xl bg-slate-950/80 border border-amber-500/40 text-[11px] text-amber-200 leading-relaxed flex items-start gap-2 shadow-xs">
                   <Info className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                   <span>
                     <strong>Informational Architecture Reference:</strong> This schematic is provided for educational and illustrative purposes. Individual NHS Trusts, research institutes, and universities maintain differing local governance policies, committee designations (e.g. delegated Caldicott panels or local data access boards), and implementation workflows.
@@ -1094,24 +1094,24 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                 </div>
               </div>
 
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 shrink-0">
                 <button
                   onClick={() => cyRef.current?.zoom(cyRef.current.zoom() * 1.2)}
-                  className="p-2 rounded-lg bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 text-xs"
+                  className="p-2 rounded-lg bg-[#07192f] hover:bg-[#123154] text-cyan-300 border border-cyan-900/60 text-xs cursor-pointer transition-colors"
                   title="Zoom In"
                 >
                   <ZoomIn className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => cyRef.current?.zoom(cyRef.current.zoom() * 0.8)}
-                  className="p-2 rounded-lg bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 text-xs"
+                  className="p-2 rounded-lg bg-[#07192f] hover:bg-[#123154] text-cyan-300 border border-cyan-900/60 text-xs cursor-pointer transition-colors"
                   title="Zoom Out"
                 >
                   <ZoomOut className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => cyRef.current?.fit(undefined, 30)}
-                  className="p-2 rounded-lg bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 text-xs flex items-center gap-1"
+                  className="p-2 rounded-lg bg-[#07192f] hover:bg-[#123154] text-cyan-300 border border-cyan-900/60 text-xs flex items-center gap-1 cursor-pointer transition-colors"
                   title="Reset Fit"
                 >
                   <RotateCcw className="w-4 h-4" />
@@ -1122,20 +1122,20 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
             {/* Cytoscape Canvas */}
             <div
               ref={graphContainerRef}
-              className="w-full h-[450px] bg-slate-950 rounded-2xl border border-slate-800"
+              className="w-full h-[450px] bg-slate-950 rounded-xl border border-cyan-900/60 shadow-inner"
             />
 
             {/* Inspected Node Card */}
             {selectedSchematicNode && (
-              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+              <div className="p-4 rounded-xl bg-slate-950/90 border border-cyan-500/40 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs shadow-md">
                 <div className="space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-slate-400 block">Selected Stage</span>
-                  <strong className="text-white text-sm block">{selectedSchematicNode.label}</strong>
-                  <span className="text-emerald-400 font-mono text-[11px] block">{selectedSchematicNode.statutoryRole}</span>
+                  <span className="text-[10px] font-mono uppercase text-slate-400 block font-semibold">Selected Stage</span>
+                  <strong className="text-white text-sm block font-bold">{selectedSchematicNode.label}</strong>
+                  <span className="text-teal-400 font-mono text-[11px] block font-semibold">{selectedSchematicNode.statutoryRole}</span>
                 </div>
                 <div className="md:col-span-2 space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-slate-400 block">Governance Function &amp; Safeguard</span>
-                  <p className="text-slate-300 leading-relaxed">{selectedSchematicNode.shortDesc}</p>
+                  <span className="text-[10px] font-mono uppercase text-slate-400 block font-semibold">Governance Function &amp; Safeguard</span>
+                  <p className="text-slate-200 leading-relaxed font-medium">{selectedSchematicNode.shortDesc}</p>
                 </div>
               </div>
             )}
@@ -1145,10 +1145,10 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
 
       {/* TAB 3: GLOSSARY */}
       {activeTab === 'glossary' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xl text-white">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-cyan-900/60 pb-4">
             <div>
-              <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
+              <span className="text-xs font-mono font-bold text-teal-300 uppercase tracking-wider">
                 Authoritative Desk Dictionary
               </span>
               <h2 className="text-xl font-bold text-white tracking-tight">
@@ -1158,27 +1158,27 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
 
             {/* Search Input */}
             <div className="relative w-full sm:w-72">
-              <Search className="w-3.5 h-3.5 absolute left-3 top-3 text-slate-500" />
+              <Search className="w-3.5 h-3.5 absolute left-3 top-3 text-slate-400" />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search terms, DPIA, S251..."
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                className="w-full bg-slate-950 border border-cyan-900/60 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 transition-colors shadow-xs"
               />
             </div>
           </div>
 
-          {/* Category Filter Pills */}
+          {/* Category Filter Buttons */}
           <div className="flex flex-wrap items-center gap-1.5 text-xs">
             {(['All', 'Governance & Frameworks', 'Standards & Clinical Safety', 'Governance Maturity Model', 'Disclosure Control (SDC)', 'AI & Autonomous Agents'] as const).map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedGlossaryCategory(cat)}
-                className={`px-3 py-1 rounded-lg transition-colors cursor-pointer ${
+                className={`px-3 py-1 rounded-lg transition-colors cursor-pointer font-medium ${
                   selectedGlossaryCategory === cat
-                    ? 'bg-emerald-500 text-slate-950 font-bold shadow-sm'
-                    : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
+                    ? 'bg-[#00A389] text-white font-bold shadow-md shadow-teal-950/40 border border-teal-400'
+                    : 'bg-[#07192f] text-slate-300 hover:text-white border border-[#1b3f68]'
                 }`}
               >
                 {cat}
@@ -1194,24 +1194,24 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               return (
                 <div
                   key={term.id}
-                  className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3 hover:border-slate-700 transition-all shadow-sm"
+                  className="p-5 rounded-xl bg-slate-950/80 border border-cyan-900/40 space-y-3 hover:border-cyan-500/40 transition-all shadow-md text-slate-200"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="space-y-0.5">
                       <div className="flex items-center gap-2">
                         <strong className="text-white text-sm font-bold">{term.term}</strong>
                         {term.acronym && (
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-emerald-400 font-bold">
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#07192f] border border-teal-500/40 text-teal-300 font-bold">
                             {term.acronym}
                           </span>
                         )}
                       </div>
-                      <span className="text-[10px] font-mono text-slate-500 uppercase block">{term.category}</span>
+                      <span className="text-[10px] font-mono text-cyan-300 uppercase block font-semibold">{term.category}</span>
                     </div>
 
                     <button
                       onClick={() => toggleCardExpanded(term.id)}
-                      className="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-850 text-emerald-400 hover:text-emerald-300 border border-slate-800 text-xs font-semibold flex items-center gap-1 shrink-0 cursor-pointer transition-colors"
+                      className="px-2.5 py-1 rounded-lg bg-[#07192f] hover:bg-[#123154] text-teal-300 border border-[#1b3f68] text-xs font-semibold flex items-center gap-1 shrink-0 cursor-pointer transition-colors"
                       title={isExpanded ? 'Collapse' : 'Expand full explanation'}
                     >
                       <span>{isExpanded ? 'Less' : 'Details'}</span>
@@ -1223,30 +1223,30 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
 
                   {/* Expanded Section with Statutory Authority & Safeguards */}
                   {isExpanded && (
-                    <div className="space-y-3 pt-3 border-t border-slate-850 text-xs animate-in fade-in duration-150">
+                    <div className="space-y-3 pt-3 border-t border-cyan-900/50 text-xs animate-in fade-in duration-150">
                       <div className="space-y-1">
                         <span className="text-[10px] uppercase font-mono text-slate-400 block font-semibold">
                           Plain-Language Explanation:
                         </span>
-                        <p className="text-slate-300 leading-relaxed bg-slate-900/60 p-3 rounded-xl border border-slate-850 whitespace-pre-line">
+                        <p className="text-slate-200 leading-relaxed bg-[#07192f] p-3 rounded-lg border border-[#1b3f68] whitespace-pre-line">
                           {term.fullDefinition}
                         </p>
                       </div>
 
                       {term.statutoryBasis && (
-                        <div className="p-2.5 rounded-xl bg-cyan-950/30 border border-cyan-800/40 text-[11px] text-cyan-200">
-                          <strong className="block font-mono text-[10px] uppercase text-cyan-400">Statutory / Regulatory Authority:</strong>
+                        <div className="p-2.5 rounded-lg bg-slate-900/80 border border-sky-800/60 text-[11px] text-sky-200">
+                          <strong className="block font-mono text-[10px] uppercase text-sky-400 font-bold">Statutory / Regulatory Authority:</strong>
                           <span>{term.statutoryBasis}</span>
                         </div>
                       )}
 
                       {term.governanceSafeguards && term.governanceSafeguards.length > 0 && (
                         <div className="space-y-1.5">
-                          <strong className="block font-mono text-[10px] uppercase text-emerald-400">Key Governance Safeguards:</strong>
+                          <strong className="block font-mono text-[10px] uppercase text-teal-300 font-bold">Key Governance Safeguards:</strong>
                           <ul className="space-y-1">
                             {term.governanceSafeguards.map((item, idx) => (
                               <li key={idx} className="flex items-start gap-2 text-[11px] text-slate-300">
-                                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                                <CheckCircle2 className="w-3.5 h-3.5 text-[#00A389] shrink-0 mt-0.5" />
                                 <span>{item}</span>
                               </li>
                             ))}
@@ -1260,14 +1260,14 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                             href={term.externalUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 hover:text-emerald-300 font-semibold bg-emerald-950/40 hover:bg-emerald-950/80 px-3 py-1.5 rounded-lg border border-emerald-800/60 transition-colors"
+                            className="inline-flex items-center gap-1.5 text-[11px] text-teal-300 hover:text-white font-semibold bg-[#07192f] hover:bg-[#113358] px-3 py-1.5 rounded-lg border border-teal-500/40 transition-colors"
                           >
                             <span>Official Statutory Standard / Resource</span>
                             <ExternalLink className="w-3.5 h-3.5" />
                           </a>
 
                           {term.relatedTerms && term.relatedTerms.length > 0 && (
-                            <span className="text-[10px] text-slate-500 font-mono">
+                            <span className="text-[10px] text-slate-400 font-mono">
                               Related: {term.relatedTerms.slice(0, 2).join(', ')}
                             </span>
                           )}
@@ -1277,7 +1277,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                   )}
 
                   {!isExpanded && (
-                    <div className="pt-2 border-t border-slate-850 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+                    <div className="pt-2 border-t border-cyan-900/40 flex items-center justify-between text-[11px] text-slate-400 font-mono">
                       <span>Click Details for statutory authority &amp; safeguards</span>
                       {term.relatedTerms && term.relatedTerms.length > 0 && (
                         <span>Related: {term.relatedTerms.slice(0, 2).join(', ')}</span>
@@ -1293,9 +1293,9 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
 
       {/* TAB 4: RESEARCHER GOVERNANCE TEMPLATES */}
       {activeTab === 'templates' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
-          <div className="border-b border-slate-800 pb-4 space-y-1">
-            <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
+        <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xl text-white">
+          <div className="border-b border-cyan-900/60 pb-4 space-y-1">
+            <span className="text-xs font-mono font-bold text-teal-300 uppercase tracking-wider">
               Practitioner Desk Toolkit
             </span>
             <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
@@ -1311,24 +1311,24 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               const isCopied = copiedTemplateId === tmpl.id;
 
               return (
-                <div key={tmpl.id} className="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-850 pb-3">
+                <div key={tmpl.id} className="p-6 rounded-xl bg-slate-950/80 border border-cyan-900/40 space-y-4 shadow-md">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cyan-900/40 pb-3">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 border border-emerald-800 text-emerald-300 font-bold uppercase">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#07192f] border border-teal-500/40 text-teal-300 font-bold uppercase">
                           {tmpl.category}
                         </span>
                         <h3 className="text-base font-bold text-white">{tmpl.title}</h3>
                       </div>
-                      <p className="text-xs text-slate-400">{tmpl.description}</p>
+                      <p className="text-xs text-slate-300">{tmpl.description}</p>
                     </div>
 
                     <button
                       onClick={() => handleCopyTemplate(tmpl.id, tmpl.markdownContent)}
                       className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all cursor-pointer shrink-0 ${
                         isCopied
-                          ? 'bg-emerald-500 text-slate-950'
-                          : 'bg-slate-900 hover:bg-slate-850 text-slate-200 border border-slate-700'
+                          ? 'bg-[#00A389] text-white shadow-md'
+                          : 'bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold shadow-md shadow-teal-500/20'
                       }`}
                     >
                       {isCopied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
@@ -1336,7 +1336,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                     </button>
                   </div>
 
-                  <pre className="p-4 bg-slate-900/90 border border-slate-850 rounded-xl font-mono text-xs text-slate-300 overflow-x-auto leading-relaxed max-h-72">
+                  <pre className="p-4 bg-[#07192f] border border-[#1b3f68] rounded-lg font-mono text-xs text-cyan-200 overflow-x-auto leading-relaxed max-h-72">
                     <code>{tmpl.markdownContent}</code>
                   </pre>
                 </div>
@@ -1346,18 +1346,18 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
         </div>
       )}
 
-      {/* TAB 4: QUIZ */}
+      {/* TAB 5: QUIZ */}
       {activeTab === 'quiz' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xl text-white">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-cyan-900/60 pb-4">
             <div>
-              <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">
+              <span className="text-xs font-mono font-bold text-teal-300 uppercase tracking-wider">
                 Self-Assessment
               </span>
               <h2 className="text-xl font-bold text-white tracking-tight">
                 Information Governance &amp; Ethics Knowledge Check
               </h2>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-300 mt-0.5">
                 5 scenario questions testing knowledge of UK GDPR, Caldicott Principles, SDC thresholds, and Section 251.
               </p>
             </div>
@@ -1366,7 +1366,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               {onNavigateToQuiz && (
                 <button
                   onClick={() => onNavigateToQuiz('Five Safes & Governance')}
-                  className="px-4 py-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-cyan-300 border border-cyan-800/60 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+                  className="px-4 py-2 rounded-xl bg-[#07192f] hover:bg-[#123154] text-cyan-300 border border-cyan-700/60 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
                   title="Switch to the full technical 30+ question exam engine"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
@@ -1376,7 +1376,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               )}
 
               {quizSubmitted && (
-                <div className="flex items-center gap-3 bg-slate-950 px-4 py-2 rounded-xl border border-slate-800">
+                <div className="flex items-center gap-3 bg-slate-950 px-4 py-2 rounded-xl border border-teal-500/40">
                   <Award className="w-5 h-5 text-amber-400" />
                   <span className="font-bold text-sm text-white">
                     Score: {calculateScore()} / {IG_QUIZ_QUESTIONS.length}
@@ -1392,12 +1392,12 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               const isCorrect = selectedOpt === q.correctIndex;
 
               return (
-                <div key={q.id} className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
+                <div key={q.id} className="p-5 rounded-xl bg-slate-950/80 border border-cyan-900/40 space-y-3 shadow-md">
                   <div className="flex items-start justify-between gap-3">
-                    <strong className="text-sm text-white">
+                    <strong className="text-sm text-white font-bold">
                       {qIdx + 1}. {q.question}
                     </strong>
-                    <span className="text-[10px] font-mono text-slate-400 shrink-0 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
+                    <span className="text-[10px] font-mono text-cyan-300 shrink-0 bg-[#07192f] px-2 py-0.5 rounded border border-cyan-900/60 font-semibold">
                       {q.statutoryReference}
                     </span>
                   </div>
@@ -1405,15 +1405,15 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                   {/* Options */}
                   <div className="space-y-2 pt-1">
                     {q.options.map((opt, optIdx) => {
-                      let btnStyle = 'bg-slate-900 border-slate-800 text-slate-300 hover:bg-slate-850';
+                      let btnStyle = 'bg-[#07192f] border-[#1b3f68] text-slate-200 hover:bg-[#123154]';
                       if (selectedOpt === optIdx) {
-                        btnStyle = 'bg-emerald-950 border-emerald-600 text-emerald-300 font-bold';
+                        btnStyle = 'bg-teal-950/80 border-teal-500 text-teal-200 font-bold ring-1 ring-teal-500';
                       }
                       if (quizSubmitted) {
                         if (optIdx === q.correctIndex) {
-                          btnStyle = 'bg-emerald-950 border-emerald-500 text-emerald-300 font-bold ring-1 ring-emerald-500';
+                          btnStyle = 'bg-teal-950/90 border-[#00A389] text-teal-200 font-bold ring-1 ring-[#00A389]';
                         } else if (selectedOpt === optIdx && !isCorrect) {
-                          btnStyle = 'bg-rose-950 border-rose-600 text-rose-300';
+                          btnStyle = 'bg-rose-950/70 border-rose-500 text-rose-200';
                         }
                       }
 
@@ -1426,7 +1426,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                         >
                           <span>{opt}</span>
                           {quizSubmitted && optIdx === q.correctIndex && (
-                            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 ml-2" />
+                            <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0 ml-2" />
                           )}
                           {quizSubmitted && selectedOpt === optIdx && !isCorrect && (
                             <XCircle className="w-4 h-4 text-rose-400 shrink-0 ml-2" />
@@ -1438,9 +1438,9 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
 
                   {/* Explanation if submitted */}
                   {quizSubmitted && (
-                    <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 space-y-1">
-                      <strong className="text-cyan-400 block font-mono text-[10px] uppercase">Official Explanation:</strong>
-                      <p>{q.explanation}</p>
+                    <div className="p-3.5 rounded-xl bg-[#07192f] border border-cyan-900/60 text-xs text-slate-200 space-y-1">
+                      <strong className="text-cyan-400 block font-mono text-[10px] uppercase font-bold">Official Explanation:</strong>
+                      <p className="leading-relaxed">{q.explanation}</p>
                     </div>
                   )}
                 </div>
@@ -1448,7 +1448,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
             })}
           </div>
 
-          <div className="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="pt-4 border-t border-cyan-900/60 flex flex-col sm:flex-row items-center justify-between gap-4">
             <button
               onClick={() => {
                 if (quizSubmitted) {
@@ -1458,7 +1458,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                   setQuizSubmitted(true);
                 }
               }}
-              className="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs flex items-center gap-2 cursor-pointer transition-all shadow-md"
+              className="px-5 py-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs flex items-center gap-2 cursor-pointer transition-all shadow-md shadow-teal-500/20"
             >
               <Award className="w-4 h-4" />
               <span>{quizSubmitted ? 'Retake Quiz' : 'Submit Answers'}</span>
@@ -1467,7 +1467,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
             {onNavigateToQuiz && (
               <button
                 onClick={() => onNavigateToQuiz('Five Safes & Governance')}
-                className="text-xs text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1.5 bg-slate-950 px-3.5 py-2 rounded-xl border border-slate-800 hover:border-cyan-500/40 transition-colors cursor-pointer"
+                className="text-xs text-cyan-300 font-semibold flex items-center gap-1.5 bg-[#07192f] px-3.5 py-2 rounded-xl border border-cyan-800 hover:border-teal-400 transition-colors cursor-pointer"
               >
                 <span>Want an accredited completion certificate? Take the full 30+ Question Exam</span>
                 <ArrowRight className="w-3.5 h-3.5" />

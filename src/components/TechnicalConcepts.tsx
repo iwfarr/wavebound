@@ -164,21 +164,21 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
       {/* Top Header & Track Selector */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-6 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1.5">
             <SeawaterLogo variant="badge" size="xs" className="mb-0.5" />
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
               Technical Concepts &amp; Governance Specifications
             </h1>
-            <p className="text-xs sm:text-sm text-slate-400 max-w-2xl">
+            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 max-w-2xl">
               Deep dives into core architectural pillars, the 8 disaggregated Caldicott Principles, data catalogue asset metadata constraints, and the SATRE standard.
             </p>
           </div>
 
-          <div className="text-xs text-slate-400 flex items-center gap-2 bg-slate-950 px-3.5 py-2 rounded-xl border border-slate-800 shrink-0">
+          <div className="text-xs text-slate-700 dark:text-slate-300 flex items-center gap-2 bg-slate-50 dark:bg-slate-950 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 shrink-0 shadow-xs">
             <span>Modules Mastered:</span>
-            <strong className="text-cyan-300 font-mono text-sm">
+            <strong className="text-[#005EB8] dark:text-cyan-300 font-mono text-sm">
               {completedModules.length} / {PLAYBOOK_MODULES.length}
             </strong>
           </div>
@@ -191,7 +191,7 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
             className={`p-3 rounded-xl text-left border transition-all flex items-center gap-2.5 ${
               activeView === 'architecture'
                 ? 'bg-cyan-500/10 border-cyan-500 text-cyan-300 font-bold shadow-sm'
-                : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-850'
+                : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-800'
             }`}
           >
             <Cpu className="w-4 h-4 text-cyan-400 shrink-0" />
@@ -206,7 +206,7 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
             className={`p-3 rounded-xl text-left border transition-all flex items-center gap-2.5 ${
               activeView === 'agentic-ai'
                 ? 'bg-sky-500/15 border-sky-400 text-sky-200 font-bold shadow-sm ring-1 ring-sky-500/40'
-                : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-850'
+                : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-800'
             }`}
           >
             <Bot className="w-4 h-4 text-sky-400 shrink-0" />
@@ -221,7 +221,7 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
             className={`p-3 rounded-xl text-left border transition-all flex items-center gap-2.5 ${
               activeView === 'caldicott'
                 ? 'bg-purple-500/10 border-purple-500 text-purple-300 font-bold shadow-sm'
-                : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-850'
+                : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-800'
             }`}
           >
             <Scale className="w-4 h-4 text-purple-400 shrink-0" />
@@ -236,7 +236,7 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
             className={`p-3 rounded-xl text-left border transition-all flex items-center gap-2.5 ${
               activeView === 'catalogue'
                 ? 'bg-emerald-500/10 border-emerald-500 text-emerald-300 font-bold shadow-sm'
-                : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-850'
+                : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-800'
             }`}
           >
             <Database className="w-4 h-4 text-emerald-400 shrink-0" />
@@ -251,7 +251,7 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
             className={`p-3 rounded-xl text-left border transition-all flex items-center gap-2.5 ${
               activeView === 'satre'
                 ? 'bg-amber-500/10 border-amber-500 text-amber-300 font-bold shadow-sm'
-                : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-850'
+                : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-800'
             }`}
           >
             <Layers className="w-4 h-4 text-amber-400 shrink-0" />
@@ -279,7 +279,7 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
                   className={`p-3 rounded-xl border text-left transition-all relative flex flex-col justify-between min-h-[92px] ${
                     isActive
                       ? 'bg-cyan-950/50 border-cyan-500 shadow-md ring-1 ring-cyan-500/40 text-white'
-                      : 'bg-slate-950/70 border-slate-800/80 hover:bg-slate-850 hover:border-slate-700 text-slate-300'
+                      : 'bg-slate-950/70 border-slate-800/80 hover:bg-slate-800 hover:border-slate-700 text-slate-300'
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -300,20 +300,20 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
           </div>
 
           {/* Selected Module Detail */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-8 shadow-sm">
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-slate-800">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-8 shadow-xs">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-800">
               <div className="space-y-2 max-w-2xl">
                 <div className="flex items-center gap-2 text-xs">
-                  <span className="font-semibold text-cyan-400 uppercase tracking-wider">
+                  <span className="font-bold text-[#005EB8] dark:text-cyan-400 uppercase tracking-wider">
                     {activeModule.category}
                   </span>
-                  <span className="text-slate-500">·</span>
-                  <span className="font-mono text-slate-400">{activeModule.playbookSection}</span>
+                  <span className="text-slate-400">·</span>
+                  <span className="font-mono text-slate-600 dark:text-slate-400">{activeModule.playbookSection}</span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
                   {activeModule.title}
                 </h2>
-                <p className="text-slate-400 text-sm leading-relaxed">
+                <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
                   {activeModule.summary}
                 </p>
               </div>
@@ -458,23 +458,21 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
       {activeView === 'agentic-ai' && (
         <div className="space-y-8">
           {/* Header & Core Dilemma Card */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-5 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
-            
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-5 relative overflow-hidden shadow-xs">
             <div className="space-y-2 relative z-10">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-mono font-bold text-sky-400 bg-sky-950/80 px-2.5 py-0.5 rounded border border-sky-800 flex items-center gap-1.5">
+                <span className="text-xs font-mono font-bold text-[#005EB8] dark:text-sky-300 bg-sky-50 dark:bg-sky-950/80 px-2.5 py-0.5 rounded border border-sky-200 dark:border-sky-800 flex items-center gap-1.5">
                   <Bot className="w-3.5 h-3.5" />
                   <span>Stanford UIT &amp; Five Safes Governance Specification</span>
                 </span>
-                <span className="text-xs font-mono text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
+                <span className="text-xs font-mono text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-950 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-800">
                   DEA 2017 &amp; Caldicott P8 Aligned
                 </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
                 AI Personhood vs. Data Asset Classification in Secure Enclaves
               </h2>
-              <p className="text-xs sm:text-sm text-slate-300 max-w-3xl leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 max-w-3xl leading-relaxed">
                 Resolving the statutory and architectural status of artificial intelligence within Trusted Research Environments (TREs), Secure Data Environments (SDEs), and population health intelligence platforms.
               </p>
             </div>
@@ -1031,7 +1029,7 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
                   className={`p-3 rounded-xl border text-center transition-all flex flex-col items-center justify-center gap-1 ${
                     isSelected
                       ? 'bg-purple-950/80 border-purple-500 text-white shadow-md ring-1 ring-purple-500/50'
-                      : 'bg-slate-900 border-slate-800 text-slate-400 hover:bg-slate-850 hover:text-slate-200'
+                      : 'bg-slate-900 border-slate-800 text-slate-400 hover:bg-slate-800 hover:text-slate-200'
                   }`}
                 >
                   <span className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs font-mono ${
@@ -1048,29 +1046,29 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
           </div>
 
           {/* Selected Caldicott Principle Deep Detail Card */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-6 shadow-xs">
             {/* Header */}
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-slate-800">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-800">
               <div className="space-y-2 max-w-3xl">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-bold text-purple-400 bg-purple-950 px-2.5 py-0.5 rounded border border-purple-800">
+                  <span className="text-xs font-mono font-bold text-purple-900 dark:text-purple-300 bg-purple-50 dark:bg-purple-950 px-2.5 py-0.5 rounded border border-purple-200 dark:border-purple-800">
                     Principle {selectedPrinciple.number} of 8
                   </span>
-                  <span className="text-xs font-mono text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
+                  <span className="text-xs font-mono text-slate-700 dark:text-slate-400 bg-slate-50 dark:bg-slate-950 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-800">
                     {selectedPrinciple.decisionGate}
                   </span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
                   {selectedPrinciple.title}
                 </h3>
-                <p className="text-purple-200/90 text-sm font-medium italic">
+                <p className="text-purple-900 dark:text-purple-200 text-sm font-medium italic">
                   "{selectedPrinciple.tagline}"
                 </p>
               </div>
 
-              <div className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-right shrink-0">
-                <div className="text-[10px] text-slate-400 uppercase font-semibold">Accountable Role</div>
-                <div className="text-xs font-bold text-purple-300">{selectedPrinciple.accountableRole}</div>
+              <div className="bg-slate-50 dark:bg-slate-950 p-3 rounded-lg border border-slate-200 dark:border-slate-800 text-right shrink-0">
+                <div className="text-[10px] text-slate-500 uppercase font-semibold">Accountable Role</div>
+                <div className="text-xs font-bold text-purple-900 dark:text-purple-300">{selectedPrinciple.accountableRole}</div>
               </div>
             </div>
 
@@ -1202,7 +1200,7 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
                   catalogueTierFilter === tier
                     ? 'bg-emerald-500 text-slate-950 font-bold shadow-sm'
-                    : 'bg-slate-900 border border-slate-800 text-slate-400 hover:bg-slate-850 hover:text-slate-200'
+                    : 'bg-slate-900 border border-slate-800 text-slate-400 hover:bg-slate-800 hover:text-slate-200'
                 }`}
               >
                 {tier === 'All' ? 'All Sensitivity Tiers' : `${tier} Datasets`}
@@ -1261,26 +1259,26 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
           </div>
 
           {/* Selected Asset Detailed Metadata Inspection View */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-6 shadow-xs">
             {/* Asset Header */}
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-slate-800">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-800">
               <div className="space-y-2 max-w-3xl">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-950 px-2.5 py-0.5 rounded border border-emerald-800">
+                  <span className="text-xs font-mono font-bold text-[#047857] dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2.5 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
                     {selectedAsset.acronym}
                   </span>
-                  <span className="text-xs font-bold text-slate-300">
+                  <span className="text-xs font-bold text-slate-800 dark:text-slate-300">
                     {selectedAsset.domain}
                   </span>
-                  <span className="text-xs text-slate-500">·</span>
-                  <span className="text-xs text-slate-400 font-medium">
+                  <span className="text-slate-400">·</span>
+                  <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">
                     Custodian: {selectedAsset.dataCustodian}
                   </span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
                   {selectedAsset.title}
                 </h3>
-                <p className="text-slate-300 text-sm leading-relaxed">
+                <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
                   {selectedAsset.summary}
                 </p>
               </div>
@@ -1447,15 +1445,15 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
           </div>
 
           {/* Active Pillar Deep Detail Box */}
-          <div className="p-6 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-5">
+          <div className="p-6 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-5 shadow-xs">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-950 px-2.5 py-0.5 rounded border border-cyan-800">
+                <span className="text-xs font-mono font-bold text-[#005EB8] dark:text-cyan-400 bg-sky-50 dark:bg-cyan-950 px-2.5 py-0.5 rounded border border-sky-200 dark:border-cyan-800">
                   Pillar Specification
                 </span>
-                <h3 className="text-xl font-bold text-white">{selectedSatrePillar.name}</h3>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white">{selectedSatrePillar.name}</h3>
               </div>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed pt-1">
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed pt-1">
                 {selectedSatrePillar.fullDesc}
               </p>
             </div>

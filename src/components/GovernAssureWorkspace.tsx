@@ -1,9 +1,18 @@
 import React, { useState, useMemo } from 'react';
 import { SeawaterLogo } from './SeawaterLogo';
+import { EvidenceDossierModal } from './EvidenceDossierModal';
+import { StatutoryMatrixView } from './StatutoryMatrixView';
+import { FiveSafesPillarsView } from './FiveSafesPillarsView';
+import { QuantitativeSDCHub } from './QuantitativeSDCHub';
+import { CaldicottTransparencyPortal } from './CaldicottTransparencyPortal';
+import { ProcurementReadinessHub } from './ProcurementReadinessHub';
 import {
   Scale,
   ShieldCheck,
   ShieldAlert,
+  Calculator,
+  HeartHandshake,
+  Award,
   CheckCircle2,
   XCircle,
   AlertTriangle,
@@ -25,7 +34,10 @@ import {
   RotateCcw,
   Sparkles,
   Workflow,
-  FileText
+  FileText,
+  Sliders,
+  Table,
+  Filter
 } from 'lucide-react';
 
 interface ScenarioPreset {
@@ -128,6 +140,9 @@ export const GovernAssureWorkspace: React.FC<GovernAssureWorkspaceProps> = ({
   onNavigateToSandbox,
   onNavigateToPlaybook
 }) => {
+  // Workspace View Selection (Simulator vs Consolidated Statutory Matrix vs Five Safes Pillar Deep-Dive vs SDC Hub vs Caldicott 8 Transparency vs Procurement Readiness)
+  const [workspaceView, setWorkspaceView] = useState<'simulator' | 'statutory_matrix' | 'five_safes_pillars' | 'sdc_hub' | 'transparency_ledger' | 'procurement_readiness'>('simulator');
+
   // Active Scenario State
   const [selectedPresetId, setSelectedPresetId] = useState<string>('scen_multi_site');
   const [researcherStatus, setResearcherStatus] = useState<'accredited' | 'pending' | 'unaccredited'>('accredited');
@@ -395,6 +410,28 @@ tre:airlockAutoVerification "PASSED" .`,
       });
     }
 
+    // Gate 6: Caldicott Principle 8 Public Data Use Register & PROV-O Lineage
+    gates.push({
+      gateName: 'Public Data Use Register (Caldicott Principle 8)',
+      pillar: 'Safe Projects',
+      status: 'PASS',
+      triggerNode: 'tre:PublicTransparencyShape § 8.1',
+      plainEnglishSummary: 'Project lay summary, public benefit statement, and PPIE engagement published to public Data Use Register with W3C PROV-O provenance lineage.',
+      statutoryBasis: 'NHS Caldicott Principle 8 (No surprises); UK GDPR Art. 13/14 transparency; CAG S251 Public Register.',
+      codeSnippet: `tre:PublicTransparencyShape a sh:NodeShape ;
+  sh:property [
+    sh:path tre:publishedToPublicRegister ;
+    sh:hasValue true ;
+  ] ;
+  sh:property [
+    sh:path prov:wasDerivedFrom ;
+    sh:minCount 1 ;
+  ] .`,
+      decisionRef: 'D-008',
+      decisionTitle: 'Public Register Transparency & Audit Retention',
+      decisionRole: 'Communications Officer, PPIE Lead & Caldicott Guardian'
+    });
+
     // Overall Synthesis
     const hasFail = gates.some((g) => g.status === 'FAIL');
     const hasWarn = gates.some((g) => g.status === 'WARN');
@@ -443,77 +480,162 @@ tre:airlockAutoVerification "PASSED" .`,
   ]);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-10">
+    <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
       {/* 1. WORKSPACE HEADER */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 space-y-3 max-w-3xl">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-mono font-bold text-amber-300 bg-amber-950/80 px-2.5 py-0.5 rounded border border-amber-800 flex items-center gap-1.5">
-              <Scale className="w-3.5 h-3.5" />
+      <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl p-6 sm:p-8 shadow-xl text-white">
+        <div className="space-y-4 max-w-4xl">
+          <div className="flex flex-wrap items-center gap-2 text-xs">
+            <span className="font-semibold text-amber-300 bg-[#07192f] px-2.5 py-0.5 rounded border border-amber-500/40 flex items-center gap-1.5 shadow-xs">
+              <Scale className="w-3.5 h-3.5 text-amber-400" />
               <span>Phase 3: Govern &amp; Assure Operational Workspace</span>
             </span>
-            <span className="text-xs font-mono text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
-              Caldicott · HRA REC · UK GDPR · SDC
+            <span className="font-mono text-slate-300 bg-[#07192f] px-2 py-0.5 rounded border border-cyan-900/60">
+              Caldicott 1–8 · Section 251 CAG · HRA REC · ONS SDC
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Compliance Logic &amp; Central Assurances Engine
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            Governance Decision-Support &amp; Compliance Dossier Compiler
           </h1>
 
           <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-            Abstracting complex semantic ontologies into interactive human-readable decision trees. Simulate research scenarios, verify Caldicott compliance, inspect plain-English statutory translations, and export printable audit assurance reports.
+            Translates complex statutory mandates into an unambiguous, machine-verifiable evidence baseline. Simulates study protocols against 6 statutory gates, inspects plain-English legal translations, and compiles a standardized compliance dossier to assist human review panels (Caldicott Guardians, DAAG, and local IG boards).
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-3 text-xs">
             <button
               onClick={() => setIsReportModalOpen(true)}
-              className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold flex items-center gap-2 shadow-md shadow-amber-500/20 transition-all cursor-pointer"
+              className="px-4 py-2 rounded-lg bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold flex items-center gap-2 transition-colors cursor-pointer shadow-md shadow-teal-500/20"
             >
-              <FileCheck2 className="w-4 h-4" />
-              <span>Generate Dynamic Assurance Report</span>
+              <FileCheck2 className="w-4 h-4 text-slate-950" />
+              <span>Compile Standardized Evidence Pack</span>
             </button>
             <button
               onClick={() => setIsCharterModalOpen(true)}
-              className="px-4 py-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold flex items-center gap-2 transition-colors cursor-pointer"
+              className="px-4 py-2 rounded-lg bg-[#07192f] hover:bg-[#123154] text-slate-200 border border-[#1b3f68] font-medium flex items-center gap-2 transition-colors cursor-pointer"
             >
               <FileText className="w-4 h-4 text-cyan-400" />
               <span>View Institutional Governance Charter</span>
             </button>
           </div>
 
-          {/* Context Strip: Assurance Report vs Governance Charter */}
-          <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800/80 grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px] text-slate-300 text-left">
-            <div className="space-y-1 border-b md:border-b-0 md:border-r border-slate-800/80 pb-2 md:pb-0 md:pr-3">
+          {/* Context Strip: Evidence Pack vs Governance Charter */}
+          <div className="p-3.5 rounded-lg bg-slate-950/80 border border-cyan-900/60 grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px] text-slate-300 text-left">
+            <div className="space-y-1 border-b md:border-b-0 md:border-r border-cyan-900/60 pb-2 md:pb-0 md:pr-3">
               <strong className="text-amber-300 block font-semibold flex items-center gap-1.5">
                 <FileCheck2 className="w-3.5 h-3.5 text-amber-400" />
-                <span>Dynamic Assurance Report (Session-Specific):</span>
+                <span>Standardized Evidence Pack (Session Decision-Support):</span>
               </strong>
               <p className="text-slate-400 leading-relaxed">
-                Needed at <strong>execution time</strong> when an accredited researcher requests workspace admission or airlock file egress. Evaluates the specific study protocol against W3C SHACL/OPA rules, producing an immutable cryptographic audit record.
+                Compiled when an accredited researcher requests workspace access or airlock export. Evaluates the specific study protocol against W3C SHACL/OPA rules, producing a standardized evidence dossier for human DAAG and Caldicott review.
               </p>
             </div>
             <div className="space-y-1">
               <strong className="text-cyan-300 block font-semibold flex items-center gap-1.5">
                 <FileText className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Governance Charter (Static Framework):</span>
+                <span>Governance Charter (Static Framework Baseline):</span>
               </strong>
               <p className="text-slate-400 leading-relaxed">
-                Needed at <strong>institutional onboarding</strong> for Trust boards, ethics committees, and public scrutiny. Establishes the macro legal mandates (DEA 2017, UK GDPR, Section 251) and standards architecture (ISO 27001, DCB0129).
+                Referenced during <strong>institutional procurement and Trust onboarding</strong>. Establishes the overarching legal mandates (DEA 2017, UK GDPR, Section 251) and clinical safety standards (DCB0129, DSPT).
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* 2. SCENARIO PRESETS & INTERACTIVE CONFIGURATOR */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+      {/* PHASE 3: CONSOLIDATED NAVIGATION TABS */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cyan-900/50 pb-2">
+        <div className="flex flex-wrap bg-[#0c2340] p-1 rounded-xl border border-cyan-900/60 gap-1">
+          <button
+            onClick={() => setWorkspaceView('simulator')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              workspaceView === 'simulator'
+                ? 'bg-[#00A389] text-white shadow-md font-bold'
+                : 'text-slate-300 hover:text-white hover:bg-[#112f54]'
+            }`}
+          >
+            <Sliders className="w-3.5 h-3.5 text-cyan-300" />
+            <span>Interactive Protocol Evaluator</span>
+          </button>
+          <button
+            onClick={() => setWorkspaceView('statutory_matrix')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              workspaceView === 'statutory_matrix'
+                ? 'bg-[#00A389] text-white shadow-md font-bold'
+                : 'text-slate-300 hover:text-white hover:bg-[#112f54]'
+            }`}
+          >
+            <Table className="w-3.5 h-3.5 text-cyan-300" />
+            <span>Consolidated Statutory Matrix</span>
+          </button>
+          <button
+            onClick={() => setWorkspaceView('five_safes_pillars')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              workspaceView === 'five_safes_pillars'
+                ? 'bg-[#00A389] text-white shadow-md font-bold'
+                : 'text-slate-300 hover:text-white hover:bg-[#112f54]'
+            }`}
+          >
+            <ShieldCheck className="w-3.5 h-3.5 text-cyan-300" />
+            <span>Five Safes Pillar Deep-Dive</span>
+          </button>
+          <button
+            onClick={() => setWorkspaceView('sdc_hub')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              workspaceView === 'sdc_hub'
+                ? 'bg-[#00A389] text-white shadow-md font-bold'
+                : 'text-slate-300 hover:text-white hover:bg-[#112f54]'
+            }`}
+          >
+            <Calculator className="w-3.5 h-3.5 text-cyan-300" />
+            <span>Quantitative SDC &amp; Airlock Review</span>
+          </button>
+          <button
+            onClick={() => setWorkspaceView('transparency_ledger')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              workspaceView === 'transparency_ledger'
+                ? 'bg-[#00A389] text-white shadow-md font-bold'
+                : 'text-slate-300 hover:text-white hover:bg-[#112f54]'
+            }`}
+          >
+            <HeartHandshake className="w-3.5 h-3.5 text-cyan-300" />
+            <span>Caldicott 8 Transparency &amp; PROV-O Ledger</span>
+          </button>
+          <button
+            onClick={() => setWorkspaceView('procurement_readiness')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              workspaceView === 'procurement_readiness'
+                ? 'bg-[#00A389] text-white shadow-md font-bold'
+                : 'text-slate-300 hover:text-white hover:bg-[#112f54]'
+            }`}
+          >
+            <Award className="w-3.5 h-3.5 text-cyan-300" />
+            <span>Procurement &amp; SATRE/DSPT Compliance</span>
+          </button>
+        </div>
+
+        <div className="flex items-center gap-2 text-xs font-mono">
+          <span className="text-slate-400">Evaluated Baseline:</span>
+          <span
+            className={`px-2.5 py-0.5 rounded font-bold border ${
+              evaluation.overallDecision === 'APPROVED'
+                ? 'bg-teal-950/80 text-teal-300 border-teal-600'
+                : 'bg-rose-950/80 text-rose-300 border-rose-600'
+            }`}
+          >
+            {evaluation.overallDecision}
+          </span>
+        </div>
+      </div>
+
+      {/* 2. SCENARIO PRESETS & INTERACTIVE CONFIGURATOR (SIMULATOR VIEW) */}
+      {workspaceView === 'simulator' && (
+        <>
+          <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl p-6 sm:p-8 space-y-6 shadow-xl text-white">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cyan-900/60 pb-4">
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-wider font-mono">
-              <Database className="w-4 h-4" />
+            <div className="flex items-center gap-2 text-xs font-bold text-amber-300 uppercase tracking-wider font-mono">
+              <Database className="w-4 h-4 text-amber-400" />
               <span>Step 1: Select or Customize Research Scenario</span>
             </div>
             <h2 className="text-xl font-bold text-white tracking-tight">
@@ -528,10 +650,10 @@ tre:airlockAutoVerification "PASSED" .`,
               <button
                 key={preset.id}
                 onClick={() => handleApplyPreset(preset)}
-                className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                className={`px-2.5 py-1 rounded text-xs font-semibold transition-colors cursor-pointer ${
                   selectedPresetId === preset.id
-                    ? 'bg-amber-500 text-slate-950 font-bold shadow-sm'
-                    : 'bg-slate-950 text-slate-400 hover:text-slate-200 border border-slate-800'
+                    ? 'bg-[#00A389] text-white shadow-md font-bold'
+                    : 'bg-[#07192f] text-slate-300 hover:text-white border border-[#1b3f68]'
                 }`}
               >
                 {preset.name.split(' ')[0]}
@@ -541,13 +663,13 @@ tre:airlockAutoVerification "PASSED" .`,
         </div>
 
         {/* Preset Description Banner */}
-        <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs text-slate-300 flex items-center justify-between gap-2">
+        <div className="p-3.5 rounded-lg bg-slate-950/80 border border-cyan-900/60 text-xs text-slate-300 flex items-center justify-between gap-2 shadow-xs">
           <span>{PRESET_SCENARIOS.find((p) => p.id === selectedPresetId)?.description}</span>
           <button
             onClick={() => handleApplyPreset(PRESET_SCENARIOS[0])}
-            className="text-[11px] text-amber-400 hover:text-amber-300 font-mono flex items-center gap-1 shrink-0"
+            className="text-[11px] text-cyan-400 hover:text-white hover:underline font-mono flex items-center gap-1 shrink-0 cursor-pointer"
           >
-            <RotateCcw className="w-3 h-3" />
+            <RotateCcw className="w-3 h-3 text-cyan-400" />
             <span>Reset Default</span>
           </button>
         </div>
@@ -555,82 +677,82 @@ tre:airlockAutoVerification "PASSED" .`,
         {/* Dynamic Parameter Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
           {/* Parameter 1: Researcher Status */}
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-            <label className="font-bold text-slate-200 block">Researcher Accreditation</label>
+          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
+            <label className="font-bold text-white block">Researcher Accreditation</label>
             <select
               value={researcherStatus}
               onChange={(e) => {
                 setResearcherStatus(e.target.value as any);
                 setSelectedPresetId('custom');
               }}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-amber-500"
+              className="w-full bg-[#07192f] border border-cyan-900/60 rounded-md p-2 text-xs text-white focus:outline-none focus:border-cyan-400"
             >
               <option value="accredited">Accredited (DEA 2017 &amp; DSPT)</option>
               <option value="pending">Renewal Pending (IG Incomplete)</option>
               <option value="unaccredited">Unaccredited / External</option>
             </select>
-            <span className="text-[10px] text-slate-400 block">Safe People Accreditation Gate</span>
+            <span className="text-[10px] text-slate-400 block font-mono">Safe People Accreditation Gate</span>
           </div>
 
           {/* Parameter 2: Ethics Approval */}
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-            <label className="font-bold text-slate-200 block">HRA Research Ethics (REC)</label>
+          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
+            <label className="font-bold text-white block">HRA Research Ethics (REC)</label>
             <select
               value={ethicsStatus}
               onChange={(e) => {
                 setEthicsStatus(e.target.value as any);
                 setSelectedPresetId('custom');
               }}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-amber-500"
+              className="w-full bg-[#07192f] border border-cyan-900/60 rounded-md p-2 text-xs text-white focus:outline-none focus:border-cyan-400"
             >
               <option value="approved">Approved (Active IRAS Ref)</option>
               <option value="in_review">In Review / Substantial Amendment</option>
               <option value="none">No Ethics Approval</option>
             </select>
-            <span className="text-[10px] text-slate-400 block">Safe Projects Mandate</span>
+            <span className="text-[10px] text-slate-400 block font-mono">Safe Projects Mandate</span>
           </div>
 
           {/* Parameter 3: Section 251 CAG */}
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-            <label className="font-bold text-slate-200 block">Section 251 CAG Clearance</label>
+          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
+            <label className="font-bold text-white block">Section 251 CAG Clearance</label>
             <select
               value={s251Status}
               onChange={(e) => {
                 setS251Status(e.target.value as any);
                 setSelectedPresetId('custom');
               }}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-amber-500"
+              className="w-full bg-[#07192f] border border-cyan-900/60 rounded-md p-2 text-xs text-white focus:outline-none focus:border-cyan-400"
             >
               <option value="exempt">Not Required (De-identified/Consented)</option>
               <option value="authorized">Authorized (Active CAG Reference)</option>
               <option value="missing">Missing / Unconsented Identifiers</option>
             </select>
-            <span className="text-[10px] text-slate-400 block">NHS Act 2006 Statutory Shield</span>
+            <span className="text-[10px] text-slate-400 block font-mono">NHS Act 2006 Statutory Shield</span>
           </div>
 
           {/* Parameter 4: Data Sensitivity Tier */}
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-            <label className="font-bold text-slate-200 block">Data Classification Tier</label>
+          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
+            <label className="font-bold text-white block">Data Classification Tier</label>
             <select
               value={dataTier}
               onChange={(e) => {
                 setDataTier(e.target.value as any);
                 setSelectedPresetId('custom');
               }}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-amber-500"
+              className="w-full bg-[#07192f] border border-cyan-900/60 rounded-md p-2 text-xs text-white focus:outline-none focus:border-cyan-400"
             >
               <option value="tier2_pseudonymised">Tier 2: Pseudonymised Cohort</option>
               <option value="tier1_aggregate">Tier 1: Synthetic / Pre-aggregated</option>
               <option value="tier3_identifiable">Tier 3: Identifiable Clinical Data</option>
             </select>
-            <span className="text-[10px] text-slate-400 block">Hospital Operational Tiering</span>
+            <span className="text-[10px] text-slate-400 block font-mono">Hospital Operational Tiering</span>
           </div>
 
           {/* Parameter 5: SDC Minimum Cell Count (k) */}
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
             <div className="flex items-center justify-between">
-              <label className="font-bold text-slate-200">SDC Cell Count (k)</label>
-              <span className={`font-mono font-bold ${minCellCount >= 10 ? 'text-emerald-400' : 'text-rose-400'}`}>
+              <label className="font-bold text-white">SDC Cell Count (k)</label>
+              <span className={`font-mono font-bold ${minCellCount >= 10 ? 'text-teal-400' : 'text-rose-400'}`}>
                 N = {minCellCount}
               </span>
             </div>
@@ -643,18 +765,18 @@ tre:airlockAutoVerification "PASSED" .`,
                 setMinCellCount(parseInt(e.target.value, 10));
                 setSelectedPresetId('custom');
               }}
-              className="w-full accent-amber-500 cursor-pointer"
+              className="w-full accent-[#00A389] cursor-pointer"
             />
-            <span className="text-[10px] text-slate-400 block">
+            <span className="text-[10px] text-slate-400 block font-mono">
               Threshold: k ≥ 10 required for safe output
             </span>
           </div>
 
           {/* Parameter 6: Dominance Ratio */}
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
             <div className="flex items-center justify-between">
-              <label className="font-bold text-slate-200">Top Contributor Dominance</label>
-              <span className={`font-mono font-bold ${dominanceRatio <= 80 ? 'text-emerald-400' : 'text-rose-400'}`}>
+              <label className="font-bold text-white">Top Contributor Dominance</label>
+              <span className={`font-mono font-bold ${dominanceRatio <= 80 ? 'text-teal-400' : 'text-rose-400'}`}>
                 {dominanceRatio}%
               </span>
             </div>
@@ -667,27 +789,27 @@ tre:airlockAutoVerification "PASSED" .`,
                 setDominanceRatio(parseInt(e.target.value, 10));
                 setSelectedPresetId('custom');
               }}
-              className="w-full accent-amber-500 cursor-pointer"
+              className="w-full accent-[#00A389] cursor-pointer"
             />
-            <span className="text-[10px] text-slate-400 block">
+            <span className="text-[10px] text-slate-400 block font-mono">
               Ceiling: ≤ 80% maximum contribution
             </span>
           </div>
 
           {/* Parameter 7: Network Egress Isolation */}
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-            <label className="font-bold text-slate-200 block">Enclave Network Routing</label>
-            <div className="flex items-center gap-3 pt-1">
+          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
+            <label className="font-bold text-white block">Enclave Network Routing</label>
+            <div className="flex items-center gap-2 pt-1">
               <button
                 type="button"
                 onClick={() => {
                   setEnclaveEgressBlocked(true);
                   setSelectedPresetId('custom');
                 }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex-1 ${
+                className={`px-2.5 py-1.5 rounded text-xs font-semibold flex-1 transition-colors cursor-pointer ${
                   enclaveEgressBlocked
-                    ? 'bg-emerald-950 text-emerald-300 border border-emerald-800 font-bold'
-                    : 'bg-slate-900 text-slate-400 border border-slate-800'
+                    ? 'bg-teal-950/80 text-teal-300 border border-teal-600 font-bold'
+                    : 'bg-[#07192f] text-slate-300 border border-[#1b3f68]'
                 }`}
               >
                 Zero-Egress VPC
@@ -698,28 +820,28 @@ tre:airlockAutoVerification "PASSED" .`,
                   setEnclaveEgressBlocked(false);
                   setSelectedPresetId('custom');
                 }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex-1 ${
+                className={`px-2.5 py-1.5 rounded text-xs font-semibold flex-1 transition-colors cursor-pointer ${
                   !enclaveEgressBlocked
-                    ? 'bg-rose-950 text-rose-300 border border-rose-800 font-bold'
-                    : 'bg-slate-900 text-slate-400 border border-slate-800'
+                    ? 'bg-rose-950/80 text-rose-300 border border-rose-600 font-bold'
+                    : 'bg-[#07192f] text-slate-300 border border-[#1b3f68]'
                 }`}
               >
                 Open WAN
               </button>
             </div>
-            <span className="text-[10px] text-slate-400 block">Calico CNI Egress Enforcement</span>
+            <span className="text-[10px] text-slate-400 block font-mono">Calico CNI Egress Enforcement</span>
           </div>
 
           {/* Parameter 8: AI Workload Governance */}
-          <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-            <label className="font-bold text-slate-200 block">Autonomous AI Agent Model</label>
+          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
+            <label className="font-bold text-white block">Assistive AI Model</label>
             <select
               value={aiWorkloadType}
               onChange={(e) => {
                 setAiWorkloadType(e.target.value as any);
                 setSelectedPresetId('custom');
               }}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-amber-500"
+              className="w-full bg-[#07192f] border border-cyan-900/60 rounded-md p-2 text-xs text-white focus:outline-none focus:border-cyan-400"
             >
               <option value="none">Standard Human Analytics</option>
               <option value="assistive">Assistive Code Completion (Cline/Cursor)</option>
@@ -731,9 +853,9 @@ tre:airlockAutoVerification "PASSED" .`,
                   type="checkbox"
                   checked={aiHumanSponsorLinked}
                   onChange={(e) => setAiHumanSponsorLinked(e.target.checked)}
-                  className="rounded text-amber-500"
+                  className="rounded text-teal-400"
                 />
-                <span className="text-[11px] text-slate-300">Human Sponsor Linked</span>
+                <span className="text-[11px] text-cyan-300">Human Sponsor Linked</span>
               </label>
             )}
           </div>
@@ -741,50 +863,58 @@ tre:airlockAutoVerification "PASSED" .`,
       </div>
 
       {/* 3. VISUALIZING THE ONTOLOGY: REAL-TIME LOGIC TREE */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl p-6 sm:p-8 space-y-6 shadow-xl text-white">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-cyan-900/60 pb-4">
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider font-mono">
-              <Server className="w-4 h-4" />
-              <span>Step 2: Real-Time Policy-as-Code Evaluation</span>
+            <div className="flex items-center gap-2 text-xs font-bold text-cyan-300 uppercase tracking-wider font-mono">
+              <Server className="w-4 h-4 text-cyan-400" />
+              <span>Step 2: Real-Time Policy-as-Code Decision-Support Evaluation</span>
             </div>
             <h2 className="text-xl font-bold text-white tracking-tight">
-              Five Safes &amp; SDC Decision Logic Flow
+              Five Safes &amp; SDC Decision-Support Logic Flow
             </h2>
           </div>
 
           {/* Outcome Status Banner */}
-          <div className={`px-4 py-2 rounded-xl border flex items-center gap-2.5 font-bold font-mono text-xs ${evaluation.decisionColor}`}>
-            {evaluation.decisionIcon}
-            <span>Status: {evaluation.overallDecision}</span>
+          <div className={`px-4 py-2 rounded-lg border flex items-center gap-2.5 font-bold text-xs ${
+            evaluation.overallDecision === 'APPROVED'
+              ? 'bg-teal-950/80 text-teal-300 border-teal-600'
+              : 'bg-rose-950/80 text-rose-300 border-rose-600'
+          }`}>
+            {evaluation.overallDecision === 'APPROVED' ? (
+              <CheckCircle2 className="w-4 h-4 text-teal-400" />
+            ) : (
+              <XCircle className="w-4 h-4 text-rose-400" />
+            )}
+            <span>Decision-Support Baseline: {evaluation.overallDecision}</span>
           </div>
         </div>
 
         {/* Narrative Reason Card */}
-        <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 flex items-start gap-3 text-xs">
-          <Info className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
+        <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/60 flex items-start gap-3 text-xs text-slate-300">
+          <Info className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
           <div className="space-y-1">
-            <strong className="text-slate-200 block">Policy Decision Point (PDP) Rationale:</strong>
+            <strong className="text-white block font-bold">Policy Decision Point (PDP) Evidence Rationale:</strong>
             <p className="text-slate-300 leading-relaxed">{evaluation.decisionReason}</p>
           </div>
         </div>
 
         {/* The 5 Gates Logic Pathway */}
         <div className="space-y-3">
-          <div className="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">
-            Sequential Compliance Gates (Click Any Gate to Inspect Plain-English Law):
+          <div className="text-xs font-bold text-cyan-300 uppercase tracking-wider font-mono">
+            Sequential Compliance Gates (Select Any Gate to Inspect Plain-English Law):
           </div>
 
           <div className="space-y-2.5">
             {evaluation.gates.map((gate, idx) => {
-              let badgeBg = 'bg-emerald-950 text-emerald-300 border-emerald-800';
-              let icon = <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />;
+              let badgeBg = 'bg-teal-950/80 text-teal-300 border-teal-600';
+              let icon = <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />;
 
               if (gate.status === 'WARN') {
-                badgeBg = 'bg-amber-950 text-amber-300 border-amber-800';
+                badgeBg = 'bg-amber-950/80 text-amber-300 border-amber-600';
                 icon = <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />;
               } else if (gate.status === 'FAIL') {
-                badgeBg = 'bg-rose-950 text-rose-300 border-rose-800';
+                badgeBg = 'bg-rose-950/80 text-rose-300 border-rose-600';
                 icon = <XCircle className="w-4 h-4 text-rose-400 shrink-0" />;
               }
 
@@ -792,7 +922,7 @@ tre:airlockAutoVerification "PASSED" .`,
                 <div
                   key={idx}
                   onClick={() => setInspectedGate(gate)}
-                  className="p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-slate-700 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 cursor-pointer group"
+                  className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/40 hover:border-cyan-500/60 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3 cursor-pointer group shadow-sm text-slate-200"
                 >
                   <div className="flex items-start sm:items-center gap-3">
                     {icon}
@@ -801,19 +931,43 @@ tre:airlockAutoVerification "PASSED" .`,
                         <span className="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors">
                           {gate.gateName}
                         </span>
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-800">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#07192f] text-cyan-300 border border-cyan-900/60">
                           {gate.pillar}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-400 line-clamp-1">{gate.plainEnglishSummary}</p>
+                      <p className="text-xs text-slate-300 line-clamp-1">{gate.plainEnglishSummary}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
+                    {gate.pillar === 'Safe Outputs' && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setWorkspaceView('sdc_hub');
+                        }}
+                        className="text-[11px] font-semibold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 hover:bg-amber-100 px-2 py-0.5 rounded border border-amber-200 dark:border-amber-800 flex items-center gap-1 transition-colors cursor-pointer"
+                      >
+                        <Calculator className="w-3 h-3 text-amber-600" />
+                        <span>Launch SDC Simulator</span>
+                      </button>
+                    )}
+                    {gate.gateName.includes('Caldicott Principle 8') && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setWorkspaceView('transparency_ledger');
+                        }}
+                        className="text-[11px] font-semibold text-[#005EB8] dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 hover:bg-sky-100 px-2 py-0.5 rounded border border-sky-200 dark:border-sky-800 flex items-center gap-1 transition-colors cursor-pointer"
+                      >
+                        <HeartHandshake className="w-3 h-3 text-[#005EB8]" />
+                        <span>View Public Register</span>
+                      </button>
+                    )}
                     <span className={`text-[10px] font-mono px-2.5 py-0.5 rounded border uppercase font-bold ${badgeBg}`}>
                       {gate.status}
                     </span>
-                    <span className="text-xs text-cyan-400 font-mono flex items-center gap-1 group-hover:underline">
+                    <span className="text-xs text-[#005EB8] dark:text-sky-400 font-medium flex items-center gap-1 group-hover:underline">
                       <span>Inspect Rule</span>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </span>
@@ -824,56 +978,143 @@ tre:airlockAutoVerification "PASSED" .`,
           </div>
         </div>
       </div>
+    </>
+  )}
 
-      {/* 4. THE PLAIN-ENGLISH POLICY INSPECTOR MODAL/DRAWER */}
-      {inspectedGate && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+  {/* CONSOLIDATED STATUTORY MATRIX VIEW (PHASE 3) */}
+  {workspaceView === 'statutory_matrix' && (
+    <StatutoryMatrixView
+      researcherStatus={researcherStatus}
+      ethicsStatus={ethicsStatus}
+      s251Status={s251Status}
+      dataTier={dataTier}
+      minCellCount={minCellCount}
+      dominanceRatio={dominanceRatio}
+      enclaveEgressBlocked={enclaveEgressBlocked}
+      aiWorkloadType={aiWorkloadType}
+      aiHumanSponsorLinked={aiHumanSponsorLinked}
+      onNavigateToDecisionRegister={onNavigateToDecisionRegister}
+      onOpenEvidenceDossier={() => setIsReportModalOpen(true)}
+    />
+  )}
+
+  {/* FIVE SAFES PILLAR DEEP-DIVE (PHASE 3) */}
+  {workspaceView === 'five_safes_pillars' && (
+    <FiveSafesPillarsView
+      researcherStatus={researcherStatus}
+      setResearcherStatus={(st) => {
+        setResearcherStatus(st);
+        setSelectedPresetId('custom');
+      }}
+      ethicsStatus={ethicsStatus}
+      setEthicsStatus={(st) => {
+        setEthicsStatus(st);
+        setSelectedPresetId('custom');
+      }}
+      s251Status={s251Status}
+      setS251Status={(st) => {
+        setS251Status(st);
+        setSelectedPresetId('custom');
+      }}
+      dataTier={dataTier}
+      setDataTier={(t) => {
+        setDataTier(t);
+        setSelectedPresetId('custom');
+      }}
+      minCellCount={minCellCount}
+      setMinCellCount={(k) => {
+        setMinCellCount(k);
+        setSelectedPresetId('custom');
+      }}
+      dominanceRatio={dominanceRatio}
+      setDominanceRatio={(r) => {
+        setDominanceRatio(r);
+        setSelectedPresetId('custom');
+      }}
+      enclaveEgressBlocked={enclaveEgressBlocked}
+      setEnclaveEgressBlocked={(b) => {
+        setEnclaveEgressBlocked(b);
+        setSelectedPresetId('custom');
+      }}
+      aiWorkloadType={aiWorkloadType}
+      setAiWorkloadType={(t) => {
+        setAiWorkloadType(t);
+        setSelectedPresetId('custom');
+      }}
+      aiHumanSponsorLinked={aiHumanSponsorLinked}
+      setAiHumanSponsorLinked={setAiHumanSponsorLinked}
+      onOpenEvidenceDossier={() => setIsReportModalOpen(true)}
+      onNavigateToDecisionRegister={onNavigateToDecisionRegister}
+    />
+  )}
+
+  {/* QUANTITATIVE SDC & AIRLOCK REVIEW HUB (PHASE 6) */}
+  {workspaceView === 'sdc_hub' && (
+    <QuantitativeSDCHub />
+  )}
+
+  {/* CALDICOTT PRINCIPLE 8 TRANSPARENCY & W3C PROV-O LEDGER (PHASE 7) */}
+  {workspaceView === 'transparency_ledger' && (
+    <CaldicottTransparencyPortal />
+  )}
+
+  {/* ENTERPRISE PROCUREMENT READINESS & SATRE/DSPT (PHASE 10) */}
+  {workspaceView === 'procurement_readiness' && (
+    <ProcurementReadinessHub
+      onNavigateToBuildDeploy={onNavigateToBuildDeploy}
+      onNavigateToGovernanceAtlas={() => onNavigateToPlaybook?.('sec-caldicott')}
+    />
+  )}
+
+  {/* 4. THE PLAIN-ENGLISH POLICY INSPECTOR MODAL/DRAWER */}
+  {inspectedGate && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative">
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
               <div className="space-y-1">
-                <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider">
-                  Plain-English Policy Inspector
+                <span className="text-xs font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider">
+                  Plain-English Statutory Policy Inspector
                 </span>
-                <h3 className="text-xl font-bold text-white">{inspectedGate.gateName}</h3>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white">{inspectedGate.gateName}</h3>
               </div>
               <button
                 onClick={() => setInspectedGate(null)}
-                className="p-2 rounded-lg bg-slate-950 text-slate-400 hover:text-white border border-slate-800"
+                className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
             <div className="space-y-4 text-xs">
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
-                <strong className="text-slate-300 uppercase tracking-wider text-[11px] block">
+              <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1.5">
+                <strong className="text-slate-700 dark:text-slate-300 uppercase tracking-wider text-[11px] block">
                   Plain-English Statutory Translation:
                 </strong>
-                <p className="text-slate-200 text-sm leading-relaxed">{inspectedGate.plainEnglishSummary}</p>
+                <p className="text-slate-900 dark:text-slate-100 text-sm leading-relaxed">{inspectedGate.plainEnglishSummary}</p>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
-                  <span className="text-[10px] text-slate-400 uppercase font-mono block">Statutory Authority</span>
-                  <span className="text-xs font-semibold text-amber-300 block">{inspectedGate.statutoryBasis}</span>
+                <div className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-lg border border-slate-200 dark:border-slate-700 space-y-1">
+                  <span className="text-[10px] text-slate-500 uppercase font-mono block">Statutory Authority</span>
+                  <span className="text-xs font-semibold text-amber-800 dark:text-amber-300 block">{inspectedGate.statutoryBasis}</span>
                 </div>
-                <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
-                  <span className="text-[10px] text-slate-400 uppercase font-mono block">Triggered Policy Node</span>
-                  <span className="text-xs font-mono text-cyan-300 block">{inspectedGate.triggerNode}</span>
+                <div className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-lg border border-slate-200 dark:border-slate-700 space-y-1">
+                  <span className="text-[10px] text-slate-500 uppercase font-mono block">Triggered Policy Node</span>
+                  <span className="text-xs font-mono text-[#005EB8] dark:text-sky-300 block">{inspectedGate.triggerNode}</span>
                 </div>
               </div>
 
               {/* Architecture Decision Register Linkage Block */}
-              <div className="p-3.5 bg-slate-950/90 rounded-xl border border-cyan-900/40 flex items-center justify-between gap-3">
+              <div className="p-3.5 bg-sky-50 dark:bg-slate-800 rounded-lg border border-sky-200 dark:border-sky-900/40 flex items-center justify-between gap-3">
                 <div className="space-y-0.5">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 font-bold border border-cyan-800">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#005EB8] text-white font-bold">
                       {inspectedGate.decisionRef}
                     </span>
-                    <strong className="text-white text-xs">{inspectedGate.decisionTitle}</strong>
+                    <strong className="text-slate-900 dark:text-white text-xs">{inspectedGate.decisionTitle}</strong>
                   </div>
-                  <span className="text-[11px] text-slate-400 block">
-                    Accountable Authority: <span className="text-slate-300">{inspectedGate.decisionRole}</span>
+                  <span className="text-[11px] text-slate-600 dark:text-slate-400 block">
+                    Accountable Authority: <span className="font-medium text-slate-800 dark:text-slate-200">{inspectedGate.decisionRole}</span>
                   </span>
                 </div>
                 {onNavigateToDecisionRegister && (
@@ -883,26 +1124,26 @@ tre:airlockAutoVerification "PASSED" .`,
                       setInspectedGate(null);
                       onNavigateToDecisionRegister(ref);
                     }}
-                    className="px-3 py-1.5 rounded-lg bg-cyan-950 hover:bg-cyan-900 text-cyan-300 border border-cyan-700 text-xs font-semibold flex items-center gap-1.5 shrink-0 transition-colors cursor-pointer"
+                    className="px-3 py-1.5 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white text-xs font-semibold flex items-center gap-1.5 shrink-0 transition-colors cursor-pointer"
                   >
-                    <span>Open in Decision Register</span>
+                    <span>Open Decision Record</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 )}
               </div>
 
-              {/* Technical Rule Block */}
+              {/* Scoped Dark Terminal for Rule */}
               <div className="space-y-1.5">
-                <span className="text-slate-400 font-mono text-[11px] block">
-                  Underlying Machine-Executable Shape / Rule:
+                <span className="text-slate-500 font-mono text-[11px] block">
+                  Machine-Executable Constraint Shape:
                 </span>
-                <pre className="p-3.5 bg-slate-950 rounded-xl border border-slate-800 text-sky-200 font-mono text-xs overflow-x-auto leading-relaxed">
+                <pre className="p-3.5 bg-slate-950 rounded-lg border border-slate-800 text-slate-200 font-mono text-xs overflow-x-auto leading-relaxed">
                   <code>{inspectedGate.codeSnippet}</code>
                 </pre>
               </div>
             </div>
 
-            <div className="pt-2 border-t border-slate-800 flex items-center justify-between">
+            <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
               {onNavigateToDecisionRegister ? (
                 <button
                   onClick={() => {
@@ -910,7 +1151,7 @@ tre:airlockAutoVerification "PASSED" .`,
                     setInspectedGate(null);
                     onNavigateToDecisionRegister(ref);
                   }}
-                  className="text-xs font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1 cursor-pointer"
+                  className="text-xs font-medium text-[#005EB8] dark:text-sky-400 hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   <Workflow className="w-3.5 h-3.5" />
                   <span>View Governance Track ({inspectedGate.decisionRef})</span>
@@ -918,7 +1159,7 @@ tre:airlockAutoVerification "PASSED" .`,
               ) : <div />}
               <button
                 onClick={() => setInspectedGate(null)}
-                className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs cursor-pointer"
+                className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-medium text-xs cursor-pointer"
               >
                 Close Inspector
               </button>
@@ -927,264 +1168,68 @@ tre:airlockAutoVerification "PASSED" .`,
         </div>
       )}
 
-      {/* 5. AUTOMATED ASSURANCE REPORT MODAL */}
-      {isReportModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-3xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            {/* Report Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <SeawaterLogo variant="badge" size="xs" />
-                  <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">
-                    Official Governance Certificate
-                  </span>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  Research Governance &amp; Digital Assurance Report
-                </h3>
-                <span className="text-xs text-slate-400 font-mono block">
-                  Document Reference: SEAWATER-ASR-{evaluation.auditHash.substring(7, 15).toUpperCase()}
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2 self-start sm:self-center">
-                <button
-                  onClick={() => window.print()}
-                  className="px-3 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
-                  title="Print or Save as PDF"
-                >
-                  <Printer className="w-3.5 h-3.5" />
-                  <span>Print / PDF</span>
-                </button>
-                <button
-                  onClick={() => setIsReportModalOpen(false)}
-                  className="p-1.5 rounded-lg bg-slate-950 text-slate-400 hover:text-white border border-slate-800"
-                >
-                  ✕
-                </button>
-              </div>
-            </div>
-
-            {/* Certificate Body */}
-            <div className="space-y-6 text-xs">
-              {/* Context Banner: What this Assurance Report is */}
-              <div className="p-4 rounded-xl bg-slate-950/90 border border-amber-900/40 space-y-2">
-                <div className="flex items-center gap-2">
-                  <Info className="w-4 h-4 text-amber-400 shrink-0" />
-                  <span className="font-bold text-amber-300 uppercase tracking-wider text-[11px]">
-                    Purpose &amp; Evidentiary Status of this Digital Assurance Report
-                  </span>
-                </div>
-                <p className="text-slate-300 text-[11px] leading-relaxed">
-                  This document serves as an immutable, machine-verified <strong>Digital Evidence Artifact</strong> compiled directly from the evaluated Policy-as-Code semantic constraints. It provides central Information Governance (IG) committees, Caldicott Guardians, and HRA Research Ethics auditors with reproducible proof that a proposed data access session satisfies statutory mandates (UK GDPR Art. 6/9, NHS Act 2006 s251) and Statistical Disclosure Control (SDC) rules prior to workspace admission or airlock data egress.
-                </p>
-                <div className="flex flex-wrap items-center gap-4 pt-1 text-[10px] text-slate-400 font-mono">
-                  <span>• Standards: SATRE v1.1 · ISO/IEC 27001 · NHS DSPT Mandate 3</span>
-                  <span>• Evaluation Engine: PySHACL v0.25 / OPA Rego v0.68</span>
-                  <span>• Lineage: W3C PROV-O Cryptographic Triple Store</span>
-                </div>
-              </div>
-
-              {/* Status & Hash Banner */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 grid grid-cols-1 sm:grid-cols-4 gap-3">
-                <div>
-                  <span className="text-[10px] text-slate-400 uppercase font-mono block">Overall Assured Status</span>
-                  <span className={`text-sm font-bold font-mono ${evaluation.overallDecision === 'APPROVED' ? 'text-emerald-400' : 'text-rose-400'}`}>
-                    {evaluation.overallDecision}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-[10px] text-slate-400 uppercase font-mono block">Evaluated Release</span>
-                  <span className="text-sm font-bold font-mono text-cyan-300">v2.4.0-prod (GitOps)</span>
-                </div>
-                <div>
-                  <span className="text-[10px] text-slate-400 uppercase font-mono block">Evaluated At</span>
-                  <span className="text-xs font-mono text-slate-300">{new Date(evaluation.evaluatedAt).toUTCString()}</span>
-                </div>
-                <div>
-                  <span className="text-[10px] text-slate-400 uppercase font-mono block">Cryptographic Hash</span>
-                  <span className="text-xs font-mono text-slate-300 truncate block">{evaluation.auditHash}</span>
-                </div>
-              </div>
-
-              {/* Research Protocol Profile */}
-              <div className="space-y-2">
-                <span className="font-bold text-slate-300 uppercase tracking-wider text-[11px] block">
-                  1. Evaluated Research Protocol Profile
-                </span>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
-                  <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800">
-                    <span className="text-slate-400 block">Accreditation</span>
-                    <strong className="text-white capitalize">{researcherStatus}</strong>
-                  </div>
-                  <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800">
-                    <span className="text-slate-400 block">Ethics (IRAS)</span>
-                    <strong className="text-white capitalize">{ethicsStatus}</strong>
-                  </div>
-                  <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800">
-                    <span className="text-slate-400 block">S251 Clearance</span>
-                    <strong className="text-white capitalize">{s251Status}</strong>
-                  </div>
-                  <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800">
-                    <span className="text-slate-400 block">Data Tier</span>
-                    <strong className="text-white">{dataTier}</strong>
-                  </div>
-                </div>
-              </div>
-
-              {/* Verified Gates Table with Decision Register & Statutory Mappings */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-slate-300 uppercase tracking-wider text-[11px] block">
-                    2. Gate-by-Gate Compliance Findings &amp; Decision Register Cross-Reference
-                  </span>
-                  <span className="text-[10px] text-cyan-400 font-mono">
-                    Click any Decision ID to open Architecture Register
-                  </span>
-                </div>
-                <div className="rounded-xl border border-slate-800 overflow-hidden">
-                  <table className="w-full text-left text-[11px]">
-                    <thead className="bg-slate-950 text-slate-400 font-mono border-b border-slate-800">
-                      <tr>
-                        <th className="p-2.5">Gate / Pillar</th>
-                        <th className="p-2.5">Status</th>
-                        <th className="p-2.5">Statutory Reference</th>
-                        <th className="p-2.5">Policy Node</th>
-                        <th className="p-2.5">Architecture Decision</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-800/80 bg-slate-950/60">
-                      {evaluation.gates.map((g, idx) => (
-                        <tr key={idx} className="hover:bg-slate-900/50">
-                          <td className="p-2.5 font-semibold text-slate-200">{g.gateName}</td>
-                          <td className="p-2.5">
-                            <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold ${
-                              g.status === 'PASS' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' :
-                              g.status === 'WARN' ? 'bg-amber-950 text-amber-300 border border-amber-800' :
-                              'bg-rose-950 text-rose-300 border border-rose-800'
-                            }`}>
-                              {g.status}
-                            </span>
-                          </td>
-                          <td className="p-2.5 text-slate-400">{g.statutoryBasis}</td>
-                          <td className="p-2.5 font-mono text-cyan-300">{g.triggerNode}</td>
-                          <td className="p-2.5">
-                            {onNavigateToDecisionRegister ? (
-                              <button
-                                onClick={() => {
-                                  setIsReportModalOpen(false);
-                                  onNavigateToDecisionRegister(g.decisionRef);
-                                }}
-                                className="font-mono text-cyan-400 hover:text-cyan-300 hover:underline flex items-center gap-1 cursor-pointer"
-                                title={`Open ${g.decisionRef}: ${g.decisionTitle}`}
-                              >
-                                <span>{g.decisionRef}</span>
-                                <ExternalLink className="w-3 h-3" />
-                              </button>
-                            ) : (
-                              <span className="font-mono text-slate-400">{g.decisionRef}</span>
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-              {/* High-Level Policy Decision Register Alignment Section */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
-                <span className="text-[10px] font-mono uppercase text-slate-400 block font-bold">
-                  3. Executive Decision Register Governance Alignment
-                </span>
-                <p className="text-[11px] text-slate-300 leading-relaxed">
-                  Each policy gate above directly derives from authoritative, board-signed records in the <strong>Seawater Architecture Decision Register</strong>. Before deploying shapes to production, the responsible operational authorities must approve these records:
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-[11px]">
-                  <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
-                    <span className="font-mono text-cyan-400 font-bold block">D-001 / D-003</span>
-                    <strong className="text-white block text-xs">Identity &amp; Boundary</strong>
-                    <span className="text-slate-400 text-[10px] block mt-0.5">Accountable: IAM Lead &amp; Policy Owner</span>
-                  </div>
-                  <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
-                    <span className="font-mono text-cyan-400 font-bold block">D-002 / D-004</span>
-                    <strong className="text-white block text-xs">Statutory Exemption &amp; Ethics</strong>
-                    <span className="text-slate-400 text-[10px] block mt-0.5">Accountable: Caldicott Guardian &amp; DPO</span>
-                  </div>
-                  <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
-                    <span className="font-mono text-cyan-400 font-bold block">D-005 / D-007</span>
-                    <strong className="text-white block text-xs">SDC Airlock &amp; PEP Rollout</strong>
-                    <span className="text-slate-400 text-[10px] block mt-0.5">Accountable: Biostatistician &amp; SRE Lead</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Sign-off & Audit Certification Block */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-                <span className="text-[10px] font-mono uppercase text-slate-400 block font-bold">
-                  4. Institutional Statement of Assurance &amp; DPIA Compliance
-                </span>
-                <p className="text-[11px] text-slate-300 leading-relaxed italic">
-                  "This report certifies that the evaluated research scenario has been validated against the Project Seawater Policy-as-Code semantic constraints. Evaluation was completed without human bias using deterministic W3C SHACL closed-world validation rules conforming to UK GDPR Art. 25 (Data Protection by Design), NHS Digital DSPT Mandate 3, and the 8 Caldicott Principles. This digital artifact constitutes admissible evidence for statutory Information Governance audits."
-                </p>
-                <div className="pt-2 border-t border-slate-800/80 flex flex-wrap items-center justify-between text-[10px] text-slate-400 font-mono">
-                  <span>Sign-off Authority: Automated Seawater Policy Decision Point (PDP)</span>
-                  <span>Ledger Verification: PROV-O Triple Ledger</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Modal Actions */}
-            <div className="pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(JSON.stringify(evaluation, null, 2));
-                  setCopiedHash(true);
-                  setTimeout(() => setCopiedHash(false), 2000);
-                }}
-                className="px-3 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-mono flex items-center gap-1.5 cursor-pointer"
-              >
-                {copiedHash ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copiedHash ? 'JSON Copied!' : 'Copy Evaluation JSON'}</span>
-              </button>
-
-              <button
-                onClick={() => setIsReportModalOpen(false)}
-                className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs cursor-pointer"
-              >
-                Close Certificate
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* 5. STANDARDIZED EVIDENCE PACK & COMPLIANCE DOSSIER MODAL */}
+      <EvidenceDossierModal
+        isOpen={isReportModalOpen}
+        onClose={() => setIsReportModalOpen(false)}
+        evaluation={{
+          gates: evaluation.gates.map((g) => ({
+            gateName: g.gateName,
+            status: g.status,
+            rationale: g.plainEnglishSummary,
+            statutoryBasis: g.statutoryBasis,
+            triggerNode: g.triggerNode,
+            decisionRef: g.decisionRef,
+            decisionTitle: g.decisionTitle
+          })),
+          overallDecision: evaluation.overallDecision === 'APPROVED' ? 'APPROVED' : 'REQUIRES_AMENDMENT',
+          decisionColor: evaluation.decisionColor,
+          decisionReason: evaluation.decisionReason,
+          auditHash: evaluation.auditHash,
+          evaluatedAt: evaluation.evaluatedAt
+        }}
+        protocolParams={{
+          researcherStatus,
+          ethicsStatus,
+          s251Status,
+          dataTier,
+          minCellCount,
+          dominanceRatio,
+          enclaveEgressBlocked,
+          aiWorkloadType,
+          aiHumanSponsorLinked,
+          studyTitle: selectedPresetId ? PRESET_SCENARIOS.find((p) => p.id === selectedPresetId)?.name : 'Cardiovascular Outcomes Observational Cohort Study',
+          leadInstitution: 'NHS Foundation Trust & University Health Partners',
+          chiefInvestigator: 'Prof. A. Henderson (Honorary Consultant)'
+        }}
+        onNavigateToDecisionRegister={onNavigateToDecisionRegister}
+      />
 
       {/* 6. INSTITUTIONAL GOVERNANCE CHARTER MODAL */}
       {isCharterModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-4xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 dark:bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-4xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
             {/* Modal Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-5">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <SeawaterLogo variant="badge" size="xs" />
-                  <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider">
+                  <span className="text-[11px] font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider">
                     Official Statutory Framework
                   </span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  Public Interest Data Governance &amp; Population Research Charter
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+                  Public Interest Data Governance &amp; Population Health Research Charter
                 </h3>
-                <span className="text-xs text-slate-400 font-mono block">
-                  Reference: SEAWATER-PAC-GOV-2026-V4 · Authorized by Data Governance &amp; Ethics Oversight Committee
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-mono block">
+                  Reference: SEAWATER-PAC-GOV-2026-V4 · Ratified for NHS SDE &amp; Academic TRE Environments
                 </span>
               </div>
 
               <div className="flex items-center gap-2 self-start sm:self-center">
                 <button
                   onClick={() => window.print()}
-                  className="px-3 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
+                  className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
                   title="Print or Save as PDF"
                 >
                   <Printer className="w-3.5 h-3.5" />
@@ -1192,7 +1237,7 @@ tre:airlockAutoVerification "PASSED" .`,
                 </button>
                 <button
                   onClick={() => setIsCharterModalOpen(false)}
-                  className="p-1.5 rounded-lg bg-slate-950 text-slate-400 hover:text-white border border-slate-800"
+                  className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white border border-slate-200 dark:border-slate-700 cursor-pointer"
                 >
                   ✕
                 </button>
@@ -1200,73 +1245,73 @@ tre:airlockAutoVerification "PASSED" .`,
             </div>
 
             {/* Charter Body */}
-            <div className="space-y-6 text-xs text-slate-300 leading-relaxed font-sans">
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-                <strong className="text-cyan-300 uppercase tracking-wider text-[11px] block font-mono">
+            <div className="space-y-5 text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2">
+                <strong className="text-[#005EB8] dark:text-sky-400 uppercase tracking-wider text-[11px] block font-mono">
                   1. Statutory Mandates &amp; Legal Processing Gateways
                 </strong>
-                <p className="text-[11px] text-slate-300">
-                  All analytical processing across the platform is authorized under statutory legislation including:
+                <p className="text-[12px] text-slate-600 dark:text-slate-300">
+                  All analytical processing across safe &amp; secure data intelligence environments is authorized under statutory legislation including:
                 </p>
-                <ul className="list-disc pl-5 space-y-1 text-slate-400 text-[11px]">
-                  <li><strong className="text-slate-200">Digital Economy Act 2017 (Part 5, Ch. 5)</strong>: Public authority data sharing under UKSA accreditation with strict criminal penalties (§ 67) for unlawful disclosure.</li>
-                  <li><strong className="text-slate-200">UK GDPR Articles 6(1)(e) &amp; 9(2)(j)</strong>: Lawful basis for public-interest archiving, scientific research, and health data linkage with Article 89(1) technical safeguards.</li>
-                  <li><strong className="text-slate-200">NHS Act 2006 (Section 251)</strong>: Statutory Confidentiality Advisory Group (CAG) exemptions for identifiable clinical microdata linkage.</li>
-                  <li><strong className="text-slate-200">The 8 NHS Caldicott Principles</strong>: Balancing confidential duty of care with the imperative to share information for patient and public benefit.</li>
+                <ul className="list-disc pl-5 space-y-1.5 text-slate-600 dark:text-slate-400 text-[11.5px]">
+                  <li><strong className="text-slate-900 dark:text-slate-200">Digital Economy Act 2017 (Part 5, Ch. 5)</strong>: Public authority data sharing under UKSA accreditation with statutory disclosure safeguards (§ 67).</li>
+                  <li><strong className="text-slate-900 dark:text-slate-200">UK GDPR Articles 6(1)(e) &amp; 9(2)(j)</strong>: Lawful basis for public-interest archiving, scientific research, and health data linkage with Article 89(1) technical safeguards.</li>
+                  <li><strong className="text-slate-900 dark:text-slate-200">NHS Act 2006 (Section 251)</strong>: Confidentiality Advisory Group (CAG) statutory approvals for identifiable clinical microdata linkage.</li>
+                  <li><strong className="text-slate-900 dark:text-slate-200">The 8 NHS Caldicott Principles</strong>: Enforcing Caldicott Principle 8 (Public Transparency) through proactive PPIE engagement and publication of standardized evidence packs.</li>
                 </ul>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-                <strong className="text-cyan-300 uppercase tracking-wider text-[11px] block font-mono">
-                  2. Standards Architecture &amp; Quality Frameworks
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2">
+                <strong className="text-[#005EB8] dark:text-sky-400 uppercase tracking-wider text-[11px] block font-mono">
+                  2. Standards Architecture &amp; Quality Assurances
                 </strong>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px]">
-                  <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
-                    <span className="font-bold text-white block">ISO/IEC 27001 &amp; 27701</span>
-                    <span className="text-slate-400 text-[10px]">Information Security and Privacy Information Management Systems.</span>
+                  <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                    <span className="font-bold text-slate-900 dark:text-white block">ISO/IEC 27001 &amp; 27701</span>
+                    <span className="text-slate-500 dark:text-slate-400 text-[10.5px]">Information Security &amp; Privacy Information Management baselines.</span>
                   </div>
-                  <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
-                    <span className="font-bold text-white block">ISO/IEC 42001 &amp; 5259</span>
-                    <span className="text-slate-400 text-[10px]">Artificial Intelligence Management and Data Quality / Bias Minimization.</span>
+                  <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                    <span className="font-bold text-slate-900 dark:text-white block">ISO/IEC 42001 &amp; 5259</span>
+                    <span className="text-slate-500 dark:text-slate-400 text-[10.5px]">Artificial Intelligence Management and Data Quality / Bias Minimization.</span>
                   </div>
-                  <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
-                    <span className="font-bold text-white block">DCB0129 &amp; DCB0160</span>
-                    <span className="text-slate-400 text-[10px]">Statutory NHS Clinical Risk Management for Health Software Systems.</span>
+                  <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                    <span className="font-bold text-slate-900 dark:text-white block">DCB0129 &amp; DCB0160</span>
+                    <span className="text-slate-500 dark:text-slate-400 text-[10.5px]">Statutory NHS Clinical Safety Risk Management for Digital Health Software.</span>
                   </div>
-                  <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
-                    <span className="font-bold text-white block">SATRE v1.1 Baseline</span>
-                    <span className="text-slate-400 text-[10px]">Standard Architecture for Trusted Research Environments.</span>
+                  <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                    <span className="font-bold text-slate-900 dark:text-white block">SATRE v1.1 Baseline</span>
+                    <span className="text-slate-500 dark:text-slate-400 text-[10.5px]">Standard Architecture for Trusted Research Environments (TREs).</span>
                   </div>
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-                <strong className="text-cyan-300 uppercase tracking-wider text-[11px] block font-mono">
-                  3. Operational Five Safes Invariants
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2">
+                <strong className="text-[#005EB8] dark:text-sky-400 uppercase tracking-wider text-[11px] block font-mono">
+                  3. Operational Five Safes Invariants &amp; Human Governance
                 </strong>
-                <p className="text-[11px] text-slate-300">
-                  Every active project must satisfy five continuous invariants: verified accreditation for Safe People, ethical clearances for Safe Projects, air-gapped zero-egress VPC routing for Safe Settings, tiered minimization for Safe Data, and automated mathematical suppression (k ≥ 10, dominance ≤ 80%) for Safe Outputs.
+                <p className="text-[11.5px] text-slate-600 dark:text-slate-300">
+                  Every active project must satisfy five continuous invariants: verified accreditation for Safe People, ethical clearance for Safe Projects, air-gapped zero-egress networks with internal mirrors for Safe Settings, tiered minimization for Safe Data, and statistical disclosure control (k ≥ 10, dominance ≤ 80%) for Safe Outputs. All decisions are submitted as standardized evidence packs for human panel approval by DAAG and local Caldicott Guardians.
                 </p>
               </div>
             </div>
 
             {/* Modal Actions */}
-            <div className="pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
               <button
                 onClick={() => {
                   navigator.clipboard.writeText("PUBLIC INTEREST DATA GOVERNANCE & POPULATION RESEARCH CHARTER (SEAWATER-PAC-GOV-2026-V4)\n\nStatutory Mandates: DEA 2017, UK GDPR Art 6/9, NHS Act 2006 s251, Caldicott Principles.\nStandards: ISO 27001, ISO 42001, DCB0129/DCB0160, SATRE v1.1.");
                   setCopiedCharter(true);
                   setTimeout(() => setCopiedCharter(false), 2000);
                 }}
-                className="px-3 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-mono flex items-center gap-1.5 cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-mono flex items-center gap-1.5 cursor-pointer"
               >
-                {copiedCharter ? <Check className="w-3.5 h-3.5 text-cyan-400" /> : <Copy className="w-3.5 h-3.5" />}
+                {copiedCharter ? <Check className="w-3.5 h-3.5 text-[#047857]" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copiedCharter ? 'Summary Copied!' : 'Copy Charter Summary'}</span>
               </button>
 
               <button
                 onClick={() => setIsCharterModalOpen(false)}
-                className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs cursor-pointer"
+                className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-white text-white dark:text-slate-900 font-medium text-xs cursor-pointer"
               >
                 Close Charter
               </button>

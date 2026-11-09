@@ -166,15 +166,15 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
     id: 'q10',
     category: 'Quantitative SDC & Airlock',
     difficulty: 'Foundation',
-    question: 'Across national statistical guidance and UK health research governance, what is the widely accepted standard convention for primary cell suppression ($k$) to mitigate individual re-identification?',
+    question: 'Across national statistical guidance and UK health research governance, what is the widely accepted standard convention for primary cell suppression (k) to mitigate individual re-identification?',
     options: [
-      'k >= 2 (suppressing only singletons)',
-      'k >= 5 (commonly applied in low-sensitivity local operational audits)',
-      'k >= 10 (the standard benchmark threshold applied in public research enclaves)',
-      'k >= 100 (applied only to national censuses)'
+      'k ≥ 2 (suppressing only singletons)',
+      'k ≥ 5 (commonly applied in low-sensitivity local operational audits)',
+      'k ≥ 10 (the standard benchmark threshold applied in public research enclaves)',
+      'k ≥ 100 (applied only to national censuses)'
     ],
     correctIndex: 2,
-    explanation: 'A threshold of k >= 10 is widely adopted across national statistical bodies and research governance frameworks as the standard convention for primary cell suppression in research enclaves. It is not an invariant mathematical law of nature, but an accepted risk-management norm balancing scientific utility against deductive disclosure risk.',
+    explanation: 'A threshold of k ≥ 10 is widely adopted across national statistical bodies and research governance frameworks as the standard convention for primary cell suppression in research enclaves. It is not an invariant mathematical law of nature, but an accepted risk-management norm balancing scientific utility against deductive disclosure risk.',
     citation: 'ONS SDC Guidelines, SDAP Handbook & National Research Governance Norms',
     tags: ['SDC', 'k-anonymity', 'Primary Suppression', 'Regulatory Norms']
   },
@@ -182,7 +182,7 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
     id: 'q11',
     category: 'Quantitative SDC & Airlock',
     difficulty: 'Intermediate',
-    question: 'What does the dominance rule ($k% \\le 80%$) in `sdc_rules.ttl` enforce?',
+    question: 'What does the dominance rule (dominance ≤ 80%) in `sdc_rules.ttl` enforce?',
     options: [
       'That at least 80% of project researchers must hold a PhD.',
       'That no single individual or unit contributes more than 80% to the total aggregate value of an output cell.',
@@ -190,7 +190,7 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
       'That 80% of database queries must be cached in memory.'
     ],
     correctIndex: 1,
-    explanation: 'The dominance rule (or $p\\%$ / $n,k$ rule) prevents attribute disclosure by ensuring that a single top contributor does not account for more than 80% of an aggregated metric (e.g. clinical costs or prescription volumes).',
+    explanation: 'The dominance rule (or (1, 80%) / (n, k) rule) prevents attribute disclosure by ensuring that a single top contributor does not account for more than 80% of an aggregated metric (e.g. clinical costs or prescription volumes).',
     citation: 'Playbook Section 1 (Key Goals) & Section 3 (Phase 1: Quantitative SDC)',
     tags: ['SDC', 'Dominance Rule']
   },
@@ -251,7 +251,7 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
     question: 'When an autonomous agent invokes `mcp:ExportSummary` to release a synthesized report, what validation pipeline is triggered?',
     options: [
       'The file is automatically emailed to external news outlets.',
-      'The request is intercepted and validated against `sdc_shapes.ttl` to guarantee primary cell suppression ($k \\ge 10$) and dominance bounds ($k% \\le 80%$) before airlock handoff.',
+      'The request is intercepted and validated against `sdc_shapes.ttl` to guarantee primary cell suppression (k ≥ 10) and dominance bounds (dominance ≤ 80%) before airlock handoff.',
       'The agent increases its own token budget by 10x.',
       'The database schema is upgraded automatically.'
     ],
@@ -386,7 +386,7 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
       'The Motion Picture Association and Spotify'
     ],
     correctIndex: 0,
-    explanation: 'ONS (Office for National Statistics) and the SAIL (Secure Anonymised Information Linkage) Databank are the standard UK clinical research governance bodies cited for SDC limits ($k \\ge 10$, dominance $k% \\le 80%$).',
+    explanation: 'ONS (Office for National Statistics) and the SAIL (Secure Anonymised Information Linkage) Databank are the standard UK clinical research governance bodies cited for SDC limits (k ≥ 10, dominance ≤ 80%).',
     citation: 'Playbook Section 2 (sdc_rules.ttl) & Section 3 (Phase 1)',
     tags: ['ONS', 'SAIL', 'SDC']
   },
@@ -474,7 +474,7 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
     id: 'q29',
     category: 'Quantitative SDC & Airlock',
     difficulty: 'Foundation',
-    question: 'What is the primary rationale for the primary cell suppression threshold ($k \\ge 10$) in clinical research outputs?',
+    question: 'What is the primary rationale for the primary cell suppression threshold (k ≥ 10) in clinical research outputs?',
     options: [
       'To prevent hard drives from running out of storage space.',
       'To avoid disclosing identifiable facts about small cohorts where an individual could be easily singled out.',

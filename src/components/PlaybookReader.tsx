@@ -301,14 +301,14 @@ any_unmasked_pii(columns) {
     subtitle: 'Integrating OPA with Kubernetes Admission Webhooks, VPC Firewalls, and Airlock Gates',
     content: [
       '• PEP Architectural Distribution:',
-      '   - Workspace Admission PEP: Kubernetes ValidatingAdmissionWebhooks intercept pod creation events (e.g., launching researcher JupyterLab containers). The webhook queries OPA; if `allow == false`, pod scheduling is aborted.',
-      '   - Network & Zero-Egress PEP: Calico CNI GlobalNetworkPolicies block all outbound egress traffic from researcher namespaces to external IP addresses.',
-      '   - Automated Airlock Egress PEP: When researchers submit tables or models for release, the airlock service executes automated SDC checks ($k \\ge 10$, dominance $\\le 80\%$) before alerting human airlock reviewers.'
+      '   - Workspace Admission PEP: Namespaced Admission Controllers intercept pod creation events (e.g., launching researcher JupyterLab containers in the research sandbox) using an audit-and-alert pattern (`failurePolicy: Ignore`) to avoid blocking cluster operations while enforcing least-privilege RBAC. The controller queries OPA and logs any policy discrepancies.',
+      '   - Network & Air-Gapped Safe Setting PEP: Calico CNI NetworkPolicies sever outbound internet access, directing all package installations to internal mirrors (CRAN, PyPI, Harbor). Heavy analytical queries (DuckDB/PostgreSQL) bypass userspace proxies to eliminate TCP connection bottlenecks.',
+      '   - SDC Airlock Egress PEP: When researchers submit tables or models for release, the airlock service compiles a standardized evidence pack with automated SDC metrics ($k \\ge 10$, dominance $\\le 80\\%$) to assist human airlock and DAAG panels.'
     ],
     keyTakeaways: [
-      'PEPs intercept actions at the perimeter before any unauthorized compute can execute.',
-      'Multi-layer defense: admission control, network policy, and airlock export validation.',
-      'Automated SDC filtering prevents human airlock reviewer fatigue and oversight.'
+      'PEPs operate within restricted namespaces without requiring high-risk cluster-admin privileges.',
+      'Multi-layer defense: namespaced admission audit, air-gapped network policies with internal mirrors, and airlock export validation.',
+      'Automated SDC filtering generates standardized evidence packs for final human panel sign-off.'
     ]
   },
   {
@@ -515,7 +515,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
             </div>
             <div className="space-y-1">
               <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                Project Seawater: Policy-as-Code Playbook
+                Data Technical Architecture Playbook (Policy-as-Code)
               </h1>
               <p className="text-slate-300 text-sm max-w-2xl leading-relaxed">
                 This playbook provides a Policy as Code (PaC) framework, bridging regulatory compliance documentation and real-time execution by compiling human- and machine-readable semantic graph ontologies into Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) across data intelligence platforms. Please note that this project is a work in progress.
@@ -603,7 +603,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                         • Egress (Outward Flow): Disclosure Control &amp; Safe Outputs
                       </span>
                       <p className="text-slate-300 text-xs leading-relaxed">
-                        Outbound flow regulates the export of derived analytical findings, statistical summaries, and model parameters. Outputs must pass automated Statistical Disclosure Control (SDC) checks, k-anonymity cell suppression ($k \ge 10$), and sub-millisecond Open Policy Agent (OPA) Rego policy evaluations to prevent patient re-identification.
+                        Outbound flow regulates the export of derived analytical findings, statistical summaries, and model parameters. Outputs must pass automated Statistical Disclosure Control (SDC) checks, k-anonymity cell suppression (k ≥ 10), and sub-millisecond Open Policy Agent (OPA) Rego policy evaluations to prevent patient re-identification.
                       </p>
                     </div>
                   </div>
@@ -742,7 +742,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
             <div>
               <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
                 <span>Operational Implementation &amp; Safe Rollout Track</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono font-bold">
+                <span className="text-[10px] px-2 py-0.5 rounded-md bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono font-bold">
                   Non-Breaking
                 </span>
               </div>
@@ -796,7 +796,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                 Data Catalogue: Metadata &amp; Dependent Constraints
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                6 real-world population data assets (GP EHR, Census, Mortality, HES APC, Genomics, Prescribing) with specific cell suppression rules ($k \ge 10$), dominance limits, and SHACL targets.
+                6 real-world population data assets (GP EHR, Census, Mortality, HES APC, Genomics, Prescribing) with specific cell suppression rules (k ≥ 10), dominance limits, and SHACL targets.
               </p>
             </div>
             <button
