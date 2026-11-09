@@ -66,7 +66,7 @@ const PRESET_REQUIREMENTS = [
     icon: 'Lock',
     shortPrompt: 'Senior consultant urgent clinical investigation requiring Caldicott dual-signoff and max 4h session.',
     prompt: 'Emergency Break-Glass access for senior clinicians: Permit access to Tier 3 clinical data during urgent safety investigations. Requires dual authorization signed by the Caldicott Guardian, active Datix clinical incident reference, maximum session duration of 4 hours, and continuous enhanced keystroke auditing.',
-    enforcementPoint: 'Kubernetes ValidatingAdmissionWebhook'
+    enforcementPoint: 'Namespaced Admission Controller (Audit & Alert)'
   },
   {
     id: 'external-collab',
@@ -74,7 +74,7 @@ const PRESET_REQUIREMENTS = [
     icon: 'Scale',
     shortPrompt: 'Non-NHS academic access limited to Tier 1 synthetic data with MFA and max 2h session.',
     prompt: 'External academic collaborator access: Non-NHS affiliated researchers must be restricted exclusively to Tier 1 Synthetic or Aggregate datasets. The session requires verified hardware MFA, active institutional accreditation, and a maximum idle timeout of 2 hours.',
-    enforcementPoint: 'Kubernetes ValidatingAdmissionWebhook'
+    enforcementPoint: 'Namespaced Admission Controller (Audit & Alert)'
   },
   {
     id: 'federated',
@@ -90,7 +90,7 @@ const PRESET_REQUIREMENTS = [
     icon: 'Scale',
     shortPrompt: 'Public authority linkage requiring UKSA RAP approval, accredited processor enclave, and s67 compliance.',
     prompt: 'Digital Economy Act 2017 Part 5 Chapter 5 public authority data linkage: Cross-departmental linkage must have active UKSA Research Accreditation Panel (RAP) project accreditation, must run exclusively within an Accredited Processor secure enclave with zero internet egress, researcher must hold verified Safe Researcher accreditation, and output checking must enforce k >= 10 and dominance <= 80%.',
-    enforcementPoint: 'Kubernetes ValidatingAdmissionWebhook'
+    enforcementPoint: 'Namespaced Admission Controller (Audit & Alert)'
   },
   {
     id: 'iso-42001-aims',
@@ -98,7 +98,7 @@ const PRESET_REQUIREMENTS = [
     icon: 'ShieldCheck',
     shortPrompt: 'ISO/IEC 42001 AIMS policy requiring risk tier classification, training provenance, and bias audit.',
     prompt: 'ISO/IEC 42001:2023 Artificial Intelligence Management System (AIMS) governance: Any model training or inference session within data analysis & intelligence platforms must document risk tier classification, must verify cryptographic training data provenance under ISO/IEC 5259, and must pass algorithmic bias and drift evaluation before deployment.',
-    enforcementPoint: 'Kubernetes ValidatingAdmissionWebhook'
+    enforcementPoint: 'Namespaced Admission Controller (Audit & Alert)'
   },
   {
     id: 'dcb-clinical-safety',
@@ -155,7 +155,7 @@ export const AIPolicyGenerator: React.FC = () => {
         title: 'Digital Economy Act 2017 Public Authority Research Linkage Policy',
         summary: 'Statutory policy enforcing UKSA Research Accreditation Panel (RAP) approval, verified Accredited Processor safe setting, Safe Researcher credentialing, and airlock disclosure control under DEA 2017 Part 5 Chapter 5.',
         targetClass: 'tre:DEALinkageSession',
-        enforcementPoint: ep.includes('Airlock') ? 'Airlock Egress PEP (Airgap Gate)' : 'Kubernetes ValidatingAdmissionWebhook',
+        enforcementPoint: ep.includes('Airlock') ? 'Airlock Egress PEP (Airgap Gate)' : 'Namespaced Admission Controller (Audit & Alert)',
         shacl: `@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix tre: <https://w3id.org/tre/core#> .
 @prefix dea: <https://w3id.org/tre/dea#> .
@@ -455,7 +455,7 @@ is_safe_select(query) {
         title: 'Emergency Break-Glass Access Authorization Policy',
         summary: 'Enforces dual-authorization Caldicott Guardian approval, Datix incident reference, maximum 4-hour session, and continuous keystroke auditing for urgent clinical safety reviews.',
         targetClass: 'tre:BreakGlassSession',
-        enforcementPoint: 'Kubernetes ValidatingAdmissionWebhook',
+        enforcementPoint: 'Namespaced Admission Controller (Audit & Alert)',
         shacl: `@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix tre: <https://w3id.org/tre/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -557,7 +557,7 @@ allow {
         title: 'ISO/IEC 42001:2023 Artificial Intelligence Management System (AIMS) Policy',
         summary: 'Standardized AI governance policy requiring verified model risk tier classification, cryptographic training data provenance under ISO/IEC 5259, and mandatory algorithmic bias audit pass prior to workload orchestration in data analysis & intelligence platforms.',
         targetClass: 'tre:AIModelWorkload',
-        enforcementPoint: 'Kubernetes ValidatingAdmissionWebhook',
+        enforcementPoint: 'Namespaced Admission Controller (Audit & Alert)',
         shacl: `@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix tre: <https://w3id.org/tre/core#> .
 @prefix iso: <https://w3id.org/tre/iso42001#> .
@@ -754,7 +754,7 @@ allow {
       title: 'Research Data Governance & Enclave Admission Policy',
       summary: `Tailored security policy synthesized for requirement: "${prompt.slice(0, 100)}..." enforcing Closed-World SHACL admission bounds and fail-closed OPA Rego rules.`,
       targetClass: 'tre:WorkspaceSession',
-      enforcementPoint: ep.includes('Airlock') ? 'Airlock Egress PEP (Airgap Gate)' : 'Kubernetes ValidatingAdmissionWebhook',
+      enforcementPoint: ep.includes('Airlock') ? 'Airlock Egress PEP (Airgap Gate)' : 'Namespaced Admission Controller (Audit & Alert)',
       shacl: `@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix tre: <https://w3id.org/tre/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -1146,7 +1146,7 @@ allow {
         <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10 space-y-3">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-800 text-cyan-300 text-xs font-mono font-bold">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-cyan-950/80 border border-cyan-800 text-cyan-300 text-xs font-mono font-bold">
               <Code2 className="w-3.5 h-3.5 text-cyan-400" />
               <span>Deterministic Policy-as-Code Synthesizer</span>
             </span>
@@ -1240,12 +1240,12 @@ allow {
             <select
               value={enforcementPoint}
               onChange={(e) => setEnforcementPoint(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500"
+              className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-[#005EB8]"
             >
-              <option value="Airlock Egress PEP (Airgap Gate)">Airlock Egress PEP (Airgap Gate & SDC)</option>
-              <option value="Kubernetes ValidatingAdmissionWebhook">Kubernetes ValidatingAdmissionWebhook (Compute Admission)</option>
+              <option value="Airlock Egress PEP (Airgap Gate)">Airlock Egress PEP (Airgap Gate &amp; SDC)</option>
+              <option value="Namespaced Admission Controller (Audit & Alert)">Namespaced Admission Controller (Audit &amp; Alert · failurePolicy: Ignore)</option>
               <option value="MCP Gateway Policy Decision Point (PEP)">Model Context Protocol (MCP) Tool Gateway</option>
-              <option value="API Gateway / Envoy Reverse Proxy">API Gateway / Envoy Reverse Proxy</option>
+              <option value="API Gateway / Egress Control Plane">API Gateway / Egress Control Plane (Direct analytics data-plane)</option>
             </select>
           </div>
 

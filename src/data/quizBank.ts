@@ -166,23 +166,23 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
     id: 'q10',
     category: 'Quantitative SDC & Airlock',
     difficulty: 'Foundation',
-    question: 'According to the playbook, what is the mandatory primary cell suppression threshold ($k$) for tabular outputs leaving the TRE airlock?',
+    question: 'Across national statistical guidance and UK health research governance, what is the widely accepted standard convention for primary cell suppression (k) to mitigate individual re-identification?',
     options: [
-      'k >= 2',
-      'k >= 5',
-      'k >= 10',
-      'k >= 100'
+      'k ≥ 2 (suppressing only singletons)',
+      'k ≥ 5 (commonly applied in low-sensitivity local operational audits)',
+      'k ≥ 10 (the standard benchmark threshold applied in public research enclaves)',
+      'k ≥ 100 (applied only to national censuses)'
     ],
     correctIndex: 2,
-    explanation: 'The playbook specifies primary cell suppression threshold of $k \\ge 10$ (aligned with ONS and SAIL Databank standards) to prevent re-identification of small patient cohorts.',
-    citation: 'Playbook Section 3 (Phase 1 & Phase 4) & sdc_rules.ttl',
-    tags: ['SDC', 'k-anonymity', 'Primary Suppression']
+    explanation: 'A threshold of k ≥ 10 is widely adopted across national statistical bodies and research governance frameworks as the standard convention for primary cell suppression in research enclaves. It is not an invariant mathematical law of nature, but an accepted risk-management norm balancing scientific utility against deductive disclosure risk.',
+    citation: 'ONS SDC Guidelines, SDAP Handbook & National Research Governance Norms',
+    tags: ['SDC', 'k-anonymity', 'Primary Suppression', 'Regulatory Norms']
   },
   {
     id: 'q11',
     category: 'Quantitative SDC & Airlock',
     difficulty: 'Intermediate',
-    question: 'What does the dominance rule ($k% \\le 80%$) in `sdc_rules.ttl` enforce?',
+    question: 'What does the dominance rule (dominance ≤ 80%) in `sdc_rules.ttl` enforce?',
     options: [
       'That at least 80% of project researchers must hold a PhD.',
       'That no single individual or unit contributes more than 80% to the total aggregate value of an output cell.',
@@ -190,7 +190,7 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
       'That 80% of database queries must be cached in memory.'
     ],
     correctIndex: 1,
-    explanation: 'The dominance rule (or $p\\%$ / $n,k$ rule) prevents attribute disclosure by ensuring that a single top contributor does not account for more than 80% of an aggregated metric (e.g. clinical costs or prescription volumes).',
+    explanation: 'The dominance rule (or (1, 80%) / (n, k) rule) prevents attribute disclosure by ensuring that a single top contributor does not account for more than 80% of an aggregated metric (e.g. clinical costs or prescription volumes).',
     citation: 'Playbook Section 1 (Key Goals) & Section 3 (Phase 1: Quantitative SDC)',
     tags: ['SDC', 'Dominance Rule']
   },
@@ -251,7 +251,7 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
     question: 'When an autonomous agent invokes `mcp:ExportSummary` to release a synthesized report, what validation pipeline is triggered?',
     options: [
       'The file is automatically emailed to external news outlets.',
-      'The request is intercepted and validated against `sdc_shapes.ttl` to guarantee primary cell suppression ($k \\ge 10$) and dominance bounds ($k% \\le 80%$) before airlock handoff.',
+      'The request is intercepted and validated against `sdc_shapes.ttl` to guarantee primary cell suppression (k ≥ 10) and dominance bounds (dominance ≤ 80%) before airlock handoff.',
       'The agent increases its own token budget by 10x.',
       'The database schema is upgraded automatically.'
     ],
@@ -330,17 +330,17 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
     id: 'q20',
     category: 'Five Safes & Governance',
     difficulty: 'Advanced',
-    question: 'What duration is allocated to Phase 1 (Knowledge Modeling & Baseline Ontology) in the 16-week project implementation roadmap?',
+    question: 'Under the Data Protection Act 2018 (Section 19) and UK GDPR Article 9(2)(j), which statutory condition must be satisfied when processing special category health data for scientific research without explicit consent?',
     options: [
-      'Weeks 1–4',
-      'Weeks 5–8',
-      'Weeks 9–12',
-      'Weeks 13–16'
+      'The processing must be subject to appropriate technical and organisational safeguards (e.g. pseudonymisation, secure enclaves) and must not cause substantial damage or distress to data subjects.',
+      'The researcher must publish all patient names and postcode districts in an academic journal for public scrutiny.',
+      'The data must be deleted within 48 hours of initial ingestion regardless of research protocol completion.',
+      'No technical or organisational safeguards are necessary if the research is conducted by an accredited university.'
     ],
     correctIndex: 0,
-    explanation: 'Phase 1 spans Weeks 1–4, establishing scope (Policy Metadata vs Runtime State), Turtle ontologies, Five Safes, SATRE pillars, SDC thresholds, and GitOps CI linting.',
-    citation: 'Playbook Section 3 (Implementation Roadmap & Phases)',
-    tags: ['Roadmap', 'Phase 1', 'Timeline']
+    explanation: 'Section 19 of the Data Protection Act 2018 and UK GDPR Article 89(1) mandate that scientific research using special category data must implement appropriate technical and organisational measures (such as pseudonymisation and enclave sandboxing), serve the public interest, and must not cause substantial damage or substantial distress to any data subject.',
+    citation: 'Data Protection Act 2018 § 19 & UK GDPR Article 9(2)(j) / 89(1)',
+    tags: ['DPA 2018', 'UK GDPR', 'Statutory Safeguards', 'Section 19']
   },
   {
     id: 'q21',
@@ -386,7 +386,7 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
       'The Motion Picture Association and Spotify'
     ],
     correctIndex: 0,
-    explanation: 'ONS (Office for National Statistics) and the SAIL (Secure Anonymised Information Linkage) Databank are the standard UK clinical research governance bodies cited for SDC limits ($k \\ge 10$, dominance $k% \\le 80%$).',
+    explanation: 'ONS (Office for National Statistics) and the SAIL (Secure Anonymised Information Linkage) Databank are the standard UK clinical research governance bodies cited for SDC limits (k ≥ 10, dominance ≤ 80%).',
     citation: 'Playbook Section 2 (sdc_rules.ttl) & Section 3 (Phase 1)',
     tags: ['ONS', 'SAIL', 'SDC']
   },
@@ -474,7 +474,7 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
     id: 'q29',
     category: 'Quantitative SDC & Airlock',
     difficulty: 'Foundation',
-    question: 'What is the primary rationale for the primary cell suppression threshold ($k \\ge 10$) in clinical research outputs?',
+    question: 'What is the primary rationale for the primary cell suppression threshold (k ≥ 10) in clinical research outputs?',
     options: [
       'To prevent hard drives from running out of storage space.',
       'To avoid disclosing identifiable facts about small cohorts where an individual could be easily singled out.',
@@ -599,7 +599,7 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
     tags: ['UK MDR 2002', 'SaMD', 'MHRA', 'Medical Devices']
   },
   {
-    id: 'q-seawater-metaphor',
+    id: 'q-wavebound-metaphor',
     category: 'Repository & Architecture',
     difficulty: 'Foundation',
     question: 'How does Project Wavebound model the clinical research data problem space through its tidal navigation metaphor?',

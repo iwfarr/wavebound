@@ -16,7 +16,13 @@ import {
   BookOpen,
   Filter,
   BarChart3,
-  Loader2
+  Loader2,
+  Printer,
+  Download,
+  FileCheck2,
+  ShieldCheck,
+  Copy,
+  Check
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -64,6 +70,20 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [startTime, setStartTime] = useState<number>(0);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
+
+  // Certificate State
+  const [candidateName, setCandidateName] = useState<string>('');
+  const [lastQuizMeta, setLastQuizMeta] = useState<{
+    category: string;
+    difficulty: string;
+    count: number;
+    score: number;
+    correct: number;
+    date: string;
+    passed: boolean;
+    hash: string;
+  } | null>(null);
+  const [showCertificateView, setShowCertificateView] = useState(false);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -183,6 +203,24 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
       });
     }
 
+    const hash = 'SWTR-' + Math.random().toString(36).substring(2, 7).toUpperCase() + '-' + Date.now().toString(36).substring(4).toUpperCase();
+    const dateFormatted = new Date().toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric'
+    });
+
+    setLastQuizMeta({
+      category: selectedCategory,
+      difficulty: selectedDifficulty,
+      count: total,
+      score: percentage,
+      correct: correctCount,
+      date: dateFormatted,
+      passed,
+      hash
+    });
+
     // Save attempt to user progress tracker
     recordQuizAttempt({
       category: selectedCategory,
@@ -217,9 +255,9 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
               TRE Policy-as-Code Quiz Engine
             </h1>
-            <p className="text-slate-400 text-xs sm:text-sm max-w-xl">
+            <p className="text-slate-300 text-xs sm:text-sm max-w-xl">
               Challenge yourself on Five Safes governance, SHACL closed-world validation,
-              quantitative SDC math ($k \ge 10$), OPA Rego compilation, and international standards (ISO 42001, DCB0129/0160).
+              quantitative SDC math (<span className="font-mono text-cyan-300 font-semibold">k &ge; 10</span>), OPA Rego compilation, and international standards (ISO 42001, DCB0129/0160).
             </p>
           </div>
 
@@ -490,6 +528,202 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
               </button>
             </div>
           </div>
+
+          {/* Certificate of Completion & Assessment Card */}
+          {lastQuizMeta && (
+            <div className="bg-slate-950 border-2 border-cyan-500/30 rounded-2xl p-6 sm:p-8 space-y-6 relative overflow-hidden shadow-2xl">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
+
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center text-cyan-400 shrink-0">
+                    <Award className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
+                      Certificate of Technical Governance Proficiency
+                    </h3>
+                    <p className="text-xs text-slate-400">
+                      Download or print an accredited record of this assessment run for governance evidence dossiers
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      try {
+                        window.print();
+                      } catch (err) {
+                        console.warn('Direct print failed, generating standalone HTML download', err);
+                      }
+                    }}
+                    className="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-2 transition-colors shadow-md cursor-pointer"
+                  >
+                    <Printer className="w-4 h-4" />
+                    <span>Print / Save PDF</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      if (!lastQuizMeta) return;
+                      const name = candidateName.trim() || 'Candidate Name / Designated Enclave Operator';
+                      const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Certificate of Competence - ${name}</title>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: #f8fafc; color: #0f172a; padding: 40px; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+    .cert-card { background: #ffffff; border: 3px double #0284c7; border-radius: 16px; padding: 48px; max-width: 800px; width: 100%; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
+    .badge { display: inline-block; padding: 6px 14px; background: #e0f2fe; color: #0369a1; border-radius: 9999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+    h1 { font-size: 28px; margin: 16px 0 4px 0; color: #0f172a; font-weight: 800; }
+    .strapline { font-size: 13px; color: #64748b; text-transform: uppercase; letter-spacing: 0.15em; font-family: monospace; }
+    .cert-name { font-size: 26px; font-weight: 700; color: #0284c7; border-bottom: 2px solid #0284c7; padding-bottom: 8px; margin: 24px auto 12px; max-width: 480px; }
+    .cert-desc { font-size: 13px; line-height: 1.6; color: #334155; max-width: 580px; margin: 0 auto 24px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; text-align: left; }
+    .grid-box { background: #f1f5f9; padding: 12px 16px; border-radius: 8px; border: 1px solid #e2e8f0; }
+    .grid-label { font-size: 10px; color: #64748b; text-transform: uppercase; font-family: monospace; font-weight: 600; }
+    .grid-val { font-size: 13px; font-weight: 700; color: #0f172a; margin-top: 4px; }
+    .footer { display: flex; justify-content: space-between; border-top: 1px solid #e2e8f0; padding-top: 16px; font-size: 12px; color: #64748b; font-family: monospace; }
+    @media print { body { padding: 0; background: #fff; } .cert-card { box-shadow: none; border: 2px solid #000; } }
+  </style>
+</head>
+<body>
+  <div class="cert-card">
+    <div class="badge">Wavebound Policy-as-Code Enclave Assurance</div>
+    <h1>Certificate of Competence & Verification</h1>
+    <div class="strapline">safe data intelligence environments</div>
+    <p style="font-style: italic; color: #64748b; margin-top: 24px;">This certifies that</p>
+    <div class="cert-name">${name}</div>
+    <p class="cert-desc">has completed a technical assessment evaluating automated governance policy, information governance safeguards, and line-rate disclosure control enforcement.</p>
+    <div class="grid">
+      <div class="grid-box"><div class="grid-label">Category Domain</div><div class="grid-val">${lastQuizMeta.category}</div></div>
+      <div class="grid-box"><div class="grid-label">Target Difficulty</div><div class="grid-val">${lastQuizMeta.difficulty} Level</div></div>
+      <div class="grid-box"><div class="grid-label">Evaluated Questions</div><div class="grid-val">${lastQuizMeta.count} Items (${lastQuizMeta.score}% Score)</div></div>
+    </div>
+    <div class="footer">
+      <div>Date Issued: <strong>${lastQuizMeta.date}</strong></div>
+      <div>Audit Hash: <strong>${lastQuizMeta.hash}</strong></div>
+    </div>
+  </div>
+</body>
+</html>`;
+                      const blob = new Blob([htmlContent], { type: 'text/html' });
+                      const url = URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = `wavebound-certificate-${lastQuizMeta.hash}.html`;
+                      document.body.appendChild(a);
+                      a.click();
+                      document.body.removeChild(a);
+                      URL.revokeObjectURL(url);
+                    }}
+                    className="px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                    title="Download clean standalone printable HTML file"
+                  >
+                    <Download className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>Download (.html)</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Name Customization Input */}
+              <div className="space-y-2 max-w-md">
+                <label className="text-xs font-semibold text-slate-300 block">
+                  Candidate Name or Professional ID:
+                </label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={candidateName}
+                    onChange={(e) => setCandidateName(e.target.value)}
+                    placeholder="e.g. Dr. Jane Smith, Information Asset Owner"
+                    className="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                  />
+                  {candidateName && (
+                    <button
+                      onClick={() => setCandidateName('')}
+                      className="text-xs text-slate-500 hover:text-slate-300 px-2 py-1"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Printable Certificate Template */}
+              <div
+                id="certificate-print-view"
+                className="bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 border-2 border-cyan-500/50 rounded-2xl p-8 sm:p-10 space-y-6 text-center relative print:border-black print:bg-white print:text-black shadow-xl"
+              >
+                <div className="space-y-1">
+                  <div className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-cyan-400 bg-cyan-950/80 px-3 py-1 rounded-md border border-cyan-800/60 print:bg-transparent print:text-black">
+                    <ShieldCheck className="w-3.5 h-3.5 text-cyan-400 print:text-black" />
+                    <span>Wavebound Policy-as-Code Enclave Assurance</span>
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight pt-2 print:text-black">
+                    Certificate of Competence &amp; Verification
+                  </h2>
+                  <p className="text-xs text-slate-400 uppercase tracking-widest font-mono print:text-gray-600">
+                    safe data intelligence environments
+                  </p>
+                </div>
+
+                <div className="py-2 space-y-2">
+                  <span className="text-xs font-serif italic text-slate-400 print:text-gray-600">
+                    This certifies that
+                  </span>
+                  <div className="text-xl sm:text-2xl font-bold text-cyan-300 border-b border-cyan-500/40 pb-2 max-w-md mx-auto print:text-black print:border-black">
+                    {candidateName.trim() || 'Candidate Name / Designated Enclave Operator'}
+                  </div>
+                  <p className="text-xs text-slate-300 max-w-lg mx-auto leading-relaxed pt-1 print:text-gray-700">
+                    has completed a rigorous technical assessment evaluating automated governance policy,
+                    information governance safeguards, and line-rate disclosure control enforcement.
+                  </p>
+                </div>
+
+                {/* Certificate Metadata Grid showing combination of Domain, Difficulty, Question Count */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left max-w-2xl mx-auto pt-2">
+                  <div className="p-3 bg-slate-900/90 rounded-xl border border-slate-800 print:bg-gray-100 print:border-gray-300">
+                    <span className="text-[10px] uppercase font-mono text-slate-500 block">Category Domain</span>
+                    <span className="text-xs font-bold text-white block mt-0.5 print:text-black">
+                      {lastQuizMeta.category}
+                    </span>
+                  </div>
+
+                  <div className="p-3 bg-slate-900/90 rounded-xl border border-slate-800 print:bg-gray-100 print:border-gray-300">
+                    <span className="text-[10px] uppercase font-mono text-slate-500 block">Target Difficulty</span>
+                    <span className="text-xs font-bold text-cyan-300 block mt-0.5 print:text-black">
+                      {lastQuizMeta.difficulty} Level
+                    </span>
+                  </div>
+
+                  <div className="p-3 bg-slate-900/90 rounded-xl border border-slate-800 print:bg-gray-100 print:border-gray-300">
+                    <span className="text-[10px] uppercase font-mono text-slate-500 block">Evaluated Questions</span>
+                    <span className="text-xs font-bold text-white block mt-0.5 print:text-black">
+                      {lastQuizMeta.count} Items ({lastQuizMeta.score}% Score)
+                    </span>
+                  </div>
+                </div>
+
+                {/* Footer Sign-off & Verification Token */}
+                <div className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400 print:border-gray-300 print:text-gray-700">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-mono">Date Issued:</span>
+                    <strong className="text-slate-200 print:text-black font-mono">{lastQuizMeta.date}</strong>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-mono text-slate-500">Audit Hash:</span>
+                    <code className="text-[11px] font-mono text-cyan-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800 print:bg-transparent print:text-black">
+                      {lastQuizMeta.hash}
+                    </code>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Question Review List */}
           <div className="space-y-4 pt-6 border-t border-slate-800">

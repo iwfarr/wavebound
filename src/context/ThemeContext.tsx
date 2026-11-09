@@ -1,41 +1,46 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-type Theme = 'dark' | 'light';
+export type ThemeMode = 'dark' | 'light';
 
 interface ThemeContextType {
-  theme: Theme;
+  theme: ThemeMode;
   toggleTheme: () => void;
-  setTheme: (theme: Theme) => void;
+  setTheme: (theme: ThemeMode) => void;
+  isDark: boolean;
+  isLight: boolean;
+  // Backward compatibility aliases
+  isEditorial: boolean;
+  isTerminal: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setThemeState] = useState<Theme>(() => {
+  // Default mode is authoritative Dark Mode
+  const [theme, setThemeState] = useState<ThemeMode>(() => {
     try {
       const stored = localStorage.getItem('seawater_theme');
-      if (stored === 'light' || stored === 'dark') {
-        return stored;
-      }
+      if (stored === 'light' || stored === 'editorial') return 'light';
+      if (stored === 'dark' || stored === 'terminal') return 'dark';
     } catch {
-      // Ignore localStorage access failures
+      // Ignore
     }
     return 'dark';
   });
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === 'light') {
-      root.classList.add('light');
-      root.classList.remove('dark');
-    } else {
+    if (theme === 'dark') {
       root.classList.add('dark');
       root.classList.remove('light');
+    } else {
+      root.classList.remove('dark');
+      root.classList.add('light');
     }
     try {
       localStorage.setItem('seawater_theme', theme);
     } catch {
-      // Ignore localStorage write failures
+      // Ignore
     }
   }, [theme]);
 
@@ -43,12 +48,22 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  const setTheme = (newTheme: Theme) => {
+  const setTheme = (newTheme: ThemeMode) => {
     setThemeState(newTheme);
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        toggleTheme,
+        setTheme,
+        isDark: theme === 'dark',
+        isLight: theme === 'light',
+        isEditorial: theme === 'light',
+        isTerminal: theme === 'dark'
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   );

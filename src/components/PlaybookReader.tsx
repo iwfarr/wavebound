@@ -32,9 +32,15 @@ interface PlaybookSection {
   title: string;
   subtitle: string;
   number: string;
+  executiveSummary?: string;
   content: string[];
   codeBlock?: {
     language: string;
+    code: string;
+  };
+  technicalImplementation?: {
+    format: string;
+    title: string;
     code: string;
   };
   keyTakeaways: string[];
@@ -46,6 +52,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
     number: '0',
     title: 'Executive Front Matter: Ontology-led Information Governance',
     subtitle: 'Connecting governance meaning, accountable human decisions and proposed technical safeguards',
+    executiveSummary: 'An ontology-led IG reference architecture connecting legal and ethical requirements, accountable human decisions and proposed safeguards. OWL/RDF examples illustrate governance meaning; executable compilation and production enforcement are not yet delivered.',
     content: [
       'Wavebound is an ontology-led information governance playbook and reference architecture connecting legal and ethical requirements, institutional decisions and technical safeguards for sensitive research data.',
       '• Governance Meaning — IG OWL/RDF Ontology: The proposed semantic model connects people, projects, datasets, purposes, permissions, approvals, responsibilities and evidence. The ontology is the connective tissue of the architecture, not just a diagram: which decision authorises which activity, for which data, under what conditions, and with whose accountability?',
@@ -70,6 +77,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
     number: '1.1',
     title: 'Foundational Architecture: Governance Metadata vs. Ephemeral Runtime State',
     subtitle: 'Proposed separation of reviewed governance assertions from transient infrastructure state',
+    executiveSummary: 'The proposed architecture separates reviewed OWL/RDF assertions from ephemeral infrastructure. Assertions require source provenance, validity and revocation handling; a graph statement alone does not grant permission.',
     content: [
       '• Plain-English Architecture Principle: Systems break when enduring governance laws are conflated with ephemeral infrastructure plumbing.',
       '• 1. Governance Metadata (Reviewed Assertions): The proposed OWL/RDF model represents project purposes, institutional decisions, permissions and evidence with source provenance and validity conditions. Accreditation, training and approvals can expire or be revoked; graph assertions are not immutable legal truths. The illustrative name tre-core.ttl denotes a proposed artifact, not an existing ontology file.',
@@ -88,6 +96,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
     number: '1.2',
     title: 'Core Ontologies: Formalizing the Five Safes & SATRE Framework',
     subtitle: 'Illustrative OWL/RDF modelling; proposed filenames and classifications require review',
+    executiveSummary: 'Embedded Turtle examples sketch the IG ontology and Five Safes relationships. Proposed ontology files and classifications require review and validation; the visual graph is not a standalone validated ontology.',
     content: [
       '• Illustrative Five Safes Modelling: The embedded Turtle snippet sketches candidate concepts. ontology/tre-core.ttl and governance_core.ttl are proposed artifacts, not delivered files. A validated IG ontology requires reviewed definitions, relationships, provenance and tests; the visual graph is not itself that ontology. The following descriptions are target examples, not approved universal requirements:',
       '   - Safe People: tre:SafePerson with mandatory institutional accreditation and active Information Governance (IG) training. Note: AI models and agents are NEVER Safe People; they operate strictly as delegated machine workloads under an accredited human researcher sponsor.',
@@ -291,14 +300,14 @@ any_unmasked_pii(columns) {
     subtitle: 'Integrating OPA with Kubernetes Admission Webhooks, VPC Firewalls, and Airlock Gates',
     content: [
       '• PEP Architectural Distribution:',
-      '   - Workspace Admission PEP: Kubernetes ValidatingAdmissionWebhooks intercept pod creation events (e.g., launching researcher JupyterLab containers). The webhook queries OPA; if `allow == false`, pod scheduling is aborted.',
-      '   - Network & Zero-Egress PEP: Calico CNI GlobalNetworkPolicies block all outbound egress traffic from researcher namespaces to external IP addresses.',
-      '   - Automated Airlock Egress PEP: When researchers submit tables or models for release, the airlock service executes automated SDC checks ($k \\ge 10$, dominance $\\le 80\%$) before alerting human airlock reviewers.'
+      '   - Workspace Admission PEP: Namespaced Admission Controllers intercept pod creation events (e.g., launching researcher JupyterLab containers in the research sandbox) using an audit-and-alert pattern (`failurePolicy: Ignore`) to avoid blocking cluster operations while enforcing least-privilege RBAC. The controller queries OPA and logs any policy discrepancies.',
+      '   - Network & Air-Gapped Safe Setting PEP: Calico CNI NetworkPolicies sever outbound internet access, directing all package installations to internal mirrors (CRAN, PyPI, Harbor). Heavy analytical queries (DuckDB/PostgreSQL) bypass userspace proxies to eliminate TCP connection bottlenecks.',
+      '   - SDC Airlock Egress PEP: When researchers submit tables or models for release, the airlock service compiles a standardized evidence pack with automated SDC metrics ($k \\ge 10$, dominance $\\le 80\\%$) to assist human airlock and DAAG panels.'
     ],
     keyTakeaways: [
-      'PEPs intercept actions at the perimeter before any unauthorized compute can execute.',
-      'Multi-layer defense: admission control, network policy, and airlock export validation.',
-      'Automated SDC filtering prevents human airlock reviewer fatigue and oversight.'
+      'PEPs operate within restricted namespaces without requiring high-risk cluster-admin privileges.',
+      'Multi-layer defense: namespaced admission audit, air-gapped network policies with internal mirrors, and airlock export validation.',
+      'Automated SDC filtering generates standardized evidence packs for final human panel sign-off.'
     ]
   },
   {
@@ -361,6 +370,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
   const [copiedCodeId, setCopiedCodeId] = useState<string | null>(null);
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
   const [expandedIntro, setExpandedIntro] = useState(true);
+  const [expandedTechnicalSchemas, setExpandedTechnicalSchemas] = useState<Record<string, boolean>>({});
   const contentContainerRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll and highlight when targetSectionId is received
@@ -451,7 +461,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
   const renderGlossaryBadges = (rawText: string, keyPrefix: number) => {
     // Terms ordered by length descending so longer phrases match first
     const sortedTerms = [...GLOSSARY_TERMS].sort((a, b) => b.term.length - a.term.length);
-    
+
     // Create regex matching whole terms or known acronyms
     const termNames = sortedTerms.map((t) => t.term.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
     const acronyms = sortedTerms.filter((t) => t.acronym).map((t) => t.acronym!.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
@@ -592,7 +602,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                         • Egress (Outward Flow): Disclosure Control &amp; Safe Outputs
                       </span>
                       <p className="text-slate-300 text-xs leading-relaxed">
-                        Outbound flow regulates the export of derived analytical findings, statistical summaries, and model parameters. Outputs must pass automated Statistical Disclosure Control (SDC) checks, k-anonymity cell suppression ($k \ge 10$), and sub-millisecond Open Policy Agent (OPA) Rego policy evaluations to prevent patient re-identification.
+                        Outbound flow regulates the export of derived analytical findings, statistical summaries, and model parameters. Outputs must pass automated Statistical Disclosure Control (SDC) checks, k-anonymity cell suppression (k ≥ 10), and sub-millisecond Open Policy Agent (OPA) Rego policy evaluations to prevent patient re-identification.
                       </p>
                     </div>
                   </div>
@@ -731,7 +741,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
             <div>
               <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
                 <span>Operational Implementation &amp; Safe Rollout Track</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono font-bold">
+                <span className="text-[10px] px-2 py-0.5 rounded-md bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono font-bold">
                   Non-Breaking
                 </span>
               </div>
@@ -785,7 +795,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                 Data Catalogue: Metadata &amp; Dependent Constraints
               </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                6 real-world population data assets (GP EHR, Census, Mortality, HES APC, Genomics, Prescribing) with specific cell suppression rules ($k \ge 10$), dominance limits, and SHACL targets.
+                6 real-world population data assets (GP EHR, Census, Mortality, HES APC, Genomics, Prescribing) with specific cell suppression rules (k ≥ 10), dominance limits, and SHACL targets.
               </p>
             </div>
             <button
@@ -922,12 +932,23 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                 </button>
               </div>
 
+              {/* 2-Sentence Executive Summary Banner */}
+              {section.executiveSummary && (
+                <div className="p-3.5 rounded-xl bg-slate-950 border border-cyan-900/30 flex items-start gap-2.5">
+                  <Sparkles className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                  <div className="text-xs text-slate-300 leading-relaxed">
+                    <strong className="text-cyan-300 font-mono uppercase text-[10px] block tracking-wider">Executive Summary:</strong>
+                    {section.executiveSummary}
+                  </div>
+                </div>
+              )}
+
               {/* Text Paragraphs with Term Highlighting */}
               <div className="space-y-3 text-slate-300 text-sm sm:text-base leading-relaxed">
                 {section.content.map((paragraph, pIdx) => {
                   const isList = paragraph.startsWith('•');
                   const isSublist = paragraph.startsWith('   -');
-                  
+
                   return (
                     <div
                       key={pIdx}
@@ -945,34 +966,64 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                 })}
               </div>
 
-              {/* Code Snippet if present */}
+              {/* Collapsible Technical Implementation (OWL/RDF/Code) Accordion */}
               {section.codeBlock && (
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs text-slate-400 px-1">
-                    <span className="font-mono flex items-center gap-1.5">
+                <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-950">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setExpandedTechnicalSchemas((prev) => ({
+                        ...prev,
+                        [section.id]: !prev[section.id]
+                      }));
+                    }}
+                    className="w-full px-4 py-3 bg-slate-900/80 hover:bg-slate-900 flex items-center justify-between text-xs font-semibold text-slate-300 transition-colors cursor-pointer"
+                  >
+                    <div className="flex items-center gap-2 font-mono">
                       <Code2 className="w-3.5 h-3.5 text-cyan-400" />
-                      {section.id === 'sec-architecture' ? 'Repository Directory Tree' : 'CLI Execution'}
-                    </span>
-                    <button
-                      onClick={() => handleCopyCode(section.id, section.codeBlock!.code)}
-                      className="flex items-center gap-1 text-slate-400 hover:text-cyan-300 bg-slate-950 px-2.5 py-1 rounded border border-slate-800 transition-colors"
-                    >
-                      {copiedCodeId === section.id ? (
-                        <>
-                          <Check className="w-3.5 h-3.5 text-emerald-400" />
-                          <span className="text-emerald-400">Copied!</span>
-                        </>
+                      <span>View Technical Implementation (OWL / RDF / Shapes)</span>
+                      <span className="text-[10px] text-slate-500 uppercase px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">
+                        {section.codeBlock.language}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-cyan-400 text-[11px] font-mono">
+                      <span>{expandedTechnicalSchemas[section.id] ? 'Collapse' : 'Expand Schema'}</span>
+                      {expandedTechnicalSchemas[section.id] ? (
+                        <ChevronUp className="w-4 h-4" />
                       ) : (
-                        <>
-                          <Copy className="w-3.5 h-3.5" />
-                          <span>Copy</span>
-                        </>
+                        <ChevronDown className="w-4 h-4" />
                       )}
-                    </button>
-                  </div>
-                  <pre className="p-4 sm:p-5 rounded-xl bg-slate-950 border border-slate-800/90 text-xs sm:text-sm font-mono text-cyan-300 overflow-x-auto leading-relaxed shadow-inner">
-                    <code>{section.codeBlock.code}</code>
-                  </pre>
+                    </div>
+                  </button>
+
+                  {expandedTechnicalSchemas[section.id] && (
+                    <div className="p-4 border-t border-slate-800 space-y-2">
+                      <div className="flex items-center justify-between text-xs text-slate-400">
+                        <span className="font-mono text-[11px]">
+                          {section.id === 'sec-architecture' ? 'Repository Directory Tree' : 'Executable Syntax'}
+                        </span>
+                        <button
+                          onClick={() => handleCopyCode(section.id, section.codeBlock!.code)}
+                          className="flex items-center gap-1 text-slate-400 hover:text-cyan-300 bg-slate-900 px-2.5 py-1 rounded border border-slate-700 text-[11px] font-mono transition-colors cursor-pointer"
+                        >
+                          {copiedCodeId === section.id ? (
+                            <>
+                              <Check className="w-3.5 h-3.5 text-emerald-400" />
+                              <span className="text-emerald-400 font-bold">Copied!</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3.5 h-3.5" />
+                              <span>Copy Schema</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                      <pre className="p-4 rounded-xl bg-slate-950 text-xs sm:text-sm font-mono text-cyan-300 overflow-x-auto leading-relaxed border border-slate-800/80 shadow-inner">
+                        <code>{section.codeBlock.code}</code>
+                      </pre>
+                    </div>
+                  )}
                 </div>
               )}
 

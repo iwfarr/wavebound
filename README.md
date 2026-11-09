@@ -24,7 +24,7 @@ See [branding notes](docs/branding.md) for retained technical identifiers, deplo
 
 ---
 
-## 🧭 Executive Overview
+## 🧭 Executive Overview: Ontology-led Information Governance
 
 Governance decisions should shape how research data is accessed, used and released, rather than sit separately in policy documents. Wavebound explores how a shared semantic model can connect those decisions to practical safeguards while retaining accountable human oversight.
 
@@ -107,7 +107,7 @@ The interactive web application provides these reference and learning capabiliti
 
 ---
 
-## 📜 Standards & Regulatory Frameworks
+## 📜 Standards & Regulatory Frameworks (Exhaustive Compendium)
 
 Wavebound references these sources when exploring governance mappings. The table describes candidate relationships, not implemented controls, certified coverage or legal equivalence. Applicability and source versions require organisational review; see the [UK context and mapping boundaries](docs/positioning.md#uk-governance-context).
 
@@ -182,21 +182,28 @@ Open your browser to `http://localhost:3000`.
 | `npm run build` | Compile and build the static production bundle into `dist/` |
 | `npm run preview` | Preview the local production build |
 | `npm run lint` | Run TypeScript type checks (`tsc --noEmit`) |
-| `npm run claims:check` | Verify compliance claims and architectural assertions |
+| `npm run claims:check` | Check inventory freshness; does not verify legal correctness or operational controls |
 | `npm run claims:update` | Update and index claims inventory |
 
 ---
 
-## 🚢 Deployment to GitHub Pages
+## 🚢 Deployment Targets: Playbook Web Portal vs. Cluster PaC Engine
 
-The repository is configured for automated, zero-cost deployment to GitHub Pages using GitHub Actions:
+Distinguish the deployable reference application from the proposed operational architecture:
 
+### Target A: Deploying the Playbook Documentation & Interactive Web Portal (GitHub Pages)
+The GitHub Actions workflow in `.github/workflows/deploy-pages.yml` deploys the **client-side React application** (the interactive Playbook, IG Quick Guide, Quiz Engine, and Cytoscape Atlas) to GitHub Pages or any static CDN:
 1. Push your repository to GitHub.
 2. In your repository on GitHub, navigate to **Settings > Pages**.
 3. Under **Build and deployment > Source**, select **GitHub Actions**.
 4. The workflow in `.github/workflows/deploy-pages.yml` will automatically build the static bundle and deploy it to `https://<your-username>.github.io/<your-repo>/`.
 
-For complete configuration instructions, custom domain setup, and troubleshooting, read the [GitHub Pages Deployment Instructions (deploy_instructions.md)](deploy_instructions.md).
+For complete web portal configuration instructions, custom domain setup, and troubleshooting, read [deploy_instructions.md](deploy_instructions.md).
+
+### Target B: Proposed Policy-as-Code Integration — Not Yet Delivered
+An organisation could use the reference architecture to plan reviewed governance assertions, explicit validation rules, a policy decision service, an enforcement integration and accountable output review. The Build & Deploy workspace and boundary matrix provide illustrative patterns, not an approved cluster deployment or executable ontology-to-policy compiler. The organisation must select and test its controls, trusted inputs and locally approved thresholds before operational use.
+
+For implementation status, decision gates and proposed boundaries, see [policy-as-code/README.md](policy-as-code/README.md) and [docs/architecture/boundary-matrix.md](docs/architecture/boundary-matrix.md).
 
 ---
 

@@ -22,7 +22,7 @@ async function textFiles(directory) {
 
 test('site sections and documentation contain no outdated display branding', async () => {
   const files = ['README.md', ...await textFiles('src'), ...await textFiles('docs')];
-  const retainedReferences = /https:\/\/github\.com\/iwfarr\/seawater-playbook[^\s)`"']*|https:\/\/iwfarr\.github\.io\/seawater-playbook\/|cd seawater-playbook|'seawater_theme'|'seawater_user_feedback'|'seawater-problem-space'|'q-seawater-metaphor'|'node-seawater'/g;
+  const retainedReferences = /https:\/\/github\.com\/iwfarr\/seawater-playbook[^\s)`"']*|https:\/\/iwfarr\.github\.io\/seawater-playbook\/|cd seawater-playbook|'seawater_theme'|'seawater_user_feedback'|'seawater_checklist_progress'|'seawater-problem-space'|'q-seawater-metaphor'|'node-seawater'/g;
   for (const file of files.filter((file) => file !== 'docs/branding.md')) {
     const content = (await read(file)).replace(retainedReferences, '');
     assert.doesNotMatch(content, /seawater/i, `${file} contains outdated branding`);

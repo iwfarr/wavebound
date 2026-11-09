@@ -1,25 +1,59 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
-  body {
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  :root {
+    --nhs-blue: #005eb8;
+    --oxford-navy: #0f294a;
+    --seawater-navy: #0c2340;
+    --seawater-deep: #071628;
+    --seawater-turquoise: #00a389;
+    --seawater-teal: #0d9488;
+    --seawater-cyan: #0284c7;
+    --govuk-text: #0b0c0c;
+    --govuk-canvas: #f8fafc;
+    --govuk-border: #cbd5e1;
+    --govuk-green: #047857;
+    --govuk-amber: #b45309;
+    --govuk-red: #d4351c;
   }
-  
+
+  body {
+    font-family: 'Public Sans', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #0b0c0c;
+    background-color: #f8fafc;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .dark body {
+    color: #f8fafc;
+    background-color: #071628;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.015em;
+  }
+
   code, pre, kbd {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
   }
 }
 
-/* Custom subtle scrollbars */
+/* Subtle, clean scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
+  background: rgba(226, 232, 240, 0.6);
+}
+.dark ::-webkit-scrollbar-track {
   background: rgba(15, 23, 42, 0.6);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(71, 85, 105, 0.6);
+  background: rgba(148, 163, 184, 0.6);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -32,115 +66,66 @@
   min-height: 520px;
 }
 
-/* Light Theme Styling */
-html.light {
-  color-scheme: light;
-}
 
-html.light body,
-html.light .bg-slate-950 {
-  background-color: #f8fafc !important;
-  color: #0f172a !important;
-}
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 
-html.light .bg-slate-900 {
-  background-color: #ffffff !important;
-  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
-}
+  /* Hide outer headers, sidebars, buttons, and applet wrapper */
+  body * {
+    visibility: hidden;
+  }
 
-html.light .bg-slate-900\/95,
-html.light .bg-slate-900\/90,
-html.light .bg-slate-900\/80,
-html.light .bg-slate-900\/70,
-html.light .bg-slate-900\/60,
-html.light .bg-slate-900\/50 {
-  background-color: rgba(255, 255, 255, 0.95) !important;
-}
+  /* Make certificate view and all its children visible and cleanly styled */
+  #certificate-print-view,
+  #certificate-print-view * {
+    visibility: visible;
+  }
 
-html.light .bg-slate-850,
-html.light .bg-slate-800 {
-  background-color: #f1f5f9 !important;
-}
+  #certificate-print-view {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 3px double #0284c7 !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    padding: 32px !important;
+    margin: 0 !important;
+    page-break-inside: avoid;
+  }
 
-html.light .bg-slate-800\/80,
-html.light .bg-slate-800\/60,
-html.light .bg-slate-800\/50,
-html.light .bg-slate-800\/40 {
-  background-color: #f1f5f9 !important;
-}
+  #certificate-print-view .text-white {
+    color: #0f172a !important;
+  }
 
-html.light .hover\:bg-slate-800:hover,
-html.light .hover\:bg-slate-850:hover,
-html.light .hover\:bg-slate-900:hover {
-  background-color: #e2e8f0 !important;
-}
+  #certificate-print-view .text-cyan-300,
+  #certificate-print-view .text-cyan-400 {
+    color: #0284c7 !important;
+  }
 
-html.light .border-slate-800,
-html.light .border-slate-800\/80,
-html.light .border-slate-800\/60,
-html.light .border-slate-800\/50,
-html.light .border-slate-800\/40 {
-  border-color: #e2e8f0 !important;
-}
+  #certificate-print-view .text-slate-200,
+  #certificate-print-view .text-slate-300,
+  #certificate-print-view .text-slate-400,
+  #certificate-print-view .text-slate-500 {
+    color: #334155 !important;
+  }
 
-html.light .border-slate-700 {
-  border-color: #cbd5e1 !important;
-}
+  #certificate-print-view .bg-slate-900,
+  #certificate-print-view .bg-slate-950,
+  #certificate-print-view .bg-slate-900\/90 {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+  }
 
-html.light .text-slate-100 {
-  color: #0f172a !important;
+  header, nav, button, input, .no-print {
+    display: none !important;
+  }
 }
-
-html.light .text-slate-200 {
-  color: #1e293b !important;
-}
-
-html.light .text-slate-300 {
-  color: #334155 !important;
-}
-
-html.light .text-slate-400 {
-  color: #64748b !important;
-}
-
-html.light .text-white {
-  color: #0f172a !important;
-}
-
-html.light input,
-html.light select,
-html.light textarea {
-  background-color: #ffffff !important;
-  color: #0f172a !important;
-  border-color: #cbd5e1 !important;
-}
-
-html.light input::placeholder,
-html.light textarea::placeholder {
-  color: #94a3b8 !important;
-}
-
-/* Maintain dark code blocks in light mode for syntax highlighting */
-html.light pre {
-  background-color: #0f172a !important;
-  color: #f8fafc !important;
-  border-color: #334155 !important;
-}
-
-html.light pre code,
-html.light pre span {
-  color: inherit;
-}
-
-html.light ::-webkit-scrollbar-track {
-  background: rgba(241, 245, 249, 0.8);
-}
-
-html.light ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.7);
-}
-
-html.light ::-webkit-scrollbar-thumb:hover {
-  background: rgba(100, 116, 139, 0.9);
-}
-

@@ -290,7 +290,7 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
                   <span>4. Airlock Output SDC</span>
                 </div>
                 <p className="text-[11px] text-slate-400 leading-relaxed">
-                  Analytical outputs, tables, and serialized models are routed to the airlock for automated SHACL SDC evaluation ($k \ge 10$, dominance $\le 80\%$).
+                  Analytical outputs, tables, and serialized models are routed to the airlock for automated SHACL SDC evaluation (k ≥ 10, dominance ≤ 80%).
                 </p>
               </div>
             </div>
@@ -463,7 +463,7 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
                 <div className="p-3 bg-slate-900/90 rounded-lg border border-slate-800 space-y-1">
                   <span className="text-[11px] font-bold text-amber-300 block">Layer 4: AST Proxy &amp; Airlock</span>
                   <p className="text-[10px] text-slate-400 leading-relaxed">
-                    Pre-prompt AST tokenizer proxies scrub residual PII, and airlock export gates validate all outbound artifacts against SHACL SDC rules ($k \ge 10$, dominance $\le 80\%$).
+                    Pre-prompt AST tokenizer proxies scrub residual PII, and airlock export gates validate all outbound artifacts against SHACL SDC rules (k ≥ 10, dominance ≤ 80%).
                   </p>
                 </div>
               </div>

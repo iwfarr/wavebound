@@ -175,6 +175,29 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     citation: 'Health Research Authority. Data protection and information governance for health and care research.',
     tags: ['HRA Approval', 'REC', 'Criteria 5.1', 'Data Security']
   },
+  {
+    id: 'res-hra-iras-ig-guide',
+    title: 'HRA Pilot: A Draft Guide to Providing Effective IG Assurances in IRAS Submissions',
+    organization: 'Health Research Authority (HRA)',
+    category: 'Statutory Legislation & Regulatory Guidance',
+    url: 'https://www.hra.nhs.uk/planning-and-improving-research/policies-standards-legislation/data-protection-and-information-governance/pilot-a-draft-guide-to-providing-effective-ig-assurances-in-iras-submissions/',
+    shortDesc: 'Official HRA guidance establishing the core Information Governance criteria, transparency evidence, and data protection assurances required for IRAS ethical review submissions.',
+    playbookRelevance: 'Defines the exact IG questions, lawful basis documentation, and technical security assurances required by RECs, informing automated admission checks.',
+    isStatutory: true,
+    citation: 'Health Research Authority (HRA). Pilot: A draft guide to providing effective Information Governance assurances in IRAS submissions. London: HRA; 2023.',
+    tags: ['HRA', 'IRAS', 'IG Assurances', 'REC Ethics', 'Research Governance']
+  },
+  {
+    id: 'res-hdr-gateway',
+    title: 'Health Data Research Innovation Gateway (HDR UK Gateway)',
+    organization: 'Health Data Research UK (HDR UK)',
+    category: 'Statutory Legislation & Regulatory Guidance',
+    url: 'https://healthdatagateway.org/en',
+    shortDesc: 'The unified UK national health and population data discovery portal, providing standardized metadata catalogues, cohort discovery, and Data Use Registers.',
+    playbookRelevance: 'The primary UK discovery portal for health data assets. Wavebound integrates at the execution layer by binding machine-readable governance constraints to catalogue metadata records.',
+    citation: 'Health Data Research UK. Health Data Research Innovation Gateway. London: HDR UK; 2024.',
+    tags: ['HDR UK', 'Data Discovery', 'Metadata Catalogue', 'Data Use Register', 'Population Health']
+  },
 
   // --- Statistical Disclosure Control (SDC) & Airlocks ---
   {
@@ -250,6 +273,29 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     playbookRelevance: 'A non-negotiable prerequisite in the SATRE Computing Infrastructure and Information Governance pillars.',
     citation: 'NHS England. Data Security and Protection Toolkit.',
     tags: ['DSPT', 'NHS Security', 'Compliance', 'Information Governance']
+  },
+  {
+    id: 'res-nhs-data-services',
+    title: 'NHS England Data Services & National Datasets Directory',
+    organization: 'NHS England',
+    category: 'NHS Information Governance & Security Toolkits',
+    url: 'https://digital.nhs.uk/data',
+    shortDesc: 'The official national hub for NHS data collections, national data platforms, secondary care feeds (HES/SUS), community prescribing datasets, and national data access governance.',
+    playbookRelevance: 'The statutory source catalog for national NHS dataset collections. Wavebound bridges this data discovery directory to runtime enforcement by compiling dataset governance constraints into executable Policy-as-Code admission rules.',
+    citation: 'NHS England. Data and information services. Leeds: NHS England; 2024.',
+    tags: ['NHS Data', 'NHS England', 'HES', 'SUS', 'Secondary Care', 'Data Platform', 'National Datasets']
+  },
+  {
+    id: 'res-nhs-dtac',
+    title: 'NHS Digital Technology Assessment Criteria (DTAC)',
+    organization: 'NHS England Transformation Directorate',
+    category: 'NHS Information Governance & Security Toolkits',
+    url: 'https://digital.nhs.uk/services/digital-technology-assessment-criteria-dtac',
+    shortDesc: 'The national standard baseline assessment across Clinical Safety (DCB0129), Data Protection (DPIA/UK GDPR), Technical Security (Cyber Essentials Plus), Interoperability, and Usability for digital health technologies entering the NHS.',
+    playbookRelevance: 'Establishes the unified statutory procurement and governance benchmark for digital health architectures and analytical platforms, aligning DCB0129 clinical risk management, NHS DSPT assurances, and zero-trust cloud security.',
+    isStatutory: true,
+    citation: 'NHS England. Digital Technology Assessment Criteria (DTAC) for health and social care. London: NHS England Transformation Directorate; 2023.',
+    tags: ['DTAC', 'NHS Digital', 'Clinical Safety', 'Cyber Essentials Plus', 'DCB0129', 'Information Governance']
   },
   {
     id: 'res-nhs-ig-portal',
@@ -479,14 +525,14 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
   },
   {
     id: 'res-dcb-0129',
-    title: 'DCB0129: Clinical Risk Management in the Deployment and Use of Health IT Systems (Manufacturers)',
+    title: 'DCB0129: Clinical Risk Management in the Manufacture of Health IT Systems',
     organization: 'NHS England / Health and Social Care Information Standards Board',
     category: 'International Standards (ISO) & Clinical Safety (DCB)',
-    url: 'https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-deployment-and-use-of-health-it-systems',
-    shortDesc: 'Mandatory statutory clinical safety standard in England requiring software manufacturers, analytical platform creators, and health algorithm developers to establish a formal Clinical Risk Management Plan and Hazard Log.',
+    url: 'https://digital.nhs.uk/data-and-information/information-standards/governance/latest-activity/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems',
+    shortDesc: 'Mandatory statutory clinical safety standard in England requiring software manufacturers, analytical platform creators, and health algorithm developers to establish a formal Clinical Risk Management Plan, Hazard Log, and Clinical Safety Case Report signed off by a Clinical Safety Officer (CSO).',
     playbookRelevance: 'Directly verified at the airlock before releasing diagnostic or predictive algorithms trained inside data analysis & intelligence platforms. Requires Clinical Safety Officer (CSO) sign-off.',
     isStatutory: true,
-    citation: 'NHS England. DCB0129: Clinical Risk Management: Its Application in the Deployment and Use of Health IT Systems. London: NHS England; 2021.',
+    citation: 'NHS England. DCB0129: Clinical Risk Management: Its Application in the Manufacture of Health IT Systems. London: NHS England; 2021.',
     tags: ['DCB0129', 'Clinical Safety', 'CSO', 'Hazard Log', 'NHS Standard']
   },
   {
