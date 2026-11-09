@@ -1,6 +1,8 @@
 # Wavebound branding
 
-The project is **Wavebound Policy-as-Code Engine**. Site sections, the glossary, README, and technical examples use Wavebound consistently. The playbook and dual-wave interpretation remain unchanged: inward enclave security and outward governance, using a tidal navigation model for the information governance problem space.
+The public-facing description is **Wavebound: Ontology-led Information Governance**. Wavebound is an ontology-led information governance playbook and reference architecture connecting legal and ethical requirements, institutional decisions and technical safeguards for sensitive research data. The proposed IG OWL/RDF ontology is the architectural foundation, not merely a visualisation feature.
+
+The playbook and dual-wave interpretation remain: inward enclave security and outward governance, using a tidal navigation model for the information governance problem space. **Policy-as-Code Engine** remains a technical direction and compatibility identifier, not a claim of current production enforcement. Package names are unchanged. See [positioning and governance boundaries](positioning.md) for current maturity, the distinct semantic/validation/enforcement layers, UK source references and retained follow-on ideas.
 
 ## Logo assets
 
@@ -25,4 +27,4 @@ Do not relabel any raster containing the old wordmark as Wavebound. A final repl
 
 ## Validation
 
-Run `npm run lint`, `npm run branding:test`, `npm run claims:test`, `npm run claims:check`, and `npm run build`. Verify the built favicon/social image under the actual Pages base path and review the rendered Wavebound name at narrow viewport widths.
+Run `npm run lint`, `npm run branding:test`, `npm run messaging:test`, `npm run claims:test`, `npm run claims:check`, and `npm run build`. Verify the built favicon/social image under the actual Pages base path and review the rendered Wavebound name at narrow viewport widths.

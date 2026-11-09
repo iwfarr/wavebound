@@ -87,7 +87,7 @@ export const WaveboundLogo: React.FC<WaveboundLogoProps> = ({
   const LogoIcon = (
     <div
       className={`relative rounded-xl overflow-hidden bg-[#0b172a] border border-cyan-500/40 flex items-center justify-center shadow-lg shadow-cyan-950/60 group-hover:border-cyan-400 transition-all ${sizeClasses}`}
-      title="Wavebound: Dual Crest Wave Engine (Inward Security & Outward Governance)"
+      title="Wavebound: Ontology-led Governance (Inward Security & Outward Governance)"
     >
       <img
         src={logoImage}
@@ -144,7 +144,7 @@ export const WaveboundLogo: React.FC<WaveboundLogoProps> = ({
         <div className="text-center sm:text-left space-y-1.5">
           <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-md bg-cyan-950/70 border border-cyan-800 text-[11px] font-mono font-semibold text-cyan-300 uppercase tracking-wider mb-0.5">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            Project Wavebound · Policy-as-Code Engine
+            Project Wavebound · Ontology-led Governance
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight flex items-center justify-center sm:justify-start gap-3">
             <span className="bg-gradient-to-r from-cyan-200 via-sky-300 to-blue-400 bg-clip-text text-transparent">
@@ -153,7 +153,7 @@ export const WaveboundLogo: React.FC<WaveboundLogoProps> = ({
           </h1>
           {showSubtitle && (
             <p className="text-slate-300 text-xs sm:text-sm font-medium max-w-xl leading-relaxed">
-              Dual-Wave Policy-as-Code Architecture: Harmonizing <strong>Inward Enclave Security</strong> (data isolation, admission PEPs) with <strong>Outward Governance</strong> (airlock verification, public transparency).
+              Ontology-led information governance playbook and reference architecture. The IG OWL/RDF model connects decisions and proposed safeguards through a Dual-Wave Policy-as-Code Architecture: <strong>Inward Enclave Security</strong> (access and admission) and <strong>Outward Governance</strong> (output review and public transparency).
             </p>
           )}
         </div>
@@ -178,7 +178,7 @@ export const WaveboundLogo: React.FC<WaveboundLogoProps> = ({
         </div>
         {showSubtitle && (
           <span className={`text-slate-400 font-mono tracking-wider font-semibold uppercase mt-0.5 ${subtextClasses}`}>
-            Policy-as-Code Engine
+            Ontology-led Governance
           </span>
         )}
       </div>

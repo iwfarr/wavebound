@@ -31,12 +31,12 @@ test('site sections and documentation contain no outdated display branding', asy
 
 test('page and metadata use Wavebound with base-aware logo URLs', async () => {
   const html = await read('index.html');
-  assert.match(html, /<title>Wavebound \| Policy-as-Code Engine<\/title>/);
-  assert.match(html, /og:title" content="Wavebound \| Policy-as-Code Engine"/);
+  assert.match(html, /<title>Wavebound \| Ontology-led Information Governance<\/title>/);
+  assert.match(html, /og:title" content="Wavebound \| Ontology-led Information Governance"/);
   assert.match(html, /content="%BASE_URL%wavebound-logo.png"/);
   assert.match(html, /href="%BASE_URL%wavebound-logo.png"/);
   assert.doesNotMatch(html, /seawater/i);
-  assert.equal(JSON.parse(await read('metadata.json')).name, 'Wavebound Policy-as-Code Engine');
+  assert.equal(JSON.parse(await read('metadata.json')).name, 'Wavebound Ontology-led Information Governance');
 });
 
 test('logo retains dual-wave design and uses the existing wave image', async () => {

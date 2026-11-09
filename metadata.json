@@ -1,6 +1,6 @@
 {
-  "name": "Wavebound Policy-as-Code Engine",
-  "description": "Interactive explorer, knowledge graph, and quiz engine for Trusted Research Environment (TRE) graph-based policy-as-code governance, SHACL shapes, OPA Rego compilation, and SDC thresholds.",
+  "name": "Wavebound Ontology-led Information Governance",
+  "description": "An ontology-led information governance playbook and reference architecture for sensitive research data, with governance visualisations, learning tools and illustrative IG OWL/RDF, SHACL and policy-as-code examples. Production enforcement is not yet delivered.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

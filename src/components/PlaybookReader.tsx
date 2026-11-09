@@ -44,53 +44,52 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
   {
     id: 'sec-front-matter',
     number: '0',
-    title: 'Executive Front Matter: Dynamic & Deployable Governance Policy',
-    subtitle: 'Machine-Executable Policy Architecture with Semantic Versioning (SemVer 2.4.0): Deployable Policy-as-Code Rather Than a Static Spec',
+    title: 'Executive Front Matter: Ontology-led Information Governance',
+    subtitle: 'Connecting governance meaning, accountable human decisions and proposed technical safeguards',
     content: [
-      'Clarification of Intent & Scope:',
-      '• The Wavebound Problem Space & Tidal Flow: Wavebound models population data research as navigation through a dynamic information governance problem space. Analytics workloads (ranging from lightweight exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, governance channels, and population confidentiality and privacy thresholds. The tide flows cyclically across two managed boundaries: Ingress and Egress.',
-      '• Ingress Governance (Access Controls, Safe People & Safe Projects): Inbound flow enforces mandatory access controls, verified institutional identity, researcher accreditation, and Information Governance (IG) training (Safe People), alongside approved NHS REC ethics protocols, research purpose justification, and Section 251 CAG exemptions (Safe Projects). Inbound clinical datasets, multi-omics records, and container workloads are verified at the boundary using W3C SHACL shape validation before admission.',
-      '• Egress Governance (Safe Outputs & Disclosure Control): Outbound flow regulates the export of derived analytical findings, statistical summaries, and model parameters. Outputs must satisfy automated Statistical Disclosure Control (SDC) rules, k-anonymity (k >= 10), and sub-millisecond Open Policy Agent (OPA) Rego policy evaluations.',
-      '• Scope: Data Analysis & Intelligence Platforms: This playbook applies across modern data analysis & intelligence platforms such as Trusted Research Environments (TREs) and Secure Data Environments (SDEs), federated analytics hubs, and autonomous AI sandbox enclaves.',
-      '• International Standards (ISO) & Clinical Safety (DCB): Formally compiles statutory compliance and standards architectures into runtime gates: ISO/IEC 42001:2023 (Artificial Intelligence Management System), ISO/IEC 5259 (Data quality for ML/analytics), ISO/IEC 27001:2022 & ISO 27701:2019 (ISMS/PIMS), ISO 13485 & ISO 14971 (Medical Devices QMS and Risk Management), DCB0129 / DCB0160 (NHS Clinical Risk Management), and UK MDR 2002 / MHRA Software as a Medical Device (SaMD) clearances.',
-      '• Dynamic & Deployable Policy Architecture: This playbook is not merely a static technical specification or descriptive checklist for Statistical Disclosure Control (SDC). Rather, it defines an active, version-controlled, and machine-executable governance policy platform.',
-      '• Semantic Versioning (SemVer 2.4.0): Every policy ontology, SHACL constraint, and OPA Rego rule is versioned as immutable code releases (e.g. v2.4.0-prod). Changes to legal bases, ethics clearances, or SDC thresholds follow strict GitOps PR review, PySHACL validation, and automated continuous deployment.',
-      '• Compilation from Knowledge Graph to Microsecond Enforcement: High-level human governance concepts (Caldicott Principles, NHS Section 251, SATRE Pillars, EU AI Act risk tiers, ISO 42001 AIMS) are formalized in OWL 2 ontologies, verified against Closed-World SHACL shapes, and automatically compiled by compiler/rdf_to_rego.py into native OPA Rego policies running at Policy Enforcement Points (PEPs) in sub-millisecond evaluation times.',
-      '• Auditable Dual-Persona Lineage: Emits immutable W3C PROV-O cryptographic audit triples for every access grant or rejection, while generating plain-English charters for Trust boards and patient advocacy committees.'
+      'Wavebound is an ontology-led information governance playbook and reference architecture connecting legal and ethical requirements, institutional decisions and technical safeguards for sensitive research data.',
+      '• Governance Meaning — IG OWL/RDF Ontology: The proposed semantic model connects people, projects, datasets, purposes, permissions, approvals, responsibilities and evidence. The ontology is the connective tissue of the architecture, not just a diagram: which decision authorises which activity, for which data, under what conditions, and with whose accountability?',
+      '• Human Understanding — Playbook & Atlas: Plain-English explanations and graph visualisations support governance leads, researchers, platform teams and public oversight panels. Applicable REC approvals, Caldicott Guardian determinations and Data Access Committee decisions remain accountable human actions, not outcomes inferred from a graph.',
+      '• Operational Translation — Proposed Validation & Enforcement: OWL/RDF represents meaning and relationships. SHACL expresses explicit validation constraints; policy-as-code expresses reviewed decision rules for an enforcement point. These are separate functions: OWL reasoning does not itself validate an access request or enforce a permission, and law is not automatically compiled into code.',
+      '• Current Maturity: Today the repository provides an interactive application, governance visualisations and illustrative OWL/RDF, SHACL and Rego snippets. A standalone validated IG ontology, executable semantic compiler and production enforcement integration are not yet delivered. The Policy Sandbox is a browser-side demonstration, not a security control. Later sections describe illustrative target patterns; example filenames, thresholds and performance figures are not evidence of deployed controls.',
+      '• Dual-Wave Navigation: Inward enclave security concerns what enters a research environment: people, projects, data and workloads. Outward governance concerns what leaves it: outputs, disclosure review, decision evidence and public transparency. The playbook proposes coordinated safeguards across both boundaries; it does not currently grant access or operate an export airlock.',
+      '• UK Governance Context: Shared health-information security concerns are distributed across distinct sources rather than represented here as a direct NEN 7510 equivalent. UK GDPR and the Data Protection Act 2018, confidentiality duties, Caldicott guidance, NHS England DSPT assurance and applicable research approvals have different authority and scope. England-specific processes are not a single UK-wide regime; applicability and current source versions require review.',
+      '• Authority & Traceability: Semantic mappings should preserve the source, jurisdiction, applicability, approved interpretation and accountable owner. Section 251 support concerns confidentiality in specified circumstances; CAG advises the relevant decision maker. Such support is not a substitute for a UK GDPR lawful basis, and an ethics approval is not a universal data-access permission.',
+      '• Implementation Gate: Proposed controls need approved decisions, trusted input contracts, automated tests, enforcement integration, audit evidence and release approval before they can be called operational. Version control supports review but does not by itself prove compliance, prevent policy drift or establish legal authority.'
     ],
     keyTakeaways: [
-      'Models research data governance through the Wavebound tidal navigation framework with coordinated ingress and egress control.',
-      'Ingress explicitly enforces access controls, Safe People (accreditation and training), and Safe Projects (ethics and Section 251).',
-      'Broadens scope to all data analysis & intelligence platforms such as TREs, SDEs, and AI enclaves.',
-      'Formally compiles ISO 42001 (AIMS), ISO 5259, DCB0129/0160 clinical safety, and UK MDR 2002 SaMD into microsecond policy-as-code.',
-      'Semantic versioning (SemVer 2.4.0) guarantees verifiable policy drift detection across releases.'
+      'The IG OWL/RDF ontology is the architectural foundation, currently illustrated rather than delivered as a standalone validated ontology.',
+      'Governance meaning, human approvals, validation and runtime enforcement are distinct layers.',
+      'The dual-wave model connects inward enclave security with outward governance and public accountability.',
+      'Legal sources, standards and assurance schemes have different scope; mappings do not establish equivalence or approval.',
+      'Operational enforcement remains implementation work subject to decision gates and evidence.'
     ]
   },
   {
     id: 'sec-phase-1-1',
     number: '1.1',
     title: 'Foundational Architecture: Governance Metadata vs. Ephemeral Runtime State',
-    subtitle: 'Decoupling immutable statutory governance assertions from transient Kubernetes cluster plumbing',
+    subtitle: 'Proposed separation of reviewed governance assertions from transient infrastructure state',
     content: [
       '• Plain-English Architecture Principle: Systems break when enduring governance laws are conflated with ephemeral infrastructure plumbing.',
-      '• 1. Governance Metadata (The Ontological Law): Enduring, legal, human-negotiated truths about the research project. Examples include: researcher accreditation status, institutional identity, NHS Section 251 exemption certificates, project REC ethics protocol numbers, approved population data sensitivity tiers, and retention horizons. This information is authored by governance officers, version-controlled in Git, and formally serialized in RDF/OWL ontologies (tre-core.ttl). It changes only when ethics approvals, laws, or institutional agreements change.',
+      '• 1. Governance Metadata (Reviewed Assertions): The proposed OWL/RDF model represents project purposes, institutional decisions, permissions and evidence with source provenance and validity conditions. Accreditation, training and approvals can expire or be revoked; graph assertions are not immutable legal truths. The illustrative name tre-core.ttl denotes a proposed artifact, not an existing ontology file.',
       '• 2. Ephemeral Runtime State (The Cluster Plumbing): Transient, mechanical facts of the live compute fabric managed by Kubernetes, Calico CNI, and Linux kernels. Examples include: pod IP addresses (10.244.2.14), ephemeral network sockets, container process IDs, CPU/GPU quotas, and transient JWT bearer tokens. This state is spun up, scaled, rescheduled, and recycled continuously.',
       '• 3. The Classic Infrastructure Trap: Traditional IT configurations mistakenly hardcode governance rules directly into cluster network rules or pod name whitelists (e.g. "allow IP 10.244.2.14 to access clinical database X"). When a container crashes, restarts, or migrates to a different worker node, the IP changes, causing immediate outages or leaving behind orphaned, unverified permissions.',
-      '• 4. The Wavebound Decoupled Solution: Clean separation of concerns. Kubernetes Admission Webhooks intercept pod launch requests and extract only the researcher and project claims. The Open Policy Agent (OPA) evaluates these claims against the versioned, compiled governance graph. If the governance metadata says Dr. Smith has active IG training and Project 102 has approved Tier 2 ethics, admission is granted, completely agnostic of which server, container ID, or IP the orchestrator assigns.'
+      '• 4. Proposed Integration Pattern: An admission service could evaluate trusted researcher and project claims against approved policy rules derived from reviewed governance assertions. A graph statement alone is not permission: the organisation must define all relevant conditions, freshness checks, failure behaviour and enforcement tests. This integration is not implemented in the current application.'
     ],
     keyTakeaways: [
-      'Governance metadata lives in version-controlled RDF ontologies; runtime state lives in Kubernetes orchestrators.',
-      'Decoupling policy definition from ephemeral cluster state prevents brittle hardcoded IPs and zombie privileges.',
-      'Enables continuous statutory compliance auditing without interrogating or restarting live database clusters.'
+      'The reference architecture separates governance meaning from ephemeral runtime state.',
+      'Reviewed assertions need provenance, validity and revocation handling, not just version control.',
+      'Admission and audit integrations remain proposed, requiring trusted inputs and verified controls.'
     ]
   },
   {
     id: 'sec-phase-1-2',
     number: '1.2',
     title: 'Core Ontologies: Formalizing the Five Safes & SATRE Framework',
-    subtitle: 'Authoring tre-core.ttl and governance_core.ttl across hospital operational tiers',
+    subtitle: 'Illustrative OWL/RDF modelling; proposed filenames and classifications require review',
     content: [
-      '• Five Safes Formalization: Expresses the 5 core dimensions in ontology/tre-core.ttl:',
+      '• Illustrative Five Safes Modelling: The embedded Turtle snippet sketches candidate concepts. ontology/tre-core.ttl and governance_core.ttl are proposed artifacts, not delivered files. A validated IG ontology requires reviewed definitions, relationships, provenance and tests; the visual graph is not itself that ontology. The following descriptions are target examples, not approved universal requirements:',
       '   - Safe People: tre:SafePerson with mandatory institutional accreditation and active Information Governance (IG) training. Note: AI models and agents are NEVER Safe People; they operate strictly as delegated machine workloads under an accredited human researcher sponsor.',
       '   - Safe Projects: tre:SafeProject with NHS Research Ethics Committee (REC) approvals and Section 251 exemption bindings.',
       '   - Safe Settings: tre:SafeSetting mandating zero-egress VPC subnets, air-gapped compute, and multi-factor authentication.',

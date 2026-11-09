@@ -13,7 +13,8 @@
     "claims:update": "node scripts/claim-inventory.mjs",
     "claims:check": "node scripts/claim-inventory.mjs --check",
     "claims:test": "node --test scripts/claim-inventory.test.mjs",
-    "branding:test": "node --test scripts/branding.test.mjs"
+    "branding:test": "node --test scripts/branding.test.mjs",
+    "messaging:test": "node --test scripts/messaging.test.mjs"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

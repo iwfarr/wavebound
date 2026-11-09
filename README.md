@@ -1,16 +1,15 @@
-# Wavebound Policy-as-Code Engine
+# Wavebound: Ontology-led Information Governance
 
-An information governance playbook built around Wavebound's dual-wave policy-as-code architecture: inward enclave security and outward governance. The tidal navigation model describes the information governance problem space and its coordinated safeguards.
+Wavebound is an ontology-led information governance playbook and reference architecture connecting legal and ethical requirements, institutional decisions and technical safeguards for sensitive research data. Its dual-wave model connects inward enclave security and outward governance: what enters a research environment, and what leaves it.
 
 See [branding notes](docs/branding.md) for retained technical identifiers, deployment paths, and logo assets.
 
-[![Release Version](https://img.shields.io/badge/version-v2.4.0--prod-06b6d4.svg)](https://github.com/iwfarr/wavebound-playbook)
-[![Build Status](https://img.shields.io/badge/build-passing-emerald.svg)](https://github.com/iwfarr/wavebound-playbook/actions)
+[![Project Status](https://img.shields.io/badge/status-reference%20architecture-06b6d4.svg)](policy-as-code/README.md)
 [![GitHub Pages](https://img.shields.io/badge/deploy-GitHub%20Pages-blue.svg)](https://iwfarr.github.io/wavebound-playbook/)
 [![License](https://img.shields.io/badge/license-MIT-purple.svg)](LICENSE)
 
 
-> **This playbook provides a Policy as Code (PaC) framework, bridging regulatory compliance documentation and real-time execution by compiling human- and machine-readable semantic graph ontologies into Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) across data intelligence platforms. Please note that this project is a work in progress.**
+> **Today: an interactive playbook, governance visualisations and illustrative OWL/RDF, SHACL and Rego examples. The IG ontology is the architectural foundation; a standalone validated ontology, executable policy compiler and production enforcement integration are not yet delivered.**
 
 ---
 
@@ -20,35 +19,37 @@ See [branding notes](docs/branding.md) for retained technical identifiers, deplo
 - **GitHub Repository**: [https://github.com/iwfarr/wavebound-playbook](https://github.com/iwfarr/wavebound-playbook)
 - **SDC & Low-Count Methods Guide**: See [docs/statistical_disclosure_control_guide.md](docs/statistical_disclosure_control_guide.md) for small cell disclosure controls and sparse data methodologies.
 - **Deployment Guide**: See [deploy_instructions.md](deploy_instructions.md) for step-by-step GitHub Pages instructions.
-- **Implementation Guide**: See [policy-as-code/README.md](policy-as-code/README.md) for production cluster integration patterns.
+- **Implementation Status & Decision Gates**: See [policy-as-code/README.md](policy-as-code/README.md) for work required before operational enforcement.
+- **Positioning & UK Governance Context**: See [docs/positioning.md](docs/positioning.md) for semantic boundaries, source references and retained follow-on ideas.
 
 ---
 
 ## 🧭 Executive Overview
 
-This playbook provides a Policy as Code (PaC) framework, bridging regulatory compliance documentation and real-time execution by compiling human- and machine-readable semantic graph ontologies into Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) across data intelligence platforms. Please note that this project is a work in progress.
+Governance decisions should shape how research data is accessed, used and released, rather than sit separately in policy documents. Wavebound explores how a shared semantic model can connect those decisions to practical safeguards while retaining accountable human oversight.
 
-Information Governance (IG) can often be a confusing, complex, and burdensome, resource-intensive legal necessity. For population data research organizations, epidemiologists, public institutions, and commercial partners, navigating statutory mandates (including UK GDPR, Data Protection Act 2018, Digital Economy Act 2017, and Section 251) across heterogeneous cohorts frequently creates operational friction, administrative paralysis, and high regulatory overhead.
+For population data research organisations, governance involves more than security checklists: lawful purpose, confidentiality, ethical review, institutional permissions, proportionate access and public accountability. These requirements have different sources and scopes; they cannot be treated as one universal controls catalogue.
 
-The **Wavebound Playbook** directly addresses this legal necessity. It brings dense statutory codes and institutional policies into an accessible, human- and machine-readable resource designed for practical comprehension, institutional onboarding, and workforce knowledge training. Simultaneously, it delivers a production-grade **policy-as-code engine** that compiles semantic governance ontologies into real-time Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) to deploy a provably safe and compliant data architecture. Rather than replacing human governance, **key human decisions and actions** (including Research Ethics Committee approvals, Caldicott Guardian determinations, Data Access Committee evaluations, and Data Stewardship signing events) are formally documented, structured, and audited as foundational milestones of the playbook.
+The **IG OWL/RDF ontology** is the connective tissue of the reference architecture, not merely a visualisation feature. The proposed model relates people, projects, datasets, purposes, permissions, approvals, responsibilities and evidence. It supports questions such as: which decision authorises which activity, for which data, under what conditions, and with whose accountability? The current graph visualisations and embedded Turtle examples illustrate this approach; they are not a deployed RDF store or a validated ontology release.
 
 Modern population data research, longitudinal cohorts, epidemiology, and multi-source analytics are transitioning away from static data distribution toward federated **data analysis & intelligence platforms** (such as secure cloud enclaves, partitioned analytical sandboxes, and sovereign data repositories). Rather than copying sensitive microdata across institutional boundaries, algorithms and accredited researchers are brought into partitioned, secure cloud enclaves.
 
 Traditional governance in these environments relies heavily on manual checklists, periodic spreadsheet audits, and static PDF specifications. These manual approaches create severe bottlenecks for vital research or leave subtle gaps when complex automated pipelines and AI workloads are executed.
 
-**Project Wavebound solves this challenge through Policy-as-Code (PaC):**
-1. **Formalize Legal & Ethical Intent in Knowledge Graphs**: High-level governance concepts (the Five Safes framework, the 8 Caldicott Principles, Digital Economy Act 2017 accreditation, NHS Section 251 CAG exemptions, and ISO/IEC 42001 AI risk controls) are formalized as immutable, version-controlled RDF/OWL 2 ontologies.
-2. **Validate Closed-World Constraints with W3C SHACL**: Inbound research proposals, cohort definitions, and container specifications are verified against strict Shapes Constraint Language (SHACL) definitions.
-3. **Compile to Microsecond Policy Decision Points (PDPs)**: Semantic graphs are compiled into native Open Policy Agent (OPA) Rego policies evaluated in sub-millisecond latencies at Kubernetes Admission Controllers and API Gateways (Policy Enforcement Points, PEPs).
-4. **Emit Cryptographic Dual-Persona Lineage**: Every access evaluation and disclosure decision emits W3C PROV-O audit trails for technical certifiers while maintaining accessible transparency charters for oversight panels and citizen advocacy groups.
+**Three connected layers define Wavebound:**
+1. **Governance meaning — OWL/RDF**: Model concepts and relationships, preserving source authority, applicability and approved institutional interpretations. Representing a requirement does not establish its legal authority or automatically translate law into code.
+2. **Human understanding — playbook and atlas**: Explain responsibilities and proposed safeguards to governance leads, researchers, platform teams and public oversight panels. Human approvals remain distinct from technical checks.
+3. **Operational translation — proposed SHACL and policy-as-code**: Explore explicit validation constraints, reviewed decision rules and enforcement points. OWL reasoning, SHACL validation and runtime enforcement are separate functions. Tests, trusted inputs, audit evidence and an approved implementation are required before claiming a control is operational.
+
+The application and examples are available today. Operational translation remains implementation work governed by the [decision register and ready-to-claim gate](policy-as-code/README.md). Policy-as-Code Engine describes a technical direction, not a current production capability. See also the [educational and regulatory disclaimer](DISCLAIMER.md).
 
 ---
 
 ## 🌊 The Wavebound Problem Space & Tidal Flow Model
 
-Project Wavebound models population data research and epidemiological governance through a grounded **tidal flow navigation framework**:
+Project Wavebound models population data research and epidemiological governance through a grounded **tidal flow navigation framework**. This diagram describes proposed safeguards, not controls running in the application:
 
-```
+```text
                               [ THE WAVEBOUND PROBLEM SPACE ]
                Dynamic, continuous population data & research intelligence workflows
                                       │
@@ -57,43 +58,43 @@ Project Wavebound models population data research and epidemiological governance
  ┌───────────────────────────────────────┐   ┌───────────────────────────────────────┐
  │   INWARD FLOW: INGRESS GOVERNANCE     │   │   OUTWARD FLOW: EGRESS GOVERNANCE     │
  │───────────────────────────────────────│   │───────────────────────────────────────│
- │ • Perimeter Access Controls           │   │ • Automated Statistical Disclosure    │
- │ • Safe People: Researcher identity,   │   │   Control (SDC)                       │
- │   institutional accreditation & IG    │   │ • Primary suppression (k >= 10)       │
- │   training verification               │   │ • Dominance masking & group bounds    │
- │ • Safe Projects: Ethics clearances,   │   │ • Sub-millisecond OPA Rego evaluation │
- │   statutory basis & public benefit    │   │ • Zero raw microdata leakage          │
- │ • Inbound W3C SHACL schema validation │   │ • Safe outputs for scientific impact  │
+ │ • Proposed access conditions          │   │ • Proposed disclosure checks          │
+ │ • Safe People: identity and evidence  │   │ • Safe Outputs: accountable review    │
+ │ • Safe Projects: approved purpose     │   │ • Locally approved thresholds         │
+ │ • Applicable institutional decisions  │   │ • Reviewed export decision rules      │
+ │ • Reviewed legal and ethical sources  │   │ • Decision evidence and provenance    │
+ │ • Illustrative SHACL validation       │   │ • Public transparency                 │
+ │ • Trusted inputs before enforcement   │   │ • No disclosure guarantee implied     │
  └───────────────────────────────────────┘   └───────────────────────────────────────┘
                                       │
                                       ▼
              [ PARTITIONED SECURE ENCLAVE (SAFE SETTINGS & SAFE DATA) ]
-              Isolated compute, ephemeral pods, zero direct external egress
+                  Proposed isolation and governed output-release boundaries
 ```
 
 - **Ingress Governance (Inward Flow)**:
-  Ingress is not merely network data transfer. It strictly enforces perimeter access controls, **Safe People** (researcher accreditation, institutional identity verification, mandatory Information Governance training), and **Safe Projects** (Research Ethics Committee [REC] approvals, Section 251 Confidentiality Advisory Group exemptions, and legitimate research purpose justification). Inbound datasets and query scripts are validated against closed-world W3C SHACL shapes before workspace admission is granted.
+  Ingress is not merely network data transfer. The proposed architecture connects **Safe People** and **Safe Projects** to access conditions, identity, training, approved purposes and applicable approvals. REC review and Section 251 support are not universal requirements for every project. SHACL examples illustrate possible validation before admission; they do not grant access in the current application.
 - **Egress Governance (Outward Flow)**:
-  Analytical findings, statistical summary tables, and trained model parameters must pass automated Statistical Disclosure Control (SDC) checks. Rules enforce cell suppression for small numbers ($k \ge 10$) and dominance masking via microsecond OPA Rego policies to prevent subject or participant re-identification or data exfiltration.
+  Egress connects analytical findings, statistical tables and model outputs to proposed disclosure checks and accountable output review. Example thresholds are illustrative, not approved universal rules or guarantees against re-identification. The current application does not operate an airlock or enforce export decisions.
 
 ---
 
 ## 🚀 Key Modules & Capabilities
 
-The interactive web application includes five integrated modules:
+The interactive web application provides these reference and learning capabilities:
 
 ### 1. The Interactive Policy-as-Code Playbook
-- **Executive Front Matter**: Core philosophy of machine-executable policy, semantic versioning (SemVer 2.4.0), and governance decoupling.
+- **Executive Front Matter**: Ontology-led governance, current maturity, semantic boundaries and accountable human decisions.
 - **Foundational Architecture**: Separation of enduring governance metadata (RDF ontologies) from ephemeral runtime state (Kubernetes pods and IPs).
 - **16-Week Implementation Track**: Four phased implementation stages with clear engineering deliverables, YAML manifests, and formal Decision Gates (D-001 through D-006).
-- **Dual-Persona Auditability**: Plain-English summaries for governance officers alongside raw Turtle, SHACL, and Rego artifacts for DevOps engineers.
+- **Dual-Persona Explanations**: Plain-English summaries for governance officers alongside illustrative Turtle, SHACL and Rego snippets for engineers.
 
 ### 2. Dual Governance Atlas
 - **Public & Citizen Trust Portal**: An interactive journey following population and research data from primary source registries to anonymous scientific and policy breakthroughs across the 8 Caldicott Principles. Includes a downloadable Public Interest Data Governance & Population Research Charter (`.md`).
-- **Technical Knowledge Graph**: Interactive Cytoscape.js network visualizer supporting four specialized layouts (Tiered Pipeline DAG, Hierarchical Tree, Orbital Rings, and Physics Force-Directed) to trace statutory mandates down to runtime admission controllers.
+- **Technical Knowledge Graph**: Interactive Cytoscape.js visualisations of proposed relationships between governance sources and technical safeguards; not an executable OWL/RDF ontology or a live enforcement trace.
 
 ### 3. Policy Sandbox & Rego Rule Synthesizer
-- Interactive client-side compiler that translates natural language data governance policies into validated W3C SHACL node shapes and Open Policy Agent (OPA) Rego rules.
+- Browser-side demonstration producing illustrative policy snippets from presets and inputs; not an executable semantic compiler, legal interpretation service or security control.
 - Built-in presets for **ISO/IEC 42001 (AIMS)**, **DCB0129 Algorithmic Safety & Hazard Logs**, **Digital Economy Act 2017 Data Linkage**, and **$k$-Anonymity Cell Suppression**.
 
 ### 4. Interactive Policy & Compliance Quiz Engine
@@ -108,14 +109,14 @@ The interactive web application includes five integrated modules:
 
 ## 📜 Standards & Regulatory Frameworks
 
-Project Wavebound incorporates and formalizes requirements from:
+Wavebound references these sources when exploring governance mappings. The table describes candidate relationships, not implemented controls, certified coverage or legal equivalence. Applicability and source versions require organisational review; see the [UK context and mapping boundaries](docs/positioning.md#uk-governance-context).
 
-| Standard / Statutory Mandate | Domain | Enforcement Mechanism |
+| Source / Framework | Domain | Proposed mapping subject to review |
 | :--- | :--- | :--- |
 | **Digital Economy Act 2017 (Part 5)** | Public Interest Data Research | UKSA RAP accreditation & accredited processor checks |
 | **The Five Safes Framework** | Enclave Governance | People, Projects, Settings, Data, and Outputs gates |
 | **8 Caldicott Principles** | Confidentiality & Proportional Sharing | Justified purpose, strict need-to-know, and duty to share |
-| **NHS Section 251 (NHS Act 2006)** | Confidential Data Governance | CAG exemption binding verified at container admission |
+| **Section 251 / Control of Patient Information Regulations** | Confidential Patient Information | Record applicable support, conditions and decision maker; CAG advises, rather than providing a universal access approval |
 | **ISO/IEC 42001:2023** | AI Management System (AIMS) | Model risk tier classification and training data lineage |
 | **ISO/IEC 27001 / ISO 27701** | ISMS & Privacy Information (PIMS) | Network boundary isolation and cryptographic audit trails |
 | **ISO/IEC 5259 Series** | Data Quality for Analytics & ML | Data ingestion quality shapes (completeness and bias) |
@@ -146,9 +147,9 @@ Project Wavebound incorporates and formalizes requirements from:
   - **How**: Run `git checkout -b feature/my-cohort-governance`.
 
 ### 🛠️ Common Customization Points
-1. **Institutional Governance Charter**: Edit `src/components/GovernanceAtlas.tsx` or download the markdown charter to replace placeholder references with your institution's Data Access Committee and Caldicott leads.
-2. **Custom Policy Presets**: Add your domain-specific regulatory checks to `src/components/AIPolicyGenerator.tsx` and `src/data/glossaryData.ts`.
-3. **Tailored Enclave Rules**: Update `policy-as-code/` with your cluster's Kubernetes admission webhooks, container registries, and airlock export thresholds.
+1. **Institutional Governance Charter**: Adapt the illustrative charter in `src/components/GovernanceAtlas.tsx` with your accountable governance leads; wording requires institutional review.
+2. **Custom Policy Presets**: Add clearly labelled illustrative presets to `src/components/AIPolicyGenerator.tsx` and explanations to `src/data/glossaryData.ts`; these do not become operational regulatory checks.
+3. **Implementation Planning**: Use `policy-as-code/` to record decisions and link approved implementation evidence. Keep executable controls and tests with the service that will operate them.
 
 ---
 
@@ -201,14 +202,14 @@ For complete configuration instructions, custom domain setup, and troubleshootin
 
 ## 📁 Repository Directory Structure
 
-```
+```text
 ├── .github/workflows/
 │   └── deploy-pages.yml        # Automated GitHub Pages build & deploy workflow
 ├── deploy_instructions.md      # Detailed GitHub Pages deployment manual
 ├── index.html                  # HTML entry point with metadata and fonts
 ├── package.json                # Project dependencies and operational scripts
 ├── policy-as-code/             # Reference implementation manifests & technical docs
-│   └── README.md               # Technical implementation guide
+│   └── README.md               # Current status, checklist and decision gates
 ├── public/                     # Static assets, logos, and vector illustrations
 ├── src/
 │   ├── App.tsx                 # Root application component with tab navigation
@@ -238,9 +239,9 @@ For complete configuration instructions, custom domain setup, and troubleshootin
 
 - **Population Data Scientists & Epidemiologists**: Explore automated disclosure control, cohort linkage patterns, and reproducible analytical pipelines.
 - **Information Governance Leads & Policy Makers**: Review statutory compliance mappings (Digital Economy Act 2017, UK GDPR, DPA 2018), ethical approvals, and public benefit charters.
-- **Platform Architects & DevOps Engineers**: Access production-ready SHACL node shapes, OPA Rego rules, and Kubernetes admission controller patterns.
-- **Citizen Advocates & Oversight Panels**: Understand how individual privacy and public trust are strictly safeguarded while supporting vital scientific discoveries.
-- **Commercial & Life Sciences Partners**: Operate within accredited, transparent safe settings without risking microdata exfiltration.
+- **Platform Architects & DevOps Engineers**: Explore illustrative OWL/RDF, SHACL, Rego and admission-controller patterns, with implementation decision gates.
+- **Citizen Advocates & Oversight Panels**: Understand proposed safeguards, responsibilities and public accountability.
+- **Commercial & Life Sciences Partners**: Explore governance conditions for research partnerships; using this playbook does not confer accreditation or eliminate disclosure risk.
 
 ---
 

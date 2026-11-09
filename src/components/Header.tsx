@@ -102,7 +102,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={() => onSelectTab('playbook')}
               className="flex items-center text-left group transition-transform active:scale-95"
-              title="Project Wavebound · Policy-as-Code Engine"
+              title="Wavebound · Ontology-led Information Governance"
             >
               <WaveboundLogo variant="horizontal" size="md" />
             </button>
