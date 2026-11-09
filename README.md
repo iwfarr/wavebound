@@ -16,7 +16,7 @@ See [branding notes](docs/branding.md) for retained technical identifiers, deplo
 ## 🌐 Live Platform & Documentation
 
 - **Interactive Public Site**: [https://iwfarr.github.io/wavebound-playbook/](https://iwfarr.github.io/wavebound-playbook/)
-- **GitHub Repository**: [https://github.com/iwfarr/wavebound-playbook](https://github.com/iwfarr/wavebound-playbook)
+- **GitHub Repository**: [https://github.com/iwfarr/wavebound](https://github.com/iwfarr/wavebound)
 - **SDC & Low-Count Methods Guide**: See [docs/statistical_disclosure_control_guide.md](docs/statistical_disclosure_control_guide.md) for small cell disclosure controls and sparse data methodologies.
 - **Deployment Guide**: See [deploy_instructions.md](deploy_instructions.md) for step-by-step GitHub Pages instructions.
 - **Implementation Status & Decision Gates**: See [policy-as-code/README.md](policy-as-code/README.md) for work required before operational enforcement.
