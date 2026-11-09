@@ -324,7 +324,7 @@ Simultaneously, pre-trained weights, fine-tuned checkpoints, embeddings, and vec
       title: 'SHACL Shape: Enforcing AI Workload Non-Personhood & Mandatory Human Sponsor',
       language: 'turtle',
       code: `@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix tre: <https://w3id.org/seawater/tre#> .
+@prefix tre: <https://w3id.org/wavebound/tre#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # An AI Agent is an AgenticWorkload, NOT a SafePerson.

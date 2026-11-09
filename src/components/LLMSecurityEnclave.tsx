@@ -560,7 +560,7 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
                       <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                      <span>Seawater TRE Enclave (Zero-Egress Isolation)</span>
+                      <span>Wavebound TRE Enclave (Zero-Egress Isolation)</span>
                     </span>
                     <span className="text-[10px] font-mono bg-emerald-950/80 text-emerald-300 px-2 py-0.5 rounded border border-emerald-800">
                       SATRE 2.0 Compliant
@@ -625,7 +625,7 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
                   </div>
 
                   <div className="p-3 rounded-lg bg-emerald-950/20 border border-emerald-900/40 text-[11px] font-mono space-y-1">
-                    <span className="text-emerald-400 font-bold block">[SECURE] Seawater Air-Gapped TRE Enclave Architecture:</span>
+                    <span className="text-emerald-400 font-bold block">[SECURE] Wavebound Air-Gapped TRE Enclave Architecture:</span>
                     <div className="text-slate-300 flex flex-wrap items-center gap-2">
                       <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Air-Gapped VDI Session</span>
                       <ArrowRight className="w-3.5 h-3.5 text-emerald-400" />

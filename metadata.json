@@ -1,5 +1,5 @@
 {
-  "name": "TRE Policy-as-Code Playbook & Knowledge Platform",
+  "name": "Wavebound Policy-as-Code Engine",
   "description": "Interactive explorer, knowledge graph, and quiz engine for Trusted Research Environment (TRE) graph-based policy-as-code governance, SHACL shapes, OPA Rego compilation, and SDC thresholds.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

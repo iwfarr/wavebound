@@ -1,10 +1,10 @@
-# Project Seawater: Educational & Regulatory Disclaimer
+# Project Wavebound: Educational & Regulatory Disclaimer
 
 ## 1. Educational Purpose
-Project Seawater, including the interactive playbook, policy-as-code compiler, semantic ontologies, SHACL constraint shapes, OPA Rego rules, and statistical disclosure control (SDC) guidelines, is provided strictly as an **educational and technical reference resource**. It is derived from publicly available literature, statutory guidelines (including the Digital Economy Act 2017, UK GDPR, Data Protection Act 2018, and NHS Caldicott Principles), and cloud-native security patterns.
+Project Wavebound, including the interactive playbook, policy-as-code compiler, semantic ontologies, SHACL constraint shapes, OPA Rego rules, and statistical disclosure control (SDC) guidelines, is provided strictly as an **educational and technical reference resource**. It is derived from publicly available literature, statutory guidelines (including the Digital Economy Act 2017, UK GDPR, Data Protection Act 2018, and NHS Caldicott Principles), and cloud-native security patterns.
 
 ## 2. Deliberately Organisationally Agnostic Architecture
-Project Seawater is **deliberately organisationally and platform agnostic**. It establishes open standards, semantic ontologies, and Policy-as-Code patterns rather than vendor-specific or institution-specific policies. Consequently, this playbook and its constituent models must be formally reviewed, calibrated, and approved by relevant decision makers (including Caldicott Guardians, Data Protection Officers, Senior Information Risk Owners, and Data Access Committees) at the organisational level prior to operational deployment.
+Project Wavebound is **deliberately organisationally and platform agnostic**. It establishes open standards, semantic ontologies, and Policy-as-Code patterns rather than vendor-specific or institution-specific policies. Consequently, this playbook and its constituent models must be formally reviewed, calibrated, and approved by relevant decision makers (including Caldicott Guardians, Data Protection Officers, Senior Information Risk Owners, and Data Access Committees) at the organisational level prior to operational deployment.
 
 ## 3. No Legal or Clinical Advice
 The contents of this repository, platform, and associated tools do **not** constitute legal, regulatory, clinical, or formal data protection advice. Organizations, researchers, and public authorities must seek their own independent legal counsel, Data Protection Officer (DPO) validation, and statutory ethics committee authorizations before deploying any policy, infrastructure, or access controls.

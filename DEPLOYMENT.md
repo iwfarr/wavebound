@@ -1,12 +1,12 @@
-# Seawater Policy-as-Code — Deployment & Architecture Guide
+# Wavebound Policy-as-Code — Deployment & Architecture Guide
 
-This guide details the **Dual-Mode Architecture** of Seawater, enabling you to host the application either as a **pure static site on GitHub Pages** (zero backend cost) or as a **full-stack application on Google Cloud Run / Node.js** (with live Gemini 3.8 Flash generation).
+This guide details the **Dual-Mode Architecture** of Wavebound, enabling you to host the application either as a **pure static site on GitHub Pages** (zero backend cost) or as a **full-stack application on Google Cloud Run / Node.js** (with live Gemini 3.8 Flash generation).
 
 ---
 
 ## 1. Architecture Overview: Dual-Mode Operation
 
-Seawater is designed with an adaptive architecture that functions in two distinct modes:
+Wavebound is designed with an adaptive architecture that functions in two distinct modes:
 
 | Feature | Mode A: Static Hosting (GitHub Pages) | Mode B: Full-Stack (Cloud Run / Node.js) |
 | :--- | :--- | :--- |
@@ -38,7 +38,7 @@ The repository includes a ready-to-use GitHub Actions workflow at `.github/workf
    - Under **Build and deployment** > **Source**, change the dropdown from *Deploy from a branch* to **GitHub Actions**.
 3. **Verify Deployment**:
    - Go to the **Actions** tab in GitHub.
-   - The workflow `Deploy Seawater to GitHub Pages` will run automatically.
+   - The workflow `Deploy Wavebound to GitHub Pages` will run automatically.
    - Once complete, your site will be live at `https://<your-username>.github.io/<your-repo>/`.
 
 *Note: The app uses relative asset resolution (`base: './'`), so it works seamlessly under any repository name or custom domain.*
@@ -47,7 +47,7 @@ The repository includes a ready-to-use GitHub Actions workflow at `.github/workf
 
 ## 3. Spinning Up Live AI Features (Gemini 3.8 Flash)
 
-When you run Seawater with a Node.js runtime, it leverages the official `@google/genai` TypeScript SDK and `gemini-3.8-flash` to dynamically synthesize SHACL shapes, compile OPA Rego rules, and generate custom quiz scenarios.
+When you run Wavebound with a Node.js runtime, it leverages the official `@google/genai` TypeScript SDK and `gemini-3.8-flash` to dynamically synthesize SHACL shapes, compile OPA Rego rules, and generate custom quiz scenarios.
 
 ### Prerequisites:
 - A Gemini API key from [Google AI Studio](https://aistudio.google.com/).
@@ -89,7 +89,7 @@ The server serves static assets from `./dist` and exposes `/api/generate-policy`
 
 ## 4. Digital Economy Act 2017 (DEA) Integration
 
-Seawater reflects the statutory framework of the **Digital Economy Act 2017 (Part 5, Chapter 5: Research)**:
+Wavebound reflects the statutory framework of the **Digital Economy Act 2017 (Part 5, Chapter 5: Research)**:
 
 - **Statutory Gateway**: Mapped in `src/data/resourcesData.ts` alongside UK GDPR / DPA 2018 Section 19 and NHS Act 2006 Section 251.
 - **Accreditation Authority**: UK Statistics Authority (UKSA) **Research Accreditation Panel (RAP)**.

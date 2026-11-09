@@ -1,4 +1,4 @@
-# GitHub Pages Deployment Instructions: Project Seawater
+# GitHub Pages Deployment Instructions: Project Wavebound
 
 *Note: This file is maintained alongside [`deploy_instructions.md`](deploy_instructions.md).*
 

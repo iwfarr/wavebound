@@ -324,10 +324,10 @@ mcp:ExecuteSQLReadOnly a mcp:MCPTool ;
     icon: 'GitBranch',
     playbookSection: 'Section 1.1, Section 4.2 & Implementation Track',
     plainEnglishSummary: 'How to transition an institution from high-level governance concepts to automated security enforcement without causing outages, downtime, or false lockouts for researchers.',
-    summary: 'The Seawater Policy-as-Code architecture coordinates compiler scripts, Turtle ontologies, SHACL shapes, OPA Rego policies, and PySHACL tests in a safe, non-breaking rollout framework backed by an auditable Decision Register (D-001 through D-009).',
+    summary: 'The Wavebound Policy-as-Code architecture coordinates compiler scripts, Turtle ontologies, SHACL shapes, OPA Rego policies, and PySHACL tests in a safe, non-breaking rollout framework backed by an auditable Decision Register (D-001 through D-009).',
     keyPrinciples: [
       'Zero-Disruption Transition: Kubernetes ValidatingAdmissionWebhooks run in evaluate-only mode (failurePolicy: Ignore) to observe real traffic without blocking pods.',
-      'Parallel Shadow Auditing: Seawater Rego verdicts are evaluated side-by-side with legacy authorization reviews until achieving a 0.00% discrepancy rate over 14 consecutive days.',
+      'Parallel Shadow Auditing: Wavebound Rego verdicts are evaluated side-by-side with legacy authorization reviews until achieving a 0.00% discrepancy rate over 14 consecutive days.',
       'Canary Scope Gating: Active enforcement is turned on exclusively in isolated non-clinical test namespaces with automatic circuit breakers.',
       'Fail-Safe Dual Semantics: Internal workspace compute fails open with alerts during OPA partitions; external airlock export fails closed to prevent data leakage.',
       'Auditable Decision Gates (D-001–D-009): Formal sign-offs by accountable owners (Caldicott, IG, SRE) before any rule is activated.',
@@ -336,7 +336,7 @@ mcp:ExecuteSQLReadOnly a mcp:MCPTool ;
     technicalDetails: [
       {
         heading: 'Safe Transition from Overview into Production Without Breaking Deployed Services',
-        body: 'Moving from an educational overview into live enforcement without service disruption requires four strict technical layers: 1) Evaluate-Only Mode (K8s webhook runs OPA in passive observation; failurePolicy: Ignore ensures zero blocked users); 2) Parallel Shadow Auditing (Seawater Rego verdicts are compared side-by-side against legacy authorization tickets; discrepancies generate Slack/PagerDuty alerts until discrepancy rate reaches 0.00% over 14 days); 3) Canary Scoping (enforcement is activated exclusively on a single non-clinical test namespace or synthetic cohort with an automated circuit breaker); 4) Fail-Safe Defaults (internal workspace admission fails open with alerts during OPA partitions, while external airlock export fails closed to prevent data leakage).'
+        body: 'Moving from an educational overview into live enforcement without service disruption requires four strict technical layers: 1) Evaluate-Only Mode (K8s webhook runs OPA in passive observation; failurePolicy: Ignore ensures zero blocked users); 2) Parallel Shadow Auditing (Wavebound Rego verdicts are compared side-by-side against legacy authorization tickets; discrepancies generate Slack/PagerDuty alerts until discrepancy rate reaches 0.00% over 14 days); 3) Canary Scoping (enforcement is activated exclusively on a single non-clinical test namespace or synthetic cohort with an automated circuit breaker); 4) Fail-Safe Defaults (internal workspace admission fails open with alerts during OPA partitions, while external airlock export fails closed to prevent data leakage).'
       },
       {
         heading: 'Repository Directory Layout & Operational Separation',

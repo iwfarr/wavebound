@@ -145,11 +145,11 @@ const TRUST_NODES: TrustNode[] = [
   },
   {
     id: 'node-seawater',
-    label: 'Seawater Flow Governance',
+    label: 'Wavebound Flow Governance',
     category: 'defense',
     shortDesc: 'The problem space architecture protecting against unverified ingress and unauthorized egress leaks.',
     safeguard: 'Enforces access controls, Safe People, and Safe Projects on ingress, and disclosure control (k >= 10) on egress.',
-    legalBasis: 'Project Seawater Policy-as-Code Architecture',
+    legalBasis: 'Project Wavebound Policy-as-Code Architecture',
     color: '#0ea5e9'
   },
   {
@@ -243,7 +243,7 @@ export const GovernanceAtlas: React.FC<GovernanceAtlasProps> = ({
 
   const COMPREHENSIVE_CHARTER_MD = `# PUBLIC INTEREST DATA GOVERNANCE & POPULATION RESEARCH CHARTER
 *Standard Operating Protocol & Statutory Compliance Specification for Data Analysis & Intelligence Platforms*
-*Document Reference: SEAWATER-PAC-GOV-2026-V4 | Authorized by the Data Governance & Ethics Oversight Committee*
+*Document Reference: WAVEBOUND-PAC-GOV-2026-V4 | Authorized by the Data Governance & Ethics Oversight Committee*
 
 ---
 
@@ -315,7 +315,7 @@ Every analytical project is partitioned and controlled across the Five Safes:
 ---
 
 ## 5. Flow Governance Architecture (Ingress & Egress)
-Project Seawater regulates the continuous movement of data through policy-as-code:
+Project Wavebound regulates the continuous movement of data through policy-as-code:
 - **Ingress Governance (Inbound Flow)**:
   - Enforces perimeter access control, Safe People accreditation, and Safe Projects ethics validation.
   - Automatically verifies inbound schemas and cohort definitions against W3C SHACL shapes to prevent corrupted or unapproved datasets.
@@ -553,11 +553,11 @@ Accountability is distributed across independent roles without reliance on singl
             </div>
           </div>
 
-          {/* THE SEAWATER PROBLEM SPACE & TIDAL FLOW CARD */}
+          {/* THE WAVEBOUND PROBLEM SPACE & TIDAL FLOW CARD */}
           <div className="rounded-3xl bg-gradient-to-br from-cyan-950/40 via-slate-900 to-slate-900 border border-cyan-500/30 p-6 sm:p-8 space-y-4 shadow-xl">
             <div className="flex items-center gap-2.5 text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider">
               <Waves className="w-4 h-4" />
-              <span>The Problem Space: Why Project Seawater?</span>
+              <span>The Problem Space: Why Project Wavebound?</span>
             </div>
             <h2 className="text-2xl font-bold text-white tracking-tight">
               Navigating Dynamic Flow: The Tidal Ingress &amp; Egress Model

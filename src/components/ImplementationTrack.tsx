@@ -9,7 +9,7 @@ import {
   RolloutStage,
   ChecklistItem
 } from '../data/implementationTrackData';
-import { SeawaterLogo } from './SeawaterLogo';
+import { WaveboundLogo } from './WaveboundLogo';
 import {
   Calendar,
   ShieldCheck,
@@ -107,7 +107,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
         <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10 space-y-4">
           <div className="flex flex-wrap items-center gap-3">
-            <SeawaterLogo variant="badge" size="sm" />
+            <WaveboundLogo variant="badge" size="sm" />
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-800 text-cyan-300 text-xs font-mono font-semibold">
               <Workflow className="w-3.5 h-3.5" />
               <span>Implementation &amp; Non-Breaking Rollout Framework</span>
@@ -351,7 +351,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
             </h2>
             <p className="text-slate-300 text-sm max-w-3xl leading-relaxed">
               The #1 hazard in clinical Policy-as-Code is a "big-bang" deployment that mistakenly locks out accredited researchers
-              or halts clinical analytics jobs due to schema drift. Seawater employs a strict <strong>5-Stage Progressive Rollout</strong>:
+              or halts clinical analytics jobs due to schema drift. Wavebound employs a strict <strong>5-Stage Progressive Rollout</strong>:
             </p>
 
             {/* Stage Selector Pills */}
@@ -441,7 +441,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                 <p className="text-xs text-slate-300 leading-relaxed">{selectedStage.rollbackProcedure}</p>
                 <div className="pt-2">
                   <code className="text-[11px] font-mono text-rose-300 bg-slate-900 px-2 py-1 rounded border border-rose-950 block">
-                    kubectl scale deployment seawater-opa --replicas=0 || make rollback-shadow
+                    kubectl scale deployment wavebound-opa --replicas=0 || make rollback-shadow
                   </code>
                 </div>
               </div>
@@ -832,12 +832,12 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                     `apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
-  name: seawater-tre-admission-hook
+  name: wavebound-tre-admission-hook
   labels:
-    app.kubernetes.io/part-of: seawater-policy-engine
-    seawater.tre/rollout-stage: "stage-1-evaluate-only"
+    app.kubernetes.io/part-of: wavebound-policy-engine
+    wavebound.tre/rollout-stage: "stage-1-evaluate-only"
 webhooks:
-  - name: validate.tre.seawater.nhs.uk
+  - name: validate.tre.wavebound.nhs.uk
     rules:
       - apiGroups: [""]
         apiVersions: ["v1"]
@@ -846,7 +846,7 @@ webhooks:
         scope: "Namespaced"
     clientConfig:
       service:
-        name: seawater-opa-pdp
+        name: wavebound-opa-pdp
         namespace: tre-system
         path: "/v1/data/tre/authz/allow"
         port: 443
@@ -858,7 +858,7 @@ webhooks:
     failurePolicy: Ignore
     namespaceSelector:
       matchExpressions:
-        - key: tre.seawater.nhs.uk/managed
+        - key: tre.wavebound.nhs.uk/managed
           operator: In
           values: ["true", "shadow-pilot"]`
                   )
@@ -883,12 +883,12 @@ webhooks:
               <code>{`apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
 metadata:
-  name: seawater-tre-admission-hook
+  name: wavebound-tre-admission-hook
   labels:
-    app.kubernetes.io/part-of: seawater-policy-engine
-    seawater.tre/rollout-stage: "stage-1-evaluate-only"
+    app.kubernetes.io/part-of: wavebound-policy-engine
+    wavebound.tre/rollout-stage: "stage-1-evaluate-only"
 webhooks:
-  - name: validate.tre.seawater.nhs.uk
+  - name: validate.tre.wavebound.nhs.uk
     rules:
       - apiGroups: [""]
         apiVersions: ["v1"]
@@ -897,7 +897,7 @@ webhooks:
         scope: "Namespaced"
     clientConfig:
       service:
-        name: seawater-opa-pdp
+        name: wavebound-opa-pdp
         namespace: tre-system
         path: "/v1/data/tre/authz/allow"
         port: 443
@@ -909,7 +909,7 @@ webhooks:
     failurePolicy: Ignore
     namespaceSelector:
       matchExpressions:
-        - key: tre.seawater.nhs.uk/managed
+        - key: tre.wavebound.nhs.uk/managed
           operator: In
           values: ["true", "shadow-pilot"]`}</code>
             </pre>
@@ -933,7 +933,7 @@ webhooks:
                 onClick={() =>
                   handleCopyCode(
                     'ci-workflow',
-                    `name: Seawater Policy-as-Code CI
+                    `name: Wavebound Policy-as-Code CI
 on:
   push:
     branches: [ main ]
@@ -998,7 +998,7 @@ jobs:
             </div>
 
             <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-purple-300 overflow-x-auto leading-relaxed">
-              <code>{`name: Seawater Policy-as-Code CI
+              <code>{`name: Wavebound Policy-as-Code CI
 on:
   push:
     branches: [ main ]
@@ -1052,7 +1052,7 @@ jobs:
                   Prometheus Discrepancy Alerting Rules (14-Day Shadow Verification)
                 </h3>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  Fires high-priority alerts to DevOps and IG leads whenever Seawater Rego verdicts diverge from legacy LDAP tickets.
+                  Fires high-priority alerts to DevOps and IG leads whenever Wavebound Rego verdicts diverge from legacy LDAP tickets.
                 </p>
               </div>
               <button
@@ -1060,20 +1060,20 @@ jobs:
                   handleCopyCode(
                     'prom-alerts',
                     `groups:
-  - name: seawater_shadow_discrepancy_alerts
+  - name: wavebound_shadow_discrepancy_alerts
     rules:
-      - alert: SeawaterLegacyAuthorizationDiscrepancy
-        expr: increase(seawater_shadow_decision_divergence_total[5m]) > 0
+      - alert: WaveboundLegacyAuthorizationDiscrepancy
+        expr: increase(wavebound_shadow_decision_divergence_total[5m]) > 0
         for: 0m
         labels:
           severity: critical
           team: clinical-ig-devops
         annotations:
-          summary: "Seawater Rego verdict diverged from legacy authorization review"
-          description: "During shadow-mode evaluation, Seawater evaluated {{ $labels.verdict }} while legacy review gave {{ $labels.legacy_verdict }} for project {{ $labels.project_id }}. Investigate immediately before Stage 3 canary promotion."
+          summary: "Wavebound Rego verdict diverged from legacy authorization review"
+          description: "During shadow-mode evaluation, Wavebound evaluated {{ $labels.verdict }} while legacy review gave {{ $labels.legacy_verdict }} for project {{ $labels.project_id }}. Investigate immediately before Stage 3 canary promotion."
 
-      - alert: SeawaterDecisionLatencyElevated
-        expr: histogram_quantile(0.99, rate(seawater_opa_request_duration_seconds_bucket[5m])) > 0.015
+      - alert: WaveboundDecisionLatencyElevated
+        expr: histogram_quantile(0.99, rate(wavebound_opa_request_duration_seconds_bucket[5m])) > 0.015
         for: 2m
         labels:
           severity: warning
@@ -1100,20 +1100,20 @@ jobs:
 
             <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-amber-300 overflow-x-auto leading-relaxed">
               <code>{`groups:
-  - name: seawater_shadow_discrepancy_alerts
+  - name: wavebound_shadow_discrepancy_alerts
     rules:
-      - alert: SeawaterLegacyAuthorizationDiscrepancy
-        expr: increase(seawater_shadow_decision_divergence_total[5m]) > 0
+      - alert: WaveboundLegacyAuthorizationDiscrepancy
+        expr: increase(wavebound_shadow_decision_divergence_total[5m]) > 0
         for: 0m
         labels:
           severity: critical
           team: clinical-ig-devops
         annotations:
-          summary: "Seawater Rego verdict diverged from legacy authorization review"
-          description: "Discrepancy detected between Seawater OPA and legacy authorization for project {{ $labels.project_id }}."
+          summary: "Wavebound Rego verdict diverged from legacy authorization review"
+          description: "Discrepancy detected between Wavebound OPA and legacy authorization for project {{ $labels.project_id }}."
 
-      - alert: SeawaterDecisionLatencyElevated
-        expr: histogram_quantile(0.99, rate(seawater_opa_request_duration_seconds_bucket[5m])) > 0.015
+      - alert: WaveboundDecisionLatencyElevated
+        expr: histogram_quantile(0.99, rate(wavebound_opa_request_duration_seconds_bucket[5m])) > 0.015
         for: 2m
         labels:
           severity: warning
@@ -1133,7 +1133,7 @@ jobs:
                   10-Second Instant Bypass Runbook (Zero Pod Restarts)
                 </h3>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  Emergency procedures for on-call SREs to deactivate Seawater admission hooks in the event of an orchestrator deadlock.
+                  Emergency procedures for on-call SREs to deactivate Wavebound admission hooks in the event of an orchestrator deadlock.
                 </p>
               </div>
               <button
@@ -1141,17 +1141,17 @@ jobs:
                   handleCopyCode(
                     'rollback-runbook',
                     `# 1. Instantly switch ValidatingWebhook to Ignore failure mode
-kubectl patch validatingwebhookconfiguration seawater-tre-admission-hook \\
+kubectl patch validatingwebhookconfiguration wavebound-tre-admission-hook \\
   --type='json' -p='[{"op": "replace", "path": "/webhooks/0/failurePolicy", "value": "Ignore"}]'
 
 # 2. If admission hook itself is unresponsive, remove the webhook registration
-kubectl delete validatingwebhookconfiguration seawater-tre-admission-hook --wait=false
+kubectl delete validatingwebhookconfiguration wavebound-tre-admission-hook --wait=false
 
 # 3. Confirm cluster admission returns to legacy default bypass
 kubectl get pods -A --field-selector status.phase=Pending
 
 # 4. Notify incident commander & clinical IG lead
-echo "Seawater PEP admission bypassed; emergency fail-safe active. Zero running pods interrupted."`
+echo "Wavebound PEP admission bypassed; emergency fail-safe active. Zero running pods interrupted."`
                   )
                 }
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 hover:text-cyan-300 hover:border-slate-700 transition-colors self-start sm:self-auto cursor-pointer"
@@ -1172,11 +1172,11 @@ echo "Seawater PEP admission bypassed; emergency fail-safe active. Zero running 
 
             <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-rose-300 overflow-x-auto leading-relaxed">
               <code>{`# Step 1: Instantly patch webhook to Ignore mode (bypasses any timeout or OPA hang)
-kubectl patch validatingwebhookconfiguration seawater-tre-admission-hook \\
+kubectl patch validatingwebhookconfiguration wavebound-tre-admission-hook \\
   --type='json' -p='[{"op": "replace", "path": "/webhooks/0/failurePolicy", "value": "Ignore"}]'
 
 # Step 2: If the webhook controller itself is partitioned, remove registration immediately
-kubectl delete validatingwebhookconfiguration seawater-tre-admission-hook --wait=false
+kubectl delete validatingwebhookconfiguration wavebound-tre-admission-hook --wait=false
 
 # Step 3: Verify existing research pods and databases remain running without interruption
 kubectl get pods -n tre-workspaces`}</code>
@@ -1207,7 +1207,7 @@ kubectl get pods -n tre-workspaces`}</code>
             </h3>
 
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-4xl">
-              Seawater is architected with dual-mode resilience. You can publish this platform as a <strong>100% free static site on GitHub Pages</strong> (where the Policy-as-Code synthesizer, 16-week timeline, knowledge graph visualizer, and curated quiz engine execute entirely client-side without any backend servers), or deploy it as a <strong>full-stack enterprise service on Cloud Run / Node.js</strong> with live generative AI capabilities via Gemini 3.8 Flash.
+              Wavebound is architected with dual-mode resilience. You can publish this platform as a <strong>100% free static site on GitHub Pages</strong> (where the Policy-as-Code synthesizer, 16-week timeline, knowledge graph visualizer, and curated quiz engine execute entirely client-side without any backend servers), or deploy it as a <strong>full-stack enterprise service on Cloud Run / Node.js</strong> with live generative AI capabilities via Gemini 3.8 Flash.
             </p>
           </div>
 
@@ -1287,7 +1287,7 @@ kubectl get pods -n tre-workspaces`}</code>
                     'gh-pages-deploy',
                     `# 1. Commit and push repository to GitHub
 git add .
-git commit -m "feat: enable GitHub Pages compatibility with Seawater"
+git commit -m "feat: enable GitHub Pages compatibility with Wavebound"
 git push origin main
 
 # 2. In GitHub repository: Settings -> Pages -> Source: select "GitHub Actions"
@@ -1346,7 +1346,7 @@ git push origin main
                   </h4>
                 </div>
                 <p className="text-xs text-slate-400">
-                  To enable live AI generation (Gemini 3.8 Flash) instead of client-side fallback, run Seawater with a Node runtime and your API key.
+                  To enable live AI generation (Gemini 3.8 Flash) instead of client-side fallback, run Wavebound with a Node runtime and your API key.
                 </p>
               </div>
 

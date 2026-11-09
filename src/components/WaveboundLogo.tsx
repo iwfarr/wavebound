@@ -1,14 +1,14 @@
 import React from 'react';
-import logoImage from '../assets/images/seawater_wave_logo.png';
+import logoImage from '../assets/images/wavebound_wave_logo.png';
 
-interface SeawaterLogoProps {
+interface WaveboundLogoProps {
   variant?: 'icon' | 'horizontal' | 'badge' | 'hero';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   className?: string;
   showSubtitle?: boolean;
 }
 
-export const SeawaterLogo: React.FC<SeawaterLogoProps> = ({
+export const WaveboundLogo: React.FC<WaveboundLogoProps> = ({
   variant = 'horizontal',
   size = 'md',
   className = '',
@@ -40,7 +40,7 @@ export const SeawaterLogo: React.FC<SeawaterLogoProps> = ({
     xl: 'text-sm',
   }[size];
 
-  // Vector SVG mirroring the Seawater curling wave emblem
+  // Vector SVG mirroring the Wavebound curling wave emblem
   const WaveVector = (
     <svg
       viewBox="0 0 100 100"
@@ -87,11 +87,11 @@ export const SeawaterLogo: React.FC<SeawaterLogoProps> = ({
   const LogoIcon = (
     <div
       className={`relative rounded-xl overflow-hidden bg-[#0b172a] border border-cyan-500/40 flex items-center justify-center shadow-lg shadow-cyan-950/60 group-hover:border-cyan-400 transition-all ${sizeClasses}`}
-      title="Seawater: Dual Crest Wave Engine (Inward Security & Outward Governance)"
+      title="Wavebound: Dual Crest Wave Engine (Inward Security & Outward Governance)"
     >
       <img
         src={logoImage}
-        alt="Seawater Wave Logo"
+        alt="Wavebound Wave Logo"
         className="w-full h-full object-contain p-0.5 transform scale-110 group-hover:scale-115 transition-transform duration-300"
         onError={(e) => {
           e.currentTarget.style.display = 'none';
@@ -116,11 +116,11 @@ export const SeawaterLogo: React.FC<SeawaterLogoProps> = ({
         className={`inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/40 text-slate-200 shadow-sm hover:border-cyan-400 transition-colors ${className}`}
       >
         <div className="w-6 h-6 rounded-lg overflow-hidden bg-[#0b172a] border border-cyan-400/40 shrink-0 flex items-center justify-center">
-          <img src={logoImage} alt="Seawater" className="w-full h-full object-contain p-0.5 transform scale-110" />
+          <img src={logoImage} alt="Wavebound" className="w-full h-full object-contain p-0.5 transform scale-110" />
         </div>
         <div className="flex items-center gap-1.5">
           <span className="font-extrabold tracking-wider text-xs uppercase bg-gradient-to-r from-cyan-300 via-sky-300 to-blue-400 bg-clip-text text-transparent">
-            Seawater
+            Wavebound
           </span>
           <span className="text-[10px] text-cyan-400 font-mono font-semibold">v2.4.0</span>
         </div>
@@ -136,7 +136,7 @@ export const SeawaterLogo: React.FC<SeawaterLogoProps> = ({
           <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-[#0b172a] border-2 border-cyan-400/60 shadow-2xl flex items-center justify-center">
             <img
               src={logoImage}
-              alt="Seawater Wave Logo"
+              alt="Wavebound Wave Logo"
               className="w-full h-full object-contain p-1 transform scale-110 group-hover:scale-115 transition-transform duration-300"
             />
           </div>
@@ -144,11 +144,11 @@ export const SeawaterLogo: React.FC<SeawaterLogoProps> = ({
         <div className="text-center sm:text-left space-y-1.5">
           <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-md bg-cyan-950/70 border border-cyan-800 text-[11px] font-mono font-semibold text-cyan-300 uppercase tracking-wider mb-0.5">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            Project Seawater · Policy-as-Code Engine
+            Project Wavebound · Policy-as-Code Engine
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight flex items-center justify-center sm:justify-start gap-3">
             <span className="bg-gradient-to-r from-cyan-200 via-sky-300 to-blue-400 bg-clip-text text-transparent">
-              SEAWATER
+              WAVEBOUND
             </span>
           </h1>
           {showSubtitle && (
@@ -170,7 +170,7 @@ export const SeawaterLogo: React.FC<SeawaterLogoProps> = ({
           <span
             className={`font-black tracking-tight uppercase bg-gradient-to-r from-cyan-200 via-sky-300 to-blue-400 bg-clip-text text-transparent ${textClasses}`}
           >
-            Seawater
+            Wavebound
           </span>
           <span className="text-[9px] px-1.5 py-0.5 font-mono font-bold bg-cyan-950/90 text-cyan-300 border border-cyan-700/80 rounded">
             PaC

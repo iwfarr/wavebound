@@ -1,4 +1,4 @@
-name: Deploy Seawater to GitHub Pages
+name: Deploy Wavebound to GitHub Pages
 
 on:
   push:

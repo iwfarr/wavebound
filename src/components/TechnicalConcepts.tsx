@@ -4,7 +4,7 @@ import { CALDICOTT_PRINCIPLES, CaldicottPrincipleDetail } from '../data/caldicot
 import { DATA_CATALOGUE_ASSETS, DataCatalogueAsset } from '../data/dataCatalogueData';
 import { AGENTIC_GOVERNANCE_DATA, SafePersonComparison, FiveSafesAssetMapping, StanfordRiskTier } from '../data/agenticGovernanceData';
 import { useUserProgress } from '../context/ProgressContext';
-import { SeawaterLogo } from './SeawaterLogo';
+import { WaveboundLogo } from './WaveboundLogo';
 import {
   ShieldCheck,
   ShieldAlert,
@@ -166,7 +166,7 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
       <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1.5">
-            <SeawaterLogo variant="badge" size="xs" className="mb-0.5" />
+            <WaveboundLogo variant="badge" size="xs" className="mb-0.5" />
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
               Technical Concepts &amp; Governance Specifications
             </h1>
@@ -738,7 +738,7 @@ export const TechnicalConcepts: React.FC<TechnicalConceptsProps> = ({
                 </a>
               </div>
               <p className="text-xs text-slate-400">
-                Four mandatory controls from the Stanford UIT security framework directly implemented inside the Seawater Policy-as-Code compiler.
+                Four mandatory controls from the Stanford UIT security framework directly implemented inside the Wavebound Policy-as-Code compiler.
               </p>
             </div>
 

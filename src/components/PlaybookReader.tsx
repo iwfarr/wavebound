@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useUserProgress } from '../context/ProgressContext';
 import { GLOSSARY_TERMS, GlossaryTerm } from '../data/glossaryData';
-import { SeawaterLogo } from './SeawaterLogo';
+import { WaveboundLogo } from './WaveboundLogo';
 import {
   Search,
   BookOpen,
@@ -48,7 +48,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
     subtitle: 'Machine-Executable Policy Architecture with Semantic Versioning (SemVer 2.4.0): Deployable Policy-as-Code Rather Than a Static Spec',
     content: [
       'Clarification of Intent & Scope:',
-      '• The Seawater Problem Space & Tidal Flow: Population data  research operates within a dynamic problem space dubbed "Seawater". Analytics workloads (ranging from lightweight exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, governance channels, and population confidentiality and privacy thresholds. The tide flows cyclically across two managed boundaries: Ingress and Egress.',
+      '• The Wavebound Problem Space & Tidal Flow: Wavebound models population data research as navigation through a dynamic information governance problem space. Analytics workloads (ranging from lightweight exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, governance channels, and population confidentiality and privacy thresholds. The tide flows cyclically across two managed boundaries: Ingress and Egress.',
       '• Ingress Governance (Access Controls, Safe People & Safe Projects): Inbound flow enforces mandatory access controls, verified institutional identity, researcher accreditation, and Information Governance (IG) training (Safe People), alongside approved NHS REC ethics protocols, research purpose justification, and Section 251 CAG exemptions (Safe Projects). Inbound clinical datasets, multi-omics records, and container workloads are verified at the boundary using W3C SHACL shape validation before admission.',
       '• Egress Governance (Safe Outputs & Disclosure Control): Outbound flow regulates the export of derived analytical findings, statistical summaries, and model parameters. Outputs must satisfy automated Statistical Disclosure Control (SDC) rules, k-anonymity (k >= 10), and sub-millisecond Open Policy Agent (OPA) Rego policy evaluations.',
       '• Scope: Data Analysis & Intelligence Platforms: This playbook applies across modern data analysis & intelligence platforms such as Trusted Research Environments (TREs) and Secure Data Environments (SDEs), federated analytics hubs, and autonomous AI sandbox enclaves.',
@@ -59,7 +59,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
       '• Auditable Dual-Persona Lineage: Emits immutable W3C PROV-O cryptographic audit triples for every access grant or rejection, while generating plain-English charters for Trust boards and patient advocacy committees.'
     ],
     keyTakeaways: [
-      'Models research data governance as navigating the Seawater problem space with tidal ingress and egress control.',
+      'Models research data governance through the Wavebound tidal navigation framework with coordinated ingress and egress control.',
       'Ingress explicitly enforces access controls, Safe People (accreditation and training), and Safe Projects (ethics and Section 251).',
       'Broadens scope to all data analysis & intelligence platforms such as TREs, SDEs, and AI enclaves.',
       'Formally compiles ISO 42001 (AIMS), ISO 5259, DCB0129/0160 clinical safety, and UK MDR 2002 SaMD into microsecond policy-as-code.',
@@ -76,7 +76,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
       '• 1. Governance Metadata (The Ontological Law): Enduring, legal, human-negotiated truths about the research project. Examples include: researcher accreditation status, institutional identity, NHS Section 251 exemption certificates, project REC ethics protocol numbers, approved population data sensitivity tiers, and retention horizons. This information is authored by governance officers, version-controlled in Git, and formally serialized in RDF/OWL ontologies (tre-core.ttl). It changes only when ethics approvals, laws, or institutional agreements change.',
       '• 2. Ephemeral Runtime State (The Cluster Plumbing): Transient, mechanical facts of the live compute fabric managed by Kubernetes, Calico CNI, and Linux kernels. Examples include: pod IP addresses (10.244.2.14), ephemeral network sockets, container process IDs, CPU/GPU quotas, and transient JWT bearer tokens. This state is spun up, scaled, rescheduled, and recycled continuously.',
       '• 3. The Classic Infrastructure Trap: Traditional IT configurations mistakenly hardcode governance rules directly into cluster network rules or pod name whitelists (e.g. "allow IP 10.244.2.14 to access clinical database X"). When a container crashes, restarts, or migrates to a different worker node, the IP changes, causing immediate outages or leaving behind orphaned, unverified permissions.',
-      '• 4. The Seawater Decoupled Solution: Clean separation of concerns. Kubernetes Admission Webhooks intercept pod launch requests and extract only the researcher and project claims. The Open Policy Agent (OPA) evaluates these claims against the versioned, compiled governance graph. If the governance metadata says Dr. Smith has active IG training and Project 102 has approved Tier 2 ethics, admission is granted, completely agnostic of which server, container ID, or IP the orchestrator assigns.'
+      '• 4. The Wavebound Decoupled Solution: Clean separation of concerns. Kubernetes Admission Webhooks intercept pod launch requests and extract only the researcher and project claims. The Open Policy Agent (OPA) evaluates these claims against the versioned, compiled governance graph. If the governance metadata says Dr. Smith has active IG training and Project 102 has approved Tier 2 ethics, admission is granted, completely agnostic of which server, container ID, or IP the orchestrator assigns.'
     ],
     keyTakeaways: [
       'Governance metadata lives in version-controlled RDF ontologies; runtime state lives in Kubernetes orchestrators.',
@@ -497,7 +497,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <SeawaterLogo variant="badge" size="sm" />
+              <WaveboundLogo variant="badge" size="sm" />
               <div className="flex items-center gap-1.5 text-xs font-semibold text-cyan-400 uppercase tracking-wider">
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>SemVer 2.4.0-prod</span>
@@ -505,7 +505,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
             </div>
             <div className="space-y-1">
               <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                Project Seawater: Policy-as-Code Playbook
+                Project Wavebound: Policy-as-Code Playbook
               </h1>
               <p className="text-slate-300 text-sm max-w-2xl leading-relaxed">
                 This playbook provides a Policy as Code (PaC) framework, bridging regulatory compliance documentation and real-time execution by compiling human- and machine-readable semantic graph ontologies into Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) across data intelligence platforms. Please note that this project is a work in progress.
@@ -552,7 +552,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                 <span className="text-xs text-slate-400">Governance &amp; Engineering Guide</span>
               </div>
               <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight">
-                Introduction to the Seawater Playbook
+                Introduction to the Wavebound Playbook
               </h2>
             </div>
             <button
@@ -566,15 +566,15 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
 
           {expandedIntro && (
             <div className="space-y-6 text-xs sm:text-sm text-slate-300 leading-relaxed">
-              {/* Context & Seawater Problem Space */}
+              {/* Context & Wavebound Problem Space */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
                 <div className="lg:col-span-2 space-y-3">
                   <h3 className="text-sm sm:text-base font-semibold text-white flex items-center gap-2">
                     <Compass className="w-4 h-4 text-cyan-400" />
-                    <span>The Seawater Problem Space &amp; Tidal Flow Model</span>
+                    <span>The Wavebound Problem Space &amp; Tidal Flow Model</span>
                   </h3>
                   <p>
-                    <strong>Project Seawater</strong> models population analytics and research through a structured tidal navigation framework. Modern data platforms do not operate in a static vacuum: analytical workloads (from exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, information governance channels, and personal privacy and confidentiality thresholds.
+                    <strong>Project Wavebound</strong> models population analytics and research through a structured tidal navigation framework. Modern data platforms do not operate in a static vacuum: analytical workloads (from exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, information governance channels, and personal privacy and confidentiality thresholds.
                   </p>
                   <p>
                     Governance operates across two coordinated directional flows:

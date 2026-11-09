@@ -478,7 +478,7 @@ app.post('/api/generate-policy', (req: Request, res: Response) => {
       success: true,
       fallback: true,
       policy: fallbackPolicy,
-      message: 'Synthesized using Seawater deterministic rule synthesis engine.'
+      message: 'Synthesized using Wavebound deterministic rule synthesis engine.'
     });
   } catch (error: any) {
     console.error('Policy generation error:', error);

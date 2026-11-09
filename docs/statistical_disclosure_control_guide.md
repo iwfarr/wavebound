@@ -104,7 +104,7 @@ Evaluates and manages data access across five complementary operational dimensio
 
 ## 6. Policy-as-Code Implementation Mapping
 
-Within the Seawater framework, these SDC techniques are encoded directly as machine-executable rules:
+Within the Wavebound framework, these SDC techniques are encoded directly as machine-executable rules:
 
 ```turtle
 # SHACL Shape for Airlock Output Verification (sdc_shapes.ttl)
@@ -127,7 +127,7 @@ tre:AirlockOutputShape a sh:NodeShape ;
 
 ```rego
 # OPA Rego Airlock Policy (policy.rego)
-package seawater.airlock
+package wavebound.airlock
 
 default allow = false
 

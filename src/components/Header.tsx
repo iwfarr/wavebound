@@ -3,7 +3,7 @@ import { useUserProgress } from '../context/ProgressContext';
 import { useTheme } from '../context/ThemeContext';
 import { GLOSSARY_TERMS } from '../data/glossaryData';
 import { PLAYBOOK_MODULES } from '../data/playbookContent';
-import { SeawaterLogo } from './SeawaterLogo';
+import { WaveboundLogo } from './WaveboundLogo';
 import {
   Shield,
   BookOpen,
@@ -102,9 +102,9 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={() => onSelectTab('playbook')}
               className="flex items-center text-left group transition-transform active:scale-95"
-              title="Project Seawater · Policy-as-Code Engine"
+              title="Project Wavebound · Policy-as-Code Engine"
             >
-              <SeawaterLogo variant="horizontal" size="md" />
+              <WaveboundLogo variant="horizontal" size="md" />
             </button>
           </div>
 

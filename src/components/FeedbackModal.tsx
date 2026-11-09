@@ -52,7 +52,7 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose })
 ${description || 'No description provided.'}
 
 ---
-*Submitted via Project Seawater Feedback Engine*`;
+*Submitted via Project Wavebound Feedback Engine*`;
   };
 
   const handleOpenGitHub = () => {

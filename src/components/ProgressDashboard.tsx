@@ -16,7 +16,7 @@ import {
   ShieldCheck,
   AlertCircle
 } from 'lucide-react';
-import { SeawaterLogo } from './SeawaterLogo';
+import { WaveboundLogo } from './WaveboundLogo';
 import confetti from 'canvas-confetti';
 
 interface ProgressDashboardProps {
@@ -88,13 +88,13 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
         <div className="absolute top-0 right-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-3">
-            <SeawaterLogo variant="badge" size="sm" />
+            <WaveboundLogo variant="badge" size="sm" />
             <div className="space-y-1">
               <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                Project Seawater: Mastery Dashboard
+                Project Wavebound: Mastery Dashboard
               </h1>
               <p className="text-slate-400 text-sm max-w-2xl leading-relaxed">
-                Track your journey through the Seawater Policy-as-Code Playbook. Review your section completion,
+                Track your journey through the Wavebound Policy-as-Code Playbook. Review your section completion,
                 quiz attempt history, highest test scores, and earned certifications.
               </p>
             </div>
@@ -468,14 +468,14 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
 
             <div className="border-2 border-dashed border-cyan-500/40 p-8 rounded-xl text-center space-y-4 bg-slate-950/60">
               <div className="flex justify-center">
-                <SeawaterLogo variant="icon" size="xl" />
+                <WaveboundLogo variant="icon" size="xl" />
               </div>
               <div className="space-y-1">
                 <div className="text-xs uppercase tracking-widest text-cyan-400 font-bold">
                   Certificate of Professional Achievement
                 </div>
                 <h2 className="text-2xl font-black tracking-tight text-white">
-                  Project Seawater: Policy-as-Code
+                  Project Wavebound: Policy-as-Code
                 </h2>
               </div>
 

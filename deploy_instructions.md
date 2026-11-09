@@ -1,6 +1,6 @@
-# GitHub Pages Deployment Instructions: Project Seawater
+# GitHub Pages Deployment Instructions: Project Wavebound
 
-This guide provides step-by-step instructions for deploying the **Project Seawater Policy-as-Code Playbook** to **GitHub Pages** as a fast, reliable, zero-cost static web application.
+This guide provides step-by-step instructions for deploying the **Project Wavebound Policy-as-Code Playbook** to **GitHub Pages** as a fast, reliable, zero-cost static web application.
 
 ---
 
@@ -56,7 +56,7 @@ git push origin main
 ### Step 3: Monitor Workflow Execution
 
 1. Click on the **Actions** tab at the top of your repository.
-2. Select the latest workflow run named **Deploy Seawater to GitHub Pages**.
+2. Select the latest workflow run named **Deploy Wavebound to GitHub Pages**.
 3. The workflow executes two clean steps:
    - **build**: Sets up Node.js 22, installs dependencies via resilient fallback, runs type checks, builds the static bundle with `VITE_BASE_PATH: /seawater-playbook/`, creates `dist/404.html`, and uploads the artifact.
    - **deploy**: Publishes the bundle to GitHub Pages.

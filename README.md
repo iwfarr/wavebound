@@ -1,4 +1,8 @@
-# Project Seawater: Policy-as-Code Playbook
+# Wavebound Policy-as-Code Engine
+
+An information governance playbook built around Wavebound's dual-wave policy-as-code architecture: inward enclave security and outward governance. The tidal navigation model describes the information governance problem space and its coordinated safeguards.
+
+See [branding notes](docs/branding.md) for retained technical identifiers, deployment paths, and logo assets.
 
 [![Release Version](https://img.shields.io/badge/version-v2.4.0--prod-06b6d4.svg)](https://github.com/iwfarr/seawater-playbook)
 [![Build Status](https://img.shields.io/badge/build-passing-emerald.svg)](https://github.com/iwfarr/seawater-playbook/actions)
@@ -26,13 +30,13 @@ This playbook provides a Policy as Code (PaC) framework, bridging regulatory com
 
 Information Governance (IG) can often be a confusing, complex, and burdensome, resource-intensive legal necessity. For population data research organizations, epidemiologists, public institutions, and commercial partners, navigating statutory mandates (including UK GDPR, Data Protection Act 2018, Digital Economy Act 2017, and Section 251) across heterogeneous cohorts frequently creates operational friction, administrative paralysis, and high regulatory overhead.
 
-The **Seawater Playbook** directly addresses this legal necessity. It brings dense statutory codes and institutional policies into an accessible, human- and machine-readable resource designed for practical comprehension, institutional onboarding, and workforce knowledge training. Simultaneously, it delivers a production-grade **policy-as-code engine** that compiles semantic governance ontologies into real-time Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) to deploy a provably safe and compliant data architecture. Rather than replacing human governance, **key human decisions and actions** (including Research Ethics Committee approvals, Caldicott Guardian determinations, Data Access Committee evaluations, and Data Stewardship signing events) are formally documented, structured, and audited as foundational milestones of the playbook.
+The **Wavebound Playbook** directly addresses this legal necessity. It brings dense statutory codes and institutional policies into an accessible, human- and machine-readable resource designed for practical comprehension, institutional onboarding, and workforce knowledge training. Simultaneously, it delivers a production-grade **policy-as-code engine** that compiles semantic governance ontologies into real-time Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) to deploy a provably safe and compliant data architecture. Rather than replacing human governance, **key human decisions and actions** (including Research Ethics Committee approvals, Caldicott Guardian determinations, Data Access Committee evaluations, and Data Stewardship signing events) are formally documented, structured, and audited as foundational milestones of the playbook.
 
 Modern population data research, longitudinal cohorts, epidemiology, and multi-source analytics are transitioning away from static data distribution toward federated **data analysis & intelligence platforms** (such as secure cloud enclaves, partitioned analytical sandboxes, and sovereign data repositories). Rather than copying sensitive microdata across institutional boundaries, algorithms and accredited researchers are brought into partitioned, secure cloud enclaves.
 
 Traditional governance in these environments relies heavily on manual checklists, periodic spreadsheet audits, and static PDF specifications. These manual approaches create severe bottlenecks for vital research or leave subtle gaps when complex automated pipelines and AI workloads are executed.
 
-**Project Seawater solves this challenge through Policy-as-Code (PaC):**
+**Project Wavebound solves this challenge through Policy-as-Code (PaC):**
 1. **Formalize Legal & Ethical Intent in Knowledge Graphs**: High-level governance concepts (the Five Safes framework, the 8 Caldicott Principles, Digital Economy Act 2017 accreditation, NHS Section 251 CAG exemptions, and ISO/IEC 42001 AI risk controls) are formalized as immutable, version-controlled RDF/OWL 2 ontologies.
 2. **Validate Closed-World Constraints with W3C SHACL**: Inbound research proposals, cohort definitions, and container specifications are verified against strict Shapes Constraint Language (SHACL) definitions.
 3. **Compile to Microsecond Policy Decision Points (PDPs)**: Semantic graphs are compiled into native Open Policy Agent (OPA) Rego policies evaluated in sub-millisecond latencies at Kubernetes Admission Controllers and API Gateways (Policy Enforcement Points, PEPs).
@@ -40,12 +44,12 @@ Traditional governance in these environments relies heavily on manual checklists
 
 ---
 
-## 🌊 The Seawater Problem Space & Tidal Flow Model
+## 🌊 The Wavebound Problem Space & Tidal Flow Model
 
-Project Seawater models population data research and epidemiological governance through a grounded **tidal flow navigation framework**:
+Project Wavebound models population data research and epidemiological governance through a grounded **tidal flow navigation framework**:
 
 ```
-                              [ THE SEAWATER PROBLEM SPACE ]
+                              [ THE WAVEBOUND PROBLEM SPACE ]
                Dynamic, continuous population data & research intelligence workflows
                                       │
             ┌─────────────────────────┴─────────────────────────┐
@@ -104,7 +108,7 @@ The interactive web application includes five integrated modules:
 
 ## 📜 Standards & Regulatory Frameworks
 
-Project Seawater incorporates and formalizes requirements from:
+Project Wavebound incorporates and formalizes requirements from:
 
 | Standard / Statutory Mandate | Domain | Enforcement Mechanism |
 | :--- | :--- | :--- |
@@ -217,7 +221,7 @@ For complete configuration instructions, custom domain setup, and troubleshootin
 │   │   ├── PlaybookReader.tsx      # 16-Week Playbook with reading tracker
 │   │   ├── QuizEngine.tsx          # Interactive compliance assessment engine
 │   │   ├── ResourcesTab.tsx        # Statutory documents & DEA accreditation
-│   │   ├── SeawaterLogo.tsx        # Official responsive logo component
+│   │   ├── WaveboundLogo.tsx        # Official responsive logo component
 │   │   └── TabNavigation.tsx       # Accessible application tab bar
 │   ├── data/                   # Structured data stores
 │   │   ├── glossaryData.ts         # Searchable regulatory and technical glossary
@@ -242,6 +246,6 @@ For complete configuration instructions, custom domain setup, and troubleshootin
 
 ## 📄 License & Attribution
 
-Project Seawater is released under the **MIT License**.
+Project Wavebound is released under the **MIT License**.
 
 Built to advance transparent, secure, and reproducible population data governance across modern data analysis & intelligence platforms.

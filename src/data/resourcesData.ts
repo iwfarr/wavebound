@@ -97,7 +97,7 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     category: 'Statutory Legislation & Regulatory Guidance',
     url: 'https://s42615.pcdn.co/wp-content/uploads/Accreditation-of-a-Trusted-Research-Environment-standard-operating-procedure-V1.4-1.pdf',
     shortDesc: 'Official UKSA statutory operating procedure detailing the end-to-end accreditation workflow, technical assessment, and governance criteria for certifying TREs and SDEs as DEA Accredited Processors under Section 71.',
-    playbookRelevance: 'Directly informs Seawater’s Phase 1-4 milestone gates and decision records (D-001–D-009), ensuring the policy-as-code architecture satisfies UKSA accreditation auditors.',
+    playbookRelevance: 'Directly informs Wavebound’s Phase 1-4 milestone gates and decision records (D-001–D-009), ensuring the policy-as-code architecture satisfies UKSA accreditation auditors.',
     isStatutory: true,
     citation: 'UK Statistics Authority. Accreditation of a Trusted Research Environment Standard Operating Procedure (V1.4). UKSA Research Accreditation Service; 2023.',
     tags: ['TRE Accreditation', 'SOP V1.4', 'UKSA', 'Accredited Processor', 'DEA 2017', 'SDE']
@@ -109,7 +109,7 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     category: 'Statutory Legislation & Regulatory Guidance',
     url: 'https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fs42615.pcdn.co%2Fwp-content%2Fuploads%2FTRE-Accreditation-Self-Assessment-Questionnaire-V3.1.xlsx&wdOrigin=BROWSELINK',
     shortDesc: 'The canonical audit instrument used by UKSA to evaluate technical controls across the Five Safes, including network egress containment, compute sandboxing, airlock SDC, and cryptographic audit logging.',
-    playbookRelevance: 'Mapped directly to Seawater’s automated SHACL shape validations and OPA Rego webhooks in Tab 4 (Checklist) and Tab 5 (Code) of the Implementation Track.',
+    playbookRelevance: 'Mapped directly to Wavebound’s automated SHACL shape validations and OPA Rego webhooks in Tab 4 (Checklist) and Tab 5 (Code) of the Implementation Track.',
     isStatutory: true,
     citation: 'UK Statistics Authority. TRE Accreditation Self-Assessment Questionnaire (SAQ V3.1). UKSA Research Accreditation Panel; 2023.',
     tags: ['SAQ V3.1', 'Audit Checklist', 'Five Safes', 'UKSA', 'TRE Accreditation', 'Compliance Matrix']
@@ -530,7 +530,7 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     category: 'International Standards (ISO) & Clinical Safety (DCB)',
     url: 'https://www.gov.uk/government/publications/software-and-artificial-intelligence-ai-as-a-medical-device',
     shortDesc: 'Statutory framework and regulatory guidance governing whether health software, diagnostic algorithms, or AI applications qualify as medical devices in the UK.',
-    playbookRelevance: 'Formalized in Seawater airlock shapes to verify CE/UKCA marking prerequisites and clinical investigation approvals before algorithmic weights can egress the platform.',
+    playbookRelevance: 'Formalized in Wavebound airlock shapes to verify CE/UKCA marking prerequisites and clinical investigation approvals before algorithmic weights can egress the platform.',
     isStatutory: true,
     citation: 'MHRA. Software and Artificial Intelligence (AI) as a Medical Device. London: Department of Health and Social Care; 2023.',
     tags: ['UK MDR 2002', 'MHRA', 'SaMD', 'Medical Device Regulation', 'UKCA']
