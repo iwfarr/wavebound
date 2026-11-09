@@ -202,7 +202,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={() => onSelectTab('gateway')}
               className="flex items-center text-left group transition-opacity hover:opacity-95 cursor-pointer"
-              title="Project Seawater · Policy-as-Code Baseline"
+              title="Project Wavebound · Policy-as-Code Baseline"
             >
               <SeawaterLogo variant="horizontal" size="md" />
             </button>

@@ -116,7 +116,7 @@ export const ProcurementReadinessHub: React.FC<ProcurementReadinessHubProps> = (
 ## 1. Executive Tender Statement
 This dossier provides verified, machine-executable Information Governance (IG) evidence for deployment across NHS Integrated Care Boards (ICBs), Secure Data Environments (SDEs), Trusted Research Environments (TREs), and Academic Health Science Networks (AHSNs).
 
-Project Seawater enforces policy-as-code through declarative W3C SHACL shapes and sub-millisecond Open Policy Agent (OPA) Rego rules, eliminating manual audit blind spots and ensuring compliance with the Eight Caldicott Principles.
+Project Wavebound enforces policy-as-code through declarative W3C SHACL shapes and sub-millisecond Open Policy Agent (OPA) Rego rules, eliminating manual audit blind spots and ensuring compliance with the Eight Caldicott Principles.
 
 ---
 
@@ -129,7 +129,7 @@ ${controls
 - **Criticality**: ${c.criticality}
 - **Caldicott Principle Link**: ${c.caldicottPrinciple}
 - **Mandated Requirement**: ${c.requirement}
-- **Project Seawater Verified Evidence**: ${c.seawaterEvidence}
+- **Project Wavebound Verified Evidence**: ${c.seawaterEvidence}
 - **Technical Reference**: \`${c.technicalAsset}\`
 `
   )
@@ -176,7 +176,7 @@ ${s.clause}
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `seawater_procurement_matrix_${new Date().toISOString().split('T')[0]}.json`;
+    a.download = `wavebound_procurement_matrix_${new Date().toISOString().split('T')[0]}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -439,7 +439,7 @@ ${s.clause}
                   <div className="space-y-1 text-xs sm:text-sm">
                     <span className="text-[10px] font-mono uppercase tracking-wider text-teal-300 font-bold block flex items-center gap-1.5">
                       <ShieldCheck className="w-3.5 h-3.5 text-teal-400" />
-                      <span>Project Seawater Verified Technical Evidence:</span>
+                      <span>Project Wavebound Verified Technical Evidence:</span>
                     </span>
                     <p className="text-slate-200 leading-relaxed bg-slate-950/80 p-3 rounded-xl border border-teal-500/40 font-medium">
                       {control.seawaterEvidence}
@@ -530,7 +530,7 @@ ${s.clause}
                 Official Declaration of Conformance
               </span>
               <h2 className="text-2xl font-extrabold text-white">
-                Project Seawater Tender Readiness Certification
+                Project Wavebound Tender Readiness Certification
               </h2>
               <p className="text-xs sm:text-sm text-slate-300">
                 Issued for submission to NHS England, Health Research Authority (HRA), and University IG Boards.
@@ -549,7 +549,7 @@ ${s.clause}
 
           <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
             <p>
-              This document certifies that the <strong>Project Seawater Policy-as-Code Architecture</strong> satisfies all mandatory controls required by the <strong>Standard Architecture for Trusted Research Environments (SATRE v1.1)</strong> and the <strong>NHS Data Security and Protection Toolkit (DSPT 2024/25)</strong> for Tier 2 pseudonymous and Tier 3 identifiable microdata workloads.
+              This document certifies that the <strong>Project Wavebound Policy-as-Code Architecture</strong> satisfies all mandatory controls required by the <strong>Standard Architecture for Trusted Research Environments (SATRE v1.1)</strong> and the <strong>NHS Data Security and Protection Toolkit (DSPT 2024/25)</strong> for Tier 2 pseudonymous and Tier 3 identifiable microdata workloads.
             </p>
 
             <div className="p-4 rounded-xl bg-slate-950/80 border border-cyan-900/60 space-y-2">

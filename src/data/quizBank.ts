@@ -599,10 +599,10 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
     tags: ['UK MDR 2002', 'SaMD', 'MHRA', 'Medical Devices']
   },
   {
-    id: 'q-seawater-metaphor',
+    id: 'q-wavebound-metaphor',
     category: 'Repository & Architecture',
     difficulty: 'Foundation',
-    question: 'How does Project Seawater model the clinical research data problem space through its tidal navigation metaphor?',
+    question: 'How does Project Wavebound model the clinical research data problem space through its tidal navigation metaphor?',
     options: [
       'As a completely static, isolated offline pond where data never enters and results never leave.',
       'As an open, turbulent sea where vessels (research workloads) navigate the flood tide of data ingress and the ebb tide of model egress, protected by SHACL and OPA breakwaters.',
@@ -610,8 +610,8 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
       'As a submarine cable that bypasses all NHS Information Governance approvals.'
     ],
     correctIndex: 1,
-    explanation: 'Project Seawater models clinical data governance as navigating an open maritime problem space: incoming data enters on the flood tide (ingress) through salinity gatekeepers, while outgoing models and statistics exit on the ebb tide (egress) through mathematical sea-locks and breakwaters.',
+    explanation: 'Project Wavebound models clinical data governance as navigating an open maritime problem space: incoming data enters on the flood tide (ingress) through salinity gatekeepers, while outgoing models and statistics exit on the ebb tide (egress) through mathematical sea-locks and breakwaters.',
     citation: 'Section 0. Executive Summary & Problem Space',
-    tags: ['Project Seawater', 'Tidal Metaphor', 'Ingress', 'Egress']
+    tags: ['Project Wavebound', 'Tidal Metaphor', 'Ingress', 'Egress']
   }
 ];

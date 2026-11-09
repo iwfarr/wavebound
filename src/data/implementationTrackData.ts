@@ -274,7 +274,7 @@ export const GRANULAR_16_WEEK_TIMELINE: SprintSchedule[] = [
       },
       {
         artifact: 'Shadow Discrepancy Logger',
-        description: 'Microservice logging differences between legacy access control decisions and Seawater Rego evaluations.',
+        description: 'Microservice logging differences between legacy access control decisions and Wavebound Rego evaluations.',
         path: 'deploy/telemetry/discrepancy-logger.py'
       },
       {
@@ -284,13 +284,13 @@ export const GRANULAR_16_WEEK_TIMELINE: SprintSchedule[] = [
       }
     ],
     safeguardsAndNonBreaking: [
-      'Evaluate-Only Mode: Seawater PDP returns verdicts, but the webhook always allows traffic. Real researchers never get blocked.',
+      'Evaluate-Only Mode: Wavebound PDP returns verdicts, but the webhook always allows traffic. Real researchers never get blocked.',
       'Zero impact on existing workflows: If OPA experiences high latency or crashes, requests fall through to legacy handlers unimpeded.',
       'Weekly discrepancy review meetings analyze edge cases to tune policy rules before enforcement.'
     ],
     exitGates: [
       'D-007 (Enforcement Point & Rollout Mode) approved by operational change authority.',
-      'Discrepancy rate between legacy authorization and Seawater Rego drops below 0.1% over 14 consecutive days.'
+      'Discrepancy rate between legacy authorization and Wavebound Rego drops below 0.1% over 14 consecutive days.'
     ]
   },
   {
@@ -368,13 +368,13 @@ export const ROLLOUT_STAGES: RolloutStage[] = [
     stage: 2,
     name: 'Stage 2: Shadow Mode (Side-by-Side Discrepancy Auditing)',
     mode: 'shadow',
-    tagline: 'Automated discrepancy detection comparing Seawater verdicts with legacy authorizations',
+    tagline: 'Automated discrepancy detection comparing Wavebound verdicts with legacy authorizations',
     productionImpact: 'Zero disruption (Legacy rules still make all binding decisions)',
     trafficPercentage: '100% live requests compared',
-    trafficHandling: 'Legacy access controls (Active Directory/manual IG ticket queues) continue to enforce decisions. In parallel, Seawater evaluates the request. If `seawater_verdict != legacy_verdict`, an alert is dispatched to the governance triage channel.',
+    trafficHandling: 'Legacy access controls (Active Directory/manual IG ticket queues) continue to enforce decisions. In parallel, Wavebound evaluates the request. If `wavebound_verdict != legacy_verdict`, an alert is dispatched to the governance triage channel.',
     failureMode: 'Non-blocking: Discrepancy logger failures do not impede user access.',
     exitCriteria: [
-      'Zero unexplained discrepancies between legacy approvals and Seawater rules over 14 consecutive days.',
+      'Zero unexplained discrepancies between legacy approvals and Wavebound rules over 14 consecutive days.',
       'All legitimate edge cases (e.g. multi-institution honorary contracts) documented in tre-core.ttl.',
       'D-007 (Enforcement Point & Mode) reviewed by Security Operations Center (SOC).'
     ],
@@ -387,7 +387,7 @@ export const ROLLOUT_STAGES: RolloutStage[] = [
     tagline: 'Active policy enforcement restricted to a single low-risk research cohort',
     productionImpact: 'Isolated (Impact strictly bounded to 1 pilot namespace)',
     trafficPercentage: '5–10% of total cluster workloads',
-    trafficHandling: 'Seawater actively blocks or permits requests, but only for requests bearing the label `tre.cohort: pilot-synthetic` or targeting a dedicated staging enclave namespace. All other namespaces remain in evaluate-only mode.',
+    trafficHandling: 'Wavebound actively blocks or permits requests, but only for requests bearing the label `tre.cohort: pilot-synthetic` or targeting a dedicated staging enclave namespace. All other namespaces remain in evaluate-only mode.',
     failureMode: 'Emergency circuit breaker: If Canary pod launch failure rate exceeds 1% or p99 latency exceeds 15ms, automated circuit breaker flips namespace to bypass mode.',
     exitCriteria: [
       'Canary researchers execute full analytics lifecycles (workspace provision, compute run, airlock export) without erroneous blockages.',
@@ -401,7 +401,7 @@ export const ROLLOUT_STAGES: RolloutStage[] = [
     name: 'Stage 4: Active Multi-PEP Enforcement (Full Production)',
     mode: 'active',
     tagline: 'End-to-end automated enforcement across Kubernetes admission, network, and airlock egress',
-    productionImpact: 'Authoritative (Seawater Rego is the authoritative gatekeeper)',
+    productionImpact: 'Authoritative (Wavebound Rego is the authoritative gatekeeper)',
     trafficPercentage: '100% of research workspace admissions and airlock releases',
     trafficHandling: 'Full production PEP integration: Namespaced Admission Controller audits researcher credentials and session attributes (failurePolicy: Ignore); airlock service compiles standardized evidence packs for human sign-off on outputs violating k >= 10 or dominance <= 80%.',
     failureMode: 'Tiered Fail-Safe: Internal workspace admission fails OPEN with high-priority PagerDuty alert if OPA cluster is partitioned; Airlock egress fails CLOSED (zero data ever leaves without verified policy grant).',

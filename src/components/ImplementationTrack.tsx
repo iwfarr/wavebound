@@ -385,7 +385,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
             </h2>
             <p className="text-slate-300 text-sm max-w-3xl leading-relaxed">
               The #1 hazard in clinical Policy-as-Code is a "big-bang" deployment that mistakenly locks out accredited researchers
-              or halts clinical analytics jobs due to schema drift. Seawater employs a strict <strong>5-Stage Progressive Rollout</strong>:
+              or halts clinical analytics jobs due to schema drift. Wavebound employs a strict <strong>5-Stage Progressive Rollout</strong>:
             </p>
 
             {/* Stage Selector Pills */}
@@ -1086,7 +1086,7 @@ jobs:
                   Prometheus Discrepancy Alerting Rules (14-Day Shadow Verification)
                 </h3>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  Fires high-priority alerts to DevOps and IG leads whenever Seawater Rego verdicts diverge from legacy LDAP tickets.
+                  Fires high-priority alerts to DevOps and IG leads whenever Wavebound Rego verdicts diverge from legacy LDAP tickets.
                 </p>
               </div>
               <button
@@ -1094,17 +1094,17 @@ jobs:
                   handleCopyCode(
                     'prom-alerts',
                     `groups:
-  - name: seawater_shadow_discrepancy_alerts
+  - name: wavebound_shadow_discrepancy_alerts
     rules:
-      - alert: SeawaterLegacyAuthorizationDiscrepancy
-        expr: increase(seawater_shadow_decision_divergence_total[5m]) > 0
+      - alert: WaveboundLegacyAuthorizationDiscrepancy
+        expr: increase(wavebound_shadow_decision_divergence_total[5m]) > 0
         for: 0m
         labels:
           severity: critical
           team: clinical-ig-devops
         annotations:
-          summary: "Seawater Rego verdict diverged from legacy authorization review"
-          description: "During shadow-mode evaluation, Seawater evaluated {{ $labels.verdict }} while legacy review gave {{ $labels.legacy_verdict }} for project {{ $labels.project_id }}. Investigate immediately before Stage 3 canary promotion."
+          summary: "Wavebound Rego verdict diverged from legacy authorization review"
+          description: "During shadow-mode evaluation, Wavebound evaluated {{ $labels.verdict }} while legacy review gave {{ $labels.legacy_verdict }} for project {{ $labels.project_id }}. Investigate immediately before Stage 3 canary promotion."
 
       - alert: SeawaterDecisionLatencyElevated
         expr: histogram_quantile(0.99, rate(seawater_opa_request_duration_seconds_bucket[5m])) > 0.015
@@ -1134,17 +1134,17 @@ jobs:
 
             <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-amber-300 overflow-x-auto leading-relaxed">
               <code>{`groups:
-  - name: seawater_shadow_discrepancy_alerts
+  - name: wavebound_shadow_discrepancy_alerts
     rules:
-      - alert: SeawaterLegacyAuthorizationDiscrepancy
-        expr: increase(seawater_shadow_decision_divergence_total[5m]) > 0
+      - alert: WaveboundLegacyAuthorizationDiscrepancy
+        expr: increase(wavebound_shadow_decision_divergence_total[5m]) > 0
         for: 0m
         labels:
           severity: critical
           team: clinical-ig-devops
         annotations:
-          summary: "Seawater Rego verdict diverged from legacy authorization review"
-          description: "Discrepancy detected between Seawater OPA and legacy authorization for project {{ $labels.project_id }}."
+          summary: "Wavebound Rego verdict diverged from legacy authorization review"
+          description: "Discrepancy detected between Wavebound OPA and legacy authorization for project {{ $labels.project_id }}."
 
       - alert: SeawaterDecisionLatencyElevated
         expr: histogram_quantile(0.99, rate(seawater_opa_request_duration_seconds_bucket[5m])) > 0.015
@@ -1167,7 +1167,7 @@ jobs:
                   10-Second Instant Bypass Runbook (Zero Pod Restarts)
                 </h3>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  Emergency procedures for on-call SREs to deactivate Seawater admission hooks in the event of an orchestrator deadlock.
+                  Emergency procedures for on-call SREs to deactivate Wavebound admission hooks in the event of an orchestrator deadlock.
                 </p>
               </div>
               <button
@@ -1185,7 +1185,7 @@ kubectl delete validatingwebhookconfiguration seawater-tre-admission-hook --wait
 kubectl get pods -A --field-selector status.phase=Pending
 
 # 4. Notify incident commander & clinical IG lead
-echo "Seawater PEP admission bypassed; emergency fail-safe active. Zero running pods interrupted."`
+echo "Wavebound PEP admission bypassed; emergency fail-safe active. Zero running pods interrupted."`
                   )
                 }
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 hover:text-cyan-300 hover:border-slate-700 transition-colors self-start sm:self-auto cursor-pointer"
@@ -1247,13 +1247,13 @@ kubectl get pods -n tre-workspaces`}</code>
                 <span>Scope Clarification: Policy-as-Code Cluster Engine vs Public Playbook Web Portal</span>
               </div>
               <p className="leading-relaxed text-slate-200">
-                It is vital to distinguish between two distinct deployments in Seawater:
+                It is vital to distinguish between two distinct deployments in Wavebound:
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
                 <div className="bg-slate-950/70 p-3 rounded-lg border border-cyan-900/60">
                   <div className="font-bold text-white flex items-center gap-1.5 mb-1">
                     <Server className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>1. Seawater Policy Engine (Internal Cluster)</span>
+                    <span>1. Wavebound Policy Engine (Internal Cluster)</span>
                   </div>
                   <p className="text-[11px] text-slate-300 leading-normal">
                     Covered in <strong>Tabs 1–5</strong>: This is the operational OPA PDP, namespaced admission audit controller, direct analytical data plane, and W3C SHACL evaluators deployed directly into your enterprise Kubernetes SDE/TRE cluster under least-privilege RBAC. It compiles standardized evidence packs to support human panel oversight.
@@ -1262,7 +1262,7 @@ kubectl get pods -n tre-workspaces`}</code>
                 <div className="bg-slate-950/70 p-3 rounded-lg border border-purple-900/60">
                   <div className="font-bold text-white flex items-center gap-1.5 mb-1">
                     <Globe className="w-3.5 h-3.5 text-purple-400" />
-                    <span>2. Seawater Playbook Web Portal (Public / Extranet)</span>
+                    <span>2. Wavebound Playbook Web Portal (Public / Extranet)</span>
                   </div>
                   <p className="text-[11px] text-slate-300 leading-normal">
                     Covered in <strong>Tab 6</strong>: This is the user-facing knowledge portal, decision register, interactive data dictionary, and IG Quick Guide. Publishing this openly fulfills <strong>Caldicott Principle 8 (Public Transparency)</strong> and enables external academic researchers to draft compliant IRAS/DAC applications without needing VPN access.
@@ -1272,7 +1272,7 @@ kubectl get pods -n tre-workspaces`}</code>
             </div>
 
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-4xl">
-              Why publish the Playbook as an open public resource? Academic researchers, clinical investigators, and partner health boards frequently plan research protocols months before receiving TRE account credentials. By hosting the Seawater Playbook as a <strong>100% free static site on GitHub Pages</strong> (where all policy synthesizers, statutory guides, and interactive calculators execute in-browser), institutions streamline onboarding, publish transparent governance registers, and offer zero-cost public accountability. Alternatively, enterprise environments can deploy the portal to <strong>Google Cloud Run</strong> with full-stack Node.js and Gemini live policy synthesis.
+              Why publish the Playbook as an open public resource? Academic researchers, clinical investigators, and partner health boards frequently plan research protocols months before receiving TRE account credentials. By hosting the Wavebound Playbook as a <strong>100% free static site on GitHub Pages</strong> (where all policy synthesizers, statutory guides, and interactive calculators execute in-browser), institutions streamline onboarding, publish transparent governance registers, and offer zero-cost public accountability. Alternatively, enterprise environments can deploy the portal to <strong>Google Cloud Run</strong> with full-stack Node.js and Gemini live policy synthesis.
             </p>
           </div>
 
@@ -1352,7 +1352,7 @@ kubectl get pods -n tre-workspaces`}</code>
                     'gh-pages-deploy',
                     `# 1. Commit and push repository to GitHub
 git add .
-git commit -m "feat: enable GitHub Pages compatibility with Seawater"
+git commit -m "feat: enable GitHub Pages compatibility with Wavebound"
 git push origin main
 
 # 2. In GitHub repository: Settings -> Pages -> Source: select "GitHub Actions"
@@ -1411,7 +1411,7 @@ git push origin main
                   </h4>
                 </div>
                 <p className="text-xs text-slate-400">
-                  To enable live AI generation (Gemini 3.8 Flash) instead of client-side fallback, run Seawater with a Node runtime and your API key.
+                  To enable live AI generation (Gemini 3.8 Flash) instead of client-side fallback, run Wavebound with a Node runtime and your API key.
                 </p>
               </div>
 

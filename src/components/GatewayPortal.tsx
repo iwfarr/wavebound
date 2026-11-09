@@ -244,7 +244,7 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
                 Human Accountability &amp; Public Transparency (Caldicott Principle 8)
               </strong>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                Technology serves human accountability; it does not replace it. Seawater is not an autonomous gatekeeper. It provides a machine-verifiable governance baseline that assists human Caldicott Guardians, Data Access Advisory Groups (DAAG), and Research Ethics Committees (REC) in making informed statutory decisions.
+                Technology serves human accountability; it does not replace it. Wavebound is not an autonomous gatekeeper. It provides a machine-verifiable governance baseline that assists human Caldicott Guardians, Data Access Advisory Groups (DAAG), and Research Ethics Committees (REC) in making informed statutory decisions.
               </p>
             </div>
           </div>

@@ -247,7 +247,7 @@ export default function App() {
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-[#005EB8]" />
               <span className="font-medium text-slate-800 dark:text-slate-200">
-                Seawater · Policy-as-Code for Safe &amp; Secure Data Intelligence Environments
+                Wavebound · Policy-as-Code for Safe &amp; Secure Data Intelligence Environments
               </span>
             </div>
             <div className="flex items-center gap-3 text-slate-600 dark:text-slate-400">
