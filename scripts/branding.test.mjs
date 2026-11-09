@@ -4,6 +4,13 @@ import test from 'node:test';
 
 const read = (file) => readFile(new URL(`../${file}`, import.meta.url), 'utf8');
 
+test('GitHub README uses Wavebound throughout, including URLs and clone commands', async () => {
+  const readme = await read('README.md');
+  assert.doesNotMatch(readme, /seawater/i);
+  assert.match(readme, /git clone https:\/\/github\.com\/iwfarr\/wavebound-playbook\.git/);
+  assert.match(readme, /cd wavebound-playbook/);
+});
+
 async function textFiles(directory) {
   const entries = await readdir(new URL(`../${directory}`, import.meta.url), { withFileTypes: true });
   const files = await Promise.all(entries.map((entry) => {

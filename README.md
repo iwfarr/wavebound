@@ -4,9 +4,9 @@ An information governance playbook built around Wavebound's dual-wave policy-as-
 
 See [branding notes](docs/branding.md) for retained technical identifiers, deployment paths, and logo assets.
 
-[![Release Version](https://img.shields.io/badge/version-v2.4.0--prod-06b6d4.svg)](https://github.com/iwfarr/seawater-playbook)
-[![Build Status](https://img.shields.io/badge/build-passing-emerald.svg)](https://github.com/iwfarr/seawater-playbook/actions)
-[![GitHub Pages](https://img.shields.io/badge/deploy-GitHub%20Pages-blue.svg)](https://iwfarr.github.io/seawater-playbook/)
+[![Release Version](https://img.shields.io/badge/version-v2.4.0--prod-06b6d4.svg)](https://github.com/iwfarr/wavebound-playbook)
+[![Build Status](https://img.shields.io/badge/build-passing-emerald.svg)](https://github.com/iwfarr/wavebound-playbook/actions)
+[![GitHub Pages](https://img.shields.io/badge/deploy-GitHub%20Pages-blue.svg)](https://iwfarr.github.io/wavebound-playbook/)
 [![License](https://img.shields.io/badge/license-MIT-purple.svg)](LICENSE)
 
 
@@ -16,8 +16,8 @@ See [branding notes](docs/branding.md) for retained technical identifiers, deplo
 
 ## 🌐 Live Platform & Documentation
 
-- **Interactive Public Site**: [https://iwfarr.github.io/seawater-playbook/](https://iwfarr.github.io/seawater-playbook/)
-- **GitHub Repository**: [https://github.com/iwfarr/seawater-playbook](https://github.com/iwfarr/seawater-playbook)
+- **Interactive Public Site**: [https://iwfarr.github.io/wavebound-playbook/](https://iwfarr.github.io/wavebound-playbook/)
+- **GitHub Repository**: [https://github.com/iwfarr/wavebound-playbook](https://github.com/iwfarr/wavebound-playbook)
 - **SDC & Low-Count Methods Guide**: See [docs/statistical_disclosure_control_guide.md](docs/statistical_disclosure_control_guide.md) for small cell disclosure controls and sparse data methodologies.
 - **Deployment Guide**: See [deploy_instructions.md](deploy_instructions.md) for step-by-step GitHub Pages instructions.
 - **Implementation Guide**: See [policy-as-code/README.md](policy-as-code/README.md) for production cluster integration patterns.
@@ -138,7 +138,7 @@ Project Wavebound incorporates and formalizes requirements from:
 - **📥 Clone (Recommended for Local Use & Training)**:
   - **Why**: Download the entire codebase, interactive Policy Sandbox, Knowledge Graph visualizer, and test suites to your local workstation.
   - **Best for**: Running internal Information Governance training workshops, evaluating policy-as-code locally without internet access, or running the compliance quiz with research teams.
-  - **How**: Run `git clone https://github.com/iwfarr/seawater-playbook.git && cd seawater-playbook && npm install && npm run dev`.
+  - **How**: Run `git clone https://github.com/iwfarr/wavebound-playbook.git && cd wavebound-playbook && npm install && npm run dev`.
 
 - **🌿 Branch (Recommended for Policy Experimentation & Contributions)**:
   - **Why**: Create isolated git branches to experiment with new SHACL shapes, custom OPA Rego rules, or specialized cohort linkage ontologies.
@@ -161,8 +161,8 @@ Project Wavebound incorporates and formalizes requirements from:
 ### Setup & Run
 ```bash
 # 1. Clone the repository
-git clone https://github.com/iwfarr/seawater-playbook.git
-cd seawater-playbook
+git clone https://github.com/iwfarr/wavebound-playbook.git
+cd wavebound-playbook
 
 # 2. Install dependencies
 npm install
