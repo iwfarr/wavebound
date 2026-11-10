@@ -587,6 +587,21 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
               </div>
             )}
 
+            {/* External Reference Link */}
+            {activeTerm.externalUrl && (
+              <div className="pt-2">
+                <a
+                  href={activeTerm.externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-sky-50 dark:bg-sky-950/60 hover:bg-sky-100 dark:hover:bg-sky-900/60 text-[#005EB8] dark:text-sky-300 border border-sky-200 dark:border-sky-800 text-xs font-semibold transition-colors shadow-xs"
+                >
+                  <ExternalLink className="w-3.5 h-3.5 text-[#005EB8] dark:text-sky-400" />
+                  <span>Authoritative Guidance</span>
+                </a>
+              </div>
+            )}
+
             {/* Related Concepts */}
             {activeTerm.relatedTerms && activeTerm.relatedTerms.length > 0 && (
               <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
@@ -695,17 +710,33 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                         {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                       </button>
 
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setModalTerm(term);
-                          recordGlossaryTermView(term.id);
-                        }}
-                        className="text-[10px] font-mono text-slate-600 dark:text-slate-400 hover:text-slate-900 bg-slate-50 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700 flex items-center gap-1 cursor-pointer"
-                      >
-                        <BookOpen className="w-3 h-3 text-[#005EB8]" />
-                        <span>Focused Sheet</span>
-                      </button>
+                      <div className="flex items-center gap-1.5">
+                        {term.externalUrl && (
+                          <a
+                            href={term.externalUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="text-[10px] font-mono text-cyan-700 dark:text-cyan-400 hover:text-cyan-900 bg-cyan-50 dark:bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-200 dark:border-cyan-800 flex items-center gap-1"
+                            title="Open external standard / guidance"
+                          >
+                            <ExternalLink className="w-3 h-3" />
+                            <span>Guide</span>
+                          </a>
+                        )}
+
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setModalTerm(term);
+                            recordGlossaryTermView(term.id);
+                          }}
+                          className="text-[10px] font-mono text-slate-600 dark:text-slate-400 hover:text-slate-900 bg-slate-50 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700 flex items-center gap-1 cursor-pointer"
+                        >
+                          <BookOpen className="w-3 h-3 text-[#005EB8]" />
+                          <span>Focused Sheet</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
 

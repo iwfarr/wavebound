@@ -209,7 +209,7 @@ allow {
             iso27001_certified: true
           },
           researcher: {
-            name: "Dr. Alistair Finch",
+            name: "Accredited Researcher [Example]",
             dea_researcher_id: "UKSA-RES-9481",
             has_safe_researcher_cert: true
           },
@@ -231,7 +231,7 @@ allow {
             iso27001_certified: false
           },
           researcher: {
-            name: "Dr. Alistair Finch",
+            name: "Accredited Researcher [Example]",
             dea_researcher_id: "UKSA-RES-EXPIRED",
             has_safe_researcher_cert: false
           },
@@ -494,7 +494,7 @@ allow {
         sampleCompliantInput: {
           request_type: "break_glass_admission",
           clinician: {
-            name: "Dr. Eleanor Vance",
+            name: "Senior Consultant [Example]",
             gmc_number: "7482910",
             is_senior_consultant: true
           },
@@ -515,7 +515,7 @@ allow {
         sampleViolatingInput: {
           request_type: "break_glass_admission",
           clinician: {
-            name: "Dr. Eleanor Vance",
+            name: "Senior Consultant [Example]",
             gmc_number: "7482910",
             is_senior_consultant: false
           },
@@ -703,8 +703,8 @@ allow {
         sampleCompliantInput: {
           request_type: "clinical_algorithm_egress",
           clinical_safety: {
-            cso_name: "Dr. Mark Robinson, FRCR (CSO)",
-            cso_registration: "GMC-6192840",
+            cso_name: "Designated Clinical Safety Officer (CSO) [Example Role]",
+            cso_registration: "GMC-123456",
             cso_signoff_valid: true,
             hazard_log_max_index: 2,
             safety_case_version: "2.1-RELEASE"
@@ -790,7 +790,7 @@ allow {
       sampleCompliantInput: {
         request_type: "workspace_admission",
         researcher: {
-          name: "Dr. Marcus Brody",
+          name: "Accredited Researcher [Example Role]",
           accreditation_valid: true
         },
         project: {

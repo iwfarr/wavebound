@@ -591,5 +591,43 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     playbookRelevance: 'Guides Phase 1 and 2 semantic data profiling, ensuring datasets meet quality thresholds before training sensitive health intelligence algorithms.',
     citation: 'ISO/IEC 5259-1:2024. Artificial intelligence - Data quality for analytics and machine learning (ML). Geneva: ISO; 2024.',
     tags: ['ISO 5259', 'ISO 22989', 'Data Quality', 'Machine Learning', 'Data Governance']
+  },
+
+  // --- Authoritative Resources: AI & LLMs in NHS Healthcare ---
+  {
+    id: 'res-nhse-generative-ai',
+    title: 'NHS England Guidance: Using Generative AI in Health and Social Care',
+    organization: 'NHS England & Department of Health and Social Care (DHSC)',
+    category: 'AI Governance, Alignment & MCP Security',
+    url: 'https://www.england.nhs.uk/long-read/guidance-for-using-generative-ai-in-health-and-care/',
+    shortDesc: 'Official NHS England guidance establishing binding rules for generative AI and LLMs: strictly prohibits inputting confidential patient data or identifiable information (PID) into commercial, public, or uncontracted third-party AI tools (such as public ChatGPT, Claude, or GitHub Copilot on developer laptops). Mandates DSPT-accredited sovereign boundaries or certified in-enclave inference.',
+    playbookRelevance: 'Authoritative statutory baseline establishing that commercial cloud LLMs cannot process patient identifiable data outside a certified TRE/SDE boundary without explicit Section 251 CAG exemption and Article 28 data processing agreements.',
+    isStatutory: true,
+    citation: 'NHS England. Guidance for using generative AI in health and care. London: Transformation Directorate; 2024.',
+    tags: ['NHS Generative AI', 'Commercial LLMs', 'Patient Confidentiality', 'PID Prohibition', 'DSPT', 'Sovereignty']
+  },
+  {
+    id: 'res-ico-generative-ai',
+    title: 'ICO Guidance on Generative AI and Data Protection (Special Category Health Data)',
+    organization: 'Information Commissioner’s Office (ICO)',
+    category: 'AI Governance, Alignment & MCP Security',
+    url: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/',
+    shortDesc: 'Statutory guidance from the UK Data Protection Authority outlining purpose limitation, lawful basis under Article 6 & 9 for training or fine-tuning models on health data, the prohibition of unconsented secondary model training, and developer liability under UK GDPR.',
+    playbookRelevance: 'Mandates that third-party AI coding extensions (e.g. Copilot, Codex) that capture editor buffers, terminal logs, or SQL queries containing patient microdata constitute unauthorized international transfers and unlawful secondary processing.',
+    isStatutory: true,
+    citation: 'Information Commissioner’s Office. Guidance on AI and data protection. Wilmslow: ICO; 2024.',
+    tags: ['ICO', 'Generative AI', 'UK GDPR', 'Special Category Data', 'Article 9', 'Model Memorization']
+  },
+  {
+    id: 'res-ndg-ai-guidance',
+    title: 'National Data Guardian (NDG) Position: Artificial Intelligence and Patient Confidentiality',
+    organization: 'National Data Guardian for Health and Care',
+    category: 'AI Governance, Alignment & MCP Security',
+    url: 'https://www.gov.uk/government/organisations/national-data-guardian',
+    shortDesc: 'Authoritative guidance on applying the Eight Caldicott Principles to clinical AI systems: mandates that patient data must remain safe (Principle 7) and patients must not be surprised by how their data is analyzed or used in algorithmic pipelines (Principle 8: No Surprises).',
+    playbookRelevance: 'Reinforces the requirement that AI workloads operate strictly under named human Clinical Safety Officer (CSO) sponsorship, precluding autonomous patient data processing outside certified environments.',
+    isStatutory: true,
+    citation: 'National Data Guardian. Guidance on clinical AI, transparency and Caldicott stewardship. London: NDG; 2023.',
+    tags: ['Caldicott 8', 'NDG', 'Patient Trust', 'Clinical AI', 'Confidentiality', 'Human Sponsorship']
   }
 ];

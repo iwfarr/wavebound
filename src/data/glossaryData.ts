@@ -35,6 +35,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'A Trusted Research Environment (TRE), designated alongside Secure Data Environments (SDE) as modern data analysis & intelligence platforms across the NHS and UK health data space, provides remote virtual access to health and administrative microdata under strict, auditable governance controls. Rather than sending data out to researchers, the platform brings researchers and their approved code into a locked digital facility adhering to the Five Safes framework and statutory accreditation standards.',
     playbookContext: 'The core operational subject of this playbook, which specifies a graph-based policy-as-code automation platform for managing data analysis & intelligence platforms such as TREs and SDEs.',
     playbookSection: 'Section 1. Project Overview & Objectives',
+    furtherResourceId: 'res-satre-spec',
+    externalUrl: 'https://satre-specification.readthedocs.io/',
     relatedTerms: ['five-safes', 'satre', 'pac', 'safe-setting']
   },
   {
@@ -45,6 +47,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'Originally developed by the UK Office for National Statistics (ONS), the Five Safes framework breaks clinical data governance into five clear, interdependent dimensions: Safe People (accredited researchers with IG training), Safe Projects (ethics-approved research protocols), Safe Settings (hardened, egress-isolated enclaves), Safe Data (de-identified tiered datasets), and Safe Outputs (disclosure-controlled findings).',
     playbookContext: 'Formalized as the core OWL 2 class hierarchy in ontology/tre-core.ttl.',
     playbookSection: 'Section 1 & Section 3 (Phase 1)',
+    furtherResourceId: 'res-sdap-handbook',
+    externalUrl: 'https://blog.ons.gov.uk/2017/01/27/the-five-safes-data-privacy-at-ons/',
     relatedTerms: ['safe-person', 'safe-project', 'safe-setting', 'safe-data', 'safe-output']
   },
   {
@@ -55,6 +59,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'Ensures that only accredited researchers who have verified employment with an accredited institution, signed user agreements, and completed mandatory annual Information Governance (IG) certifications are granted access to clinical data tiers.',
     playbookContext: 'Modeled in tre-core.ttl and validated in access-shapes.ttl via `sh:minCount 1` and `tre:hasValidIGCertification true`.',
     playbookSection: 'Section 2 & Section 3 (Phase 1)',
+    furtherResourceId: 'res-uksa-tre-sop',
+    externalUrl: 'https://uksa.statisticsauthority.gov.uk/digitaleconomyact-research-provider-accreditation/',
     relatedTerms: ['five-safes', 'caldicott']
   },
   {
@@ -65,6 +71,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'A governance dimension verifying that the research protocol has undergone independent ethical review by an accredited Research Ethics Committee (REC), has a lawful processing basis under UK GDPR, and holds Section 251 exemption where consent is impracticable.',
     playbookContext: 'Modeled in tre-core.ttl and governance_core.ttl as an ethics approval constraint.',
     playbookSection: 'Section 2 & Section 3 (Phase 1)',
+    furtherResourceId: 'res-hra-iras-ig-guide',
+    externalUrl: 'https://www.hra.nhs.uk/planning-and-improving-research/policies-standards-legislation/research-ethics-committees/',
     relatedTerms: ['five-safes', 's251', 'rec-hra']
   },
   {
@@ -75,6 +83,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'The technological enclave where researcher pods, databases, and analytics engines run. Network egress is blocked at the subnet and firewall layer to prevent unauthorized data exfiltration, and file movement is restricted to airlocks.',
     playbookContext: 'Enforced through SHACL access-shapes.ttl (`tre:enclaveEgressBlocked true`) and OPA Rego rules.',
     playbookSection: 'Section 2 & Section 3 (Phase 1 & 4)',
+    furtherResourceId: 'res-satre-spec',
+    externalUrl: 'https://satre-specification.readthedocs.io/en/latest/',
     relatedTerms: ['five-safes', 'pep', 'rego', 'airlock']
   },
   {
@@ -85,6 +95,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'Structured data management where clinical tables have direct identifiers permanently removed and are partitioned into hospital operational tiers matching project clearance. Researchers are granted access only to the minimal necessary columns and rows.',
     playbookContext: 'Modeled in governance_core.ttl and mapped to clinical hospital tiers.',
     playbookSection: 'Section 2 & Section 3 (Phase 1)',
+    furtherResourceId: 'res-statbarn',
+    externalUrl: 'https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts/disclosurecontrol',
     relatedTerms: ['five-safes', 'sdc', 'k-anonymity']
   },
   {
@@ -95,6 +107,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'The final barrier ensuring that all analytical artifacts, regression models, summary tables, and visualizations satisfy quantitative disclosure thresholds ($k \\ge 10$, dominance $\\le 80\%$) before leaving the airlock.',
     playbookContext: 'Formalized in ontology/sdc_rules.ttl and enforced via sdc_shapes.ttl and compiled Rego airlock rules.',
     playbookSection: 'Section 1 & Section 3 (Phase 1 & 4)',
+    furtherResourceId: 'res-sdap-handbook',
+    externalUrl: 'https://sdap.org.uk/',
     relatedTerms: ['sdc', 'primary-suppression', 'dominance-rule', 'airlock']
   },
   {
@@ -105,6 +119,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'Established by Dame Fiona Caldicott, these principles mandate: (1) Justify the purpose, (2) Do not use personal confidential data unless absolutely necessary, (3) Use the minimum necessary personal confidential data, (4) Access to personal confidential data should be on a strict need-to-know basis, (5) Everyone with access to personal confidential data should be aware of their responsibilities, (6) Understand and comply with the law, (7) The duty to share information for individual care is as important as the duty to protect confidentiality, and (8) Inform patients and service users about how their confidential information is used.',
     playbookContext: 'Embedded into ontology/tre-core.ttl as class annotations, access criteria, and researcher training checks.',
     playbookSection: 'Section 1 & Section 2',
+    furtherResourceId: 'res-ndg-ai-guidance',
+    externalUrl: 'https://www.gov.uk/government/organisations/national-data-guardian',
     relatedTerms: ['s251', 'five-safes', 'tre']
   },
   {
@@ -115,6 +131,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'Granted by the Health Research Authority (HRA) on advice from the Confidentiality Advisory Group (CAG), Section 251 permits confidential patient data to be processed for essential medical research when obtaining direct consent is not feasible and the study provides significant public benefit.',
     playbookContext: 'Modeled in governance_core.ttl as an explicit legal basis for accessing Tier 3 clinical data.',
     playbookSection: 'Section 2 & Section 3 (Phase 1)',
+    furtherResourceId: 'res-nhs-s251',
+    externalUrl: 'https://www.hra.nhs.uk/approvals-amendments/what-approvals-do-i-need/confidentiality-advisory-group/',
     relatedTerms: ['caldicott', 'safe-project', 'safe-data', 'rec-hra']
   },
   {
@@ -126,6 +144,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'Part 5, Chapter 5 of the Digital Economy Act 2017 provides a statutory mechanism for UK public authorities to share non-identifying data for approved research projects that serve the public interest. Overseen by the UK Statistics Authority and the Research Accreditation Panel (RAP), it sets high legal standards, severe criminal penalties for unlawful re-identification or disclosure under Section 67, and mandates accredited safe settings.',
     playbookContext: 'Formalized in ontology/governance_core.ttl as a first-class legal gateway alongside NHS s251 and DPA 2018 Section 19.',
     playbookSection: 'Section 2 & Section 3 (Phase 1)',
+    furtherResourceId: 'res-dea-2017',
+    externalUrl: 'https://www.legislation.gov.uk/ukpga/2017/30/part/5/chapter/5',
     relatedTerms: ['rap-uksa', 'dea-accredited-researcher', 'dea-accredited-processor', 'five-safes', 'safe-project']
   },
   {
@@ -137,6 +157,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'The independent statutory body established under Section 70 of the Digital Economy Act 2017. RAP is responsible for accrediting researchers, evaluating project public benefit and methodology, and accrediting secure data processing facilities (TREs).',
     playbookContext: 'Represented in access-shapes.ttl as `tre:accreditedByRAP true` to validate project and institutional eligibility for public data linkages.',
     playbookSection: 'Section 2 & Section 3 (Phase 1)',
+    furtherResourceId: 'res-uksa-code-practice',
+    externalUrl: 'https://uksa.statisticsauthority.gov.uk/digitaleconomyact/research-code-of-practice-and-accreditation-criteria/',
     relatedTerms: ['dea-2017', 'dea-accredited-researcher', 'dea-accredited-processor', 'safe-project']
   },
   {
@@ -148,6 +170,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'An individual certified under the UK Statistics Authority Research Accreditation Framework. Researchers must demonstrate qualifications, complete UKSA Safe Researcher Training, verify employer sponsorship, and sign legally binding commitments subject to statutory penalties for data misuse.',
     playbookContext: 'Directly mapped to the Safe Person verification shape (`tre:hasAccreditedResearcher`) in access-shapes.ttl.',
     playbookSection: 'Section 2 & Section 3 (Phase 1)',
+    furtherResourceId: 'res-uksa-accreditation-policy',
+    externalUrl: 'https://uksa.statisticsauthority.gov.uk/digitaleconomyact/researchers/',
     relatedTerms: ['safe-person', 'dea-2017', 'rap-uksa', 'five-safes']
   },
   {
@@ -159,6 +183,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'An organization or technological platform formally accredited by the UK Statistics Authority to prepare, link, store, or provide access to de-identified data. Requires verified compliance with ISO 27001, NHS DSPT, airlock egress controls, and full audit logging.',
     playbookContext: 'Corresponds to the `tre:SecureEnclave` and `tre:AirlockGate` classes verified by Wavebound admission webhooks and egress controllers.',
     playbookSection: 'Section 2 & Section 3 (Phase 1 & 4)',
+    furtherResourceId: 'res-uksa-tre-sop',
+    externalUrl: 'https://s42615.pcdn.co/wp-content/uploads/Accreditation-of-a-Trusted-Research-Environment-standard-operating-procedure-V1.4-1.pdf',
     relatedTerms: ['tre', 'safe-setting', 'dea-2017', 'satre', 'airlock']
   },
   {
@@ -170,6 +196,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'The Health Research Authority (HRA) and its network of Research Ethics Committees (RECs) review research protocols involving NHS patients or their data. An active, unexpired REC approval letter is a mandatory prerequisite for creating any project in the TRE.',
     playbookContext: 'Enforced via `tre:hasEthicsApproval true` in `ontology/shapes/access-shapes.ttl`.',
     playbookSection: 'Section 2 & Section 3 (Phase 1 & 2)',
+    furtherResourceId: 'res-hra-criteria-5-1',
+    externalUrl: 'https://www.hra.nhs.uk/planning-and-improving-research/policies-standards-legislation/data-protection-and-information-governance/',
     relatedTerms: ['safe-project', 's251']
   },
   {
@@ -206,6 +234,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       'Only aggregated mathematical parameters or privacy-preserved model updates travel across nodes.',
       'Unified Policy-as-Code enforcement across all participating federated environments.'
     ],
+    furtherResourceId: 'res-hdr-gateway',
+    externalUrl: 'https://healthdatagateway.org/en',
     relatedTerms: ['tre', 'vde', 'dcr', 'safe-setting', 'sdc']
   },
   {
@@ -216,6 +246,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'Under the UK General Data Protection Regulation and Data Protection Act 2018, health data constitutes special category data. TRE research typically relies on Article 6(1)(e) (public task) and Article 9(2)(j) (archiving and research in the public interest, subject to technical and organizational safeguards).',
     playbookContext: 'Documented in `governance_core.ttl` and synthesized into the FOI Governance Charter.',
     playbookSection: 'Section 1 & Section 3 (Phase 1 & 3)',
+    furtherResourceId: 'res-dpa-2018',
+    externalUrl: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/',
     relatedTerms: ['caldicott', 's251', 'foi']
   },
   {
@@ -227,6 +259,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'The Standard Architecture for Trusted Research Environments (SATRE) provides a comprehensive specification spanning four foundational pillars: Information Governance, Computing Infrastructure, Data Management, and Software Operations.',
     playbookContext: 'The project aligns its core ontology definitions and repo architecture with SATRE pillars.',
     playbookSection: 'Section 1 & Section 3 (Phase 1)',
+    furtherResourceId: 'res-satre-spec',
+    externalUrl: 'https://satre-specification.readthedocs.io/',
     relatedTerms: ['tre', 'caldicott', 'five-safes']
   },
   {
@@ -238,6 +272,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'Public transparency reports generated by `compiler/generate_docs.py` into `GOVERNANCE_CHARTER.md`, ensuring clinical data governance remains transparent to patients, auditors, clinicians, and journalists under the Freedom of Information Act 2000.',
     playbookContext: 'Generated in Phase 3 via `python compiler/generate_docs.py`.',
     playbookSection: 'Section 2 & Section 3 (Phase 3)',
+    externalUrl: 'https://ico.org.uk/for-organisations/foi-guidance-and-resources/',
     relatedTerms: ['pac', 'caldicott']
   },
 
@@ -251,6 +286,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'Policy-as-Code translates human governance charters into version-controlled declarative code. In this project, high-level OWL 2 ontologies authored by clinical governance teams are validated via SHACL and compiled into OPA Rego policies for real-time automated enforcement.',
     playbookContext: 'The core methodology of this playbook, bridging clinical governance with low-latency Kubernetes and API gateway enforcement.',
     playbookSection: 'Section 1 & Section 2',
+    externalUrl: 'https://www.openpolicyagent.org/docs/latest/',
     relatedTerms: ['rego', 'opa', 'shacl', 'owl2']
   },
   {
@@ -262,6 +298,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'OWL 2 provides semantic transparency and rich domain modeling, allowing clinical governance teams, data stewards, and auditors to inspect access hierarchies and data relationships in machine-readable format.',
     playbookContext: 'Used in `tre-core.ttl` and `governance_core.ttl` to author the TRE domain ontology.',
     playbookSection: 'Section 1 & Section 2',
+    externalUrl: 'https://www.w3.org/TR/owl2-overview/',
     exampleSnippet: `tre:SafePerson a owl:Class ;
     rdfs:subClassOf tre:FiveSafesDimension .`,
     relatedTerms: ['rdf', 'turtle', 'owa', 'shacl']
@@ -275,6 +312,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'The foundational W3C semantic data model used to express entity relationships in the form of triples (e.g. `Researcher -> hasAccreditation -> True`).',
     playbookContext: 'Forms the underlying graph data structure for all policy and governance definitions in the platform.',
     playbookSection: 'Section 1 & Section 2',
+    externalUrl: 'https://www.w3.org/RDF/',
     relatedTerms: ['owl2', 'turtle', 'provo']
   },
   {
@@ -286,6 +324,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'Turtle (Terse RDF Triple Language) provides an intuitive prefix-based format for writing RDF graphs, widely preferred over verbose XML representations.',
     playbookContext: 'All ontology and shape definitions in `ontology/*.ttl` and test fixtures in `tests/fixtures/*.ttl` are written in Turtle.',
     playbookSection: 'Section 2 (Repository Structure)',
+    externalUrl: 'https://www.w3.org/TR/turtle/',
     relatedTerms: ['rdf', 'owl2']
   },
   {
@@ -296,6 +335,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'JSON for Linking Data (JSON-LD) serializes RDF graph triples into structured JSON objects. It enables frontend applications (such as Cytoscape.js) and search engines to consume semantic data seamlessly.',
     playbookContext: 'Generated by `compiler/build_graph.py` from RDF/OWL files for ingestion into the Cytoscape web explorer.',
     playbookSection: 'Section 2 (compiler/build_graph.py)',
+    externalUrl: 'https://www.w3.org/TR/json-ld/',
     relatedTerms: ['rdf', 'cytoscape']
   },
   {
@@ -329,6 +369,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'SHACL defines structural rules (NodeShapes and PropertyShapes) that test RDF data for cardinality, datatypes, values, and closed-world constraints, producing standard validation reports.',
     playbookContext: 'Used in `ontology/shapes/access-shapes.ttl` and `sdc_shapes.ttl` to validate workspace sessions and export artifacts.',
     playbookSection: 'Section 2 & Section 3 (Phase 2)',
+    externalUrl: 'https://www.w3.org/TR/shacl/',
     exampleSnippet: `tre:WorkspaceAdmissionShape a sh:NodeShape ;
     sh:targetClass tre:WorkspaceSession ;
     sh:property [
@@ -345,6 +386,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'In SHACL, a `sh:NodeShape` targets specific graph nodes (e.g. `sh:targetClass tre:WorkspaceSession`) and binds property constraints that the node must satisfy to pass validation.',
     playbookContext: 'Used in `access-shapes.ttl` (`tre:WorkspaceAdmissionShape`) and `sdc_shapes.ttl` (`tre:AirlockOutputShape`).',
     playbookSection: 'Section 2 & Section 3 (Phase 2)',
+    externalUrl: 'https://www.w3.org/TR/shacl/#node-shapes',
     relatedTerms: ['shacl', 'propertyshape']
   },
   {
@@ -355,6 +397,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'Specifies cardinality (`sh:minCount`, `sh:maxCount`), datatype (`sh:datatype xsd:integer`), numeric bounds (`sh:minInclusive 10`), or value constraints (`sh:hasValue true`) for a given RDF predicate.',
     playbookContext: 'Used to enforce primary suppression (`sh:minInclusive 10`) and dominance (`sh:maxInclusive 0.80`).',
     playbookSection: 'Section 2 & Section 3 (Phase 2)',
+    externalUrl: 'https://www.w3.org/TR/shacl/#property-shapes',
     relatedTerms: ['shacl', 'nodeshape']
   },
 
@@ -368,6 +411,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'OPA decouples policy decisions from application code. In this architecture, OPA acts as the high-speed Policy Decision Point (PDP) evaluating admission reviews and airlock requests against compiled Rego files.',
     playbookContext: 'Target runtime engine located in `security/opa/policy.rego` and `authz.rego`.',
     playbookSection: 'Section 1, Section 2 & Section 3 (Phase 4)',
+    externalUrl: 'https://www.openpolicyagent.org/',
     relatedTerms: ['rego', 'pep', 'pdp']
   },
   {
@@ -378,6 +422,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     fullDefinition: 'Rego allows policies to be evaluated against JSON request payloads in microseconds. In this playbook, semantic Turtle rules and SDC mathematical thresholds are compiled into Rego by `compiler/rdf_to_rego.py`.',
     playbookContext: 'Written in `security/opa/policy.rego` and `authz.rego`.',
     playbookSection: 'Section 1, Section 2 & Section 3 (Phase 4)',
+    externalUrl: 'https://www.openpolicyagent.org/docs/latest/policy-language/',
     exampleSnippet: `package tre.authz
 default allow = false
 allow {
@@ -395,6 +440,7 @@ allow {
     fullDefinition: 'PEPs guard entry and exit points. When a researcher creates a compute pod or requests file egress, the PEP intercepts the request and submits it to OPA for an authorization verdict.',
     playbookContext: 'Implemented in Phase 4 for Kubernetes workspace admission and network airlock egress interception.',
     playbookSection: 'Section 3 (Phase 4: Policy Enforcement Points)',
+    externalUrl: 'https://csrc.nist.gov/glossary/term/policy_enforcement_point',
     relatedTerms: ['pdp', 'opa', 'safe-setting', 'k8s-admission']
   },
   {
@@ -406,6 +452,7 @@ allow {
     fullDefinition: 'Decoupled from enforcement points, the PDP ingests context (user role, project status, cell counts) and runs compiled Rego rules to return a boolean verdict and violation reasons.',
     playbookContext: 'Provided by the OPA server running `security/opa/authz.rego`.',
     playbookSection: 'Section 3 (Phase 4)',
+    externalUrl: 'https://csrc.nist.gov/glossary/term/policy_decision_point',
     relatedTerms: ['pep', 'opa', 'rego']
   },
   {
@@ -416,6 +463,7 @@ allow {
     fullDefinition: 'Operates as a Policy Enforcement Point (PEP) within scoped research namespaces (e.g., research-sandbox) under least-privilege RBAC. It avoids fragile cluster-wide blocking webhooks by using an audit-and-alert pattern (`failurePolicy: Ignore`), logging any policy discrepancies for IG committee review without risking cluster instability.',
     playbookContext: 'Audits workspace provisioning requests in Phase 4.',
     playbookSection: 'Section 3 (Phase 4: Workspace Admission)',
+    externalUrl: 'https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/',
     relatedTerms: ['pep', 'opa', 'rego', 'least-privilege']
   },
   {
@@ -426,6 +474,8 @@ allow {
     fullDefinition: 'The airlock is the sole mechanism through which code, tables, and reports can be exported outside the TRE. All exports undergo automated Statistical Disclosure Control (SDC) shape validation followed by independent human airlock reviewer sign-off.',
     playbookContext: 'Automated via `sdc_shapes.ttl` and `compiler/rdf_to_rego.py` in Phase 4.',
     playbookSection: 'Section 3 (Phase 4: Network & Egress Controls)',
+    furtherResourceId: 'res-statbarn',
+    externalUrl: 'https://outputchecking.org/',
     relatedTerms: ['safe-output', 'sdc', 'primary-suppression']
   },
   {
@@ -436,6 +486,8 @@ allow {
     fullDefinition: 'Ensures that researcher virtual machines and containers cannot open outbound TCP/UDP connections to public internet hosts, preventing accidental or intentional exfiltration of microdata.',
     playbookContext: 'Enforced via `tre:enclaveEgressBlocked true` in access-shapes.ttl and Rego.',
     playbookSection: 'Section 1 & Section 3 (Phase 1)',
+    furtherResourceId: 'res-satre-spec',
+    externalUrl: 'https://satre-specification.readthedocs.io/',
     relatedTerms: ['safe-setting', 'airlock']
   },
 
@@ -449,6 +501,8 @@ allow {
     fullDefinition: 'A formal discipline of privacy-preserving computation that evaluates and transforms analytical outputs (tables, model weights, graphs, survival curves) to prevent identity, attribute, and inferential disclosure. SDC operates on the fundamental principle that merely removing direct identifiers (names, addresses) does NOT render person-level data anonymous.',
     playbookContext: 'Defined in `ontology/sdc_rules.ttl` as machine-enforceable thresholds and compiled into automated airlock checks.',
     playbookSection: 'Phase 3 (Section 3.xx) & Phase 4 (Section 4.xx)',
+    furtherResourceId: 'res-ons-srs-guidance',
+    externalUrl: 'https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts/disclosurecontrol',
     exampleSnippet: `# Common SDC Rules & Analytical Applications Matrix:
 1. Primary Cell Suppression: k >= 10 (or k >= 5). Any count between 1 and k-1 is suppressed.
 2. Dominance / (n, k) Rule: Top 1 contributor <= 50%, top 2 contributors <= 80% of aggregate sum.
@@ -466,6 +520,8 @@ allow {
     fullDefinition: 'Indirect identifying variables (including appointment timestamps, hospital admission/discharge dates, birth year/month, partial postcode districts e.g. SW1A, sex, ethnicity, and rare clinical diagnosis codes). Sweeney’s landmark theorem demonstrated that 87% of the US/UK population is uniquely identifiable by just 5-digit ZIP code/postcode, gender, and date of birth. In healthcare research, removing patient names does not confer true anonymity: linking multiple quasi-identifiers against voter registries, local news, or obituary notices can immediately re-identify patients. Under UK GDPR and Caldicott Principle 1, such row-level datasets remain confidential personal data requiring strict airlock suppression, k-anonymity grouping, and AST scrubbing.',
     playbookContext: 'Enforced through strict tiering in governance_core.ttl, SHACL validation in sdc_shapes.ttl, and pre-prompt AST scrubbing for LLM queries.',
     playbookSection: 'Phase 1 (Section 1.xx) & Phase 3 (Section 3.xx)',
+    furtherResourceId: 'res-ico-anonymisation',
+    externalUrl: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/anonymisation-code-of-practice/',
     exampleSnippet: `# Quasi-Identifier Linkage Risk Vector:
 # Patient Record: { Age: 54, Postcode: "PE21 8**", Appt: "2024-03-12 14:30", Diagnosis: "E11.9" }
 # External Gazette: "54-year-old local councilor hospitalized following road accident on March 12"
@@ -481,6 +537,8 @@ allow {
     fullDefinition: 'Under ONS and SAIL guidelines, if a frequency cell has a value between 1 and 9 ($k < 10$), releasing it poses high re-identification risk. The cell count must be replaced with an asterisk or combined with another category.',
     playbookContext: 'Enforced via `tre:minObservedCellCount >= 10` in `sdc_shapes.ttl` and `authz.rego`.',
     playbookSection: 'Section 3 (Phase 1: Quantitative SDC)',
+    furtherResourceId: 'res-sail-output-policy',
+    externalUrl: 'https://saildatabank.com/wp-content/uploads/2022/08/SAIL-POL-024-Output-Review-Policy-v1.2-3.pdf',
     exampleSnippet: `tre:minObservedCellCount sh:minInclusive 10 .`,
     relatedTerms: ['sdc', 'dominance-rule', 'k-anonymity', 'secondary-suppression']
   },
@@ -492,6 +550,8 @@ allow {
     fullDefinition: 'Also known as the $(n, k)$ rule or $(1, 80\%)$ rule. If a single clinical patient or clinic accounts for more than 80% of a total numerical value (e.g. drug costs or clinic visits), outsiders can deduce individual attributes.',
     playbookContext: 'Enforced via `tre:topContributorDominanceRatio <= 0.80` in `sdc_shapes.ttl`.',
     playbookSection: 'Section 1 & Section 3 (Phase 1)',
+    furtherResourceId: 'res-sail-output-policy',
+    externalUrl: 'https://saildatabank.com/wp-content/uploads/2022/08/SAIL-POL-024-Output-Review-Policy-v1.2-3.pdf',
     relatedTerms: ['sdc', 'primary-suppression']
   },
   {
@@ -502,6 +562,8 @@ allow {
     fullDefinition: 'If a row has a total of 50 and one cell with count 7 is primary suppressed (masked with *), an adversary can deduce 7 by subtracting the remaining cells from 50. Secondary suppression masks a second non-sensitive cell to preserve the mathematical uncertainty.',
     playbookContext: 'Crucial operational requirement cited in `sdc_rules.ttl` and airlock review procedures.',
     playbookSection: 'Section 2 (sdc_rules.ttl) & Section 3',
+    furtherResourceId: 'res-sdap-handbook',
+    externalUrl: 'https://outputchecking.org/',
     relatedTerms: ['sdc', 'primary-suppression']
   },
   {
@@ -512,6 +574,8 @@ allow {
     fullDefinition: 'A dataset satisfies $k$-anonymity if the quasi-identifiers (such as age, sex, postcode district) for each person are identical to at least $k-1$ other individuals in the dataset.',
     playbookContext: 'Cited in `sdc_rules.ttl` as a key foundation for tabular clinical output clearance.',
     playbookSection: 'Section 2 & Section 3 (Phase 1)',
+    furtherResourceId: 'res-statbarn',
+    externalUrl: 'https://outputchecking.org/',
     relatedTerms: ['sdc', 'primary-suppression', 'quasi-identifiers']
   },
   {
@@ -522,6 +586,8 @@ allow {
     fullDefinition: 'Authoritative clinical and public data governance bodies whose thresholds ($k \\ge 10$, dominance $\\le 80\%$, secondary suppression) form the basis of the quantitative rules in `sdc_rules.ttl`.',
     playbookContext: 'Referenced in `ontology/sdc_rules.ttl` as the authority for quantitative thresholds.',
     playbookSection: 'Section 2 & Section 3 (Phase 1)',
+    furtherResourceId: 'res-ons-srs-guidance',
+    externalUrl: 'https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts/disclosurecontrol',
     relatedTerms: ['sdc', 'primary-suppression', 'dominance-rule']
   },
 
@@ -534,6 +600,7 @@ allow {
     fullDefinition: 'The European Union artificial intelligence regulatory framework. In the TRE, analytical agent workloads are classified into risk tiers, imposing audit trails, human oversight, and data governance limits on high-risk clinical models.',
     playbookContext: 'Section 1 & Section 3 establish AI governance directly mapped to EU AI Act tiers in `agent_mcp.ttl`.',
     playbookSection: 'Section 1 & Section 3 (Phase 1)',
+    externalUrl: 'https://artificialintelligenceact.eu/',
     relatedTerms: ['mcp', 'agent-mcp']
   },
   {
@@ -545,6 +612,7 @@ allow {
     fullDefinition: 'Model Context Protocol defines structured JSON-RPC interfaces for agent tool invocation. In the TRE, MCP boundaries (`agent_mcp.ttl`) strictly govern what tools autonomous agents can call, capping rows and blocking external internet egress.',
     playbookContext: 'Defines autonomous agent boundaries (`mcp:ExecuteSQL`, `mcp:ExportSummary`) in `ontology/agent_mcp.ttl`.',
     playbookSection: 'Section 1, Section 2 & Section 3 (Phase 1)',
+    externalUrl: 'https://modelcontextprotocol.io/',
     exampleSnippet: `mcp:ExecuteSQLReadOnly a mcp:MCPTool ;
     mcp:allowedStatements "SELECT", "EXPLAIN" ;
     mcp:maxRowsReturned 500 .`,
@@ -558,6 +626,7 @@ allow {
     fullDefinition: 'Constrains autonomous agents to read-only queries (`SELECT`, `EXPLAIN`). Destructive DDL/DML statements (`DROP`, `ALTER`, `UPDATE`, `INSERT`, `TRUNCATE`) are structurally barred at the policy level.',
     playbookContext: 'Declared in `ontology/agent_mcp.ttl` and verified by OPA before query execution.',
     playbookSection: 'Section 2 & Section 3 (Phase 1)',
+    externalUrl: 'https://modelcontextprotocol.io/introduction',
     relatedTerms: ['mcp', 'eu-ai-act']
   },
   {
@@ -568,6 +637,7 @@ allow {
     fullDefinition: 'When an LLM agent generates an output table or summary, `mcp:ExportSummary` forces the candidate artifact through `sdc_shapes.ttl` before handoff to the human airlock reviewer.',
     playbookContext: 'Modeled in `ontology/agent_mcp.ttl`.',
     playbookSection: 'Section 2 & Section 3 (Phase 1 & 4)',
+    externalUrl: 'https://outputchecking.org/',
     relatedTerms: ['mcp', 'sdc', 'safe-output']
   },
 
@@ -581,6 +651,7 @@ allow {
     fullDefinition: 'PROV-O models who accessed what, when, and under which policy version. The TRE Policy-as-Code engine emits immutable PROV-O RDF triples on every workspace provisioning and airlock egress decision to an append-only audit ledger.',
     playbookContext: 'Emitted to an append-only audit ledger in Phase 4 for complete forensic provenance.',
     playbookSection: 'Section 3 (Phase 4: Audit Lineage)',
+    externalUrl: 'https://www.w3.org/TR/prov-o/',
     exampleSnippet: `tre:AdmissionEvent a prov:Activity ;
     prov:wasAssociatedWith tre:OPA_PDP ;
     prov:generated tre:AuthorizationDecision .`,
@@ -594,6 +665,7 @@ allow {
     fullDefinition: 'PySHACL is used in `tests/test_shapes.py` to evaluate test graph fixtures (`valid-session.ttl`, `noncompliant-session.ttl`) in CI before any code or policy is compiled for production.',
     playbookContext: 'Run via `pytest tests/test_shapes.py -v` during local development and GitHub Actions CI.',
     playbookSection: 'Section 2, Section 3 & Section 4',
+    externalUrl: 'https://github.com/RDFLib/pySHACL',
     relatedTerms: ['shacl', 'gitops']
   },
   {
@@ -604,6 +676,7 @@ allow {
     fullDefinition: 'Cytoscape.js renders the full OWL ontology, SHACL shapes, and MCP tool relationships as an interactive, draggable network diagram in the TRE dual-persona portal.',
     playbookContext: 'Used in `web/app.js` and generated by `compiler/build_graph.py` in Phase 3.',
     playbookSection: 'Section 1, Section 2 & Section 3 (Phase 3)',
+    externalUrl: 'https://js.cytoscape.org/',
     relatedTerms: ['owl2', 'tre', 'jsonld']
   },
   {
@@ -614,6 +687,7 @@ allow {
     fullDefinition: 'All changes to Turtle ontologies or SHACL shapes undergo version-controlled pull requests, automated PySHACL testing in `.github/workflows/ci.yml`, and automatic compilation into OPA Rego rules.',
     playbookContext: 'Established in Phase 1 and automated with the project `Makefile`.',
     playbookSection: 'Section 2 & Section 3 (Phase 1)',
+    externalUrl: 'https://www.opengitops.net/',
     relatedTerms: ['pyshacl', 'rego', 'pac']
   },
   {
@@ -624,6 +698,7 @@ allow {
     fullDefinition: 'Provides simple developer commands: `make install` (Python dependencies), `pytest tests/test_shapes.py -v` (SHACL tests), `python compiler/generate_docs.py` (FOI docs), `make build` (compiles to Rego and Cytoscape JSON), and `make serve` (local portal).',
     playbookContext: 'Documented in Section 4 of the playbook.',
     playbookSection: 'Section 4. Verification & Developer Workflow Commands',
+    externalUrl: 'https://www.gnu.org/software/make/',
     relatedTerms: ['gitops', 'pyshacl']
   },
 
@@ -637,6 +712,8 @@ allow {
     fullDefinition: 'Widely used across academic, census, and social sciences (e.g., ICPSR, NORC, US Census Bureau), a Virtual Data Enclave (VDE) prevents users from moving, printing, or copying data to outside workstations. A TRE or SDE is a specialized healthcare-grade evolution of the broader VDE paradigm with automated clinical governance and quantitative disclosure controls.',
     playbookContext: 'The overarching technical architectural pattern upon which Trusted Research Environments (TREs) and Secure Data Environments (SDEs) are founded.',
     playbookSection: 'Section 1. Project Overview & Objectives',
+    furtherResourceId: 'res-satre-spec',
+    externalUrl: 'https://satre-specification.readthedocs.io/',
     relatedTerms: ['tre', 'dcr', 'dsh', 'safe-setting']
   },
   {
@@ -648,6 +725,8 @@ allow {
     fullDefinition: 'Data Clean Rooms (DCRs) operate on cryptographic, federated, or differential privacy guarantees. Unlike open-ended research enclaves, clean rooms typically restrict interactions to predefined SQL aggregations, homomorphic operations, or machine learning model training without granting exploratory shell access to raw rows.',
     playbookContext: 'Related safe data enclave pattern increasingly used when NHS Trusts partner with pharmaceutical research or external health data providers.',
     playbookSection: 'Section 1. Project Overview & Objectives',
+    furtherResourceId: 'res-hdr-gateway',
+    externalUrl: 'https://healthdatagateway.org/en',
     relatedTerms: ['vde', 'tre', 'sdc']
   },
   {
@@ -659,6 +738,7 @@ allow {
     fullDefinition: 'Established in Scotland (e.g., Electronic Data Research and Innovation Service - eDRIS, and regional NHS Safe Havens), Data Safe Havens operate under the Scottish Health Informatics Programme (SHIP) charter and ISO 27001 standards, embodying the Five Safes framework.',
     playbookContext: 'The Scottish and regional NHS predecessor and counterpart to modern national Secure Data Environments (SDEs).',
     playbookSection: 'Section 1 & Section 3',
+    externalUrl: 'https://www.edris.scot.nhs.uk/',
     relatedTerms: ['tre', 'vde', 'five-safes']
   },
   {
@@ -670,6 +750,7 @@ allow {
     fullDefinition: 'Trusted Execution Environments (TEEs) extend enclave protection down to the physical silicon. While traditional TREs protect data at rest and in transit, Confidential Computing protects "data in use" by encrypting CPU memory registers, ensuring that even rogue cloud provider administrators cannot inspect decrypted patient records or model parameters.',
     playbookContext: 'Forms the underlying silicon-level enclave foundation for next-generation sovereign healthcare cloud enclaves.',
     playbookSection: 'Section 3 (Phase 1 & Phase 4: Computing Infrastructure)',
+    externalUrl: 'https://confidentialcomputing.io/',
     relatedTerms: ['safe-setting', 'zero-egress']
   },
 
@@ -733,11 +814,27 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'When commercial LLM APIs must be connected via private network interconnects (e.g., Azure OpenAI Private Endpoint, AWS Bedrock VPC Endpoint), Zero Data Retention (ZDR) guarantees that prompt buffers are processed strictly in transient RAM and discarded immediately. A Business Associate Agreement (BAA) and NHS Data Processing Addendum legally enforce these provisions.',
     playbookContext: 'Mandatory statutory and governance prerequisite in `governance_core.ttl` before approving any external cloud model adapter.',
     playbookSection: 'Section 1 & Section 3 (Phase 1)',
+    furtherResourceId: 'res-nhse-generative-ai',
+    externalUrl: 'https://www.england.nhs.uk/long-read/guidance-for-using-generative-ai-in-health-and-care/',
     relatedTerms: ['in-enclave-llm', 'llm-prompt-leakage', 'uk-gdpr']
+  },
+  {
+    id: 'nhs-generative-ai-policy',
+    term: 'NHS Generative AI & External Commercial LLM Guidance',
+    acronym: 'NHS GenAI Guidance',
+    category: 'AI & Autonomous Agents',
+    shortDefinition: 'Statutory NHS policy strictly prohibiting entering confidential patient data or identifiable microdata (PID/CPI) into commercial or consumer AI tools outside certified boundaries.',
+    fullDefinition: 'Joint guidance from NHS England and DHSC establishes that healthcare workers, data scientists, and developers must never enter patient identifiable data (PID) or confidential personal information into public or commercial generative AI tools (such as ChatGPT, Claude, GitHub Copilot, Cursor, or Codex) running on local laptops or public cloud infrastructure. Commercial AI models transmit active editor buffers, diagnostic logs, and prompts across external networks, which violates the Common Law Duty of Confidentiality and UK GDPR Art. 5, 6, and 9 without statutory Section 251 CAG clearance and formal Article 28 processing contracts. Compliant execution requires either air-gapped in-enclave open models (e.g. vLLM with Llama-3/DeepSeek) behind Calico zero-WAN policies, or accredited NHS Enterprise sovereign tenants with signed Zero Data Retention (ZDR) and BAA agreements.',
+    playbookContext: 'Fundamental governance foundation for LLM security enclaves: prevents accidental code editor leakage of patient records.',
+    playbookSection: 'Section 3 (Phase 3 AI Governance) & LLM Enclave Hub',
+    statutoryBasis: 'NHS England GenAI Guidance (2024); UK GDPR Art. 5(1)(f), 9 & 28; Common Law Duty of Confidentiality',
+    furtherResourceId: 'res-nhse-generative-ai',
+    externalUrl: 'https://www.england.nhs.uk/long-read/guidance-for-using-generative-ai-in-health-and-care/',
+    relatedTerms: ['in-enclave-llm', 'llm-prompt-leakage', 'zdr-baa', 'caldicott']
   },
   // --- Wavebound Problem Space & Flow Governance ---
   {
-    id: 'seawater-problem-space',
+    id: 'wavebound-problem-space',
     term: 'Wavebound Problem Space & Tidal Flow Model',
     acronym: 'Project Wavebound',
     category: 'Standards & Clinical Safety',
@@ -745,6 +842,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'Wavebound models clinical and genomic research as navigation through an active, continuous information governance problem space. Analytics workloads (ranging from exploratory query scripts to distributed foundation model pipelines) must navigate regulatory requirements, clinical governance channels, and patient confidentiality thresholds. The tide flows cyclically across two managed boundaries: Ingress and Egress. Ingress enforces gateway access controls, researcher accreditation, institutional identity verification, and Information Governance training (Safe People), alongside approved REC ethics protocols and Section 251 CAG exemptions (Safe Projects). Inbound clinical datasets, multi-omics records, and container workloads are verified at the boundary using W3C SHACL shape validation before admission. Egress regulates the export of derived analytical findings, statistical summaries, and model parameters, requiring automated Statistical Disclosure Control (SDC) checks, k-anonymity (k >= 10), and sub-millisecond Open Policy Agent (OPA) Rego policy evaluations to prevent patient re-identification.',
     playbookContext: 'The overarching architectural concept of Project Wavebound: transforming traditional manual governance into continuous, microsecond-latency policy-as-code navigation.',
     playbookSection: 'Section 0. Executive Summary & Problem Space',
+    furtherResourceId: 'res-satre-spec',
+    externalUrl: 'https://satre-specification.readthedocs.io/',
     relatedTerms: ['tre', 'five-safes', 'pac', 'shacl', 'opa']
   },
   // --- International Standards (ISO) & Clinical Safety (DCB) ---
@@ -757,6 +856,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'ISO/IEC 42001:2023 is the world’s first certifiable standard for AI management. Within data analysis & intelligence platforms such as TREs and SDEs, it provides the governance architecture for managing AI risks, algorithmic transparency, automated continuous monitoring, data provenance, and ethical accountability across predictive and generative AI lifecycles.',
     playbookContext: 'Directly mapped into Section 3 (Phase 3 AI Governance) and compiled into SHACL node shapes validating model risk classification and training data lineage.',
     playbookSection: 'Section 3. Implementation Phases (Phase 3: AI & Dual-Persona Enclave Governance)',
+    furtherResourceId: 'res-iso-42001',
+    externalUrl: 'https://www.iso.org/standard/81230.html',
     relatedTerms: ['eu-ai-act', 'iso-5259', 'dcb-0129-0160', 'samd-uk-mdr']
   },
   {
@@ -768,6 +869,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'ISO 13485 establishes strict quality management system (QMS) requirements for medical device design, risk control, software verification, and traceability. When research algorithms in data analysis & intelligence platforms transition toward clinical decision support or SaMD, compliance with ISO 13485 ensures reproducible pipelines, strict configuration management, and audited deployment controls.',
     playbookContext: 'Governs the transition of models trained in the platform into clinical trials or health technology deployments.',
     playbookSection: 'Section 3. Implementation Phases (Phase 3 & Phase 4)',
+    furtherResourceId: 'res-iso-13485',
+    externalUrl: 'https://www.iso.org/standard/59752.html',
     relatedTerms: ['iso-14971', 'samd-uk-mdr', 'dcb-0129-0160']
   },
   {
@@ -779,6 +882,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'ISO 14971 provides the formal methodology for identifying hazards, estimating clinical risks, evaluating risk acceptability, implementing risk control measures, and monitoring post-market effectiveness. In the context of Project Wavebound, it aligns with DCB0129 clinical hazard logs for models exiting the airlock.',
     playbookContext: 'Required risk management framework when evaluating egressed algorithms intended for clinical decision influence.',
     playbookSection: 'Section 3. Implementation Phases (Phase 4: Policy Compilation & Runtime Enforcement)',
+    furtherResourceId: 'res-iso-14971',
+    externalUrl: 'https://www.iso.org/standard/72704.html',
     relatedTerms: ['iso-13485', 'dcb-0129-0160', 'samd-uk-mdr']
   },
   {
@@ -884,6 +989,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'Software as a Medical Device (SaMD) encompasses software intended to be used for diagnostic or therapeutic purposes without being part of a hardware medical device. In the UK, SaMD is regulated by the Medicines and Healthcare products Regulatory Agency (MHRA) under the UK MDR 2002. Research models developed in data analysis & intelligence platforms that provide diagnostic or risk prediction outputs must be assessed against SaMD classification rules before clinical deployment.',
     playbookContext: 'Informed by the dual-persona governance model to separate exploratory research models from regulated clinical decision tools.',
     playbookSection: 'Section 3. Implementation Phases (Phase 3 & Phase 4)',
+    furtherResourceId: 'res-mhra-samd',
+    externalUrl: 'https://www.gov.uk/government/collections/medical-devices-software-applications-apps',
     relatedTerms: ['iso-13485', 'iso-14971', 'dcb-0129-0160', 'iso-42001']
   },
   {
@@ -895,6 +1002,7 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'ISO/IEC 5259 provides benchmark quality dimensions (including completeness, representativeness, bias minimization, and feature consistency) for datasets used in AI model training. Within data analysis & intelligence platforms, it establishes data ingestion quality gates that prevent downstream algorithmic drift and hallucination.',
     playbookContext: 'Modes of data quality verification encoded into SHACL shapes for safe data ingestion.',
     playbookSection: 'Section 2. Architecture: The Policy-as-Code Pipeline',
+    externalUrl: 'https://www.iso.org/standard/81230.html',
     relatedTerms: ['iso-42001', 'safe-data', 'owl2', 'shacl']
   },
   // --- Governance Maturity Model (Population Data & Epidemiology) ---
@@ -907,6 +1015,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'The Governance Maturity Model (GMM) provides population data organizations, health registries, and epidemiological research platforms with a structured path to evaluate and advance their Information Governance capabilities. The model defines five progressive tiers: Level 1 (Ad-hoc: fragmented files, bespoke permissions, manual approval bottlenecks); Level 2 (Repeatable: standardized Data Sharing Agreements and manual DPIAs); Level 3 (Defined: formal institutional baselines adhering to the Five Safes, Caldicott Principles, and SATRE specifications); Level 4 (Managed: automated policy-as-code enforcement, quantitative disclosure control, and real-time metric tracking); Level 5 (Optimizing: continuous semantic graph validation, W3C PROV-O audit trails, and automated regulatory drift adaptation).',
     playbookContext: 'Structures the 16-Week Implementation Track, allowing organizations to benchmark their transition toward Level 4 and Level 5 machine-executable governance.',
     playbookSection: 'Section 1. Project Overview & Implementation Track',
+    furtherResourceId: 'res-satre-spec',
+    externalUrl: 'https://satre-specification.readthedocs.io/',
     relatedTerms: ['data-stewardship', 'dpia', 'dsa', 'five-safes', 'pac']
   },
   {
@@ -918,6 +1028,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'A Data Protection Impact Assessment (DPIA) is a formal risk management process mandated under UK GDPR Article 35 and the Data Protection Act 2018 whenever processing is likely to result in a high risk to the rights and freedoms of individuals. In population data research and epidemiology, DPIAs systematically analyze: (1) the lawful basis for processing (e.g. Article 6(1)(e) public interest task and Article 9(2)(j) research exemption); (2) necessity and proportionality relative to research objectives; (3) measures to mitigate re-identification, longitudinal linkage, and inference risks; (4) privacy-enhancing technologies (PETs) deployed; and (5) formal consultation with the Data Protection Officer (DPO) and affected community representatives.',
     playbookContext: 'Formalized within governance ontologies and validated prior to cohort provisioning; serves as a prerequisite for Phase 1 baseline certification.',
     playbookSection: 'Section 1. Foundations & Statutory Compliance',
+    furtherResourceId: 'res-ico-lawful-basis',
+    externalUrl: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/',
     relatedTerms: ['dsa', 'data-stewardship', 'uk-gdpr', 'safe-project']
   },
   {
@@ -929,6 +1041,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'A Data Sharing Agreement (DSA), also referred to as a Data Transfer Agreement (DTA) or Information Sharing Agreement (ISA), is a legal instrument established between data controllers and processors before any multi-institutional population research commences. A compliant DSA defines: (1) the specific parties and their statutory controller/processor designations; (2) explicit purpose limitation strictly bounding analytical scope; (3) data categories, pseudonymization standards, and transmission security; (4) data retention horizons and secure destruction protocols; (5) intellectual property rights and publication clearances; and (6) breach notification SLAs and legal liability allocation.',
     playbookContext: 'Compiled into machine-readable shape constraints in tre-core.ttl to guarantee that only projects with signed, active DSAs can receive data partitions.',
     playbookSection: 'Section 1. Core Ontologies & Phase 1 Implementation',
+    furtherResourceId: 'res-ico-controllers-processors',
+    externalUrl: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/data-sharing-code-of-practice/',
     relatedTerms: ['dpia', 'data-stewardship', 'safe-project', 'purpose-limitation']
   },
   {
@@ -939,6 +1053,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'Data Stewardship represents the active management, governance, and ethical custodianship of population, administrative, and epidemiological data assets throughout their entire lifecycle. Unlike traditional IT administration, data stewards act as trusted fiduciaries for research participants and public authorities. Key responsibilities include maintaining FAIR (Findable, Accessible, Interoperable, Reusable) data standards, curating standardized semantic data dictionaries (OMOP CDM, ICD-10, SNOMED CT), ensuring data minimization at ingress, managing project-specific role assignments, and enforcing ethical boundary conditions.',
     playbookContext: 'Modeled in tre-core.ttl as tre:DataSteward, linking human custodians to W3C SHACL shape validation rules and access review gates.',
     playbookSection: 'Section 1.2 & Section 3.1',
+    furtherResourceId: 'res-hdr-gateway',
+    externalUrl: 'https://healthdatagateway.org/en',
     relatedTerms: ['governance-maturity-model', 'ethical-framework', 'dsa', 'five-safes']
   },
   {
@@ -949,6 +1065,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'The Ethical Framework for population and health research provides principles and decision heuristics for evaluating whether secondary data linkage and analysis are morally and socially justified. Anchored by the UNESCO Universal Declaration on Bioethics and Human Rights, the Belmont Report, and national data guardian principles, the framework evaluates four core pillars: (1) Beneficence (clear societal value, disease mitigation, or policy improvement); (2) Non-maleficence (robust mathematical safeguards preventing group stigma, discriminatory profiling, or re-identification); (3) Autonomy (respect for statutory opt-outs, transparent public registers, and citizen dialogue); and (4) Justice (fair distribution of research benefits across diverse population strata).',
     playbookContext: 'Integrated into the Playbook front matter and encoded into the governance graph to enforce public benefit criteria as machine-checkable preconditions.',
     playbookSection: 'Section 0. Executive Front Matter & Section 1.2',
+    furtherResourceId: 'res-ndg-ai-guidance',
+    externalUrl: 'https://www.gov.uk/government/organisations/national-data-guardian',
     relatedTerms: ['data-stewardship', 'caldicott', 'purpose-limitation', 'five-safes']
   },
   {
@@ -959,6 +1077,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'Longitudinal Cohort Linkage is the systematic process of connecting multiple datasets (such as birth cohorts, census returns, health encounters, educational attainment, and environmental exposures) for the same individuals across multi-decade observation periods. To maintain compliance with UK GDPR and the Digital Economy Act 2017, linkage protocols employ privacy-preserving record linkage (PPRL), deterministic cryptographic hash tokens (e.g. Salted HMAC-SHA256), and trusted third-party separation of identity from analytical attributes (the split-file model).',
     playbookContext: 'Encoded into SHACL ingress rules to verify that linkage tokens are irreversible and that row-level datasets cannot be joined without active ethical authorization.',
     playbookSection: 'Section 2. Architecture & Ingress Governance',
+    furtherResourceId: 'res-adruk-framework',
+    externalUrl: 'https://www.adruk.org/our-work/browse-all-projects/the-digital-economy-act-and-adr-uk/',
     relatedTerms: ['data-stewardship', 'quasi-identifiers', 'dea-2017']
   },
   {
@@ -969,6 +1089,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'Under UK GDPR Article 5(1)(b) and statutory research gateways, data collected for specific administrative, health, or statistical purposes must not be further processed in a manner incompatible with those legitimate purposes. Within data analysis & intelligence platforms, purpose limitation is enforced mechanically through container sandboxing, read-only data mounts, and automated query analysis. Any analytical workload attempting to join unauthorized tables, train unapproved models, or explore variables outside the declared protocol is flagged and aborted.',
     playbookContext: 'Directly enforced by OPA Rego admission webhooks that verify incoming query tokens against approved project claim graphs.',
     playbookSection: 'Section 1.1 & Section 3 (Phase 4)',
+    furtherResourceId: 'res-ico-lawful-basis',
+    externalUrl: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/',
     relatedTerms: ['ethical-framework', 'dsa', 'safe-project', 'opa']
   },
   {
@@ -980,6 +1102,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'A Trusted Data Intermediary (TDI), recognized under the EU Data Governance Act and the UK Data (Use and Access) legislative framework, is an impartial organization that operates sovereign linkage and identity resolution services between public data custodians and research platforms. TDIs perform pseudonymization, match key generation, and validation of research credentials while remaining legally and technologically barred from accessing either the underlying personal identifiers or the resulting research insights.',
     playbookContext: 'Reflected in the Wavebound architectural ingress tier to ensure independent, cryptographically audited data ingestion into secure enclaves.',
     playbookSection: 'Section 2. Architecture: The Policy-as-Code Pipeline',
+    furtherResourceId: 'res-hdr-gateway',
+    externalUrl: 'https://healthdatagateway.org/en',
     relatedTerms: ['data-stewardship', 'longitudinal-cohort-linkage', 'dea-2017', 'tre']
   },
   {
@@ -991,6 +1115,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'A Data Access Committee (DAC), often functioning alongside an Information Governance Review Panel (IGRP), serves as the institutional gatekeeper for population health cohorts and linked epidemiological registries. Comprising data stewards, Caldicott guardians, methodologists, public representatives, and legal advisers, the DAC evaluates: (1) whether the research question delivers tangible public health benefit; (2) whether the data requested is strictly minimized; (3) whether the analytical team holds requisite accreditations; and (4) whether the risk of deductive re-identification has been controlled. In a mature organization, DAC approvals produce cryptographically signed assertions that activate Policy Enforcement Points (PEPs) automatically.',
     playbookContext: 'Modeled in tre-core.ttl as tre:DataAccessCommittee, emitting decision assertions that unlock enclave workspace provisioning.',
     playbookSection: 'Section 1.1 & Section 1.2',
+    furtherResourceId: 'res-cag',
+    externalUrl: 'https://www.hra.nhs.uk/approvals-amendments/what-approvals-do-i-need/confidentiality-advisory-group/',
     relatedTerms: ['data-stewardship', 'dsa', 'dpia', 'caldicott']
   },
   {
@@ -1002,6 +1128,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'Mandated across public health, social care, and population research organizations in the UK, the Caldicott Guardian acts as the conscience of the organization regarding the handling of confidential patient and population information. Working in partnership with the Senior Information Risk Owner (SIRO) and Data Protection Officer (DPO), the Caldicott Guardian arbitrates complex data-sharing decisions, tests proposed secondary uses against the 8 Caldicott Principles, and ensures that citizen confidentiality is never compromised for administrative expediency.',
     playbookContext: 'Represented as an authoritative approval gate (D-001 through D-009) in the implementation transition track.',
     playbookSection: 'Section 1.2 & Section 3.1',
+    furtherResourceId: 'res-ndg-ai-guidance',
+    externalUrl: 'https://www.gov.uk/government/organisations/national-data-guardian',
     relatedTerms: ['caldicott', 'data-stewardship', 'dpia', 'dsa']
   },
   {
@@ -1012,6 +1140,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'Under statutory research frameworks (UK Digital Economy Act 2017, ONS SRS, and Caldicott Principles), a "Safe Person" must be an accredited natural person bearing direct legal and criminal liability. An AI model, agent, or LLM possesses no legal personhood, cannot sign statutory undertakings, and cannot be prosecuted. Architecturally, AI operates strictly as a delegated machine workload under the custody of an Accredited Human Researcher (Human Sponsor) who retains 100% legal and ethical accountability.',
     playbookContext: 'Enforced via SHACL shapes rejecting tre:SafePerson status for AI workloads and requiring tre:sponsoredByHumanResearcher with an active accreditation URI.',
     playbookSection: 'Section 2 & Section 3 (Phase 3 & Phase 4)',
+    furtherResourceId: 'res-ndg-ai-guidance',
+    externalUrl: 'https://www.gov.uk/government/organisations/national-data-guardian',
     relatedTerms: ['safe-person', 'mcp', 'stanford-agentic-framework', 'five-safes']
   },
   {
@@ -1022,6 +1152,8 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'Pre-trained foundation models imported into a TRE, fine-tuned weights, embeddings, and vector databases are formally categorized as "Data Assets" within the Safe Data pillar. Because deep learning models can memorize private training records (vulnerable to membership inference and model inversion attacks), exporting model weights across the airlock requires statistical disclosure control, differential privacy verification (epsilon <= 1.0), and DCB0129 clinical hazard log sign-off.',
     playbookContext: 'Catalogued under dcat:Dataset / tre:DataAsset and evaluated at the airlock via sdc_shapes.ttl before egress authorization.',
     playbookSection: 'Section 2 & Section 3 (Phase 1 & Phase 4)',
+    furtherResourceId: 'res-ico-generative-ai',
+    externalUrl: 'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/',
     relatedTerms: ['safe-data', 'safe-output', 'sdc', 'differential-privacy']
   },
   {
@@ -1032,6 +1164,7 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'Published by Stanford University IT Information Security Office, this framework establishes essential guardrails for autonomous agents: (1) machine identities must be revocable near-instantaneously in an automated manner without long-lived credentials, (2) agents must operate within a bounded blast radius without direct write access to systems of record, and (3) all agents must have an identified human sponsor (Principal) who is accountable for actions taken by the workload.',
     playbookContext: 'Directly compiled into Wavebound OPA admission controllers (authz.rego) and SHACL agent boundaries (agent-sponsor-shapes.ttl).',
     playbookSection: 'Section 3 (Phase 3 & Phase 4)',
+    externalUrl: 'https://uit.stanford.edu/security',
     relatedTerms: ['ai-non-personhood', 'stanford-risk-tiers', 'mcp', 'pep']
   },
   {
@@ -1042,6 +1175,7 @@ export OPENAI_API_KEY="enclave-internal-token"`,
     fullDefinition: 'Categorizes agentic AI workloads into four risk levels based on autonomy, target data classification, and potential harm. Section 8702 specifies that High Risk agents operating on pseudonymised microdata require human-in-the-loop approvals, short-lived tokens (<= 2 hours), and read-only tools. Section 8938 mandates that Very High Risk operations (e.g., cross-registry linkage, raw re-identifiable demographic queries) are strictly prohibited from autonomous execution.',
     playbookContext: 'Governs the admission control rules enforced by OPA PDPs when agents attempt tool execution in the research enclave.',
     playbookSection: 'Section 3 (Phase 3 & Phase 4)',
+    externalUrl: 'https://uit.stanford.edu/security',
     relatedTerms: ['stanford-agentic-framework', 'ai-non-personhood', 'eu-ai-act', 'mcp-sql']
   }
 ];
@@ -1049,7 +1183,7 @@ export OPENAI_API_KEY="enclave-internal-token"`,
 export const GLOSSARY_SECTION_MAP: Record<string, string> = {
   // Foundations & Statutory Frameworks -> Phase 1 Baseline Ontologies & SATRE
   'tre': 'sec-phase-1-2',
-  'seawater-problem-space': 'sec-front-matter',
+  'wavebound-problem-space': 'sec-front-matter',
   'iso-42001': 'sec-phase-3-2',
   'iso-13485': 'sec-phase-4-1',
   'iso-14971': 'sec-phase-4-1',

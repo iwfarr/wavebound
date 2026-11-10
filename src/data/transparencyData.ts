@@ -65,8 +65,8 @@ export const TRANSPARENCY_PROJECTS: TransparencyProject[] = [
     code: 'HDRUK-SDE-2026-089',
     title: 'Early Detection of Congenital Heart Anomalies Using Multi-Modal Clinical Linkage',
     category: 'Cardiovascular',
-    leadInvestigator: 'Prof. Alistair MacIntyre, MBChB PhD',
-    institution: 'University of Edinburgh & BHF Centre of Research Excellence',
+    leadInvestigator: 'Cardiovascular Research Lead [Example Role]',
+    institution: 'University Partner & Research Centre of Excellence [Example]',
     nhsTrustSponsor: 'NHS Lothian & Great Ormond Street Hospital for Children NHS Foundation Trust',
     laySummary: 'Every year in the UK, over 1,000 babies are born with critical heart defects that are not detected before birth. This study links routine newborn check records with hospital scan records to build early-warning computer tools for midwives and doctors, helping babies receive urgent heart surgery faster.',
     publicBenefitStatement: 'Reduces diagnostic delays for neonatal critical congenital heart disease (CCHD) by an estimated 28%, significantly decreasing preventable brain injury and neonatal mortality across NHS specialist cardiology units.',
@@ -132,7 +132,7 @@ export const TRANSPARENCY_PROJECTS: TransparencyProject[] = [
           description: 'Deterministic DuckDB SQL join of HES, NCARDRS, and PICANet.',
           timestamp: '2026-03-02T14:30:00Z',
           sha256Hash: '1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b',
-          attributes: { researcher: 'Prof. Alistair MacIntyre', compute: 'DuckDB 4.3 Node' }
+          attributes: { researcher: 'Accredited Researcher [Example Role]', compute: 'DuckDB 4.3 Node' }
         },
         {
           id: 'ent_derived_table',
@@ -163,14 +163,14 @@ export const TRANSPARENCY_PROJECTS: TransparencyProject[] = [
         },
         {
           id: 'agt_macintyre',
-          label: 'Prof. A. MacIntyre',
+          label: 'Designated Researcher [Example]',
           type: 'Agent',
           description: 'Accredited Researcher (DEA 2017 #ONS-RES-49201).',
           attributes: { role: 'Lead Investigator' }
         },
         {
           id: 'agt_caldicott',
-          label: 'Dr. E. Vance (Caldicott)',
+          label: 'Designated Caldicott Lead [Example]',
           type: 'Agent',
           description: 'Trust Caldicott Guardian & SDC Review Lead.',
           attributes: { role: 'Airlock Signatory' }
@@ -202,12 +202,12 @@ tre:AirlockReleaseCandidate_089 a prov:Entity ;
 
 tre:Act_SDC_Suppression a prov:Activity ;
     prov:used tre:CongenitalHeartMatrix_Raw ;
-    prov:wasAssociatedWith tre:Agent_DrEVance ;
+    prov:wasAssociatedWith tre:Agent_CaldicottLead ;
     prov:startedAtTime "2026-03-02T15:18:00Z"^^xsd:dateTime .
 
-tre:Agent_DrEVance a prov:Agent ;
-    tre:role "Caldicott Guardian & SDC Officer" ;
-    tre:institutionalAffiliation "NHS Lothian & SDE Board" .`,
+tre:Agent_CaldicottLead a prov:Agent ;
+    tre:role "Caldicott Guardian & SDC Officer [Example Role]" ;
+    tre:institutionalAffiliation "NHS Trust & SDE Board [Example]" .`,
       sparqlAuditQuery: `PREFIX prov: <http://www.w3.org/ns/prov#>
 PREFIX tre: <https://w3id.org/wavebound/tre#>
 
@@ -228,8 +228,8 @@ WHERE {
     code: 'HDRUK-SDE-2026-112',
     title: 'Genomic Multi-Omics Stratification in Treatment-Resistant Pediatric Epilepsy',
     category: 'Rare Diseases',
-    leadInvestigator: 'Dr. Rebecca H. Thornton, PhD',
-    institution: 'King\'s College London & Genomics England',
+    leadInvestigator: 'Pediatric Genomic Lead [Example Role]',
+    institution: 'University Partner & Genomics Centre [Example]',
     nhsTrustSponsor: 'South London and Maudsley NHS Foundation Trust & Guy\'s and St Thomas\' NHS FT',
     laySummary: 'One in three children with epilepsy continues having severe seizures despite taking standard anti-seizure medicines. This research analyses whole-genome genetic sequences and clinical prescription histories to identify rare biochemical pathways that respond to targeted, repurposed therapies.',
     publicBenefitStatement: 'Identifies precision medication candidates for an estimated 350 UK children with rare ion-channel epilepsy mutations, preventing avoidable emergency ICU admissions for status epilepticus.',
@@ -289,7 +289,7 @@ WHERE {
         },
         {
           id: 'agt_thornton',
-          label: 'Dr. R. Thornton',
+          label: 'Genomics Lead [Example]',
           type: 'Agent',
           description: 'Accredited Genomic Researcher (#GEL-RES-8812).',
           attributes: { role: 'Principal Investigator' }
@@ -325,8 +325,8 @@ WHERE {
     code: 'HDRUK-SDE-2026-145',
     title: 'Reducing Sepsis Readmissions in Rural Cancer Chemotherapy Outpatients',
     category: 'Oncology',
-    leadInvestigator: 'Dr. Fiona Campbell, MD FRCP',
-    institution: 'University of Leeds & Yorkshire Cancer Research',
+    leadInvestigator: 'Oncology Clinical Lead [Example Role]',
+    institution: 'University Hospital Partner & Cancer Institute [Example]',
     nhsTrustSponsor: 'The Leeds Teaching Hospitals NHS Trust & Mid Yorkshire Teaching NHS Trust',
     laySummary: 'Cancer patients undergoing chemotherapy are at high risk of sudden infections. Patients in rural Yorkshire often live more than an hour away from an emergency hospital. This project uses blood test trends and remote temperature monitoring to identify infection signs 24 hours earlier.',
     publicBenefitStatement: 'Reduces neutropenic sepsis ICU admissions by an estimated 22% in rural cancer cohorts and optimizes community antibiotic administration pathways.',
@@ -382,7 +382,7 @@ WHERE {
           description: 'Airlocked regression parameters with verified residual degrees of freedom.',
           timestamp: '2026-02-01T09:30:00Z',
           sha256Hash: '5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d',
-          attributes: { airlockReviewed: 'Dr. Campbell & Caldicott Lead' }
+          attributes: { airlockReviewed: 'Designated SDC Output Checker & Caldicott Lead [Example]' }
         }
       ],
       edges: [

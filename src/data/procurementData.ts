@@ -253,3 +253,171 @@ export const TENDER_CONTRACTUAL_SCHEDULES = [
 4.2 Every data linkage and export event shall emit an immutable W3C PROV-O audit record with cryptographic state hashes retained for statutory inspection.`
   }
 ];
+
+// --- IN-HOUSE NHS SOFTWARE & AI DEVELOPMENT (DCB0129 / DCB0160 TRACK) ---
+
+export type ClinicalSeverity = 'Catastrophic' | 'Major' | 'Considerable' | 'Significant' | 'Minor';
+export type ClinicalLikelihood = 'Very High' | 'High' | 'Medium' | 'Low' | 'Very Low';
+export type ClinicalRiskLevel = 'Very High' | 'High' | 'Medium' | 'Low';
+
+export interface ClinicalHazard {
+  id: string;
+  category: string;
+  hazardDescription: string;
+  potentialCause: string;
+  clinicalHarm: string;
+  initialSeverity: ClinicalSeverity;
+  initialLikelihood: ClinicalLikelihood;
+  initialRisk: ClinicalRiskLevel;
+  clinicalMitigation: string;
+  residualSeverity: ClinicalSeverity;
+  residualLikelihood: ClinicalLikelihood;
+  residualRisk: ClinicalRiskLevel;
+  csoStatus: 'APPROVED' | 'IN_REVIEW' | 'ACTION_REQUIRED';
+  dcb0160DeploymentNote: string;
+}
+
+export interface InHouseCSOProfile {
+  name: string;
+  title: string;
+  professionalBody: 'GMC' | 'NMC' | 'GPhC' | 'HCPC';
+  registrationNumber: string;
+  clinicalSpeciality: string;
+  accreditedTraining: string;
+  statutoryVetoAcknowledged: boolean;
+  appointmentDate: string;
+}
+
+export const DEFAULT_INHOUSE_CSO: InHouseCSOProfile = {
+  name: 'Jane Doe, MSc',
+  title: 'Consultant Clinical Informatician & Designated Clinical Safety Officer (CSO) [Example Role]',
+  professionalBody: 'GMC',
+  registrationNumber: '123456',
+  clinicalSpeciality: 'Cardiothoracic Medicine & Digital Health Safety',
+  accreditedTraining: 'NHS England National Clinical Risk Management Training (DCB0129 / DCB0160 Certified)',
+  statutoryVetoAcknowledged: true,
+  appointmentDate: '2024-06-15'
+};
+
+export const INITIAL_INHOUSE_HAZARDS: ClinicalHazard[] = [
+  {
+    id: 'HAZ-IH-01',
+    category: 'Patient Identity & Linkage',
+    hazardDescription: 'Cross-patient linkage mismatch during longitudinal cohort assembly in SDE data plane.',
+    potentialCause: 'Malformed local hospital number (MRN) padding without deterministic NHS Number modulus 11 validation.',
+    clinicalHarm: 'Incorrect lab values, diagnosis history, or medication records associated with wrong patient, leading to erroneous clinical risk scoring or contra-indicated therapeutic recommendation in downstream decision support.',
+    initialSeverity: 'Catastrophic',
+    initialLikelihood: 'Low',
+    initialRisk: 'High',
+    clinicalMitigation: 'Enforce strict 10-digit NHS Number modulus 11 checksum verification in ingestion pipeline. Reject and quarantine any unvalidated records to an unlinked exceptions log. Pre-linkage deterministic matching audit enforced via SHACL constraint.',
+    residualSeverity: 'Major',
+    residualLikelihood: 'Very Low',
+    residualRisk: 'Low',
+    csoStatus: 'APPROVED',
+    dcb0160DeploymentNote: 'Trust deployment team must configure local MPI feed with authoritative PDS (Personal Demographics Service) spine sync before enabling real-time clinical dashboards.'
+  },
+  {
+    id: 'HAZ-IH-02',
+    category: 'Alert Latency & Real-Time Ingestion',
+    hazardDescription: 'Critical laboratory telemetry delay or silent queue backlog in analytical data plane.',
+    potentialCause: 'Analytical DuckDB/Arrow Flight query burst exhausts sidecar connections or threadpool, causing critical pathology alerts to queue behind bulk batch queries.',
+    clinicalHarm: 'Delayed escalation of life-threatening acute kidney injury (AKI) or sepsis troponin biomarker rise beyond clinical golden hour.',
+    initialSeverity: 'Catastrophic',
+    initialLikelihood: 'Medium',
+    initialRisk: 'Very High',
+    clinicalMitigation: 'Direct Analytical Data Plane architecture bypasses userspace sidecars. Critical clinical alert telemetry is assigned dedicated kernel priority QoS socket (Port 5432 direct) with fallback SMS/Pager webhook trigger if buffer delay exceeds 90 seconds.',
+    residualSeverity: 'Major',
+    residualLikelihood: 'Very Low',
+    residualRisk: 'Low',
+    csoStatus: 'APPROVED',
+    dcb0160DeploymentNote: 'Deploying Trust IT must verify local network QoS tagging for SDE telemetry port and maintain manual hospital switchboard escalation protocols.'
+  },
+  {
+    id: 'HAZ-IH-03',
+    category: 'Algorithmic Demographic Bias & Under-Representation',
+    hazardDescription: 'Under-performance or false-negative diagnostic bias for minority ethnic or socioeconomic sub-cohorts in internally trained diagnostic AI model.',
+    potentialCause: 'Training dataset predominantly sampled from tertiary centre catchment area with skewed Index of Multiple Deprivation (IMD) deciles.',
+    clinicalHarm: 'Failure to detect high-risk cardiovascular or diabetic complication in under-represented groups, exacerbating known health inequalities.',
+    initialSeverity: 'Major',
+    initialLikelihood: 'High',
+    initialRisk: 'Very High',
+    clinicalMitigation: 'ISO 5259 multi-dimensional data quality auditing applied prior to model training. Stratified cross-validation with minimum per-decile F1 threshold (≥ 0.82) mandated. Subgroup performance audited against NHS Core20PLUS5 clinical priorities.',
+    residualSeverity: 'Considerable',
+    residualLikelihood: 'Low',
+    residualRisk: 'Low',
+    csoStatus: 'APPROVED',
+    dcb0160DeploymentNote: 'Local clinical governance committee must review subgroup calibration curves for their specific ICB population footprint prior to live deployment.'
+  },
+  {
+    id: 'HAZ-IH-04',
+    category: 'SDC Egress & Patient Re-Identification',
+    hazardDescription: 'Patient microdata leak or small-cell identification via exported research model artifacts or extrema summaries.',
+    potentialCause: 'Researcher requests release of raw regression residual scatterplots or summary tables with un-suppressed min/max extrema values.',
+    clinicalHarm: 'Loss of patient confidentiality leading to psychological distress, stigmatization, or breach of statutory Caldicott duties under UK GDPR.',
+    initialSeverity: 'Considerable',
+    initialLikelihood: 'Medium',
+    initialRisk: 'Medium',
+    clinicalMitigation: 'Automated policy-as-code airlock strictly enforces: 1) suppression of all raw min/max extrema (replaced with 5th/95th percentiles); 2) primary cell suppression (k ≥ 10); 3) differential privacy verification on model weights; 4) two-person airlock cryptographic seal.',
+    residualSeverity: 'Minor',
+    residualLikelihood: 'Very Low',
+    residualRisk: 'Low',
+    csoStatus: 'APPROVED',
+    dcb0160DeploymentNote: 'Trust Caldicott Guardian and Information Governance Lead receive automated cryptographically signed manifest for each released file.'
+  },
+  {
+    id: 'HAZ-IH-05',
+    category: 'Schema Null Semantics & Missing Data Misinterpretation',
+    hazardDescription: 'Algorithmic misinterpretation of null/missing values as "normal" or "negative" clinical test result.',
+    potentialCause: 'Feature store pipeline imputes missing troponin, allergy, or creatinine values as 0.0 or default negative baseline without indicator flag.',
+    clinicalHarm: 'Patient falsely triaged as low risk due to missing historical test, causing discharge without necessary inpatient monitoring.',
+    initialSeverity: 'Major',
+    initialLikelihood: 'Medium',
+    initialRisk: 'High',
+    clinicalMitigation: 'Strict schema definition enforces tri-boolean logic (TRUE, FALSE, UNKNOWN). Pipelines reject zero-imputation of unperformed investigations and mandate explicit Missingness Indicator vectors for model inference.',
+    residualSeverity: 'Significant',
+    residualLikelihood: 'Very Low',
+    residualRisk: 'Low',
+    csoStatus: 'APPROVED',
+    dcb0160DeploymentNote: 'Clinical end-users must be trained that missing lab values are displayed as "Not Tested" rather than "Negative".'
+  }
+];
+
+export interface DCB0160ChecklistItem {
+  id: string;
+  title: string;
+  description: string;
+  owner: string;
+  status: 'COMPLIANT' | 'IN_PROGRESS' | 'PLANNED';
+}
+
+export const INHOUSE_DCB0160_CHECKLIST: DCB0160ChecklistItem[] = [
+  {
+    id: 'DCB160-01',
+    title: 'Deploying Trust CSO & Clinical Sponsor Appointment',
+    description: 'The deploying health organisation has designated an in-house Registered Clinician as Deploying CSO to review the Manufacturer DCB0129 Safety Case.',
+    owner: 'Trust Clinical Governance Board',
+    status: 'COMPLIANT'
+  },
+  {
+    id: 'DCB160-02',
+    title: 'Local Clinical Workflow & Fallback Integration',
+    description: 'Documented manual fallback procedures (e.g. paper triage, local PACS direct viewing) in the event of SDE or network downtime.',
+    owner: 'Chief Clinical Information Officer (CCIO)',
+    status: 'COMPLIANT'
+  },
+  {
+    id: 'DCB160-03',
+    title: 'Clinician Training & Competency Verification',
+    description: 'End-user clinicians, nurses, and data scientists trained on system boundaries, missing-data indications, and reporting clinical safety incidents.',
+    owner: 'Digital Clinical Education Lead',
+    status: 'IN_PROGRESS'
+  },
+  {
+    id: 'DCB160-04',
+    title: 'Post-Market Clinical Follow-Up (PMCF) & Datix Incident Feedback',
+    description: 'Bi-directional feedback loop linking local Datix / Ulysses incident reports directly back to the living In-House Clinical Hazard Log.',
+    owner: 'Trust Patient Safety Lead',
+    status: 'COMPLIANT'
+  }
+];
+

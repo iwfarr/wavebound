@@ -10,16 +10,16 @@ A phased, pragmatic roadmap for streamlining Information Governance (IG) decisio
 
 | Phase | Title | Focus & Deliverable | Status |
 | :--- | :--- | :--- | :--- |
-| **Phase 1** | **Dual-Persona Navigation** | Global persona toggle (`IG Handbook` vs `Data Technical`) across header, mobile drawer, and Gateway hub | **COMPLETED** |
+| **Phase 1** | **Dual-Persona Navigation** | Global persona toggle (`IG Handbook` vs `Runtime`) across header, mobile drawer, and Gateway hub | **COMPLETED** |
 | **Phase 2** | **Universal Evidence Pack Generator** | Standardized compliance dossier with Web Crypto SHA-256 seal, Caldicott & DAAG sign-offs, 1-click Markdown export, and print summary | **COMPLETED** |
 | **Phase 3** | **Five Safes Interactive Evaluator** | Consolidated Statutory Matrix & Five Safes Deep-Dive with live statutory mapping (UK GDPR, S251, Caldicott 1–8) | **COMPLETED** |
-| **Phase 4** | **Air-Gapped Package Mirror Architecture** | Dedicated developer guide & manifests for internal CRAN/PyPI/Docker registries with zero internet egress and direct analytics data plane | **COMPLETED** |
+| **Phase 4** | **Air-Gapped Package Mirror Architecture** | Dedicated developer guide & manifests for internal package registries with zero internet egress and direct analytics data plane | **COMPLETED** |
 | **Phase 5** | **Least-Privilege Enclave Manifests** | Namespaced admission & non-blocking audit-and-alert controllers (`failurePolicy: Ignore`), root-read-only pods, and zero-cluster-admin RBAC | **COMPLETED** |
-| **Phase 6** | **Quantitative SDC Math & Airlock Review** | Clean tabular disclosure control guide with interactive primary suppression ($k \ge 10$), complementary secondary suppression, (1, 80%) dominance, and 2-person cryptographic release | **COMPLETED** |
-| **Phase 7** | **Caldicott Principle 8 Transparency Portal** | Public benefit audit register and machine-readable W3C PROV-O provenance triple ledger (dual angle: IG Handbook & Data Technical) | **COMPLETED** |
-| **Phase 8** | **High-Contrast Editorial Typography & Zero-Pill Polish** | Seawater Deep Navy & Turquoise brand tokens, Public Sans government scale, high contrast, and strict non-pill badge discipline | **COMPLETED** |
-| **Phase 9** | **Curated Knowledge Graph Lenses** | Multi-lens Cytoscape explorer (Statutory Policy, Cloud Fabric, Data Lifecycle, Human Roles) with 6–8 nodes per lens, dual-angle inspector, and live sub-ms Rego simulator | **COMPLETED** |
-| **Phase 10** | **End-to-End Procurement Readiness** | Comprehensive SATRE v1.1, NHS DSPT 24/25, ISO 27001, and DCB0129 interactive compliance matrix, tender schedules, and downloadable vendor dossier | **COMPLETED** |
+| **Phase 6** | **Quantitative SDC Math & 7 Output Classes** | Comprehensive SDC Policy & SOP covering 7 statistical output classes (aggregates, regressions, survival curves, extrema, charts, ML weights, tests) with strict min/max suppression | **COMPLETED** |
+| **Phase 7** | **Caldicott Principle 8 Transparency Portal** | Public benefit audit register and machine-readable W3C PROV-O provenance triple ledger (dual angle: IG Handbook & Runtime) | **COMPLETED** |
+| **Phase 8** | **High-Contrast Editorial Typography & Zero-Pill Polish** | Wavebound Deep Navy & Turquoise brand tokens, Public Sans government scale, high contrast, and strict non-pill badge discipline | **COMPLETED** |
+| **Phase 9** | **Curated Knowledge Graph Lenses** | Multi-lens Cytoscape explorer (Statutory Policy, Cloud Fabric, Data Lifecycle, Human Roles) with software-agnostic PEP lens and live sub-ms Rego simulator | **COMPLETED** |
+| **Phase 10** | **Procurement & In-House Development Track** | Dual-track hub: Track 1 (Vendor Procurement & Tender Readiness) and Track 2 (In-House NHS Software/AI Development with DCB0129 / DCB0160 Clinical Risk Management) | **COMPLETED** |
 
 ---
 

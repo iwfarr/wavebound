@@ -68,9 +68,9 @@ export const LENS_DEFINITIONS: Record<GraphLensType, LensMeta> = {
     id: 'cloud-fabric',
     title: 'Cloud Fabric & Enclave PEP Lens',
     badge: 'Zero-Trust Technical Architecture',
-    tagline: 'Perimeter Ingress, Ephemeral Pods & Direct Analytics Data Planes',
-    description: 'Maps the physical cloud execution architecture: Envoy TLS proxies, non-blocking admission webhooks (failurePolicy: Ignore), air-gapped package ingestion, root-read-only compute enclaves, and direct Arrow/DuckDB data planes.',
-    rationale: 'Designed for cloud platform architects, Kubernetes engineers, and SATRE v1.1 auditors evaluating technical network boundaries and zero internet egress.',
+    tagline: 'Perimeter Ingress, Ephemeral Workloads & High-Throughput Data Planes',
+    description: 'Maps the sovereign cloud execution architecture: perimeter TLS reverse proxies, non-blocking admission policy controllers (failurePolicy: Ignore), air-gapped package ingestion mirrors, root-read-only compute enclaves, and direct high-throughput columnar data planes.',
+    rationale: 'Designed for cloud infrastructure architects, platform security engineers, and SATRE v1.1 auditors evaluating technical network boundaries and zero internet egress across any cloud or sovereign data center.',
     iconName: 'Server',
     nodeCount: 7
   },
@@ -396,17 +396,17 @@ const CLOUD_FABRIC_NODES: GraphNodeElement[] = [
     data: {
       id: 'cf_IngressGateway',
       lensId: 'cloud-fabric',
-      label: 'gw:EnvoyPEP',
+      label: 'pep:PerimeterGateway',
       title: 'Perimeter TLS Ingress Gateway',
       category: 'Service',
       tier: 'Cloud Fabric',
-      badge: 'mTLS Envoy 1.30',
+      badge: 'mTLS Ingress Proxy',
       description: 'Terminates researcher TLS connections, inspects mTLS client certificates, and injects OIDC bearer tokens.',
       patientReassurance: 'Unauthenticated or unauthorized devices are blocked at the perimeter before touching clinical data networks.',
       statutoryBasis: 'NHS DSPT Assertion 9.4 (Perimeter Defense & Encryption in Transit).',
-      sourceFile: 'k8s/gateway/envoy-ingress.yaml',
-      fullDefinition: 'High-performance Envoy reverse proxy enforcing mutual TLS (mTLS), rate limiting, and web application firewalling at the perimeter.',
-      codeSnippet: `apiVersion: gateway.networking.k8s.io/v1
+      sourceFile: 'deploy/gateway/perimeter-ingress.yaml',
+      fullDefinition: 'High-performance reverse proxy gateway enforcing mutual TLS (mTLS), rate limiting, and web application firewalling at the perimeter.',
+      codeSnippet: `apiVersion: gateway.networking/v1
 kind: Gateway
 metadata:
   name: tre-ingress-gateway
@@ -426,27 +426,26 @@ spec:
     data: {
       id: 'cf_AdmissionWebhook',
       lensId: 'cloud-fabric',
-      label: 'k8s:ValidatingWebhook',
-      title: 'Audit & Alert Admission Webhook',
+      label: 'pep:AdmissionController',
+      title: 'Audit & Alert Admission Guard',
       category: 'Service',
       tier: 'Cloud Fabric',
       badge: 'failurePolicy: Ignore',
-      description: 'Kubernetes admission controller enforcing root-read-only filesystems and dropped capabilities with non-blocking audit-and-alert.',
+      description: 'Workload admission controller enforcing root-read-only filesystems and dropped capabilities with non-blocking audit-and-alert.',
       patientReassurance: 'Ensures research containers cannot escalate privileges or tamper with host operating systems.',
-      statutoryBasis: 'SATRE v1.1 Computing Infrastructure § 2.2; CIS Kubernetes Benchmark 1.8.',
-      sourceFile: 'k8s/admission/validating-webhook.yaml',
-      fullDefinition: 'ValidatingWebhookConfiguration scoped strictly to project namespaces. Emits SIEM alerts without blocking researcher pods if the webhook experiences transient network delays.',
-      codeSnippet: `apiVersion: admissionregistration.k8s.io/v1
+      statutoryBasis: 'SATRE v1.1 Computing Infrastructure § 2.2; CIS Container Security Standards.',
+      sourceFile: 'deploy/admission/validating-policy.yaml',
+      fullDefinition: 'Admission guard scoped strictly to project partitions. Emits SIEM alerts without blocking researcher workloads if the policy engine experiences transient network latency.',
+      codeSnippet: `apiVersion: admission.policy/v1
 kind: ValidatingWebhookConfiguration
 metadata:
   name: tre-enclave-guardrails
 webhooks:
   - name: guardrails.tre.local
-    failurePolicy: Ignore # Audit and alert mode prevents pod timeouts
+    failurePolicy: Ignore # Audit-and-alert mode prevents compute timeouts
     rules:
       - operations: ["CREATE"]
-        apiGroups: [""]
-        resources: ["pods"]`,
+        resources: ["workloads", "containers"]`,
       stateHash: 'sha256:77bb0091...'
     },
     position: { x: 320, y: 110 }
@@ -455,26 +454,26 @@ webhooks:
     data: {
       id: 'cf_PackageDiode',
       lensId: 'cloud-fabric',
-      label: 'pkg:HarborDMZMirror',
+      label: 'pkg:SecureDMZMirror',
       title: 'Air-Gapped Package Diode',
       category: 'Service',
       tier: 'Cloud Fabric',
       badge: 'Zero-WAN Egress',
-      description: 'Internal CRAN, PyPI, and OCI mirrors quarantined in DMZ with Trivy CVE scanning and Cosign cryptographic signatures.',
+      description: 'Internal library, package, and container image repository mirrors quarantined in DMZ with automated CVE scanning and cryptographic signatures.',
       patientReassurance: 'Researchers cannot download untrusted, malicious code from the public internet into the patient environment.',
       statutoryBasis: 'NHS Digital Cyber Security Standard § 7; SATRE § 3.4.',
-      sourceFile: 'k8s/mirrors/harbor-crandevpi.yaml',
-      fullDefinition: 'Four-stage air-gapped package ingestion pipeline preventing arbitrary internet package pulls while providing data scientists with verified R and Python packages.',
+      sourceFile: 'deploy/mirrors/package-diode.yaml',
+      fullDefinition: 'Four-stage air-gapped package ingestion pipeline preventing arbitrary internet package pulls while providing data scientists with verified language runtimes and mathematical libraries.',
       codeSnippet: `apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: private-cran-pypi-mirror
+  name: private-package-mirror
 spec:
   template:
     spec:
       containers:
-      - name: devpi-cran-cache
-        image: harbor.internal.tre/system/pkg-mirror:v2.4`,
+      - name: repository-cache
+        image: internal-registry.tre/system/pkg-mirror:v2.4`,
       stateHash: 'sha256:88bc4122...'
     },
     position: { x: 320, y: 260 }
@@ -483,16 +482,16 @@ spec:
     data: {
       id: 'cf_AnalyticPod',
       lensId: 'cloud-fabric',
-      label: 'k8s:RStudioDuckDBPod',
-      title: 'Hardened Analytic Enclave Pod',
+      label: 'enclave:IsolatedComputeNode',
+      title: 'Hardened Analytic Compute Enclave',
       category: 'Enclave',
       tier: 'Cloud Fabric',
       badge: 'UID 10001 / ReadOnly',
-      description: 'RStudio and Posit workbench container running with read-only root filesystem, dropped Linux capabilities, and ephemeral /scratch volume.',
+      description: 'Interactive analytical workbench environment running with read-only root filesystem, dropped system capabilities, and ephemeral /scratch volume.',
       patientReassurance: 'Isolated compute sandbox guarantees that analyses execute in a sterile, temporary environment that leaves no data behind upon termination.',
       statutoryBasis: 'ISO/IEC 27001 Annex A.12.1.2; NHS DSPT Assertion 9.2.',
-      sourceFile: 'k8s/enclaves/rstudio-analytical-pod.yaml',
-      fullDefinition: 'Least-privilege analytical pod configured with securityContext { readOnlyRootFilesystem: true, runAsNonRoot: true, runAsUser: 10001, capabilities: { drop: ["ALL"] } }.',
+      sourceFile: 'deploy/enclaves/hardened-analytic-enclave.yaml',
+      fullDefinition: 'Least-privilege analytical node configured with securityContext { readOnlyRootFilesystem: true, runAsNonRoot: true, runAsUser: 10001, capabilities: { drop: ["ALL"] } }.',
       codeSnippet: `securityContext:
   readOnlyRootFilesystem: true
   runAsNonRoot: true
@@ -508,21 +507,21 @@ spec:
     data: {
       id: 'cf_DirectDataPlane',
       lensId: 'cloud-fabric',
-      label: 'data:ArrowFlightDirect',
+      label: 'data:HighThroughputDataPlane',
       title: 'Direct Columnar Data Plane',
       category: 'Service',
       tier: 'Cloud Fabric',
-      badge: 'Zero Envoy Overhead',
-      description: 'Direct in-memory Apache Arrow Flight and DuckDB kernel sockets bypassing sidecar proxies to eliminate socket exhaustion on billion-row queries.',
+      badge: 'Zero Proxy Overhead',
+      description: 'Direct in-memory columnar query protocol and analytical engine kernel sockets bypassing userspace proxies to eliminate socket exhaustion on billion-row queries.',
       patientReassurance: 'Enables high-speed clinical research without risking server crashes or connection timeouts.',
       statutoryBasis: 'SATRE Performance & Scalability Specification § 4.1.',
-      sourceFile: 'k8s/dataplane/duckdb-flight-service.yaml',
-      fullDefinition: 'Direct data path connecting research pod kernels to the DuckDB read-only columnar storage engine, eliminating proxy serialization bottlenecks.',
+      sourceFile: 'deploy/dataplane/high-throughput-data-service.yaml',
+      fullDefinition: 'Direct data path connecting analytical research kernels to the read-only columnar storage engine, eliminating proxy serialization bottlenecks.',
       codeSnippet: `spec:
   ports:
-  - name: arrow-flight
+  - name: analytical-flight
     port: 8815
-    targetPort: 8815 # Direct TCP socket bypasses Envoy proxy`,
+    targetPort: 8815 # Direct TCP socket bypasses userspace proxy`,
       stateHash: 'sha256:44fe0099...'
     },
     position: { x: 540, y: 260 }
@@ -566,7 +565,7 @@ spec:
       fullDefinition: 'Appends W3C PROV-O triples with SHA-256 state commitments directly to object storage with object-lock write-once-read-many (WORM) policy.',
       codeSnippet: `prov:wasGeneratedBy [
   a prov:Activity ;
-  prov:used cf:RStudioDuckDBPod ;
+  prov:used cf:IsolatedComputeNode ;
   prov:endedAtTime "2026-11-08T18:15:00Z"^^xsd:dateTime
 ] .`,
       stateHash: 'sha256:99bb1144...'
@@ -576,11 +575,11 @@ spec:
 ];
 
 const CLOUD_FABRIC_EDGES: GraphEdgeData[] = [
-  { id: 'e_cf_gw_webhook', source: 'cf_IngressGateway', target: 'cf_AdmissionWebhook', label: 'interceptsSession', relationship: 'Validates Pod Spec', lensId: 'cloud-fabric' },
+  { id: 'e_cf_gw_webhook', source: 'cf_IngressGateway', target: 'cf_AdmissionWebhook', label: 'interceptsSession', relationship: 'Validates Workload Spec', lensId: 'cloud-fabric' },
   { id: 'e_cf_gw_diode', source: 'cf_IngressGateway', target: 'cf_PackageDiode', label: 'routesToMirror', relationship: 'Air-Gapped Package Proxy', lensId: 'cloud-fabric' },
-  { id: 'e_cf_webhook_pod', source: 'cf_AdmissionWebhook', target: 'cf_AnalyticPod', label: 'admitsPod', relationship: 'Least-Privilege Launch', lensId: 'cloud-fabric' },
-  { id: 'e_cf_diode_pod', source: 'cf_PackageDiode', target: 'cf_AnalyticPod', label: 'suppliesPackages', relationship: 'CRAN/PyPI Internal Sync', lensId: 'cloud-fabric' },
-  { id: 'e_cf_pod_direct', source: 'cf_AnalyticPod', target: 'cf_DirectDataPlane', label: 'executesQuery', relationship: 'Direct Kernel Socket', lensId: 'cloud-fabric' },
+  { id: 'e_cf_webhook_pod', source: 'cf_AdmissionWebhook', target: 'cf_AnalyticPod', label: 'admitsCompute', relationship: 'Least-Privilege Launch', lensId: 'cloud-fabric' },
+  { id: 'e_cf_diode_pod', source: 'cf_PackageDiode', target: 'cf_AnalyticPod', label: 'suppliesLibraries', relationship: 'Internal Package Sync', lensId: 'cloud-fabric' },
+  { id: 'e_cf_pod_direct', source: 'cf_AnalyticPod', target: 'cf_DirectDataPlane', label: 'executesQuery', relationship: 'Kernel Data Socket', lensId: 'cloud-fabric' },
   { id: 'e_cf_pod_airlock', source: 'cf_AnalyticPod', target: 'cf_OutputAirlockPEP', label: 'submitsExport', relationship: 'Airlock Release Request', lensId: 'cloud-fabric' },
   { id: 'e_cf_airlock_provo', source: 'cf_OutputAirlockPEP', target: 'cf_ProvOLineage', label: 'commitsAudit', relationship: 'Cryptographic PROV-O Emission', lensId: 'cloud-fabric' }
 ];

@@ -17,7 +17,12 @@ import {
   Layers,
   ArrowRight,
   Database,
-  Bot
+  Bot,
+  Scale,
+  BookOpen,
+  FileText,
+  HelpCircle,
+  Info
 } from 'lucide-react';
 
 interface LLMSecurityEnclaveProps {
@@ -29,7 +34,7 @@ export const LLMSecurityEnclave: React.FC<LLMSecurityEnclaveProps> = ({
   onNavigateToGlossaryTerm,
   onNavigateToSandbox
 }) => {
-  const [activeTab, setActiveTab] = useState<'in-enclave-inference' | 'simulator' | 'safeguards' | 'config-generator'>('in-enclave-inference');
+  const [activeTab, setActiveTab] = useState<'in-enclave-inference' | 'simulator' | 'safeguards' | 'config-generator' | 'nhs-external-guidance'>('in-enclave-inference');
 
   // Interactive Prompt Sanitizer Simulator State
   const [inputCode, setInputCode] = useState<string>(`# Data analysis script for Cohort 12
@@ -152,6 +157,7 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
           <div className="flex flex-wrap items-center gap-2 pt-2">
             {[
               { id: 'in-enclave-inference', label: 'In-Enclave Inference & Policy Modes', icon: <Server className="w-3.5 h-3.5" /> },
+              { id: 'nhs-external-guidance', label: 'NHS Guidance: AI Outside TRE', icon: <Scale className="w-3.5 h-3.5" /> },
               { id: 'simulator', label: 'Interactive Pre-Prompt PEP Simulator', icon: <Terminal className="w-3.5 h-3.5" /> },
               { id: 'safeguards', label: '5 Core Enclave Safeguards', icon: <Lock className="w-3.5 h-3.5" /> },
               { id: 'config-generator', label: 'IDE & Ignore Config Generator', icon: <FileCode2 className="w-3.5 h-3.5" /> }
@@ -1065,6 +1071,446 @@ OPENAI_API_KEY="enclave-airgap-internal-token"
 MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`}</code>
               )}
             </pre>
+          </div>
+        </div>
+      )}
+
+      {/* TAB 4: AUTHORITATIVE GUIDELINES: AI & LLMS OUTSIDE A TRE (NHS & UK STATUTORY RULES) */}
+      {activeTab === 'nhs-external-guidance' && (
+        <div className="space-y-6">
+          {/* Executive Ruling Hero Card */}
+          <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 space-y-4 shadow-xl">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-cyan-900/60 pb-4">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">
+                  <Scale className="w-4 h-4 text-amber-400" />
+                  <span>NHS England &amp; UK Information Commissioner Mandate</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+                  Can You Use Codex, Claude, ChatGPT, or GitHub Copilot with Patient Data Outside a TRE?
+                </h2>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="px-3 py-1 rounded-lg bg-red-950/90 text-red-300 border border-red-700/80 font-mono text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+                  <XCircle className="w-4 h-4 text-red-400" />
+                  <span>Prohibited on Patient Data</span>
+                </span>
+              </div>
+            </div>
+
+            {/* Direct Statutory Answer */}
+            <div className="p-4 rounded-xl bg-slate-950/80 border border-red-900/50 space-y-2">
+              <div className="flex items-center gap-2 text-sm font-bold text-red-400 font-mono">
+                <AlertTriangle className="w-4 h-4 text-red-400 shrink-0" />
+                <span>The Definitive NHS Statutory Answer:</span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-medium">
+                <strong>No. Under official NHS England guidance and UK data protection law, clinical staff, data scientists, and software engineers must NEVER enter patient-identifiable data (PID) or confidential patient information (CPI) into commercial, consumer, or public cloud AI tools on developer workstations or outside a certified TRE/SDE boundary.</strong>
+              </p>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Even when connected to an NHS Trust VPN, modern AI coding extensions (such as GitHub Copilot, Cursor, Cline, or Claude Code) automatically scan open editor buffers, local database connection strings, terminal logs, and SQL scripts. These tools transmit code context across commercial cloud APIs hosted on public infrastructure outside NHS sovereign control, constituting an unlawful disclosure under the <strong>Common Law Duty of Confidentiality</strong>, <strong>Caldicott Principles 1, 2 &amp; 8</strong>, and <strong>UK GDPR Articles 5(1)(f), 6, and 9</strong>.
+              </p>
+            </div>
+
+            {/* Four Authoritative Regulatory Frameworks Strip */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
+              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-cyan-900/60 space-y-1.5">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-sky-400">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>NHS England / DHSC</span>
+                </div>
+                <div className="text-[11px] text-slate-300 font-semibold">Generative AI Policy (2024)</div>
+                <p className="text-[11px] text-slate-400 leading-normal">
+                  Strictly prohibits inputting identifiable or confidential health information into commercial or uncontracted AI platforms. Mandates formal DPIAs and sovereign environments.
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-cyan-900/60 space-y-1.5">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
+                  <Scale className="w-3.5 h-3.5" />
+                  <span>National Data Guardian</span>
+                </div>
+                <div className="text-[11px] text-slate-300 font-semibold">Caldicott Principles 1, 2, 7 &amp; 8</div>
+                <p className="text-[11px] text-slate-400 leading-normal">
+                  Patients have a reasonable expectation that their confidential records are not transmitted to third-party commercial machine learning models without statutory Section 251 CAG clearance.
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-cyan-900/60 space-y-1.5">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-purple-400">
+                  <Lock className="w-3.5 h-3.5" />
+                  <span>Information Commissioner</span>
+                </div>
+                <div className="text-[11px] text-slate-300 font-semibold">ICO Generative AI Guidance</div>
+                <p className="text-[11px] text-slate-400 leading-normal">
+                  Requires valid Article 9 condition for special category health data, prohibits unauthorized model retraining, and mandates Article 28 data processor agreements.
+                </p>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-cyan-900/60 space-y-1.5">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-amber-400">
+                  <BookOpen className="w-3.5 h-3.5" />
+                  <span>MHRA &amp; DCB0129</span>
+                </div>
+                <div className="text-[11px] text-slate-300 font-semibold">Software as a Medical Device</div>
+                <p className="text-[11px] text-slate-400 leading-normal">
+                  If AI generated code calculates clinical dosages, triages patients, or influences diagnostic outcomes, it is a Medical Device requiring Clinical Safety Officer (CSO) sign-off.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* CRITICAL DEEP DIVE: CAN ENTERPRISE VERSIONS BE USED ON PATIENT DATA? */}
+          <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 space-y-5 shadow-xl text-white">
+            <div className="flex items-center gap-2 text-xs font-mono font-bold text-teal-400 uppercase tracking-wider">
+              <ShieldAlert className="w-4 h-4 text-teal-400" />
+              <span>Crucial Regulatory Distinction · Enterprise vs Consumer AI Tiers</span>
+            </div>
+            
+            <div className="space-y-2 max-w-4xl">
+              <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+                Can Enterprise Versions (ChatGPT Enterprise, Claude Enterprise, Copilot Enterprise) Be Used on Patient Data?
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                Many NHS data teams and digital health startups ask: <em>&ldquo;Our Trust or company has purchased an Enterprise subscription (with Zero Data Retention and a BAA). Does that mean we can now process identifiable patient records or run Copilot on live EHR database schemas?&rdquo;</em>
+              </p>
+            </div>
+
+            {/* The Legal Reality Box */}
+            <div className="p-5 rounded-xl bg-slate-950/90 border border-teal-500/40 space-y-3">
+              <div className="flex items-center gap-2 text-sm font-bold text-teal-300 font-mono">
+                <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />
+                <span>The Statutory Reality in NHS Healthcare:</span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-100 leading-relaxed font-sans">
+                <strong>NO for identifiable patient data outside an accredited TRE/SDE.</strong> Purchasing an Enterprise plan resolves certain commercial IP and model retraining concerns, but <strong>an enterprise contract CANNOT and DOES NOT grant statutory authority to bypass UK health data privacy laws or the Common Law Duty of Confidentiality.</strong>
+              </p>
+            </div>
+
+            {/* 2-Column Comparison: What Enterprise Solves vs What It Cannot Bypass */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              <div className="p-4 rounded-xl bg-[#07192f] border border-emerald-500/30 space-y-3">
+                <div className="flex items-center gap-2 font-bold text-emerald-300 text-sm border-b border-emerald-500/30 pb-2">
+                  <Check className="w-4 h-4 text-emerald-400" />
+                  <span>What Enterprise Subscriptions Actually Provide</span>
+                </div>
+                <ul className="space-y-2 text-slate-300 leading-relaxed">
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-400 font-bold">&bull;</span>
+                    <div><strong>Zero Data Retention (ZDR):</strong> Prompts and completions are not cached on disk or used by OpenAI/Anthropic to retrain foundation models.</div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-400 font-bold">&bull;</span>
+                    <div><strong>Dedicated Customer Encryption:</strong> Data encrypted in transit (TLS 1.3) and at rest with customer-managed keys (CMK / BYOK).</div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-400 font-bold">&bull;</span>
+                    <div><strong>Standard DPA &amp; SOC 2:</strong> Contractual Article 28 UK GDPR Data Processing Addendum and SOC 2 Type II compliance certificates.</div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-400 font-bold">&bull;</span>
+                    <div><strong>Permitted for Non-PID Tasks:</strong> Excellent for general NHS policy drafting, administrative emails, synthetic dataset code prototyping, and non-health documentation.</div>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="p-4 rounded-xl bg-[#07192f] border border-rose-500/30 space-y-3">
+                <div className="flex items-center gap-2 font-bold text-rose-300 text-sm border-b border-rose-500/30 pb-2">
+                  <XCircle className="w-4 h-4 text-rose-400" />
+                  <span>What Enterprise Subscriptions CANNOT Bypass Under UK Law</span>
+                </div>
+                <ul className="space-y-2 text-slate-300 leading-relaxed">
+                  <li className="flex items-start gap-2">
+                    <span className="text-rose-400 font-bold">&bull;</span>
+                    <div><strong>Common Law Duty of Confidentiality (CLDC):</strong> A commercial SaaS agreement does not satisfy CLDC. Unless patients gave explicit consent or statutory Section 251 CAG clearance exists, transmitting PID to a commercial vendor is unlawful.</div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-rose-400 font-bold">&bull;</span>
+                    <div><strong>Caldicott Principle 2 (Minimum Necessary):</strong> Identifiable data must not be used where de-identified, pseudonymised, or synthetic tokens suffice. Enterprise terms do not relax this duty.</div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-rose-400 font-bold">&bull;</span>
+                    <div><strong>Caldicott Principle 8 (No Surprises):</strong> Patients have not been informed via public privacy notices that their confidential medical episodes are processed through commercial LLM clusters.</div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-rose-400 font-bold">&bull;</span>
+                    <div><strong>Multi-Region Dynamic Failover:</strong> Enterprise multi-tenant SaaS endpoints dynamically shed compute load to US or EU regions during peak load, violating sovereign data residency mandates unless explicitly pinned via private VPC endpoints.</div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-rose-400 font-bold">&bull;</span>
+                    <div><strong>Developer Laptop Memory Leaks:</strong> Running Copilot Enterprise on an unmanaged laptop caches database schemas, patient snippets, and terminal logs in local editor state and unencrypted git trees.</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* How Enterprise LLMs CAN Be Lawfully Deployed */}
+            <div className="p-4 rounded-xl bg-slate-950/80 border border-cyan-800/60 space-y-2">
+              <span className="text-xs font-mono font-bold text-cyan-300 uppercase tracking-wider block">
+                The Lawful Formula for Enterprise LLMs on Health Data:
+              </span>
+              <p className="text-xs text-slate-200 leading-relaxed">
+                If your organisation wants to use an enterprise LLM (e.g. Azure OpenAI or AWS Bedrock) with healthcare records, you must deploy it <strong>within an accredited TRE / SDE boundary via Private VPC Endpoints</strong> (with zero public internet routing), under a <strong>Trust Caldicott-approved DPIA</strong>, and with <strong>pre-prompt deterministic pseudonymisation or statistical disclosure control (SDC)</strong> active at the egress gateway.
+              </p>
+            </div>
+          </div>
+
+          {/* Scenario Analysis: What is Permitted vs Prohibited? */}
+          <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 space-y-5 shadow-xl">
+            <div className="space-y-1">
+              <span className="text-xs font-mono font-bold text-teal-400 uppercase tracking-wider block">
+                Practical Workplace Compliance Matrix
+              </span>
+              <h3 className="text-xl font-bold text-white tracking-tight">
+                Evaluating Common Clinical &amp; Analytical AI Scenarios
+              </h3>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs text-left border-collapse">
+                <thead>
+                  <tr className="bg-slate-950/90 text-slate-300 border-b border-cyan-900/80 font-mono">
+                    <th className="py-2.5 px-3 font-semibold">Proposed Scenario</th>
+                    <th className="py-2.5 px-3 font-semibold">Data Handled</th>
+                    <th className="py-2.5 px-3 font-semibold">Compliance Status</th>
+                    <th className="py-2.5 px-3 font-semibold">Statutory Rationale &amp; Required Remediation</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-cyan-950/60 text-slate-200">
+                  <tr className="hover:bg-slate-900/40">
+                    <td className="py-3 px-3 font-semibold text-white">
+                      GitHub Copilot / Cursor on NHS laptop connected to Trust VPN
+                    </td>
+                    <td className="py-3 px-3 font-mono text-amber-300">
+                      SQL scripts querying EPR, real NHS numbers, postcodes
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-700 font-mono font-bold text-[10px] block w-fit">
+                        STRICTLY PROHIBITED
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                      VPN split-tunneling allows active document context to leave for OpenAI/Microsoft endpoints. Breach of confidentiality. Must reconfigure IDE to point to in-enclave vLLM cluster.
+                    </td>
+                  </tr>
+
+                  <tr className="hover:bg-slate-900/40">
+                    <td className="py-3 px-3 font-semibold text-white">
+                      Pasting clinical free-text clinic letters into public ChatGPT or Claude
+                    </td>
+                    <td className="py-3 px-3 font-mono text-amber-300">
+                      Unstructured clinic notes with names redacted
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-700 font-mono font-bold text-[10px] block w-fit">
+                        STRICTLY PROHIBITED
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                      Free-text contains deductive identifiers (rare symptoms, exact treatment dates). Public tiers may use prompts for model retraining. Zero Section 251 clearance.
+                    </td>
+                  </tr>
+
+                  <tr className="hover:bg-slate-900/40">
+                    <td className="py-3 px-3 font-semibold text-white">
+                      Copilot on purely synthetic or open non-health datasets (e.g. Synthetic Mass, open synthetic OMOP)
+                    </td>
+                    <td className="py-3 px-3 font-mono text-emerald-300">
+                      100% statistically generated synthetic data (no real patients)
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono font-bold text-[10px] block w-fit">
+                        PERMITTED
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                      Synthetic data contains zero real patient confidentiality risks. Ideal for algorithm prototyping, mock testing, and training coding pipelines before deploying into the TRE.
+                    </td>
+                  </tr>
+
+                  <tr className="hover:bg-slate-900/40">
+                    <td className="py-3 px-3 font-semibold text-white">
+                      ChatGPT Enterprise / Claude Enterprise on analyst workstation (with ZDR active)
+                    </td>
+                    <td className="py-3 px-3 font-mono text-amber-300">
+                      Unmasked patient microdata, hospital numbers, clinical episode text
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-700 font-mono font-bold text-[10px] block w-fit">
+                        PROHIBITED OUTSIDE TRE
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                      ZDR contract solves vendor training but does NOT bypass Common Law Duty of Confidentiality or provide Section 251 statutory research clearance. Unconsented disclosure of identifiable records to commercial infrastructure.
+                    </td>
+                  </tr>
+
+                  <tr className="hover:bg-slate-900/40">
+                    <td className="py-3 px-3 font-semibold text-white">
+                      GitHub Copilot Enterprise querying live EHR databases on developer laptop
+                    </td>
+                    <td className="py-3 px-3 font-mono text-amber-300">
+                      Live SQL results containing patient identifiable demographics
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-700 font-mono font-bold text-[10px] block w-fit">
+                        PROHIBITED OUTSIDE TRE
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                      Local IDE context windows capture database buffers, query outputs, and schemas into local unencrypted swap space and telemetry queues. Bypasses the audited clinical perimeter.
+                    </td>
+                  </tr>
+
+                  <tr className="hover:bg-slate-900/40">
+                    <td className="py-3 px-3 font-semibold text-white">
+                      Microsoft 365 Copilot within NHS Central Enterprise Tenant
+                    </td>
+                    <td className="py-3 px-3 font-mono text-sky-300">
+                      Internal NHS emails, administrative documents, care guidelines
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-700 font-mono font-bold text-[10px] block w-fit">
+                        CONDITIONALLY PERMITTED
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                      Permitted only if enrolled under the official NHS Central Tenant with Commercial Data Protection (CDP) and zero model training agreements active. Individual Trust DPIA required.
+                    </td>
+                  </tr>
+
+                  <tr className="hover:bg-slate-900/40">
+                    <td className="py-3 px-3 font-semibold text-white">
+                      Azure OpenAI / AWS Bedrock Enterprise via Private VPC Endpoint inside certified SDE
+                    </td>
+                    <td className="py-3 px-3 font-mono text-teal-300">
+                      Enclave-partitioned pseudonymous research data
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-teal-950 text-teal-300 border border-teal-700 font-mono font-bold text-[10px] block w-fit">
+                        CONDITIONALLY PERMITTED
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                      Permitted when routed strictly over internal VPC Private Link (zero public internet transit), backed by Trust Caldicott Guardian approval, signed NHS DPA, and automated pre-prompt SDC tokenization.
+                    </td>
+                  </tr>
+
+                  <tr className="hover:bg-slate-900/40">
+                    <td className="py-3 px-3 font-semibold text-white">
+                      Air-Gapped In-Enclave vLLM cluster inside TRE / SDE
+                    </td>
+                    <td className="py-3 px-3 font-mono text-emerald-300">
+                      De-identified microdata, research cohorts, hospital extracts
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono font-bold text-[10px] block w-fit">
+                        RECOMMENDED &amp; COMPLIANT
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                      Gold standard architecture. GPU node runs inside certified enclave behind Calico zero-WAN egress policies. No data ever leaves the boundary. Meets Goldacre Review Rec 1.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* The 3 Approved Pathways Card */}
+          <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 space-y-5 shadow-xl">
+            <div className="space-y-1">
+              <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider block">
+                Compliant Enterprise Architectures
+              </span>
+              <h3 className="text-xl font-bold text-white tracking-tight">
+                The 3 Approved Pathways to Run AI &amp; LLMs on Health Data
+              </h3>
+              <p className="text-xs text-slate-300 leading-relaxed max-w-3xl">
+                If your research or clinical engineering team needs the productivity of AI coding assistants or generative LLMs, you must deploy one of these three recognized architectures:
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
+              {/* Pathway 1 */}
+              <div className="p-4 rounded-xl bg-slate-950/80 border border-teal-500/50 space-y-3 flex flex-col justify-between">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="px-2 py-0.5 rounded bg-teal-950 text-teal-300 border border-teal-700 text-[10px] font-mono font-bold">
+                      PATHWAY 1 (GOLD STANDARD)
+                    </span>
+                    <Server className="w-4 h-4 text-teal-400" />
+                  </div>
+                  <h4 className="text-sm font-bold text-white">
+                    Air-Gapped In-Enclave Inference
+                  </h4>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Host open-weights foundation models (such as Qwen 2.5 Coder, Llama 3.3, or DeepSeek Coder) directly inside your secure enclave or TRE on dedicated GPU nodes running vLLM or Triton.
+                  </p>
+                  <ul className="text-[11px] text-slate-400 space-y-1 list-disc list-inside">
+                    <li>Zero packets routed to the public internet.</li>
+                    <li>eBPF &amp; Calico drop rules enforce absolute network isolation.</li>
+                    <li>Developers point IDE extensions to private internal cluster DNS.</li>
+                  </ul>
+                </div>
+                <div className="pt-2 border-t border-slate-900 text-[11px] font-mono text-teal-400 font-semibold">
+                  SATRE v1.1 &amp; DSPT 100% Compliant
+                </div>
+              </div>
+
+              {/* Pathway 2 */}
+              <div className="p-4 rounded-xl bg-slate-950/80 border border-sky-500/50 space-y-3 flex flex-col justify-between">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-700 text-[10px] font-mono font-bold">
+                      PATHWAY 2 (MANAGED CLOUD)
+                    </span>
+                    <ShieldCheck className="w-4 h-4 text-sky-400" />
+                  </div>
+                  <h4 className="text-sm font-bold text-white">
+                    NHS Enterprise Sovereign Tenants (ZDR)
+                  </h4>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Deploy managed enterprise endpoints (e.g. Azure OpenAI Private Endpoint or AWS Bedrock VPC Interconnect) under formal NHS procurement frameworks with signed Business Associate Agreements.
+                  </p>
+                  <ul className="text-[11px] text-slate-400 space-y-1 list-disc list-inside">
+                    <li>Zero Data Retention (ZDR) enabled (prompts never saved to disk).</li>
+                    <li>Model retraining explicitly disabled by contractual DPA.</li>
+                    <li>Private IP routing via ExpressRoute / AWS Direct Connect.</li>
+                  </ul>
+                </div>
+                <div className="pt-2 border-t border-slate-900 text-[11px] font-mono text-sky-400 font-semibold">
+                  Requires Trust SIRO &amp; Caldicott Sign-off
+                </div>
+              </div>
+
+              {/* Pathway 3 */}
+              <div className="p-4 rounded-xl bg-slate-950/80 border border-purple-500/50 space-y-3 flex flex-col justify-between">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-700 text-[10px] font-mono font-bold">
+                      PATHWAY 3 (CLIENT GUARD)
+                    </span>
+                    <Lock className="w-4 h-4 text-purple-400" />
+                  </div>
+                  <h4 className="text-sm font-bold text-white">
+                    Pre-Prompt PEP Proxy &amp; AST Scrubbers
+                  </h4>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Implement client-side abstract syntax tree (AST) linters and local PEP proxy daemons that inspect outbound code buffers before transmission, scrubbing direct identifiers and small cell numbers.
+                  </p>
+                  <ul className="text-[11px] text-slate-400 space-y-1 list-disc list-inside">
+                    <li>Mandatory <code>.copilotignore</code> and <code>.cursorignore</code> files.</li>
+                    <li>Regex and named-entity recognition (NER) for NHS numbers.</li>
+                    <li>Blocks un-sanitized prompts at local localhost port before WAN.</li>
+                  </ul>
+                </div>
+                <div className="pt-2 border-t border-slate-900 text-[11px] font-mono text-purple-400 font-semibold">
+                  Interactive Simulator in Tab 2
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

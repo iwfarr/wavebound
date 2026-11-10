@@ -144,7 +144,7 @@ const TRUST_NODES: TrustNode[] = [
     color: '#34d399'
   },
   {
-    id: 'node-seawater',
+    id: 'node-wavebound',
     label: 'Wavebound Flow Governance',
     category: 'defense',
     shortDesc: 'The problem space architecture protecting against unverified ingress and unauthorized egress leaks.',
@@ -210,10 +210,10 @@ const TRUST_NODES: TrustNode[] = [
 
 const TRUST_EDGES = [
   { source: 'node-citizen', target: 'node-hospital', label: 'Population Data Registries' },
-  { source: 'node-hospital', target: 'node-seawater', label: 'Tidal Ingress' },
-  { source: 'node-caldicott', target: 'node-seawater', label: 'Confidentiality Mandate' },
+  { source: 'node-hospital', target: 'node-wavebound', label: 'Tidal Ingress' },
+  { source: 'node-caldicott', target: 'node-wavebound', label: 'Confidentiality Mandate' },
   { source: 'node-ethics', target: 'node-enclave', label: 'Approved Study Protocol' },
-  { source: 'node-seawater', target: 'node-enclave', label: 'Partitioned Workspace' },
+  { source: 'node-wavebound', target: 'node-enclave', label: 'Partitioned Workspace' },
   { source: 'node-iso-dcb', target: 'node-enclave', label: 'Safety Case Verification' },
   { source: 'node-enclave', target: 'node-shacl', label: 'Egress Airlock Request' },
   { source: 'node-shacl', target: 'node-opa', label: 'Compiled Rego Decision' },
