@@ -150,7 +150,7 @@ const HANDBOOK_CHAPTERS: HandbookChapter[] = [
     title: 'Statistical Disclosure Control & Airlocks',
     shortDesc: 'Preventing small-cell re-identification and differencing through automated suppression and two-person airlock reviews.',
     badge: 'Safe Outputs & Disclosure Control',
-    statutoryBasis: 'ONS Tabular SDC Guidelines; SAIL Databank Output Review Protocol; Caldicott Principle 8.',
+    statutoryBasis: 'ONS Tabular SDC Guidelines; National Output Review Protocols for Secure Environments; Caldicott Principle 8.',
     keySafeguards: [
       'Primary Cell Suppression (k ≥ 10): Any aggregate table cell representing fewer than 10 individuals is permanently masked.',
       'Dominance Concentration Rule (≤ 80%): Top contributor must not account for more than 80% of any summary value.',
@@ -167,104 +167,365 @@ const HANDBOOK_CHAPTERS: HandbookChapter[] = [
 
 interface SchematicNode {
   id: string;
+  stepNumber: number;
   label: string;
   category: 'origin' | 'governance' | 'boundary' | 'enclave' | 'egress' | 'release';
+  categoryLabel: string;
   shortDesc: string;
   statutoryRole: string;
   handbookChapterRef: string;
+  handbookChapterTitle: string;
   color: string;
+  responsibleRoles: string[];
+  statutoryHandoffs: string[];
+  privacySafeguards: string[];
+  operationalActions: string[];
+  upstreamHandoff: string;
+  downstreamHandoff: string;
 }
 
 const SCHEMATIC_NODES: SchematicNode[] = [
   {
     id: 'node-citizen',
+    stepNumber: 1,
     label: 'Population Data Sources',
     category: 'origin',
-    shortDesc: 'Citizens, survey cohorts, and patients whose records are held under statutory duty of confidentiality.',
-    statutoryRole: 'Data Subjects & NHS Cohorts',
+    categoryLabel: 'Source Cohort',
+    shortDesc: 'Citizens, survey cohorts, and patients whose health and care encounters are held under statutory common law confidentiality.',
+    statutoryRole: 'Data Subjects & Primary Cohorts',
     handbookChapterRef: 'ch-data',
-    color: '#06b6d4'
+    handbookChapterTitle: 'Chapter 04: Data Minimisation & Sensitivity Tiers',
+    color: '#06b6d4',
+    responsibleRoles: [
+      'Data Subjects (Patients & Service Users)',
+      'Direct Healthcare Clinicians (GPs, Hospital Consultants)',
+      'Primary Care Practice Caldicott Leads'
+    ],
+    statutoryHandoffs: [
+      'Common Law Duty of Confidentiality (CLDC) established at time of clinical consultation',
+      'UK GDPR Article 13 & 14 Fair Processing Notices and transparency disclosures',
+      'National Data Opt-Out (NDOO) recording via NHS App or central digital spine'
+    ],
+    privacySafeguards: [
+      'Statutory duty of confidence attached to all personal clinical interactions',
+      'National Data Opt-Out preference filtering (Type 1 practice-level & National research opt-outs)',
+      'Explicit consent protocols for interventional clinical trials and identifiable survey cohorts'
+    ],
+    operationalActions: [
+      'Clinical data capture strictly bounded by individual care delivery and statutory NHS duties',
+      'Publication of organizational privacy notices explaining public interest research processing'
+    ],
+    upstreamHandoff: 'Routine clinical consultation / primary care encounter',
+    downstreamHandoff: 'Secure ingress to Data Custodian / Health Organization Data Repository'
   },
   {
     id: 'node-custodian',
+    stepNumber: 2,
     label: 'Data Custodian / NHS Trust',
     category: 'origin',
-    shortDesc: 'Authorised health organizations holding legal stewardship over primary clinical records.',
-    statutoryRole: 'Data Controller (UK GDPR Art. 4)',
+    categoryLabel: 'Data Custodian',
+    shortDesc: 'Authorised health organizations and trusts holding statutory legal stewardship over primary clinical records.',
+    statutoryRole: 'Data Controller (UK GDPR Art. 4(7))',
     handbookChapterRef: 'ch-data',
-    color: '#0ea5e9'
+    handbookChapterTitle: 'Chapter 04: Data Minimisation & Sensitivity Tiers',
+    color: '#0ea5e9',
+    responsibleRoles: [
+      'Trust Senior Information Risk Owner (SIRO)',
+      'Institutional Caldicott Guardian',
+      'Head of Information Governance & Data Protection Officer (DPO)',
+      'Healthcare Records Manager'
+    ],
+    statutoryHandoffs: [
+      'UK GDPR Article 6(1)(e) (Public Task) & Article 9(2)(h) (Health & Social Care Administration)',
+      'Data Sharing Agreements (DSA) drafted under DPA 2018 Section 121 statutory code of practice',
+      'Data Protection Impact Assessment (DPIA) signed off under UK GDPR Article 35'
+    ],
+    privacySafeguards: [
+      'AES-256 encrypted storage volumes with role-partitioned EHR database clusters',
+      'De-identification at source: direct patient identifiers (Name, NHS Number, Full Address) stripped',
+      'Salted HMAC tokenisation for longitudinal linkage via honest-broker third parties',
+      'Immutable database audit logging for all extraction and cohort selection queries'
+    ],
+    operationalActions: [
+      'Execution of de-identification pipelines replacing NHS numbers with project-scoped tokens',
+      'Verification of National Data Opt-Out exclusion lists before cohort staging'
+    ],
+    upstreamHandoff: 'Primary electronic patient records and clinical registries',
+    downstreamHandoff: 'Pseudonymised project dataset routed to Governance Review'
   },
   {
     id: 'node-caldicott',
+    stepNumber: 3,
     label: 'Caldicott Guardian & DPO',
     category: 'governance',
-    shortDesc: 'Senior statutory official ensuring that confidentiality duty is maintained and public benefit justified.',
-    statutoryRole: 'Statutory Confidentiality Oversight',
+    categoryLabel: 'Institutional Conscience',
+    shortDesc: 'Senior statutory officials ensuring that patient confidentiality duty is preserved, public benefit justified, and Caldicott Principles 1–8 strictly enforced.',
+    statutoryRole: 'Statutory Confidentiality & Legal Compliance Oversight',
     handbookChapterRef: 'ch-projects',
-    color: '#10b981'
+    handbookChapterTitle: 'Chapter 02: Statutory Gateways & Ethical Approvals',
+    color: '#10b981',
+    responsibleRoles: [
+      'Institutional Caldicott Guardian',
+      'Data Protection Officer (DPO)',
+      'Caldicott Advisory Review Panel',
+      'Patient & Public Involvement and Engagement (PPIE) Lead'
+    ],
+    statutoryHandoffs: [
+      'Caldicott Principle 1: Purpose justification and necessity validation',
+      'Caldicott Principle 8: Public transparency & machine-readable Data Use Register publication',
+      'Common Law Duty of Confidentiality clearance (or confirmation of s251 statutory gateway requirement)'
+    ],
+    privacySafeguards: [
+      'Rigorous proportionality test weighing public health benefit against privacy intrusion',
+      'Data minimisation audit (Caldicott Principle 3: strictly only approved clinical fields)',
+      'Scrutiny of lay summaries to eliminate discriminatory, stigmatising, or commercially exploitative aims',
+      'Affirmation that data will never be shared with insurers, employers, or credit agencies'
+    ],
+    operationalActions: [
+      'Evaluation of study protocol against institutional risk appetite and public benefit criteria',
+      'Issuance of formal Caldicott Assent and publication of metadata on Open Data Use Register'
+    ],
+    upstreamHandoff: 'De-identified cohort request and research proposal dossier',
+    downstreamHandoff: 'Formal referral to Independent Ethics Committee (REC / HRA)'
   },
   {
     id: 'node-ethics',
+    stepNumber: 4,
     label: 'Ethics Committee (REC / HRA)',
     category: 'governance',
-    shortDesc: 'Independent body reviewing study ethical validity, consent frameworks, and public benefit.',
+    categoryLabel: 'Independent Ethics',
+    shortDesc: 'Independent statutory body evaluating study ethical validity, scientific merit, consent frameworks, and public benefit.',
     statutoryRole: 'NHS REC / IRAS Protocol Favourable Opinion',
     handbookChapterRef: 'ch-projects',
-    color: '#34d399'
+    handbookChapterTitle: 'Chapter 02: Statutory Gateways & Ethical Approvals',
+    color: '#34d399',
+    responsibleRoles: [
+      'NHS Research Ethics Committee (REC) Chair & Committee Members',
+      'Independent Lay Public Members',
+      'Health Research Authority (HRA) Approvals Officer',
+      'Confidentiality Advisory Group (CAG) Reviewers'
+    ],
+    statutoryHandoffs: [
+      'Governance Arrangements for Research Ethics Committees (GAfREC) formal opinion',
+      'IRAS (Integrated Research Application System) standardized application submission',
+      'Section 251 NHS Act 2006 statutory clearance from CAG (if unconsented clinical data)'
+    ],
+    privacySafeguards: [
+      'Scrutiny of participant burden, vulnerable cohort safeguards, and incidental finding policies',
+      'Review of PPIE co-design evidence and lay summary clarity',
+      'Binding ethical stipulations governing cohort retention and secondary use boundaries'
+    ],
+    operationalActions: [
+      'Convening multi-disciplinary ethics panel including clinicians, ethicists, and lay citizens',
+      'Issuing formal Favourable Ethical Opinion with IRAS reference number and expiry schedule'
+    ],
+    upstreamHandoff: 'Caldicott Assent and IRAS Ethics Application Dossier',
+    downstreamHandoff: 'Ethical clearance token provided to Perimeter Access Gateway'
   },
   {
     id: 'node-accreditation',
+    stepNumber: 5,
     label: 'Researcher Accreditation (RAP)',
     category: 'governance',
-    shortDesc: 'Verifying researcher qualifications, institutional employment, and annual IG certification.',
-    statutoryRole: 'Safe Person Accreditation Standard',
+    categoryLabel: 'Safe Person',
+    shortDesc: 'Verifying researcher qualifications, institutional employment, bona fides, and certified annual Information Governance training.',
+    statutoryRole: 'Safe Person Accreditation Standard (DEA 2017 / ONS)',
     handbookChapterRef: 'ch-people',
-    color: '#38bdf8'
+    handbookChapterTitle: 'Chapter 01: Researcher Accreditation & Safe People',
+    color: '#38bdf8',
+    responsibleRoles: [
+      'Research Accreditation Panel (RAP / UKSA / ONS)',
+      'Submitting University Research Operations Office',
+      'Lead Principal Investigator (PI)',
+      'Platform Identity & Access Authority'
+    ],
+    statutoryHandoffs: [
+      'Digital Economy Act 2017 Section 64 (Accredited Researcher Scheme)',
+      'Research Passport and Honorary Clinical Research Contracts (HR / Occupational Health)',
+      'Certified completion of NHS Data Security & Protection Toolkit (DSPT) / MRC Research Governance modules'
+    ],
+    privacySafeguards: [
+      'Institutional employment verification and formal academic sponsorship',
+      'Signed Legal Researcher Undertaking acknowledging criminal sanctions for re-identification (DPA 2018 § 171)',
+      'Time-bounded credentials with mandatory annual retraining and re-vetting cycles'
+    ],
+    operationalActions: [
+      'Automated validation against national Accredited Researcher register',
+      'Issuance of cryptographic client credential (FIDO2 / mTLS) tied to verified individual identity'
+    ],
+    upstreamHandoff: 'Researcher application, institutional backing, and training certificates',
+    downstreamHandoff: 'Cryptographic credentials minted for Perimeter Access Gateway'
   },
   {
     id: 'node-gateway',
+    stepNumber: 6,
     label: 'Perimeter Access Gateway',
     category: 'boundary',
-    shortDesc: 'Secure boundary requiring FIDO2/MFA authentication and verifying project authorizations.',
-    statutoryRole: 'Perimeter Admission Control Gate',
+    categoryLabel: 'Access Boundary',
+    shortDesc: 'Hardened zero-trust gateway validating multi-factor authentication, active ethical clearance, and project authorization before admitting compute sessions.',
+    statutoryRole: 'Policy Enforcement Point (PEP) & Admission Gate',
     handbookChapterRef: 'ch-settings',
-    color: '#f59e0b'
+    handbookChapterTitle: 'Chapter 03: Secure Enclaves & Perimeter Controls',
+    color: '#f59e0b',
+    responsibleRoles: [
+      'Enclave Platform Security Engineers',
+      'Identity & Access Management (IAM / SAML) Administrators',
+      'Open Policy Agent (OPA) Evaluation Engine'
+    ],
+    statutoryHandoffs: [
+      'Real-time automated evaluation of project REC ethical validity and Caldicott approval',
+      'Sub-millisecond Open Policy Agent (OPA) admission policy evaluation (default allow = false)',
+      'mTLS 1.3 mutual certificate verification and FIDO2 WebAuthn hardware token check'
+    ],
+    privacySafeguards: [
+      'Zero direct microdata access: client laptops receive encrypted video pixels only (VDI streaming)',
+      'Software-defined perimeter and IP allowlisting blocking untrusted ingress networks',
+      'Immediate session termination and token revocation upon project expiry or security suspension'
+    ],
+    operationalActions: [
+      'Matching JWT claims against semantic project authorization graph in memory',
+      'Orchestrating ephemeral, isolated compute cleanroom for approved researcher session'
+    ],
+    upstreamHandoff: 'Verified Credentials from Accreditation + Project Clearance from Ethics & Caldicott',
+    downstreamHandoff: 'Spawned isolated workspace inside the Air-Gapped Enclave'
   },
   {
     id: 'node-enclave',
+    stepNumber: 7,
     label: 'Air-Gapped Research Enclave',
     category: 'enclave',
-    shortDesc: 'Hardened virtual cleanroom with zero outbound internet access and read-only microdata partitions.',
-    statutoryRole: 'Safe Setting (SATRE Standard)',
+    categoryLabel: 'Safe Setting',
+    shortDesc: 'Hardened virtual cleanroom with zero outbound WAN internet access, read-only data partitions, internal package mirrors, and GPU acceleration.',
+    statutoryRole: 'SATRE v1.1 Pillar 2 Secure Computing Cleanroom',
     handbookChapterRef: 'ch-settings',
-    color: '#8b5cf6'
+    handbookChapterTitle: 'Chapter 03: Secure Enclaves & Perimeter Controls',
+    color: '#8b5cf6',
+    responsibleRoles: [
+      'Accredited Analytical Researchers (Epidemiologists, Biostatisticians)',
+      'Enclave Platform Infrastructure Engineers',
+      'Accredited Clinical Safety Officer (CSO under DCB0129)'
+    ],
+    statutoryHandoffs: [
+      'SATRE Standard Architecture for Trusted Research Environments (v1.1 baseline)',
+      'ISO/IEC 27001:2022 & NHS DSPT Mandatory Technical Controls (zero egress enforcement)',
+      'DCB0129 Statutory Clinical Risk Management for in-house analytical models and algorithms'
+    ],
+    privacySafeguards: [
+      'Zero outbound WAN internet connectivity (enforced at Linux kernel & eBPF socket layer)',
+      'Internal air-gapped package mirrors (PyPI, CRAN, npm) pre-scanned for vulnerabilities and CVEs',
+      'Read-only microdata partitions (no researcher write or DDL privileges on shared database tables)',
+      'Ephemeral compute workspaces: all user session memory and temp files wiped on logout'
+    ],
+    operationalActions: [
+      'Execution of DuckDB, PostgreSQL, Python, and R statistical models against de-identified cohorts',
+      'Deposition of candidate summary publication tables and model coefficients into airlock staging zone'
+    ],
+    upstreamHandoff: 'Authorized ingress session from Perimeter Access Gateway',
+    downstreamHandoff: 'Candidate aggregate tables and statistical plots routed to SDC Scanner'
   },
   {
     id: 'node-sdc',
+    stepNumber: 8,
     label: 'Statistical Disclosure Control (SDC)',
     category: 'egress',
-    shortDesc: 'Primary suppression (k >= 10), dominance ceilings (<= 80%), and secondary suppression checks.',
-    statutoryRole: 'Safe Output Mathematical Protection',
+    categoryLabel: 'Mathematical Gate',
+    shortDesc: 'Automated policy-as-code scanner checking primary small-cell suppression (k >= 10), dominance ceilings (<= 80%), and regression degrees of freedom.',
+    statutoryRole: 'ONS & NHS SDE Quantitative Output Protection',
     handbookChapterRef: 'ch-outputs',
-    color: '#ec4899'
+    handbookChapterTitle: 'Chapter 05: Statistical Disclosure Control & Airlocks',
+    color: '#ec4899',
+    responsibleRoles: [
+      'Automated SDC Rego Policy Engine',
+      'SHACL Output Compliance Validator',
+      'Lead Analytical Investigator'
+    ],
+    statutoryHandoffs: [
+      'ONS Working Paper No. 22 Statistical Disclosure Control Guidance',
+      'NHS England Secure Data Environment SDC Standard Operating Procedure',
+      'W3C SHACL shape validation of candidate tabular schemas and summary metrics'
+    ],
+    privacySafeguards: [
+      'Minimum cell count suppression (k >= 10): all frequency counts between 1 and 9 replaced with *',
+      'Controlled rounding to Base 5 / 10 as alternative suppression technique',
+      'Secondary (complementary) suppression preventing margin subtraction deduction',
+      'Dominance rules: (1, 80%) single unit and (2, 85%) top-two contributor suppression',
+      'Prohibition of raw scatterplots and unbinned regression residual plots (must be binned/hexbin)',
+      'Kaplan-Meier survival curve tail smoothing or truncation when remaining risk pool N < 10'
+    ],
+    operationalActions: [
+      'Automated static analysis of candidate files, table matrices, and embedded chart coordinates',
+      'Compilation of structured mathematical compliance audit report for human airlock reviewers'
+    ],
+    upstreamHandoff: 'Candidate analytical outputs submitted from Enclave Workspace',
+    downstreamHandoff: 'Scanned files and automated compliance report sent to Airlock Review'
   },
   {
     id: 'node-airlock',
+    stepNumber: 9,
     label: 'Airlocked Review',
     category: 'egress',
-    shortDesc: 'Human-in-the-loop review by certified output officers checking candidate outputs against differencing, small-cell disclosure, and inferential re-identification risks.',
-    statutoryRole: 'Human-in-the-Loop Review Gate',
+    categoryLabel: 'Safe Output Gate',
+    shortDesc: 'Independent dual-reviewer sign-off by accredited SDC officers checking candidate outputs against differencing, small-cell disclosure, and inferential risks.',
+    statutoryRole: 'Human-in-the-Loop SDC Officer Verification',
     handbookChapterRef: 'ch-outputs',
-    color: '#f97316'
+    handbookChapterTitle: 'Chapter 05: Statistical Disclosure Control & Airlocks',
+    color: '#f97316',
+    responsibleRoles: [
+      'Lead Statistical Disclosure Control (SDC) Officer',
+      'Secondary Independent SDC Officer',
+      'Enclave Information Governance Lead'
+    ],
+    statutoryHandoffs: [
+      'Safe Output principle of Five Safes framework',
+      'Dual-reviewer independent authorization protocol (two distinct accredited SDC officers)',
+      'W3C PROV-O non-repudiable audit recording of review decision and officer signatures'
+    ],
+    privacySafeguards: [
+      'Differencing attack analysis against previous project releases and public registries',
+      'Computer vision and OCR scanning of plot images for embedded microdata pixels or small numbers',
+      'Steganography and zero-width character inspection preventing covert PII exfiltration',
+      'Strict prohibition of raw microdata CSVs, uncompiled binaries, and SQL table dumps'
+    ],
+    operationalActions: [
+      'Inspection of candidate files in isolated airlock quarantine viewer',
+      'Two-party cryptographic signing (Cosign / ECDSA) of approved release manifest'
+    ],
+    upstreamHandoff: 'Mathematical validation report from automated SDC scanner',
+    downstreamHandoff: 'Signed release bundle unlocked for external researcher egress'
   },
   {
     id: 'node-publication',
+    stepNumber: 10,
     label: 'Safe Public Health Output',
     category: 'release',
-    shortDesc: 'Fully anonymous epidemiological models and statistical charts approved for public release.',
+    categoryLabel: 'Public Domain',
+    shortDesc: 'Fully anonymous epidemiological models, aggregated tables, and peer-reviewed clinical publications released into the public domain.',
     statutoryRole: 'Anonymous Data (UK GDPR Recital 26)',
     handbookChapterRef: 'ch-outputs',
-    color: '#10b981'
+    handbookChapterTitle: 'Chapter 05: Statistical Disclosure Control & Airlocks',
+    color: '#10b981',
+    responsibleRoles: [
+      'Principal Investigator & Study Co-Authors',
+      'Peer-Reviewed Scientific Journal Editors',
+      'Public & Patient Involvement Co-Authors',
+      'NHS SDE Public Communications Lead'
+    ],
+    statutoryHandoffs: [
+      'UK GDPR Recital 26 (data rendered non-identifiable ceases to be personal data)',
+      'Caldicott Principle 8 (publication of lay findings and public benefit evidence)',
+      'Open Science and FAIR Data principles (Findable, Accessible, Interoperable, Reusable)'
+    ],
+    privacySafeguards: [
+      'Output fully resilient to Motivated Intruder and Prosecutor re-identification models',
+      'Inclusion of lay summaries co-authored with lived-experience patient advisory panel',
+      'Permanent archival of compliance dossier in non-repudiable institutional repository'
+    ],
+    operationalActions: [
+      'Publication in open-access scientific journals and policy briefings',
+      'Updating Public Data Use Register with final published citations and project closure'
+    ],
+    upstreamHandoff: 'Cryptographically signed release bundle from Airlock Review',
+    downstreamHandoff: 'Public health impact, NICE guideline update, and clinical practice improvement'
   }
 ];
 
@@ -300,8 +561,8 @@ const IG_QUIZ_QUESTIONS: IGQuizQuestion[] = [
       'No cell suppression is needed if data is pseudonymised'
     ],
     correctIndex: 1,
-    explanation: 'National Information Governance and Statistical Disclosure Control (SDC) guidelines (ONS and SAIL Databank standards) mandate primary suppression for any table cell representing fewer than 10 individuals (k < 10).',
-    statutoryReference: 'ONS SDC Standard & SAIL Databank Output Review Protocol § 3.2'
+    explanation: 'National Information Governance and Statistical Disclosure Control (SDC) guidelines (ONS and secure environment standards) mandate primary suppression for any table cell representing fewer than 10 individuals (k < 10).',
+    statutoryReference: 'ONS SDC Standard & National Output Review Protocol § 3.2'
   },
   {
     id: 'ig-q2',
@@ -392,7 +653,7 @@ A comprehensive, multi-agency planning dossier for research protocols accessing 
 1.5 Target Ethics, Statutory & Data Governance Approval Bodies:
     [X] HRA Research Ethics Committee (NHS REC)
     [X] Confidentiality Advisory Group (CAG Section 251) - for unconsented secondary care linkage
-    [X] Data Access Committee (DAC / IGRP / Information Governance Panel)
+    [X] Data Access Committee (DAC / Institutional Information Governance Panel)
     [X] National Data Opt-Out (NDOO) Exemption / Compliance Verification
 1.6 Chief Investigator (CI) & Professional Affiliations:
     - Name: [Prof. / Dr. Jane Doe]
@@ -610,11 +871,11 @@ Application under Regulation 5 of the Health Service (Control of Patient Informa
     - Project transparency notices will be displayed on participating NHS Trust websites with dedicated contact points for opt-out queries.`
   },
   {
-    id: 'tmpl-dac-igrp',
-    title: 'Data Access Committee (DAC / IGRP) Cohort Specification & Variable Minimisation Schedule',
+    id: 'tmpl-dac-schedule',
+    title: 'Data Access Committee (DAC) Cohort Minimisation & Data Sharing Schedule',
     category: 'Data Access Committee (DAC)',
-    description: 'Operational schedule for institutional Data Access Committees and Information Governance Review Panels (IGRP). Specifies exact clinical tables, column exclusions, temporal windows, and researcher credentials.',
-    markdownContent: `# Data Access Committee (DAC / IGRP) Variable Minimisation & Cohort Schedule
+    description: 'Organization-agnostic operational schedule for institutional Data Access Committees (DAC) and Information Governance Review Boards. Specifies exact clinical tables, column exclusions, temporal windows, and researcher credentials.',
+    markdownContent: `# Data Access Committee (DAC) Variable Minimisation & Cohort Schedule
 Institutional Review & Data Sharing Approval Specification.
 
 ---

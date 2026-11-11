@@ -140,10 +140,10 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
 
           <div className="space-y-3">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
-              Streamlining Information Governance for Safe &amp; Secure Data Intelligence Environments
+              Streamlined Information Governance for Safe &amp; Secure Data Intelligence Environments
             </h1>
             <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
-              Technical navigation of IG semantic ontology, standardising evidence packs, and generating clear, structured compliance reviews.
+              Navigation of IG via semantic ontology, standardised evidence packs, clear, structured compliance reviews, and progress tracked and certificated learning.
             </p>
           </div>
 
