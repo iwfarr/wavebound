@@ -146,7 +146,7 @@ tre:WorkspaceAdmissionShape a sh:NodeShape ;
     category: 'Enforcement',
     icon: 'Cpu',
     playbookSection: 'Section 1, Section 2 & Section 3 (Phase 4)',
-    plainEnglishSummary: 'Knowledge graphs are rich for humans and auditors, but microsecond firewalls and Kubernetes cluster controllers need lightning-fast rule evaluation. The compiler automatically translates graph rules into Open Policy Agent (OPA) Rego code.',
+    plainEnglishSummary: 'Knowledge graphs are rich for humans and auditors, but microsecond firewalls and runtime compute admission controllers need lightning-fast rule evaluation. The compiler automatically translates graph rules into Open Policy Agent (OPA) Rego code.',
     summary: 'To achieve microsecond Policy Enforcement Point (PEP) latencies, the compiler (`compiler/rdf_to_rego.py` and `generate_opa.py`) translates Turtle ontology assertions and SHACL shapes into native Open Policy Agent (OPA) Rego policy documents.',
     keyPrinciples: [
       'Decoupled Policy Engine: OPA evaluates policies as code against JSON inputs at runtime without needing graph database traversals at ingress.',
@@ -191,8 +191,8 @@ any_unmasked_pii(columns) {
         }
       },
       {
-        heading: 'PEP Kubernetes Admission Integration',
-        body: 'When a researcher launches a Jupyter notebook or pod, the Kubernetes validating webhook forwards the admission review to OPA. If `allow` is false, pod creation is rejected with the exact policy violation reason.'
+        heading: 'PEP Service & Container Admission Integration',
+        body: 'When a researcher launches a Jupyter notebook or compute session, the admission webhook forwards the review request to OPA. If `allow` is false, session creation is rejected with the exact policy violation reason.'
       }
     ],
     commonPitfalls: [
@@ -415,7 +415,7 @@ export const SATRE_PILLARS: SatrePillarDetail[] = [
     id: 'satre-infra',
     name: 'Computing Infrastructure',
     shortDesc: 'Zero-egress hardened cloud enclaves, microsegmented VPCs, ephemeral compute, and isolated subnets.',
-    fullDesc: 'The SATRE Computing Infrastructure pillar specifies technical boundaries guaranteeing that data stays inside the environment. Compute nodes (Kubernetes clusters, Jupyter containers, virtual desktops) are instantiated in locked-down Virtual Private Clouds (VPCs) with external internet routing disabled.',
+    fullDesc: 'The SATRE Computing Infrastructure pillar specifies technical boundaries guaranteeing that data stays inside the environment. Compute nodes (analytical containers, Jupyter workspaces, virtual desktops) are instantiated in locked-down Virtual Private Clouds (VPCs) with external internet routing disabled.',
     keyRequirements: [
       'Zero external internet egress routing (egress disabled at the VPC and network security group level).',
       'Microsegmentation preventing unauthorized inter-project network communication.',

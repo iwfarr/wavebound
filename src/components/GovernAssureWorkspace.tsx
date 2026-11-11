@@ -6,6 +6,7 @@ import { FiveSafesPillarsView } from './FiveSafesPillarsView';
 import { QuantitativeSDCHub } from './QuantitativeSDCHub';
 import { CaldicottTransparencyPortal } from './CaldicottTransparencyPortal';
 import { ProcurementReadinessHub } from './ProcurementReadinessHub';
+import { GovernanceCharterModal } from './GovernanceCharterModal';
 import {
   Scale,
   ShieldCheck,
@@ -495,11 +496,11 @@ tre:airlockAutoVerification "PASSED" .`,
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-            Governance Decision-Support &amp; Compliance Dossier Compiler
+            Governance Review Aid &amp; Evidence Summary Compiler
           </h1>
 
           <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-            Translates complex statutory mandates into an unambiguous, machine-verifiable evidence baseline. Simulates study protocols against 6 statutory gates, inspects plain-English legal translations, and compiles a standardized compliance dossier to assist human review panels (Caldicott Guardians, DAAG, and local IG boards).
+            A practical workspace to help research teams and Information Governance panels check study proposals against standard UK health data rules (Caldicott Principles, Section 251, REC ethics, and SDC thresholds). It evaluates proposal details against working policy shapes and compiles a standardized evidence summary to help human reviewers spot issues early.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-3 text-xs">
@@ -519,6 +520,17 @@ tre:airlockAutoVerification "PASSED" .`,
             </button>
           </div>
 
+          {/* Practical Note: Mandatory Documents vs Operational Aid */}
+          <div className="p-3.5 rounded-lg bg-amber-950/40 border border-amber-800/60 text-xs text-amber-200 space-y-1.5 text-left">
+            <div className="flex items-center gap-2 font-bold text-amber-300">
+              <ShieldAlert className="w-4 h-4 text-amber-400 shrink-0" />
+              <span>Are these decision-support summaries or &quot;dossiers&quot; legally mandatory documents?</span>
+            </div>
+            <p className="text-slate-300 text-[11px] leading-relaxed">
+              <strong>No.</strong> There is no statutory requirement under UK law to create an automated &quot;compliance dossier&quot;. The actual legally mandated documents are your <strong>Data Protection Impact Assessment (DPIA under UK GDPR Art 35)</strong>, <strong>Data Sharing Agreement (DSA)</strong>, <strong>HRA REC Ethical Approval</strong>, <strong>Section 251 CAG Clearance</strong> (when using confidential patient data without consent), and annual <strong>Data Security &amp; Protection Toolkit (DSPT)</strong> submissions. This evidence summary is simply an operational tool to help Caldicott Guardians and Data Access Committees review applications without tedious manual checklists.
+            </p>
+          </div>
+
           {/* Context Strip: Evidence Pack vs Governance Charter */}
           <div className="p-3.5 rounded-lg bg-slate-950/80 border border-cyan-900/60 grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px] text-slate-300 text-left">
             <div className="space-y-1 border-b md:border-b-0 md:border-r border-cyan-900/60 pb-2 md:pb-0 md:pr-3">
@@ -527,7 +539,7 @@ tre:airlockAutoVerification "PASSED" .`,
                 <span>Standardized Evidence Pack (Session Decision-Support):</span>
               </strong>
               <p className="text-slate-400 leading-relaxed">
-                Compiled when an accredited researcher requests workspace access or airlock export. Evaluates the specific study protocol against W3C SHACL/OPA rules, producing a standardized evidence dossier for human DAAG and Caldicott review.
+                Compiled when an accredited researcher requests workspace access or airlock export. Evaluates the specific study protocol against working SHACL and policy rules, producing a standardized evidence summary to assist human DAAG and Caldicott review panels.
               </p>
             </div>
             <div className="space-y-1">
@@ -536,7 +548,7 @@ tre:airlockAutoVerification "PASSED" .`,
                 <span>Governance Charter (Static Framework Baseline):</span>
               </strong>
               <p className="text-slate-400 leading-relaxed">
-                Referenced during <strong>institutional procurement and Trust onboarding</strong>. Establishes the overarching legal mandates (DEA 2017, UK GDPR, Section 251) and clinical safety standards (DCB0129, DSPT).
+                Referenced during <strong>institutional procurement and Trust onboarding</strong>. Sets out the baseline statutory mandates (DEA 2017, UK GDPR, Section 251) and clinical safety standards (DCB0129, DSPT).
               </p>
             </div>
           </div>
@@ -1205,120 +1217,11 @@ tre:airlockAutoVerification "PASSED" .`,
         onNavigateToDecisionRegister={onNavigateToDecisionRegister}
       />
 
-      {/* 6. INSTITUTIONAL GOVERNANCE CHARTER MODAL */}
-      {isCharterModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 dark:bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-4xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            {/* Modal Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-5">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <WaveboundLogo variant="badge" size="xs" />
-                  <span className="text-[11px] font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider">
-                    Official Statutory Framework
-                  </span>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
-                  Public Interest Data Governance &amp; Population Health Research Charter
-                </h3>
-                <span className="text-xs text-slate-500 dark:text-slate-400 font-mono block">
-                  Reference: WAVEBOUND-PAC-GOV-2026-V4 · Ratified for NHS SDE &amp; Academic TRE Environments
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2 self-start sm:self-center">
-                <button
-                  onClick={() => window.print()}
-                  className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
-                  title="Print or Save as PDF"
-                >
-                  <Printer className="w-3.5 h-3.5" />
-                  <span>Print / PDF</span>
-                </button>
-                <button
-                  onClick={() => setIsCharterModalOpen(false)}
-                  className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white border border-slate-200 dark:border-slate-700 cursor-pointer"
-                >
-                  ✕
-                </button>
-              </div>
-            </div>
-
-            {/* Charter Body */}
-            <div className="space-y-5 text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2">
-                <strong className="text-[#005EB8] dark:text-sky-400 uppercase tracking-wider text-[11px] block font-mono">
-                  1. Statutory Mandates &amp; Legal Processing Gateways
-                </strong>
-                <p className="text-[12px] text-slate-600 dark:text-slate-300">
-                  All analytical processing across safe &amp; secure data intelligence environments is authorized under statutory legislation including:
-                </p>
-                <ul className="list-disc pl-5 space-y-1.5 text-slate-600 dark:text-slate-400 text-[11.5px]">
-                  <li><strong className="text-slate-900 dark:text-slate-200">Digital Economy Act 2017 (Part 5, Ch. 5)</strong>: Public authority data sharing under UKSA accreditation with statutory disclosure safeguards (§ 67).</li>
-                  <li><strong className="text-slate-900 dark:text-slate-200">UK GDPR Articles 6(1)(e) &amp; 9(2)(j)</strong>: Lawful basis for public-interest archiving, scientific research, and health data linkage with Article 89(1) technical safeguards.</li>
-                  <li><strong className="text-slate-900 dark:text-slate-200">NHS Act 2006 (Section 251)</strong>: Confidentiality Advisory Group (CAG) statutory approvals for identifiable clinical microdata linkage.</li>
-                  <li><strong className="text-slate-900 dark:text-slate-200">The 8 NHS Caldicott Principles</strong>: Enforcing Caldicott Principle 8 (Public Transparency) through proactive PPIE engagement and publication of standardized evidence packs.</li>
-                </ul>
-              </div>
-
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2">
-                <strong className="text-[#005EB8] dark:text-sky-400 uppercase tracking-wider text-[11px] block font-mono">
-                  2. Standards Architecture &amp; Quality Assurances
-                </strong>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px]">
-                  <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                    <span className="font-bold text-slate-900 dark:text-white block">ISO/IEC 27001 &amp; 27701</span>
-                    <span className="text-slate-500 dark:text-slate-400 text-[10.5px]">Information Security &amp; Privacy Information Management baselines.</span>
-                  </div>
-                  <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                    <span className="font-bold text-slate-900 dark:text-white block">ISO/IEC 42001 &amp; 5259</span>
-                    <span className="text-slate-500 dark:text-slate-400 text-[10.5px]">Artificial Intelligence Management and Data Quality / Bias Minimization.</span>
-                  </div>
-                  <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                    <span className="font-bold text-slate-900 dark:text-white block">DCB0129 &amp; DCB0160</span>
-                    <span className="text-slate-500 dark:text-slate-400 text-[10.5px]">Statutory NHS Clinical Safety Risk Management for Digital Health Software.</span>
-                  </div>
-                  <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                    <span className="font-bold text-slate-900 dark:text-white block">SATRE v1.1 Baseline</span>
-                    <span className="text-slate-500 dark:text-slate-400 text-[10.5px]">Standard Architecture for Trusted Research Environments (TREs).</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2">
-                <strong className="text-[#005EB8] dark:text-sky-400 uppercase tracking-wider text-[11px] block font-mono">
-                  3. Operational Five Safes Invariants &amp; Human Governance
-                </strong>
-                <p className="text-[11.5px] text-slate-600 dark:text-slate-300">
-                  Every active project must satisfy five continuous invariants: verified accreditation for Safe People, ethical clearance for Safe Projects, air-gapped zero-egress networks with internal mirrors for Safe Settings, tiered minimization for Safe Data, and statistical disclosure control (k ≥ 10, dominance ≤ 80%) for Safe Outputs. All decisions are submitted as standardized evidence packs for human panel approval by DAAG and local Caldicott Guardians.
-                </p>
-              </div>
-            </div>
-
-            {/* Modal Actions */}
-            <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText("PUBLIC INTEREST DATA GOVERNANCE & POPULATION RESEARCH CHARTER (WAVEBOUND-PAC-GOV-2026-V4)\n\nStatutory Mandates: DEA 2017, UK GDPR Art 6/9, NHS Act 2006 s251, Caldicott Principles.\nStandards: ISO 27001, ISO 42001, DCB0129/DCB0160, SATRE v1.1.");
-                  setCopiedCharter(true);
-                  setTimeout(() => setCopiedCharter(false), 2000);
-                }}
-                className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-mono flex items-center gap-1.5 cursor-pointer"
-              >
-                {copiedCharter ? <Check className="w-3.5 h-3.5 text-[#047857]" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copiedCharter ? 'Summary Copied!' : 'Copy Charter Summary'}</span>
-              </button>
-
-              <button
-                onClick={() => setIsCharterModalOpen(false)}
-                className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-white text-white dark:text-slate-900 font-medium text-xs cursor-pointer"
-              >
-                Close Charter
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* 6. EXPANSIVE INSTITUTIONAL GOVERNANCE CHARTER MODAL */}
+      <GovernanceCharterModal
+        isOpen={isCharterModalOpen}
+        onClose={() => setIsCharterModalOpen(false)}
+      />
     </div>
   );
 };

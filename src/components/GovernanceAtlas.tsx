@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import cytoscape from 'cytoscape';
+import { GovernanceCharterModal } from './GovernanceCharterModal';
 import { GLOSSARY_TERMS, GlossaryTerm } from '../data/glossaryData';
 import {
   ShieldCheck,
@@ -1043,50 +1044,10 @@ Accountability is distributed across independent roles without reliance on singl
       )}
 
       {/* Comprehensive Charter Modal */}
-      {showFullCharter && (
-        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-4xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
-            <div className="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950/70">
-              <div className="flex items-center gap-2">
-                <FileText className="w-5 h-5 text-cyan-400" />
-                <h3 className="font-bold text-white text-base">
-                  Public Interest Data Governance &amp; Population Research Charter (Full Text)
-                </h3>
-              </div>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={handleDownloadCharter}
-                  className="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-lg text-xs flex items-center gap-1.5"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  <span>Download .md</span>
-                </button>
-                <button
-                  onClick={() => setShowFullCharter(false)}
-                  className="text-slate-400 hover:text-white px-2 py-1 text-sm font-bold"
-                >
-                  ✕
-                </button>
-              </div>
-            </div>
-
-            <div className="p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-mono bg-slate-950/40">
-              <pre className="whitespace-pre-wrap font-sans leading-relaxed text-slate-200">
-                {COMPREHENSIVE_CHARTER_MD}
-              </pre>
-            </div>
-
-            <div className="p-4 border-t border-slate-800 flex justify-end bg-slate-950/70">
-              <button
-                onClick={() => setShowFullCharter(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg"
-              >
-                Close Window
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <GovernanceCharterModal
+        isOpen={showFullCharter}
+        onClose={() => setShowFullCharter(false)}
+      />
     </div>
   );
 };

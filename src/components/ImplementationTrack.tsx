@@ -39,7 +39,8 @@ import {
   Cloud,
   Sparkles,
   Undo2,
-  Info
+  Info,
+  Cpu
 } from 'lucide-react';
 
 interface ImplementationTrackProps {
@@ -63,7 +64,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
   const [checklistFilter, setChecklistFilter] = useState<'ALL' | 'SETUP' | 'DECISION REQUIRED' | 'IMPLEMENT' | 'VERIFY'>('ALL');
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>(() => {
     try {
-      const saved = localStorage.getItem('seawater_checklist_progress');
+      const saved = localStorage.getItem('wavebound_checklist_progress');
       if (saved) {
         return JSON.parse(saved);
       }
@@ -81,7 +82,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
   // Persist checklist progress per visitor
   React.useEffect(() => {
     try {
-      localStorage.setItem('seawater_checklist_progress', JSON.stringify(checkedItems));
+      localStorage.setItem('wavebound_checklist_progress', JSON.stringify(checkedItems));
     } catch {
       // Ignore storage errors in restricted iframes
     }
@@ -149,17 +150,84 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
-            Transitioning from Overview to Production Without Breaking Deployed Services
+            Transitioning from Policy Design to Production Without Breaking Deployed Services
           </h1>
 
           <p className="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed">
-            A comprehensive, rigorous operational engineering roadmap taking an institution from blank ontologies
-            to automated Kubernetes admission controls and airlock enforcement. Combines a granular <strong>16-week sprint schedule</strong>,
+            A practical, non-breaking engineering roadmap taking an institution from blank policy definitions
+            to automated service admission controls and airlock enforcement. Combines a granular <strong>16-week sprint schedule</strong>,
             staged <strong>non-breaking rollout modes (Evaluate-Only &rarr; Shadow &rarr; Canary &rarr; Active)</strong>, and an accountable <strong>Decision Register (D-001 &ndash; D-009)</strong>.
           </p>
 
+          {/* Clarity Callout: Playbook vs Implementation Track */}
+          <div className="p-4 rounded-xl bg-slate-950/90 border border-cyan-800/60 text-xs space-y-2">
+            <div className="flex items-center gap-2 text-cyan-300 font-bold">
+              <Sparkles className="w-4 h-4 text-cyan-400" />
+              <span>How the Playbook &amp; Implementation Track Work Together (Without Duplication)</span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-slate-300 pt-1 text-[11px]">
+              <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 space-y-1">
+                <span className="font-bold text-cyan-300 block">The Playbook (The Rules &amp; Rationale)</span>
+                <p className="text-slate-400 leading-relaxed">
+                  Your conceptual curriculum and governance standard. Explains <em>why</em> rules exist (Five Safes, Caldicott Principles, statutory roots, and semantic graph modelling). Designed for IG Leads, Caldicott Guardians, and architects to align on definitions.
+                </p>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 space-y-1">
+                <span className="font-bold text-teal-300 block">The Implementation Track (The Technical Delivery)</span>
+                <p className="text-slate-400 leading-relaxed">
+                  Your operational delivery track. Explains <em>how</em> to safely introduce policy-as-code into running hospital clusters without outages. Provides the GitOps tree, decision sign-offs, canary stages, and verified rollback runbooks.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Spoon-Fed 5-Step Starter Walkthrough */}
+          <div className="p-4 rounded-xl bg-[#07192f] border border-[#1b3f68] text-xs space-y-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-cyan-900/40 pb-2">
+              <span className="font-bold text-white flex items-center gap-1.5 text-sm">
+                <CheckCircle2 className="w-4 h-4 text-teal-400" />
+                <span>Start Here: Implementing Policy-as-Code in 5 Simple Steps (Least-Knowledge Quickstart)</span>
+              </span>
+              <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">
+                Beginner Friendly · Pragmatic Path
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 text-[11px]">
+              <div className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 space-y-1">
+                <span className="font-mono font-bold text-cyan-400 block">1. Write in English</span>
+                <p className="text-slate-400 text-[10px] leading-relaxed">
+                  Agree on simple human rules first (e.g. &quot;IG training valid within 12 months&quot;, &quot;Cell count &ge; 10&quot;). No code needed yet.
+                </p>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 space-y-1">
+                <span className="font-mono font-bold text-cyan-400 block">2. Express Declaratively</span>
+                <p className="text-slate-400 text-[10px] leading-relaxed">
+                  Write rules as testable declarations: SHACL shapes or OPA Rego rules (e.g. <code className="text-teal-300">cell_count &gt;= 10</code>).
+                </p>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 space-y-1">
+                <span className="font-mono font-bold text-cyan-400 block">3. Test on Synthetic Data</span>
+                <p className="text-slate-400 text-[10px] leading-relaxed">
+                  Run test scripts against mock JSON/RDF fixtures on your laptop to verify that disclosive requests fail before connecting to servers.
+                </p>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 space-y-1">
+                <span className="font-mono font-bold text-cyan-400 block">4. Deploy in Audit Mode</span>
+                <p className="text-slate-400 text-[10px] leading-relaxed">
+                  Connect to your admission service in non-blocking evaluate-only mode. Record decisions in logs for 2–4 weeks; zero researchers are blocked.
+                </p>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 space-y-1">
+                <span className="font-mono font-bold text-teal-300 block">5. Enable with Fail-Open</span>
+                <p className="text-slate-400 text-[10px] leading-relaxed">
+                  Once false positives hit 0%, switch on active checks. Keep an emergency bypass switch active in case of unexpected outages.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Quick Metrics Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
             <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3">
               <span className="text-[10px] text-slate-500 uppercase font-mono block">Timeline</span>
               <span className="text-lg font-bold text-cyan-300 font-mono">16 Weeks</span>
@@ -190,7 +258,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
               { id: 'decisions', label: '3. Policy Decision Register (D-001–D-009)', icon: <Lock className="w-3.5 h-3.5" /> },
               { id: 'checklist', label: '4. Operational Checklist & Progress', icon: <CheckCircle2 className="w-3.5 h-3.5" /> },
               { id: 'architecture-code', label: '5. Zero-Downtime Deployment & Code', icon: <Code2 className="w-3.5 h-3.5" /> },
-              { id: 'deployment-hosting', label: '6. GitHub Pages vs Cloud Run & Rollback', icon: <Globe className="w-3.5 h-3.5" /> }
+              { id: 'deployment-hosting', label: '6. Enterprise Policy Engine Rollout & Health Check', icon: <Cpu className="w-3.5 h-3.5" /> }
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -1205,74 +1273,46 @@ echo "Wavebound PEP admission bypassed; emergency fail-safe active. Zero running
             </div>
 
             <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-rose-300 overflow-x-auto leading-relaxed">
-              <code>{`# Step 1: Instantly patch webhook to Ignore mode (bypasses any timeout or OPA hang)
-kubectl patch validatingwebhookconfiguration wavebound-tre-admission-hook \\
-  --type='json' -p='[{"op": "replace", "path": "/webhooks/0/failurePolicy", "value": "Ignore"}]'
+              <code>{`# Step 1: Instantly patch admission controller to Ignore/Audit mode (bypasses any timeout or OPA hang)
+curl -X PATCH http://admission-controller.internal/v1/config \\
+  -H "Content-Type: application/json" \\
+  -d '{"failurePolicy": "Ignore", "auditOnly": true}'
 
-# Step 2: If the webhook controller itself is partitioned, remove registration immediately
-kubectl delete validatingwebhookconfiguration wavebound-tre-admission-hook --wait=false
+# Step 2: If the admission hook service itself is partitioned, toggle the emergency fail-open bypass flag
+tre-admission-cli bypass --enable --reason="Emergency maintenance - zero research disruption"
 
-# Step 3: Verify existing research pods and databases remain running without interruption
-kubectl get pods -n tre-workspaces`}</code>
+# Step 3: Verify existing research workspaces and analytical pipelines continue operating uninterrupted
+tre-service-cli status --all`}</code>
             </pre>
           </div>
         </div>
       )}
 
-      {/* TAB 6: DUAL-MODE DEPLOYMENT: GITHUB PAGES VS CLOUD RUN, AI SPIN-UP & ROLLBACK */}
+      {/* TAB 6: ENTERPRISE POLICY ENGINE ROLLOUT, HEALTH CHECK & VERIFICATION PIPELINE */}
       {activeTab === 'deployment-hosting' && (
         <div className="space-y-8 animate-in fade-in duration-300">
           {/* Header Card */}
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-4">
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">
-                Documentation &amp; Portal Publishing
+                Production Policy Engine
               </span>
-              <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">
-                GitHub Pages Ready
+              <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-teal-950 text-teal-300 border border-teal-800">
+                OPA PDP &amp; W3C SHACL
               </span>
               <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
-                Gemini 3.8 Flash Full-Stack
+                Zero-Downtime GitOps
               </span>
             </div>
 
             <h3 className="text-2xl font-black text-white tracking-tight">
-              Publishing the Public Playbook Portal: Static GitHub Pages vs Full-Stack Cloud Run
+              Enterprise Policy-as-Code Engine Rollout, Health Check &amp; Verification Pipeline
             </h3>
 
-            {/* Clear Scope Boundary Callout */}
-            <div className="p-4 rounded-xl bg-cyan-950/40 border border-cyan-800/80 text-xs text-cyan-100 space-y-2">
-              <div className="flex items-center gap-2 font-bold text-cyan-300 text-sm">
-                <Info className="w-4 h-4 shrink-0 text-cyan-400" />
-                <span>Scope Clarification: Policy-as-Code Cluster Engine vs Public Playbook Web Portal</span>
-              </div>
-              <p className="leading-relaxed text-slate-200">
-                It is vital to distinguish between two distinct deployments in Wavebound:
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
-                <div className="bg-slate-950/70 p-3 rounded-lg border border-cyan-900/60">
-                  <div className="font-bold text-white flex items-center gap-1.5 mb-1">
-                    <Server className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>1. Wavebound Policy Engine (Internal Cluster)</span>
-                  </div>
-                  <p className="text-[11px] text-slate-300 leading-normal">
-                    Covered in <strong>Tabs 1–5</strong>: This is the operational OPA PDP, namespaced admission audit controller, direct analytical data plane, and W3C SHACL evaluators deployed directly into your enterprise Kubernetes SDE/TRE cluster under least-privilege RBAC. It compiles standardized evidence packs to support human panel oversight.
-                  </p>
-                </div>
-                <div className="bg-slate-950/70 p-3 rounded-lg border border-purple-900/60">
-                  <div className="font-bold text-white flex items-center gap-1.5 mb-1">
-                    <Globe className="w-3.5 h-3.5 text-purple-400" />
-                    <span>2. Wavebound Playbook Web Portal (Public / Extranet)</span>
-                  </div>
-                  <p className="text-[11px] text-slate-300 leading-normal">
-                    Covered in <strong>Tab 6</strong>: This is the user-facing knowledge portal, decision register, interactive data dictionary, and IG Quick Guide. Publishing this openly fulfills <strong>Caldicott Principle 8 (Public Transparency)</strong> and enables external academic researchers to draft compliant IRAS/DAC applications without needing VPN access.
-                  </p>
-                </div>
-              </div>
-            </div>
-
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-4xl">
-              Why publish the Playbook as an open public resource? Academic researchers, clinical investigators, and partner health boards frequently plan research protocols months before receiving TRE account credentials. By hosting the Wavebound Playbook as a <strong>100% free static site on GitHub Pages</strong> (where all policy synthesizers, statutory guides, and interactive calculators execute in-browser), institutions streamline onboarding, publish transparent governance registers, and offer zero-cost public accountability. Alternatively, enterprise environments can deploy the portal to <strong>Google Cloud Run</strong> with full-stack Node.js and Gemini live policy synthesis.
+              How does an organization or NHS Trust engineering team roll out ontology-led policy-as-code into their secure analytical environment?
+              Wavebound decouples enduring governance definitions (<code className="text-cyan-300 font-mono">ontology/</code>) from high-speed runtime policy enforcement points (PEPs).
+              Below is the step-by-step technical runbook to deploy the Open Policy Agent (OPA) Policy Decision Point (PDP) daemon and W3C SHACL shape validator alongside your analytical services without breaking existing workloads.
             </p>
           </div>
 
@@ -1280,88 +1320,92 @@ kubectl get pods -n tre-workspaces`}</code>
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
             <h4 className="text-base font-bold text-white flex items-center gap-2">
               <Server className="w-4 h-4 text-cyan-400" />
-              <span>Feature &amp; Execution Matrix: Mode A vs Mode B</span>
+              <span>Deployment Topology: Sidecar Daemon (Mode A) vs Centralized Cluster PDP (Mode B)</span>
             </h4>
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
                   <tr className="border-b border-slate-800 text-slate-400 font-mono text-[11px]">
-                    <th className="py-3 px-4">Capability Dimension</th>
-                    <th className="py-3 px-4 text-cyan-300">Mode A: Static Hosting (GitHub Pages)</th>
-                    <th className="py-3 px-4 text-purple-300">Mode B: Full-Stack (Cloud Run / Node.js)</th>
+                    <th className="py-3 px-4">Evaluation Dimension</th>
+                    <th className="py-3 px-4 text-cyan-300">Topology A: In-Process / Sidecar OPA Daemon</th>
+                    <th className="py-3 px-4 text-purple-300">Topology B: Centralized High-Availability PDP Service</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-800/60 text-slate-300">
                   <tr>
-                    <td className="py-3 px-4 font-semibold text-white">Hosting Infrastructure &amp; Cost</td>
-                    <td className="py-3 px-4 text-emerald-300">$0 / Free (GitHub Pages CDN, zero servers)</td>
-                    <td className="py-3 px-4 text-slate-300">Minimal (Cloud Run container with scale-to-zero)</td>
+                    <td className="py-3 px-4 font-semibold text-white">Evaluation Latency</td>
+                    <td className="py-3 px-4 text-emerald-300">Sub-millisecond (&lt; 1ms line-rate, local UNIX socket/localhost)</td>
+                    <td className="py-3 px-4 text-slate-300">2–5ms (internal VPC gRPC / REST network roundtrip)</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 font-semibold text-white">Policy-as-Code Synthesizer</td>
-                    <td className="py-3 px-4">
-                      Client-side rule engine (Instant W3C SHACL shapes, OPA Rego rules, test inputs &amp; PROV-O triples)
-                    </td>
-                    <td className="py-3 px-4">
-                      Live Gemini 3.8 Flash via Express server (<code className="text-cyan-400">/api/generate-policy</code>)
-                    </td>
+                    <td className="py-3 px-4 font-semibold text-white">Network Failure Blast Radius</td>
+                    <td className="py-3 px-4 text-emerald-300">Zero network dependency (runs on same node as PEP gateway)</td>
+                    <td className="py-3 px-4 text-slate-300">Requires local caching or fail-open bypass if network partitions</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 font-semibold text-white">Quiz Engine</td>
+                    <td className="py-3 px-4 font-semibold text-white">Policy Bundle Distribution</td>
                     <td className="py-3 px-4">
-                      30+ curated technical questions across 6 Five Safes &amp; SDC categories
+                      GitOps agent pulls compiled bundles (<code className="text-cyan-400">authz.rego</code>) on git commit
                     </td>
                     <td className="py-3 px-4">
-                      Dynamic AI quiz generator powered by Gemini 3.8 Flash + curated bank fallback
+                      Centralized bundle server broadcasts updates to OPA cluster replicas in real time
                     </td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 font-semibold text-white">16-Week Implementation &amp; Decision Register</td>
-                    <td className="py-3 px-4 text-emerald-300">100% Functional (interactive filters &amp; checklists)</td>
-                    <td className="py-3 px-4 text-emerald-300">100% Functional</td>
+                    <td className="py-3 px-4 font-semibold text-white">Audit Triples (W3C PROV-O)</td>
+                    <td className="py-3 px-4 text-slate-300">Local log forwarder streams PROV-O triples to append-only storage</td>
+                    <td className="py-3 px-4 text-emerald-300">Direct write to centralized immutable ledger / object store</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 font-semibold text-white">DEA 2017 &amp; UKSA Statutory Docs</td>
-                    <td className="py-3 px-4 text-emerald-300">100% Functional (Full statutory guides &amp; resources)</td>
-                    <td className="py-3 px-4 text-emerald-300">100% Functional</td>
+                    <td className="py-3 px-4 font-semibold text-white">Recommended Use Case</td>
+                    <td className="py-3 px-4 text-cyan-300 font-medium">Service admission webhooks and high-throughput query airlocks</td>
+                    <td className="py-3 px-4 text-purple-300 font-medium">Multi-tenant institutional research portals and data access committees</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
 
-          {/* Section 1: Deploy to GitHub Pages */}
+          {/* Section 1: Step-by-Step Rollout Runbook */}
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <Globe className="w-5 h-5 text-cyan-400" />
+                  <Terminal className="w-5 h-5 text-cyan-400" />
                   <h4 className="text-lg font-bold text-white">
-                    Step-by-Step: Deploy to GitHub Pages
+                    Step-by-Step Production Rollout Runbook
                   </h4>
                 </div>
                 <p className="text-xs text-slate-400">
-                  The codebase includes universal relative asset pathing (<code className="text-cyan-300 font-mono">base: './'</code>) and an automated GitHub Actions deployment workflow.
+                  Deploying the compiled OPA policy bundle into your organization&apos;s infrastructure with automated parity verification.
                 </p>
               </div>
 
               <button
                 onClick={() =>
                   handleCopyCode(
-                    'gh-pages-deploy',
-                    `# 1. Commit and push repository to GitHub
-git add .
-git commit -m "feat: enable GitHub Pages compatibility with Wavebound"
-git push origin main
+                    'policy-rollout-runbook',
+                    `# 1. Initialize GitOps Policy Hierarchy
+git clone git@internal-git.trust.nhs.uk:tre/policy-as-code.git
+cd policy-as-code
 
-# 2. In GitHub repository: Settings -> Pages -> Source: select "GitHub Actions"
-# 3. The workflow .github/workflows/deploy-pages.yml will build and publish automatically!`
+# 2. Build and verify Rego policy bundle from upstream Turtle shapes
+python3 compiler/rdf_to_rego.py --in ontology/ --out security/opa/authz.rego
+python3 tests/test_compiler_parity.py --fixtures tests/fixtures/
+
+# 3. Deploy OPA daemon in Evaluate-Only / Audit Mode
+opa run --server --set=decision_logs.console=true security/opa/authz.rego
+
+# 4. Run automated test query against local PDP
+curl -X POST http://localhost:8181/v1/data/tre/authz/allow \\
+  -H "Content-Type: application/json" \\
+  -d '{"input": {"researcher": {"accreditation_valid": true, "ig_training_expiry": 1893456000000000000}, "project": {"ethics_approval_active": true}, "enclave": {"egress_blocked": true}}}'`
                   )
                 }
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 hover:text-cyan-300 hover:border-slate-700 transition-colors self-start sm:self-auto cursor-pointer"
               >
-                {copiedSnippetId === 'gh-pages-deploy' ? (
+                {copiedSnippetId === 'policy-rollout-runbook' ? (
                   <>
                     <Check className="w-3.5 h-3.5 text-emerald-400" />
                     <span className="text-emerald-400 font-bold">Copied!</span>
@@ -1369,7 +1413,7 @@ git push origin main
                 ) : (
                   <>
                     <Copy className="w-3.5 h-3.5" />
-                    <span>Copy Git Commands</span>
+                    <span>Copy Rollout Commands</span>
                   </>
                 )}
               </button>
@@ -1377,64 +1421,78 @@ git push origin main
 
             <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 pl-1">
               <li>
-                <strong>Push to your GitHub repository</strong>: Push your changes to the <code className="text-cyan-300 font-mono">main</code> or <code className="text-cyan-300 font-mono">master</code> branch.
+                <strong>Step 1: Scaffolding and Verification</strong>: Clone the policy repository. Run <code className="text-cyan-300 font-mono">python3 tests/test_compiler_parity.py</code> to prove that high-level SHACL shapes and compiled low-level Rego rules return 100% identical pass/fail decisions across synthetic clinical cohorts.
               </li>
               <li>
-                <strong>Enable GitHub Actions in Pages Settings</strong>: In your GitHub repo, navigate to <em>Settings &rarr; Pages</em>. Under <em>Build and deployment &gt; Source</em>, choose <strong>GitHub Actions</strong>.
+                <strong>Step 2: Deploy OPA in Audit / Evaluate-Only Mode</strong>: Spin up the OPA daemon beside your admission controller or gateway with non-blocking logging enabled. Wire the PEP to send request contexts, but configure the PEP to ignore denials during the 14-day calibration window.
               </li>
               <li>
-                <strong>Automatic Zero-Config Build</strong>: GitHub Actions automatically executes <code className="text-cyan-300 font-mono">.github/workflows/deploy-pages.yml</code>, builds the static bundle, and serves it globally on GitHub's secure CDN.
+                <strong>Step 3: Analyze Shadow Discrepancies</strong>: Compare Wavebound verdicts with your existing manual approvals or LDAP tickets. When false-positive denies drop to zero, proceed to Stage 3 (Canary Enforcement).
+              </li>
+              <li>
+                <strong>Step 4: Enable Active Enforcement with Circuit Breaker</strong>: Switch PEP failure policy to active enforcement while maintaining a designated fail-open flag for emergency operational resilience.
               </li>
             </ol>
 
             <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-cyan-300 overflow-x-auto leading-relaxed">
-              <code>{`# Step 1: Commit and push changes
-git add .
-git commit -m "feat: enable GitHub Pages static hosting"
-git push origin main
+              <code>{`# Step 1: Run Parity Check between SHACL & OPA Rego
+$ python3 tests/test_compiler_parity.py
+[OK] access-shapes.ttl  <-> security/opa/authz.rego (100% verdict parity across 48 fixtures)
+[OK] sdc_shapes.ttl     <-> security/opa/sdc.rego   (100% verdict parity across 32 fixtures)
 
-# Step 2: Open GitHub Repository Settings
-# Go to: https://github.com/<your-username>/<your-repo>/settings/pages
-# Under 'Source', select: 'GitHub Actions'
-# Your application will deploy to: https://<your-username>.github.io/<your-repo>/`}</code>
+# Step 2: Start Local OPA Sidecar PDP with Bundle Reloading
+$ opa run --server \\
+    --bundle security/opa/bundle.tar.gz \\
+    --log-format=json \\
+    --addr=127.0.0.1:8181
+
+# Step 3: Health Probe Endpoint
+$ curl http://127.0.0.1:8181/health
+{"status": "ok", "bundle_version": "v1.4.0", "rules_loaded": 14}`}</code>
             </pre>
           </div>
 
-          {/* Section 2: Spin Up Live AI Features */}
+          {/* Section 2: Automated Health Check & Regression Test Harness */}
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-purple-400" />
+                  <ShieldCheck className="w-5 h-5 text-emerald-400" />
                   <h4 className="text-lg font-bold text-white">
-                    Step-by-Step: Spin Up Live Gemini 3.8 Flash AI Server
+                    Automated Continuous Compliance &amp; Health Probe
                   </h4>
                 </div>
                 <p className="text-xs text-slate-400">
-                  To enable live AI generation (Gemini 3.8 Flash) instead of client-side fallback, run Wavebound with a Node runtime and your API key.
+                  Continuous integration test suite executed before every policy commit is approved for production deployment.
                 </p>
               </div>
 
               <button
                 onClick={() =>
                   handleCopyCode(
-                    'ai-spin-up',
-                    `# 1. Obtain an API key from Google AI Studio: https://aistudio.google.com/
-# 2. Configure environment variables in .env
-echo "GEMINI_API_KEY=AIzaSyYourSecretKeyHere" > .env
-echo "PORT=3000" >> .env
+                    'ci-health-check',
+                    `# CI Pipeline: Pre-commit Validation Script
+#!/usr/bin/env bash
+set -euo pipefail
 
-# 3. Start development server with full backend
-npm run dev
+echo "=== 1. Validating W3C Turtle Syntax ==="
+pyshacl -s ontology/shapes/access-shapes.ttl -m -f table ontology/tre-core.ttl
 
-# 4. Or build and run production server
-npm run build
-npm start`
+echo "=== 2. Compiling RDF to OPA Rego ==="
+python3 compiler/rdf_to_rego.py --in ontology/ --out security/opa/authz.rego
+
+echo "=== 3. Executing OPA Unit Tests ==="
+opa test security/opa/ -v
+
+echo "=== 4. Statistical SDC Edge Cases Verification ==="
+python3 tests/test_sdc_math.py --min-k 10 --dominance-p 80
+
+echo "ALL CHECKS PASSED: Policy bundle is verified and ready for deployment."`
                   )
                 }
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 hover:text-cyan-300 hover:border-slate-700 transition-colors self-start sm:self-auto cursor-pointer"
               >
-                {copiedSnippetId === 'ai-spin-up' ? (
+                {copiedSnippetId === 'ci-health-check' ? (
                   <>
                     <Check className="w-3.5 h-3.5 text-emerald-400" />
                     <span className="text-emerald-400 font-bold">Copied!</span>
@@ -1442,50 +1500,55 @@ npm start`
                 ) : (
                   <>
                     <Copy className="w-3.5 h-3.5" />
-                    <span>Copy Setup Commands</span>
+                    <span>Copy CI Script</span>
                   </>
                 )}
               </button>
             </div>
 
-            <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 pl-1">
-              <li>
-                <strong>Get an API Key</strong>: Generate a free or paid Gemini API key from <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" className="text-cyan-400 underline hover:text-cyan-300">Google AI Studio</a>.
-              </li>
-              <li>
-                <strong>Configure Environment</strong>: Set <code className="text-purple-300 font-mono">GEMINI_API_KEY="AIzaSy..."</code> in your <code className="text-purple-300 font-mono">.env</code> file.
-              </li>
-              <li>
-                <strong>Start Server</strong>: Run <code className="text-purple-300 font-mono">npm run dev</code> (starts Express backend with tsx on port 3000) or <code className="text-purple-300 font-mono">npm run build &amp;&amp; npm start</code>.
-              </li>
-            </ol>
-
-            <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-purple-300 overflow-x-auto leading-relaxed">
-              <code>{`# 1. Set API Key in .env
-GEMINI_API_KEY="AIzaSy..."
-PORT=3000
-
-# 2. Boot Full-Stack Development Engine
-npm run dev
-
-# 3. Production Build & Start
-npm run build
-node server.ts`}</code>
-            </pre>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
+              <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
+                <span className="font-bold text-cyan-300 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                  <span>1. Turtle Shape Linter</span>
+                </span>
+                <p className="text-slate-400 text-[11px] leading-relaxed">
+                  Validates URI namespaces, prefix bindings, and closed-world constraints in W3C SHACL before compiling.
+                </p>
+              </div>
+              <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
+                <span className="font-bold text-teal-300 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-teal-400" />
+                  <span>2. OPA Native Unit Tests</span>
+                </span>
+                <p className="text-slate-400 text-[11px] leading-relaxed">
+                  Executes <code className="text-teal-300 font-mono">opa test</code> over test suites asserting expected allow/deny decisions on synthetic tokens.
+                </p>
+              </div>
+              <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
+                <span className="font-bold text-purple-300 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-purple-400" />
+                  <span>3. SDC Airlock Math Suite</span>
+                </span>
+                <p className="text-slate-400 text-[11px] leading-relaxed">
+                  Verifies mathematical correctness of primary suppression, complementary secondary masking, rounding, and $(1, p\%)$ dominance rules.
+                </p>
+              </div>
+            </div>
           </div>
 
-          {/* Section 3: Rollback Instructions */}
+          {/* Section 3: Safe Rollback & Emergency Circuit Breaker */}
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <Undo2 className="w-5 h-5 text-amber-400" />
                   <h4 className="text-lg font-bold text-white">
-                    Rollback Runbook (Option to Revert)
+                    Emergency Rollback &amp; Fail-Open Runbook
                   </h4>
                 </div>
                 <p className="text-xs text-slate-400">
-                  If the static GitHub Pages configuration is unsatisfactory, you have three guaranteed rollback options to revert cleanly.
+                  If an unexpected policy edge-case blocks legitimate clinical research, three safe recovery mechanisms exist to restore service instantly.
                 </p>
               </div>
 
@@ -1493,16 +1556,19 @@ node server.ts`}</code>
                 onClick={() =>
                   handleCopyCode(
                     'rollback-guide',
-                    `# Option A: Clean Git Revert to prior commit
+                    `# Recovery Option 1: Instant Circuit Breaker Flip (Zero Downtime)
+curl -X POST http://localhost:8181/v1/data/tre/admin/emergency_bypass \\
+  -H "Authorization: Bearer \${ADMIN_TOKEN}" \\
+  -d '{"bypass_active": true, "duration_minutes": 60, "reason": "Incident INC-4091"}'
+
+# Recovery Option 2: GitOps Automated Rollback to Prior Tagged Release
 git log --oneline -n 5
 git revert HEAD --no-edit
 git push origin main
+# Automated CI re-compiles and deploys the previous verified bundle within 60 seconds.
 
-# Option B: Disable GitHub Pages without altering code
-# In GitHub repo Settings -> Pages -> Click '...' -> 'Unpublish site'
-
-# Option C: Revert vite.config.ts base path to root
-# Change "base: './'" to "base: '/'" in vite.config.ts`
+# Recovery Option 3: Fallback PEP Interceptor to Audit-Only Telemetry
+tre-admission-cli set-mode --audit-only --failure-policy=Ignore`
                   )
                 }
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 hover:text-cyan-300 hover:border-slate-700 transition-colors self-start sm:self-auto cursor-pointer"
@@ -1523,21 +1589,21 @@ git push origin main
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
               <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-xs">
-                <span className="font-bold text-amber-300 block">Option 1: Git Revert (Cleanest)</span>
+                <span className="font-bold text-amber-300 block">Option 1: Emergency Circuit Breaker</span>
                 <p className="text-slate-400 text-[11px] leading-relaxed">
-                  Run <code className="text-cyan-300 font-mono">git revert HEAD</code> to immediately undo the deployment commit and restore previous repository state.
+                  Flip the runtime fail-open flag via REST API or Redis key (<code className="text-cyan-300 font-mono">tre:policy:bypass = 1</code>). Bypasses blocking checks within 1 second while logging all requests for post-incident review.
                 </p>
               </div>
               <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-xs">
-                <span className="font-bold text-amber-300 block">Option 2: Unpublish GitHub Pages</span>
+                <span className="font-bold text-amber-300 block">Option 2: GitOps Revert Commit</span>
                 <p className="text-slate-400 text-[11px] leading-relaxed">
-                  In GitHub repo <em>Settings &gt; Pages</em>, click the three dots (<code className="text-cyan-300 font-mono">...</code>) and select <strong>Unpublish site</strong> to take down the static endpoint.
+                  Run <code className="text-cyan-300 font-mono">git revert HEAD</code> on the policy repository. CI automatically recompiles and distributes the previous verified bundle to all PDP nodes in &lt; 60 seconds.
                 </p>
               </div>
               <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-xs">
-                <span className="font-bold text-amber-300 block">Option 3: Enforce Root Base</span>
+                <span className="font-bold text-amber-300 block">Option 3: Switch PEP to Audit-Only</span>
                 <p className="text-slate-400 text-[11px] leading-relaxed">
-                  Change <code className="text-cyan-300 font-mono">base: './'</code> back to <code className="text-cyan-300 font-mono">base: '/'</code> in <code className="text-cyan-300 font-mono">vite.config.ts</code> for absolute root hosting.
+                  Set the admission interceptor to <code className="text-cyan-300 font-mono">failurePolicy: Ignore</code>. Traffic flows without impediment while OPA continues logging discrepancy telemetry.
                 </p>
               </div>
             </div>

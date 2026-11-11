@@ -111,7 +111,7 @@ export const BuildDeployWorkspace: React.FC<BuildDeployWorkspaceProps> = ({
           </h1>
 
           <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
-            Engineered for NHS Integrated Care Board (ICB) IT environments, university research clusters, and national SDEs/TREs. Rather than re-architecting infrastructure from scratch, this workspace demonstrates how to apply graph-navigated, audited Information Governance (IG)—coupling formal W3C RDF/OWL ontologies, closed-world SHACL shapes, and microsecond OPA Rego policies to existing enclaves.
+            Engineered for patient and population safe and secure data and intelligence environments. Rather than re-architecting infrastructure from scratch, this workspace demonstrates how to apply graph-navigated, audited Information Governance (IG)—coupling formal W3C RDF/OWL ontologies, closed-world SHACL shapes, and microsecond OPA Rego policies to existing enclaves.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-3 text-xs">

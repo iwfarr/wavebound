@@ -371,7 +371,7 @@ export const AirGapArchitectureHub: React.FC = () => {
               Internal Registry Infrastructure &amp; Dual-Plane Network Routing
             </h2>
             <p className="text-xs sm:text-sm text-slate-200 max-w-2xl">
-              Engineered for locked-down NHS Trusts and university research environments where researchers operate under zero outbound internet connectivity.
+              Engineered for patient and population safe and secure data and intelligence environments where researchers operate under zero outbound internet connectivity.
             </p>
           </div>
 

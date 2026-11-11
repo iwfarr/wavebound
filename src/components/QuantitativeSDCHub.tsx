@@ -191,6 +191,7 @@ export const QuantitativeSDCHub: React.FC = () => {
   const [selectedPresetId, setSelectedPresetId] = useState<string>(PRESET_SCENARIOS[0].id);
   const [kThreshold, setKThreshold] = useState<number>(10);
   const [suppressionMode, setSuppressionMode] = useState<'raw' | 'primary' | 'secondary' | 'rounded'>('secondary');
+  const [roundingBase, setRoundingBase] = useState<number>(5); // Base 5 or Base 10
   const [dominancePPercent, setDominancePPercent] = useState<number>(80);
   const [customTopContributor, setCustomTopContributor] = useState<number>(82); // 82%
 
@@ -323,10 +324,34 @@ export const QuantitativeSDCHub: React.FC = () => {
       !extremaViolation &&
       !dfViolation;
 
+    // Suppression through Rounding calculation:
+    // Rounding to higher base helps mask real small counts (e.g. counts 1 to 4 round to 5, 6 to 9 round to 10)
+    const roundedCells: Record<string, number> = {};
+    const roundedRowSums: Record<string, number> = {};
+    const roundedColSums: Record<string, number> = {};
+    let roundedGrandTotal = 0;
+
+    rows.forEach((r) => { roundedRowSums[r] = 0; });
+    cols.forEach((c) => { roundedColSums[c] = 0; });
+
+    cells.forEach((cell) => {
+      const key = `${cell.row}__${cell.col}`;
+      // Rounding to higher multiple: if val > 0, Math.ceil(val / roundingBase) * roundingBase
+      const roundedVal = cell.val === 0 ? 0 : Math.ceil(cell.val / roundingBase) * roundingBase;
+      roundedCells[key] = roundedVal;
+      roundedRowSums[cell.row] = (roundedRowSums[cell.row] || 0) + roundedVal;
+      roundedColSums[cell.col] = (roundedColSums[cell.col] || 0) + roundedVal;
+      roundedGrandTotal += roundedVal;
+    });
+
     return {
       rowSums,
       colSums,
       grandTotal,
+      roundedCells,
+      roundedRowSums,
+      roundedColSums,
+      roundedGrandTotal,
       primaryDisclosiveKeys,
       secondarySuppressedKeys,
       totalPrimaryDisclosive,
@@ -340,7 +365,7 @@ export const QuantitativeSDCHub: React.FC = () => {
       dfViolation,
       isCleanAirlock
     };
-  }, [activePreset, kThreshold, suppressionMode, dominancePPercent]);
+  }, [activePreset, kThreshold, suppressionMode, dominancePPercent, roundingBase]);
 
   // Compute live Web Crypto SHA-256 seal
   const generateCryptographicSeal = async () => {
@@ -612,16 +637,23 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
 
               {/* Suppression Algorithm Mode */}
               <div className="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-2">
-                <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                  <Hash className="w-3.5 h-3.5 text-amber-600" />
-                  <span>Suppression Mode</span>
-                </span>
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                    <Hash className="w-3.5 h-3.5 text-amber-600" />
+                    <span>Suppression Mode</span>
+                  </span>
+                  {suppressionMode === 'rounded' && (
+                    <span className="text-[10px] font-mono text-[#047857] dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-300 dark:border-emerald-700">
+                      Base {roundingBase}
+                    </span>
+                  )}
+                </div>
                 <div className="grid grid-cols-2 gap-1.5">
                   <button
                     onClick={() => setSuppressionMode('raw')}
                     className={`py-1 px-2 rounded text-xs font-medium cursor-pointer transition-colors ${
                       suppressionMode === 'raw'
-                        ? 'bg-red-700 text-white'
+                        ? 'bg-red-700 text-white font-bold'
                         : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
                     }`}
                   >
@@ -631,7 +663,7 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
                     onClick={() => setSuppressionMode('primary')}
                     className={`py-1 px-2 rounded text-xs font-medium cursor-pointer transition-colors ${
                       suppressionMode === 'primary'
-                        ? 'bg-amber-600 text-white'
+                        ? 'bg-amber-600 text-white font-bold'
                         : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
                     }`}
                   >
@@ -639,15 +671,50 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
                   </button>
                   <button
                     onClick={() => setSuppressionMode('secondary')}
-                    className={`py-1 px-2 rounded text-xs font-bold cursor-pointer transition-colors col-span-2 ${
+                    className={`py-1 px-2 rounded text-xs font-bold cursor-pointer transition-colors ${
                       suppressionMode === 'secondary'
-                        ? 'bg-[#047857] text-white'
+                        ? 'bg-[#005EB8] text-white shadow-xs'
                         : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
                     }`}
                   >
-                    Primary + Secondary (Recommended)
+                    Primary + Secondary
+                  </button>
+                  <button
+                    onClick={() => setSuppressionMode('rounded')}
+                    className={`py-1 px-2 rounded text-xs font-bold cursor-pointer transition-colors ${
+                      suppressionMode === 'rounded'
+                        ? 'bg-[#047857] text-white shadow-xs'
+                        : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
+                    }`}
+                  >
+                    Rounding (Base 5 / 10)
                   </button>
                 </div>
+                {suppressionMode === 'rounded' && (
+                  <div className="flex items-center gap-1.5 pt-1">
+                    <span className="text-[10px] text-slate-500 font-medium">Rounding Base:</span>
+                    <button
+                      onClick={() => setRoundingBase(5)}
+                      className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold cursor-pointer ${
+                        roundingBase === 5
+                          ? 'bg-[#047857] text-white'
+                          : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
+                      }`}
+                    >
+                      Base 5 (ONS)
+                    </button>
+                    <button
+                      onClick={() => setRoundingBase(10)}
+                      className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold cursor-pointer ${
+                        roundingBase === 10
+                          ? 'bg-[#047857] text-white'
+                          : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
+                      }`}
+                    >
+                      Base 10 (Strict)
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Dominance threshold */}
@@ -713,6 +780,12 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
                     <span>Protected: {tableAnalysis.totalPrimaryDisclosive} Primary + {tableAnalysis.totalSecondarySuppressed} Complementary</span>
                   </span>
                 )}
+                {suppressionMode === 'rounded' && (
+                  <span className="px-2.5 py-1 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-semibold border border-emerald-300 dark:border-emerald-800 flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Protected: Suppression through Rounding (Base {roundingBase} Applied)</span>
+                  </span>
+                )}
               </div>
             </div>
 
@@ -725,7 +798,9 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
                     {activePreset.cols.map((col) => (
                       <th key={col} className="py-2.5 px-3 font-semibold text-center">{col}</th>
                     ))}
-                    <th className="py-2.5 px-3 font-bold text-center bg-slate-100 dark:bg-slate-800">Row Total</th>
+                    <th className="py-2.5 px-3 font-bold text-center bg-slate-100 dark:bg-slate-800">
+                      {suppressionMode === 'rounded' ? `Row Total (Base ${roundingBase})` : 'Row Total'}
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
@@ -771,26 +846,47 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
                                   <span className="text-slate-800 dark:text-slate-200">{val}</span>
                                 )
                               )}
+                              {suppressionMode === 'rounded' && (
+                                <div className="flex flex-col items-center justify-center">
+                                  <span
+                                    className={`px-2 py-0.5 rounded font-mono font-bold ${
+                                      isPrimary
+                                        ? 'text-[#047857] dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-700'
+                                        : 'text-slate-800 dark:text-slate-200'
+                                    }`}
+                                    title={isPrimary ? `Original small count ${val} masked by rounding up to Base ${roundingBase}` : `Rounded to Base ${roundingBase}`}
+                                  >
+                                    {tableAnalysis.roundedCells[`${row}__${col}`]}
+                                  </span>
+                                  {isPrimary && (
+                                    <span className="text-[9px] text-[#047857] dark:text-emerald-400 font-sans font-semibold">
+                                      Masked (&lt;{kThreshold})
+                                    </span>
+                                  )}
+                                </div>
+                              )}
                             </td>
                           );
                         })}
                         {/* Row Total */}
                         <td className="py-2.5 px-3 text-center font-bold font-mono bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white">
-                          {tableAnalysis.rowSums[row]}
+                          {suppressionMode === 'rounded' ? tableAnalysis.roundedRowSums[row] : tableAnalysis.rowSums[row]}
                         </td>
                       </tr>
                     );
                   })}
                   {/* Column Totals Row */}
                   <tr className="bg-slate-100 dark:bg-slate-800 font-bold font-mono border-t border-slate-200 dark:border-slate-700">
-                    <td className="py-2.5 px-3 text-slate-900 dark:text-white">Column Total</td>
+                    <td className="py-2.5 px-3 text-slate-900 dark:text-white">
+                      {suppressionMode === 'rounded' ? `Column Total (Base ${roundingBase})` : 'Column Total'}
+                    </td>
                     {activePreset.cols.map((col) => (
                       <td key={col} className="py-2.5 px-3 text-center text-slate-900 dark:text-white">
-                        {tableAnalysis.colSums[col]}
+                        {suppressionMode === 'rounded' ? tableAnalysis.roundedColSums[col] : tableAnalysis.colSums[col]}
                       </td>
                     ))}
                     <td className="py-2.5 px-3 text-center bg-slate-200 dark:bg-slate-750 text-[#005EB8] dark:text-sky-300 font-extrabold">
-                      {tableAnalysis.grandTotal}
+                      {suppressionMode === 'rounded' ? tableAnalysis.roundedGrandTotal : tableAnalysis.grandTotal}
                     </td>
                   </tr>
                 </tbody>
@@ -805,7 +901,20 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
                   <span>Deductive Hazard Detected in Primary-Only Mode:</span>
                 </div>
                 <p className="leading-relaxed">
-                  Notice row <em>Tetralogy of Fallot</em>: Neonate count is &lt;10*, Infant is 28, Child is 42, and Row Total is 74. Any external party can trivially compute Neonate = 74 - (28 + 42) = 4! Therefore, <strong>complementary secondary suppression is mathematically required</strong> before airlock release.
+                  Notice row <em>Tetralogy of Fallot</em>: Neonate count is &lt;10*, Infant is 28, Child is 42, and Row Total is 74. Any external party can trivially compute Neonate = 74 - (28 + 42) = 4! Therefore, <strong>complementary secondary suppression or controlled rounding is mathematically required</strong> before airlock release.
+                </p>
+              </div>
+            )}
+
+            {/* Explanation Note regarding Suppression through Rounding */}
+            {suppressionMode === 'rounded' && (
+              <div className="p-3.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-300 dark:border-emerald-800 text-xs text-emerald-900 dark:text-emerald-200 space-y-1.5">
+                <div className="flex items-center gap-1.5 font-bold text-[#047857] dark:text-emerald-300">
+                  <CheckCircle2 className="w-4 h-4 text-[#047857] dark:text-emerald-400" />
+                  <span>SDC Tactic: Suppression through Controlled Rounding (Base {roundingBase}):</span>
+                </div>
+                <p className="leading-relaxed">
+                  In health research tables with multiple small counts, traditional asterisk suppression often requires redacting safe cells (secondary suppression) to prevent marginal subtraction, leaving tables full of holes. <strong>Suppression through Rounding</strong> is the established ONS alternative: all counts are rounded up to the nearest multiple of {roundingBase} (e.g. real counts of 1–4 become 5, 6–9 become 10). This disguises the exact microdata values and prevents singling out, while maintaining numeric table structure and additive marginal totals for public health reporting.
                 </p>
               </div>
             )}
@@ -942,6 +1051,13 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
                       <td className="py-3 px-3 text-[#047857] dark:text-emerald-400">Mask second safe cell as &quot;SUPP*&quot; or suppress row/col totals</td>
                       <td className="py-3 px-3 text-red-600 dark:text-red-400">1 suppressed cell with visible row/col sum</td>
                       <td className="py-3 px-3 font-semibold text-red-600">Immediate Block</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-3 font-bold font-mono text-teal-700 dark:text-teal-400">Controlled Rounding (Suppression via Rounding)</td>
+                      <td className="py-3 px-3 font-mono">Base 5 or Base 10</td>
+                      <td className="py-3 px-3 text-[#047857] dark:text-emerald-400">All cells and totals rounded up to base multiple (e.g. 1–4 &rarr; 5); disguises small counts without asterisk holes</td>
+                      <td className="py-3 px-3 text-red-600 dark:text-red-400">Unrounded small counts published alongside rounded totals</td>
+                      <td className="py-3 px-3 font-semibold text-[#047857] dark:text-emerald-400">Permitted (ONS Standard)</td>
                     </tr>
                     <tr>
                       <td className="py-3 px-3 font-bold font-mono text-purple-700 dark:text-purple-400">Sampling Zeros</td>

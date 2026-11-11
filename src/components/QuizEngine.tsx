@@ -22,7 +22,8 @@ import {
   FileCheck2,
   ShieldCheck,
   Copy,
-  Check
+  Check,
+  Info
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -203,7 +204,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
       });
     }
 
-    const hash = 'SWTR-' + Math.random().toString(36).substring(2, 7).toUpperCase() + '-' + Date.now().toString(36).substring(4).toUpperCase();
+    const hash = 'WVBD-' + Math.random().toString(36).substring(2, 7).toUpperCase() + '-' + Date.now().toString(36).substring(4).toUpperCase();
     const dateFormatted = new Date().toLocaleDateString('en-GB', {
       day: '2-digit',
       month: 'short',
@@ -343,7 +344,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <button
               onClick={() => handleStartCuratedQuiz()}
-              className="flex-1 py-3 px-6 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2"
+              className="flex-1 py-3 px-6 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
             >
               <Zap className="w-4 h-4" />
               <span>Start Curated Playbook Exam</span>
@@ -351,11 +352,33 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
 
             <button
               onClick={() => handleStartCuratedQuiz(3)}
-              className="py-3 px-6 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2"
+              className="py-3 px-6 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
             >
               <RotateCcw className="w-4 h-4" />
               <span>3-Question Quick Drill</span>
             </button>
+          </div>
+
+          {/* Architectural Notice: Bringing Your Own API vs Running a Local Instance */}
+          <div className="p-4 rounded-xl bg-slate-950 border border-cyan-900/60 text-xs text-slate-300 space-y-2">
+            <div className="flex items-center gap-2 text-cyan-300 font-bold">
+              <Info className="w-4 h-4 text-cyan-400 shrink-0" />
+              <span>Can I bring my own API key to the Quiz, or should I run a local instance of Wavebound?</span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1 text-[11px] text-slate-400 leading-relaxed">
+              <div className="space-y-1 p-3 rounded-lg bg-slate-900/80 border border-slate-800">
+                <span className="font-bold text-emerald-300 block">1. 100% Self-Contained by Default (No Keys Needed)</span>
+                <p>
+                  Wavebound is designed to run self-contained in your browser and on local instances. All 30+ curated questions, disclosure controls, and certificate verifications execute locally with zero external network calls. You do <strong>not</strong> need to supply an external OpenAI, Anthropic, or cloud API key to practice or take assessments.
+                </p>
+              </div>
+              <div className="space-y-1 p-3 rounded-lg bg-slate-900/80 border border-slate-800">
+                <span className="font-bold text-cyan-300 block">2. In-Enclave Local Instance for Custom AI Generation</span>
+                <p>
+                  In NHS and health data governance contexts, pasting personal API keys into web interfaces is discouraged because it routes queries across public cloud infrastructure. If your institution wishes to dynamically generate synthetic questions against local policies, <strong>run an in-enclave local instance</strong> connected to an internal sovereign endpoint (e.g. on-premise Ollama, vLLM, or Trust private VPC proxy).
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       ) : quizActive && currentQ ? (

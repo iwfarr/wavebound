@@ -59,7 +59,7 @@ export const GRANULAR_16_WEEK_TIMELINE: SprintSchedule[] = [
     phase: 'Phase 1: Knowledge Modeling',
     title: 'Inception, System Boundaries & GitOps Scaffolding',
     subtitle: 'Decoupling policy metadata from live cluster telemetry without touching running services',
-    goal: 'Establish the repository, CI linting pipelines, and formal definitions of research governance metadata versus ephemeral Kubernetes runtime state.',
+    goal: 'Establish the repository, CI linting pipelines, and formal definitions of research governance metadata versus ephemeral compute runtime state.',
     accountableRoles: ['Service Owner', 'Policy Owner', 'DevOps / Infrastructure Lead'],
     operationalDeliverables: [
       {
@@ -216,7 +216,7 @@ export const GRANULAR_16_WEEK_TIMELINE: SprintSchedule[] = [
       }
     ],
     safeguardsAndNonBreaking: [
-      'Public portal is hosted on decoupled static storage (GitHub Pages / Cloud CDN) with zero access to internal TRE subnets.',
+      'Public documentation portal is hosted on decoupled static storage (object storage / CDN) with zero access to internal TRE subnets.',
       'Public portal cannot execute administrative commands or alter policy files.'
     ],
     exitGates: [
@@ -263,14 +263,14 @@ export const GRANULAR_16_WEEK_TIMELINE: SprintSchedule[] = [
     weeks: 'Weeks 13–14',
     phase: 'Phase 4: Runtime Enforcement',
     title: 'PEP Integration & Non-Breaking Shadow Mode Evaluation',
-    subtitle: 'Connecting OPA to Kubernetes and API Gateways in Evaluate-Only & Shadow Mode',
+    subtitle: 'Connecting OPA to Compute Admission Controllers and API Gateways in Evaluate-Only & Shadow Mode',
     goal: 'Integrate the compiled OPA policy engine with production infrastructure control points without altering live decisions, recording real-world decisions in parallel.',
-    accountableRoles: ['Platform / Kubernetes Engineer', 'Site Reliability Engineer (SRE)', 'Security Architect'],
+    accountableRoles: ['Platform / Infrastructure Engineer', 'Site Reliability Engineer (SRE)', 'Security Architect'],
     operationalDeliverables: [
       {
-        artifact: 'Kubernetes Admission Webhook (Audit Mode)',
-        description: 'ValidatingWebhookConfiguration intercepting JupyterLab workspace pod launches in `failurePolicy: Ignore` / evaluate-only mode.',
-        path: 'deploy/k8s/admission-webhook-shadow.yaml'
+        artifact: 'Service Admission Controller (PEP in Audit Mode)',
+        description: 'Admission controller intercepting JupyterLab workspace launch requests in evaluate-only mode with audit logging.',
+        path: 'deploy/admission/admission-shadow.yaml'
       },
       {
         artifact: 'Shadow Discrepancy Logger',
@@ -304,8 +304,8 @@ export const GRANULAR_16_WEEK_TIMELINE: SprintSchedule[] = [
     operationalDeliverables: [
       {
         artifact: 'Production Active Admission Controller',
-        description: 'Enforcing Kubernetes Webhook (`failurePolicy: Fail` with fail-open emergency bypass switch).',
-        path: 'deploy/k8s/admission-webhook-prod.yaml'
+        description: 'Enforcing Service Admission Controller (with fail-open emergency bypass switch).',
+        path: 'deploy/admission/admission-prod.yaml'
       },
       {
         artifact: 'W3C PROV-O Audit Emitter',
@@ -355,14 +355,14 @@ export const ROLLOUT_STAGES: RolloutStage[] = [
     tagline: 'PDP evaluates live production requests, but verdicts are purely informational',
     productionImpact: 'Negligible (non-blocking monitoring)',
     trafficPercentage: '100% live requests observed, 0% blocked',
-    trafficHandling: 'Kubernetes admission webhook and airlock send input contexts to OPA. OPA evaluates the policy and logs the verdict, but the PEP unconditionally permits the action regardless of outcome.',
+    trafficHandling: 'Service admission controller and airlock send input contexts to OPA. OPA evaluates the policy and logs the verdict, but the PEP unconditionally permits the action regardless of outcome.',
     failureMode: 'Fail-Open by default: If OPA crashes, times out (>50ms), or errors, the PEP immediately allows the request and increments a telemetry error metric.',
     exitCriteria: [
-      'OPA evaluation latency verified at p99 < 3ms under peak hospital cluster load.',
+      'OPA evaluation latency verified at p99 < 3ms under peak analytical load.',
       'Zero crashes or resource leaks in OPA sidecar daemons over 7 consecutive days.',
       'Discrepancy logs reviewed to confirm absence of unexpected false-positive denies.'
     ],
-    rollbackProcedure: 'Set `WEBHOOK_EVALUATE_ONLY=true` or delete the ValidatingWebhookConfiguration object.'
+    rollbackProcedure: 'Set `PEP_EVALUATE_ONLY=true` or disable the admission interceptor.'
   },
   {
     stage: 2,
@@ -400,10 +400,10 @@ export const ROLLOUT_STAGES: RolloutStage[] = [
     stage: 4,
     name: 'Stage 4: Active Multi-PEP Enforcement (Full Production)',
     mode: 'active',
-    tagline: 'End-to-end automated enforcement across Kubernetes admission, network, and airlock egress',
+    tagline: 'End-to-end automated enforcement across service admission, network, and airlock egress',
     productionImpact: 'Authoritative (Wavebound Rego is the authoritative gatekeeper)',
     trafficPercentage: '100% of research workspace admissions and airlock releases',
-    trafficHandling: 'Full production PEP integration: Namespaced Admission Controller audits researcher credentials and session attributes (failurePolicy: Ignore); airlock service compiles standardized evidence packs for human sign-off on outputs violating k >= 10 or dominance <= 80%.',
+    trafficHandling: 'Full production PEP integration: Namespaced Admission Controller audits researcher credentials and session attributes; airlock service compiles standardized evidence packs for human sign-off on outputs violating k >= 10 or dominance <= 80%.',
     failureMode: 'Tiered Fail-Safe: Internal workspace admission fails OPEN with high-priority PagerDuty alert if OPA cluster is partitioned; Airlock egress fails CLOSED (zero data ever leaves without verified policy grant).',
     exitCriteria: [
       'Continuous compliance verified with automated weekly governance report exports.',
@@ -500,14 +500,14 @@ export const DECISION_REGISTER: DecisionRecord[] = [
     title: 'Runtime Policy Engine & Source of Truth Architecture',
     status: 'OPEN',
     accountableOwner: 'Architecture Owner & Policy-as-Code Engineering Lead',
-    requiredReviewers: ['Kubernetes Infrastructure Lead', 'Lead Software Architect'],
+    requiredReviewers: ['Platform Infrastructure Lead', 'Lead Software Architect'],
     decisionStatement: 'Select runtime execution engine (OPA Rego) and specify whether OWL 2/SHACL serves as authoritative specification compiled into Rego, or whether Rego is authored directly with RDF parity validation.',
     optionsConsidered: [
       'Option A: Dual-Tier (OWL/SHACL is human/legal source of truth; compiler generates OPA Rego for sub-ms runtime)',
       'Option B: Native OPA Rego Only (Fastest execution, but lacks semantic interoperability and FOI graph reporting)',
       'Option C: Native SPARQL/PySHACL in Production (Too high latency for admission webhooks: >250ms)'
     ],
-    rationaleAndEvidence: 'Dual-Tier provides the best of both worlds: semantic transparency and graphical auditability for Trust boards and regulators, compiled down to microsecond Rego for Kubernetes admission controllers.',
+    rationaleAndEvidence: 'Dual-Tier provides the best of both worlds: semantic transparency and graphical auditability for Trust boards and regulators, compiled down to microsecond Rego for container and service admission controllers.',
     blocks: 'Compiler script architecture, CI pipeline build steps, and developer repository workflow.',
     nonBreakingImpact: 'Artifact generation occurs completely in CI before deployment; zero runtime compiler overhead.'
   },
@@ -699,7 +699,7 @@ export const IMPLEMENTATION_CHECKLIST: ChecklistItem[] = [
     type: 'DECISION REQUIRED',
     decisionRef: 'D-007',
     text: 'Select enforcement point and staged progression mode (evaluate-only, shadow, canary, active).',
-    details: 'Confirm deployment target (Kubernetes admission webhook) and operational failure response.',
+    details: 'Confirm deployment target (service admission controller) and operational failure response.',
     verificationEvidence: 'Approved Decision Record D-007 and architecture diagram.'
   },
   {

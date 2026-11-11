@@ -285,7 +285,7 @@ export const ProcurementReadinessHub: React.FC<ProcurementReadinessHubProps> = (
 ---
 
 ## 1. Executive Tender Statement
-This dossier provides verified, machine-executable Information Governance (IG) evidence for deployment across NHS Integrated Care Boards (ICBs), Secure Data Environments (SDEs), Trusted Research Environments (TREs), and Academic Health Science Networks (AHSNs).
+This dossier provides verified, machine-executable Information Governance (IG) evidence for deployment across patient and population safe and secure data and intelligence environments.
 
 Project Wavebound enforces policy-as-code through declarative W3C SHACL shapes and sub-millisecond Open Policy Agent (OPA) Rego rules, eliminating manual audit blind spots and ensuring compliance with the Eight Caldicott Principles.
 
@@ -334,8 +334,8 @@ ${s.clause}
   // Export Track 2: DCB0129 Clinical Safety Case Report (CSCR)
   const handleExportCSCR = () => {
     const cscrMarkdown = `# DCB0129 CLINICAL SAFETY CASE REPORT (CSCR)
-## In-House NHS Health Software & AI Analytical Data Platform
-**Manufacturer / Developing Organisation**: NHS Trust / ICB In-House Engineering & Clinical Informatics
+## In-House Health Software & AI Analytical Data Platform
+**Manufacturer / Developing Organisation**: In-House Engineering & Clinical Informatics for Patient and Population Safe and Secure Data and Intelligence Environments
 **System Name**: Project Wavebound Policy-as-Code Health Data Environment
 **Document Reference**: DCB0129-CSCR-${new Date().toISOString().split('T')[0]}
 **Standard Applied**: DCB0129 (Clinical Risk Management: Its Application in the Deployment and Use of Health IT Systems)
@@ -463,7 +463,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                   In-House NHS Software, Analytics &amp; AI Safety Hub
                 </h1>
                 <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
-                  When NHS Trusts, ICBs, or academic units develop software, analytics pipelines, feature stores, or diagnostic AI models in-house, they are legally classified as <strong>Health IT Manufacturers under DCB0129</strong>. This interactive hub operationalises the mandatory Clinical Risk Management lifecycle: Clinical Safety Officer (CSO) governance, living Hazard Log tracking with 5×5 NHS risk matrices, mitigation validation, and one-click Clinical Safety Case Report (CSCR) generation for Trust Clinical Governance sign-off.
+                  When clinical and engineering teams develop software, analytics pipelines, feature stores, or diagnostic AI models in-house for patient and population safe and secure data and intelligence environments, they are classified as <strong>Health IT Manufacturers under DCB0129</strong>. This interactive hub operationalises the mandatory Clinical Risk Management lifecycle: Clinical Safety Officer (CSO) governance, living Hazard Log tracking with 5×5 NHS risk matrices, mitigation validation, and one-click Clinical Safety Case Report (CSCR) generation for clinical governance sign-off.
                 </p>
 
                 <div className="flex flex-wrap items-center gap-3 pt-2 text-xs">
@@ -1367,7 +1367,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
               <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/60 text-xs text-slate-300 space-y-1">
                 <span className="font-bold text-white text-sm block">Standard Contractual Schedules for Procurement</span>
                 <p>
-                  These contractual clauses are designed to be copied directly into Section G (Information Governance &amp; Security Schedules) of NHS Trust IT supply contracts, framework call-offs, or ICB academic partnering agreements.
+                  These contractual clauses are designed to be copied directly into Section G (Information Governance &amp; Security Schedules) of supply contracts, framework call-offs, or partnering agreements across patient and population safe and secure data and intelligence environments.
                 </p>
               </div>
 

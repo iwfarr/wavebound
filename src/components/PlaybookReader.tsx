@@ -81,7 +81,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
     content: [
       '• Plain-English Architecture Principle: Systems break when enduring governance laws are conflated with ephemeral infrastructure plumbing.',
       '• 1. Governance Metadata (Reviewed Assertions): The proposed OWL/RDF model represents project purposes, institutional decisions, permissions and evidence with source provenance and validity conditions. Accreditation, training and approvals can expire or be revoked; graph assertions are not immutable legal truths. The illustrative name tre-core.ttl denotes a proposed artifact, not an existing ontology file.',
-      '• 2. Ephemeral Runtime State (The Cluster Plumbing): Transient, mechanical facts of the live compute fabric managed by Kubernetes, Calico CNI, and Linux kernels. Examples include: pod IP addresses (10.244.2.14), ephemeral network sockets, container process IDs, CPU/GPU quotas, and transient JWT bearer tokens. This state is spun up, scaled, rescheduled, and recycled continuously.',
+      '• 2. Ephemeral Runtime State (The Infrastructure Plumbing): Transient, mechanical facts of the live compute fabric managed by container orchestrators, network CNI, and operating system kernels. Examples include: internal IP addresses (10.244.2.14), ephemeral network sockets, container process IDs, CPU/GPU quotas, and transient JWT bearer tokens. This state is spun up, scaled, rescheduled, and recycled continuously.',
       '• 3. The Classic Infrastructure Trap: Traditional IT configurations mistakenly hardcode governance rules directly into cluster network rules or pod name whitelists (e.g. "allow IP 10.244.2.14 to access clinical database X"). When a container crashes, restarts, or migrates to a different worker node, the IP changes, causing immediate outages or leaving behind orphaned, unverified permissions.',
       '• 4. Proposed Integration Pattern: An admission service could evaluate trusted researcher and project claims against approved policy rules derived from reviewed governance assertions. A graph statement alone is not permission: the organisation must define all relevant conditions, freshness checks, failure behaviour and enforcement tests. This integration is not implemented in the current application.'
     ],
@@ -297,7 +297,7 @@ any_unmasked_pii(columns) {
     id: 'sec-phase-4-2',
     number: '4.2',
     title: 'Policy Enforcement Points (PEP): Admission, Network & Airlock',
-    subtitle: 'Integrating OPA with Kubernetes Admission Webhooks, VPC Firewalls, and Airlock Gates',
+    subtitle: 'Integrating OPA with Container & Service Admission Webhooks, VPC Firewalls, and Airlock Gates',
     content: [
       '• PEP Architectural Distribution:',
       '   - Workspace Admission PEP: Namespaced Admission Controllers intercept pod creation events (e.g., launching researcher JupyterLab containers in the research sandbox) using an audit-and-alert pattern (`failurePolicy: Ignore`) to avoid blocking cluster operations while enforcing least-privilege RBAC. The controller queries OPA and logs any policy discrepancies.',

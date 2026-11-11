@@ -143,7 +143,7 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
               Streamlining Information Governance for Safe &amp; Secure Data Intelligence Environments
             </h1>
             <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
-              Technical navigation of IG semantic ontology, standardising evidence packs, and autogenerating audit-ready compliance dossiers.
+              Technical navigation of IG semantic ontology, standardising evidence packs, and generating clear, structured compliance reviews.
             </p>
           </div>
 
@@ -198,7 +198,7 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
                       IG Handbook Pathway Active (Non-Technical &amp; Statutory Leadership)
                     </strong>
                     <p className="text-slate-700 dark:text-slate-300 text-[11px] leading-relaxed">
-                      Optimized for Caldicott Guardians, Information Governance Leads, and Research Ethics Committees. Prioritizing plain-English statutory translations, Section 251 decision gates, and standardized compliance evidence dossiers.
+                      Optimized for Caldicott Guardians, Information Governance Leads, and Research Ethics Committees. Prioritizing plain-English statutory translations, Section 251 decision gates, and standardized review packs.
                     </p>
                   </div>
                 </div>
@@ -255,11 +255,11 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
               <div className="space-y-1.5">
                 <div className="flex items-center gap-1.5 text-xs font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wide">
                   <FileCheck2 className="w-3.5 h-3.5" />
-                  <span>Evidence Dossiers</span>
+                  <span>Review Packs</span>
                 </div>
                 <div className="text-xs font-bold text-slate-900 dark:text-white">Standardized Pack</div>
                 <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
-                  Replaces repetitive multi-site Trust questionnaires with an unambiguous, machine-verifiable statutory audit dossier.
+                  Helps replace repetitive multi-site questionnaires with a structured, verifiable review summary.
                 </p>
               </div>
               <button
@@ -344,7 +344,7 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
                   Governance Assurance Workspace
                 </h3>
                 <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Interactive statutory evaluator. Simulate study protocols against 6 statutory gates, inspect plain-English legal translations, and compile a standardized compliance dossier for human panel review.
+                  Interactive statutory evaluator. Check study protocols against 6 statutory gates, inspect plain-English legal translations, and compile a standardized evidence pack for human panel review.
                 </p>
               </div>
 
@@ -354,7 +354,7 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
                   { title: 'Five Safes Protocol Evaluator', desc: 'Validates Safe People, Projects, Data, Settings, & Outputs.' },
                   { title: 'Consolidated Statutory Matrix', desc: 'Cross-cutting UK GDPR, Section 251, Caldicott 1–8 & ONS SDC.' },
                   { title: 'Caldicott 8 & PROV-O Ledger', desc: 'Open Data Use Register with W3C PROV-O cryptographic lineage.' },
-                  { title: 'SATRE & DSPT Procurement Matrix', desc: 'Verified audit controls for NHS Trust IT and ICB tenders.' }
+                  { title: 'SATRE & DSPT Procurement Matrix', desc: 'Verified audit controls for tenders across patient and population safe and secure data and intelligence environments.' }
                 ].map((item, idx) => (
                   <div key={idx} className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex items-start gap-2.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
