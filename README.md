@@ -162,8 +162,8 @@ Wavebound references these sources when exploring governance mappings. The table
 ### Setup & Run
 ```bash
 # 1. Clone the repository
-git clone https://github.com/iwfarr/wavebound-playbook.git
-cd wavebound-playbook
+git clone https://github.com/iwfarr/wavebound.git
+cd wavebound
 
 # 2. Install dependencies
 npm install
