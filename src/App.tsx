@@ -269,14 +269,14 @@ export default function App() {
                 onClick={() => setActiveTab('governance-atlas')}
                 className="hover:text-[#005EB8] dark:hover:text-sky-300 font-medium cursor-pointer"
               >
-                IG Quick Guide
+                Foundations
               </button>
               <span>·</span>
               <button
                 onClick={() => setActiveTab('playbook')}
                 className="hover:text-[#005EB8] dark:hover:text-sky-300 font-medium cursor-pointer"
               >
-                Playbook
+                PaC Playbook
               </button>
               <span>·</span>
               <button

@@ -502,7 +502,7 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
               {
                 id: 'statutory-policy' as GraphLensType,
                 title: '1. Statutory & Policy Lens',
-                badge: 'IG Handbook & Law',
+                badge: 'Foundations & Law',
                 icon: <Scale className="w-4 h-4" />,
                 nodes: 8
               },
@@ -687,7 +687,7 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
                     }`}
                   >
                     <HeartHandshake className="w-3.5 h-3.5" />
-                    <span>IG Handbook Angle</span>
+                    <span>Foundations Angle</span>
                   </button>
                   <button
                     onClick={() => setInspectorMode('technical')}
@@ -698,7 +698,7 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
                     }`}
                   >
                     <FileCode className="w-3.5 h-3.5" />
-                    <span>Runtime Angle</span>
+                    <span>PaC Playbook Angle</span>
                   </button>
                 </div>
 

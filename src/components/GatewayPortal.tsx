@@ -168,10 +168,10 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
                     ? 'bg-[#00A389] text-white shadow-xs font-bold'
                     : 'text-slate-700 dark:text-slate-300 hover:text-[#00A389] hover:bg-white/60 dark:hover:bg-slate-800'
                 }`}
-                title="Filter for Caldicott Guardians, IG Leads, and Research Ethics Panels"
+                title="High-level desk reference for Caldicott Guardians, IG Leads, Ethics Committees, researchers, and the public"
               >
                 <HeartHandshake className="w-3.5 h-3.5" />
-                <span>IG Handbook Pathway</span>
+                <span>Foundations Pathway</span>
               </button>
 
               <button
@@ -181,10 +181,10 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
                     ? 'bg-[#005EB8] text-white shadow-xs font-bold'
                     : 'text-slate-700 dark:text-slate-300 hover:text-[#005EB8] hover:bg-white/60 dark:hover:bg-slate-800'
                 }`}
-                title="Filter for Cloud Architects, Data Stewards, and DevOps Engineers"
+                title="Filter for Cloud Architects, Policy Engineers, and SREs"
               >
                 <Code2 className="w-3.5 h-3.5" />
-                <span>Runtime Pathway</span>
+                <span>PaC Playbook Pathway</span>
               </button>
             </div>
 
@@ -195,10 +195,10 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
                   <HeartHandshake className="w-4 h-4 text-[#047857] dark:text-emerald-400 shrink-0 mt-0.5" />
                   <div className="text-xs space-y-0.5">
                     <strong className="text-[#065f46] dark:text-emerald-300 font-bold block">
-                      IG Handbook Pathway Active (Non-Technical &amp; Statutory Leadership)
+                      Foundations Pathway Active (High-Level Desk Reference &amp; Statutory Overview)
                     </strong>
                     <p className="text-slate-700 dark:text-slate-300 text-[11px] leading-relaxed">
-                      Optimized for Caldicott Guardians, Information Governance Leads, and Research Ethics Committees. Prioritizing plain-English statutory translations, Section 251 decision gates, and standardized review packs.
+                      Designed for Caldicott Guardians, Information Governance Leads, Research Ethics Committees, researchers, and interested members of the public. Prioritizing plain-English statutory foundations, Section 251 decision gates, and standardized review packs.
                     </p>
                   </div>
                 </div>
@@ -206,7 +206,7 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
                   onClick={() => onSelectTab('governance-atlas')}
                   className="px-3 py-1.5 rounded-lg bg-[#047857] hover:bg-emerald-700 text-white font-semibold text-xs shrink-0 flex items-center gap-1.5 cursor-pointer shadow-xs"
                 >
-                  <span>Open Handbook</span>
+                  <span>Open Foundations</span>
                   <ArrowRight className="w-3 h-3" />
                 </button>
               </div>
@@ -218,7 +218,7 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
                   <Code2 className="w-4 h-4 text-[#005EB8] dark:text-sky-400 shrink-0 mt-0.5" />
                   <div className="text-xs space-y-0.5">
                     <strong className="text-[#0c2340] dark:text-sky-300 font-bold block">
-                      Runtime Pathway Active (Architecture, Manifests &amp; Ontologies)
+                      PaC Playbook Pathway Active (Architecture, Manifests &amp; Ontologies)
                     </strong>
                     <p className="text-slate-700 dark:text-slate-300 text-[11px] leading-relaxed">
                       Optimized for Data Stewards, Cloud Architects, and SREs. Prioritizing machine-executable OPA Rego policies, closed-world W3C SHACL shapes, least-privilege enclave manifests, and air-gapped package mirrors.
@@ -229,7 +229,7 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
                   onClick={() => onSelectTab('playbook')}
                   className="px-3 py-1.5 rounded-lg bg-[#005EB8] hover:bg-[#0c2340] text-white font-semibold text-xs shrink-0 flex items-center gap-1.5 cursor-pointer shadow-xs"
                 >
-                  <span>Open Playbook</span>
+                  <span>Open PaC Playbook</span>
                   <ArrowRight className="w-3 h-3" />
                 </button>
               </div>
@@ -391,7 +391,7 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
             </div>
           </div>
 
-          {/* PATH 2: IG HANDBOOK & DESK REFERENCE */}
+          {/* PATH 2: FOUNDATIONS & DESK REFERENCE */}
           <div
             className={`rounded-xl bg-white dark:bg-slate-900 border p-6 space-y-5 flex flex-col justify-between shadow-xs transition-all ${
               personaFocus === 'ig-handbook'
@@ -403,17 +403,17 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
                 <span className="text-xs font-bold text-[#047857] dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5">
                   <HeartHandshake className="w-3.5 h-3.5" />
-                  <span>IG Handbook</span>
+                  <span>Foundations</span>
                 </span>
                 <span className="text-[11px] text-slate-500 font-medium">PPIE &amp; Leadership</span>
               </div>
 
               <div className="space-y-1.5">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                  IG Handbook &amp; Desk Reference
+                  Foundations &amp; Statutory Desk Reference
                 </h3>
                 <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Plain-language reference guide designed for non-technical leadership, Caldicott Guardians, and Patient &amp; Public Involvement (PPIE) advisory representatives.
+                  Plain-language statutory foundations designed for non-technical leadership, Caldicott Guardians, and Patient &amp; Public Involvement (PPIE) advisory representatives.
                 </p>
               </div>
 
@@ -440,7 +440,7 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
                 onClick={() => onSelectTab('governance-atlas')}
                 className="w-full py-2.5 rounded-lg bg-[#00A389] hover:bg-emerald-700 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
               >
-                <span>Open IG Handbook</span>
+                <span>Open Foundations</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
               <button
@@ -452,7 +452,7 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
             </div>
           </div>
 
-          {/* PATH 3: DATA TECHNICAL & MANIFESTS */}
+          {/* PATH 3: PAC PLAYBOOK & MANIFESTS */}
           <div
             className={`rounded-xl bg-white dark:bg-slate-900 border p-6 space-y-5 flex flex-col justify-between shadow-xs transition-all ${
               personaFocus === 'data-technical'
@@ -464,14 +464,14 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
                 <span className="text-xs font-bold text-[#005EB8] dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 px-2.5 py-1 rounded border border-sky-200 dark:border-sky-800 flex items-center gap-1.5">
                   <Code2 className="w-3.5 h-3.5" />
-                  <span>Runtime</span>
+                  <span>PaC Playbook</span>
                 </span>
                 <span className="text-[11px] text-slate-500 font-medium">Architects &amp; SREs</span>
               </div>
 
               <div className="space-y-1.5">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                  Runtime Architecture &amp; Manifests
+                  PaC Playbook &amp; Technical Architecture
                 </h3>
                 <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                   Enterprise deployment artifacts for multi-tenant research clusters: namespaced audit-and-alert manifests, internal air-gapped CRAN/PyPI mirrors, and direct analytics access patterns.
@@ -501,14 +501,14 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
                 onClick={() => onSelectTab('build-deploy')}
                 className="w-full py-2.5 rounded-lg bg-[#005EB8] hover:bg-[#0c2340] text-white font-semibold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
               >
-                <span>Open Runtime Workstation</span>
+                <span>Open PaC Playbook &amp; Workstation</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={() => onSelectTab('playbook')}
                 className="w-full py-2 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-center font-medium text-xs transition-colors cursor-pointer"
               >
-                Inspect Technical Playbook
+                Read PaC Playbook
               </button>
             </div>
           </div>

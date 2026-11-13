@@ -36,7 +36,7 @@ import {
 } from 'lucide-react';
 
 export const CaldicottTransparencyPortal: React.FC = () => {
-  // Dual Angle Toggle: IG Handbook (Lay/Public) vs Data Technical (W3C PROV-O Graph)
+  // Dual Angle Toggle: Foundations (Lay/Public) vs PaC Playbook (W3C PROV-O Graph)
   const [lensMode, setLensMode] = useState<'ig_handbook' | 'data_technical'>('ig_handbook');
 
   // Project selection & filters
@@ -168,7 +168,7 @@ ${p.commercialInvolvement}
                   }`}
                 >
                   <HeartHandshake className="w-3.5 h-3.5 text-emerald-300" />
-                  <span>IG Handbook Angle: Public Register &amp; PPIE</span>
+                  <span>Foundations Angle: Public Register &amp; PPIE</span>
                 </button>
 
                 <button
@@ -180,7 +180,7 @@ ${p.commercialInvolvement}
                   }`}
                 >
                   <Network className="w-3.5 h-3.5 text-sky-300" />
-                  <span>Runtime Lineage: W3C PROV-O Graph</span>
+                  <span>PaC Playbook Lineage: W3C PROV-O Graph</span>
                 </button>
               </div>
             </div>
@@ -409,6 +409,41 @@ ${p.commercialInvolvement}
                 <div className="p-2.5 rounded bg-[#07192f] border border-cyan-900/50 flex items-center gap-2 text-slate-200">
                   <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />
                   <span>Zero commercial exclusivity; open-access scientific findings</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Freedom of Information Act 2000 (FOIA) & Proactive Publication */}
+            <div className="p-4 rounded-lg bg-slate-950/80 border border-sky-800/50 space-y-2.5">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="text-xs font-bold text-sky-300 uppercase tracking-wider">
+                  Freedom of Information Act 2000 (FOIA) &amp; Proactive Publication Scheme
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#07192f] text-sky-300 border border-sky-800/60">
+                  FOIA s19 · s22 · s40(2) · s41
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-300 leading-relaxed">
+                Public-sector data custodians and accredited research hosts are statutory public authorities under the Freedom of Information Act 2000. Publishing plain-English lay summaries, Data Use Registers, and compiled <code className="text-cyan-300">GOVERNANCE_CHARTER.md</code> artefacts proactively satisfies <strong>FOIA Section 19</strong> publication schemes while establishing clear, auditable boundaries when handling public requests:
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 text-[11px]">
+                <div className="p-2.5 rounded bg-[#07192f] border border-cyan-900/50 space-y-1">
+                  <strong className="text-teal-300 block">s40(2) &amp; s41 Confidentiality</strong>
+                  <span className="text-slate-300 leading-relaxed block">
+                    Exempts row-level microdata and disclosive small cells (<code className="text-amber-300">k &lt; 10</code> or mosaic-differencing tables) that would risk UK GDPR personal identification or breach common law confidentiality.
+                  </span>
+                </div>
+                <div className="p-2.5 rounded bg-[#07192f] border border-cyan-900/50 space-y-1">
+                  <strong className="text-teal-300 block">s21 / s22 Research Publication</strong>
+                  <span className="text-slate-300 leading-relaxed block">
+                    Signposts requesters to already-accessible Data Use Registers (s21) and protects pre-publication manuscripts or airlock outputs scheduled for peer-reviewed release (s22 / s22A).
+                  </span>
+                </div>
+                <div className="p-2.5 rounded bg-[#07192f] border border-cyan-900/50 space-y-1">
+                  <strong className="text-teal-300 block">Cumulative Differencing Check</strong>
+                  <span className="text-slate-300 leading-relaxed block">
+                    FOI officers cross-check any newly requested aggregate breakdown against prior airlock and FOI releases so overlapping cohorts cannot expose suppressed cells.
+                  </span>
                 </div>
               </div>
             </div>

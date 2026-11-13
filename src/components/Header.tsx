@@ -131,8 +131,8 @@ export const Header: React.FC<HeaderProps> = ({
     },
     {
       id: 'governance-atlas',
-      label: 'IG Quick Guide & Handbook',
-      desc: 'Plain-language guide for non-technical leads & PPIE panels',
+      label: 'Foundations & Desk Reference',
+      desc: 'High-level statutory foundations, schematic & templates for IG leads, researchers, and the public',
       icon: <HeartHandshake className="w-4 h-4 text-emerald-300" />
     }
   ];
@@ -252,7 +252,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Switcher & Controls */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            {/* Persona Switcher: IG Handbook vs Data Technical (Hidden on mobile; prominent in mobile drawer) */}
+            {/* Persona Switcher: Foundations vs PaC Playbook (Hidden on mobile; prominent in mobile drawer) */}
             <div className="hidden sm:flex items-center gap-1 bg-[#07192f] p-1 rounded-lg border border-[#1b3f68]">
               <button
                 onClick={() => onSelectTab('governance-atlas')}
@@ -261,10 +261,10 @@ export const Header: React.FC<HeaderProps> = ({
                     ? 'bg-[#00A389] text-white shadow-xs font-bold'
                     : 'text-slate-300 hover:text-white'
                 }`}
-                title="IG Handbook: Plain-language guidance for Caldicott Guardians, IG Leads & Ethics Reviewers"
+                title="Foundations: High-level desk reference for Caldicott Guardians, IG Leads, Ethics Committees, researchers & the public"
               >
                 <HeartHandshake className="w-3.5 h-3.5 text-emerald-300" />
-                <span>IG Handbook</span>
+                <span>Foundations</span>
               </button>
               <button
                 onClick={() => onSelectTab('playbook')}
@@ -273,10 +273,10 @@ export const Header: React.FC<HeaderProps> = ({
                     ? 'bg-[#005EB8] text-white shadow-xs font-bold'
                     : 'text-slate-300 hover:text-white'
                 }`}
-                title="Runtime: Policy-as-code architecture, OPA Rego rules & deployment manifests"
+                title="PaC Playbook: Policy-as-code architecture, OPA Rego rules & deployment manifests"
               >
                 <Shield className="w-3.5 h-3.5 text-sky-300" />
-                <span>Runtime</span>
+                <span>PaC Playbook</span>
               </button>
             </div>
 
@@ -589,7 +589,7 @@ export const Header: React.FC<HeaderProps> = ({
                 }`}
               >
                 <HeartHandshake className="w-3.5 h-3.5" />
-                <span>IG Handbook</span>
+                <span>Foundations</span>
               </button>
               <button
                 onClick={() => {
@@ -601,7 +601,7 @@ export const Header: React.FC<HeaderProps> = ({
                 }`}
               >
                 <Shield className="w-3.5 h-3.5" />
-                <span>Runtime</span>
+                <span>PaC Playbook</span>
               </button>
             </div>
 

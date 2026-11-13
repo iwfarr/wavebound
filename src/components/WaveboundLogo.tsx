@@ -14,6 +14,8 @@ export const WaveboundLogo: React.FC<WaveboundLogoProps> = ({
   className = '',
   showSubtitle = true,
 }) => {
+  const [imgError, setImgError] = React.useState(false);
+
   // Dimensions for the wave icon - scaled to fill container boldly
   const sizeClasses = {
     xs: 'w-7 h-7',
@@ -89,18 +91,18 @@ export const WaveboundLogo: React.FC<WaveboundLogoProps> = ({
       className={`relative rounded-xl overflow-hidden bg-[#0b172a] border border-cyan-500/40 flex items-center justify-center shadow-lg shadow-cyan-950/60 group-hover:border-cyan-400 transition-all ${sizeClasses}`}
       title="Wavebound: Ontology-led Governance (Inward Security & Outward Governance)"
     >
-      <img
-        src={logoImage}
-        alt="Wavebound Wave Logo"
-        className="w-full h-full object-contain p-0.5 transform scale-110 group-hover:scale-115 transition-transform duration-300"
-        onError={(e) => {
-          e.currentTarget.style.display = 'none';
-        }}
-      />
-      {/* Fallback container if image fails to render */}
-      <div className="absolute inset-0 flex items-center justify-center p-0.5 pointer-events-none opacity-0 img-fallback:opacity-100">
-        {WaveVector}
-      </div>
+      {!imgError ? (
+        <img
+          src={logoImage}
+          alt="Wavebound Wave Logo"
+          className="w-full h-full object-contain p-0.5 transform scale-110 group-hover:scale-115 transition-transform duration-300"
+          onError={() => setImgError(true)}
+        />
+      ) : (
+        <div className="w-full h-full p-0.5 flex items-center justify-center">
+          {WaveVector}
+        </div>
+      )}
       {/* Subtle atmospheric edge vignette */}
       <div className="absolute inset-0 ring-1 ring-inset ring-cyan-400/20 rounded-xl pointer-events-none" />
     </div>
@@ -116,7 +118,16 @@ export const WaveboundLogo: React.FC<WaveboundLogoProps> = ({
         className={`inline-flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-[#0C2340] border border-cyan-500/40 text-slate-200 shadow-sm hover:border-cyan-400 transition-colors ${className}`}
       >
         <div className="w-6 h-6 rounded-md overflow-hidden bg-[#071628] border border-cyan-400/40 shrink-0 flex items-center justify-center">
-          <img src={logoImage} alt="Wavebound" className="w-full h-full object-contain p-0.5 transform scale-110" />
+          {!imgError ? (
+            <img
+              src={logoImage}
+              alt="Wavebound"
+              className="w-full h-full object-contain p-0.5 transform scale-110"
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            WaveVector
+          )}
         </div>
         <div className="flex items-center gap-1.5">
           <span className="font-extrabold tracking-wider text-xs uppercase bg-gradient-to-r from-cyan-300 via-sky-300 to-teal-300 bg-clip-text text-transparent">
@@ -134,11 +145,16 @@ export const WaveboundLogo: React.FC<WaveboundLogoProps> = ({
         <div className="relative group">
           <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl blur-xl opacity-50 group-hover:opacity-85 transition duration-500" />
           <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-[#071628] border-2 border-cyan-400/60 shadow-2xl flex items-center justify-center">
-            <img
-              src={logoImage}
-              alt="Wavebound Wave Logo"
-              className="w-full h-full object-contain p-1 transform scale-110 group-hover:scale-115 transition-transform duration-300"
-            />
+            {!imgError ? (
+              <img
+                src={logoImage}
+                alt="Wavebound Wave Logo"
+                className="w-full h-full object-contain p-1 transform scale-110 group-hover:scale-115 transition-transform duration-300"
+                onError={() => setImgError(true)}
+              />
+            ) : (
+              WaveVector
+            )}
           </div>
         </div>
         <div className="text-center sm:text-left space-y-1.5">

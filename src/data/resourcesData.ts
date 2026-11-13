@@ -198,6 +198,18 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     citation: 'Health Data Research UK. Health Data Research Innovation Gateway. London: HDR UK; 2024.',
     tags: ['HDR UK', 'Data Discovery', 'Metadata Catalogue', 'Data Use Register', 'Population Health']
   },
+  {
+    id: 'res-ehds',
+    title: 'European Health Data Space (EHDS) Regulation',
+    organization: 'European Commission / European Parliament & Council',
+    category: 'Statutory Legislation & Regulatory Guidance',
+    url: 'https://health.ec.europa.eu/ehealth-digital-health-and-care/european-health-data-space-regulation-ehds_en',
+    shortDesc: 'EU statutory regulation establishing standardized rules for primary clinical interoperability and secondary use of electronic health data via Health Data Access Bodies (HDABs), Data Permits, and air-gapped Secure Processing Environments (SPEs).',
+    playbookRelevance: 'Demonstrates direct international structural overlap with UK Five Safes, CAG/HRA permits, and accredited TRE/SDE settings—enabling harmonized cross-border federated analytics ontologies.',
+    isStatutory: true,
+    citation: 'European Union. Regulation on the European Health Data Space (EHDS). Brussels: European Commission DG SANTE; 2024.',
+    tags: ['EHDS', 'EU Regulation', 'HDAB', 'Data Permit', 'SPE', 'Secondary Use', 'Federated Analytics']
+  },
 
   // --- Statistical Disclosure Control (SDC) & Airlocks ---
   {
@@ -206,9 +218,21 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     organization: 'Safe Data Access Professionals (SDAP) Network',
     category: 'Statistical Disclosure Control (SDC) & Airlocks',
     url: 'https://outputchecking.org/',
-    shortDesc: 'The definitive UK community repository of Statistical Disclosure Control rules, statistical edge cases, and airlock checking protocols.',
-    playbookRelevance: 'Authoritative source for practical airlock checking methodologies and small-cell suppression edge cases.',
-    tags: ['StatBarn', 'SDAP', 'Output Checking', 'SDC']
+    shortDesc: 'The definitive UK community repository of Statistical Disclosure Control rules, grouping research outputs into standardized "Statistical Barns" (Frequencies, Position, Means/Totals, Correlation, Shape/Survival).',
+    playbookRelevance: 'Authoritative classification taxonomy used by automated SDC checkers (like SACRO) and airlock reviewers to evaluate tabular, regression, and survival model disclosures.',
+    citation: 'Safe Data Access Professionals. Statistical Disclosure Control Handbook & Statbarn Classification. UK SDAP Community; 2024.',
+    tags: ['StatBarn', 'SDAP', 'Output Checking', 'SDC', 'SACRO', 'Safe Outputs']
+  },
+  {
+    id: 'res-statbarn-srt',
+    title: 'Safe Researcher Training: Output SDC & Statbarns Guide',
+    organization: 'Safe Researcher Training (SRT) & DARE UK SACRO',
+    category: 'Statistical Disclosure Control (SDC) & Airlocks',
+    url: 'https://saferesearchertraining.org/',
+    shortDesc: 'The national UK curriculum for accredited researchers and SDC officers, explaining the 5 Statbarns and practical risk mitigation for health and population outputs.',
+    playbookRelevance: 'Informs researcher preparation of aggregate tables, survival curves, and regression residuals prior to airlock submission.',
+    citation: 'DARE UK SACRO Project & Safe Researcher Training. Output SDC Guidelines and Statbarn Classifications. 2024.',
+    tags: ['StatBarn', 'DARE UK', 'SACRO', 'Researcher Training', 'SDC']
   },
   {
     id: 'res-ukllc-sdc',
@@ -260,6 +284,17 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     shortDesc: 'Official pathway for researcher accreditation, training assessment, and research project approval under the Digital Economy Act 2017.',
     playbookRelevance: 'Directly operationalized in `tre:SafePerson` and `tre:hasAccreditedResearcher` within `access-shapes.ttl`.',
     tags: ['Accreditation', 'Safe Person', 'ONS SRS', 'DEA 2017']
+  },
+  {
+    id: 'res-datashield',
+    title: 'DataSHIELD: Distributed Non-Disclosive Federated Data Analysis',
+    organization: 'DataSHIELD Community / DARE UK / ELIXIR',
+    category: 'Statistical Disclosure Control (SDC) & Airlocks',
+    url: 'https://datashield.org/',
+    shortDesc: 'Open-source federated analysis infrastructure enabling researchers to run pre-approved statistical models across distributed data custodian servers without pooling row-level microdata, guarded by server-side nfilter disclosure traps.',
+    playbookRelevance: 'Complements interactive enclave SDC and airlock review for structured multi-node epidemiological studies; distinct from interactive developer IDEs or LLM coding environments.',
+    citation: 'DataSHIELD Consortium. DataSHIELD: Privacy-preserving distributed multi-site analysis platform. 2024.',
+    tags: ['DataSHIELD', 'Federated Analytics', 'nfilter', 'Non-Disclosive', 'Distributed Compute']
   },
 
   // --- NHS Information Governance & Security Toolkits ---
@@ -498,6 +533,17 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     shortDesc: 'The UK reference standard specification for Trusted Research Environments across 4 core operational pillars.',
     playbookRelevance: 'The foundational architectural blueprint aligned throughout the entire repository and ontology.',
     tags: ['SATRE', 'DARE UK', 'TRE Architecture', 'Turing Institute']
+  },
+  {
+    id: 'res-ro-crate',
+    title: 'RO-Crate (Research Object Crate) & Five Safes RO-Crate Profile',
+    organization: 'RO-Crate Community / DARE UK / HDR UK',
+    category: 'Policy-as-Code, IAM & Fine-Grained Access Control',
+    url: 'https://www.researchobject.org/ro-crate/',
+    shortDesc: 'Community standard using Schema.org JSON-LD (`ro-crate-metadata.json`) to bundle computational workflows, approvals, datasets, and W3C PROV-O lineage; extended by DARE UK as the Five Safes RO-Crate profile for trusted federated TRE workflows.',
+    playbookRelevance: 'Serves as the portable packaging envelope for Wavebound’s PROV-O audit graphs and signed airlock release manifests without replacing closed-world SHACL or OPA policy enforcement.',
+    citation: 'Sefton P, Carragáin EÓ, Soiland-Reyes S, et al. RO-Crate Metadata Specification & Five Safes RO-Crate Profile. ResearchObject.org; 2024.',
+    tags: ['RO-Crate', 'Five Safes RO-Crate', 'JSON-LD', 'PROV-O', 'W3C', 'DARE UK']
   },
 
   // --- International Standards (ISO) & Clinical Safety (DCB) ---

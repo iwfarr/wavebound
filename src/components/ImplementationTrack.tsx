@@ -924,7 +924,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                   Kubernetes ValidatingWebhookConfiguration (Passive Evaluate-Only Mode)
                 </h3>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  Notice <code className="text-emerald-300 font-mono">failurePolicy: Ignore</code>: if OPA is unavailable, pods still launch without blocking clinical research.
+                  Notice <code className="text-emerald-300 font-mono">failurePolicy: Ignore</code>, <code className="text-emerald-300 font-mono">path: &quot;/validate&quot;</code> (returning a full <code className="text-emerald-300 font-mono">AdmissionReview</code> envelope), and the break-glass <code className="text-emerald-300 font-mono">objectSelector</code>: critical pods launch safely without deadlock.
                 </p>
               </div>
               <button
@@ -936,33 +936,51 @@ kind: ValidatingWebhookConfiguration
 metadata:
   name: wavebound-tre-admission-hook
   labels:
+    app.kubernetes.io/name: wavebound-policy-engine
     app.kubernetes.io/part-of: wavebound-policy-engine
     wavebound.tre/rollout-stage: "stage-1-evaluate-only"
+  annotations:
+    # Recommended: Let cert-manager automatically inject and rotate caBundle
+    # cert-manager.io/inject-ca-from: tre-system/wavebound-opa-pdp-tls
 webhooks:
   - name: validate.tre.wavebound.nhs.uk
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
+    matchPolicy: Equivalent
+    timeoutSeconds: 2
+    # Prevents pod creation lockouts if the PDP is unreachable or times out.
+    # Note: For true "evaluate-only" mode, the PDP must still return allowed: true.
+    failurePolicy: Ignore
+    clientConfig:
+      service:
+        name: wavebound-opa-pdp
+        namespace: tre-system
+        # Must return a full Kubernetes AdmissionReview JSON envelope.
+        # (Raw OPA /v1/data/... wraps responses in {"result": ...} and will fail.)
+        path: "/validate"
+        port: 443
+      # Single-line base64-encoded PEM CA certificate (no inline comments on this line)
+      caBundle: "LS0tLS1CRUdJTi..."
     rules:
       - apiGroups: [""]
         apiVersions: ["v1"]
         operations: ["CREATE"]
         resources: ["pods"]
+        # Optional: Uncomment below to also block unauthorized ephemeral debug containers
+        # operations: ["CREATE", "UPDATE"]
+        # resources: ["pods", "pods/ephemeralcontainers"]
         scope: "Namespaced"
-    clientConfig:
-      service:
-        name: wavebound-opa-pdp
-        namespace: tre-system
-        path: "/v1/data/tre/authz/allow"
-        port: 443
-      caBundle: LS0tLS1CRUdJTi... # Internal cluster CA cert
-    admissionReviewVersions: ["v1"]
-    sideEffects: None
-    timeoutSeconds: 2
-    # CRITICAL: failurePolicy must be Ignore in Stage 1 & Stage 2 to prevent false lockouts
-    failurePolicy: Ignore
     namespaceSelector:
       matchExpressions:
         - key: tre.wavebound.nhs.uk/managed
           operator: In
-          values: ["true", "shadow-pilot"]`
+          values: ["true", "shadow-pilot"]
+    # Emergency break-glass: allows skipping admission checks on labeled critical Pods
+    objectSelector:
+      matchExpressions:
+        - key: tre.wavebound.nhs.uk/bypass-admission
+          operator: NotIn
+          values: ["true"]`
                   )
                 }
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 hover:text-cyan-300 hover:border-slate-700 transition-colors self-start sm:self-auto cursor-pointer"
@@ -987,33 +1005,51 @@ kind: ValidatingWebhookConfiguration
 metadata:
   name: wavebound-tre-admission-hook
   labels:
+    app.kubernetes.io/name: wavebound-policy-engine
     app.kubernetes.io/part-of: wavebound-policy-engine
     wavebound.tre/rollout-stage: "stage-1-evaluate-only"
+  annotations:
+    # Recommended: Let cert-manager automatically inject and rotate caBundle
+    # cert-manager.io/inject-ca-from: tre-system/wavebound-opa-pdp-tls
 webhooks:
   - name: validate.tre.wavebound.nhs.uk
+    admissionReviewVersions: ["v1"]
+    sideEffects: None
+    matchPolicy: Equivalent
+    timeoutSeconds: 2
+    # Prevents pod creation lockouts if the PDP is unreachable or times out.
+    # Note: For true "evaluate-only" mode, the PDP must still return allowed: true.
+    failurePolicy: Ignore
+    clientConfig:
+      service:
+        name: wavebound-opa-pdp
+        namespace: tre-system
+        # Must return a full Kubernetes AdmissionReview JSON envelope.
+        # (Raw OPA /v1/data/... wraps responses in {"result": ...} and will fail.)
+        path: "/validate"
+        port: 443
+      # Single-line base64-encoded PEM CA certificate (no inline comments on this line)
+      caBundle: "LS0tLS1CRUdJTi..."
     rules:
       - apiGroups: [""]
         apiVersions: ["v1"]
         operations: ["CREATE"]
         resources: ["pods"]
+        # Optional: Uncomment below to also block unauthorized ephemeral debug containers
+        # operations: ["CREATE", "UPDATE"]
+        # resources: ["pods", "pods/ephemeralcontainers"]
         scope: "Namespaced"
-    clientConfig:
-      service:
-        name: wavebound-opa-pdp
-        namespace: tre-system
-        path: "/v1/data/tre/authz/allow"
-        port: 443
-      caBundle: LS0tLS1CRUdJTi... # Internal cluster CA cert
-    admissionReviewVersions: ["v1"]
-    sideEffects: None
-    timeoutSeconds: 2
-    # CRITICAL NON-BREAKING SAFEGUARD: failurePolicy is Ignore during evaluate-only and shadow stages
-    failurePolicy: Ignore
     namespaceSelector:
       matchExpressions:
         - key: tre.wavebound.nhs.uk/managed
           operator: In
-          values: ["true", "shadow-pilot"]`}</code>
+          values: ["true", "shadow-pilot"]
+    # Emergency break-glass: allows skipping admission checks on labeled critical Pods
+    objectSelector:
+      matchExpressions:
+        - key: tre.wavebound.nhs.uk/bypass-admission
+          operator: NotIn
+          values: ["true"]`}</code>
             </pre>
           </div>
 

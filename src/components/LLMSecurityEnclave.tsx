@@ -62,7 +62,7 @@ def calculate_risk(df):
     sanitizedCode: string;
   } | null>(null);
 
-  const [activeToolConfig, setActiveToolConfig] = useState<'cline' | 'copilot' | 'cursor' | 'vllm'>('cline');
+  const [activeToolConfig, setActiveToolConfig] = useState<'harness' | 'bindings' | 'vllm'>('harness');
   const [copiedConfig, setCopiedConfig] = useState(false);
 
   // Run PEP Simulation
@@ -445,13 +445,13 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
                 <span>Defense-in-Depth Specification: Layered Isolation vs. Advisory Client Filters</span>
               </div>
               <p className="text-xs text-slate-300 leading-relaxed">
-                In a production data analysis platform, security boundaries must be structured hierarchically. Client-side ignore files (<code>.clineignore</code>, <code>.copilotignore</code>, <code>.cursorignore</code>) are advisory developer hints, not cryptographic or security guarantees:
+                In a production data analysis platform, security boundaries must be structured hierarchically. Client-side ignore files (<code>.harness_ignore</code>, mapped to client-specific files like <code>.clineignore</code>, <code>.copilotignore</code>, or <code>.cursorignore</code>) are advisory developer hints, not cryptographic or security guarantees:
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs pt-1">
                 <div className="p-3 bg-slate-900/90 rounded-lg border border-slate-800 space-y-1">
                   <span className="text-[11px] font-bold text-purple-300 block">Layer 1: Advisory Client Filters</span>
                   <p className="text-[10px] text-slate-400 leading-relaxed">
-                    <code>.clineignore</code>, <code>.copilotignore</code> prevent IDE plugins from routinely scraping data folders into prompt windows. (Can be bypassed by subshells or misconfiguration).
+                    <code>.harness_ignore</code> (and tool bindings such as <code>.clineignore</code> / <code>.copilotignore</code>) prevent IDE agents from routinely scraping data folders into prompt windows. (Can be bypassed by subshells or misconfiguration).
                   </p>
                 </div>
                 <div className="p-3 bg-slate-900/90 rounded-lg border border-slate-800 space-y-1">
@@ -876,13 +876,13 @@ def process(data): return data.mean()`)
               <div className="w-9 h-9 rounded-xl bg-purple-950 flex items-center justify-center text-purple-400 border border-purple-800 font-bold font-mono">
                 2
               </div>
-              <h3 className="font-bold text-white text-base">Content Exclusion Policies (.clineignore, .copilotignore)</h3>
+              <h3 className="font-bold text-white text-base">Content Exclusion Policies (.harness_ignore)</h3>
               <p className="text-xs text-slate-300 leading-relaxed">
-                Developer tools honor client exclusion files (<strong>.clineignore, .copilotignore, .cursorignore</strong>) to omit data folders
+                Repositories define a unified <strong>.harness_ignore</strong> exclusion policy (which GitOps automation mirrors to tool-specific bindings such as <code>.clineignore</code>, <code>.copilotignore</code>, or <code>.cursorignore</code>) to omit data folders
                 (<code className="text-purple-300">/data/**, *.csv, *.parquet</code>) from IDE indexing buffers during interactive coding.
               </p>
               <div className="text-[11px] text-amber-300 bg-amber-950/40 p-2.5 rounded-lg border border-amber-800/50 leading-relaxed">
-                <strong>Enclave Security Standard:</strong> Client-side ignore files are an advisory developer heuristic, not an isolation guarantee. In accredited enclaves, they must be backed by non-bypassable host controls: read-only POSIX directory mounts (<code className="text-amber-200">chmod 400</code>) and network-level air-gapping.
+                <strong>Enclave Security Standard:</strong> Client-side ignore files are an advisory developer heuristic, not an isolation guarantee. In accredited enclaves, <code>.harness_ignore</code> must be backed by non-bypassable host controls: read-only POSIX directory mounts (<code className="text-amber-200">chmod 400</code>) and network-level air-gapping.
               </div>
             </div>
 
@@ -944,8 +944,7 @@ def process(data): return data.mean()`)
               Ready-to-Use IDE & Agent Lockdown Configurations
             </h2>
             <p className="text-xs sm:text-sm text-slate-400 max-w-2xl">
-              Copy and deploy these configuration files into your enclave coding workspace to lock down
-              Cline, GitHub Copilot, Cursor, and local vLLM instances.
+              Deploy a standardized <code className="text-cyan-300">.harness_ignore</code> exclusion policy and local inference configuration into your enclave workspace to lock down agentic coding harnesses without tying policies to a single vendor tool.
             </p>
           </div>
 
@@ -953,15 +952,14 @@ def process(data): return data.mean()`)
             <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-800">
               <div className="flex items-center gap-2">
                 {[
-                  { id: 'cline', label: '.clineignore (Cline Agent)' },
-                  { id: 'copilot', label: '.copilotignore (GitHub Copilot)' },
-                  { id: 'cursor', label: '.cursorignore (Cursor IDE)' },
+                  { id: 'harness', label: '.harness_ignore (Standard Policy)' },
+                  { id: 'bindings', label: 'Client Symlink Sync (Makefile)' },
                   { id: 'vllm', label: 'Local vLLM Private Endpoint (.env)' }
                 ].map((item) => (
                   <button
                     key={item.id}
                     onClick={() => setActiveToolConfig(item.id as any)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
                       activeToolConfig === item.id
                         ? 'bg-cyan-500 text-slate-950 font-bold'
                         : 'bg-slate-950 text-slate-400 hover:text-slate-200'
@@ -975,35 +973,32 @@ def process(data): return data.mean()`)
               <button
                 onClick={() => {
                   const snippets: Record<string, string> = {
-                    cline: `# .clineignore: Advisory Developer Exclusion Filter
+                    harness: `# .harness_ignore: Canonical Agent & IDE Content Exclusion Policy
 # NOTE: Client-side ignore files are an advisory filter, NOT an enclave isolation guarantee.
 # Enclaves must enforce POSIX read-only mounts (chmod 400) and zero-egress VPC rules on host containers.
 /data/**
 /raw_clinical/**
+/patients/**
+/clinical_records/**
+/audit/**
 *.csv
+*.tsv
 *.parquet
 *.feather
+*.sqlite
+*.pkl
 *.jsonl
 *.ttl
 *.sql
 .env*
 /tests/fixtures/**`,
-                    copilot: `# .copilotignore: Prevent GitHub Copilot Context Ingestion (Advisory)
-# Pairs with host read-only storage permissions to protect clinical microdata
-/data/**
-/patients/**
-*.csv
-*.tsv
-*.parquet
-*.sqlite
-/audit/**`,
-                    cursor: `# .cursorignore: Cursor AI Agent Context Filter (Advisory)
-# Excludes data fixtures; must be backed by host namespace isolation
-/data/**
-/clinical_records/**
-*.parquet
-*.feather
-*.pkl`,
+                    bindings: `# Makefile target: Project canonical .harness_ignore onto tool-specific agent filenames
+# Keeps a single audited exclusion baseline regardless of developer IDE choice
+sync-harness-ignore:
+\t@for f in .clineignore .copilotignore .cursorignore .aiignore; do \\
+\t  cp .harness_ignore $$f; \\
+\tdone
+\t@echo "Synchronized .harness_ignore across local IDE bindings."`,
                     vllm: `# Environment config pointing IDE to In-Enclave Local Inference Cluster
 OPENAI_BASE_URL="http://vllm-service.enclave.internal:8000/v1"
 OPENAI_API_KEY="enclave-airgap-internal-token"
@@ -1011,7 +1006,7 @@ MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`
                   };
                   handleCopyConfig(snippets[activeToolConfig]);
                 }}
-                className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors border border-slate-700"
+                className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors border border-slate-700 cursor-pointer"
               >
                 {copiedConfig ? (
                   <>
@@ -1028,44 +1023,39 @@ MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`
             </div>
 
             <pre className="p-4 bg-slate-950 rounded-xl border border-slate-800 font-mono text-xs text-cyan-200 overflow-x-auto leading-relaxed">
-              {activeToolConfig === 'cline' && (
-                <code>{`# .clineignore: Advisory Developer Exclusion Filter
+              {activeToolConfig === 'harness' && (
+                <code>{`# .harness_ignore: Canonical Agent & IDE Content Exclusion Policy
 # NOTE: Client-side ignore files are an advisory filter, NOT an enclave isolation guarantee.
 # Enclaves must enforce POSIX read-only mounts (chmod 400) and zero-egress VPC rules on host containers.
 /data/**
 /raw_clinical/**
+/patients/**
+/clinical_records/**
+/audit/**
 *.csv
+*.tsv
 *.parquet
 *.feather
+*.sqlite
+*.pkl
 *.jsonl
 *.ttl
 *.sql
 .env*
 /tests/fixtures/**`}</code>
               )}
-              {activeToolConfig === 'copilot' && (
-                <code>{`# .copilotignore: Prevent GitHub Copilot Context Ingestion
-# Enforces Safe Data dimension in editor tabs
-/data/**
-/patients/**
-*.csv
-*.tsv
-*.parquet
-*.sqlite
-/audit/**`}</code>
-              )}
-              {activeToolConfig === 'cursor' && (
-                <code>{`# .cursorignore: Cursor AI Agent Context Lockdown
-# Restricts indexing to source application code only
-/data/**
-/clinical_records/**
-*.parquet
-*.feather
-*.pkl`}</code>
+              {activeToolConfig === 'bindings' && (
+                <code>{`# Makefile target: Project canonical .harness_ignore onto tool-specific agent filenames
+# Keeps a single audited exclusion baseline regardless of developer IDE choice
+sync-harness-ignore:
+\t@for f in .clineignore .copilotignore .cursorignore .aiignore; do \\
+\t  cp .harness_ignore $$f; \\
+\tdone
+\t@echo "Synchronized .harness_ignore across local IDE bindings."`}</code>
               )}
               {activeToolConfig === 'vllm' && (
                 <code>{`# Local Enclave Air-Gapped Inference (.env)
-# Connects Cline, Cursor, or Continue.dev to In-Enclave GPU node (Zero Egress)
+# Connects coding harnesses to In-Enclave GPU node (Zero Egress)
 OPENAI_BASE_URL="http://vllm-service.enclave.internal:8000/v1"
 OPENAI_API_KEY="enclave-airgap-internal-token"
 MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`}</code>
@@ -1501,7 +1491,7 @@ MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`}</code>
                     Implement client-side abstract syntax tree (AST) linters and local PEP proxy daemons that inspect outbound code buffers before transmission, scrubbing direct identifiers and small cell numbers.
                   </p>
                   <ul className="text-[11px] text-slate-400 space-y-1 list-disc list-inside">
-                    <li>Mandatory <code>.copilotignore</code> and <code>.cursorignore</code> files.</li>
+                    <li>Mandatory <code>.harness_ignore</code> exclusion policy (synced to IDE bindings).</li>
                     <li>Regex and named-entity recognition (NER) for NHS numbers.</li>
                     <li>Blocks un-sanitized prompts at local localhost port before WAN.</li>
                   </ul>

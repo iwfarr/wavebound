@@ -9,7 +9,7 @@ export default defineConfig(() => {
   const isCI = process.env.GITHUB_ACTIONS === 'true';
   const repoName = process.env.GITHUB_REPOSITORY
     ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/`
-    : '/seawater-playbook/';
+    : '/wavebound/';
   const base = process.env.VITE_BASE_PATH || (isCI ? repoName : './');
 
   return {

@@ -115,6 +115,7 @@ const HANDBOOK_CHAPTERS: HandbookChapter[] = [
     statutoryBasis: 'SATRE Specification v1.1; ISO/IEC 27001 Annex A.13; NHS DSPT Assertion 1.5.',
     keySafeguards: [
       'Air-gapped Zero-Egress VPC: Compute pods cannot reach the public internet; all outbound WAN routing is severed.',
+      'AES-256 Encryption at Rest & In Transit: All storage volumes, database partitions, and internal mTLS tunnels enforce AES-256 cryptographic protection.',
       'Virtual Desktop Infrastructure (VDI): Researchers view pixels only; underlying microdata never resides on local client laptops.',
       'Multi-Factor Authentication (MFA): FIDO2 / hardware token authentication required at entry perimeter.'
     ],
@@ -134,7 +135,7 @@ const HANDBOOK_CHAPTERS: HandbookChapter[] = [
     statutoryBasis: 'UK GDPR Art. 5(1)(c) Minimisation; ICO Anonymisation Code; NHS Caldicott Principle 2.',
     keySafeguards: [
       'Direct Identifiers Expunged: Names, NHS numbers, addresses, and full dates of birth are segregated before enclave ingestion.',
-      'Salted HMAC Pseudonymisation: Reversible linkage tokens are salted and managed by an independent Trusted Third Party.',
+      'Salted HMAC Pseudonymisation: Reversible linkage tokens are salted and managed by an independent Trusted Third Party (industry-standard PPRL per ISO/TS 25237, e.g. SAIL Databank split-file & NHS DARS models).',
       'Sensitivity Classification: Data tiered into Tier 1 (Aggregate/Synthetic), Tier 2 (Pseudonymised Cohort), and Tier 3 (Sensitive Clinical under Section 251).'
     ],
     workflowSteps: [
@@ -154,7 +155,8 @@ const HANDBOOK_CHAPTERS: HandbookChapter[] = [
     keySafeguards: [
       'Primary Cell Suppression (k ≥ 10): Any aggregate table cell representing fewer than 10 individuals is permanently masked.',
       'Dominance Concentration Rule (≤ 80%): Top contributor must not account for more than 80% of any summary value.',
-      'Independent Two-Person Airlock Review: Certified output reviewers inspect all candidate charts, tables, and model parameters before release.'
+      'Independent Two-Person Airlock Review: Certified output reviewers inspect all candidate charts, tables, and model parameters before release.',
+      'Freedom of Information (FOI) Proactive Transparency: Published Caldicott 8 summaries and release registers satisfy FOIA s19 publication schemes while shielding s40(2) personal data and s41 confidential microdata.'
     ],
     workflowSteps: [
       { title: '1. Airlock Export Submission', description: 'Researcher deposits candidate publication table into the enclave airlock staging area.', responsibleParty: 'Approved Researcher' },
@@ -171,6 +173,7 @@ interface SchematicNode {
   label: string;
   category: 'origin' | 'governance' | 'boundary' | 'enclave' | 'egress' | 'release';
   categoryLabel: string;
+  fiveSafesPillar: 'Safe Data' | 'Safe Projects' | 'Safe People' | 'Safe Settings' | 'Safe Outputs';
   shortDesc: string;
   statutoryRole: string;
   handbookChapterRef: string;
@@ -191,6 +194,7 @@ const SCHEMATIC_NODES: SchematicNode[] = [
     label: 'Population Data Sources',
     category: 'origin',
     categoryLabel: 'Source Cohort',
+    fiveSafesPillar: 'Safe Data',
     shortDesc: 'Citizens, survey cohorts, and patients whose health and care encounters are held under statutory common law confidentiality.',
     statutoryRole: 'Data Subjects & Primary Cohorts',
     handbookChapterRef: 'ch-data',
@@ -224,6 +228,7 @@ const SCHEMATIC_NODES: SchematicNode[] = [
     label: 'Data Custodian / NHS Trust',
     category: 'origin',
     categoryLabel: 'Data Custodian',
+    fiveSafesPillar: 'Safe Data',
     shortDesc: 'Authorised health organizations and trusts holding statutory legal stewardship over primary clinical records.',
     statutoryRole: 'Data Controller (UK GDPR Art. 4(7))',
     handbookChapterRef: 'ch-data',
@@ -243,7 +248,7 @@ const SCHEMATIC_NODES: SchematicNode[] = [
     privacySafeguards: [
       'AES-256 encrypted storage volumes with role-partitioned EHR database clusters',
       'De-identification at source: direct patient identifiers (Name, NHS Number, Full Address) stripped',
-      'Salted HMAC tokenisation for longitudinal linkage via honest-broker third parties',
+      'Salted HMAC tokenisation for longitudinal linkage via honest-broker third parties (international PPRL standard, e.g. SAIL Databank split-file & NHS DARS models)',
       'Immutable database audit logging for all extraction and cohort selection queries'
     ],
     operationalActions: [
@@ -259,6 +264,7 @@ const SCHEMATIC_NODES: SchematicNode[] = [
     label: 'Caldicott Guardian & DPO',
     category: 'governance',
     categoryLabel: 'Institutional Conscience',
+    fiveSafesPillar: 'Safe Projects',
     shortDesc: 'Senior statutory officials ensuring that patient confidentiality duty is preserved, public benefit justified, and Caldicott Principles 1–8 strictly enforced.',
     statutoryRole: 'Statutory Confidentiality & Legal Compliance Oversight',
     handbookChapterRef: 'ch-projects',
@@ -294,6 +300,7 @@ const SCHEMATIC_NODES: SchematicNode[] = [
     label: 'Ethics Committee (REC / HRA)',
     category: 'governance',
     categoryLabel: 'Independent Ethics',
+    fiveSafesPillar: 'Safe Projects',
     shortDesc: 'Independent statutory body evaluating study ethical validity, scientific merit, consent frameworks, and public benefit.',
     statutoryRole: 'NHS REC / IRAS Protocol Favourable Opinion',
     handbookChapterRef: 'ch-projects',
@@ -328,6 +335,7 @@ const SCHEMATIC_NODES: SchematicNode[] = [
     label: 'Researcher Accreditation (RAP)',
     category: 'governance',
     categoryLabel: 'Safe Person',
+    fiveSafesPillar: 'Safe People',
     shortDesc: 'Verifying researcher qualifications, institutional employment, bona fides, and certified annual Information Governance training.',
     statutoryRole: 'Safe Person Accreditation Standard (DEA 2017 / ONS)',
     handbookChapterRef: 'ch-people',
@@ -362,6 +370,7 @@ const SCHEMATIC_NODES: SchematicNode[] = [
     label: 'Perimeter Access Gateway',
     category: 'boundary',
     categoryLabel: 'Access Boundary',
+    fiveSafesPillar: 'Safe Settings',
     shortDesc: 'Hardened zero-trust gateway validating multi-factor authentication, active ethical clearance, and project authorization before admitting compute sessions.',
     statutoryRole: 'Policy Enforcement Point (PEP) & Admission Gate',
     handbookChapterRef: 'ch-settings',
@@ -395,6 +404,7 @@ const SCHEMATIC_NODES: SchematicNode[] = [
     label: 'Air-Gapped Research Enclave',
     category: 'enclave',
     categoryLabel: 'Safe Setting',
+    fiveSafesPillar: 'Safe Settings',
     shortDesc: 'Hardened virtual cleanroom with zero outbound WAN internet access, read-only data partitions, internal package mirrors, and GPU acceleration.',
     statutoryRole: 'SATRE v1.1 Pillar 2 Secure Computing Cleanroom',
     handbookChapterRef: 'ch-settings',
@@ -429,6 +439,7 @@ const SCHEMATIC_NODES: SchematicNode[] = [
     label: 'Statistical Disclosure Control (SDC)',
     category: 'egress',
     categoryLabel: 'Mathematical Gate',
+    fiveSafesPillar: 'Safe Outputs',
     shortDesc: 'Automated policy-as-code scanner checking primary small-cell suppression (k >= 10), dominance ceilings (<= 80%), and regression degrees of freedom.',
     statutoryRole: 'ONS & NHS SDE Quantitative Output Protection',
     handbookChapterRef: 'ch-outputs',
@@ -441,6 +452,7 @@ const SCHEMATIC_NODES: SchematicNode[] = [
     ],
     statutoryHandoffs: [
       'ONS Working Paper No. 22 Statistical Disclosure Control Guidance',
+      'SDAP & DARE UK Statbarn Output Classification (5 canonical barns: Frequencies, Quantiles, Means/Totals, Correlation, Shape & Survival)',
       'NHS England Secure Data Environment SDC Standard Operating Procedure',
       'W3C SHACL shape validation of candidate tabular schemas and summary metrics'
     ],
@@ -465,6 +477,7 @@ const SCHEMATIC_NODES: SchematicNode[] = [
     label: 'Airlocked Review',
     category: 'egress',
     categoryLabel: 'Safe Output Gate',
+    fiveSafesPillar: 'Safe Outputs',
     shortDesc: 'Independent dual-reviewer sign-off by accredited SDC officers checking candidate outputs against differencing, small-cell disclosure, and inferential risks.',
     statutoryRole: 'Human-in-the-Loop SDC Officer Verification',
     handbookChapterRef: 'ch-outputs',
@@ -477,6 +490,7 @@ const SCHEMATIC_NODES: SchematicNode[] = [
     ],
     statutoryHandoffs: [
       'Safe Output principle of Five Safes framework',
+      'SDAP Statbarn & DARE UK SACRO independent airlock checking protocol',
       'Dual-reviewer independent authorization protocol (two distinct accredited SDC officers)',
       'W3C PROV-O non-repudiable audit recording of review decision and officer signatures'
     ],
@@ -499,6 +513,7 @@ const SCHEMATIC_NODES: SchematicNode[] = [
     label: 'Safe Public Health Output',
     category: 'release',
     categoryLabel: 'Public Domain',
+    fiveSafesPillar: 'Safe Outputs',
     shortDesc: 'Fully anonymous epidemiological models, aggregated tables, and peer-reviewed clinical publications released into the public domain.',
     statutoryRole: 'Anonymous Data (UK GDPR Recital 26)',
     handbookChapterRef: 'ch-outputs',
@@ -936,13 +951,72 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
   const [quizAnswers, setQuizAnswers] = useState<Record<string, number>>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
 
+  // Floating tooltip state for technical terms
+  const [activeTooltipTerm, setActiveTooltipTerm] = useState<GlossaryTerm | null>(null);
+
+  // Five Safes filter for Schematic
+  const [schematicSafesFilter, setSchematicSafesFilter] = useState<
+    'All' | 'Safe Data' | 'Safe Projects' | 'Safe People' | 'Safe Settings' | 'Safe Outputs'
+  >('All');
+
   // Cytoscape ref
   const graphContainerRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<cytoscape.Core | null>(null);
 
   const selectedChapter = HANDBOOK_CHAPTERS.find((c) => c.id === selectedChapterId) || HANDBOOK_CHAPTERS[0];
 
-  // Filter glossary specifically for IG non-technical terms
+  // Scan text for known glossary terms / acronyms (e.g. AES-256, HMAC, Statbarn, DPIA, etc.)
+  const renderGlossaryBadges = (rawText: string, keyPrefix: string | number = 'term') => {
+    if (!rawText) return rawText;
+
+    // Sort terms by length descending so longer compound terms match first
+    const sortedTerms = [...GLOSSARY_TERMS].sort((a, b) => b.term.length - a.term.length);
+    const termNames = sortedTerms.map((t) => t.term.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
+    const acronyms = sortedTerms
+      .filter((t) => t.acronym)
+      .map((t) => t.acronym!.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
+    const combinedTokens = Array.from(new Set([...termNames, ...acronyms]));
+
+    const regex = new RegExp(`\\b(${combinedTokens.join('|')})\\b`, 'i');
+    const pieces = rawText.split(regex);
+
+    if (pieces.length === 1) return rawText;
+
+    return pieces.map((piece, idx) => {
+      const matchedTerm = sortedTerms.find(
+        (t) =>
+          t.term.toLowerCase() === piece.toLowerCase() ||
+          (t.acronym && t.acronym.toLowerCase() === piece.toLowerCase())
+      );
+
+      if (matchedTerm) {
+        return (
+          <span key={`${keyPrefix}-${idx}`} className="relative inline-block">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                if (onNavigateToGlossary) {
+                  onNavigateToGlossary(matchedTerm.id);
+                } else {
+                  setSelectedGlossaryCategory('All');
+                  setSearchTerm(matchedTerm.term);
+                  setActiveTab('glossary');
+                }
+              }}
+              onMouseEnter={() => setActiveTooltipTerm(matchedTerm)}
+              className="inline-flex items-baseline text-cyan-300 font-semibold underline decoration-cyan-400/60 decoration-1 underline-offset-2 hover:text-cyan-100 hover:decoration-cyan-300 hover:bg-cyan-950/70 px-0.5 rounded transition-colors cursor-pointer"
+              title={`Inspect '${matchedTerm.term}' in the Information Governance Dictionary`}
+            >
+              {piece}
+            </button>
+          </span>
+        );
+      }
+      return piece;
+    });
+  };
+
+  // Filter glossary specifically for IG non-technical terms, strictly sorted alphabetically
   const igFilteredGlossary = GLOSSARY_TERMS.filter((term) => {
     // Strictly exclude technical code/ontology/developer categories
     if (
@@ -960,7 +1034,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
       term.shortDefinition.toLowerCase().includes(searchTerm.toLowerCase()) ||
       term.fullDefinition.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
-  });
+  }).sort((a, b) => a.term.localeCompare(b.term, undefined, { sensitivity: 'base' }));
 
   // Cytoscape initialization for Schematic
   useEffect(() => {
@@ -1052,7 +1126,27 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
       }
     });
 
+    cy.on('mouseover', 'node', () => {
+      if (graphContainerRef.current) {
+        graphContainerRef.current.style.cursor = 'pointer';
+      }
+    });
+
+    cy.on('mouseout', 'node', () => {
+      if (graphContainerRef.current) {
+        graphContainerRef.current.style.cursor = 'default';
+      }
+    });
+
     cyRef.current = cy;
+
+    // Highlight the selected node initially
+    if (selectedSchematicNode) {
+      const initialNode = cy.$id(selectedSchematicNode.id);
+      if (initialNode && initialNode.length > 0) {
+        initialNode.select();
+      }
+    }
 
     return () => {
       if (cyRef.current) {
@@ -1061,6 +1155,22 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
       }
     };
   }, [activeTab]);
+
+  const handleSelectSchematicStage = (node: SchematicNode) => {
+    setSelectedSchematicNode(node);
+    if (cyRef.current) {
+      cyRef.current.nodes().unselect();
+      const cyNode = cyRef.current.$id(node.id);
+      if (cyNode && cyNode.length > 0) {
+        cyNode.select();
+        cyRef.current.animate({
+          center: { eles: cyNode },
+          zoom: 1.15,
+          duration: 300
+        });
+      }
+    }
+  };
 
   const handleQuizAnswer = (qId: string, optionIdx: number) => {
     if (quizSubmitted) return;
@@ -1087,19 +1197,19 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-xs font-mono font-bold text-teal-300 bg-[#07192f] px-2.5 py-1 rounded border border-teal-500/40 flex items-center gap-1.5 shadow-xs">
               <ShieldCheck className="w-3.5 h-3.5 text-[#00A389]" />
-              <span>Official Reference Handbook</span>
+              <span>Foundations Reference Guide</span>
             </span>
             <span className="text-xs font-mono text-slate-300 bg-[#07192f] px-2.5 py-1 rounded border border-cyan-900/60 font-semibold">
-              UK GDPR · Caldicott Principles 1–8 · NHS Act 2006 s251 · DEA 2017
+              UK GDPR · Caldicott Principles 1–8 · NHS Act 2006 s251 · DEA 2017 · EHDS
             </span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            IG Handbook: Information Governance &amp; Statutory Desk Reference
+            Foundations: Information Governance &amp; Statutory Desk Reference
           </h1>
 
           <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-            The authoritative, plain-language handbook for Caldicott Guardians, Data Protection Officers, HRA ethics committees, and clinical researchers. Navigating statutory frameworks, human compliance workflows, and disclosure control safeguards without technical code or jargon.
+            The authoritative, plain-language foundations guide for Caldicott Guardians, Data Protection Officers, HRA ethics committees, and clinical researchers. Navigating statutory frameworks, human compliance workflows, and disclosure control safeguards without technical code or jargon.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-3 text-xs">
@@ -1119,7 +1229,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
       {/* 2. SUB-NAVIGATION TABS */}
       <div className="flex items-center gap-2 border-b border-cyan-900/40 pb-2 overflow-x-auto">
         {[
-          { id: 'handbook', label: '1. Compliance Handbook', icon: <BookOpen className="w-4 h-4" /> },
+          { id: 'handbook', label: '1. Foundations Guide', icon: <BookOpen className="w-4 h-4" /> },
           { id: 'schematic', label: '2. Governance Decision Schematic', icon: <Network className="w-4 h-4" /> },
           { id: 'glossary', label: '3. Information Governance Glossary', icon: <FileText className="w-4 h-4" /> },
           { id: 'templates', label: '4. Researcher Governance Templates', icon: <FileCheck2 className="w-4 h-4" /> },
@@ -1140,13 +1250,13 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
         ))}
       </div>
 
-      {/* TAB 1: HANDBOOK */}
+      {/* TAB 1: FOUNDATIONS GUIDE */}
       {activeTab === 'handbook' && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* Chapter Selector (Left 4 cols) */}
           <div className="lg:col-span-4 space-y-2">
             <span className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider block px-1">
-              Handbook Chapters:
+              Foundations Chapters:
             </span>
             <div className="space-y-2">
               {HANDBOOK_CHAPTERS.map((ch) => {
@@ -1185,7 +1295,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                 <span className="text-xs font-mono text-cyan-300 font-medium">{selectedChapter.badge}</span>
               </div>
               <h2 className="text-2xl font-bold text-white tracking-tight">{selectedChapter.title}</h2>
-              <p className="text-xs text-cyan-300 font-mono font-medium">Statutory Authority: {selectedChapter.statutoryBasis}</p>
+              <p className="text-xs text-cyan-300 font-mono font-medium">Statutory Authority: {renderGlossaryBadges(selectedChapter.statutoryBasis, 'stat-basis')}</p>
             </div>
 
             {/* Key Safeguards Callout - Dark Navy & Turquoise Container */}
@@ -1198,7 +1308,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                 {selectedChapter.keySafeguards.map((item, idx) => (
                   <div key={idx} className="p-3.5 rounded-xl bg-slate-950/80 border border-teal-500/40 flex items-start gap-3 shadow-xs">
                     <CheckCircle2 className="w-4 h-4 text-[#00A389] shrink-0 mt-0.5" />
-                    <p className="text-xs text-slate-200 leading-relaxed font-medium">{item}</p>
+                    <p className="text-xs text-slate-200 leading-relaxed font-medium">{renderGlossaryBadges(item, `sg-${idx}`)}</p>
                   </div>
                 ))}
               </div>
@@ -1214,12 +1324,12 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                 {selectedChapter.workflowSteps.map((wf, idx) => (
                   <div key={idx} className="p-3.5 rounded-xl bg-slate-950/80 border border-[#1b3f68] space-y-1 shadow-xs">
                     <div className="flex items-center justify-between">
-                      <strong className="text-cyan-200 text-xs font-bold">{wf.title}</strong>
+                      <strong className="text-cyan-200 text-xs font-bold">{renderGlossaryBadges(wf.title, `wft-${idx}`)}</strong>
                       <span className="text-[10px] font-mono text-cyan-300 bg-[#07192f] px-2 py-0.5 rounded border border-cyan-700/60 font-semibold">
                         Role: {wf.responsibleParty}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-300 leading-relaxed">{wf.description}</p>
+                    <p className="text-xs text-slate-300 leading-relaxed">{renderGlossaryBadges(wf.description, `wfd-${idx}`)}</p>
                   </div>
                 ))}
               </div>
@@ -1232,7 +1342,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                 <strong className="text-amber-400 font-mono uppercase text-[10px] block tracking-wider font-bold">
                   Caldicott &amp; DPO Executive Directive:
                 </strong>
-                <p className="text-amber-200 leading-relaxed italic font-medium">{selectedChapter.executiveCallout}</p>
+                <p className="text-amber-200 leading-relaxed italic font-medium">{renderGlossaryBadges(selectedChapter.executiveCallout, 'callout')}</p>
               </div>
             </div>
           </div>
@@ -1285,11 +1395,11 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                   </div>
                   <h4 className="text-sm font-bold text-teal-200">Safe Data Intelligence Model</h4>
                   <ul className="text-xs text-slate-300 space-y-2 leading-relaxed">
-                    <li><strong className="text-teal-300">Safe People:</strong> Vetted researchers with annual accredited Information Governance training and institutional sponsorship.</li>
-                    <li><strong className="text-teal-300">Safe Projects:</strong> Protocols evaluated by HRA Research Ethics Committees for valid public interest benefit.</li>
-                    <li><strong className="text-teal-300">Safe Settings:</strong> Air-gapped, zero-egress enclaves where clipboard, external USB, and outbound internet are permanently severed.</li>
-                    <li><strong className="text-teal-300">Safe Data:</strong> Direct identifiers permanently expunged at source; linkage via salted one-way tokens.</li>
-                    <li><strong className="text-teal-300">Safe Outputs:</strong> Mandatory statistical disclosure control (k &ge; 10) and two-person airlock reviews.</li>
+                    <li><strong className="text-teal-300">Safe People:</strong> {renderGlossaryBadges('Vetted researchers with annual accredited Information Governance training and institutional sponsorship.', 'fs-1')}</li>
+                    <li><strong className="text-teal-300">Safe Projects:</strong> {renderGlossaryBadges('Protocols evaluated by HRA Research Ethics Committees for valid public interest benefit.', 'fs-2')}</li>
+                    <li><strong className="text-teal-300">Safe Settings:</strong> {renderGlossaryBadges('Air-gapped, zero-egress enclaves protected by AES-256 encryption where clipboard and outbound internet are severed.', 'fs-3')}</li>
+                    <li><strong className="text-teal-300">Safe Data:</strong> {renderGlossaryBadges('Direct identifiers expunged at source; linkage via salted one-way HMAC tokens.', 'fs-4')}</li>
+                    <li><strong className="text-teal-300">Safe Outputs:</strong> {renderGlossaryBadges('Mandatory Statistical Disclosure Control (k >= 10), Statbarn classification, and two-person airlock reviews.', 'fs-5')}</li>
                   </ul>
                 </div>
               </div>
@@ -1301,12 +1411,12 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                     <Building2 className="w-4 h-4 text-sky-400" />
                     <span>Lawful Grounds &amp; Gateway</span>
                   </div>
-                  <h4 className="text-sm font-bold text-sky-200">UK GDPR &amp; Section 251</h4>
+                  <h4 className="text-sm font-bold text-sky-200">UK GDPR, Section 251 &amp; FOIA 2000</h4>
                   <ul className="text-xs text-slate-300 space-y-2 leading-relaxed">
-                    <li><strong className="text-sky-300">UK GDPR Article 6(1)(e):</strong> Processing is necessary for the performance of a task carried out in the public interest.</li>
-                    <li><strong className="text-sky-300">UK GDPR Article 9(2)(j):</strong> Scientific research condition under DPA 2018 Section 19 safeguards.</li>
-                    <li><strong className="text-sky-300">NHS Act 2006 s251:</strong> Statutory exemption advised by the Confidentiality Advisory Group (CAG) when direct patient consent is impracticable.</li>
+                    <li><strong className="text-sky-300">UK GDPR Article 6(1)(e) &amp; 9(2)(j):</strong> Public interest task paired with DPA 2018 Section 19 research safeguards.</li>
+                    <li><strong className="text-sky-300">NHS Act 2006 s251:</strong> Statutory exemption advised by the Confidentiality Advisory Group (CAG) when direct consent is impracticable.</li>
                     <li><strong className="text-sky-300">National Data Opt-Out:</strong> Citizens who register their opt-out preference are systematically purged prior to analytical extraction.</li>
+                    <li><strong className="text-sky-300">Freedom of Information Act 2000:</strong> {renderGlossaryBadges('Proactive FOI publication schemes (s19) expose approved governance charters and aggregate outputs while protecting confidential records under s40(2) personal data, s41 confidentiality, and s22 future publication exemptions.', 'foi-pillar')}</li>
                   </ul>
                 </div>
               </div>
@@ -1380,23 +1490,244 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               </div>
             </div>
 
+            {/* Five Safes Framework Full Coverage Bar */}
+            <div className="p-3.5 rounded-xl bg-slate-950/90 border border-teal-500/40 space-y-2.5 shadow-md">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-teal-400 shrink-0" />
+                  <strong className="text-white text-xs font-bold">Five Safes Framework End-to-End Representation:</strong>
+                  <span className="text-[11px] text-slate-300">All 5 Safes mapped systematically across the 10 stages</span>
+                </div>
+                <div className="text-[10px] font-mono text-cyan-300">
+                  Select a Safe dimension to filter stages
+                </div>
+              </div>
+
+              <div className="flex items-center gap-1.5 flex-wrap">
+                {[
+                  { pillar: 'All', label: 'All 10 Stages', color: 'bg-slate-800 border-slate-600 text-white' },
+                  { pillar: 'Safe Data', label: '1. Safe Data (Stages 1-2)', color: 'bg-cyan-950 border-cyan-600 text-cyan-300' },
+                  { pillar: 'Safe Projects', label: '2. Safe Projects (Stages 3-4)', color: 'bg-emerald-950 border-emerald-600 text-emerald-300' },
+                  { pillar: 'Safe People', label: '3. Safe People (Stage 5)', color: 'bg-sky-950 border-sky-600 text-sky-300' },
+                  { pillar: 'Safe Settings', label: '4. Safe Settings (Stages 6-7)', color: 'bg-purple-950 border-purple-600 text-purple-300' },
+                  { pillar: 'Safe Outputs', label: '5. Safe Outputs (Stages 8-10)', color: 'bg-amber-950 border-amber-600 text-amber-300' },
+                ].map((item) => {
+                  const isActive = schematicSafesFilter === item.pillar;
+                  return (
+                    <button
+                      key={item.pillar}
+                      onClick={() => {
+                        setSchematicSafesFilter(item.pillar as any);
+                        if (item.pillar !== 'All') {
+                          const firstMatching = SCHEMATIC_NODES.find((n) => n.fiveSafesPillar === item.pillar);
+                          if (firstMatching) handleSelectSchematicStage(firstMatching);
+                        }
+                      }}
+                      className={`px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold border transition-all cursor-pointer ${
+                        isActive
+                          ? 'ring-2 ring-cyan-400 shadow-md font-bold opacity-100 scale-102'
+                          : 'opacity-75 hover:opacity-100 hover:scale-[1.01]'
+                      } ${item.color}`}
+                    >
+                      {item.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Pipeline Stage Quick Selector */}
+            <div className="space-y-1.5 pt-1">
+              <div className="flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                <span>SELECT PIPELINE STAGE (1–10)</span>
+                <span className="text-teal-400">Click a stage chip or canvas node to inspect full governance specifications</span>
+              </div>
+              <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-cyan-900/60">
+                {SCHEMATIC_NODES.filter((node) => schematicSafesFilter === 'All' || node.fiveSafesPillar === schematicSafesFilter).map((node) => {
+                  const isSelected = selectedSchematicNode?.id === node.id;
+                  return (
+                    <button
+                      key={node.id}
+                      onClick={() => handleSelectSchematicStage(node)}
+                      className={`shrink-0 px-2.5 py-1.5 rounded-lg text-xs font-medium border flex items-center gap-2 transition-all cursor-pointer ${
+                        isSelected
+                          ? 'bg-cyan-500/20 text-cyan-200 border-cyan-400 ring-1 ring-cyan-400/50 shadow-md'
+                          : 'bg-slate-950/70 hover:bg-[#07192f] text-slate-300 border-cyan-900/50 hover:border-cyan-700/60'
+                      }`}
+                    >
+                      <span
+                        className="w-5 h-5 rounded-full text-[10px] font-mono font-bold flex items-center justify-center shrink-0 shadow-xs"
+                        style={{ backgroundColor: node.color, color: '#ffffff' }}
+                      >
+                        {node.stepNumber}
+                      </span>
+                      <span className="truncate max-w-[130px] font-medium">{node.label}</span>
+                      <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 text-teal-300">
+                        {node.fiveSafesPillar.replace('Safe ', '')}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Cytoscape Canvas */}
             <div
               ref={graphContainerRef}
               className="w-full h-[450px] bg-slate-950 rounded-xl border border-cyan-900/60 shadow-inner"
             />
 
-            {/* Inspected Node Card */}
+            {/* Inspected Node Card with Detailed Statutory, Roles, and Safeguards */}
             {selectedSchematicNode && (
-              <div className="p-4 rounded-xl bg-slate-950/90 border border-cyan-500/40 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs shadow-md">
-                <div className="space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-slate-400 block font-semibold">Selected Stage</span>
-                  <strong className="text-white text-sm block font-bold">{selectedSchematicNode.label}</strong>
-                  <span className="text-teal-400 font-mono text-[11px] block font-semibold">{selectedSchematicNode.statutoryRole}</span>
+              <div className="rounded-2xl bg-slate-950/95 border border-cyan-500/50 p-5 sm:p-6 space-y-5 shadow-2xl">
+                {/* Header Banner */}
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-cyan-900/60 pb-4">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span
+                        className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-extrabold uppercase tracking-wide text-white"
+                        style={{ backgroundColor: selectedSchematicNode.color }}
+                      >
+                        Stage {selectedSchematicNode.stepNumber} of 10
+                      </span>
+                      <span className="px-2 py-0.5 rounded-md bg-teal-950/90 border border-teal-600/80 text-[10px] font-mono font-bold text-teal-300 uppercase">
+                        5 Safes: {selectedSchematicNode.fiveSafesPillar}
+                      </span>
+                      <span className="px-2 py-0.5 rounded-md bg-cyan-950/80 border border-cyan-800/80 text-[10px] font-mono font-semibold text-cyan-300 uppercase">
+                        {selectedSchematicNode.categoryLabel}
+                      </span>
+                      <span className="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-700 text-[10px] font-mono text-slate-300">
+                        {selectedSchematicNode.statutoryRole}
+                      </span>
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-black text-white tracking-tight flex items-center gap-2">
+                      <span>{selectedSchematicNode.label}</span>
+                    </h3>
+                  </div>
+
+                  {selectedSchematicNode.handbookChapterRef && (
+                    <button
+                      onClick={() => {
+                        setSelectedChapterId(selectedSchematicNode.handbookChapterRef);
+                        setActiveTab('handbook');
+                      }}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-950/90 hover:bg-cyan-900/90 text-cyan-200 border border-cyan-700/80 text-xs font-semibold cursor-pointer transition-colors shrink-0 shadow-xs"
+                    >
+                      <BookOpen className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>{selectedSchematicNode.handbookChapterTitle}</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+                  )}
                 </div>
-                <div className="md:col-span-2 space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-slate-400 block font-semibold">Governance Function &amp; Safeguard</span>
-                  <p className="text-slate-200 leading-relaxed font-medium">{selectedSchematicNode.shortDesc}</p>
+
+                {/* Narrative Summary */}
+                <div className="p-3.5 rounded-xl bg-slate-900/90 border-l-4 border-l-cyan-400 border border-cyan-950 text-xs text-slate-200 leading-relaxed font-medium">
+                  {renderGlossaryBadges(selectedSchematicNode.shortDesc, 'node-desc')}
+                </div>
+
+                {/* The 3 Core Information Governance Inspection Pillars */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Pillar 1: Statutory Hand-Offs & Legal Gateways */}
+                  <div className="p-4 rounded-xl bg-slate-900/70 border border-sky-800/40 space-y-3 shadow-md flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center gap-2 text-xs font-bold text-sky-300 uppercase tracking-wider font-mono border-b border-sky-900/50 pb-2">
+                        <Scale className="w-4 h-4 text-sky-400 shrink-0" />
+                        <span>Statutory Hand-Offs</span>
+                      </div>
+                      <ul className="mt-3 space-y-2 text-xs text-slate-200">
+                        {selectedSchematicNode.statutoryHandoffs.map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-2 leading-relaxed">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-sky-400 shrink-0 mt-0.5" />
+                            <span>{renderGlossaryBadges(item, `stat-${idx}`)}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="pt-2 text-[10px] font-mono text-sky-400/80 uppercase">
+                      Legal Compliance Gate
+                    </div>
+                  </div>
+
+                  {/* Pillar 2: Responsible Roles & Review Panels */}
+                  <div className="p-4 rounded-xl bg-slate-900/70 border border-teal-800/40 space-y-3 shadow-md flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center gap-2 text-xs font-bold text-teal-300 uppercase tracking-wider font-mono border-b border-teal-900/50 pb-2">
+                        <Users className="w-4 h-4 text-teal-400 shrink-0" />
+                        <span>Responsible Roles</span>
+                      </div>
+                      <ul className="mt-3 space-y-2 text-xs text-slate-200">
+                        {selectedSchematicNode.responsibleRoles.map((role, idx) => (
+                          <li key={idx} className="flex items-start gap-2 leading-relaxed">
+                            <Shield className="w-3.5 h-3.5 text-teal-400 shrink-0 mt-0.5" />
+                            <span className="font-medium text-slate-100">{renderGlossaryBadges(role, `role-${idx}`)}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="pt-2 text-[10px] font-mono text-teal-400/80 uppercase">
+                      Governance Accountability
+                    </div>
+                  </div>
+
+                  {/* Pillar 3: Privacy Safeguards & Technical Controls */}
+                  <div className="p-4 rounded-xl bg-slate-900/70 border border-emerald-800/40 space-y-3 shadow-md flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center gap-2 text-xs font-bold text-emerald-300 uppercase tracking-wider font-mono border-b border-emerald-900/50 pb-2">
+                        <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                        <span>Privacy Safeguards</span>
+                      </div>
+                      <ul className="mt-3 space-y-2 text-xs text-slate-200">
+                        {selectedSchematicNode.privacySafeguards.map((safeguard, idx) => (
+                          <li key={idx} className="flex items-start gap-2 leading-relaxed">
+                            <Lock className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                            <span>{renderGlossaryBadges(safeguard, `priv-${idx}`)}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="pt-2 text-[10px] font-mono text-emerald-400/80 uppercase">
+                      Technical Assurance
+                    </div>
+                  </div>
+                </div>
+
+                {/* Operational Actions & Hand-off Lineage */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+                  {/* Operational Actions */}
+                  <div className="p-3.5 rounded-xl bg-slate-900/50 border border-cyan-950 space-y-2">
+                    <span className="text-[10px] font-mono uppercase text-cyan-400 font-bold block">
+                      Execution &amp; Operational Actions
+                    </span>
+                    <ul className="space-y-1.5 text-xs text-slate-300">
+                      {selectedSchematicNode.operationalActions.map((action, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0 mt-1.5" />
+                          <span>{renderGlossaryBadges(action, `act-${idx}`)}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Lineage & Hand-offs */}
+                  <div className="p-3.5 rounded-xl bg-slate-900/50 border border-cyan-950 space-y-2 flex flex-col justify-between">
+                    <span className="text-[10px] font-mono uppercase text-cyan-400 font-bold block">
+                      Governance Hand-off Lineage
+                    </span>
+                    <div className="space-y-2 text-xs">
+                      <div className="flex items-start gap-2 text-slate-300">
+                        <span className="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-amber-300 shrink-0">
+                          INPUT
+                        </span>
+                        <span>{renderGlossaryBadges(selectedSchematicNode.upstreamHandoff, 'up-handoff')}</span>
+                      </div>
+                      <div className="flex items-start gap-2 text-slate-300">
+                        <span className="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-emerald-300 shrink-0">
+                          OUTPUT
+                        </span>
+                        <span>{renderGlossaryBadges(selectedSchematicNode.downstreamHandoff, 'down-handoff')}</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
@@ -1734,6 +2065,63 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Floating Tooltip / Quick Definition Card when hovering or clicking a technical term */}
+      {activeTooltipTerm && (
+        <div className="fixed bottom-6 right-6 max-w-sm bg-slate-900/95 backdrop-blur-md border border-cyan-400/60 rounded-xl p-4 shadow-2xl z-50 space-y-2.5 animate-in fade-in slide-in-from-bottom-2 duration-200">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-400 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/80">
+              {activeTooltipTerm.category}
+            </span>
+            <button
+              onClick={() => setActiveTooltipTerm(null)}
+              className="text-xs text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800 transition-colors cursor-pointer"
+              title="Close definition"
+            >
+              ✕
+            </button>
+          </div>
+          <div>
+            <h4 className="text-sm font-bold text-white flex items-center gap-2">
+              <span>{activeTooltipTerm.term}</span>
+              {activeTooltipTerm.acronym && (
+                <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950 px-1.5 py-0.5 rounded border border-cyan-800">
+                  {activeTooltipTerm.acronym}
+                </span>
+              )}
+            </h4>
+            <p className="text-xs text-slate-200 leading-relaxed mt-1 font-medium">
+              {activeTooltipTerm.shortDefinition}
+            </p>
+          </div>
+          {activeTooltipTerm.statutoryBasis && (
+            <div className="text-[11px] text-teal-300 font-mono bg-teal-950/50 p-2 rounded border border-teal-900/50">
+              <strong className="text-teal-200 block text-[10px] uppercase">Statutory Basis:</strong>
+              <span>{activeTooltipTerm.statutoryBasis}</span>
+            </div>
+          )}
+          <div className="pt-2 flex justify-between items-center text-xs border-t border-slate-800">
+            <span className="text-[10px] font-mono text-slate-400">IG Dictionary</span>
+            <button
+              onClick={() => {
+                const termId = activeTooltipTerm.id;
+                setActiveTooltipTerm(null);
+                if (onNavigateToGlossary) {
+                  onNavigateToGlossary(termId);
+                } else {
+                  setSelectedGlossaryCategory('All');
+                  setSearchTerm(activeTooltipTerm.term);
+                  setActiveTab('glossary');
+                }
+              }}
+              className="text-cyan-400 hover:text-cyan-200 font-semibold flex items-center gap-1 cursor-pointer"
+            >
+              <span>Full Details</span>
+              <ExternalLink className="w-3 h-3" />
+            </button>
           </div>
         </div>
       )}

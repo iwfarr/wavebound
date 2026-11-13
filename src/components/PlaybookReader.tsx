@@ -50,7 +50,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
   {
     id: 'sec-front-matter',
     number: '0',
-    title: 'Executive Front Matter: Ontology-led Information Governance',
+    title: 'Front Matter: Ontology-led Information Governance',
     subtitle: 'Connecting governance meaning, accountable human decisions and proposed technical safeguards',
     executiveSummary: 'An ontology-led IG reference architecture connecting legal and ethical requirements, accountable human decisions and proposed safeguards. OWL/RDF examples illustrate governance meaning; executable compilation and production enforcement are not yet delivered.',
     content: [
@@ -60,7 +60,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
       '• Operational Translation — Proposed Validation & Enforcement: OWL/RDF represents meaning and relationships. SHACL expresses explicit validation constraints; policy-as-code expresses reviewed decision rules for an enforcement point. These are separate functions: OWL reasoning does not itself validate an access request or enforce a permission, and law is not automatically compiled into code.',
       '• Current Maturity: Today the repository provides an interactive application, governance visualisations and illustrative OWL/RDF, SHACL and Rego snippets. A standalone validated IG ontology, executable semantic compiler and production enforcement integration are not yet delivered. The Policy Sandbox is a browser-side demonstration, not a security control. Later sections describe illustrative target patterns; example filenames, thresholds and performance figures are not evidence of deployed controls.',
       '• Dual-Wave Navigation: Inward enclave security concerns what enters a research environment: people, projects, data and workloads. Outward governance concerns what leaves it: outputs, disclosure review, decision evidence and public transparency. The playbook proposes coordinated safeguards across both boundaries; it does not currently grant access or operate an export airlock.',
-      '• UK Governance Context: Shared health-information security concerns are distributed across distinct sources rather than represented here as a direct NEN 7510 equivalent. UK GDPR and the Data Protection Act 2018, confidentiality duties, Caldicott guidance, NHS England DSPT assurance and applicable research approvals have different authority and scope. England-specific processes are not a single UK-wide regime; applicability and current source versions require review.',
+      '• UK Governance & EHDS Alignment: Shared health-information security concerns are distributed across distinct sources rather than represented here as a direct NEN 7510 equivalent. UK GDPR and the Data Protection Act 2018, confidentiality duties, Caldicott guidance, NHS England DSPT assurance and applicable research approvals have different authority and scope. Across European cross-border research, the European Health Data Space (EHDS) Regulation establishes directly analogous roles—Health Data Access Bodies (HDABs), secondary-use Data Permits, and Secure Processing Environments (SPEs)—which align structurally with the Five Safes and UK SDE model.',
       '• Authority & Traceability: Semantic mappings should preserve the source, jurisdiction, applicability, approved interpretation and accountable owner. Section 251 support concerns confidentiality in specified circumstances; CAG advises the relevant decision maker. Such support is not a substitute for a UK GDPR lawful basis, and an ethics approval is not a universal data-access permission.',
       '• Implementation Gate: Proposed controls need approved decisions, trusted input contracts, automated tests, enforcement integration, audit evidence and release approval before they can be called operational. Version control supports review but does not by itself prove compliance, prevent policy drift or establish legal authority.'
     ],
@@ -105,7 +105,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
       '   - Safe Data: tre:SafeData classifying records into Hospital Operational Tiers (Tier 1: Aggregate/Synthetic, Tier 2: De-identified Pseudonymous, Tier 3: Sensitive Clinical/Identifiable under s251). Pre-trained foundation models, embeddings, and fine-tuned checkpoints ARE Data Assets subject to disclosure controls.',
       '   - Safe Outputs: tre:SafeOutput requiring quantitative SDC clearance and differential privacy / memorization verification before airlock egress.',
       '• Stanford UIT Agentic AI Security Framework Integration: Formally aligns agentic workloads with Stanford UIT cybersecurity mandates: automated near-instantaneous token revocation, blast radius containment, read-only SELECT permissions, and risk categorization (Section 8702 High Risk vs Section 8938 Very High Risk).',
-      '• SATRE Pillars Integration: Aligns tre-core.ttl with the 4 pillars of the Standard Architecture for Trusted Research Environments (Information Governance, Computing Infrastructure, Data Management, Software Operations).'
+      '• SATRE & EHDS Interoperability: Aligns tre-core.ttl with the 4 pillars of SATRE (Information Governance, Computing Infrastructure, Data Management, Software Operations) and maps cleanly to EU EHDS secondary-use Data Permits and Secure Processing Environments (SPEs). Where federated statistical workflows execute structured server-side calls rather than interactive workspace containers, frameworks like DataSHIELD provide built-in non-disclosive node checks (nfilter) that complement interactive enclave controls.'
     ],
     codeBlock: {
       language: 'turtle',
@@ -317,6 +317,7 @@ any_unmasked_pii(columns) {
     subtitle: 'Emitting immutable provenance records tied to versioned policy Git commit hashes',
     content: [
       '• Immutable W3C PROV-O Audit Lineage: On every major event (workspace admission permitted, access revoked, airlock export approved or blocked), the PEP emits an immutable W3C PROV-O RDF triple to an append-only audit stream.',
+      '• Five Safes RO-Crate Packaging: As a complementary packaging layer (developed across DARE UK and HDR UK), workflow inputs, human approval checkpoints, PROV-O graphs, and signed airlock release manifests can be serialized into a portable JSON-LD RO-Crate (`ro-crate-metadata.json`) without duplicating policy enforcement logic.',
       '• Cryptographic Policy Hash: Every audit record contains the SHA-256 hash of the exact policy commit and Rego ruleset that evaluated the decision, guaranteeing non-repudiation.',
       '• Standard Makefile Dev Commands: Developers, security engineers, and CI pipelines run standard operational targets:'
     ],

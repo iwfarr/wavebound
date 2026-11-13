@@ -254,7 +254,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
               <span>Interactive Technical Verification</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              TRE Policy-as-Code Quiz Engine
+              Wavebound Policy as Code Quiz
             </h1>
             <p className="text-slate-300 text-xs sm:text-sm max-w-xl">
               Challenge yourself on Five Safes governance, SHACL closed-world validation,

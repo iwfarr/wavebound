@@ -57,7 +57,7 @@ const COMPARISON_MATRIX: SDCComparisonRow[] = [
 ];
 
 export const SDCMethodsGuide: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'techniques' | 'matrix' | 'low-count' | 'governance' | 'simulator'>('techniques');
+  const [activeTab, setActiveTab] = useState<'techniques' | 'matrix' | 'statbarn' | 'low-count' | 'governance' | 'simulator'>('techniques');
   const [copied, setCopied] = useState(false);
   const [simulatorMode, setSimulatorMode] = useState<'raw' | 'primary' | 'secondary' | 'rounded'>('raw');
   const [tableFilter, setTableFilter] = useState<string>('All');
@@ -117,7 +117,8 @@ When presenting aggregate tables or public reports containing small cell counts,
 ## 4. Data Governance & Safe Access Models
 - Five Safes Framework: Safe People, Safe Projects, Safe Settings, Safe Data, Safe Outputs.
 - Secure Data Enclaves: Zero-egress sovereign analytical environments.
-- Output Checking: Independent disclosure control clearance before external release.`;
+- Output Checking: Independent disclosure control clearance before external release across the 5 Statbarns (Frequencies, Position & Quantiles, Means & Totals, Correlation, Shape & Survival).
+- Federated Non-Disclosive Execution (DataSHIELD): Server-side nfilter disclosure traps for structured distributed multi-node statistics without pooling microdata.`;
 
     navigator.clipboard.writeText(markdownContent);
     setCopied(true);
@@ -182,6 +183,18 @@ When presenting aggregate tables or public reports containing small cell counts,
           >
             <Filter className="w-3.5 h-3.5" />
             <span>Comparison Matrix</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('statbarn')}
+            className={`px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors flex items-center gap-2 cursor-pointer ${
+              activeTab === 'statbarn'
+                ? 'bg-[#0F294A] text-white shadow-xs'
+                : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 hover:bg-white dark:hover:bg-slate-800'
+            }`}
+          >
+            <GitBranch className="w-3.5 h-3.5" />
+            <span>Statbarn Output Taxonomy</span>
           </button>
 
           <button
@@ -392,6 +405,100 @@ When presenting aggregate tables or public reports containing small cell counts,
                 ))}
               </tbody>
             </table>
+          </div>
+        </div>
+      )}
+
+      {/* Tab 2b: Statbarn Output Taxonomy & Federated Non-Disclosive Execution */}
+      {activeTab === 'statbarn' && (
+        <div className="p-6 sm:p-8 space-y-6">
+          <div className="space-y-1.5">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider bg-sky-50 dark:bg-sky-950/60 px-2.5 py-0.5 rounded border border-sky-200 dark:border-sky-800">
+                SDAP &amp; DARE UK SACRO Standard
+              </span>
+              <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400">
+                5 Canonical Statistical Barns (outputchecking.org)
+              </span>
+            </div>
+            <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+              Statbarn Classification &amp; Semi-Automated Airlock Checking
+            </h3>
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-w-4xl">
+              Developed by the Safe Data Access Professionals (SDAP) community and Safe Researcher Training, the <strong>Statbarn</strong> taxonomy groups arbitrary research outputs into five structural families (&ldquo;barns&rdquo;) that share identical disclosure mathematics. Automated Policy-as-Code airlocks (including DARE UK SACRO and Wavebound OPA Rego gates) route candidate files to the matching barn validator rather than treating every chart as an ad-hoc exception.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              {
+                barn: 'Barn 1 · Frequencies & Counts',
+                examples: 'Cross-tabulations, histograms, cohort consort flowcharts, bar charts',
+                primaryRisk: 'Small cells (N < 10), residual differencing across margins, structural vs sampling zeros',
+                control: 'Primary suppression (N < 10), complementary secondary suppression, or controlled rounding to base 3 / base 5.'
+              },
+              {
+                barn: 'Barn 2 · Position & Quantiles',
+                examples: 'Medians, quartiles, IQR, box plots, minimum/maximum extrema',
+                primaryRisk: 'Unweighted min/max values expose exact extreme outlier patient measurements',
+                control: 'Suppress raw Min/Max; allow smoothed medians/percentiles only when underlying bin N ≥ 10.'
+              },
+              {
+                barn: 'Barn 3 · Means, Totals & Ratios',
+                examples: 'Group means, weighted sums, clinical spend totals, incidence rates',
+                primaryRisk: 'Dominance (1–2 outliers drive > 80% of sum) allowing subtraction estimation (p%-rule)',
+                control: 'Verify (1, 80%) and (2, 90%) dominance limits; suppress or winzorize concentrated subgroups.'
+              },
+              {
+                barn: 'Barn 4 · Correlation & Covariance',
+                examples: 'Pearson/Spearman matrices, variance-covariance tables, PCA loadings',
+                primaryRisk: 'High-collinearity near-1.0 fits reconstructing excluded variables from remaining fields',
+                control: 'Enforce minimum residual degrees of freedom (df ≥ 10) and reject identity/rank-deficient matrices.'
+              },
+              {
+                barn: 'Barn 5 · Shape, Regression & Survival',
+                examples: 'Kaplan-Meier curves, Cox PH models, GLMs, residual plots, ROC curves',
+                primaryRisk: 'Single-patient KM step drops leaking death dates; raw scatter/residual points exposing microdata',
+                control: 'Require smoothed/binned survival steps or tail truncation (at-risk N ≥ 10); block raw scatter plots.'
+              }
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2.5 flex flex-col justify-between"
+              >
+                <div className="space-y-1.5">
+                  <span className="text-xs font-bold text-[#0F294A] dark:text-sky-300 block">{item.barn}</span>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-400">
+                    <strong className="text-slate-800 dark:text-slate-200">Outputs:</strong> {item.examples}
+                  </p>
+                  <p className="text-[11px] text-amber-800 dark:text-amber-300">
+                    <strong>Disclosure Risk:</strong> {item.primaryRisk}
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-slate-200 dark:border-slate-800 text-[11px] text-[#047857] dark:text-emerald-300 font-medium">
+                  <strong>Airlock Mitigation:</strong> {item.control}
+                </div>
+              </div>
+            ))}
+
+            {/* Scope Companion: Federated DataSHIELD */}
+            <div className="p-4 rounded-xl bg-sky-50/70 dark:bg-sky-950/30 border border-sky-200 dark:border-sky-800/70 space-y-2.5 flex flex-col justify-between">
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#005EB8] dark:text-sky-300">
+                  <Network className="w-4 h-4 shrink-0" />
+                  <span>Companion Pattern: DataSHIELD Federated SDC</span>
+                </div>
+                <p className="text-[11px] text-slate-700 dark:text-slate-300 leading-relaxed">
+                  For multi-node federated studies that do not require an interactive workspace IDE or generative coding loop, <strong>DataSHIELD</strong> executes pre-approved non-disclosive server-side R functions at each custodian node and returns only aggregate summary statistics.
+                </p>
+                <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Built-in <code className="font-mono text-[#005EB8] dark:text-sky-300">nfilter</code> disclosure traps (e.g. <code className="font-mono">nfilter.tab</code>, <code className="font-mono">nfilter.subset</code>, <code className="font-mono">nfilter.glm</code>) reject small-cell subsets or over-parameterized regressions before results leave the node—complementing airlock SDC for interactive enclaves.
+                </p>
+              </div>
+              <div className="pt-2 border-t border-sky-200 dark:border-sky-800/60 text-[10px] font-mono text-slate-600 dark:text-slate-400">
+                Scope boundary: Structured federated API calls only (complements, does not replace, enclave IDEs &amp; LLMs).
+              </div>
+            </div>
           </div>
         </div>
       )}

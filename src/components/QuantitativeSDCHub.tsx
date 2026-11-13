@@ -979,8 +979,28 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
               Statistical Output Classes &amp; Airlock Egress Rulebook
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-4xl">
-              Statistical Disclosure Control in NHS Secure Data Environments (SDEs) extends far beyond simple frequency table cross-tabulation. Every statistical artifact—including survival curves, regression parameter sets, summary moments, scatterplots, and machine learning checkpoints—is governed by strict mathematical disclosure limits before passing the airlock.
+              Statistical Disclosure Control in patient and population Secure Data Environments (SDEs) extends far beyond simple frequency table cross-tabulation. Every statistical artifact—including survival curves, regression parameter sets, summary moments, scatterplots, and machine learning checkpoints—is governed by strict mathematical disclosure limits before passing the airlock.
             </p>
+
+            {/* Statbarn & DataSHIELD Scope Bridge */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-xs">
+              <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 space-y-1">
+                <strong className="text-[#0F294A] dark:text-sky-300 block">
+                  Mapping to the 5 Statbarns (SDAP &amp; DARE UK SACRO)
+                </strong>
+                <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Classes 1–7 operationalize the 5 canonical Statbarns: <em>Frequencies</em> (Class 1), <em>Position &amp; Quantiles</em> (Class 4), <em>Means &amp; Totals</em> (Classes 1 &amp; 4), <em>Correlation</em> (Class 2), and <em>Shape &amp; Endpoints</em> (Classes 3, 5 &amp; 7), plus ML weight controls (Class 6).
+                </p>
+              </div>
+              <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 space-y-1">
+                <strong className="text-[#0F294A] dark:text-sky-300 block">
+                  Federated Alternative: DataSHIELD Server-Side Filters
+                </strong>
+                <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                  In multi-node federated studies without interactive IDEs, <strong>DataSHIELD</strong> enforces built-in <code className="font-mono text-[#005EB8] dark:text-sky-300">nfilter</code> disclosure checks on server-side summary calls rather than post-hoc airlock inspection.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* 7-Class Output Navigation Pills */}
@@ -1910,6 +1930,11 @@ model, optimizer, train_loader = privacy_engine.make_private(
                 <span className="text-slate-500">Authority:</span>
                 <span className="text-slate-200">ONS SDC Standard · Caldicott Principle 8 · DAAG Mandate D-005</span>
               </div>
+            </div>
+
+            <div className="pt-2.5 border-t border-slate-800 text-[11px] text-slate-400 leading-relaxed">
+              <strong className="text-sky-300">Five Safes RO-Crate Packaging (Recommended Profile):</strong>{' '}
+              This signed release ticket, alongside <code className="text-cyan-300">W3C PROV-O</code> execution traces and approved Safe Outputs, can be bundled into a machine-readable Schema.org / JSON-LD <strong>Five Safes RO-Crate</strong> archive (<code className="text-cyan-300">ro-crate-metadata.json</code>) for portable auditability across federated TREs and EHDS Secure Processing Environments.
             </div>
           </div>
         </div>

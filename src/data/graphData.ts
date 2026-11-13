@@ -57,7 +57,7 @@ export const LENS_DEFINITIONS: Record<GraphLensType, LensMeta> = {
   'statutory-policy': {
     id: 'statutory-policy',
     title: 'Statutory & Policy-as-Code Lens',
-    badge: 'IG Handbook & Caldicott Foundation',
+    badge: 'Foundations & Caldicott Anchor',
     tagline: 'From UK Law to Machine-Verifiable RDF & Rego Guardrails',
     description: 'Visualizes how statutory instruments (UK GDPR Art. 6/9, NHS Act 2006 S251, Caldicott Principles 1–8) formalize into W3C OWL/RDF ontologies and compile into sub-millisecond OPA Rego admission gatekeepers.',
     rationale: 'Essential for Caldicott Guardians, DAAG committees, and Data Protection Officers verifying that human law directly governs machine execution.',

@@ -5413,5 +5413,70 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
       "PITR",
       "RTO/RPO"
     ]
+  },
+  {
+    "id": "fsg_f_16",
+    "category": "Five Safes & Governance",
+    "difficulty": "Foundation",
+    "question": "How does publishing plain-English Data Use Registers and generated governance charters (GOVERNANCE_CHARTER.md) support Freedom of Information Act 2000 (FOIA) compliance in a Trusted Research Environment?",
+    "options": [
+      "It exempts the organisation from keeping audit trails",
+      "It fulfils FOIA Section 19 proactive publication duties and aligns with Caldicott Principle 8 by making approved study purposes, safeguards, and SDC thresholds routinely accessible without ad-hoc manual delays",
+      "It automatically releases all patient-level datasets to anyone who submits an email request",
+      "It replaces the requirement for UK GDPR Article 6 and Article 9 lawful bases"
+    ],
+    "correctIndex": 1,
+    "explanation": "Under FOIA Section 19 and Caldicott Principle 8 ('no surprises'), proactively publishing governance charters, active disclosure rules, and approved study registers satisfies public transparency duties efficiently and reduces repetitive administrative FOI burdens.",
+    "citation": "Freedom of Information Act 2000 Section 19 & Caldicott Principle 8 (NDG)",
+    "tags": [
+      "FOI",
+      "Freedom of Information",
+      "Caldicott 8",
+      "Publication Scheme"
+    ]
+  },
+  {
+    "id": "fsg_i_16",
+    "category": "Five Safes & Governance",
+    "difficulty": "Intermediate",
+    "question": "A public authority hosting a health data enclave receives a Freedom of Information (FOI) request for pseudonymised patient-level microdata and unpublished draft study tables scheduled for peer-reviewed journal submission. Which combination of FOIA exemptions is primarily engaged?",
+    "options": [
+      "FOIA Section 12 cost limit only, because health data cannot ever be retrieved from SQL databases",
+      "FOIA Section 40(2) (personal data where disclosure would contravene UK GDPR), Section 41 (information provided in confidence), and Section 22 / 22A (pre-publication research data)",
+      "FOIA Section 30 criminal investigations exemption only",
+      "No exemptions apply; all TRE microdata must be disclosed within 20 working days under FOIA"
+    ],
+    "correctIndex": 1,
+    "explanation": "Individual health records inside an enclave remain personal confidential data for third parties: FOIA Section 40(2) prevents unlawful UK GDPR disclosure, Section 41 upholds the Common Law Duty of Confidentiality, and Section 22/22A protects incomplete or scheduled academic research outputs prior to planned publication.",
+    "citation": "Freedom of Information Act 2000 Sections 22, 22A, 40(2) & 41; ICO FOIA Health Data Guidance",
+    "tags": [
+      "FOI",
+      "Freedom of Information",
+      "Section 40(2)",
+      "Section 41",
+      "Section 22A"
+    ]
+  },
+  {
+    "id": "sdc_a_16",
+    "category": "Quantitative SDC & Airlock",
+    "difficulty": "Advanced",
+    "question": "When an external requester files a Freedom of Information (FOI) request asking for a slightly modified regional age-band breakdown of an already published airlock table, why must the FOI officer run an SDC differencing check against all prior airlock and FOI releases?",
+    "options": [
+      "FOIA requests do not need SDC checking as long as row counts exceed 2",
+      "Because FOIA disclosures are effectively releases 'to the world at large', overlapping breakdowns can enable subtraction (mosaic/differencing) attacks that reveal suppressed k < 10 small cells, rendering the output personal data under FOIA s40(2) and UK GDPR Recital 26",
+      "Only to verify that the requester holds an Accredited Researcher certificate",
+      "Because FOIA prohibits releasing any numerical statistics containing decimals"
+    ],
+    "correctIndex": 1,
+    "explanation": "A disclosure under FOIA is considered public to the entire world. If a newly requested tabulation overlaps slightly with prior airlock releases, subtracting the two totals can isolate a single individual or small cell (<10), engaging FOIA Section 40(2) / UK GDPR Recital 26 'means reasonably likely to be used' re-identification limits.",
+    "citation": "ICO Anonymisation Guidance, UK GDPR Recital 26 & ONS SDC Handbook (FOIA Public Release Standard)",
+    "tags": [
+      "FOI",
+      "Freedom of Information",
+      "Differencing Attack",
+      "SDC",
+      "Recital 26"
+    ]
   }
 ];
