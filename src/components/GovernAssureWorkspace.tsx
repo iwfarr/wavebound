@@ -6,6 +6,7 @@ import { FiveSafesPillarsView } from './FiveSafesPillarsView';
 import { QuantitativeSDCHub } from './QuantitativeSDCHub';
 import { CaldicottTransparencyPortal } from './CaldicottTransparencyPortal';
 import { ProcurementReadinessHub } from './ProcurementReadinessHub';
+import { IsmsDeaBuildupSection } from './IsmsDeaBuildupSection';
 import { GovernanceCharterModal } from './GovernanceCharterModal';
 import { PrinciplesVsRulesCard, SDCEvaluationMode } from './PrinciplesVsRulesCard';
 import {
@@ -135,7 +136,8 @@ export type GovernAssureView =
   | 'five_safes_pillars'
   | 'sdc_hub'
   | 'transparency_ledger'
-  | 'procurement_readiness';
+  | 'procurement_readiness'
+  | 'isms_dea_buildup';
 
 interface GovernAssureWorkspaceProps {
   initialView?: GovernAssureView;
@@ -694,6 +696,17 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
             <Award className="w-3.5 h-3.5 text-cyan-300" />
             <span>Procurement &amp; SATRE/DSPT Compliance</span>
           </button>
+          <button
+            onClick={() => setWorkspaceView('isms_dea_buildup')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              workspaceView === 'isms_dea_buildup'
+                ? 'bg-[#00A389] text-white shadow-md font-bold'
+                : 'text-slate-300 hover:text-white hover:bg-[#112f54]'
+            }`}
+          >
+            <Lock className="w-3.5 h-3.5 text-cyan-300" />
+            <span>ISO 27001 ISMS &amp; DEA Build-Up</span>
+          </button>
         </div>
 
         <div className="flex items-center gap-2 text-xs font-mono">
@@ -1200,6 +1213,14 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
     <ProcurementReadinessHub
       onNavigateToBuildDeploy={onNavigateToBuildDeploy}
       onNavigateToGovernanceAtlas={() => onNavigateToPlaybook?.('sec-caldicott')}
+    />
+  )}
+
+  {/* ISO/IEC 27001:2022 ISMS, SOA & DEA 2017 BUILD-UP DOCS & DOCS-TO-OPA PIPELINE */}
+  {workspaceView === 'isms_dea_buildup' && (
+    <IsmsDeaBuildupSection
+      onNavigateToDecisionRegister={onNavigateToDecisionRegister}
+      onNavigateToMatrix={() => setWorkspaceView('statutory_matrix')}
     />
   )}
 
