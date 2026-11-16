@@ -93,6 +93,9 @@ export default function App() {
           }}
           onNavigateToGlossaryTerm={handleNavigateToGlossaryTerm}
           onNavigateToSection={handleNavigateToSection}
+          onNavigateToGovernAssure={handleOpenGovernAssure}
+          onNavigateToConcept={handleNavigateToConcept}
+          onNavigateToQuiz={handleNavigateToQuiz}
           onOpenFeedback={() => setIsFeedbackOpen(true)}
         />
 

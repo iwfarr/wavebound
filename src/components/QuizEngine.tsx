@@ -44,6 +44,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
 
   const categories = [
     'All Categories (Comprehensive Exam)',
+    'ISO 27001 & DEA 2017',
     'Five Safes & Governance',
     'Semantic Modeling & SHACL',
     'OPA Rego & Enforcement',
@@ -307,8 +308,8 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
               Wavebound Quiz
             </h1>
             <p className="text-slate-300 text-xs sm:text-sm max-w-xl">
-              Challenge yourself on Five Safes governance, SHACL closed-world validation,
-              quantitative SDC math (<span className="font-mono text-cyan-300 font-semibold">k &ge; 10</span>), OPA Rego compilation, and international standards (ISO 42001, DCB0129/0160).
+              Challenge yourself on Five Safes governance, ISO/IEC 27001:2022 ISMS &amp; DEA 2017 accreditation, SHACL closed-world validation,
+              quantitative SDC math (<span className="font-mono text-cyan-300 font-semibold">k &ge; 10</span>), OPA Rego compilation, and clinical safety standards (ISO 42001, DCB0129/0160).
             </p>
           </div>
 
@@ -386,6 +387,8 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
                 <option value={5}>5 Questions (Standard)</option>
                 <option value={10}>10 Questions (In-Depth Assessment)</option>
                 <option value={15}>15 Questions (Mastery Exam)</option>
+                <option value={30}>30 Questions (Extended Mock)</option>
+                <option value={45}>45 Questions (Full Standalone Category Bank)</option>
               </select>
             </div>
           </div>

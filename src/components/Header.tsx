@@ -46,11 +46,16 @@ export type ActiveTab =
   | 'progress'
   | 'governance-atlas';
 
+import { GovernAssureView } from './GovernAssureWorkspace';
+
 interface HeaderProps {
   activeTab: ActiveTab;
   onSelectTab: (tab: ActiveTab) => void;
   onNavigateToGlossaryTerm: (termId: string) => void;
   onNavigateToSection: (sectionId: string) => void;
+  onNavigateToGovernAssure?: (view: GovernAssureView) => void;
+  onNavigateToConcept?: (conceptId: string) => void;
+  onNavigateToQuiz?: (category?: string) => void;
   onOpenFeedback?: () => void;
 }
 
@@ -61,11 +66,101 @@ interface NavGroupItem {
   icon: React.ReactNode;
 }
 
+interface SearchDestinationItem {
+  id: string;
+  title: string;
+  desc: string;
+  keywords: string[];
+  badge: string;
+  action: 'govern-assure' | 'tab' | 'quiz';
+  governAssureView?: GovernAssureView;
+  tab?: ActiveTab;
+  quizCategory?: string;
+}
+
+const SEARCH_SIMULATORS_AND_VIEWS: SearchDestinationItem[] = [
+  {
+    id: 'sim-iso27001-isms',
+    title: 'ISO 27001 ISMS, SoA & DEA Build-Up Simulator',
+    desc: '4 audit roles, 6-phase 24-week playbook, 11 mandatory Clauses 4–10 artifacts, 3-year cadence & Docs-to-OPA claim simulator',
+    keywords: ['iso27001', 'iso 27001', '27001', 'isms', 'soa', 'statement of applicability', 'dea', 'buildup', 'simulator', 'roles', 'cadence', 'roadmap', 'clause', 'audit'],
+    badge: 'Simulator',
+    action: 'govern-assure',
+    governAssureView: 'isms_dea_buildup'
+  },
+  {
+    id: 'sim-iso27001-procurement',
+    title: 'Procurement, SATRE, DSPT & ISO 27001:2022 Matrix',
+    desc: 'Interactive ISO/IEC 27001:2022 Annex A.5–A.8, SATRE v1.1, NHS DSPT & DCB0129 compliance matrix and clinical hazard log',
+    keywords: ['iso27001', 'iso 27001', 'procurement', 'matrix', 'satre', 'dspt', 'annex a', 'dcb0129', 'compliance', 'simulator'],
+    badge: 'Simulator',
+    action: 'govern-assure',
+    governAssureView: 'procurement_readiness'
+  },
+  {
+    id: 'sim-protocol-evaluator',
+    title: 'Governance Protocol Evaluator Simulator',
+    desc: 'Test Five Safes, Section 251 CAG, REC ethics, data tiers, AI sponsorship & fail-closed gate verdicts',
+    keywords: ['simulator', 'protocol', 'evaluator', 'five safes', 'caldicott', 's251', 'govern', 'assure'],
+    badge: 'Simulator',
+    action: 'govern-assure',
+    governAssureView: 'simulator'
+  },
+  {
+    id: 'sim-sdc-airlock',
+    title: 'Quantitative SDC & Airlock Egress Simulator',
+    desc: 'Calculate k >= 10 suppression, (1, 80%) dominance checks, Statbarn rules & auditable dual-reviewer airlock release',
+    keywords: ['sdc', 'airlock', 'statbarn', 'suppression', 'dominance', 'safe outputs', 'simulator', 'auditable'],
+    badge: 'Simulator',
+    action: 'govern-assure',
+    governAssureView: 'sdc_hub'
+  },
+  {
+    id: 'sim-opa-sandbox',
+    title: 'OPA Rego Policy Sandbox',
+    desc: 'Interactive Rego policy evaluator testing JSON admission & airlock egress inputs live',
+    keywords: ['opa', 'rego', 'sandbox', 'simulator', 'json', 'policy-as-code', 'pac'],
+    badge: 'Simulator',
+    action: 'tab',
+    tab: 'sandbox'
+  },
+  {
+    id: 'sim-llm-enclave',
+    title: 'AI & Autonomous LLM Security Enclave Simulator',
+    desc: 'Test human sponsorship, read-only MCP tool policies, ZDR boundaries & ISO/IEC 42001 guardrails',
+    keywords: ['ai', 'llm', 'mcp', 'agent', 'enclave', 'iso 42001', 'simulator'],
+    badge: 'Simulator',
+    action: 'tab',
+    tab: 'llm-security'
+  },
+  {
+    id: 'view-foundations',
+    title: 'Foundations & 10-Stage Schematic (Safe Outputs)',
+    desc: 'Plain-English governance desk reference, 10-stage workflow, auditable output approval hand-offs & FOIA transparency',
+    keywords: ['foundations', 'schematic', 'safe outputs', 'hand-offs', 'auditable', 'caldicott', 'ig guide'],
+    badge: 'Foundations',
+    action: 'tab',
+    tab: 'governance-atlas'
+  },
+  {
+    id: 'quiz-iso27001-dea',
+    title: 'Quiz: ISO 27001 & DEA 2017 (45 Questions)',
+    desc: 'Standalone practice exam covering ISO/IEC 27001:2022 Clauses 4–10, Annex A, roles, cadence & UKSA DEA accreditation',
+    keywords: ['quiz', 'exam', 'iso27001', 'iso 27001', 'dea', '2017', 'isms', 'test'],
+    badge: 'Quiz',
+    action: 'quiz',
+    quizCategory: 'ISO 27001 & DEA 2017'
+  }
+];
+
 export const Header: React.FC<HeaderProps> = ({
   activeTab,
   onSelectTab,
   onNavigateToGlossaryTerm,
   onNavigateToSection,
+  onNavigateToGovernAssure,
+  onNavigateToConcept,
+  onNavigateToQuiz,
   onOpenFeedback
 }) => {
   const { stats } = useUserProgress();
@@ -90,24 +185,89 @@ export const Header: React.FC<HeaderProps> = ({
     }, 180);
   };
 
-  // Global search across terms, modules, and sections
+  // Global search across interactive simulators, workspaces, glossary terms, and modules
   const searchResults = React.useMemo(() => {
     if (!globalSearch.trim()) return [];
-    const q = globalSearch.toLowerCase();
+    const raw = globalSearch.toLowerCase().trim();
+    const normalized = raw.replace(/[^a-z0-9]/g, '');
+
+    const workspaces = SEARCH_SIMULATORS_AND_VIEWS.filter((item) => {
+      const titleNorm = item.title.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const descMatch = item.desc.toLowerCase().includes(raw);
+      const kwMatch = item.keywords.some((kw) => {
+        const kwNorm = kw.replace(/[^a-z0-9]/g, '');
+        return kw.includes(raw) || (normalized.length >= 2 && kwNorm.includes(normalized));
+      });
+      return item.title.toLowerCase().includes(raw) || titleNorm.includes(normalized) || descMatch || kwMatch;
+    }).map((item) => ({
+      kind: 'destination' as const,
+      id: item.id,
+      title: item.title,
+      desc: item.desc,
+      badge: item.badge,
+      destination: item
+    }));
 
     const terms = GLOSSARY_TERMS.filter(
       (t) =>
-        t.term.toLowerCase().includes(q) ||
-        (t.acronym && t.acronym.toLowerCase().includes(q)) ||
-        t.shortDefinition.toLowerCase().includes(q)
-    ).map((t) => ({ type: 'glossary' as const, id: t.id, title: t.term, desc: t.shortDefinition, section: t.playbookSection }));
+        t.term.toLowerCase().includes(raw) ||
+        t.term.toLowerCase().replace(/[^a-z0-9]/g, '').includes(normalized) ||
+        (t.acronym && t.acronym.toLowerCase().includes(raw)) ||
+        t.shortDefinition.toLowerCase().includes(raw)
+    ).map((t) => ({
+      kind: 'glossary' as const,
+      id: t.id,
+      title: t.term,
+      desc: t.shortDefinition,
+      badge: 'Glossary'
+    }));
 
     const modules = PLAYBOOK_MODULES.filter(
-      (m) => m.title.toLowerCase().includes(q) || m.summary.toLowerCase().includes(q)
-    ).map((m) => ({ type: 'module' as const, id: m.id, title: m.title, desc: m.shortDesc, section: m.playbookSection }));
+      (m) =>
+        m.title.toLowerCase().includes(raw) ||
+        m.title.toLowerCase().replace(/[^a-z0-9]/g, '').includes(normalized) ||
+        m.summary.toLowerCase().includes(raw)
+    ).map((m) => ({
+      kind: 'module' as const,
+      id: m.id,
+      title: m.title,
+      desc: m.shortDesc,
+      badge: 'Concept'
+    }));
 
-    return [...terms.slice(0, 4), ...modules.slice(0, 3)];
+    return [...workspaces.slice(0, 4), ...modules.slice(0, 2), ...terms.slice(0, 3)].slice(0, 8);
   }, [globalSearch]);
+
+  const handleSelectSearchResult = (item: (typeof searchResults)[number]) => {
+    if (item.kind === 'destination') {
+      const dest = item.destination;
+      if (dest.action === 'govern-assure' && dest.governAssureView) {
+        if (onNavigateToGovernAssure) {
+          onNavigateToGovernAssure(dest.governAssureView);
+        } else {
+          onSelectTab('govern-assure');
+        }
+      } else if (dest.action === 'quiz') {
+        if (onNavigateToQuiz) {
+          onNavigateToQuiz(dest.quizCategory);
+        } else {
+          onSelectTab('quiz');
+        }
+      } else if (dest.action === 'tab' && dest.tab) {
+        onSelectTab(dest.tab);
+      }
+    } else if (item.kind === 'glossary') {
+      onNavigateToGlossaryTerm(item.id);
+    } else if (item.kind === 'module') {
+      if (onNavigateToConcept) {
+        onNavigateToConcept(item.id);
+      } else {
+        onSelectTab('concepts');
+      }
+    }
+    setGlobalSearch('');
+    setSearchFocused(false);
+  };
 
   // Pillar 1: Playbook & Guides (playbook, rollout, ontology, concepts primer)
   const playbookGuidesGroup: NavGroupItem[] = [
@@ -219,34 +379,39 @@ export const Header: React.FC<HeaderProps> = ({
             <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Search Caldicott, Section 251, Statbarn, Rego..."
+              placeholder="Search ISO 27001, Simulator, Caldicott, Rego..."
               value={globalSearch}
-              onChange={(e) => setGlobalSearch(e.target.value)}
+              onChange={(e) => {
+                setGlobalSearch(e.target.value);
+                setSearchFocused(true);
+              }}
               onFocus={() => setSearchFocused(true)}
               onBlur={() => setTimeout(() => setSearchFocused(false), 200)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && searchResults.length > 0) {
+                  e.preventDefault();
+                  handleSelectSearchResult(searchResults[0]);
+                }
+              }}
               className="w-full bg-[#07192f] border border-[#1b3f68] rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:bg-[#0a223f] transition-colors"
             />
 
             {/* Quick Search Dropdown */}
             {searchFocused && searchResults.length > 0 && (
-              <div className="absolute top-full mt-1 left-0 right-0 bg-[#0c2340] border border-[#1b3f68] rounded-xl shadow-2xl p-2 z-50 space-y-1">
+              <div className="absolute top-full mt-1 left-0 right-0 bg-[#0c2340] border border-[#1b3f68] rounded-xl shadow-2xl p-2 z-50 space-y-1 max-h-96 overflow-y-auto">
                 {searchResults.map((item) => (
                   <button
-                    key={`${item.type}-${item.id}`}
-                    onMouseDown={() => {
-                      if (item.type === 'glossary') {
-                        onNavigateToGlossaryTerm(item.id);
-                      } else {
-                        onSelectTab('concepts');
-                      }
-                      setGlobalSearch('');
+                    key={`${item.kind}-${item.id}`}
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      handleSelectSearchResult(item);
                     }}
                     className="w-full text-left p-2 rounded-lg hover:bg-[#123154] text-xs space-y-0.5 transition-colors cursor-pointer"
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="font-semibold text-white">{item.title}</span>
-                      <span className="text-[10px] uppercase font-mono text-cyan-400">
-                        {item.type}
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-semibold text-white truncate">{item.title}</span>
+                      <span className="text-[10px] uppercase font-mono text-cyan-400 shrink-0">
+                        {item.badge}
                       </span>
                     </div>
                     <p className="text-[11px] text-slate-300 line-clamp-1">{item.desc}</p>

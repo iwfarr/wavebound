@@ -1,3 +1,5 @@
+import { ISO_DEA_QUIZ_QUESTIONS } from './isoDeaQuizQuestions';
+
 export interface QuizQuestion {
   id: string;
   category: string;
@@ -5606,5 +5608,6 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
       "ISO 27001",
       "UK GDPR"
     ]
-  }
+  },
+  ...ISO_DEA_QUIZ_QUESTIONS
 ];

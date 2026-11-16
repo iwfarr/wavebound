@@ -157,15 +157,16 @@ const HANDBOOK_CHAPTERS: HandbookChapter[] = [
     keySafeguards: [
       'Primary Cell Suppression (k ≥ 10): Any aggregate table cell representing fewer than 10 individuals is permanently masked.',
       'Dominance Concentration Rule (≤ 80%): Top contributor must not account for more than 80% of any summary value.',
-      'Independent Two-Person Airlock Review: Certified output reviewers inspect all candidate charts, tables, and model parameters before release.',
+      'Auditable Procedural Approval Hand-offs: Every output passes logged quarantine intake, automated disclosure triage, independent two-person sign-off, and immutable release provenance.',
       'Freedom of Information (FOI) Proactive Transparency: Published Caldicott 8 summaries and release registers satisfy FOIA s19 publication schemes while shielding s40(2) personal data and s41 confidential microdata.'
     ],
     workflowSteps: [
-      { title: '1. Airlock Export Submission', description: 'Researcher deposits candidate publication table into the enclave airlock staging area.', responsibleParty: 'Approved Researcher' },
-      { title: '2. Automated Mathematical Scan', description: 'Statistical rules verify cell frequencies ($k \\ge 10$) and dominance thresholds.', responsibleParty: 'Automated Airlock Evaluator' },
-      { title: '3. Two-Person Manual Sign-off', description: 'Certified output review officers independently confirm zero spontaneous re-identification or differencing risk.', responsibleParty: 'Output Review Officers (2)' }
+      { title: '1. Quarantine Intake & Provenance Logging', description: 'Researcher deposits candidate table/plot into airlock staging; submission timestamp, study ID, code reference, and candidate SHA-256 hash are logged for audit.', responsibleParty: 'Approved Researcher' },
+      { title: '2. Automated Mathematical Scan & Audit Artifact', description: 'Statistical disclosure rules check cell counts (k >= 10), dominance ceilings (<= 80%), and residual smoothing, archiving an automated triage report.', responsibleParty: 'Automated Airlock Evaluator' },
+      { title: '3. Procedural Two-Person Approval Hand-off', description: 'Two accredited output reviewers—strictly independent of the submitting researcher—inspect differencing risk, review notes, and countersign the release approval.', responsibleParty: 'Independent Output Review Officers (2)' },
+      { title: '4. Immutable Auditable Output Release', description: 'Signed release manifest, reviewer identities, rationale, and cryptographic provenance trail (W3C PROV-O) are archived immutably so every released output remains fully auditable.', responsibleParty: 'Airlock Egress Gate & IG Audit Archive' }
     ],
-    executiveCallout: 'Residual disclosure risk is mitigated through secondary suppression: masking neighboring cells so small cell counts cannot be deduced by subtracting from row or column totals.'
+    executiveCallout: 'Safe Outputs require both disclosure maths (primary & secondary suppression) AND auditable procedural approval hand-offs: every airlock release must retain tamper-evident logs of who submitted, checked, and countersigned the cleared artifact.'
   }
 ];
 
@@ -492,19 +493,19 @@ const SCHEMATIC_NODES: SchematicNode[] = [
     ],
     statutoryHandoffs: [
       'Safe Output principle of Five Safes framework',
+      'Auditable Procedural Approval Hand-offs: segregation of duties between submitter and two independent accredited SDC officers',
       'SDAP Statbarn & DARE UK SACRO independent airlock checking protocol',
-      'Dual-reviewer independent authorization protocol (two distinct accredited SDC officers)',
-      'W3C PROV-O non-repudiable audit recording of review decision and officer signatures'
+      'W3C PROV-O & ISO/IEC 27001 A.8.15 non-repudiable audit recording of review rationale, checklist state, and reviewer signatures'
     ],
     privacySafeguards: [
       'Differencing attack analysis against previous project releases and public registries',
       'Computer vision and OCR scanning of plot images for embedded microdata pixels or small numbers',
       'Steganography and zero-width character inspection preventing covert PII exfiltration',
-      'Strict prohibition of raw microdata CSVs, uncompiled binaries, and SQL table dumps'
+      'Mandatory auditable hand-off trail capturing candidate checksum, triage findings, and dual officer sign-off before unlock'
     ],
     operationalActions: [
-      'Inspection of candidate files in isolated airlock quarantine viewer',
-      'Two-party cryptographic signing (Cosign / ECDSA) of approved release manifest'
+      'Inspection of candidate files in isolated airlock quarantine viewer with documented pass/reject notes',
+      'Two-party cryptographic signing (Cosign / ECDSA) of auditable release manifest persisted to immutable WORM log'
     ],
     upstreamHandoff: 'Mathematical validation report from automated SDC scanner',
     downstreamHandoff: 'Signed release bundle unlocked for external researcher egress'
@@ -1412,7 +1413,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                     <li><strong className="text-teal-300">Safe Projects:</strong> {renderGlossaryBadges('Protocols evaluated by HRA Research Ethics Committees for valid public interest benefit.', 'fs-2')}</li>
                     <li><strong className="text-teal-300">Safe Settings:</strong> {renderGlossaryBadges('Air-gapped, zero-egress enclaves protected by AES-256 encryption where clipboard and outbound internet are severed.', 'fs-3')}</li>
                     <li><strong className="text-teal-300">Safe Data:</strong> {renderGlossaryBadges('Direct identifiers expunged at source; linkage via salted one-way HMAC tokens.', 'fs-4')}</li>
-                    <li><strong className="text-teal-300">Safe Outputs:</strong> {renderGlossaryBadges('Mandatory Statistical Disclosure Control (k >= 10), Statbarn classification, and two-person airlock reviews.', 'fs-5')}</li>
+                    <li><strong className="text-teal-300">Safe Outputs:</strong> {renderGlossaryBadges('Statistical Disclosure Control (k >= 10), Statbarn classification, and auditable procedural approval hand-offs via two-person airlock sign-off and immutable provenance logs.', 'fs-5')}</li>
                   </ul>
                 </div>
               </div>

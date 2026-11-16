@@ -611,7 +611,7 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     category: 'International Standards (ISO) & Clinical Safety (DCB)',
     url: 'https://www.iso.org/standard/27001',
     shortDesc: 'International certifiable standard defining mandatory ISMS management clauses (Clauses 4–10: context, leadership, risk treatment, Statement of Applicability, internal audit, continual improvement) alongside 93 controls grouped into 4 Annex A themes: A.5 Organizational, A.6 People, A.7 Physical, and A.8 Technological.',
-    playbookRelevance: 'Mandatory technical and organizational baseline required for UKSA DEA 2017 Section 71 Accredited Processing Environments (TREs) and NHS DSPT equivalence; enforced via Wavebound zero-egress networks (A.8.20–A.8.22), AES-256 cryptography (A.8.24), DLP airlocks (A.8.12), GitOps change control (A.8.32), and WORM PROV-O logging (A.8.15).',
+    playbookRelevance: 'Foundational security standard against which UKSA DEA 2017 Section 71 Accredited Processing Environments are benchmarked (required baseline under UKSA TRE SOP V1.4 alongside NHS DSPT equivalence; holding certification supports applications but does not replace DEA evidence-based SAQ verification). Enforced via zero-egress networks (A.8.20–A.8.22), AES-256 cryptography (A.8.24), DLP airlocks (A.8.12), change control (A.8.32), and immutable logging (A.8.15).',
     isStatutory: true,
     citation: 'ISO/IEC 27001:2022. Information security, cybersecurity and privacy protection — Information security management systems — Requirements. Geneva: ISO; 2022.',
     tags: ['ISO 27001:2022', 'ISMS', 'Annex A', 'DEA 2017 Section 71', 'Cybersecurity', 'Clauses 4-10']
