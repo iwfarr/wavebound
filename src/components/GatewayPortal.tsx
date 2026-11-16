@@ -67,7 +67,7 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
         gateName: 'Least-Privilege Network Isolation Verified',
         status: 'PASS' as const,
         rationale: 'Restricted Kubernetes namespace; non-blocking audit controllers; outbound internet traffic blocked at policy decision point (PDP). Internal package mirrors operational.',
-        statutoryBasis: 'NHS Data Security & Protection Toolkit (DSPT) Assertion 1.5; ISO/IEC 27001 A.13.1.',
+        statutoryBasis: 'NHS Data Security & Protection Toolkit (DSPT) Assertion 1.5; ISO/IEC 27001:2022 Annex A.8.20–A.8.22.',
         triggerNode: 'tre:NetworkEnclaveShape § 4.3',
         decisionRef: 'D-007',
         decisionTitle: 'Enforcement Point Selection & Enclave Network Boundary'

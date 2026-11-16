@@ -5478,5 +5478,133 @@ export const CURATED_QUIZ_BANK: QuizQuestion[] = [
       "SDC",
       "Recital 26"
     ]
+  },
+  {
+    "id": "iso_f_01",
+    "category": "Five Safes & Governance",
+    "difficulty": "Foundation",
+    "question": "How does ISO/IEC 27001:2022 organize its 93 Annex A security controls compared with the retired 2013 edition?",
+    "options": [
+      "It consolidates all security requirements into a single mandatory cloud infrastructure appendix focused exclusively on AES-256 disk encryption and perimeter firewalls",
+      "It groups controls into four clear themes—Organizational (A.5), People (A.6), Physical (A.7), and Technological (A.8)—replacing the 14 legacy 2013 domains",
+      "It eliminates non-technical organizational and personnel safeguards so accredited healthcare enclaves only verify automated Kubernetes network policies",
+      "It separates mandatory UK statutory legislation under Section 251 from NHS Clinical Safety DCB0129 hazard logs across two parallel certification audits"
+    ],
+    "correctIndex": 1,
+    "explanation": "ISO/IEC 27001:2022 reorganized the 114 controls across 14 domains from the 2013 revision into 93 controls across 4 intuitive themes: Organizational (A.5), People (A.6), Physical (A.7), and Technological (A.8).",
+    "citation": "ISO/IEC 27001:2022 Annex A (Themes A.5–A.8)",
+    "tags": [
+      "ISO 27001:2022",
+      "Annex A",
+      "ISMS",
+      "Governance"
+    ]
+  },
+  {
+    "id": "iso_i_01",
+    "category": "Five Safes & Governance",
+    "difficulty": "Intermediate",
+    "question": "What is the specific statutory role of an ISO/IEC 27001:2022 Information Security Management System (ISMS) Statement of Applicability (Clause 6.1.3(d)) in a UKSA DEA 2017 Accredited Processing Environment?",
+    "options": [
+      "It grants public authorities an automatic exemption from UK GDPR Articles 6 and 9 when sharing unlinked hospital records without Research Accreditation Panel approval",
+      "It replaces independent penetration testing and NHS DSPT assertions by allowing engineering teams to self-certify container images without risk assessments",
+      "It formally documents which Annex A.5–A.8 controls are included or excluded with justification, supporting continuous ISMS compliance required for Section 71 DEA TRE accreditation",
+      "It authorizes researchers accredited outside the United Kingdom to download pseudonymised clinical cohorts onto encrypted institutional laptops for offline regression modeling"
+    ],
+    "correctIndex": 2,
+    "explanation": "Under ISO/IEC 27001:2022 Clause 6.1.3(d), the Statement of Applicability (SoA) justifies inclusion or exclusion of every Annex A control against risk treatment decisions, forming core audit evidence for mandatory ISO 27001 certification under DEA 2017 Section 71.",
+    "citation": "ISO/IEC 27001:2022 Clause 6.1.3(d) & DEA 2017 Part 5 Chapter 5 (Sections 70–71)",
+    "tags": [
+      "Statement of Applicability",
+      "SoA",
+      "ISMS",
+      "DEA 2017",
+      "UKSA"
+    ]
+  },
+  {
+    "id": "iso_i_02",
+    "category": "Five Safes & Governance",
+    "difficulty": "Intermediate",
+    "question": "Which combination of ISO/IEC 27001:2022 controls replaces the retired 2013 citations (A.10 Cryptography, A.12.1.2 Change Management, and A.13.1 Network Security) in a zero-egress enclave?",
+    "options": [
+      "Annex A.5.1 (Policies for information security), Annex A.6.3 (Security awareness training), and Annex A.7.4 (Physical security monitoring across sovereign data centers)",
+      "Annex A.8.1 (User endpoint devices), Annex A.8.10 (Information deletion routines), and Annex A.8.19 (Installation of software on operational production systems)",
+      "Annex A.5.15 (Access control lifecycle), Annex A.6.6 (Confidentiality or non-disclosure agreements), and Annex A.7.11 (Supporting utilities and power continuity)",
+      "Annex A.8.24 (Use of cryptography), Annex A.8.32 (Change management), and Annex A.8.20–A.8.22 (Network security, services security, and segregation)"
+    ],
+    "correctIndex": 3,
+    "explanation": "In ISO/IEC 27001:2022, Cryptography moved from A.10 to A.8.24, Change Management moved from A.12.1.2 to A.8.32, and Network Security/Segregation moved from A.13.1 to A.8.20–A.8.22.",
+    "citation": "ISO/IEC 27001:2022 Annex A Correlation Matrix (A.8.20–A.8.22, A.8.24, A.8.32)",
+    "tags": [
+      "ISO 27001:2022",
+      "Annex A.8.24",
+      "Annex A.8.32",
+      "Annex A.8.20"
+    ]
+  },
+  {
+    "id": "iso_a_01",
+    "category": "OPA Rego & Enforcement",
+    "difficulty": "Advanced",
+    "question": "How does a Policy-as-Code Trusted Research Environment satisfy ISO/IEC 27001:2022 Clause 9 (Performance Evaluation & Internal Audit) alongside Annex A.8.15 (Logging) and A.8.16 (Monitoring)?",
+    "options": [
+      "By executing automated PySHACL regression tests in CI and emitting tamper-evident W3C PROV-O policy decision triples to immutable WORM SIEM storage on every admission and export",
+      "By exporting all database query audit logs as unhashed CSV spreadsheets to external public cloud drives for quarterly manual inspection by academic supervisors",
+      "By disabling Kubernetes validating admission webhooks during peak analytical bursts so unlogged container sessions can bypass policy evaluation without latency spikes",
+      "By deleting researcher session lineage graphs every 24 hours to minimize persistent cloud object storage footprint and satisfy NHS DSPT data minimization assertions"
+    ],
+    "correctIndex": 0,
+    "explanation": "Continuous automated PySHACL verification and immutable W3C PROV-O telemetry stored in WORM SIEM archives provide verifiable, non-repudiable evidence for ISMS Clause 9 performance evaluation as well as Annex A.8.15 logging and A.8.16 monitoring.",
+    "citation": "ISO/IEC 27001:2022 Clauses 9–10, Annex A.8.15–A.8.16 & W3C PROV-O",
+    "tags": [
+      "ISO 27001:2022",
+      "ISMS Clause 9",
+      "PROV-O",
+      "WORM",
+      "Audit"
+    ]
+  },
+  {
+    "id": "iso_f_02",
+    "category": "Repository & Architecture",
+    "difficulty": "Foundation",
+    "question": "Under ISO/IEC 27001:2022 Annex A.6 (People Controls), how are personnel screening (A.6.1), recurring training (A.6.3), and confidentiality undertakings (A.6.6) enforced at TRE workspace admission?",
+    "options": [
+      "They are treated strictly as post-incident legal remedies audited manually only after a suspected re-identification breach or improper data export occurs",
+      "They are encoded as closed-world Safe Person SHACL and OPA Rego checks requiring verified vetting, unexpired annual IG training, and active DEA/DAA undertakings prior to token issuance",
+      "They are delegated automatically to autonomous AI coding agents acting as institutional Safe People without requiring an accredited human sponsor",
+      "They apply exclusively to external cloud datacenter hardware technicians and exclude university researchers analyzing Tier 2 pseudonymised cohorts"
+    ],
+    "correctIndex": 1,
+    "explanation": "ISO/IEC 27001:2022 Annex A.6 controls reinforce Five Safes 'Safe People': SHACL and Rego admission shapes fail-closed unless researcher vetting, unexpired IG training, and confidentiality undertakings are verified.",
+    "citation": "ISO/IEC 27001:2022 Annex A.6.1, A.6.3 & A.6.6; DEA 2017 Accredited Researcher Criteria",
+    "tags": [
+      "ISO 27001:2022",
+      "Annex A.6",
+      "Safe People",
+      "SHACL"
+    ]
+  },
+  {
+    "id": "iso_a_02",
+    "category": "Repository & Architecture",
+    "difficulty": "Advanced",
+    "question": "Which complementary international standard extends an ISO/IEC 27001:2022 ISMS into a Privacy Information Management System (PIMS) to formalize UK GDPR Data Controller and Data Processor obligations inside a TRE?",
+    "options": [
+      "ISO/IEC 14721:2012 (OAIS Reference Model), which defines 25-year tape archival formatting exclusively for astrophysical telemetry",
+      "ISO 13485:2016 (Medical Devices QMS), which governs surgical hardware sterilization rather than PII controller-processor accountability",
+      "ISO/IEC 27701:2019 (PIMS), which extends ISO/IEC 27001 ISMS controls with explicit privacy governance requirements for PII controllers and processors",
+      "W3C CSV on the Web (CSVW), which serves solely as an advisory UK Data Standards Authority format for describing comma-separated column schemas"
+    ],
+    "correctIndex": 2,
+    "explanation": "ISO/IEC 27701:2019 builds directly upon ISO/IEC 27001 ISMS and ISO/IEC 27002 controls to establish a Privacy Information Management System (PIMS) detailing PII controller and processor responsibilities aligned with UK GDPR.",
+    "citation": "ISO/IEC 27701:2019 (PIMS) & UK GDPR Articles 24–28",
+    "tags": [
+      "ISO 27701",
+      "PIMS",
+      "ISO 27001",
+      "UK GDPR"
+    ]
   }
 ];

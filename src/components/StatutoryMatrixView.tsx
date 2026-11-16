@@ -160,7 +160,7 @@ export const StatutoryMatrixView: React.FC<StatutoryMatrixViewProps> = ({
       pillar: 'Safe Settings',
       gateName: 'Least-Privilege Enclave & Zero-Egress Network Routing',
       statutoryInstrument: 'NHS Data Security and Protection Toolkit (DSPT); ISO/IEC 27001',
-      statutorySection: 'DSPT Mandate 3 Assertion 1.5; ISO 27001 Annex A.13 (Communications security)',
+      statutorySection: 'DSPT Mandate 3 Assertion 1.5; ISO/IEC 27001:2022 Annex A.8.20–A.8.22 (Network security & segregation)',
       ukGdprBasis: 'UK GDPR Art. 25 (Data protection by design) & Art. 32 (Security of processing)',
       caldicottPrinciples: ['Principle 3 (Minimum necessary)', 'Principle 4 (Strict need-to-know)'],
       machinePolicyNode: 'tre:SafeSettingShape § 1.1 (SHACL) / calico_egress_drop (Rego)',

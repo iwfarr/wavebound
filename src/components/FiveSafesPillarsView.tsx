@@ -279,7 +279,7 @@ export const FiveSafesPillarsView: React.FC<FiveSafesPillarsViewProps> = ({
             <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-800 space-y-1">
               <strong className="text-slate-800 dark:text-slate-200 block font-semibold text-[11px]">Statutory Guardrails:</strong>
               <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-[11px]">
-                SATRE Specification Pillar 2 (Computing Infrastructure); NHS DSPT Assertion 1.5; ISO/IEC 27001 A.13.1. Zero-egress network policies with eBPF/Calico drop rules.
+                SATRE Specification Pillar 2 (Computing Infrastructure); NHS DSPT Assertion 1.5; ISO/IEC 27001:2022 Annex A.8.20–A.8.22. Zero-egress network policies with eBPF/Calico drop rules.
               </p>
             </div>
 

@@ -58,7 +58,7 @@ ${description || 'No description provided.'}
   const handleOpenGitHub = () => {
     const issueTitle = encodeURIComponent(`[${getCategoryLabel()}] ${title || 'Feedback Submission'}`);
     const issueBody = encodeURIComponent(generateMarkdownPayload());
-    const githubUrl = `https://github.com/iwfarr/seawater-playbook/issues/new?title=${issueTitle}&body=${issueBody}`;
+    const githubUrl = `https://github.com/iwfarr/wavebound/issues/new?title=${issueTitle}&body=${issueBody}`;
     window.open(githubUrl, '_blank', 'noopener,noreferrer');
   };
 

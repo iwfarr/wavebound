@@ -606,14 +606,37 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
   },
   {
     id: 'res-iso-27001-27701',
-    title: 'ISO/IEC 27001:2022 & ISO/IEC 27701:2019: ISMS & Privacy Information Management',
+    title: 'ISO/IEC 27001:2022: Information Security Management Systems (ISMS) & Annex A (A.5–A.8)',
     organization: 'International Organization for Standardization (ISO / IEC)',
     category: 'International Standards (ISO) & Clinical Safety (DCB)',
     url: 'https://www.iso.org/standard/27001',
-    shortDesc: 'Foundational information security management system (ISMS) controls augmented by ISO 27701 for privacy information management (PIMS) and PII processing.',
-    playbookRelevance: 'Mandatory technical baseline required for DEA Accredited Processors and NHS DSPT accreditation; directly mapped to Safe Setting network isolation and cryptographic audit logging.',
-    citation: 'ISO/IEC 27001:2022. Information security, cybersecurity and privacy protection - Information security management systems. Geneva: ISO; 2022.',
-    tags: ['ISO 27001', 'ISO 27701', 'ISMS', 'PIMS', 'Cybersecurity']
+    shortDesc: 'International certifiable standard defining mandatory ISMS management clauses (Clauses 4–10: context, leadership, risk treatment, Statement of Applicability, internal audit, continual improvement) alongside 93 controls grouped into 4 Annex A themes: A.5 Organizational, A.6 People, A.7 Physical, and A.8 Technological.',
+    playbookRelevance: 'Mandatory technical and organizational baseline required for UKSA DEA 2017 Section 71 Accredited Processing Environments (TREs) and NHS DSPT equivalence; enforced via Wavebound zero-egress networks (A.8.20–A.8.22), AES-256 cryptography (A.8.24), DLP airlocks (A.8.12), GitOps change control (A.8.32), and WORM PROV-O logging (A.8.15).',
+    isStatutory: true,
+    citation: 'ISO/IEC 27001:2022. Information security, cybersecurity and privacy protection — Information security management systems — Requirements. Geneva: ISO; 2022.',
+    tags: ['ISO 27001:2022', 'ISMS', 'Annex A', 'DEA 2017 Section 71', 'Cybersecurity', 'Clauses 4-10']
+  },
+  {
+    id: 'res-iso-27001-soa',
+    title: 'ISO/IEC 27002:2022 & Statement of Applicability (Clause 6.1.3) Control Guidance',
+    organization: 'International Organization for Standardization (ISO / IEC)',
+    category: 'International Standards (ISO) & Clinical Safety (DCB)',
+    url: 'https://www.iso.org/standard/75652.html',
+    shortDesc: 'Companion implementation code of practice detailing the 93 organizational, people, physical, and technological controls referenced in ISO/IEC 27001:2022 Clause 6.1.3(d) Statement of Applicability (SoA).',
+    playbookRelevance: 'Bridges paper-based SoA justifications and live Policy-as-Code enforcement: SHACL shapes, OPA Rego bundles, and PySHACL CI checks generate continuous Clause 9 compliance evidence across A.5–A.8 controls.',
+    citation: 'ISO/IEC 27002:2022. Information security, cybersecurity and privacy protection — Information security controls. Geneva: ISO; 2022.',
+    tags: ['ISO 27002:2022', 'Statement of Applicability', 'SoA', 'Clause 6.1.3', 'ISMS', 'Annex A']
+  },
+  {
+    id: 'res-iso-27701',
+    title: 'ISO/IEC 27701:2019: Privacy Information Management System (PIMS)',
+    organization: 'International Organization for Standardization (ISO / IEC)',
+    category: 'International Standards (ISO) & Clinical Safety (DCB)',
+    url: 'https://www.iso.org/standard/71670.html',
+    shortDesc: 'Privacy extension to ISO/IEC 27001 ISMS and ISO/IEC 27002 specifying PIMS governance requirements and mapping controller and processor accountability for Personally Identifiable Information (PII).',
+    playbookRelevance: 'Aligns ISMS security controls with UK GDPR / DPA 2018 Articles 6, 9, and 28 Data Controller/Processor obligations inside sovereign Trusted Research Environments.',
+    citation: 'ISO/IEC 27701:2019. Security techniques — Extension to ISO/IEC 27001 and ISO/IEC 27002 for privacy information management. Geneva: ISO; 2019.',
+    tags: ['ISO 27701', 'PIMS', 'UK GDPR', 'Privacy', 'Data Processor', 'ISMS']
   },
   {
     id: 'res-dcb-0129',

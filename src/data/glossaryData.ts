@@ -49,7 +49,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     "fullDefinition": "Advanced Encryption Standard (AES) with a 256-bit key length is the national and international benchmark for cryptographic protection of electronic health records (EHR) and population microdata at rest and in transit. Mandated by NHS Data Security & Protection Toolkit (DSPT Assertion 1.5) and ISO/IEC 27001, AES-256 ensures database volumes, object stores, and backup archives remain cryptographically indecipherable in the event of unauthorized physical or storage-tier access.",
     "playbookContext": "Enforced across all persistent storage volumes, ephemeral analytical workspaces, and intermediate Parquet staging zones in the Wavebound enclave architecture.",
     "playbookSection": "Section 2 (Phase 1 & Phase 2)",
-    "statutoryBasis": "NHS DSPT Assertion 1.5; ISO/IEC 27001:2022 Annex A.10; FIPS 197",
+    "statutoryBasis": "NHS DSPT Assertion 1.5; ISO/IEC 27001:2022 Annex A.8.24 (Use of cryptography); FIPS 197",
     "governanceSafeguards": [
       "Hardware-accelerated AES-NI symmetric encryption for high-throughput analytical query engines.",
       "Envelope encryption with KMS-backed root keys rotated on a scheduled statutory cycle.",
@@ -492,6 +492,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       "tre",
       "safe-setting",
       "dea-2017",
+      "iso-27001",
+      "isms",
       "satre",
       "airlock"
     ]
@@ -816,6 +818,32 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     ]
   },
   {
+    "id": "isms",
+    "term": "Information Security Management System (ISMS)",
+    "acronym": "ISMS",
+    "category": "Standards & Clinical Safety",
+    "shortDefinition": "Risk-based management system defined by ISO/IEC 27001 Clauses 4–10 governing organizational policies, risk treatment, Statement of Applicability, internal audit, and continual improvement.",
+    "fullDefinition": "An Information Security Management System (ISMS) is the formal management framework established under Clauses 4 to 10 of ISO/IEC 27001:2022. Rather than treating cybersecurity as isolated technical fixes, an ISMS mandates leadership accountability (Clause 5), structured risk assessment and risk treatment plans plus a Statement of Applicability (Clause 6), operational competency and documented controls (Clauses 7–8), continuous monitoring and internal audit (Clause 9), and corrective improvement (Clause 10). Within UK Trusted Research Environments, independent ISO/IEC 27001 ISMS certification is a mandatory prerequisite for UKSA Digital Economy Act 2017 Section 71 Accredited Processing Environments.",
+    "playbookContext": "Wavebound operationalizes ISMS Clauses 6, 8, and 9 using version-controlled W3C SHACL shapes, PySHACL CI checks, OPA Rego enforcement, and append-only W3C PROV-O audit trails.",
+    "playbookSection": "Section 0 & Section 1.2 (ISMS & Five Safes Governance)",
+    "targetSectionId": "sec-phase-1-2",
+    "statutoryBasis": "ISO/IEC 27001:2022 Clauses 4–10; DEA 2017 Section 71 (UKSA TRE SOP V1.4); NHS DSPT",
+    "governanceSafeguards": [
+      "Documented ISMS scope boundary covering sovereign VPCs, airlock workflows, and governance registries.",
+      "Traceable Risk Treatment Plan linked directly to Policy-as-Code enforcement gates and Decision Register sign-offs (D-001–D-009).",
+      "Continuous Clause 9 telemetry via SIEM alerting and non-repudiable W3C PROV-O audit ledgers."
+    ],
+    "furtherResourceId": "res-iso-27001-27701",
+    "externalUrl": "https://www.iso.org/standard/27001",
+    "relatedTerms": [
+      "iso-27001",
+      "statement-of-applicability",
+      "dea-accredited-processor",
+      "satre",
+      "provo"
+    ]
+  },
+  {
     "id": "iso-13485",
     "term": "ISO 13485:2016 Medical Devices Quality Management",
     "acronym": "ISO 13485 (QMS)",
@@ -847,6 +875,33 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       "iso-13485",
       "dcb-0129-0160",
       "samd-uk-mdr"
+    ]
+  },
+  {
+    "id": "iso-27001",
+    "term": "ISO/IEC 27001:2022 Information Security & Annex A (A.5–A.8)",
+    "acronym": "ISO/IEC 27001:2022",
+    "category": "Standards & Clinical Safety",
+    "shortDefinition": "The international standard for Information Security Management Systems (ISMS), organizing 93 Annex A security controls across Organizational (A.5), People (A.6), Physical (A.7), and Technological (A.8) themes.",
+    "fullDefinition": "ISO/IEC 27001:2022 is the authoritative international standard for establishing and certifying an ISMS. Its 2022 revision streamlined Annex A from 14 domains (ISO/IEC 27001:2013) into four structured themes: A.5 Organizational (37 controls, including access governance, supplier/cloud security, incident response, and legal compliance), A.6 People (8 controls, including screening, security awareness training, and confidentiality undertakings), A.7 Physical (14 controls, including secure facilities and storage media sanitization), and A.8 Technological (34 controls, including A.8.12 data leakage prevention, A.8.15 logging, A.8.20–A.8.22 network security and segregation, A.8.24 cryptography, and A.8.32 change management). Under DEA 2017 Section 71 and the UKSA Research Code of Practice, independent ISO/IEC 27001 certification is mandatory for Accredited Processing Environments.",
+    "playbookContext": "Mapped across Wavebound's Procurement Compliance Matrix, Gateway checks, SHACL admission/airlock shapes, and GitOps release pipelines.",
+    "playbookSection": "Section 1.2 & Procurement Matrix (ISO 27001:2022 Track)",
+    "targetSectionId": "sec-phase-1-2",
+    "statutoryBasis": "ISO/IEC 27001:2022 Clauses 4–10 & Annex A.5–A.8; DEA 2017 Part 5 Ch. 5 (s70–s71); NHS DSPT",
+    "governanceSafeguards": [
+      "Standardizes retired 2013 citations (A.10, A.12.1.2, A.13.1) into current :2022 controls (A.8.24 Cryptography, A.8.32 Change Management, A.8.20–A.8.22 Network Security).",
+      "Binds Organizational (A.5) and People (A.6) obligations—including researcher screening and annual IG training—to machine-checked tre:SafePerson shapes.",
+      "Satisfies UKSA TRE Accreditation SOP V1.4 prerequisites alongside Caldicott Principles and SATRE pillars."
+    ],
+    "furtherResourceId": "res-iso-27001-27701",
+    "externalUrl": "https://www.iso.org/standard/27001",
+    "relatedTerms": [
+      "isms",
+      "statement-of-applicability",
+      "dea-accredited-processor",
+      "dea-2017",
+      "aes-256",
+      "zero-egress"
     ]
   },
   {
@@ -1580,6 +1635,31 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     ]
   },
   {
+    "id": "statement-of-applicability",
+    "term": "Statement of Applicability (SoA — ISO/IEC 27001 Clause 6.1.3)",
+    "acronym": "SoA",
+    "category": "Standards & Clinical Safety",
+    "shortDefinition": "Mandatory ISO/IEC 27001 Clause 6.1.3(d) governance document recording which Annex A controls apply to the ISMS, why they are included or excluded, and their implementation status.",
+    "fullDefinition": "Required by ISO/IEC 27001:2022 Clause 6.1.3(d), the Statement of Applicability (SoA) bridges risk assessment outcomes and operational controls. Every organization certifying a Trusted Research Environment must justify every control across Annex A.5–A.8 (93 controls), documenting both inclusion rationale and technical implementation evidence. In a Policy-as-Code TRE architecture, the SoA is treated as a living governance register backed directly by automated PySHACL CI assertions, OPA Rego policies, network policy manifests, and W3C PROV-O audit trails.",
+    "playbookContext": "Represented in Wavebound through the ISO 27001:2022 Procurement & Audit Matrix and linked Decision Register gates (D-001–D-009).",
+    "playbookSection": "Section 1.2 & Section 4.3 (Audit Lineage & Tooling)",
+    "targetSectionId": "sec-phase-1-2",
+    "statutoryBasis": "ISO/IEC 27001:2022 Clause 6.1.3(d); UKSA TRE Accreditation SAQ V3.1",
+    "governanceSafeguards": [
+      "Explicit justification for any excluded Annex A control (e.g. physical media restrictions in cloud-native zero-egress VPCs).",
+      "Direct binding between Annex A control IDs and version-controlled Rego/SHACL policy files.",
+      "Prevents paper compliance drift by pairing documented SoA assertions with automated CI verification."
+    ],
+    "furtherResourceId": "res-iso-27001-soa",
+    "externalUrl": "https://www.iso.org/standard/75652.html",
+    "relatedTerms": [
+      "isms",
+      "iso-27001",
+      "dea-accredited-processor",
+      "gitops"
+    ]
+  },
+  {
     "id": "statbarn",
     "term": "Statbarn (Statistical Barns Framework)",
     "acronym": "Statbarn",
@@ -1878,7 +1958,10 @@ export const GLOSSARY_SECTION_MAP: Record<string, string> = {
   "atrs": "sec-phase-3-2",
   "csvw-openapi": "sec-phase-3-2",
   "data-standards-authority": "sec-front-matter",
-  "government-data-quality-framework": "sec-phase-1-1"
+  "government-data-quality-framework": "sec-phase-1-1",
+  "isms": "sec-phase-1-2",
+  "iso-27001": "sec-phase-1-2",
+  "statement-of-applicability": "sec-phase-1-2"
 };
 
 export function getSectionIdForGlossaryTerm(termId: string): string {

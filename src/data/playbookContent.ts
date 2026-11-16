@@ -85,6 +85,67 @@ tre:isEgressDisabled a owl:DatatypeProperty ;
     ]
   },
   {
+    id: 'isms-iso27001-dea',
+    title: 'ISO/IEC 27001:2022 ISMS, SoA & DEA 2017 Accreditation',
+    shortDesc: 'Mapping ISMS Clauses 4–10, the Statement of Applicability, and Annex A.5–A.8 controls directly to DEA 2017 Section 71 TRE requirements.',
+    category: 'Governance',
+    icon: 'ShieldCheck',
+    playbookSection: 'Section 0, Section 1.2 & Procurement Compliance Matrix',
+    plainEnglishSummary: 'An Information Security Management System (ISMS) is not just a binder of policies for annual inspection. By linking ISO/IEC 27001:2022 Clauses 4–10 and Annex A controls to machine-checked Policy-as-Code gates, a research environment proves continuous compliance—satisfying the mandatory ISO 27001 prerequisite for UKSA Digital Economy Act 2017 TRE accreditation.',
+    summary: 'Under Part 5, Chapter 5 (Sections 70–71) of the Digital Economy Act 2017 and the UKSA Research Code of Practice, Accredited Processing Environments must hold independent ISO/IEC 27001 certification. Wavebound maps ISMS management Clauses 4–10, Clause 6.1.3(d) Statement of Applicability (SoA), and the four 2022 Annex A themes (A.5 Organizational, A.6 People, A.7 Physical, A.8 Technological) directly into declarative SHACL and OPA Rego guardrails.',
+    keyPrinciples: [
+      'ISMS Clauses 4–10 Lifecycle: Risk treatment plans, competence verification, internal audit (Clause 9), and corrective actions (Clause 10) map onto continuous GitOps CI gates and W3C PROV-O telemetry.',
+      'Statement of Applicability (Clause 6.1.3(d)): Every Annex A.5–A.8 control—plus exclusions—links from documented SoA rationale directly to testable technical assets and Decision Register approvals (D-001–D-009).',
+      'Four 2022 Annex A Themes: Replaces legacy 2013 sections (A.10, A.12.1.2, A.13.1) with unified A.5 Organizational (access lifecycle, suppliers, statutory compliance), A.6 People (screening, annual IG awareness), A.7 Physical (UK sovereign hosting, VDI perimeter), and A.8 Technological (A.8.12 DLP, A.8.15 logging, A.8.20–A.8.22 network segregation, A.8.24 cryptography, A.8.32 change management).',
+      'DEA 2017 Section 70/71 Statutory Bridge: Verifies active UKSA Research Accreditation Panel (RAP) processor certification alongside ISO/IEC 27001:2022 SoA currency and NHS DSPT "Standards Met" status before project mount.'
+    ],
+    technicalDetails: [
+      {
+        heading: 'SHACL Mapping: ISMS Clause 6.1.3 SoA & DEA Section 71 Accreditation',
+        body: 'In Wavebound, enclave certification and Annex A technological guarantees are evaluated together prior to mounting public authority datasets under DEA 2017 Part 5, Chapter 5.',
+        codeSnippet: {
+          language: 'turtle',
+          title: 'ontology/shapes/isms-soa-shapes.ttl (Illustrative)',
+          code: `@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix tre: <https://w3id.org/tre/core#> .
+@prefix iso: <https://w3id.org/iso27001/2022#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+tre:AccreditedEnclaveISMSShape a sh:NodeShape ;
+    sh:targetClass tre:SafeSetting ;
+    sh:property [
+        sh:path iso:hasCertifiedISMS ;
+        sh:hasValue true ;
+        sh:message "DEA 2017 s71 Violation: Enclave must hold active ISO/IEC 27001:2022 ISMS certification." ;
+    ] ;
+    sh:property [
+        sh:path iso:hasApprovedSoA ;
+        sh:minCount 1 ;
+        sh:message "ISMS Clause 6.1.3(d): Current Statement of Applicability covering Annex A.5-A.8 is required." ;
+    ] ;
+    sh:property [
+        sh:path iso:controlA8_20_NetworkSegregation ;
+        sh:hasValue true ;
+        sh:message "Annex A.8.20-A.8.22 Violation: Zero-egress VPC microsegmentation not verified." ;
+    ] ;
+    sh:property [
+        sh:path iso:controlA8_24_Cryptography ;
+        sh:hasValue "AES-256-GCM" ;
+        sh:message "Annex A.8.24 Violation: KMS-backed AES-256 encryption at rest mandatory." ;
+    ] .`
+        }
+      },
+      {
+        heading: 'ISO/IEC 27001:2013 to 2022 Reconciliation Across Wavebound',
+        body: 'Wavebound enforces strict 2022 terminology across every portal, statutory matrix, and quiz item: Cryptography is cited as Annex A.8.24 (replacing retired A.10), Change Management as Annex A.8.32 (replacing A.12.1.2), and Network Security/Segregation as Annex A.8.20–A.8.22 (replacing A.13 / A.13.1).'
+      }
+    ],
+    commonPitfalls: [
+      'Citing retired ISO/IEC 27001:2013 Annex A clauses (e.g. A.10 or A.13.1) inside `:2022` Statements of Applicability or procurement responses.',
+      'Treating ISO/IEC 27001 Annex A.8 technical controls in isolation while overlooking Clause 6.1.3(d) SoA justifications and A.5/A.6 organizational and people controls.'
+    ]
+  },
+  {
     id: 'owa-to-cwa-shacl',
     title: 'Deterministic Enforcement: OWA to CWA via SHACL',
     shortDesc: 'Transforming semantic Open-World Assumption into Closed-World security constraints.',

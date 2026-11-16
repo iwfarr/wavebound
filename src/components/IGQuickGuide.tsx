@@ -114,7 +114,7 @@ const HANDBOOK_CHAPTERS: HandbookChapter[] = [
     title: 'Secure Enclaves & Perimeter Controls',
     shortDesc: 'Operating within hardened, air-gapped virtual safe rooms where outbound internet, copy-paste, and USB exports are blocked.',
     badge: 'Safe Settings & Infrastructure',
-    statutoryBasis: 'SATRE Specification v1.1; ISO/IEC 27001 Annex A.13; NHS DSPT Assertion 1.5.',
+    statutoryBasis: 'SATRE Specification v1.1; ISO/IEC 27001:2022 Annex A.8.20–A.8.22; NHS DSPT Assertion 1.5.',
     keySafeguards: [
       'Air-gapped Zero-Egress VPC: Compute pods cannot reach the public internet; all outbound WAN routing is severed.',
       'AES-256 Encryption at Rest & In Transit: All storage volumes, database partitions, and internal mTLS tunnels enforce AES-256 cryptographic protection.',

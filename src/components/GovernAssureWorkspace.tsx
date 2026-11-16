@@ -318,7 +318,7 @@ tre:legalBasis "UK_GDPR_Art6_1_e" .`,
         status: 'PASS',
         triggerNode: 'tre:SafeSettingShape § 1.1',
         plainEnglishSummary: 'Compute environment runs in a private cloud VPC with all outbound WAN internet routing severed via eBPF/Calico network policy.',
-        statutoryBasis: 'SATRE Computing Infrastructure Pillar 2; ISO/IEC 27001 Annex A.13.',
+        statutoryBasis: 'SATRE Computing Infrastructure Pillar 2; ISO/IEC 27001:2022 Annex A.8.20–A.8.22.',
         codeSnippet: `tre:enclaveEgressBlocked true ;
 tre:networkIsolationTier "ZeroEgressVPC" .`,
         decisionRef: 'D-007',

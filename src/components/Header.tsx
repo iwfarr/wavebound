@@ -317,7 +317,7 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* GitHub Repository */}
             <a
-              href="https://github.com/iwfarr/seawater-playbook"
+              href="https://github.com/iwfarr/wavebound"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#07192f] border border-[#1b3f68] p-2 rounded-lg text-slate-300 hover:text-white transition-colors hidden sm:flex items-center gap-1.5 text-xs shadow-xs"
@@ -744,7 +744,7 @@ export const Header: React.FC<HeaderProps> = ({
               )}
 
               <a
-                href="https://github.com/iwfarr/seawater-playbook"
+                href="https://github.com/iwfarr/wavebound"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-200 hover:bg-[#0f2847] flex items-center gap-2 border border-[#1b3f68]"
