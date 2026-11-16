@@ -7,6 +7,7 @@ import { QuantitativeSDCHub } from './QuantitativeSDCHub';
 import { CaldicottTransparencyPortal } from './CaldicottTransparencyPortal';
 import { ProcurementReadinessHub } from './ProcurementReadinessHub';
 import { GovernanceCharterModal } from './GovernanceCharterModal';
+import { PrinciplesVsRulesCard, SDCEvaluationMode } from './PrinciplesVsRulesCard';
 import {
   Scale,
   ShieldCheck,
@@ -152,6 +153,7 @@ export const GovernAssureWorkspace: React.FC<GovernAssureWorkspaceProps> = ({
   const [dataTier, setDataTier] = useState<'tier1_aggregate' | 'tier2_pseudonymised' | 'tier3_identifiable'>('tier2_pseudonymised');
   const [minCellCount, setMinCellCount] = useState<number>(15);
   const [dominanceRatio, setDominanceRatio] = useState<number>(45);
+  const [sdcMode, setSdcMode] = useState<SDCEvaluationMode>('principles_triage');
   const [enclaveEgressBlocked, setEnclaveEgressBlocked] = useState<boolean>(true);
   const [aiWorkloadType, setAiWorkloadType] = useState<'none' | 'assistive' | 'autonomous_high_risk'>('none');
   const [aiHumanSponsorLinked, setAiHumanSponsorLinked] = useState<boolean>(true);
@@ -357,58 +359,109 @@ tre:pseudonymisationAlgorithm "Salted_HMAC_SHA256" .`,
       });
     }
 
-    // Gate 5: Safe Output & SDC Airlock Verification
-    if (minCellCount < 10) {
-      gates.push({
-        gateName: 'Primary Cell Suppression Violation (k < 10)',
-        pillar: 'Safe Outputs',
-        status: 'FAIL',
-        triggerNode: 'sdc:AirlockOutputShape § 6.1',
-        plainEnglishSummary: `Candidate table contains small cell count (N = ${minCellCount}). National clinical SDC standards mandate primary suppression for any cell with N < 10.`,
-        statutoryBasis: 'ONS Statistical Disclosure Control Standard; SAIL Databank Output Review Protocol § 3.2.',
-        codeSnippet: `tre:AirlockOutputShape a sh:NodeShape ;
+    // Gate 5: Safe Output & SDC Airlock Verification (Strict Rules-Based vs. Ritchie/SACRO Principles-Based Triage)
+    if (sdcMode === 'strict_rules') {
+      if (minCellCount < 10) {
+        gates.push({
+          gateName: 'Primary Cell Suppression Violation (k < 10)',
+          pillar: 'Safe Outputs',
+          status: 'FAIL',
+          triggerNode: 'sdc:AirlockOutputShape § 6.1',
+          plainEnglishSummary: `Candidate table contains small cell count (N = ${minCellCount}). Strict rules-based policy configuration rejects any cell below the k ≥ 10 threshold.`,
+          statutoryBasis: 'Strict Rules-Based Mode · ONS/SAIL k ≥ 10 Threshold Configuration.',
+          codeSnippet: `tre:AirlockOutputShape a sh:NodeShape ;
   sh:property [
     sh:path tre:minObservedCellCount ;
     sh:minInclusive 10 ;
-    sh:message "Primary cell suppression violation: k must be >= 10." ;
+    sh:message "Strict rule: primary cell count must be >= 10." ;
   ] .`,
-        decisionRef: 'D-005',
-        decisionTitle: 'Quantitative Statistical Disclosure Control Rules',
-        decisionRole: 'Statistical Disclosure Control (SDC) Lead'
-      });
-    } else if (dominanceRatio > 80) {
-      gates.push({
-        gateName: 'Top-Contributor Dominance Ceiling Violation (> 80%)',
-        pillar: 'Safe Outputs',
-        status: 'FAIL',
-        triggerNode: 'sdc:AirlockOutputShape § 6.2',
-        plainEnglishSummary: `Candidate table has a single contributor accounting for ${dominanceRatio}% of the aggregate sum (exceeds the 80% dominance ceiling).`,
-        statutoryBasis: 'ONS (n, k) Dominance Rule; NHS Caldicott Principle 8.',
-        codeSnippet: `tre:AirlockOutputShape a sh:NodeShape ;
+          decisionRef: 'D-005',
+          decisionTitle: 'Quantitative Statistical Disclosure Control Rules',
+          decisionRole: 'Statistical Disclosure Control (SDC) Lead'
+        });
+      } else if (dominanceRatio > 80) {
+        gates.push({
+          gateName: 'Top-Contributor Dominance Ceiling Violation (> 80%)',
+          pillar: 'Safe Outputs',
+          status: 'FAIL',
+          triggerNode: 'sdc:AirlockOutputShape § 6.2',
+          plainEnglishSummary: `Candidate table has a single contributor accounting for ${dominanceRatio}% of the aggregate sum (exceeds the strict 80% dominance ceiling).`,
+          statutoryBasis: 'Strict Rules-Based Mode · ONS (1, 80%) Dominance Rule.',
+          codeSnippet: `tre:AirlockOutputShape a sh:NodeShape ;
   sh:property [
     sh:path tre:topContributorDominanceRatio ;
     sh:maxInclusive 0.80 ;
-    sh:message "Dominance violation: top contributor must not exceed 80%." ;
+    sh:message "Strict rule: top contributor must not exceed 80%." ;
   ] .`,
-        decisionRef: 'D-005',
-        decisionTitle: 'Quantitative Statistical Disclosure Control Rules',
-        decisionRole: 'Statistical Disclosure Control (SDC) Lead'
-      });
-    } else {
-      gates.push({
-        gateName: 'Statistical Disclosure Control (SDC) Passed',
-        pillar: 'Safe Outputs',
-        status: 'PASS',
-        triggerNode: 'sdc:AirlockOutputShape § 6.3',
-        plainEnglishSummary: `Candidate table satisfies primary suppression (k = ${minCellCount} ≥ 10) and dominance ratio (${dominanceRatio}% ≤ 80%). Ready for 2-person airlock review.`,
-        statutoryBasis: 'Caldicott Principle 8 (No surprises); ONS Tabular SDC Guidelines.',
-        codeSnippet: `tre:minObservedCellCount >= 10 ;
+          decisionRef: 'D-005',
+          decisionTitle: 'Quantitative Statistical Disclosure Control Rules',
+          decisionRole: 'Statistical Disclosure Control (SDC) Lead'
+        });
+      } else {
+        gates.push({
+          gateName: 'Strict Thresholds Satisfied (k ≥ 10 & Dominance ≤ 80%)',
+          pillar: 'Safe Outputs',
+          status: 'PASS',
+          triggerNode: 'sdc:AirlockOutputShape § 6.3',
+          plainEnglishSummary: `Candidate table satisfies strict binary thresholds (k = ${minCellCount} ≥ 10, dominance = ${dominanceRatio}% ≤ 80%). Note: switch to Principles-Based Triage to examine contextual risks beyond thresholds.`,
+          statutoryBasis: 'Strict Rules-Based Mode · Automated Threshold Screening.',
+          codeSnippet: `tre:minObservedCellCount >= 10 ;
 tre:topContributorDominanceRatio <= 0.80 ;
 tre:airlockAutoVerification "PASSED" .`,
-        decisionRef: 'D-005',
-        decisionTitle: 'Quantitative Statistical Disclosure Control Rules',
-        decisionRole: 'Statistical Disclosure Control (SDC) Lead'
-      });
+          decisionRef: 'D-005',
+          decisionTitle: 'Quantitative Statistical Disclosure Control Rules',
+          decisionRole: 'Statistical Disclosure Control (SDC) Lead'
+        });
+      }
+    } else {
+      // Principles-Based Triage Mode (Felix Ritchie / DARE UK SACRO)
+      if (minCellCount < 10) {
+        gates.push({
+          gateName: 'Rule-of-Thumb Flagged: Small Cell Triage (k < 10)',
+          pillar: 'Safe Outputs',
+          status: 'WARN',
+          triggerNode: 'sdc:PrinciplesTriageShape § 6.1',
+          plainEnglishSummary: `Cell count N = ${minCellCount} is below the k ≥ 10 rule-of-thumb. Under Felix Ritchie / SACRO principles-based checking, automated triage holds for 2-person human review and researcher justification rather than blind refusal (e.g. checking structural zeros, safe regression stats, or complementary suppression).`,
+          statutoryBasis: 'Principles-Based Output SDC (Ritchie & Elliot, 2015); DARE UK SACRO & SDAP Statbarn Triage.',
+          codeSnippet: `# SACRO Semi-Automated Rule-of-Thumb Triage (Non-Blocking)
+sacro:outcome "REVIEW_REQUIRED"
+sdc:ruleOfThumbTriggered "min_cell_count_below_10"
+sdc:humanAction "Inspect researcher context & Statbarn class before release"`,
+          decisionRef: 'D-005',
+          decisionTitle: 'Quantitative Statistical Disclosure Control Rules',
+          decisionRole: 'Statistical Disclosure Control (SDC) Lead & Output Checker'
+        });
+      } else if (dominanceRatio > 80) {
+        gates.push({
+          gateName: `Rule-of-Thumb Flagged: Contributor Dominance (${dominanceRatio}%)`,
+          pillar: 'Safe Outputs',
+          status: 'WARN',
+          triggerNode: 'sdc:PrinciplesTriageShape § 6.2',
+          plainEnglishSummary: `Top contributor accounts for ${dominanceRatio}% (above 80% rule-of-thumb). Principles-based reviewers inspect whether this identifies an individual or reflects non-sensitive organizational totals before suppression.`,
+          statutoryBasis: 'Principles-Based Output SDC (Ritchie & Elliot, 2015); ONS Dominance Rule-of-Thumb.',
+          codeSnippet: `# SACRO Semi-Automated Dominance Triage
+sacro:outcome "REVIEW_REQUIRED"
+sdc:ruleOfThumbTriggered "dominance_above_80_pct"
+sdc:humanAction "Assess attribute sensitivity & institutional vs. patient dominance"`,
+          decisionRef: 'D-005',
+          decisionTitle: 'Quantitative Statistical Disclosure Control Rules',
+          decisionRole: 'Statistical Disclosure Control (SDC) Lead & Output Checker'
+        });
+      } else {
+        gates.push({
+          gateName: 'Safe Outputs: Rules-of-Thumb Met (Contextual Check Confirmed)',
+          pillar: 'Safe Outputs',
+          status: 'PASS',
+          triggerNode: 'sdc:PrinciplesTriageShape § 6.3',
+          plainEnglishSummary: `Passes k = ${minCellCount} ≥ 10 and dominance = ${dominanceRatio}% ≤ 80% triage rules-of-thumb. Under principles-based checking, 2-person airlock reviewers still confirm no group disclosure (100% homogeneity) or differencing across prior exports.`,
+          statutoryBasis: 'Principles-Based Five Safes (Green & Ritchie, 2023); Caldicott Principle 8.',
+          codeSnippet: `sacro:ruleOfThumbChecks "GREEN" ;
+sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`,
+          decisionRef: 'D-005',
+          decisionTitle: 'Quantitative Statistical Disclosure Control Rules',
+          decisionRole: 'Statistical Disclosure Control (SDC) Lead & Output Checker'
+        });
+      }
     }
 
     // Gate 6: Caldicott Principle 8 Public Data Use Register & PROV-O Lineage
@@ -475,6 +528,7 @@ tre:airlockAutoVerification "PASSED" .`,
     dataTier,
     minCellCount,
     dominanceRatio,
+    sdcMode,
     enclaveEgressBlocked,
     aiWorkloadType,
     aiHumanSponsorLinked
@@ -632,7 +686,9 @@ tre:airlockAutoVerification "PASSED" .`,
             className={`px-2.5 py-0.5 rounded font-bold border ${
               evaluation.overallDecision === 'APPROVED'
                 ? 'bg-teal-950/80 text-teal-300 border-teal-600'
-                : 'bg-rose-950/80 text-rose-300 border-rose-600'
+                : evaluation.overallDecision === 'REQUIRES LOCAL REVIEW'
+                  ? 'bg-amber-950/80 text-amber-300 border-amber-600'
+                  : 'bg-rose-950/80 text-rose-300 border-rose-600'
             }`}
           >
             {evaluation.overallDecision}
@@ -684,6 +740,43 @@ tre:airlockAutoVerification "PASSED" .`,
             <RotateCcw className="w-3 h-3 text-cyan-400" />
             <span>Reset Default</span>
           </button>
+        </div>
+
+        {/* Safe Outputs SDC Evaluation Mode Toggle */}
+        <div className="p-4 rounded-xl bg-slate-950/90 border border-cyan-900/60 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 text-xs font-bold text-teal-300">
+              <Scale className="w-4 h-4 text-teal-400" />
+              <span>Safe Outputs Check Mode: Principles-Based Triage vs. Strict Rules-Based</span>
+            </div>
+            <p className="text-[11px] text-slate-300 leading-relaxed max-w-2xl">
+              Compare how <strong>k &lt; 10</strong> or <strong>dominance &gt; 80%</strong> behaves under Felix Ritchie&apos;s principles-based triage (flagging human airlock review) versus a rigid automated threshold block. Try the <strong>Rare</strong> preset above to see the difference.
+            </p>
+          </div>
+          <div className="inline-flex p-1 rounded-lg bg-[#07192f] border border-cyan-900/60 shrink-0 self-start lg:self-center">
+            <button
+              type="button"
+              onClick={() => setSdcMode('principles_triage')}
+              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                sdcMode === 'principles_triage'
+                  ? 'bg-[#00A389] text-white shadow-sm font-bold'
+                  : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              Principles-Based Triage (SACRO)
+            </button>
+            <button
+              type="button"
+              onClick={() => setSdcMode('strict_rules')}
+              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                sdcMode === 'strict_rules'
+                  ? 'bg-[#005EB8] text-white shadow-sm font-bold'
+                  : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              Strict Rules-Based
+            </button>
+          </div>
         </div>
 
         {/* Dynamic Parameter Grid */}
@@ -780,7 +873,9 @@ tre:airlockAutoVerification "PASSED" .`,
               className="w-full accent-[#00A389] cursor-pointer"
             />
             <span className="text-[10px] text-slate-400 block font-mono">
-              Threshold: k ≥ 10 required for safe output
+              {sdcMode === 'principles_triage'
+                ? 'Rule-of-thumb benchmark: k < 10 flags human triage'
+                : 'Strict gate: k ≥ 10 required automatically'}
             </span>
           </div>
 
@@ -804,7 +899,9 @@ tre:airlockAutoVerification "PASSED" .`,
               className="w-full accent-[#00A389] cursor-pointer"
             />
             <span className="text-[10px] text-slate-400 block font-mono">
-              Ceiling: ≤ 80% maximum contribution
+              {sdcMode === 'principles_triage'
+                ? 'Rule-of-thumb ceiling: > 80% flags context review'
+                : 'Strict ceiling: ≤ 80% maximum contribution'}
             </span>
           </div>
 
@@ -891,10 +988,14 @@ tre:airlockAutoVerification "PASSED" .`,
           <div className={`px-4 py-2 rounded-lg border flex items-center gap-2.5 font-bold text-xs ${
             evaluation.overallDecision === 'APPROVED'
               ? 'bg-teal-950/80 text-teal-300 border-teal-600'
-              : 'bg-rose-950/80 text-rose-300 border-rose-600'
+              : evaluation.overallDecision === 'REQUIRES LOCAL REVIEW'
+                ? 'bg-amber-950/80 text-amber-300 border-amber-600'
+                : 'bg-rose-950/80 text-rose-300 border-rose-600'
           }`}>
             {evaluation.overallDecision === 'APPROVED' ? (
               <CheckCircle2 className="w-4 h-4 text-teal-400" />
+            ) : evaluation.overallDecision === 'REQUIRES LOCAL REVIEW' ? (
+              <AlertTriangle className="w-4 h-4 text-amber-400" />
             ) : (
               <XCircle className="w-4 h-4 text-rose-400" />
             )}
@@ -989,6 +1090,14 @@ tre:airlockAutoVerification "PASSED" .`,
             })}
           </div>
         </div>
+
+        {/* Principles-Based vs. Rules-Based SDC Explainer (Felix Ritchie / Five Safes & SACRO) */}
+        <PrinciplesVsRulesCard
+          activeMode={sdcMode}
+          onSelectMode={setSdcMode}
+          variant="navy"
+          defaultExpanded={true}
+        />
       </div>
     </>
   )}

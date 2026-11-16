@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { PrinciplesVsRulesCard } from './PrinciplesVsRulesCard';
 import {
   ShieldAlert,
   Calculator,
@@ -465,10 +466,10 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
             <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-1">
               <span className="font-bold text-[#005EB8] dark:text-sky-400 flex items-center gap-1.5">
                 <ShieldAlert className="w-3.5 h-3.5" />
-                <span>Primary Suppression (k ≥ 10)</span>
+                <span>Rule-of-Thumb: Primary Suppression (k ≥ 10)</span>
               </span>
               <p className="text-[11px] text-slate-600 dark:text-slate-400">
-                Redacts cell counts under 10 (or 5 for local operational audits) to stop individual singling out.
+                Flags cell counts under 10 (or 5 for local operational audits) as triage thresholds—reviewed in context under principles-based checking.
               </p>
             </div>
 
@@ -755,7 +756,7 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
                     {activePreset.metricLabel}
                   </span>
                 </div>
-                <span className="text-[11px] text-slate-500 font-mono">
+                <span className="text-[11px] text-slate-600 dark:text-slate-300 font-mono">
                   Rows: {activePreset.rows.length} · Columns: {activePreset.cols.length} · Grand Total: {tableAnalysis.grandTotal}
                 </span>
               </div>
@@ -885,7 +886,7 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
                         {suppressionMode === 'rounded' ? tableAnalysis.roundedColSums[col] : tableAnalysis.colSums[col]}
                       </td>
                     ))}
-                    <td className="py-2.5 px-3 text-center bg-slate-200 dark:bg-slate-750 text-[#005EB8] dark:text-sky-300 font-extrabold">
+                    <td className="py-2.5 px-3 text-center bg-slate-200 dark:bg-slate-900 text-slate-900 dark:text-white font-extrabold border-l border-slate-300 dark:border-slate-700">
                       {suppressionMode === 'rounded' ? tableAnalysis.roundedGrandTotal : tableAnalysis.grandTotal}
                     </td>
                   </tr>
@@ -1000,6 +1001,10 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
                   In multi-node federated studies without interactive IDEs, <strong>DataSHIELD</strong> enforces built-in <code className="font-mono text-[#005EB8] dark:text-sky-300">nfilter</code> disclosure checks on server-side summary calls rather than post-hoc airlock inspection.
                 </p>
               </div>
+            </div>
+
+            <div className="pt-2">
+              <PrinciplesVsRulesCard variant="surface" defaultExpanded={true} />
             </div>
           </div>
 

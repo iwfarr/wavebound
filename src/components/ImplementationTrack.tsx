@@ -78,6 +78,17 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
   });
   const [searchQuery, setSearchQuery] = useState(targetDecisionId ? targetDecisionId : '');
   const [expandedSprintIndex, setExpandedSprintIndex] = useState<number | null>(0);
+  const [decisionStatuses, setDecisionStatuses] = useState<Record<string, DecisionRecord['status']>>(() => {
+    try {
+      const saved = localStorage.getItem('wavebound_decision_statuses');
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch {
+      // Fallback if localStorage is inaccessible
+    }
+    return {};
+  });
 
   // Persist checklist progress per visitor
   React.useEffect(() => {
@@ -87,6 +98,15 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
       // Ignore storage errors in restricted iframes
     }
   }, [checkedItems]);
+
+  // Persist decision register sign-off statuses per visitor
+  React.useEffect(() => {
+    try {
+      localStorage.setItem('wavebound_decision_statuses', JSON.stringify(decisionStatuses));
+    } catch {
+      // Ignore storage errors in restricted iframes
+    }
+  }, [decisionStatuses]);
 
   React.useEffect(() => {
     if (initialTab) {
@@ -111,7 +131,30 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
     }));
   };
 
-  const filteredDecisions = DECISION_REGISTER.filter((d) => {
+  const updateDecisionStatus = (id: string, newStatus: DecisionRecord['status']) => {
+    setDecisionStatuses((prev) => ({
+      ...prev,
+      [id]: newStatus
+    }));
+  };
+
+  const resetDecisionStatuses = () => {
+    setDecisionStatuses({});
+    try {
+      localStorage.removeItem('wavebound_decision_statuses');
+    } catch {
+      // Ignore storage errors
+    }
+  };
+
+  const decisionsWithStatus = DECISION_REGISTER.map((d) => ({
+    ...d,
+    status: decisionStatuses[d.id] || d.status
+  }));
+
+  const hasCustomDecisionStatuses = Object.keys(decisionStatuses).length > 0;
+
+  const filteredDecisions = decisionsWithStatus.filter((d) => {
     const matchesFilter = decisionFilter === 'ALL' || d.status === decisionFilter;
     const matchesSearch =
       searchQuery.trim() === '' ||
@@ -569,24 +612,37 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
             </p>
 
             {/* Filter & Search Bar */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pt-3">
               <div className="flex flex-wrap items-center gap-2">
                 {(['ALL', 'OPEN', 'IN_REVIEW', 'APPROVED'] as const).map((st) => (
                   <button
                     key={st}
                     onClick={() => setDecisionFilter(st)}
-                    className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
+                    className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                       decisionFilter === st
                         ? 'bg-cyan-500 text-slate-950 font-bold'
                         : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
                     }`}
                   >
-                    {st === 'ALL' ? 'All Decisions (9)' : `${st} (${DECISION_REGISTER.filter((d) => d.status === st).length})`}
+                    {st === 'ALL'
+                      ? `All Decisions (${decisionsWithStatus.length})`
+                      : `${st.replace('_', ' ')} (${decisionsWithStatus.filter((d) => d.status === st).length})`}
                   </button>
                 ))}
+                {hasCustomDecisionStatuses && (
+                  <button
+                    type="button"
+                    onClick={resetDecisionStatuses}
+                    className="px-2.5 py-1 rounded-lg text-xs font-medium text-cyan-300 hover:text-white bg-slate-950 border border-slate-800 hover:border-cyan-700 flex items-center gap-1 cursor-pointer transition-colors"
+                    title="Reset all decision statuses back to default register baseline"
+                  >
+                    <RotateCcw className="w-3 h-3" />
+                    <span>Reset Defaults</span>
+                  </button>
+                )}
               </div>
 
-              <div className="relative w-full sm:w-64">
+              <div className="relative w-full lg:w-64">
                 <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
@@ -614,18 +670,30 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                     <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">{dec.title}</h3>
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`text-[11px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-md border ${
-                        dec.status === 'APPROVED'
-                          ? 'bg-emerald-950 text-emerald-300 border-emerald-700'
-                          : dec.status === 'IN_REVIEW'
-                          ? 'bg-amber-950 text-amber-300 border-amber-700'
-                          : 'bg-rose-950 text-rose-300 border-rose-800'
-                      }`}
-                    >
-                      {dec.status}
-                    </span>
+                  {/* Interactive Decision Status Selector */}
+                  <div className="flex items-center gap-1 p-1 rounded-lg bg-slate-950 border border-slate-800 self-start sm:self-auto" role="group" aria-label={`Status for ${dec.id}`}>
+                    {([
+                      { value: 'OPEN', label: 'OPEN', activeClass: 'bg-rose-950 text-rose-200 border-rose-700' },
+                      { value: 'IN_REVIEW', label: 'IN REVIEW', activeClass: 'bg-amber-950 text-amber-200 border-amber-700' },
+                      { value: 'APPROVED', label: 'APPROVED', activeClass: 'bg-emerald-950 text-emerald-200 border-emerald-700' }
+                    ] as const).map((opt) => {
+                      const isActive = dec.status === opt.value;
+                      return (
+                        <button
+                          key={opt.value}
+                          type="button"
+                          onClick={() => updateDecisionStatus(dec.id, opt.value)}
+                          aria-pressed={isActive}
+                          className={`px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase border transition-all cursor-pointer ${
+                            isActive
+                              ? `${opt.activeClass} shadow-xs`
+                              : 'border-transparent text-slate-400 hover:text-white hover:bg-slate-900'
+                          }`}
+                        >
+                          {opt.label}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 

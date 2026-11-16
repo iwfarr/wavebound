@@ -109,87 +109,93 @@ export const Header: React.FC<HeaderProps> = ({
     return [...terms.slice(0, 4), ...modules.slice(0, 3)];
   }, [globalSearch]);
 
-  // Group 1: Govern & Assure (Decisions, Evaluation & Assurance)
-  const governAssureGroup: NavGroupItem[] = [
-    {
-      id: 'govern-assure',
-      label: 'Governance Assurance Workspace',
-      desc: 'Statutory evaluator, SDC airlock, Caldicott 8 & SATRE/DSPT procurement matrix',
-      icon: <Scale className="w-4 h-4 text-amber-400" />
-    },
-    {
-      id: 'sandbox',
-      label: 'Policy Decision Sandbox',
-      desc: 'Interactive OPA Rego decision testing against mock research requests',
-      icon: <Cpu className="w-4 h-4 text-emerald-400" />
-    },
-    {
-      id: 'concepts',
-      label: 'Governance Concepts & Caldicott',
-      desc: 'Deep dives on Caldicott Principles 1–8, Five Safes & SATRE',
-      icon: <BookOpen className="w-4 h-4 text-amber-300" />
-    },
-    {
-      id: 'governance-atlas',
-      label: 'Foundations & Desk Reference',
-      desc: 'High-level statutory foundations, schematic & templates for IG leads, researchers, and the public',
-      icon: <HeartHandshake className="w-4 h-4 text-emerald-300" />
-    }
-  ];
-
-  // Group 2: Architecture & Manifests (Code, Topology & Deployment)
-  const architectureCodeGroup: NavGroupItem[] = [
+  // Pillar 1: Playbook, Ontology & Guides (Learn & Explore)
+  const playbookGuidesGroup: NavGroupItem[] = [
     {
       id: 'playbook',
-      label: 'Technical Playbook',
-      desc: 'End-to-end technical specifications & policy-as-code patterns',
+      label: 'Wavebound PaC Playbook',
+      desc: 'Step-by-step plain-English & technical guide from ontology to safeguards',
       icon: <FileText className="w-4 h-4 text-sky-400" />
     },
     {
       id: 'graph',
-      label: 'Semantic Topology Graph',
-      desc: 'Curated 4-lens SHACL/RDF knowledge graph & live policy simulator',
+      label: 'Ontology Topology Graph',
+      desc: 'Interactive 4-lens knowledge map tracing rules from SHACL into OPA Rego',
       icon: <Layers className="w-4 h-4 text-teal-400" />
+    },
+    {
+      id: 'concepts',
+      label: 'Concepts Visual Primer',
+      desc: 'Quick visual tour of AI Five Safes, Caldicott 1–8, Data Catalogue & SATRE',
+      icon: <BookOpen className="w-4 h-4 text-amber-300" />
+    },
+    {
+      id: 'implementation-track',
+      label: 'Transitioning to Production: Rollout & Decisions',
+      desc: '16-week non-breaking policy adoption roadmap, checklists & D-001–D-009 sign-offs',
+      icon: <Workflow className="w-4 h-4 text-purple-400" />
+    }
+  ];
+
+  // Pillar 2: Evidence, Standards & Further Resources (Accountability & Guidance)
+  const evidenceResourcesGroup: NavGroupItem[] = [
+    {
+      id: 'resources',
+      label: 'Further Resources & Official Standards',
+      desc: 'Searchable library of laws, ISO standards, DSA, Statbarn, DataSHIELD, RO-Crate & EHDS',
+      icon: <ExternalLink className="w-4 h-4 text-cyan-300" />
+    },
+    {
+      id: 'governance-atlas',
+      label: 'Foundations & 10-Stage Schematic',
+      desc: 'Plain-English desk reference, statutory workflow, FOIA summary & templates',
+      icon: <HeartHandshake className="w-4 h-4 text-emerald-300" />
+    },
+    {
+      id: 'glossary',
+      label: 'Governance & Architecture Glossary',
+      desc: 'Alphabetical A–Z dictionary and visual term-relationship map',
+      icon: <Bookmark className="w-4 h-4 text-slate-300" />
+    },
+    {
+      id: 'govern-assure',
+      label: 'Evidence Packs & Caldicott 8 Register',
+      desc: 'Standardised compliance evidence & public transparency log in Govern & Assure',
+      icon: <Scale className="w-4 h-4 text-amber-400" />
+    }
+  ];
+
+  // Pillar 3: Simulators & Review Lab (Hands-on Testing & Manifests)
+  const simulatorsLabGroup: NavGroupItem[] = [
+    {
+      id: 'govern-assure',
+      label: 'Govern & Assure Review Workspace',
+      desc: 'Live protocol gate evaluator, Statbarn SDC simulator & statutory matrix',
+      icon: <Scale className="w-4 h-4 text-amber-400" />
+    },
+    {
+      id: 'sandbox',
+      label: 'OPA Rego Policy Sandbox',
+      desc: 'Test realistic research requests live against fail-closed policy rules',
+      icon: <Cpu className="w-4 h-4 text-emerald-400" />
+    },
+    {
+      id: 'llm-security',
+      label: 'LLM Redaction & Enclave Security Lab',
+      desc: 'Interactive AST prompt scrubber, .harness_ignore & zero-egress firewall controls',
+      icon: <Bot className="w-4 h-4 text-cyan-300" />
     },
     {
       id: 'build-deploy',
       label: 'Build & Deploy Workstation',
-      desc: 'Least-privilege deployment manifests, enclave container configs & package mirrors',
+      desc: 'Interactive SHACL/Rego generator & least-privilege container/mirror manifests',
       icon: <Code2 className="w-4 h-4 text-sky-300" />
-    },
-    {
-      id: 'implementation-track',
-      label: 'Rollout Schedule & Decisions',
-      desc: '16-week sprint schedule, rollout stages & architectural decision register',
-      icon: <Workflow className="w-4 h-4 text-purple-400" />
-    },
-    {
-      id: 'llm-security',
-      label: 'Enclave Security & Defense',
-      desc: 'Confidential compute, zero-egress enclaves & model protection',
-      icon: <Bot className="w-4 h-4 text-cyan-300" />
     }
   ];
 
-  // Group 3: Standards & Evidence
-  const standardsEvidenceGroup: NavGroupItem[] = [
-    {
-      id: 'glossary',
-      label: 'Statutory & Technical Glossary',
-      desc: 'Searchable dictionary and interactive concept graph of all IG terms',
-      icon: <Bookmark className="w-4 h-4 text-slate-300" />
-    },
-    {
-      id: 'resources',
-      label: 'Official Standards & Procurement',
-      desc: 'SATRE v1.1, DSPT, ISO 42001, DCB0129, SDC guide & vendor procurement matrix',
-      icon: <ExternalLink className="w-4 h-4 text-slate-300" />
-    }
-  ];
-
-  const isGovernAssureActive = governAssureGroup.some((item) => item.id === activeTab);
-  const isArchitectureCodeActive = architectureCodeGroup.some((item) => item.id === activeTab);
-  const isStandardsEvidenceActive = standardsEvidenceGroup.some((item) => item.id === activeTab);
+  const isPlaybookGuidesActive = playbookGuidesGroup.some((item) => item.id === activeTab);
+  const isEvidenceResourcesActive = evidenceResourcesGroup.some((item) => item.id === activeTab);
+  const isSimulatorsLabActive = simulatorsLabGroup.some((item) => item.id === activeTab);
 
   const isAtlasMode = activeTab === 'governance-atlas';
 
@@ -213,7 +219,7 @@ export const Header: React.FC<HeaderProps> = ({
             <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Search Caldicott, Section 251, SDC, Rego..."
+              placeholder="Search Caldicott, Section 251, Statbarn, Rego..."
               value={globalSearch}
               onChange={(e) => setGlobalSearch(e.target.value)}
               onFocus={() => setSearchFocused(true)}
@@ -252,28 +258,28 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Switcher & Controls */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            {/* Persona Switcher: Foundations vs PaC Playbook (Hidden on mobile; prominent in mobile drawer) */}
+            {/* Quick Lens Jump: Foundations vs PaC Playbook */}
             <div className="hidden sm:flex items-center gap-1 bg-[#07192f] p-1 rounded-lg border border-[#1b3f68]">
               <button
                 onClick={() => onSelectTab('governance-atlas')}
-                className={`px-2.5 sm:px-3 py-1 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+                className={`px-2.5 sm:px-3 py-1 rounded text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
                   isAtlasMode
                     ? 'bg-[#00A389] text-white shadow-xs font-bold'
                     : 'text-slate-300 hover:text-white'
                 }`}
-                title="Foundations: High-level desk reference for Caldicott Guardians, IG Leads, Ethics Committees, researchers & the public"
+                title="Foundations: Plain-English desk reference for Caldicott Guardians, IG Leads, Ethics Committees, researchers & the public"
               >
                 <HeartHandshake className="w-3.5 h-3.5 text-emerald-300" />
                 <span>Foundations</span>
               </button>
               <button
                 onClick={() => onSelectTab('playbook')}
-                className={`px-2.5 sm:px-3 py-1 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
-                  !isAtlasMode
+                className={`px-2.5 sm:px-3 py-1 rounded text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
+                  activeTab === 'playbook'
                     ? 'bg-[#005EB8] text-white shadow-xs font-bold'
                     : 'text-slate-300 hover:text-white'
                 }`}
-                title="PaC Playbook: Policy-as-code architecture, OPA Rego rules & deployment manifests"
+                title="Wavebound PaC Playbook: Step-by-step guide from ontology to OPA Rego & safe deployment"
               >
                 <Shield className="w-3.5 h-3.5 text-sky-300" />
                 <span>PaC Playbook</span>
@@ -283,7 +289,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Light / Dark Mode Switcher */}
             <button
               onClick={toggleTheme}
-              className="bg-[#07192f] border border-[#1b3f68] px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:bg-[#123154] transition-colors flex items-center gap-1.5 cursor-pointer"
+              className="bg-[#07192f] border border-[#1b3f68] px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:bg-[#123154] transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer"
               title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
               {isDark ? (
@@ -302,11 +308,11 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Quick Progress Tracker */}
             <button
               onClick={() => onSelectTab('progress')}
-              className="bg-[#07192f] border border-[#1b3f68] px-2.5 py-1.5 rounded-lg text-xs font-mono text-emerald-300 hover:bg-[#123154] transition-colors hidden lg:flex items-center gap-1.5 cursor-pointer"
-              title="Overall Governance Progress Tracker"
+              className="bg-[#07192f] border border-[#1b3f68] px-2.5 py-1.5 rounded-lg text-xs font-mono text-emerald-300 hover:bg-[#123154] transition-colors hidden lg:flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer"
+              title="Overall Learning & Governance Progress"
             >
               <FileCheck2 className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="font-semibold">{stats.overallProgressPercentage}%</span>
+              <span className="font-semibold tabular-nums">{stats.overallProgressPercentage}%</span>
             </button>
 
             {/* GitHub Repository */}
@@ -326,15 +332,15 @@ export const Header: React.FC<HeaderProps> = ({
             {onOpenFeedback && (
               <button
                 onClick={onOpenFeedback}
-                className="hidden sm:flex bg-amber-500/20 border border-amber-500/50 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-amber-300 hover:bg-amber-500/30 transition-colors items-center gap-1.5 shadow-xs cursor-pointer shrink-0"
-                title="Submit Information Governance Feedback or Raise an Issue"
+                className="hidden sm:flex bg-amber-500/20 border border-amber-500/50 px-2.5 py-1.5 rounded-lg text-xs font-semibold text-amber-300 hover:bg-amber-500/30 transition-colors items-center gap-1.5 whitespace-nowrap shrink-0 shadow-xs cursor-pointer"
+                title="Share Governance Feedback or Raise an Issue"
               >
                 <MessageSquarePlus className="w-3.5 h-3.5 text-amber-400" />
                 <span>Raise Issue</span>
               </button>
             )}
 
-            {/* Mobile Menu Button - stays pinned on screen */}
+            {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden p-2 rounded-lg bg-[#07192f] border border-[#1b3f68] text-slate-200 cursor-pointer shrink-0"
@@ -345,237 +351,234 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Condensed Floatover Desktop Navigation Row */}
-        {!isAtlasMode && (
-          <nav className="hidden md:flex items-center space-x-1 py-1.5 border-t border-[#18375b] relative">
-            {/* 1. Executive Overview */}
+        {/* 4-Pillar Aligned Desktop Navigation Row */}
+        <nav className="hidden md:flex items-center space-x-1 py-1.5 border-t border-[#18375b] relative">
+          {/* Home / Overview */}
+          <button
+            onClick={() => onSelectTab('gateway')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+              activeTab === 'gateway'
+                ? 'bg-[#133760] text-cyan-300 font-bold border-b-2 border-cyan-400'
+                : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
+            }`}
+          >
+            <Shield className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Overview</span>
+          </button>
+
+          {/* Pillar 1: Playbook, Ontology & Guides */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter('playbook-guides')}
+            onMouseLeave={handleMouseLeave}
+          >
             <button
-              onClick={() => onSelectTab('gateway')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer ${
-                activeTab === 'gateway'
+              onClick={() => {
+                onSelectTab('playbook');
+                setOpenDropdown(null);
+              }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                isPlaybookGuidesActive
+                  ? 'bg-[#133760] text-sky-300 font-bold border-b-2 border-sky-400'
+                  : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
+              }`}
+            >
+              <BookOpen className="w-3.5 h-3.5 text-sky-400" />
+              <span>Playbook &amp; Guides</span>
+              <ChevronDown className="w-3 h-3 text-slate-400" />
+            </button>
+
+            {openDropdown === 'playbook-guides' && (
+              <div
+                className="absolute top-full left-0 mt-1 w-88 bg-[#0c2340] border border-[#1b3f68] rounded-xl shadow-2xl p-2 z-50 space-y-1 backdrop-blur-md"
+                onMouseEnter={() => handleMouseEnter('playbook-guides')}
+                onMouseLeave={handleMouseLeave}
+              >
+                <div className="px-2.5 py-1 text-[11px] font-semibold text-sky-300 border-b border-[#1b3f68]">
+                  Pillar 1 · Explore the Playbook, Graphs &amp; Rollout Plan
+                </div>
+                {playbookGuidesGroup.map((subItem) => {
+                  const isSubActive = activeTab === subItem.id;
+                  return (
+                    <button
+                      key={subItem.id}
+                      onClick={() => {
+                        onSelectTab(subItem.id);
+                        setOpenDropdown(null);
+                      }}
+                      className={`w-full text-left p-2.5 rounded-lg transition-colors cursor-pointer flex items-start gap-2.5 ${
+                        isSubActive
+                          ? 'bg-[#153f6d] text-white font-semibold'
+                          : 'hover:bg-[#123154] text-slate-200'
+                      }`}
+                    >
+                      <div className="mt-0.5 shrink-0">{subItem.icon}</div>
+                      <div>
+                        <div className="text-xs font-semibold leading-tight text-white">
+                          {subItem.label}
+                        </div>
+                        <div className="text-[11px] text-slate-300 leading-snug mt-0.5">
+                          {subItem.desc}
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Pillar 2: Evidence, Standards & Further Resources */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter('evidence-resources')}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button
+              onClick={() => {
+                onSelectTab('resources');
+                setOpenDropdown(null);
+              }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                isEvidenceResourcesActive && !isSimulatorsLabActive
                   ? 'bg-[#133760] text-cyan-300 font-bold border-b-2 border-cyan-400'
                   : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
               }`}
             >
-              <Shield className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Overview</span>
+              <Bookmark className="w-3.5 h-3.5 text-cyan-300" />
+              <span>Evidence &amp; Resources</span>
+              <ChevronDown className="w-3 h-3 text-slate-400" />
             </button>
 
-            {/* 2. Govern & Assure (Floatover Dropdown) */}
-            <div
-              className="relative"
-              onMouseEnter={() => handleMouseEnter('govern-assure')}
-              onMouseLeave={handleMouseLeave}
-            >
-              <button
-                onClick={() => {
-                  onSelectTab('govern-assure');
-                  setOpenDropdown(null);
-                }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer ${
-                  isGovernAssureActive
-                    ? 'bg-[#133760] text-amber-300 font-bold border-b-2 border-amber-400'
-                    : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
-                }`}
+            {openDropdown === 'evidence-resources' && (
+              <div
+                className="absolute top-full left-0 mt-1 w-84 bg-[#0c2340] border border-[#1b3f68] rounded-xl shadow-2xl p-2 z-50 space-y-1 backdrop-blur-md"
+                onMouseEnter={() => handleMouseEnter('evidence-resources')}
+                onMouseLeave={handleMouseLeave}
               >
-                <Scale className="w-3.5 h-3.5 text-amber-400" />
-                <span>Govern &amp; Assure</span>
-                <ChevronDown className="w-3 h-3 text-slate-400" />
-              </button>
-
-              {openDropdown === 'govern-assure' && (
-                <div
-                  className="absolute top-full left-0 mt-1 w-80 bg-[#0c2340] border border-[#1b3f68] rounded-xl shadow-2xl p-2 z-50 space-y-1 backdrop-blur-md"
-                  onMouseEnter={() => handleMouseEnter('govern-assure')}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <div className="px-2.5 py-1 text-[10px] font-bold text-amber-400 uppercase tracking-wider border-b border-[#1b3f68]">
-                    Governance Decisions &amp; Assurance
-                  </div>
-                  {governAssureGroup.map((subItem) => {
-                    const isSubActive = activeTab === subItem.id;
-                    return (
-                      <button
-                        key={subItem.id}
-                        onClick={() => {
-                          onSelectTab(subItem.id);
-                          setOpenDropdown(null);
-                        }}
-                        className={`w-full text-left p-2.5 rounded-lg transition-colors cursor-pointer flex items-start gap-2.5 ${
-                          isSubActive
-                            ? 'bg-[#153f6d] text-white font-semibold'
-                            : 'hover:bg-[#123154] text-slate-200'
-                        }`}
-                      >
-                        <div className="mt-0.5 shrink-0">{subItem.icon}</div>
-                        <div>
-                          <div className="text-xs font-semibold leading-tight text-white">
-                            {subItem.label}
-                          </div>
-                          <div className="text-[11px] text-slate-300 leading-snug mt-0.5">
-                            {subItem.desc}
-                          </div>
-                        </div>
-                      </button>
-                    );
-                  })}
+                <div className="px-2.5 py-1 text-[11px] font-semibold text-cyan-300 border-b border-[#1b3f68]">
+                  Pillar 2 · Further Resources, Foundations &amp; Glossary
                 </div>
-              )}
-            </div>
-
-            {/* 3. Architecture & Code (Floatover Dropdown) */}
-            <div
-              className="relative"
-              onMouseEnter={() => handleMouseEnter('architecture-code')}
-              onMouseLeave={handleMouseLeave}
-            >
-              <button
-                onClick={() => {
-                  onSelectTab('playbook');
-                  setOpenDropdown(null);
-                }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer ${
-                  isArchitectureCodeActive
-                    ? 'bg-[#133760] text-sky-300 font-bold border-b-2 border-sky-400'
-                    : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
-                }`}
-              >
-                <Code2 className="w-3.5 h-3.5 text-sky-400" />
-                <span>Architecture &amp; Code</span>
-                <ChevronDown className="w-3 h-3 text-slate-400" />
-              </button>
-
-              {openDropdown === 'architecture-code' && (
-                <div
-                  className="absolute top-full left-0 mt-1 w-84 bg-[#0c2340] border border-[#1b3f68] rounded-xl shadow-2xl p-2 z-50 space-y-1 backdrop-blur-md"
-                  onMouseEnter={() => handleMouseEnter('architecture-code')}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <div className="px-2.5 py-1 text-[10px] font-bold text-sky-400 uppercase tracking-wider border-b border-[#1b3f68]">
-                    Technical Architecture, Manifests &amp; Ontologies
-                  </div>
-                  {architectureCodeGroup.map((subItem) => {
-                    const isSubActive = activeTab === subItem.id;
-                    return (
-                      <button
-                        key={subItem.id}
-                        onClick={() => {
-                          onSelectTab(subItem.id);
-                          setOpenDropdown(null);
-                        }}
-                        className={`w-full text-left p-2.5 rounded-lg transition-colors cursor-pointer flex items-start gap-2.5 ${
-                          isSubActive
-                            ? 'bg-[#153f6d] text-white font-semibold'
-                            : 'hover:bg-[#123154] text-slate-200'
-                        }`}
-                      >
-                        <div className="mt-0.5 shrink-0">{subItem.icon}</div>
-                        <div>
-                          <div className="text-xs font-semibold leading-tight text-white">
-                            {subItem.label}
-                          </div>
-                          <div className="text-[11px] text-slate-300 leading-snug mt-0.5">
-                            {subItem.desc}
-                          </div>
+                {evidenceResourcesGroup.map((subItem) => {
+                  const isSubActive = activeTab === subItem.id;
+                  return (
+                    <button
+                      key={`${subItem.id}-${subItem.label}`}
+                      onClick={() => {
+                        onSelectTab(subItem.id);
+                        setOpenDropdown(null);
+                      }}
+                      className={`w-full text-left p-2.5 rounded-lg transition-colors cursor-pointer flex items-start gap-2.5 ${
+                        isSubActive
+                          ? 'bg-[#153f6d] text-white font-semibold'
+                          : 'hover:bg-[#123154] text-slate-200'
+                      }`}
+                    >
+                      <div className="mt-0.5 shrink-0">{subItem.icon}</div>
+                      <div>
+                        <div className="text-xs font-semibold leading-tight text-white">
+                          {subItem.label}
                         </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-
-            {/* 4. Standards & Evidence (Floatover Dropdown) */}
-            <div
-              className="relative"
-              onMouseEnter={() => handleMouseEnter('standards-evidence')}
-              onMouseLeave={handleMouseLeave}
-            >
-              <button
-                onClick={() => {
-                  onSelectTab('glossary');
-                  setOpenDropdown(null);
-                }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer ${
-                  isStandardsEvidenceActive
-                    ? 'bg-[#133760] text-cyan-300 font-bold border-b-2 border-cyan-400'
-                    : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
-                }`}
-              >
-                <Bookmark className="w-3.5 h-3.5 text-slate-300" />
-                <span>Evidence &amp; Standards</span>
-                <ChevronDown className="w-3 h-3 text-slate-400" />
-              </button>
-
-              {openDropdown === 'standards-evidence' && (
-                <div
-                  className="absolute top-full left-0 mt-1 w-80 bg-[#0c2340] border border-[#1b3f68] rounded-xl shadow-2xl p-2 z-50 space-y-1 backdrop-blur-md"
-                  onMouseEnter={() => handleMouseEnter('standards-evidence')}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <div className="px-2.5 py-1 text-[10px] font-bold text-cyan-400 uppercase tracking-wider border-b border-[#1b3f68]">
-                    Terminology, ISO Standards &amp; SDC
-                  </div>
-                  {standardsEvidenceGroup.map((subItem) => {
-                    const isSubActive = activeTab === subItem.id;
-                    return (
-                      <button
-                        key={subItem.id}
-                        onClick={() => {
-                          onSelectTab(subItem.id);
-                          setOpenDropdown(null);
-                        }}
-                        className={`w-full text-left p-2.5 rounded-lg transition-colors cursor-pointer flex items-start gap-2.5 ${
-                          isSubActive
-                            ? 'bg-[#153f6d] text-white font-semibold'
-                            : 'hover:bg-[#123154] text-slate-200'
-                        }`}
-                      >
-                        <div className="mt-0.5 shrink-0">{subItem.icon}</div>
-                        <div>
-                          <div className="text-xs font-semibold leading-tight text-white">
-                            {subItem.label}
-                          </div>
-                          <div className="text-[11px] text-slate-300 leading-snug mt-0.5">
-                            {subItem.desc}
-                          </div>
+                        <div className="text-[11px] text-slate-300 leading-snug mt-0.5">
+                          {subItem.desc}
                         </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
 
-            {/* 5. Knowledge Quiz */}
+          {/* Pillar 3: Simulators & Review Lab */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter('simulators-lab')}
+            onMouseLeave={handleMouseLeave}
+          >
             <button
-              onClick={() => onSelectTab('quiz')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer ${
-                activeTab === 'quiz'
-                  ? 'bg-[#133760] text-cyan-300 font-bold border-b-2 border-cyan-400'
+              onClick={() => {
+                onSelectTab('govern-assure');
+                setOpenDropdown(null);
+              }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                isSimulatorsLabActive
+                  ? 'bg-[#133760] text-amber-300 font-bold border-b-2 border-amber-400'
                   : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
               }`}
             >
-              <HelpCircle className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Assurance Quizzes</span>
+              <Scale className="w-3.5 h-3.5 text-amber-400" />
+              <span>Simulators &amp; Lab</span>
+              <ChevronDown className="w-3 h-3 text-slate-400" />
             </button>
 
-            {/* 6. Progress Tracker */}
-            <button
-              onClick={() => onSelectTab('progress')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer ${
-                activeTab === 'progress'
-                  ? 'bg-[#133760] text-emerald-300 font-bold border-b-2 border-emerald-400'
-                  : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
-              }`}
-            >
-              <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Progress Tracker</span>
-            </button>
-          </nav>
-        )}
+            {openDropdown === 'simulators-lab' && (
+              <div
+                className="absolute top-full left-0 mt-1 w-88 bg-[#0c2340] border border-[#1b3f68] rounded-xl shadow-2xl p-2 z-50 space-y-1 backdrop-blur-md"
+                onMouseEnter={() => handleMouseEnter('simulators-lab')}
+                onMouseLeave={handleMouseLeave}
+              >
+                <div className="px-2.5 py-1 text-[11px] font-semibold text-amber-300 border-b border-[#1b3f68]">
+                  Pillar 3 · Interactive Reviews, SDC, Rego &amp; Enclaves
+                </div>
+                {simulatorsLabGroup.map((subItem) => {
+                  const isSubActive = activeTab === subItem.id;
+                  return (
+                    <button
+                      key={subItem.id}
+                      onClick={() => {
+                        onSelectTab(subItem.id);
+                        setOpenDropdown(null);
+                      }}
+                      className={`w-full text-left p-2.5 rounded-lg transition-colors cursor-pointer flex items-start gap-2.5 ${
+                        isSubActive
+                          ? 'bg-[#153f6d] text-white font-semibold'
+                          : 'hover:bg-[#123154] text-slate-200'
+                      }`}
+                    >
+                      <div className="mt-0.5 shrink-0">{subItem.icon}</div>
+                      <div>
+                        <div className="text-xs font-semibold leading-tight text-white">
+                          {subItem.label}
+                        </div>
+                        <div className="text-[11px] text-slate-300 leading-snug mt-0.5">
+                          {subItem.desc}
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
 
-        {/* Mobile Dropdown Menu - fully responsive within screen viewport */}
+          {/* Pillar 4: Quizzes & Progress */}
+          <button
+            onClick={() => onSelectTab('quiz')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+              activeTab === 'quiz'
+                ? 'bg-[#133760] text-cyan-300 font-bold border-b-2 border-cyan-400'
+                : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
+            }`}
+          >
+            <HelpCircle className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Policy Quiz</span>
+          </button>
+
+          <button
+            onClick={() => onSelectTab('progress')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+              activeTab === 'progress'
+                ? 'bg-[#133760] text-emerald-300 font-bold border-b-2 border-emerald-400'
+                : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
+            }`}
+          >
+            <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Progress &amp; Certs</span>
+          </button>
+        </nav>
+
+        {/* Mobile Dropdown Menu - aligned with the 4 Pillars */}
         {mobileMenuOpen && (
           <div className="md:hidden py-3 space-y-3 border-t border-[#18375b] max-h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain pb-16">
             <div className="grid grid-cols-2 gap-2 pb-2">
@@ -597,7 +600,7 @@ export const Header: React.FC<HeaderProps> = ({
                   setMobileMenuOpen(false);
                 }}
                 className={`py-2 px-3 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer ${
-                  !isAtlasMode ? 'bg-[#005EB8] text-white' : 'bg-[#07192f] text-slate-200'
+                  activeTab === 'playbook' ? 'bg-[#005EB8] text-white' : 'bg-[#07192f] text-slate-200'
                 }`}
               >
                 <Shield className="w-3.5 h-3.5" />
@@ -619,34 +622,12 @@ export const Header: React.FC<HeaderProps> = ({
               <span>Overview</span>
             </button>
 
-            {/* Mobile Section 1: Govern & Assure */}
+            {/* Mobile Pillar 1: Playbook & Guides */}
             <div className="space-y-1 pt-1">
-              <div className="px-3 text-[10px] font-bold text-amber-400 uppercase tracking-wider">
-                Govern &amp; Assure
+              <div className="px-3 text-[11px] font-semibold text-sky-300">
+                1. Playbook, Ontology &amp; Guides
               </div>
-              {governAssureGroup.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => {
-                    onSelectTab(item.id);
-                    setMobileMenuOpen(false);
-                  }}
-                  className={`w-full text-left px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 cursor-pointer ${
-                    activeTab === item.id ? 'bg-[#133760] text-amber-300 font-semibold' : 'text-slate-300 hover:bg-[#0f2847]'
-                  }`}
-                >
-                  {item.icon}
-                  <span>{item.label}</span>
-                </button>
-              ))}
-            </div>
-
-            {/* Mobile Section 2: Architecture & Code */}
-            <div className="space-y-1 pt-1">
-              <div className="px-3 text-[10px] font-bold text-sky-400 uppercase tracking-wider">
-                Architecture &amp; Code
-              </div>
-              {architectureCodeGroup.map((item) => (
+              {playbookGuidesGroup.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => {
@@ -663,14 +644,14 @@ export const Header: React.FC<HeaderProps> = ({
               ))}
             </div>
 
-            {/* Mobile Section 3: Evidence & Standards */}
+            {/* Mobile Pillar 2: Evidence & Further Resources */}
             <div className="space-y-1 pt-1">
-              <div className="px-3 text-[10px] font-bold text-cyan-400 uppercase tracking-wider">
-                Evidence &amp; Standards
+              <div className="px-3 text-[11px] font-semibold text-cyan-300">
+                2. Evidence, Standards &amp; Resources
               </div>
-              {standardsEvidenceGroup.map((item) => (
+              {evidenceResourcesGroup.map((item) => (
                 <button
-                  key={item.id}
+                  key={`${item.id}-${item.label}`}
                   onClick={() => {
                     onSelectTab(item.id);
                     setMobileMenuOpen(false);
@@ -685,8 +666,33 @@ export const Header: React.FC<HeaderProps> = ({
               ))}
             </div>
 
-            {/* Mobile Section 4: Quiz & Tracker */}
+            {/* Mobile Pillar 3: Simulators & Review Lab */}
+            <div className="space-y-1 pt-1">
+              <div className="px-3 text-[11px] font-semibold text-amber-300">
+                3. Simulators &amp; Review Lab
+              </div>
+              {simulatorsLabGroup.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    onSelectTab(item.id);
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`w-full text-left px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 cursor-pointer ${
+                    activeTab === item.id ? 'bg-[#133760] text-amber-300 font-semibold' : 'text-slate-300 hover:bg-[#0f2847]'
+                  }`}
+                >
+                  {item.icon}
+                  <span>{item.label}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Mobile Pillar 4: Quizzes & Progress */}
             <div className="pt-2 border-t border-[#18375b] space-y-1">
+              <div className="px-3 text-[11px] font-semibold text-emerald-300">
+                4. Quizzes &amp; Progress
+              </div>
               <button
                 onClick={() => {
                   onSelectTab('quiz');
@@ -697,7 +703,7 @@ export const Header: React.FC<HeaderProps> = ({
                 }`}
               >
                 <HelpCircle className="w-4 h-4 text-cyan-400" />
-                <span>Assurance Quizzes</span>
+                <span>Wavebound Policy Quiz</span>
               </button>
 
               <button
@@ -710,7 +716,7 @@ export const Header: React.FC<HeaderProps> = ({
                 }`}
               >
                 <TrendingUp className="w-4 h-4 text-emerald-400" />
-                <span>Progress Tracker ({stats.overallProgressPercentage}%)</span>
+                <span>Progress &amp; Certs ({stats.overallProgressPercentage}%)</span>
               </button>
             </div>
 

@@ -489,6 +489,68 @@ app.post('/api/generate-policy', (req: Request, res: Response) => {
   }
 });
 
+interface RecordedIssue {
+  id: string;
+  title: string;
+  category: string;
+  area: string;
+  role: string;
+  description: string;
+  contact?: string;
+  createdAt: string;
+}
+
+const recordedIssues: RecordedIssue[] = [];
+
+// Endpoint to record community/contributor issues and suggestions
+app.post('/api/issues', (req: Request, res: Response) => {
+  try {
+    const {
+      title,
+      category = 'Plain-English & Accessibility Clarity',
+      area = 'Overview',
+      role = 'Prefer not to say',
+      description,
+      contact = ''
+    } = req.body || {};
+
+    if (!title || typeof title !== 'string' || !title.trim() || !description || typeof description !== 'string' || !description.trim()) {
+      return res.status(400).json({
+        success: false,
+        error: 'Both a summary title and issue details are required.'
+      });
+    }
+
+    const seq = String(recordedIssues.length + 1).padStart(3, '0');
+    const issue: RecordedIssue = {
+      id: `WB-ISS-${seq}`,
+      title: title.trim().slice(0, 180),
+      category: String(category).slice(0, 120),
+      area: String(area).slice(0, 120),
+      role: String(role).slice(0, 120),
+      description: description.trim().slice(0, 4000),
+      contact: typeof contact === 'string' && contact.trim() ? contact.trim().slice(0, 180) : undefined,
+      createdAt: new Date().toISOString()
+    };
+
+    recordedIssues.push(issue);
+
+    try {
+      const logPath = path.resolve(__dirname, '.wavebound-issues.json');
+      fs.writeFileSync(logPath, JSON.stringify(recordedIssues, null, 2), 'utf-8');
+    } catch {
+      // Non-fatal if running on a read-only filesystem
+    }
+
+    res.status(201).json({ success: true, issue });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      error: error?.message || 'Unable to submit issue.'
+    });
+  }
+});
+
 async function startServer() {
   if (!isProduction) {
     const { createServer } = await import('vite');

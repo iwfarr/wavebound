@@ -81,6 +81,32 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     ]
   },
   {
+    "id": "atrs",
+    "term": "Algorithmic Transparency Recording Standard (ATRS)",
+    "acronym": "ATRS",
+    "category": "AI & Autonomous Agents",
+    "shortDefinition": "Recommended UK public-sector transparency template for publishing structured plain-English and technical disclosures about algorithmic and AI tools.",
+    "fullDefinition": "Maintained by the Government Digital Service (GDS), DSIT, and CDDO alongside Data Standards Authority (DSA) open standards work, the Algorithmic Transparency Recording Standard (ATRS) offers a standardized two-tier disclosure record: Tier 1 provides an accessible plain-English summary of what a tool does and why it is used, while Tier 2 documents ownership, model architecture, data sources, evaluation metrics, and human oversight.\n\nAdvisory Scope Note: Referenced in Wavebound strictly as recommended public-sector transparency guidance complementing NHS Caldicott Principle 8 ('No Surprises') Data Use Registers and W3C PROV-O lineage—not as a statutory gating substitute.",
+    "playbookContext": "Complements Caldicott Principle 8 public registers and AI governance views by giving teams a standard format to explain in-enclave predictive or AI models.",
+    "playbookSection": "Section 3.2 & Caldicott 8 Transparency Portal",
+    "targetSectionId": "sec-phase-3-2",
+    "statutoryBasis": "Advisory UK Open Standards Guidance (Non-Statutory); complements NHS Caldicott Principle 8",
+    "governanceSafeguards": [
+      "Two-tier public disclosure separating accessible citizen summaries from technical audit metadata.",
+      "Explicit attribution of accountable organisational owner, data sources, and human-in-the-loop review.",
+      "Pairs naturally with W3C PROV-O lineage traces and FOI public accountability records."
+    ],
+    "furtherResourceId": "res-atrs-hub",
+    "externalUrl": "https://www.gov.uk/government/collections/algorithmic-transparency-recording-standard-hub",
+    "relatedTerms": [
+      "caldicott",
+      "eu-ai-act",
+      "iso-42001",
+      "foi",
+      "data-standards-authority"
+    ]
+  },
+  {
     "id": "ast-scrubbing",
     "term": "AST-Based Pre-Prompt Sanitizer",
     "category": "AI & Autonomous Agents",
@@ -125,7 +151,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     "relatedTerms": [
       "s251",
       "five-safes",
-      "tre"
+      "tre",
+      "atrs"
     ]
   },
   {
@@ -231,6 +258,31 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     ]
   },
   {
+    "id": "csvw-openapi",
+    "term": "CSV on the Web (CSVW) & OpenAPI 3",
+    "acronym": "CSVW / OpenAPI 3",
+    "category": "Semantic Web & Ontologies",
+    "shortDefinition": "DSA-recommended open interoperability specifications: W3C CSVW adds machine-readable schema metadata to tabular CSVs, while OpenAPI 3 standardizes REST API contracts.",
+    "fullDefinition": "Endorsed by the UK Government Open Standards Board and Data Standards Authority (DSA), CSV on the Web (CSVW) pairs standard UTF-8 CSV files with a JSON-LD metadata sidecar describing column types, null rules, and schema constraints—allowing tabular datasets to interoperate cleanly with RDF, DCAT, and SHACL validation pipelines. OpenAPI 3 provides a language-agnostic contract describing REST HTTP endpoints, parameters, schemas, and authentication methods.\n\nAdvisory Scope Note: Referenced strictly as recommended open interoperability guidance for connecting catalogues, Policy Decision Points (OPA PDPs), and airlock submission APIs—not as mandatory health IG legislation.",
+    "playbookContext": "Noted in Playbook Section 3.2 interoperability guidance alongside DCAT, SHACL, PROV-O, and Five Safes RO-Crate.",
+    "playbookSection": "Section 3.2 (Interoperability & Policy Graph Alignment)",
+    "targetSectionId": "sec-phase-3-2",
+    "statutoryBasis": "Advisory UK Open Standards Guidance (Non-Statutory); W3C CSVW & OpenAPI Initiative",
+    "governanceSafeguards": [
+      "CSVW sidecars keep tabular extracts self-describing without exposing raw row microdata in public metadata.",
+      "OpenAPI 3 contracts define strict, versioned HTTP payloads for OPA PDP and airlock submission gateways.",
+      "Complements closed-world SHACL shapes without loosening fail-closed enclave rules."
+    ],
+    "furtherResourceId": "res-dsa-csvw-openapi",
+    "externalUrl": "https://www.gov.uk/government/publications/open-standards-for-government-data-and-technology",
+    "relatedTerms": [
+      "rdf",
+      "shacl",
+      "ro-crate",
+      "data-standards-authority"
+    ]
+  },
+  {
     "id": "cytoscape",
     "term": "Cytoscape.js Knowledge Graph",
     "category": "Operations & Testing",
@@ -333,6 +385,27 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     ]
   },
   {
+    "id": "data-standards-authority",
+    "term": "Data Standards Authority (DSA)",
+    "acronym": "DSA",
+    "category": "Governance & Frameworks",
+    "shortDefinition": "UK cross-government group coordinating recommended open data and interoperability standards (including Data Quality Framework, ATRS, CSVW, and OpenAPI 3).",
+    "fullDefinition": "Established to improve how the UK public sector structures, shares, and describes data, the Data Standards Authority (DSA)—working with the Open Standards Board across Cabinet Office, CDDO, and DSIT—maintains recommended open standards spanning APIs (OpenAPI 3), tabular data (CSVW / RFC 4180), data quality governance (The Government Data Quality Framework), and algorithmic transparency (ATRS).\n\nAdvisory Scope Note: In Wavebound, DSA outputs are positioned strictly as recommended open interoperability guidance alongside health-specific statutory rules (UK GDPR, NHS Act 2006 s251, DEA 2017, DSPT, DCB0129/0160).",
+    "playbookContext": "Provides shared cross-government open standards referenced in Further Resources, Playbook Section 3.2, Data Catalogue quality notes, and Caldicott 8 transparency guidance.",
+    "playbookSection": "Section 0 & Section 3.2 (Advisory Interoperability)",
+    "targetSectionId": "sec-front-matter",
+    "statutoryBasis": "Advisory UK Public-Sector Open Interoperability Guidance (Non-Statutory)",
+    "furtherResourceId": "res-dsa-group",
+    "externalUrl": "https://www.gov.uk/government/groups/data-standards-authority",
+    "relatedTerms": [
+      "government-data-quality-framework",
+      "csvw-openapi",
+      "atrs",
+      "data-stewardship",
+      "satre"
+    ]
+  },
+  {
     "id": "data-stewardship",
     "term": "Data Stewardship & Fiduciary Custodianship",
     "category": "Governance Maturity Model",
@@ -346,7 +419,9 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       "governance-maturity-model",
       "ethical-framework",
       "dsa",
-      "five-safes"
+      "five-safes",
+      "data-standards-authority",
+      "government-data-quality-framework"
     ]
   },
   {
@@ -611,7 +686,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     "fullDefinition": "Public transparency reports generated by `compiler/generate_docs.py` into `GOVERNANCE_CHARTER.md`, ensuring clinical data governance remains transparent to patients, auditors, clinicians, and journalists under the Freedom of Information Act 2000.",
     "playbookContext": "Generated in Phase 3 via `python compiler/generate_docs.py`.",
     "playbookSection": "Section 2 & Section 3 (Phase 3)",
-    "externalUrl": "https://ico.org.uk/for-organisations/foi-guidance-and-resources/",
+    "externalUrl": "https://ico.org.uk/for-organisations/foi/",
     "relatedTerms": [
       "pac",
       "caldicott"
@@ -649,6 +724,31 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       "dsa",
       "five-safes",
       "pac"
+    ]
+  },
+  {
+    "id": "government-data-quality-framework",
+    "term": "Government Data Quality Framework",
+    "acronym": "GDQF",
+    "category": "Standards & Clinical Safety",
+    "shortDefinition": "UK Government Data Quality Hub framework establishing six core data quality dimensions and Information Asset Owner / Data Steward accountability across the data lifecycle.",
+    "fullDefinition": "Published under the UK Government Data Quality Hub and aligned with Data Standards Authority (DSA) guidance, The Government Data Quality Framework equips public-sector bodies to evaluate and communicate dataset fitness for purpose using six core dimensions: Accuracy, Completeness, Consistency, Timeliness, Uniqueness, and Validity.\n\nRelationship to ISO/IEC 5259: While ISO/IEC 5259 focuses specifically on data quality metrics for analytics and machine learning pipelines, the Government Data Quality Framework provides an accessible, non-ML operational governance vocabulary tying quality assurance directly to Information Asset Owners (IAOs) and Data Stewards. Referenced in Wavebound as advisory open guidance.",
+    "playbookContext": "Pairs alongside ISO/IEC 5259 in Data Catalogue metadata and Phase 1–2 profiling guidance for operational and linked health datasets.",
+    "playbookSection": "Section 1.1 & Data Catalogue Assets",
+    "targetSectionId": "sec-phase-1-1",
+    "statutoryBasis": "Advisory UK Open Standards Guidance (Non-Statutory); pairs with ISO/IEC 5259",
+    "governanceSafeguards": [
+      "Evaluates datasets consistently across Accuracy, Completeness, Consistency, Timeliness, Uniqueness, and Validity.",
+      "Assigns clear lifecycle stewardship to Information Asset Owners (IAOs) and Data Stewards.",
+      "Avoids conflating metadata quality checks with clinical safety or statutory admission gates."
+    ],
+    "furtherResourceId": "res-gov-data-quality-framework",
+    "externalUrl": "https://www.gov.uk/government/publications/the-government-data-quality-framework",
+    "relatedTerms": [
+      "iso-5259",
+      "data-stewardship",
+      "safe-data",
+      "data-standards-authority"
     ]
   },
   {
@@ -773,12 +873,14 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     "acronym": "ISO/IEC 5259",
     "category": "Standards & Clinical Safety",
     "shortDefinition": "The ISO standard series defining data quality measures, data governance, and data lifecycle management specifically for machine learning, model training, and analytical pipelines.",
-    "fullDefinition": "ISO/IEC 5259 provides benchmark quality dimensions (including completeness, representativeness, bias minimization, and feature consistency) for datasets used in AI model training. Within data analysis & intelligence platforms, it establishes data ingestion quality gates that prevent downstream algorithmic drift and hallucination.",
-    "playbookContext": "Modes of data quality verification encoded into SHACL shapes for safe data ingestion.",
+    "fullDefinition": "ISO/IEC 5259 provides benchmark quality dimensions (including completeness, representativeness, bias minimization, and feature consistency) for datasets used in AI model training. Within data analysis & intelligence platforms, it establishes data ingestion quality gates that prevent downstream algorithmic drift and hallucination, complementing broader UK public-sector stewardship frameworks such as The Government Data Quality Framework for operational datasets.",
+    "playbookContext": "Modes of data quality verification encoded into SHACL shapes for safe data ingestion, paired alongside the advisory UK Government Data Quality Framework for non-ML datasets.",
     "playbookSection": "Section 2. Architecture: The Policy-as-Code Pipeline",
-    "externalUrl": "https://www.iso.org/standard/81230.html",
+    "furtherResourceId": "res-iso-5259-22989",
+    "externalUrl": "https://www.iso.org/standard/81289.html",
     "relatedTerms": [
       "iso-42001",
+      "government-data-quality-framework",
       "safe-data",
       "owl2",
       "shacl"
@@ -1247,7 +1349,8 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       "federated-analysis",
       "airlock",
       "ehds",
-      "jsonld"
+      "jsonld",
+      "csvw-openapi"
     ]
   },
   {
@@ -1771,7 +1874,11 @@ export const GLOSSARY_SECTION_MAP: Record<string, string> = {
   "statbarn": "sec-phase-2-1",
   "datashield": "sec-phase-1-2",
   "ehds": "sec-front-matter",
-  "ro-crate": "sec-phase-4-3"
+  "ro-crate": "sec-phase-4-3",
+  "atrs": "sec-phase-3-2",
+  "csvw-openapi": "sec-phase-3-2",
+  "data-standards-authority": "sec-front-matter",
+  "government-data-quality-framework": "sec-phase-1-1"
 };
 
 export function getSectionIdForGlossaryTerm(termId: string): string {

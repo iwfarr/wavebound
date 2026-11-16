@@ -166,6 +166,22 @@ export default function App() {
                 setActiveTab('implementation-track');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
+              onNavigateToPlaybook={(sectionId) => {
+                handleNavigateToSection(sectionId || 'sec-front-matter');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onNavigateToResources={() => {
+                setActiveTab('resources');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onNavigateToGovernAssure={() => {
+                setActiveTab('govern-assure');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onNavigateToSandbox={() => {
+                setActiveTab('sandbox');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
             />
           )}
 
@@ -184,6 +200,14 @@ export default function App() {
               onNavigateToConcept={handleNavigateToConcept}
               onNavigateToSandbox={() => {
                 setActiveTab('sandbox');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onNavigateToAtlas={() => {
+                setActiveTab('governance-atlas');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onNavigateToGlossaryGraph={() => {
+                setActiveTab('glossary');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             />
@@ -215,10 +239,21 @@ export default function App() {
               initialTermId={activeGlossaryTermId}
               onNavigateToSection={handleNavigateToSection}
               onNavigateToConcept={handleNavigateToConcept}
+              onNavigateToResources={() => {
+                setActiveTab('resources');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
             />
           )}
 
-          {activeTab === 'resources' && <ResourcesPage />}
+          {activeTab === 'resources' && (
+            <ResourcesPage
+              onNavigateToGovernAssure={() => {
+                setActiveTab('govern-assure');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            />
+          )}
 
           {activeTab === 'progress' && (
             <ProgressDashboard
@@ -237,6 +272,14 @@ export default function App() {
                 setActiveTab('govern-assure');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
+              onNavigateToGraph={() => {
+                setActiveTab('graph');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onNavigateToResources={() => {
+                setActiveTab('resources');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
             />
           )}
         </main>
@@ -250,7 +293,7 @@ export default function App() {
                 Wavebound · Policy-as-Code for Safe &amp; Secure Data Intelligence Environments
               </span>
             </div>
-            <div className="flex items-center gap-3 text-slate-600 dark:text-slate-400">
+            <div className="flex flex-wrap items-center justify-center gap-3 text-slate-600 dark:text-slate-400">
               <button
                 onClick={() => setActiveTab('gateway')}
                 className="hover:text-[#005EB8] dark:hover:text-sky-300 font-medium cursor-pointer"
@@ -259,10 +302,10 @@ export default function App() {
               </button>
               <span>·</span>
               <button
-                onClick={() => setActiveTab('govern-assure')}
+                onClick={() => setActiveTab('playbook')}
                 className="hover:text-[#005EB8] dark:hover:text-sky-300 font-medium cursor-pointer"
               >
-                Govern &amp; Assure
+                PaC Playbook
               </button>
               <span>·</span>
               <button
@@ -273,10 +316,17 @@ export default function App() {
               </button>
               <span>·</span>
               <button
-                onClick={() => setActiveTab('playbook')}
+                onClick={() => setActiveTab('resources')}
                 className="hover:text-[#005EB8] dark:hover:text-sky-300 font-medium cursor-pointer"
               >
-                PaC Playbook
+                Further Resources
+              </button>
+              <span>·</span>
+              <button
+                onClick={() => setActiveTab('govern-assure')}
+                className="hover:text-[#005EB8] dark:hover:text-sky-300 font-medium cursor-pointer"
+              >
+                Simulators &amp; Lab
               </button>
               <span>·</span>
               <button
@@ -290,7 +340,7 @@ export default function App() {
                 onClick={() => setActiveTab('progress')}
                 className="hover:text-[#005EB8] dark:hover:text-sky-300 font-medium cursor-pointer"
               >
-                Progress Tracker
+                Progress &amp; Certs
               </button>
             </div>
           </div>

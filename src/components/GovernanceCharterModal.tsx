@@ -201,7 +201,7 @@ export const GovernanceCharterModal: React.FC<GovernanceCharterModalProps> = ({ 
       content: (
         <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
           <p>
-            To prevent spontaneous individual identification or attribute disclosure in published outputs, the platform enforces the <strong>ONS SDC Handbook &amp; SAIL Databank</strong> rules across all export categories:
+            To prevent spontaneous individual identification or attribute disclosure in published outputs, the platform enforces specific rules across all export categories:
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11.5px]">
             <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1.5">
@@ -421,42 +421,111 @@ Reference: WAVEBOUND-PAC-GOV-2026-V5 | Patient and Population Safe and Secure Da
   };
 
   const handleDownloadFullMarkdown = () => {
-    let md = `# PUBLIC INTEREST DATA GOVERNANCE & POPULATION HEALTH RESEARCH CHARTER\n`;
-    md += `*Document Reference: WAVEBOUND-PAC-GOV-2026-V5*\n`;
-    md += `*Applicable Domain: Patient and Population Safe and Secure Data and Intelligence Environments*\n\n---\n\n`;
+    const md = `# PUBLIC INTEREST DATA GOVERNANCE & POPULATION HEALTH RESEARCH CHARTER
 
-    CHARTER_SECTIONS.forEach((s) => {
-      md += `## ${s.title}\n\n`;
-      if (s.id === 1) {
-        md += `- **Digital Economy Act 2017 (Part 5, Chapter 5)**: Authorizing disclosure under UKSA accreditation (§§ 64, 70, 71) with criminal penalties under § 67 for unlawful disclosure.\n`;
-        md += `- **UK GDPR Articles 6(1)(e) & 9(2)(j)**: Lawful bases for public interest research with Article 89(1) safeguards.\n`;
-        md += `- **Data Protection Act 2018 (DPA 2018)**: Schedule 1, Part 1, Para 4 research provisions.\n`;
-        md += `- **NHS Act 2006 (Section 251)**: Statutory CAG clearance for unconsented clinical data linkage.\n`;
-        md += `- **Common Law Duty of Confidentiality & HRA REC**: Favorable ethical opinion mandatory for all active studies.\n\n`;
-      } else if (s.id === 2) {
-        md += `All 8 Caldicott Principles enforced, with explicit focus on Principle 8 (Public Transparency via Open Data Use Registers) and patient public involvement.\n\n`;
-      } else if (s.id === 3) {
-        md += `Five Safes framework: Safe People (accreditation), Safe Projects (ethics), Safe Settings (air-gapped zero egress, local package mirrors), Safe Data (pseudonymisation), Safe Outputs (quantitative SDC).\n\n`;
-      } else if (s.id === 4) {
-        md += `- **Tabular Aggregates**: Primary suppression (k >= 10) or Suppression through Controlled Rounding to Base 5 or 10.\n`;
-        md += `- **Secondary Suppression**: Complementary suppression preventing marginal arithmetic deduction.\n`;
-        md += `- **Dominance Bounds**: (1, 80%) single contributor and (2, 85%) dual contributor rules.\n`;
-        md += `- **Regression Diagnostics**: Residual df >= 10; raw residual scatterplots strictly prohibited.\n`;
-        md += `- **Survival Curves**: Risk set N_risk >= 10, continuous spline/kernel smoothing permitted as alternative to tail truncation.\n`;
-        md += `- **Extrema & Machine Learning**: Zero raw min/max; Differential Privacy epsilon <= 1.0; 2-person cryptographic airlock sign-off.\n\n`;
-      } else if (s.id === 5) {
-        md += `- **Commercial LLM Prohibition**: Identifiable patient records strictly prohibited from entering external public or commercial LLMs.\n`;
-        md += `- **In-Enclave Sovereign AI**: Dedicated local weights executed inside zero-egress VPCs.\n`;
-        md += `- **Model Context Protocol (MCP)**: Strictly read-only analytical tool execution.\n`;
-        md += `- **Zero Training**: Model weights never fine-tuned on patient data.\n`;
-        md += `- **Clinical Safety Management**: DCB0129/0160 Clinical Safety Case Report overseen by accredited CSO; ISO/IEC 42001 and ISO/IEC 5259 compliance.\n\n`;
-      } else if (s.id === 6) {
-        md += `Automated National Data Opt-Out (NDOO) filtering, patient lived-experience co-design, and open public audit reporting.\n\n`;
-      } else if (s.id === 7) {
-        md += `Policy-as-code dual-tier compilation (OWL/SHACL to OPA Rego), non-breaking 4-stage rollout (Evaluate-Only -> Shadow -> Canary -> Active), and W3C PROV-O audit triples.\n\n`;
-      }
-      md += `---\n\n`;
-    });
+*Authoritative Governance Specification*  
+*Reference: WAVEBOUND-PAC-GOV-2026-V5 · Ratified for Patient & Population Safe & Secure Data and Intelligence Environments*
+
+---
+
+## 1. Statutory Foundations & Legal Processing Gateways
+
+All analytical processing across **patient and population safe and secure data and intelligence environments** (including Trusted Research Environments [TREs], Secure Data Environments [SDEs], and AI sandbox enclaves) is strictly grounded in statutory legislation and Common Law duties:
+
+- **UK GDPR Articles 6(1)(e) & 9(2)(j)**: Lawful basis for public-interest archiving, scientific research, and health data linkage with Article 89(1) technical safeguards and strict minimization principles.
+- **Data Protection Act 2018 (DPA 2018)**: Schedule 1, Part 1, Paragraph 4 (Research purposes in the public interest) providing the domestic legislative exemption for special category population health data.
+- **NHS Act 2006 (Section 251)**: Statutory clearance advised by the Confidentiality Advisory Group (CAG) permitting the linkage of confidential patient information without prior explicit consent where obtaining consent is impracticable.
+- **Digital Economy Act 2017 (Part 5, Ch 5)**: Public authority data sharing under UK Statistics Authority (UKSA) accreditation (§§ 64, 70, 71) with criminal penalties under § 67 for unlawful or unauthorized disclosure.
+
+### Common Law Duty of Confidentiality (CLDC) & Research Ethics
+Processing must satisfy the Common Law Duty of Confidentiality either via statutory exemption (Section 251), explicit consent, or robust de-identification at source. In addition, every active research protocol requires a formal favorable ethical opinion from a recognized Health Research Authority (HRA) Research Ethics Committee (REC).
+
+---
+
+## 2. Caldicott Principles & Public Transparency Mandate
+
+Patient and population safe and secure data environments enforce the **Eight Caldicott Principles** across all analytical lifecycles, ensuring human accountability remains paramount:
+
+1. **Principle 1: Justify the purpose** — Every data access request must have an explicitly documented, legitimate public-interest objective.
+2. **Principle 2: Do not use personal confidential data unless absolutely necessary** — Identifiable data items are eliminated unless the research question cannot be answered otherwise.
+3. **Principle 3: Use the minimum necessary data** — Cohort schemas are trimmed to the minimal essential variables and temporal windows.
+4. **Principle 4: Access on a strict need-to-know basis** — Granular project workspaces isolate researchers so users access only authorized project tables.
+5. **Principle 5: Everyone must understand their responsibilities** — Mandatory annual accredited Information Governance training and researcher credentials.
+6. **Principle 6: Understand and comply with the law** — Every data flow is legally mapped to UK GDPR, DPA 2018, and Section 251 gateways.
+7. **Principle 7: The duty to share is as important as the duty to protect** — Legitimate research for population health benefit is proactively facilitated, not artificially obstructed.
+8. **Principle 8: Inform patients and the public about data use** — Public transparency is paramount. Full research summaries are published in an open, public register.
+
+### Public Data Use Register (Caldicott 8 Compliance)
+In accordance with National Data Guardian standards, the environment maintains an automated, public-facing Data Use Register. Every approved project emits machine-verifiable W3C PROV-O provenance records recording the study title, lay summary, approving ethics committee, and researcher accreditation.
+
+---
+
+## 3. Operational Five Safes Invariants for Secure Intelligence Enclaves
+
+The environment enforces the internationally recognized **Five Safes framework** as continuous, machine-verifiable invariants:
+
+- **Safe People — Accredited Researchers with Verified Credentials:** Researchers must hold verified ONS/DEA accreditation or equivalent institutional sponsorship, valid annual Information Governance certificates, and signed user confidentiality agreements.
+- **Safe Projects — Ethically Approved Public Benefit Research:** Independent committee sign-off proving public benefit, scientific validity, and lawful basis. Strict statutory prohibition against commercial marketing, insurance underwriting, or individual credit assessment.
+- **Safe Settings — Zero-Egress Air-Gapped Cloud Fabric:** Workspaces operate in isolated Virtual Private Clouds with outbound internet access completely blocked at the kernel and network layer. All software dependencies are installed from internal, security-scanned mirrors (CRAN, PyPI, Harbor). Local download and clipboard exfiltration are disabled.
+- **Safe Data — Tiered Sensitivity & Deterministic Pseudonymisation:** Direct patient identifiers (names, addresses, NHS numbers) are segregated at source. Research microdata is provisioned under pseudonymized project tokens with strict field-level minimization.
+- **Safe Outputs — Mathematical SDC & 2-Person Cryptographic Airlock:** All statistical models, summaries, and plots must pass automated disclosure checks (\`k >= 10\`, rounding, dominance bounds) followed by accredited human SDC reviewer sign-off.
+
+---
+
+## 4. Quantitative Statistical Disclosure Control (SDC) & Airlock SOP
+
+To prevent spontaneous individual identification or attribute disclosure in published outputs, the platform enforces specific rules across all export categories:
+
+- **Primary Suppression & Controlled Rounding:** Raw frequency counts between 1 and 9 are prohibited from egress. Analysts may either redact small counts (\`<10*\`) with complementary secondary suppression, or apply **Suppression through Controlled Rounding to Base 5 or 10**. Controlled rounding elevates or rounds counts to multiples of 5, disguising true microdata counts while preserving tabular completeness without empty asterisk holes.
+- **Dominance Rules: (1, 80%) & (2, 85%):** In continuous tabular outputs (costs, bed days, dosages), outputs are blocked if a single patient accounts for >80% of an aggregate metric, or two patients account for >85%, preventing deductive attribute disclosure by external parties.
+- **Regression Degrees of Freedom & Residuals:** Published linear, logistic, and Cox models must maintain residual degrees of freedom \`df = N - p >= 10\`. Categorical factors must be backed by >= 10 patients. Raw residual scatterplots and studentized outlier plots are strictly prohibited microdata.
+- **Survival Curves: Smoothing vs Tail Truncation:** Kaplan-Meier survival curves with risk sets falling below \`N_risk < 10\` must either be truncated at the critical timepoint, or smoothed continuously (via spline regression or kernel density smoothing) to eliminate vertical step drops that expose exact patient event dates.
+
+### Extrema, Differential Privacy & 2-Person Sign-Off
+Raw extrema (\`min() / max()\`) are strictly forbidden; 5th and 95th percentiles must be substituted. AI model weights must demonstrate Differential Privacy guarantees (\`epsilon <= 1.0\`). All exports require automated SHACL/OPA validation followed by accredited human SDC Officer sign-off with a SHA-256 digital seal.
+
+---
+
+## 5. Generative AI, LLMs & Autonomous Agent Governance Position
+
+> **Strict Prohibition on Consumer & Commercial Multi-Tenant External LLMs:** Under UK GDPR, the Common Law Duty of Confidentiality, and NHS Information Governance guidance, **identifiable or pseudonymised patient microdata must NEVER be entered into external, multi-tenant commercial LLMs or AI assistants** (including consumer or standard commercial ChatGPT, Claude, GitHub Copilot, or public cloud APIs). Even enterprise agreements promising "no training on customer data" do not waive the statutory requirement for sovereign data boundaries, Section 251 legal gateways, and approved TRE airlocks.
+
+- **In-Enclave Sovereign LLM Deployment:** Where generative AI or LLMs are deployed for research, model weights must execute completely **in-enclave** within the isolated VPC boundary (e.g. via dedicated local containerized endpoints such as vLLM or Ollama). Zero data or metadata may traverse external public internet backbones.
+- **Read-Only Model Context Protocol (MCP) Bounds:** Autonomous agents and MCP tools are strictly restricted to read-only analytical queries (\`mcp:ExecuteSQL\`, \`mcp:ExportSummary\`). Tool definitions are validated against W3C SHACL shapes; schema modification, file deletion, and direct egress network calls are blocked.
+- **Zero Training & Prompt Defense:** No patient records or clinician prompts may be stored, cached, or used to fine-tune foundation models. Real-time prompt injection and jailbreak defenses sanitize inputs, while outbound synthetic outputs are evaluated against SDC thresholds before display.
+- **DCB0129 & ISO 42001 Clinical Safety:** AI software developed in the platform must maintain an active Clinical Safety Case Report and living Hazard Log overseen by an accredited Clinical Safety Officer (CSO) under DCB0129, complying with ISO/IEC 42001 (AIMS) and ISO/IEC 5259 (bias mitigation).
+
+---
+
+## 6. Data Subject Rights, National Opt-Outs & PPIE Co-Design
+
+Maintaining public trust requires that citizens retain transparent control over their data, and that research reflects lived patient experience:
+
+- **National Data Opt-Out (NDOO) Compliance:** The environment automatically ingests the NHS Spine National Data Opt-Out list. Any patient who has registered an opt-out for secondary research purposes is systematically filtered and purged prior to cohort provisioning, satisfying national policy requirements in England and Wales.
+- **Patient & Public Involvement & Engagement (PPIE):** Study designs are co-created with lived-experience patient advisory panels. Representatives review data flow diagrams, eliminate non-essential demographic fields, and co-author plain-English lay summaries published on the open Data Use Register.
+
+### Individual Rights Under UK GDPR
+While scientific research under UK GDPR Article 89(1) and DPA 2018 Section 19 provides specific exemptions from individual subject access requests (SARs) and erasure where fulfillment would render research impossible, the environment ensures that general public accountability, opt-outs, and independent ethics governance are never bypassed.
+
+---
+
+## 7. Policy-as-Code Implementation & Non-Breaking Staged Rollout
+
+Wavebound operationalizes this Charter by decoupling enduring governance ontologies from high-speed runtime enforcement points (PEPs), guaranteeing zero operational downtime during rollout:
+
+- **Dual-Tier Compilation (OWL to OPA Rego):** Governance policies are authored in readable W3C OWL 2 and closed-world SHACL shapes for institutional boards and auditors, then compiled into sub-millisecond Open Policy Agent (OPA) Rego rules for line-rate authorization.
+- **W3C PROV-O Cryptographic Audit Lineage:** Every authorization decision, admission event, and airlock release emits a cryptographically signed RDF provenance triple to an append-only store, enabling comprehensive regulatory and public scrutiny.
+
+### Safe, Non-Breaking 4-Stage Operational Rollout
+- **Stage 1: Evaluate-Only** — Passive telemetry; zero requests blocked.
+- **Stage 2: Shadow Mode** — Side-by-side discrepancy logging.
+- **Stage 3: Canary Pilot** — Active checks on single test namespace.
+- **Stage 4: Multi-PEP Active** — Full enforcement with fail-open emergency switch.
+
+---
+
+*Authorized by Institutional IG & Ethics Oversight Board*
+`;
 
     const blob = new Blob([md], { type: 'text/markdown;charset=utf-8;' });
     const url = URL.createObjectURL(blob);

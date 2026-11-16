@@ -68,12 +68,16 @@ interface CytoscapeGraphProps {
   onNavigateToGlossaryTerm?: (termId: string) => void;
   onNavigateToConcept?: (conceptId: string) => void;
   onNavigateToSandbox?: () => void;
+  onNavigateToAtlas?: () => void;
+  onNavigateToGlossaryGraph?: () => void;
 }
 
 export const CytoscapeGraph: React.FC<CytoscapeGraphProps> = ({
   onNavigateToGlossaryTerm,
   onNavigateToConcept,
-  onNavigateToSandbox
+  onNavigateToSandbox,
+  onNavigateToAtlas,
+  onNavigateToGlossaryGraph
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<cytoscape.Core | null>(null);
@@ -452,19 +456,39 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
         <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-1.5 max-w-2xl">
-            <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider font-mono">
+            <div className="flex items-center gap-2 text-xs font-semibold text-cyan-300">
               <Layers className="w-4 h-4 text-teal-400" />
-              <span>Semantic Topology Graph &amp; Knowledge Lenses</span>
+              <span>Graph 2 of 3 · Technical Architecture &amp; Rule Compiler Map</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Graph-Navigated &amp; Audited Information Governance
+              Ontology Topology Graph: Legal Rules to SHACL &amp; Rego
             </h1>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Explore Wavebound&apos;s living knowledge graph across four curated perspectives. Trace how statutory healthcare mandates compile into W3C SHACL shapes, sub-millisecond OPA Rego gatekeepers, and immutable PROV-O audit commitments.
+              See how statutory duties turn into machine-checked rules and verifiable audit records. Looking for step-by-step approval workflows or term definitions instead? Jump directly to the <strong className="text-white">Foundations 10-Stage Process Schematic</strong> or <strong className="text-white">Glossary Concept Map</strong>.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
+            {onNavigateToAtlas && (
+              <button
+                onClick={onNavigateToAtlas}
+                className="px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-[#0F294A] text-emerald-300 border border-emerald-500/30 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                title="Switch to Graph 1 of 3: End-to-End Human Governance Process Schematic"
+              >
+                <HeartHandshake className="w-3.5 h-3.5" />
+                <span>10-Stage Workflow Graph</span>
+              </button>
+            )}
+            {onNavigateToGlossaryGraph && (
+              <button
+                onClick={onNavigateToGlossaryGraph}
+                className="px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-[#0F294A] text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                title="Switch to Graph 3 of 3: Glossary Terminology Cluster Network"
+              >
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Glossary Cluster Map</span>
+              </button>
+            )}
             <button
               onClick={handleExportLensTTL}
               className="px-3.5 py-2 rounded-xl bg-[#0F294A] hover:bg-[#005EB8] text-cyan-200 border border-cyan-500/30 text-xs font-semibold flex items-center gap-2 transition-all shadow-md cursor-pointer"

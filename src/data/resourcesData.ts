@@ -14,6 +14,7 @@ export interface ResourceItem {
   playbookRelevance: string;
   isStatutory?: boolean;
   isCaseStudy?: boolean;
+  isAdvisoryGuidance?: boolean;
   citation?: string;
   tags: string[];
 }
@@ -271,9 +272,20 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     category: 'Statistical Disclosure Control (SDC) & Airlocks',
     url: 'https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts/disclosurecontrol',
     shortDesc: 'The UK national statistical service formal guidance for checking frequency tables, linear regressions, survival curves, and machine learning models.',
-    playbookRelevance: 'Provides the statutory standard for primary cell suppression ($k \\ge 10$) and dominance bounds ($k\% \\le 80\%$) in the playbook.',
+    playbookRelevance: 'Provides operational rules-of-thumb and principles-based output checking guidance for primary cell suppression ($k \\ge 10$) and dominance bounds ($k\\% \\le 80\\%$) in the playbook.',
     citation: 'Office for National Statistics (ONS). The SRS Output Checking Guidance Document Work strand: Statistical Disclosure Control.',
     tags: ['ONS', 'Secure Research Service', 'Airlock', 'SDC']
+  },
+  {
+    id: 'res-ritchie-principles-sdc',
+    title: 'Principles- vs. Rules-Based Output SDC & The Present and Future of the Five Safes',
+    organization: 'Felix Ritchie & Mark Elliot / Elizabeth Green (UWE Bristol & University of Manchester)',
+    category: 'Statistical Disclosure Control (SDC) & Airlocks',
+    url: 'https://journalprivacyconfidentiality.org/index.php/jpc/article/view/822',
+    shortDesc: 'Foundational Five Safes scholarship distinguishing rigid mechanical thresholds from principles-based triage, where k ≥ 10 acts as an initial rule-of-thumb alongside researcher partnership and human output-checker judgement.',
+    playbookRelevance: 'Directly informs Govern & Assure’s Principles-Based Triage mode, DARE UK SACRO human-in-the-loop airlock workflows, and compensating Five Safes controls.',
+    citation: 'Ritchie, F. & Elliot, M. (2015). Principles- versus rules-based output statistical disclosure control in remote access environments; Green, E. & Ritchie, F. (2023), Journal of Privacy and Confidentiality.',
+    tags: ['Five Safes', 'Principles-Based SDC', 'Felix Ritchie', 'SACRO', 'Rules of Thumb']
   },
   {
     id: 'res-ons-accredited-researcher',
@@ -372,6 +384,18 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     playbookRelevance: 'Demonstrates why traditional manual checklists fail and why automated Policy-as-Code (zero-trust SHACL and OPA admission controls) is strictly necessary in clinical environments.',
     isCaseStudy: true,
     tags: ['Case Study', 'Zero Trust', 'Password Security', 'Breach Prevention']
+  },
+  {
+    id: 'res-dsa-group',
+    title: 'UK Data Standards Authority (DSA) & Open Standards Guidance',
+    organization: 'Cabinet Office / CDDO / DSIT Data Standards Authority',
+    category: 'NHS Information Governance & Security Toolkits',
+    url: 'https://www.gov.uk/government/groups/data-standards-authority',
+    shortDesc: 'Cross-government coordination body (alongside the Open Standards Board) publishing recommended open standards and practical guidance for sharing and describing data cleanly across the UK public sector. Referenced as advisory open interoperability guidance rather than mandatory health IG legislation.',
+    playbookRelevance: 'Complements health-specific statutory rules (UK GDPR, NHS Act 2006 s251, DSPT) with shared public-sector conventions for open APIs, tabular metadata schemas, data quality ownership, and algorithmic transparency.',
+    isAdvisoryGuidance: true,
+    citation: 'UK Government. Data Standards Authority (DSA). GOV.UK; 2024.',
+    tags: ['DSA', 'Data Standards Authority', 'Open Standards', 'Interoperability', 'Advisory Guidance']
   },
 
   // --- AI Governance, Alignment & MCP Security ---
@@ -535,6 +559,16 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     tags: ['SATRE', 'DARE UK', 'TRE Architecture', 'Turing Institute']
   },
   {
+    id: 'res-dare-uk',
+    title: 'DARE UK (Data and Analytics Research Environments UK)',
+    organization: 'UK Research and Innovation (UKRI)',
+    category: 'Policy-as-Code, IAM & Fine-Grained Access Control',
+    url: 'https://dareuk.org.uk/',
+    shortDesc: 'National programme establishing an interoperable network of trustworthy, federated data research environments across the United Kingdom.',
+    playbookRelevance: 'Coordinates SATRE, Five Safes RO-Crate, and cross-enclave federation patterns referenced across Wavebound.',
+    tags: ['DARE UK', 'UKRI', 'SATRE', 'Federation']
+  },
+  {
     id: 'res-ro-crate',
     title: 'RO-Crate (Research Object Crate) & Five Safes RO-Crate Profile',
     organization: 'RO-Crate Community / DARE UK / HDR UK',
@@ -544,6 +578,18 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     playbookRelevance: 'Serves as the portable packaging envelope for Wavebound’s PROV-O audit graphs and signed airlock release manifests without replacing closed-world SHACL or OPA policy enforcement.',
     citation: 'Sefton P, Carragáin EÓ, Soiland-Reyes S, et al. RO-Crate Metadata Specification & Five Safes RO-Crate Profile. ResearchObject.org; 2024.',
     tags: ['RO-Crate', 'Five Safes RO-Crate', 'JSON-LD', 'PROV-O', 'W3C', 'DARE UK']
+  },
+  {
+    id: 'res-dsa-csvw-openapi',
+    title: 'UK Open Standards for Government Data & APIs (CSVW & OpenAPI 3)',
+    organization: 'UK Government Open Standards Board / W3C / OpenAPI Initiative',
+    category: 'Policy-as-Code, IAM & Fine-Grained Access Control',
+    url: 'https://www.gov.uk/government/publications/open-standards-for-government-data-and-technology',
+    shortDesc: 'Recommended UK public-sector open standards pairing CSV on the Web (CSVW, W3C) for machine-readable tabular metadata with OpenAPI 3 for consistent RESTful API contracts. Advisory open interoperability guidance only, leaving fail-closed TRE controls authoritative.',
+    playbookRelevance: 'Supports Playbook Phase 3.2 interoperability: CSVW pairs with DCAT/SHACL tabular descriptions, while OpenAPI 3 standardizes HTTP interface contracts around OPA Policy Decision Points (PDPs) and airlock gateways.',
+    isAdvisoryGuidance: true,
+    citation: 'UK Government Data Standards Authority / Open Standards Board. Open standards for government data and technology. GOV.UK; 2024.',
+    tags: ['CSVW', 'OpenAPI 3', 'DSA', 'Open Standards', 'Interoperability', 'DCAT']
   },
 
   // --- International Standards (ISO) & Clinical Safety (DCB) ---
@@ -634,9 +680,21 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     category: 'International Standards (ISO) & Clinical Safety (DCB)',
     url: 'https://www.iso.org/standard/81289.html',
     shortDesc: 'Standards for data quality management in analytics, data science, and machine learning pipelines, ensuring completeness, accuracy, and representativeness.',
-    playbookRelevance: 'Guides Phase 1 and 2 semantic data profiling, ensuring datasets meet quality thresholds before training sensitive health intelligence algorithms.',
+    playbookRelevance: 'Guides Phase 1 and 2 semantic data profiling, ensuring datasets meet quality thresholds before training sensitive health intelligence algorithms. Pairs with the UK Government Data Quality Framework (six core dimensions and IAO/Data Steward roles) as advisory guidance for operational datasets.',
     citation: 'ISO/IEC 5259-1:2024. Artificial intelligence - Data quality for analytics and machine learning (ML). Geneva: ISO; 2024.',
-    tags: ['ISO 5259', 'ISO 22989', 'Data Quality', 'Machine Learning', 'Data Governance']
+    tags: ['ISO 5259', 'ISO 22989', 'Data Quality', 'Data Quality Framework', 'Machine Learning', 'Data Governance']
+  },
+  {
+    id: 'res-gov-data-quality-framework',
+    title: 'The Government Data Quality Framework',
+    organization: 'UK Government Data Quality Hub / Data Standards Authority',
+    category: 'International Standards (ISO) & Clinical Safety (DCB)',
+    url: 'https://www.gov.uk/government/publications/the-government-data-quality-framework',
+    shortDesc: 'UK public-sector framework defining six core data quality dimensions (accuracy, completeness, consistency, timeliness, uniqueness, validity), fitness-for-purpose principles, and Information Asset Owner (IAO) / Data Steward accountability. Advisory interoperability guidance alongside ISO/IEC 5259.',
+    playbookRelevance: 'Pairs alongside ISO/IEC 5259 to give non-ML operational, administrative, and linked health datasets a shared public-sector quality vocabulary for ingestion profiling and steward sign-off.',
+    isAdvisoryGuidance: true,
+    citation: 'UK Government Data Quality Hub. The Government Data Quality Framework. GOV.UK; 2020 (updated 2023).',
+    tags: ['Data Quality Framework', 'ISO 5259', 'DSA', 'IAO', 'Data Steward', 'Advisory Guidance']
   },
 
   // --- Authoritative Resources: AI & LLMs in NHS Healthcare ---
@@ -675,5 +733,17 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     isStatutory: true,
     citation: 'National Data Guardian. Guidance on clinical AI, transparency and Caldicott stewardship. London: NDG; 2023.',
     tags: ['Caldicott 8', 'NDG', 'Patient Trust', 'Clinical AI', 'Confidentiality', 'Human Sponsorship']
+  },
+  {
+    id: 'res-atrs-hub',
+    title: 'Algorithmic Transparency Recording Standard (ATRS) Hub',
+    organization: 'Government Digital Service (GDS) / DSIT / CDDO',
+    category: 'AI Governance, Alignment & MCP Security',
+    url: 'https://www.gov.uk/government/collections/algorithmic-transparency-recording-standard-hub',
+    shortDesc: 'UK public-sector transparency standard providing a structured two-tier public record (plain-English Tier 1 summary plus Tier 2 technical, data, and risk details) for algorithmic and AI tools. Referenced here as optional open transparency guidance complementing NHS Caldicott Principle 8.',
+    playbookRelevance: 'Complements Wavebound’s Caldicott Principle 8 Public Data Use Register and AI governance views by offering an established public-sector structure for explaining model purpose, datasets, and human oversight.',
+    isAdvisoryGuidance: true,
+    citation: 'Government Digital Service & Central Digital and Data Office. Algorithmic Transparency Recording Standard (ATRS) Hub. GOV.UK; 2024.',
+    tags: ['ATRS', 'Algorithmic Transparency', 'Caldicott 8', 'AI Governance', 'DSA', 'Advisory Guidance']
   }
 ];

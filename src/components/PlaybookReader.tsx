@@ -60,7 +60,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
       '• Operational Translation — Proposed Validation & Enforcement: OWL/RDF represents meaning and relationships. SHACL expresses explicit validation constraints; policy-as-code expresses reviewed decision rules for an enforcement point. These are separate functions: OWL reasoning does not itself validate an access request or enforce a permission, and law is not automatically compiled into code.',
       '• Current Maturity: Today the repository provides an interactive application, governance visualisations and illustrative OWL/RDF, SHACL and Rego snippets. A standalone validated IG ontology, executable semantic compiler and production enforcement integration are not yet delivered. The Policy Sandbox is a browser-side demonstration, not a security control. Later sections describe illustrative target patterns; example filenames, thresholds and performance figures are not evidence of deployed controls.',
       '• Dual-Wave Navigation: Inward enclave security concerns what enters a research environment: people, projects, data and workloads. Outward governance concerns what leaves it: outputs, disclosure review, decision evidence and public transparency. The playbook proposes coordinated safeguards across both boundaries; it does not currently grant access or operate an export airlock.',
-      '• UK Governance & EHDS Alignment: Shared health-information security concerns are distributed across distinct sources rather than represented here as a direct NEN 7510 equivalent. UK GDPR and the Data Protection Act 2018, confidentiality duties, Caldicott guidance, NHS England DSPT assurance and applicable research approvals have different authority and scope. Across European cross-border research, the European Health Data Space (EHDS) Regulation establishes directly analogous roles—Health Data Access Bodies (HDABs), secondary-use Data Permits, and Secure Processing Environments (SPEs)—which align structurally with the Five Safes and UK SDE model.',
+      '• UK Governance, Open Standards & EHDS Alignment: Shared health-information security concerns are distributed across distinct sources rather than represented here as a direct NEN 7510 equivalent. UK GDPR and the Data Protection Act 2018, confidentiality duties, Caldicott guidance, NHS England DSPT assurance and applicable research approvals have different authority and scope. Cross-government specifications from the UK Data Standards Authority (DSA)—such as OpenAPI 3, CSVW, the Government Data Quality Framework, and ATRS—are referenced here strictly as recommended open interoperability guidance alongside health law, not as statutory mandates. Across European cross-border research, the European Health Data Space (EHDS) Regulation establishes analogous roles—Health Data Access Bodies (HDABs), secondary-use Data Permits, and Secure Processing Environments (SPEs)—aligning structurally with the Five Safes and UK SDE model.',
       '• Authority & Traceability: Semantic mappings should preserve the source, jurisdiction, applicability, approved interpretation and accountable owner. Section 251 support concerns confidentiality in specified circumstances; CAG advises the relevant decision maker. Such support is not a substitute for a UK GDPR lawful basis, and an ethics approval is not a universal data-access permission.',
       '• Implementation Gate: Proposed controls need approved decisions, trusted input contracts, automated tests, enforcement integration, audit evidence and release approval before they can be called operational. Version control supports review but does not by itself prove compliance, prevent policy drift or establish legal authority.'
     ],
@@ -217,34 +217,36 @@ def test_noncompliant_session_rejected():
   {
     id: 'sec-phase-3-1',
     number: '3.1',
-    title: 'Public Transparency: Automated FOI Governance Charters',
-    subtitle: 'Synthesizing machine-readable Turtle ontologies into human-readable trust documentation',
+    title: 'Public Transparency: Automated Governance & FOI Summaries',
+    subtitle: 'Turning machine-readable policy specifications into plain-English public trust records',
     content: [
-      '• Bridging Engineers, Trust Boards, and the Public: A major challenge in population data research governance is communicating technical code rules to Caldicott Guardians, NHS Trust Boards, ethics committees, and patient participants.',
-      '• Automated Markdown Synthesizer (`compiler/generate_docs.py`): Traverses the RDF graphs and SHACL shape definitions to produce an up-to-date, transparent `GOVERNANCE_CHARTER.md`.',
-      '• Freedom of Information (FOI) Readiness: When external audits or FOI queries arrive, the generated charter provides an exact, cryptographic summary of all active data safeguards, data tiering criteria, and disclosure thresholds.'
+      '• Bridging Engineers, Oversight Boards, and the Public: A recurring challenge in safe data research governance is explaining automated technical rules clearly to Caldicott Guardians, ethics committees, Freedom of Information (FOI) officers, and patient contributors.',
+      '• Generated Markdown Documentation: A lightweight build script (`compiler/generate_docs.py`) walks reviewed RDF/SHACL definitions and emits a clean human-readable `GOVERNANCE_CHARTER.md` alongside versioned policy releases.',
+      '• Freedom of Information (FOI) Readiness: When public queries or audits ask what thresholds or data-sharing rules applied on a given date, teams have a plain-English snapshot directly tied to the active policy commit rather than manually re-documenting spreadsheets.'
     ],
     keyTakeaways: [
-      'Eliminates the gap between technical firewall rules and public governance promises.',
-      'Guarantees documentation is never out of sync with deployed enforcement rules.',
-      'Provides Caldicott Guardians and patient advocacy groups with plain-English compliance summaries.'
+      'Keeps public governance explanations aligned with the technical rules actually in use.',
+      'Reduces manual copy-paste drift when handling Freedom of Information enquiries.',
+      'Gives Caldicott Guardians and patient panels clear, readable compliance summaries.'
     ]
   },
   {
     id: 'sec-phase-3-2',
     number: '3.2',
-    title: 'Dual-Persona Architecture: Patient Atlas & Knowledge Graph',
-    subtitle: 'Interactive Cytoscape network explorer paired with public-facing patient journey maps',
+    title: 'Connecting Legal Responsibilities to Runtime Policy Graphs',
+    subtitle: 'Mapping human review steps alongside automated boundary checks across a Safe Setting',
     content: [
-      '• Dual-Persona UX Architecture:',
-      '   - Public / Patient View (Governance Atlas): A calm, non-technical, 5-step journey explaining how personal health data is guarded (Caldicott Principles, tiered de-identification, and strict export airlocks).',
-      '   - Technical / Systems View (Knowledge Graph): An interactive Cytoscape canvas mapping the full compilation pipeline from OWL Policies down to SHACL Shapes, OPA Rego rules, and PROV-O audit trails.',
-      '• Interactive Inspection: Users can click any node in the graph to inspect exact source file locations, formal definitions, and executable code snippets.'
+      '• Keeping Human Decisions Front and Centre: Policy-as-code does not replace ethics committees or Caldicott reviews—it checks that their signed conditions are genuinely reflected in workspace configuration.',
+      '• Separating Audience Views cleanly:',
+      '   - Oversight & Patient Contributors need clear journey maps showing why approvals, de-identification, Statbarn output checks, and FOI transparency happen at each milestone.',
+      '   - Engineers & Auditors need dependency graphs tracing each legal mandate down to the exact SHACL shape, OPA Rego rule, and provenance log.',
+      '• Org-Agnostic Alignment: Whether an environment runs an internal data access board, multi-site federation via DataSHIELD, or RO-Crate workflow packaging, each step anchors back to accountable human roles.',
+      '• Open Interoperability Guidance (DSA — CSVW & OpenAPI 3): As recommended UK public-sector interoperability guidance (non-mandatory for health IG law), tabular dataset metadata pairs cleanly with W3C CSV on the Web (CSVW) alongside DCAT/SHACL schemas, while OpenAPI 3 provides standard machine-readable HTTP contracts for OPA Policy Decision Points (PDPs), data catalogue lookups, and airlock submission APIs.'
     ],
     keyTakeaways: [
-      'Meets public transparency obligations without overwhelming non-technical visitors with raw code.',
-      'Empowers system architects and security auditors with complete graphical traceability.',
-      'Demonstrates full compliance with NHS Caldicott Principle 8 (No surprises for patients).'
+      'Meets Caldicott Principle 8 transparency obligations without overwhelming lay reviewers with raw policy code.',
+      'Preserves end-to-end engineering traceability from legal gate to firewall and airlock checks.',
+      'Pairs CSVW tabular metadata and OpenAPI 3 contracts cleanly with DCAT, SHACL, and RO-Crate as advisory interoperability standards.'
     ]
   },
   {
@@ -557,7 +559,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-950/80 px-2.5 py-0.5 rounded border border-cyan-800/60">
-                  Executive Brief &amp; Overview
+                  Front Matter &amp; Overview
                 </span>
                 <span className="text-xs text-slate-400">Governance &amp; Engineering Guide</span>
               </div>

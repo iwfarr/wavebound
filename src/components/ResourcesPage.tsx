@@ -17,11 +17,13 @@ import {
 interface ResourcesPageProps {
   initialSearchQuery?: string;
   initialView?: 'sdc-guide' | 'compendium' | 'procurement';
+  onNavigateToGovernAssure?: () => void;
 }
 
 export const ResourcesPage: React.FC<ResourcesPageProps> = ({
   initialSearchQuery = '',
-  initialView = 'compendium'
+  initialView = 'compendium',
+  onNavigateToGovernAssure
 }) => {
   const [activeView, setActiveView] = useState<'sdc-guide' | 'compendium' | 'procurement'>(initialView);
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
@@ -58,62 +60,73 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
         <div className="relative z-10 max-w-3xl space-y-3">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-cyan-300">
             <BookOpen className="w-4 h-4 text-cyan-400" />
-            <span>Statutory Compendium &amp; Technical Standards</span>
+            <span>Pillar 2 · Shared Reading Library &amp; External References</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-            Authoritative Resources &amp; Technical Guidelines
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight text-balance">
+            Further Resources &amp; Official Standards
           </h1>
           <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
-            Statutory legislation, international standards, algorithmic risk management, and SDC rulebooks governing data intelligence environments, secure research enclaves, and policy-as-code architectures.
+            Explore the laws, public guidance, and technical specifications behind safe health data environments—bringing UK statutes, SATRE, Statbarn, DataSHIELD, RO-Crate, and European Health Data Space resources together in one place.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-2 text-xs text-slate-300">
             <span className="inline-flex items-center gap-1.5 font-medium">
               <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
-              Total Catalogued Resources: <strong className="text-white font-semibold">{COMPREHENSIVE_RESOURCES.length}</strong>
+              Catalogued Sources: <strong className="text-white font-semibold tabular-nums">{COMPREHENSIVE_RESOURCES.length}</strong>
             </span>
-            <span>·</span>
-            <span>Primary Sources: UK Parliament, ONS, W3C, and Cloud Native Computing Foundation</span>
+            <span aria-hidden="true">·</span>
+            <span>Primary Bodies: UK Parliament, ONS, UKSA, DSA, W3C, DARE UK &amp; EU EHDS</span>
+            {onNavigateToGovernAssure && (
+              <>
+                <span aria-hidden="true">·</span>
+                <button
+                  onClick={onNavigateToGovernAssure}
+                  className="text-cyan-300 hover:text-white underline font-semibold cursor-pointer"
+                >
+                  Open Live SDC &amp; Gate Simulators
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
 
-      {/* View Switcher: SDC Methods Guide vs Statutory Compendium */}
-      <div className="flex items-center gap-2 p-1.5 bg-[#0c2340] rounded-xl border border-cyan-900/50 w-full sm:w-auto">
-        <button
-          onClick={() => setActiveView('sdc-guide')}
-          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
-            activeView === 'sdc-guide'
-              ? 'bg-[#00A389] text-white shadow-md font-bold'
-              : 'text-slate-300 hover:text-white hover:bg-[#07192f]'
-          }`}
-        >
-          <Calculator className="w-4 h-4" />
-          <span>SDC &amp; Low-Count Methods Guide (Interactive SOP)</span>
-        </button>
-
+      {/* View Switcher: Further Resources Compendium vs SATRE Procurement vs SDC Reference */}
+      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-[#0c2340] rounded-xl border border-cyan-900/50 w-full sm:w-auto">
         <button
           onClick={() => setActiveView('compendium')}
-          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
             activeView === 'compendium'
               ? 'bg-[#00A389] text-white shadow-md font-bold'
               : 'text-slate-300 hover:text-white hover:bg-[#07192f]'
           }`}
         >
           <BookOpen className="w-4 h-4" />
-          <span>Statutory Compendium ({COMPREHENSIVE_RESOURCES.length})</span>
+          <span>Further Resources Library ({COMPREHENSIVE_RESOURCES.length})</span>
         </button>
 
         <button
           onClick={() => setActiveView('procurement')}
-          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
             activeView === 'procurement'
               ? 'bg-[#00A389] text-white shadow-md font-bold'
               : 'text-slate-300 hover:text-white hover:bg-[#07192f]'
           }`}
         >
           <Award className="w-4 h-4 text-teal-400" />
-          <span>Procurement &amp; SATRE Matrix</span>
+          <span>SATRE &amp; Procurement Matrix</span>
+        </button>
+
+        <button
+          onClick={() => setActiveView('sdc-guide')}
+          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
+            activeView === 'sdc-guide'
+              ? 'bg-[#00A389] text-white shadow-md font-bold'
+              : 'text-slate-300 hover:text-white hover:bg-[#07192f]'
+          }`}
+        >
+          <Calculator className="w-4 h-4" />
+          <span>SDC &amp; Low-Count Calculator</span>
         </button>
       </div>
 
@@ -142,7 +155,7 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
               <Search className="w-4 h-4 text-cyan-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Search external resources by keyword, law, or author (e.g. Section 251, OpenSearch, StatBarn, Keycloak, DSPT, MCP)..."
+                placeholder="Search external resources by keyword, law, or author (e.g. Section 251, DSA, ATRS, CSVW, StatBarn, DSPT, MCP)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-[#0c2340] border border-cyan-900/60 rounded-xl pl-10 pr-12 py-2.5 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 transition-colors shadow-lg"
@@ -201,6 +214,11 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
                         {res.isCaseStudy && (
                           <span className="text-[10px] font-bold text-purple-900 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/60 px-2 py-0.5 rounded border border-purple-200 dark:border-purple-800">
                             Governance Baseline
+                          </span>
+                        )}
+                        {res.isAdvisoryGuidance && (
+                          <span className="text-[10px] font-bold text-sky-200 bg-sky-950/70 px-2 py-0.5 rounded border border-sky-700/70">
+                            Open Interoperability Guidance
                           </span>
                         )}
                       </div>

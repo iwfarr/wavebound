@@ -413,39 +413,32 @@ ${p.commercialInvolvement}
               </div>
             </div>
 
-            {/* Freedom of Information Act 2000 (FOIA) & Proactive Publication */}
-            <div className="p-4 rounded-lg bg-slate-950/80 border border-sky-800/50 space-y-2.5">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <span className="text-xs font-bold text-sky-300 uppercase tracking-wider">
-                  Freedom of Information Act 2000 (FOIA) &amp; Proactive Publication Scheme
-                </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#07192f] text-sky-300 border border-sky-800/60">
-                  FOIA s19 · s22 · s40(2) · s41
-                </span>
+            {/* Compact Governance Domain Note: Freedom of Information Act 2000 */}
+            <div className="p-3 rounded-lg bg-slate-950/60 border border-cyan-900/40 text-[11px] text-slate-300 leading-relaxed flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <strong className="text-sky-300">Related Domain — FOIA 2000 Alignment:</strong>{' '}
+                Publishing Caldicott 8 registers and <code className="text-cyan-300">GOVERNANCE_CHARTER.md</code> satisfies proactive s19 publication duties while upholding s40(2) personal data, s41 confidentiality, s22 pre-publication exemptions, and SDC differencing checks.
               </div>
-              <p className="text-[11px] text-slate-300 leading-relaxed">
-                Public-sector data custodians and accredited research hosts are statutory public authorities under the Freedom of Information Act 2000. Publishing plain-English lay summaries, Data Use Registers, and compiled <code className="text-cyan-300">GOVERNANCE_CHARTER.md</code> artefacts proactively satisfies <strong>FOIA Section 19</strong> publication schemes while establishing clear, auditable boundaries when handling public requests:
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 text-[11px]">
-                <div className="p-2.5 rounded bg-[#07192f] border border-cyan-900/50 space-y-1">
-                  <strong className="text-teal-300 block">s40(2) &amp; s41 Confidentiality</strong>
-                  <span className="text-slate-300 leading-relaxed block">
-                    Exempts row-level microdata and disclosive small cells (<code className="text-amber-300">k &lt; 10</code> or mosaic-differencing tables) that would risk UK GDPR personal identification or breach common law confidentiality.
-                  </span>
-                </div>
-                <div className="p-2.5 rounded bg-[#07192f] border border-cyan-900/50 space-y-1">
-                  <strong className="text-teal-300 block">s21 / s22 Research Publication</strong>
-                  <span className="text-slate-300 leading-relaxed block">
-                    Signposts requesters to already-accessible Data Use Registers (s21) and protects pre-publication manuscripts or airlock outputs scheduled for peer-reviewed release (s22 / s22A).
-                  </span>
-                </div>
-                <div className="p-2.5 rounded bg-[#07192f] border border-cyan-900/50 space-y-1">
-                  <strong className="text-teal-300 block">Cumulative Differencing Check</strong>
-                  <span className="text-slate-300 leading-relaxed block">
-                    FOI officers cross-check any newly requested aggregate breakdown against prior airlock and FOI releases so overlapping cohorts cannot expose suppressed cells.
-                  </span>
-                </div>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#07192f] text-slate-400 border border-cyan-900/50 shrink-0 self-start sm:self-center">
+                s19 · s22 · s40(2) · s41
+              </span>
+            </div>
+
+            {/* Advisory Open Standard: Algorithmic Transparency Recording Standard (ATRS) */}
+            <div className="p-3.5 rounded-lg bg-slate-950/60 border border-sky-800/40 text-[11px] text-slate-300 leading-relaxed flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <strong className="text-sky-300">Algorithmic Transparency Recording Standard (ATRS) · Open Interoperability Guidance:</strong>{' '}
+                Where approved research uses predictive models or AI decision support, UK Government ATRS offers a recommended two-tier public disclosure format (plain-English summary plus technical, data, and risk record) that complements Caldicott Principle 8 Data Use Registers without replacing statutory IG review.
               </div>
+              <a
+                href="https://www.gov.uk/government/collections/algorithmic-transparency-recording-standard-hub"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] font-mono px-2.5 py-1 rounded bg-[#07192f] hover:bg-[#123154] text-sky-300 border border-sky-700/50 shrink-0 self-start sm:self-center inline-flex items-center gap-1 transition-colors"
+              >
+                <span>ATRS Hub</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
             </div>
           </div>
         </div>

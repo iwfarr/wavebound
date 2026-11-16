@@ -2,28 +2,15 @@ import React, { useState } from 'react';
 import { WaveboundLogo } from './WaveboundLogo';
 import { ActiveTab } from './Header';
 import { EvidenceDossierModal } from './EvidenceDossierModal';
+import { IssueReportModal } from './IssueReportModal';
 import {
   ShieldCheck,
-  Cpu,
   Layers,
   ArrowRight,
   Scale,
-  Database,
-  Server,
   FileCheck2,
-  Lock,
-  ExternalLink,
   Code2,
-  Terminal,
-  CheckCircle2,
-  Bot,
-  Zap,
-  Bookmark,
-  BookOpen,
   HeartHandshake,
-  Users,
-  AlertTriangle,
-  FileText,
   Filter,
   Sparkles
 } from 'lucide-react';
@@ -45,6 +32,7 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
   const [personaFocus, setPersonaFocus] = useState<'all' | 'ig-handbook' | 'data-technical'>('all');
   // Phase 2: Evidence Dossier Modal State
   const [isEvidenceModalOpen, setIsEvidenceModalOpen] = useState(false);
+  const [isIssueModalOpen, setIsIssueModalOpen] = useState(false);
 
   const baselineEvaluation = {
     gates: [
@@ -121,44 +109,55 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
       {/* 1. EXECUTIVE STATUTORY PROPOSITION */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 sm:p-12 shadow-xs">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          {/* Institutional Trust Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-3 text-xs">
-            <span className="font-semibold text-teal-800 dark:text-teal-300 bg-teal-50 dark:bg-teal-950/60 px-3 py-1 rounded border border-teal-200 dark:border-teal-800 flex items-center gap-1.5">
+          {/* Institutional Context Strip */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5 text-xs text-slate-600 dark:text-slate-400">
+            <span className="inline-flex items-center gap-1.5 font-semibold text-teal-800 dark:text-teal-300">
               <ShieldCheck className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
               <span>Safe &amp; Secure Data Intelligence Environments</span>
             </span>
-            <span className="font-medium text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded border border-slate-300 dark:border-slate-700">
-              Caldicott Principles 1–8 · S251 CAG · Five Safes
-            </span>
-            <span className="font-medium text-[#047857] dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1 rounded border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5">
-              <Scale className="w-3.5 h-3.5" />
-              <span>Policy-as-Code Baseline</span>
+            <span aria-hidden="true">·</span>
+            <span>Caldicott Principles 1–8 · S251 CAG · Five Safes</span>
+            <span aria-hidden="true">·</span>
+            <span className="font-medium text-[#047857] dark:text-emerald-400">
+              Ontology-Led Policy Baseline
             </span>
           </div>
 
           <WaveboundLogo variant="hero" size="lg" className="mx-auto" />
 
           <div className="space-y-3">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight text-balance">
               Streamlined Information Governance for Safe &amp; Secure Data Intelligence Environments
             </h1>
             <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
               Navigation of IG via semantic ontology, standardised evidence packs, clear, structured compliance reviews, and progress tracked and certificated learning.
             </p>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+              Designed for patients, public contributors, researchers, governance leads, and engineering teams—start with plain-English foundations, explore the step-by-step Playbook, or test live policy simulators below. A work in progress.{' '}
+              <button
+                type="button"
+                onClick={() => setIsIssueModalOpen(true)}
+                className="font-semibold text-[#005EB8] dark:text-sky-400 hover:text-[#0c2340] dark:hover:text-sky-300 underline underline-offset-2 cursor-pointer transition-colors"
+              >
+                Contributions welcome
+              </button>
+              .
+            </p>
           </div>
 
-          {/* Phase 1: Dual-Persona Routing Toggle */}
+          {/* Focused Pathway Filter Bar */}
           <div className="pt-2 pb-1 max-w-2xl mx-auto">
             <div className="p-1.5 bg-slate-100 dark:bg-slate-800/90 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xs flex flex-col sm:flex-row items-center gap-1.5">
               <button
                 onClick={() => setPersonaFocus('all')}
-                className={`w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                className={`w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                   personaFocus === 'all'
                     ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs font-bold'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
-                Comprehensive View
+                <Filter className="w-3.5 h-3.5" />
+                <span>All 4 Core Pillars</span>
               </button>
 
               <button
@@ -168,10 +167,10 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
                     ? 'bg-[#00A389] text-white shadow-xs font-bold'
                     : 'text-slate-700 dark:text-slate-300 hover:text-[#00A389] hover:bg-white/60 dark:hover:bg-slate-800'
                 }`}
-                title="High-level desk reference for Caldicott Guardians, IG Leads, Ethics Committees, researchers, and the public"
+                title="Filter Overview to Foundations: Plain-English desk reference for Caldicott Guardians, IG Leads, Ethics Committees, researchers, and the public"
               >
                 <HeartHandshake className="w-3.5 h-3.5" />
-                <span>Foundations Pathway</span>
+                <span>Foundations Lens</span>
               </button>
 
               <button
@@ -181,59 +180,12 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
                     ? 'bg-[#005EB8] text-white shadow-xs font-bold'
                     : 'text-slate-700 dark:text-slate-300 hover:text-[#005EB8] hover:bg-white/60 dark:hover:bg-slate-800'
                 }`}
-                title="Filter for Cloud Architects, Policy Engineers, and SREs"
+                title="Filter Overview to PaC Playbook: Ontology rules, OPA Rego sandboxes, enclaves, and manifests"
               >
                 <Code2 className="w-3.5 h-3.5" />
-                <span>PaC Playbook Pathway</span>
+                <span>PaC Playbook Lens</span>
               </button>
             </div>
-
-            {/* Persona Callout Banner */}
-            {personaFocus === 'ig-handbook' && (
-              <div className="mt-3 p-3.5 rounded-xl bg-[#ecfdf5] dark:bg-emerald-950/40 border border-[#a7f3d0] dark:border-emerald-800 text-left flex items-start justify-between gap-3 animate-in fade-in duration-200">
-                <div className="flex items-start gap-2.5">
-                  <HeartHandshake className="w-4 h-4 text-[#047857] dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <div className="text-xs space-y-0.5">
-                    <strong className="text-[#065f46] dark:text-emerald-300 font-bold block">
-                      Foundations Pathway Active (High-Level Desk Reference &amp; Statutory Overview)
-                    </strong>
-                    <p className="text-slate-700 dark:text-slate-300 text-[11px] leading-relaxed">
-                      Designed for Caldicott Guardians, Information Governance Leads, Research Ethics Committees, researchers, and interested members of the public. Prioritizing plain-English statutory foundations, Section 251 decision gates, and standardized review packs.
-                    </p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => onSelectTab('governance-atlas')}
-                  className="px-3 py-1.5 rounded-lg bg-[#047857] hover:bg-emerald-700 text-white font-semibold text-xs shrink-0 flex items-center gap-1.5 cursor-pointer shadow-xs"
-                >
-                  <span>Open Foundations</span>
-                  <ArrowRight className="w-3 h-3" />
-                </button>
-              </div>
-            )}
-
-            {personaFocus === 'data-technical' && (
-              <div className="mt-3 p-3.5 rounded-xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 text-left flex items-start justify-between gap-3 animate-in fade-in duration-200">
-                <div className="flex items-start gap-2.5">
-                  <Code2 className="w-4 h-4 text-[#005EB8] dark:text-sky-400 shrink-0 mt-0.5" />
-                  <div className="text-xs space-y-0.5">
-                    <strong className="text-[#0c2340] dark:text-sky-300 font-bold block">
-                      PaC Playbook Pathway Active (Architecture, Manifests &amp; Ontologies)
-                    </strong>
-                    <p className="text-slate-700 dark:text-slate-300 text-[11px] leading-relaxed">
-                      Optimized for Data Stewards, Cloud Architects, and SREs. Prioritizing machine-executable OPA Rego policies, closed-world W3C SHACL shapes, least-privilege enclave manifests, and air-gapped package mirrors.
-                    </p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => onSelectTab('playbook')}
-                  className="px-3 py-1.5 rounded-lg bg-[#005EB8] hover:bg-[#0c2340] text-white font-semibold text-xs shrink-0 flex items-center gap-1.5 cursor-pointer shadow-xs"
-                >
-                  <span>Open PaC Playbook</span>
-                  <ArrowRight className="w-3 h-3" />
-                </button>
-              </div>
-            )}
           </div>
 
           {/* Caldicott Human Accountability Notice */}
@@ -241,384 +193,366 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
             <HeartHandshake className="w-5 h-5 text-[#005EB8] dark:text-sky-400 shrink-0 mt-0.5" />
             <div className="text-xs space-y-1">
               <strong className="text-slate-900 dark:text-slate-100 font-bold block">
-                Human Accountability &amp; Public Transparency (Caldicott Principle 8)
+                People First: Technology Assists Human Decisions (Caldicott Principle 8)
               </strong>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                Technology serves human accountability; it does not replace it. Wavebound is not an autonomous gatekeeper. It provides a machine-verifiable governance baseline that assists human Caldicott Guardians, Data Access Advisory Groups (DAAG), and Research Ethics Committees (REC) in making informed statutory decisions.
-              </p>
-            </div>
-          </div>
-
-          {/* Strategic Assurances Strip */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-6 border-t border-slate-200 dark:border-slate-800 text-left">
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2 flex flex-col justify-between">
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wide">
-                  <FileCheck2 className="w-3.5 h-3.5" />
-                  <span>Review Packs</span>
-                </div>
-                <div className="text-xs font-bold text-slate-900 dark:text-white">Standardized Pack</div>
-                <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
-                  Helps replace repetitive multi-site questionnaires with a structured, verifiable review summary.
-                </p>
-              </div>
-              <button
-                onClick={() => setIsEvidenceModalOpen(true)}
-                className="text-[11px] font-semibold text-[#005EB8] dark:text-sky-400 hover:text-[#0c2340] dark:hover:text-white flex items-center gap-1 cursor-pointer pt-1"
-              >
-                <span>Preview Evidence Pack</span>
-                <ArrowRight className="w-3 h-3" />
-              </button>
-            </div>
-
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1.5">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-[#047857] dark:text-emerald-400 uppercase tracking-wide">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Least-Privilege Enclave</span>
-              </div>
-              <div className="text-xs font-bold text-slate-900 dark:text-white">Audit &amp; Alert Model</div>
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
-                Operates within restricted namespaces with non-blocking audit controllers, avoiding fragile cluster-admin dependencies.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1.5">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wide">
-                <Server className="w-3.5 h-3.5" />
-                <span>Air-Gapped Realities</span>
-              </div>
-              <div className="text-xs font-bold text-slate-900 dark:text-white">Internal Package Mirrors</div>
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
-                Maintained internal CRAN, PyPI, and Docker mirrors provide researchers validated libraries with zero outbound internet egress.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1.5">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wide">
-                <Database className="w-3.5 h-3.5" />
-                <span>Decoupled IG Tags</span>
-              </div>
-              <div className="text-xs font-bold text-slate-900 dark:text-white">Closed-World ABAC</div>
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
-                Decoupled from volatile EHR/SNOMED schemas; scoped strictly to Caldicott, S251, and Five Safes for deterministic verification.
+                Automation helps check rules consistently, while accountable decisions remain firmly with Caldicott Guardians, Data Access Advisory Groups (DAAG), Research Ethics Committees (REC), and patient oversight panels.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* 2. THREE-PATHWAY STRATEGIC WORKSPACES */}
-      <div className="space-y-4">
-        <div className="text-center space-y-1.5">
-          <span className="text-xs font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider">
-            Operational Workspaces
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
-            Role-Based Assurance &amp; Implementation Pathways
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Direct navigation tailored for Information Governance leads, Caldicott Guardians, PPIE panels, and platform architects.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-          {/* PATH 1: GOVERN & ASSURE */}
-          <div
-            className={`rounded-xl bg-white dark:bg-slate-900 border p-6 space-y-5 flex flex-col justify-between shadow-xs transition-all ${
-              personaFocus === 'ig-handbook'
-                ? 'border-[#00A389] ring-2 ring-[#00A389]/20 shadow-md'
-                : 'border-slate-200 dark:border-slate-800'
-            }`}
-          >
-            <div className="space-y-3.5">
-              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-                <span className="text-xs font-bold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 px-2.5 py-1 rounded border border-amber-200 dark:border-amber-800 flex items-center gap-1.5">
-                  <Scale className="w-3.5 h-3.5" />
-                  <span>Govern &amp; Assure</span>
-                </span>
-                <span className="text-[11px] text-slate-500 font-medium">Compliance &amp; IG Panels</span>
-              </div>
-
-              <div className="space-y-1.5">
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                  Governance Assurance Workspace
-                </h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Interactive statutory evaluator. Check study protocols against 6 statutory gates, inspect plain-English legal translations, and compile a standardized evidence pack for human panel review.
-                </p>
-              </div>
-
-              {/* Verified Capabilities */}
-              <div className="space-y-2 pt-1 text-xs">
-                {[
-                  { title: 'Five Safes Protocol Evaluator', desc: 'Validates Safe People, Projects, Data, Settings, & Outputs.' },
-                  { title: 'Consolidated Statutory Matrix', desc: 'Cross-cutting UK GDPR, Section 251, Caldicott 1–8 & ONS SDC.' },
-                  { title: 'Caldicott 8 & PROV-O Ledger', desc: 'Open Data Use Register with W3C PROV-O cryptographic lineage.' },
-                  { title: 'SATRE & DSPT Procurement Matrix', desc: 'Verified audit controls for tenders across patient and population safe and secure data and intelligence environments.' }
-                ].map((item, idx) => (
-                  <div key={idx} className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex items-start gap-2.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-slate-900 dark:text-slate-100 text-xs block">{item.title}</strong>
-                      <span className="text-slate-600 dark:text-slate-400 text-[11px]">{item.desc}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
-              <button
-                onClick={() => onSelectTab('govern-assure')}
-                className="w-full py-2.5 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white font-semibold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer"
-              >
-                <span>Enter Govern &amp; Assure Workspace</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-              <button
-                onClick={() => setIsEvidenceModalOpen(true)}
-                className="w-full py-2 px-3 rounded-lg bg-teal-50 dark:bg-teal-950/40 hover:bg-teal-100 dark:hover:bg-teal-900/60 border border-teal-200 dark:border-teal-800 text-teal-800 dark:text-teal-300 text-center font-medium text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-              >
-                <FileCheck2 className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
-                <span>Preview Standardized Evidence Pack</span>
-              </button>
-              <button
-                onClick={() => onNavigateToConcept('caldicott')}
-                className="w-full py-2 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-center font-medium text-xs transition-colors cursor-pointer"
-              >
-                Inspect Caldicott Principles 1–8
-              </button>
-            </div>
+      {/* 2. DYNAMIC FOCUSED OVERVIEW CONTENT (No Duplicated Grids) */}
+      {personaFocus === 'all' && (
+        <div className="space-y-4 animate-in fade-in duration-200">
+          <div className="text-center space-y-1">
+            <span className="text-xs font-semibold text-[#005EB8] dark:text-sky-400">
+              Explore by Pillar
+            </span>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+              Start Where You Need
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+              Pick any of the four pillars below, or switch the lens filter above to step through a Foundations or PaC Playbook pathway.
+            </p>
           </div>
 
-          {/* PATH 2: FOUNDATIONS & DESK REFERENCE */}
-          <div
-            className={`rounded-xl bg-white dark:bg-slate-900 border p-6 space-y-5 flex flex-col justify-between shadow-xs transition-all ${
-              personaFocus === 'ig-handbook'
-                ? 'border-[#00A389] ring-2 ring-[#00A389]/20 shadow-md bg-[#f0fdf9]/30 dark:bg-emerald-950/20'
-                : 'border-slate-200 dark:border-slate-800'
-            }`}
-          >
-            <div className="space-y-3.5">
-              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-                <span className="text-xs font-bold text-[#047857] dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5">
-                  <HeartHandshake className="w-3.5 h-3.5" />
-                  <span>Foundations</span>
-                </span>
-                <span className="text-[11px] text-slate-500 font-medium">PPIE &amp; Leadership</span>
-              </div>
-
-              <div className="space-y-1.5">
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                  Foundations &amp; Statutory Desk Reference
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
+            {/* Pillar 1: Playbook, Ontology & Guides */}
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 space-y-4 flex flex-col justify-between shadow-xs">
+              <div className="space-y-2.5">
+                <div className="w-9 h-9 rounded-lg bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 flex items-center justify-center text-teal-700 dark:text-teal-400">
+                  <Layers className="w-4 h-4" />
+                </div>
+                <h3 className="font-bold text-slate-900 dark:text-white text-sm">
+                  1. Playbook, Ontology &amp; Guides
                 </h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Plain-language statutory foundations designed for non-technical leadership, Caldicott Guardians, and Patient &amp; Public Involvement (PPIE) advisory representatives.
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Read the step-by-step Wavebound PaC Playbook, trace our Ontology Topology Graph, inspect the Concepts Primer, or plan production rollout without breaking services.
                 </p>
               </div>
-
-              {/* Verified Capabilities */}
-              <div className="space-y-2 pt-1 text-xs">
-                {[
-                  { title: 'Caldicott 8 Transparency', desc: 'Ensures public benefit is visible, accessible, and accountable.' },
-                  { title: 'Five Safes Walkthrough', desc: 'Stage-by-stage statutory requirements and safeguards.' },
-                  { title: 'Self-Assessment Check', desc: '5-question IG assurance assessment with statutory rationale.' }
-                ].map((item, idx) => (
-                  <div key={idx} className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex items-start gap-2.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#047857] shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-slate-900 dark:text-slate-100 text-xs block">{item.title}</strong>
-                      <span className="text-slate-600 dark:text-slate-400 text-[11px]">{item.desc}</span>
-                    </div>
-                  </div>
-                ))}
+              <div className="space-y-1.5 pt-2 border-t border-slate-100 dark:border-slate-800">
+                <button
+                  onClick={() => onSelectTab('playbook')}
+                  className="w-full py-2 px-3 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <span>Read PaC Playbook</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => onSelectTab('graph')}
+                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                >
+                  Explore Ontology Topology Graph
+                </button>
+                <button
+                  onClick={() => onSelectTab('implementation-track')}
+                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                >
+                  Transitioning to Production &amp; Decisions
+                </button>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
+            {/* Pillar 2: Further Resources, Evidence & Foundations */}
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 space-y-4 flex flex-col justify-between shadow-xs">
+              <div className="space-y-2.5">
+                <div className="w-9 h-9 rounded-lg bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 flex items-center justify-center text-[#005EB8] dark:text-sky-400">
+                  <FileCheck2 className="w-4 h-4" />
+                </div>
+                <h3 className="font-bold text-slate-900 dark:text-white text-sm">
+                  2. Evidence, Standards &amp; Resources
+                </h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Browse Further Resources (UK law, DSA, Statbarn, DataSHIELD, RO-Crate, EHDS), open the Foundations &amp; 10-Stage Schematic, explore the A–Z Glossary, or preview Evidence Packs.
+                </p>
+              </div>
+              <div className="space-y-1.5 pt-2 border-t border-slate-100 dark:border-slate-800">
+                <button
+                  onClick={() => onSelectTab('resources')}
+                  className="w-full py-2 px-3 rounded-lg bg-[#005EB8] hover:bg-[#0c2340] text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <span>Browse Further Resources</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => onSelectTab('governance-atlas')}
+                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                >
+                  Open Foundations &amp; Schematic
+                </button>
+                <button
+                  onClick={() => onSelectTab('glossary')}
+                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                >
+                  Governance &amp; Architecture Glossary
+                </button>
+                <button
+                  onClick={() => setIsEvidenceModalOpen(true)}
+                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                >
+                  Preview Standardised Evidence Pack
+                </button>
+              </div>
+            </div>
+
+            {/* Pillar 3: Interactive Simulators & Review Lab */}
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 space-y-4 flex flex-col justify-between shadow-xs">
+              <div className="space-y-2.5">
+                <div className="w-9 h-9 rounded-lg bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 flex items-center justify-center text-amber-700 dark:text-amber-400">
+                  <Scale className="w-4 h-4" />
+                </div>
+                <h3 className="font-bold text-slate-900 dark:text-white text-sm">
+                  3. Simulators &amp; Review Lab
+                </h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Try interactive tools hands-on: evaluate study protocols, run Statbarn SDC suppression checks, test OPA Rego rules, scrub LLM prompts, or generate manifests.
+                </p>
+              </div>
+              <div className="space-y-1.5 pt-2 border-t border-slate-100 dark:border-slate-800">
+                <button
+                  onClick={() => onSelectTab('govern-assure')}
+                  className="w-full py-2 px-3 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <span>Govern &amp; Assure + SDC</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => onSelectTab('sandbox')}
+                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                >
+                  OPA Rego Policy Sandbox
+                </button>
+                <button
+                  onClick={() => onSelectTab('llm-security')}
+                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                >
+                  LLM Redaction &amp; Enclave Lab
+                </button>
+              </div>
+            </div>
+
+            {/* Pillar 4: Progress Tracked & Certificated Learning */}
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 space-y-4 flex flex-col justify-between shadow-xs">
+              <div className="space-y-2.5">
+                <div className="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-[#047857] dark:text-emerald-400">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+                <h3 className="font-bold text-slate-900 dark:text-white text-sm">
+                  4. Tracked Quizzes &amp; Learning
+                </h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Check your confidence across Five Safes, SHACL, OPA Rego, SDC thresholds, FOIA, and enclave security with downloadable completion certificates.
+                </p>
+              </div>
+              <div className="space-y-1.5 pt-2 border-t border-slate-100 dark:border-slate-800">
+                <button
+                  onClick={() => onSelectTab('quiz')}
+                  className="w-full py-2 px-3 rounded-lg bg-[#00A389] hover:bg-emerald-700 text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <span>Launch Policy Quiz</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => onSelectTab('progress')}
+                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                >
+                  View Progress &amp; Certificates
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* FOCUSED FILTER: FOUNDATIONS LENS */}
+      {personaFocus === 'ig-handbook' && (
+        <div className="space-y-5 animate-in fade-in duration-200">
+          <div className="p-4 rounded-xl bg-[#ecfdf5] dark:bg-emerald-950/40 border border-[#a7f3d0] dark:border-emerald-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-start gap-2.5">
+              <HeartHandshake className="w-5 h-5 text-[#047857] dark:text-emerald-400 shrink-0 mt-0.5" />
+              <div className="text-xs space-y-0.5">
+                <strong className="text-[#065f46] dark:text-emerald-300 font-bold block text-sm">
+                  Foundations Pathway Active (High-Level Desk Reference &amp; Statutory Overview)
+                </strong>
+                <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
+                  Filtered view for Caldicott Guardians, Information Governance Leads, Research Ethics Committees, researchers, and interested members of the public.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={() => setPersonaFocus('all')}
+              className="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-emerald-300 dark:border-emerald-700 text-[#047857] dark:text-emerald-300 text-xs font-semibold shrink-0 cursor-pointer hover:bg-emerald-50"
+            >
+              Show All Pillars
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs">
+              <div className="space-y-2">
+                <span className="text-[11px] font-mono font-bold text-[#047857] dark:text-emerald-400 uppercase">Step 1 · Statutory Baseline</span>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">Foundations Desk Reference &amp; Schematic</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Walk through the 10-stage IG &amp; Ethics schematic with statutory hand-offs across Caldicott 1–8, Section 251, UK GDPR, Statbarn outputs, and FOIA readiness.
+                </p>
+              </div>
               <button
                 onClick={() => onSelectTab('governance-atlas')}
-                className="w-full py-2.5 rounded-lg bg-[#00A389] hover:bg-emerald-700 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
+                className="w-full py-2.5 rounded-lg bg-[#00A389] hover:bg-emerald-700 text-white font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Open Foundations</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
-              <button
-                onClick={() => onSelectTab('quiz')}
-                className="w-full py-2 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-center font-medium text-xs transition-colors cursor-pointer"
-              >
-                Knowledge Assessment Quizzes
-              </button>
             </div>
-          </div>
 
-          {/* PATH 3: PAC PLAYBOOK & MANIFESTS */}
-          <div
-            className={`rounded-xl bg-white dark:bg-slate-900 border p-6 space-y-5 flex flex-col justify-between shadow-xs transition-all ${
-              personaFocus === 'data-technical'
-                ? 'border-[#005EB8] ring-2 ring-[#005EB8]/20 shadow-md bg-sky-50/30 dark:bg-sky-950/20'
-                : 'border-slate-200 dark:border-slate-800'
-            }`}
-          >
-            <div className="space-y-3.5">
-              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-                <span className="text-xs font-bold text-[#005EB8] dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 px-2.5 py-1 rounded border border-sky-200 dark:border-sky-800 flex items-center gap-1.5">
-                  <Code2 className="w-3.5 h-3.5" />
-                  <span>PaC Playbook</span>
-                </span>
-                <span className="text-[11px] text-slate-500 font-medium">Architects &amp; SREs</span>
-              </div>
-
-              <div className="space-y-1.5">
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                  PaC Playbook &amp; Technical Architecture
-                </h3>
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs">
+              <div className="space-y-2">
+                <span className="text-[11px] font-mono font-bold text-[#047857] dark:text-emerald-400 uppercase">Step 2 · Panel Review</span>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">Assurance Workspace &amp; Evidence Packs</h3>
                 <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Enterprise deployment artifacts for multi-tenant research clusters: namespaced audit-and-alert manifests, internal air-gapped CRAN/PyPI mirrors, and direct analytics access patterns.
+                  Simulate ethics/IG protocol gates, review Caldicott 8 public register templates, and inspect a standardized evidence pack before committee sign-off.
                 </p>
               </div>
-
-              {/* Verified Capabilities */}
-              <div className="space-y-2 pt-1 text-xs">
-                {[
-                  { title: 'Least-Privilege Manifests', desc: 'Namespaced admission and non-blocking audit controllers.' },
-                  { title: 'Air-Gapped Package Mirrors', desc: 'CRAN, PyPI, and Docker registries with zero internet egress.' },
-                  { title: 'Closed-World Rego PDPs', desc: 'Sub-millisecond ABAC/RBAC egress decision-support.' }
-                ].map((item, idx) => (
-                  <div key={idx} className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex items-start gap-2.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#005EB8] shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-slate-900 dark:text-slate-100 text-xs block">{item.title}</strong>
-                      <span className="text-slate-600 dark:text-slate-400 text-[11px]">{item.desc}</span>
-                    </div>
-                  </div>
-                ))}
+              <div className="space-y-2">
+                <button
+                  onClick={() => onSelectTab('govern-assure')}
+                  className="w-full py-2.5 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>Enter Review Workspace</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => setIsEvidenceModalOpen(true)}
+                  className="w-full py-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-[#047857] dark:text-emerald-300 font-medium text-xs cursor-pointer"
+                >
+                  Preview Evidence Pack
+                </button>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs">
+              <div className="space-y-2">
+                <span className="text-[11px] font-mono font-bold text-[#047857] dark:text-emerald-400 uppercase">Step 3 · Competency Check</span>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">Certificated IG &amp; SDC Quizzes</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Complete Five Safes, Quantitative SDC, and AI Governance quiz domains with tracked progress and verifiable completion certificates.
+                </p>
+              </div>
               <button
-                onClick={() => onSelectTab('build-deploy')}
-                className="w-full py-2.5 rounded-lg bg-[#005EB8] hover:bg-[#0c2340] text-white font-semibold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
+                onClick={() => onSelectTab('quiz')}
+                className="w-full py-2.5 rounded-lg bg-slate-900 dark:bg-slate-800 hover:bg-[#005EB8] text-white font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>Open PaC Playbook &amp; Workstation</span>
+                <span>Open Policy Quiz</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
-              <button
-                onClick={() => onSelectTab('playbook')}
-                className="w-full py-2 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-center font-medium text-xs transition-colors cursor-pointer"
-              >
-                Read PaC Playbook
-              </button>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* 3. FOUR CORE ENGINES GRID */}
-      <div className="space-y-4">
-        <div className="text-center space-y-1">
-          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-            Enterprise Architecture Core
-          </span>
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
-            Governance &amp; Policy Decision Primitives
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
-            The machine-executable architectural layers compiling high-level legal doctrines into deterministic policy enforcement points.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* Card 1: W3C SHACL Ontology */}
-          <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 space-y-3 flex flex-col justify-between shadow-xs">
-            <div className="space-y-2">
-              <div className="w-9 h-9 rounded-lg bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 flex items-center justify-center text-teal-700 dark:text-teal-400">
-                <Layers className="w-4 h-4" />
+      {/* FOCUSED FILTER: PAC PLAYBOOK LENS */}
+      {personaFocus === 'data-technical' && (
+        <div className="space-y-5 animate-in fade-in duration-200">
+          <div className="p-4 rounded-xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-start gap-2.5">
+              <Code2 className="w-5 h-5 text-[#005EB8] dark:text-sky-400 shrink-0 mt-0.5" />
+              <div className="text-xs space-y-0.5">
+                <strong className="text-[#0c2340] dark:text-sky-300 font-bold block text-sm">
+                  PaC Playbook Pathway Active (Architecture, Manifests &amp; Ontologies)
+                </strong>
+                <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
+                  Filtered engineering route for Data Stewards, Cloud Architects, and SREs implementing W3C SHACL shapes, OPA Rego PDPs, and least-privilege enclaves.
+                </p>
               </div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-sm">
-                W3C SHACL Ontology
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Deterministic closed-world data models. Encodes Caldicott principles and Section 251 constraints as machine-verifiable data shapes.
-              </p>
             </div>
             <button
-              onClick={() => onSelectTab('graph')}
-              className="text-xs font-semibold text-[#005EB8] dark:text-sky-400 flex items-center gap-1 hover:underline pt-2 cursor-pointer"
+              onClick={() => setPersonaFocus('all')}
+              className="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-sky-300 dark:border-sky-700 text-[#005EB8] dark:text-sky-300 text-xs font-semibold shrink-0 cursor-pointer hover:bg-sky-50"
             >
-              <span>Explore Knowledge Graph</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              Show All Pillars
             </button>
           </div>
 
-          {/* Card 2: OPA Rego Decision Points */}
-          <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 space-y-3 flex flex-col justify-between shadow-xs">
-            <div className="space-y-2">
-              <div className="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-[#047857] dark:text-emerald-400">
-                <Cpu className="w-4 h-4" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-sky-200 dark:border-sky-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs">
+              <div className="space-y-2">
+                <span className="text-[11px] font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase">Step 1 · Ontology &amp; Spec</span>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">PaC Playbook &amp; Semantic Topology</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Inspect how OWL/RDF metadata resolves Open-World Assumptions via W3C SHACL shapes and compiles to deterministic Rego bundles &amp; PROV-O / RO-Crate records.
+                </p>
               </div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-sm">
-                Policy Decision Points (PDP)
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Sub-millisecond Open Policy Agent (OPA) rule evaluation, verifying identity, dataset tiering, and project ethics dynamically.
-              </p>
+              <div className="space-y-2">
+                <button
+                  onClick={() => onSelectTab('playbook')}
+                  className="w-full py-2.5 rounded-lg bg-[#005EB8] hover:bg-[#0c2340] text-white font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>Read PaC Playbook</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => onSelectTab('graph')}
+                  className="w-full py-2 rounded-lg bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 text-[#005EB8] dark:text-sky-300 font-medium text-xs cursor-pointer"
+                >
+                  Explore Semantic Topology Graph
+                </button>
+              </div>
             </div>
-            <button
-              onClick={() => onSelectTab('sandbox')}
-              className="text-xs font-semibold text-[#047857] dark:text-emerald-400 flex items-center gap-1 hover:underline pt-2 cursor-pointer"
-            >
-              <span>Launch Policy Sandbox</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
 
-          {/* Card 3: Quantitative SDC Airlock */}
-          <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 space-y-3 flex flex-col justify-between shadow-xs">
-            <div className="space-y-2">
-              <div className="w-9 h-9 rounded-lg bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 flex items-center justify-center text-amber-700 dark:text-amber-400">
-                <ShieldCheck className="w-4 h-4" />
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-sky-200 dark:border-sky-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs">
+              <div className="space-y-2">
+                <span className="text-[11px] font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase">Step 2 · Policy &amp; Enclave Hardening</span>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">OPA Sandbox &amp; AI Enclave Security</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Test fail-closed OPA Rego evaluation, inspect .harness_ignore &amp; AST scrubbing proxies, and enforce air-gapped CRAN/PyPI/Docker mirrors.
+                </p>
               </div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-sm">
-                Quantitative SDC Airlock
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Automated cell suppression (k ≥ 10), dominance thresholds, and controlled perturbation prior to research egress authorization.
-              </p>
+              <div className="space-y-2">
+                <button
+                  onClick={() => onSelectTab('sandbox')}
+                  className="w-full py-2.5 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>Launch OPA Rego Sandbox</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => onSelectTab('llm-security')}
+                  className="w-full py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-xs cursor-pointer"
+                >
+                  Inspect Enclave &amp; LLM Security
+                </button>
+              </div>
             </div>
-            <button
-              onClick={() => onSelectTab('govern-assure')}
-              className="text-xs font-semibold text-amber-700 dark:text-amber-400 flex items-center gap-1 hover:underline pt-2 cursor-pointer"
-            >
-              <span>Launch Quantitative SDC Simulator &amp; Airlock</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
 
-          {/* Card 4: Multi-Tenant Safe Compute */}
-          <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 space-y-3 flex flex-col justify-between shadow-xs">
-            <div className="space-y-2">
-              <div className="w-9 h-9 rounded-lg bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800 flex items-center justify-center text-purple-700 dark:text-purple-400">
-                <Server className="w-4 h-4" />
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-sky-200 dark:border-sky-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs">
+              <div className="space-y-2">
+                <span className="text-[11px] font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase">Step 3 · Least-Privilege Rollout</span>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">Build, Webhook &amp; Rollout Schedule</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Deploy namespaced evaluate-only ValidatingWebhookConfiguration manifests with break-glass selectors and decision gate traceability.
+                </p>
               </div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-sm">
-                Safe Enclave Compute
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Confidential compute enclaves, restricted namespaces, internal container mirrors, and zero-egress network policies.
-              </p>
+              <div className="space-y-2">
+                <button
+                  onClick={() => onSelectTab('build-deploy')}
+                  className="w-full py-2.5 rounded-lg bg-slate-900 dark:bg-slate-800 hover:bg-[#005EB8] text-white font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>Open Build &amp; Deploy Workstation</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => onSelectTab('implementation-track')}
+                  className="w-full py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-xs cursor-pointer"
+                >
+                  View Rollout Schedule &amp; Decisions
+                </button>
+              </div>
             </div>
-            <button
-              onClick={() => onSelectTab('llm-security')}
-              className="text-xs font-semibold text-purple-700 dark:text-purple-400 flex items-center gap-1 hover:underline pt-2 cursor-pointer"
-            >
-              <span>Inspect Enclave Security</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Universal Evidence Dossier Modal (Phase 2) */}
       <EvidenceDossierModal
@@ -630,6 +564,13 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
           setIsEvidenceModalOpen(false);
           onSelectTab('build-deploy');
         }}
+      />
+
+      {/* Contributor Issue & Feedback Form Modal */}
+      <IssueReportModal
+        isOpen={isIssueModalOpen}
+        onClose={() => setIsIssueModalOpen(false)}
+        defaultArea="Overview"
       />
     </div>
   );

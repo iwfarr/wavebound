@@ -256,6 +256,22 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
                   </p>
                 </div>
               </div>
+
+              <div className="p-3 rounded-xl bg-slate-900/90 border border-sky-800/50 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px]">
+                <div className="text-slate-300 leading-relaxed">
+                  <strong className="text-sky-300">Algorithmic Transparency Recording Standard (ATRS) · Advisory Interoperability Guidance:</strong>{' '}
+                  When AI workflows produce analytical models or decision-support tools, UK GDS/DSA&apos;s optional two-tier ATRS record format complements Caldicott Principle 8 (&quot;No Surprises&quot;) and ISO/IEC 42001 documentation without altering enclave admission rules.
+                </div>
+                <a
+                  href="https://www.gov.uk/government/collections/algorithmic-transparency-recording-standard-hub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sky-300 hover:text-sky-200 font-mono inline-flex items-center gap-1 shrink-0 hover:underline"
+                >
+                  <span>GOV.UK ATRS Hub</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
             </div>
 
             {/* Architecture Flow Diagram */}

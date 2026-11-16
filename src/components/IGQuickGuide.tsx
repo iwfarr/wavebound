@@ -49,6 +49,8 @@ interface IGQuickGuideProps {
   onNavigateToSection?: (sectionId: string) => void;
   onNavigateToGovernAssure?: () => void;
   onNavigateToQuiz?: (category?: string) => void;
+  onNavigateToGraph?: () => void;
+  onNavigateToResources?: () => void;
 }
 
 interface HandbookChapter {
@@ -923,7 +925,9 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
   onNavigateToGlossary,
   onNavigateToSection,
   onNavigateToGovernAssure,
-  onNavigateToQuiz
+  onNavigateToQuiz,
+  onNavigateToGraph,
+  onNavigateToResources
 }) => {
   const [activeTab, setActiveTab] = useState<'handbook' | 'schematic' | 'glossary' | 'templates' | 'quiz'>('handbook');
   const [selectedChapterId, setSelectedChapterId] = useState<string>(HANDBOOK_CHAPTERS[0].id);
@@ -1204,12 +1208,12 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight text-balance">
             Foundations: Information Governance &amp; Statutory Desk Reference
           </h1>
 
           <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-            The authoritative, plain-language foundations guide for Caldicott Guardians, Data Protection Officers, HRA ethics committees, and clinical researchers. Navigating statutory frameworks, human compliance workflows, and disclosure control safeguards without technical code or jargon.
+            A clear, jargon-free starting point for Caldicott Guardians, Data Protection Officers, ethics committees, clinical researchers, and interested members of the public—explaining how legal safeguards, the Five Safes, and Statbarn output checks keep data secure.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-3 text-xs">
@@ -1220,6 +1224,15 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               >
                 <Scale className="w-4 h-4 text-slate-950" />
                 <span>Open Scenario Evaluator &amp; Assurance Engine</span>
+              </button>
+            )}
+            {onNavigateToResources && (
+              <button
+                onClick={onNavigateToResources}
+                className="px-4 py-2.5 rounded-xl bg-[#07192f] hover:bg-[#123154] text-cyan-200 border border-cyan-500/40 font-semibold flex items-center gap-2 transition-colors cursor-pointer"
+              >
+                <BookOpen className="w-4 h-4 text-cyan-400" />
+                <span>Browse Further Resources</span>
               </button>
             )}
           </div>
@@ -1448,14 +1461,24 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
           <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 space-y-4 shadow-xl text-white">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cyan-900/60 pb-4">
               <div>
-                <span className="text-xs font-mono font-bold text-teal-300 uppercase tracking-wider">
-                  Governance Process Architecture
-                </span>
+                <div className="flex flex-wrap items-center gap-2 mb-1">
+                  <span className="text-[11px] font-mono font-bold text-teal-300 bg-teal-950/80 border border-teal-700/60 px-2 py-0.5 rounded uppercase tracking-wider">
+                    Graph 1 of 3 · Human Governance Workflow &amp; Five Safes Stage Map
+                  </span>
+                  {onNavigateToGraph && (
+                    <button
+                      onClick={onNavigateToGraph}
+                      className="text-[11px] font-semibold text-cyan-300 hover:text-white underline decoration-cyan-500/60 underline-offset-2 cursor-pointer transition-colors"
+                    >
+                      Need rule-to-code internals? Switch to Ontology Topology Graph (Graph 2) &rarr;
+                    </button>
+                  )}
+                </div>
                 <h2 className="text-xl font-bold text-white tracking-tight">
                   End-to-End Information Governance &amp; Ethics Schematic
                 </h2>
                 <p className="text-xs text-slate-300 mt-0.5">
-                  Click any stage node below to inspect statutory hand-offs, responsible roles, and privacy safeguards.
+                  Click any stage node below to inspect statutory hand-offs (including CAG, REC &amp; Statbarn outputs), responsible roles, and privacy safeguards.
                 </p>
                 <div className="mt-2 p-2.5 rounded-xl bg-slate-950/80 border border-amber-500/40 text-[11px] text-amber-200 leading-relaxed flex items-start gap-2 shadow-xs">
                   <Info className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
