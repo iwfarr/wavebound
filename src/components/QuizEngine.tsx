@@ -116,8 +116,56 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
     }).length;
   }, [selectedCategory, selectedDifficulty]);
 
+  // Unbiased Fisher-Yates (Knuth) shuffle
+  const shuffleArray = <T,>(items: readonly T[]): T[] => {
+    const arr = [...items];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  };
+
+  // Randomize option order for a set of questions so correct positions (A/B/C/D)
+  // are unpredictable and well-distributed on every single play.
+  const randomizeQuestionOptions = (questions: QuizQuestion[]): QuizQuestion[] => {
+    const targetSlots: number[] = [];
+    while (targetSlots.length < questions.length) {
+      targetSlots.push(...shuffleArray([0, 1, 2, 3]));
+    }
+    const assignedSlots = shuffleArray(targetSlots.slice(0, questions.length));
+
+    return questions.map((q, idx) => {
+      const optionCount = q.options.length;
+      if (optionCount <= 1) return q;
+
+      const correctText = q.options[q.correctIndex];
+      const distractors = shuffleArray(
+        q.options.filter((_, optIdx) => optIdx !== q.correctIndex)
+      );
+      const targetSlot = assignedSlots[idx] % optionCount;
+      const newOptions: string[] = [];
+      let distractorPtr = 0;
+
+      for (let i = 0; i < optionCount; i++) {
+        if (i === targetSlot) {
+          newOptions.push(correctText);
+        } else {
+          newOptions.push(distractors[distractorPtr++]);
+        }
+      }
+
+      return {
+        ...q,
+        options: newOptions,
+        correctIndex: targetSlot
+      };
+    });
+  };
+
   // Start Standard / Filtered Curated Quiz with robust fallback
   const handleStartCuratedQuiz = (countOverride?: number) => {
+    const targetCount = countOverride || questionCount;
     let pool = CURATED_QUIZ_BANK.filter((q) => {
       const matchCat = selectedCategory === 'All Categories (Comprehensive Exam)' || q.category === selectedCategory;
       const matchDiff = selectedDifficulty === 'All' || q.difficulty === selectedDifficulty;
@@ -136,22 +184,24 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
         pool = [...CURATED_QUIZ_BANK];
         notice = `Loaded full comprehensive question bank.`;
       }
-    } else if (pool.length < questionCount) {
+    } else if (pool.length < targetCount) {
       // If we have fewer than requested, pad with questions from same category or same difficulty
       const extra = CURATED_QUIZ_BANK.filter(
         (q) => !pool.some((p) => p.id === q.id) && (q.category === selectedCategory || q.difficulty === selectedDifficulty)
       );
-      pool = [...pool, ...extra.sort(() => Math.random() - 0.5)];
-      notice = `Loaded ${availableMatchingCount} matching ${selectedDifficulty} question(s) plus related practice items to reach ${Math.min(questionCount, pool.length)}.`;
+      pool = [...pool, ...shuffleArray(extra)];
+      notice = `Loaded ${availableMatchingCount} matching ${selectedDifficulty} question(s) plus related practice items to reach ${Math.min(targetCount, pool.length)}.`;
     }
 
     if (pool.length === 0) {
       pool = [...CURATED_QUIZ_BANK];
     }
 
-    // Shuffle and slice
-    const shuffled = [...pool].sort(() => Math.random() - 0.5);
-    const selected = shuffled.slice(0, Math.min(countOverride || questionCount, shuffled.length));
+    // Shuffle questions and randomize option positions on every play
+    const shuffled = shuffleArray(pool);
+    const selected = randomizeQuestionOptions(
+      shuffled.slice(0, Math.min(targetCount, shuffled.length))
+    );
 
     setActiveQuestions(selected);
     setCurrentIndex(0);
@@ -254,7 +304,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
               <span>Interactive Technical Verification</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Wavebound Policy as Code Quiz
+              Wavebound Quiz
             </h1>
             <p className="text-slate-300 text-xs sm:text-sm max-w-xl">
               Challenge yourself on Five Safes governance, SHACL closed-world validation,
@@ -369,13 +419,13 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
               <div className="space-y-1 p-3 rounded-lg bg-slate-900/80 border border-slate-800">
                 <span className="font-bold text-emerald-300 block">1. 100% Self-Contained by Default (No Keys Needed)</span>
                 <p>
-                  Wavebound is designed to run self-contained in your browser and on local instances. All 30+ curated questions, disclosure controls, and certificate verifications execute locally with zero external network calls. You do <strong>not</strong> need to supply an external OpenAI, Anthropic, or cloud API key to practice or take assessments.
+                  Wavebound is designed to run self-contained in your browser with zero external network calls. All 270+ curated questions, randomized answer checks, and certificate downloads execute locally on your device. You do <strong>not</strong> need to supply an OpenAI, Anthropic, or cloud API key to practice or take assessments.
                 </p>
               </div>
               <div className="space-y-1 p-3 rounded-lg bg-slate-900/80 border border-slate-800">
-                <span className="font-bold text-cyan-300 block">2. In-Enclave Local Instance for Custom AI Generation</span>
+                <span className="font-bold text-cyan-300 block">2. Bring Your Own Local Model or Private Endpoint</span>
                 <p>
-                  In NHS and health data governance contexts, pasting personal API keys into web interfaces is discouraged because it routes queries across public cloud infrastructure. If your institution wishes to dynamically generate synthetic questions against local policies, <strong>run an in-enclave local instance</strong> connected to an internal sovereign endpoint (e.g. on-premise Ollama, vLLM, or Trust private VPC proxy).
+                  By contrast, if you want to dynamically generate custom questions from your own notes or local policy files, avoid pasting personal API keys into hosted web apps where credentials and prompts cross third-party servers. Instead, <strong>run a local copy of Wavebound on your own machine</strong> connected to a local model (e.g. Ollama, LM Studio, or vLLM) or your own private API environment.
                 </p>
               </div>
             </div>

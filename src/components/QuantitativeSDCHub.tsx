@@ -186,7 +186,11 @@ const PRESET_SCENARIOS: SDCScenarioPreset[] = [
 
 export const QuantitativeSDCHub: React.FC = () => {
   // Navigation tabs within SDC Hub
-  const [activeTab, setActiveTab] = useState<'simulator' | 'methods_matrix' | 'policy_code' | 'airlock_gate'>('simulator');
+  const [activeTab, setActiveTab] = useState<
+    'simulator' | 'methods_matrix' | 'low_count_reference' | 'policy_code' | 'airlock_gate'
+  >('simulator');
+  const [tradeoffFilter, setTradeoffFilter] = useState<'All' | 'Suppression' | 'Aggregation' | 'Perturbation' | 'Synthetic'>('All');
+  const [sopCopied, setSopCopied] = useState<boolean>(false);
 
   // Simulator state
   const [selectedPresetId, setSelectedPresetId] = useState<string>(PRESET_SCENARIOS[0].id);
@@ -438,6 +442,35 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
     URL.revokeObjectURL(url);
   };
 
+  const handleCopyMarkdownSOP = () => {
+    const markdownContent = `# Statistical Disclosure Control (SDC) & Low-Count Analytical Guide
+
+A practitioner reference standard for population data research organizations, epidemiologists, data stewards, and governance committees.
+
+## 1. Small Cell Disclosure Risks (N < 5 or N < 10)
+When presenting aggregate tables or public reports containing small cell counts, specific disclosure control methods prevent re-identification through direct identification or indirect deduction.
+
+## 2. Core SDC Techniques
+- Cell Suppression: Primary (redacting N < 10) and Secondary / Complementary Suppression (masking totals/adjacent cells to prevent subtraction deduction).
+- Data Aggregation: Spatial Aggregation (counties/regions instead of postal districts), Temporal Aggregation (3- or 5-year moving averages), Demographic Recoding (broader age bands, top-level ICD chapters).
+- Data Perturbation & Noise: Targeted / Controlled Rounding (base 5 or 10), Random Swapping / PRAM, and Differential Privacy (Laplace / Gaussian calibrated noise, epsilon <= 1.0).
+
+## 3. Methodological Approaches for Low-Count Data
+- Bayesian Hierarchical Modeling: Borrowing strength via Empirical Bayes and Spatial Conditional Autoregressive (CAR) models to smooth rate volatility.
+- International Consortia & Multi-Center Registries: Standardized protocols pooling rare condition cohorts globally with uniform governance.
+- Qualitative & Mixed-Methods Frameworks: Structured case series, process tracing, and Qualitative Comparative Analysis (QCA) when N < 30.
+
+## 4. Data Governance & Safe Access Models
+- Five Safes Framework: Safe People, Safe Projects, Safe Settings, Safe Data, Safe Outputs.
+- Secure Data Enclaves: Zero-egress sovereign analytical environments.
+- Output Checking: Independent disclosure control clearance before external release across the 5 Statbarns (Frequencies, Position & Quantiles, Means & Totals, Correlation, Shape & Survival) and 7 Quantitative SDC SOP Output Classes.
+- Federated Non-Disclosive Execution (DataSHIELD): Server-side nfilter disclosure traps for structured distributed multi-node statistics without pooling microdata.`;
+
+    navigator.clipboard.writeText(markdownContent);
+    setSopCopied(true);
+    setTimeout(() => setSopCopied(false), 2500);
+  };
+
   return (
     <div className="space-y-6">
       {/* 1. EDITORIAL HEADER & ONS/CALDICOTT BASELINE */}
@@ -453,9 +486,18 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
             </span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
-            Quantitative SDC Math &amp; Airlock Governance Gate
-          </h1>
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
+              Quantitative SDC Math &amp; Airlock Governance Gate
+            </h1>
+            <button
+              onClick={handleCopyMarkdownSOP}
+              className="self-start shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-medium border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
+            >
+              {sopCopied ? <Check className="w-3.5 h-3.5 text-[#047857]" /> : <Copy className="w-3.5 h-3.5 text-[#005EB8]" />}
+              <span>{sopCopied ? 'Copied SOP!' : 'Copy Markdown SOP'}</span>
+            </button>
+          </div>
 
           <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
             Applies graph-navigated and machine-audited Information Governance to outbound clinical research exports. Mathematically models primary cell suppression, complementary secondary suppression to prevent marginal deduction, top-contributor dominance thresholds, and degrees-of-freedom bounds before candidate tables leave the airlock.
@@ -520,6 +562,17 @@ Cryptographic SHA-256 Seal: ${airlockSealHash}
           >
             <TableIcon className="w-3.5 h-3.5" />
             <span>SDC Policy &amp; SOP (7 Output Classes)</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('low_count_reference')}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              activeTab === 'low_count_reference'
+                ? 'bg-[#005EB8] text-white shadow-xs'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+            }`}
+          >
+            <Layers className="w-3.5 h-3.5" />
+            <span>Low-Count Methods, Statbarns &amp; Trade-Offs</span>
           </button>
           <button
             onClick={() => setActiveTab('policy_code')}
@@ -1752,6 +1805,371 @@ model, optimizer, train_loader = privacy_engine.make_private(
         </div>
       )}
 
+      {/* TAB 2B: COMPREHENSIVE LOW-COUNT METHODS, STATBARNS, TRADE-OFF MATRIX & SAFE ACCESS MODELS */}
+      {activeTab === 'low_count_reference' && (
+        <div className="space-y-6">
+          {/* Core SDC Techniques */}
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-6 shadow-xs">
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#0F294A] dark:text-sky-400">
+                <Calculator className="w-4 h-4 text-[#005EB8]" />
+                <span>Practitioner Reference &amp; Core Disclosure Mechanisms</span>
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+                Core SDC Techniques &amp; Graphical Plots Mandate
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-4xl">
+                Standard operating approaches for presenting aggregate tables, public reports, and epidemiological analyses containing small cell counts (N &lt; 5 or N &lt; 10), preventing re-identification while preserving scientific utility.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* 1. Cell Suppression */}
+              <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider">
+                  <EyeOff className="w-4 h-4 text-amber-600" />
+                  <span>1. Cell Suppression</span>
+                </div>
+                <h4 className="text-base font-bold text-slate-900 dark:text-white">Hiding Disclosive Counts</h4>
+                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                  Directly suppresses low numbers to prevent re-identification through direct observation or indirect arithmetic deduction.
+                </p>
+                <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                    <strong className="text-slate-900 dark:text-slate-100 block mb-0.5">Primary Suppression</strong>
+                    Replacing counts below threshold (N &lt; 5 or N &lt; 10) with masking symbols (e.g. &ldquo;*&rdquo; or &ldquo;&lt;10&rdquo;).
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                    <strong className="text-slate-900 dark:text-slate-100 block mb-0.5">Secondary (Complementary) Suppression</strong>
+                    Masking adjacent non-sensitive cells within the same row or column to prevent calculating the suppressed value using marginal totals.
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. Data Aggregation */}
+              <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-bold text-purple-900 dark:text-purple-300 uppercase tracking-wider">
+                  <Layers className="w-4 h-4 text-purple-700" />
+                  <span>2. Data Aggregation</span>
+                </div>
+                <h4 className="text-base font-bold text-slate-900 dark:text-white">Grouping Granular Categories</h4>
+                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                  Collapses granular observations into broader categorical buckets to elevate small frequencies safely above threshold.
+                </p>
+                <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                    <strong className="text-slate-900 dark:text-slate-100 block mb-0.5">Spatial Aggregation</strong>
+                    Reporting data at county, regional, or ICB boundaries rather than census output areas or postal districts.
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                    <strong className="text-slate-900 dark:text-slate-100 block mb-0.5">Temporal &amp; Demographic Aggregation</strong>
+                    Pooling counts across 3- or 5-year moving averages, 10-year age bands, or parent diagnostic ICD chapters.
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Perturbation & Noise */}
+              <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#047857] dark:text-emerald-300 uppercase tracking-wider">
+                  <Calculator className="w-4 h-4 text-[#047857]" />
+                  <span>3. Perturbation &amp; Noise</span>
+                </div>
+                <h4 className="text-base font-bold text-slate-900 dark:text-white">Mathematical Modification</h4>
+                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                  Injects controlled noise or rounds counts to obscure exact frequencies while preserving distribution and statistical properties.
+                </p>
+                <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                    <strong className="text-slate-900 dark:text-slate-100 block mb-0.5">Controlled Rounding &amp; PRAM</strong>
+                    Rounding table counts to base 5 or 10 (preserving additive marginals) or Post-Randomization Attribute Swapping.
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                    <strong className="text-slate-900 dark:text-slate-100 block mb-0.5">Differential Privacy</strong>
+                    Injecting mathematically calibrated noise (&epsilon; &le; 1.0) so an individual&rsquo;s presence cannot be inferred with certainty.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Graphical Plots & Visualisations SDC Mandate Callout */}
+            <div className="p-5 rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 space-y-3">
+              <div className="flex items-center gap-2 text-xs font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider">
+                <AlertTriangle className="w-4 h-4 text-amber-600" />
+                <span>Critical Mandate: SDC Applies Equally to Graphical Plots &amp; Visualisations</span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-800 dark:text-amber-100 leading-relaxed">
+                Disclosure control does not stop at tabular numbers. Visualisations such as <strong>scatter plots</strong>, <strong>Kaplan-Meier survival curves</strong>, and <strong>box plots</strong> carry identical re-identification liabilities under UK GDPR if they render single patient points or tail events with fewer than 10 patients at risk.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <div className="p-3 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 space-y-1">
+                  <span className="text-slate-900 dark:text-white font-semibold block text-[11px]">Scatter Plots</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed block">
+                    Individual (x, y) coordinates must be converted to 2D hexbins or density contours where every bin represents &ge; 10 patients.
+                  </span>
+                </div>
+                <div className="p-3 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 space-y-1">
+                  <span className="text-slate-900 dark:text-white font-semibold block text-[11px]">Survival Curves</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed block">
+                    Right-censored tails must be truncated or spline-smoothed once the at-risk count falls below 10, preventing death date extraction.
+                  </span>
+                </div>
+                <div className="p-3 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 space-y-1">
+                  <span className="text-slate-900 dark:text-white font-semibold block text-[11px]">Same PaC Engine</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed block">
+                    The Wavebound OPA PDP parses plot metadata ASTs and enforces identical k &ge; 10 rules prior to airlock export sign-off.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Technique Trade-Off Matrix */}
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-4 shadow-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">SDC Technique Trade-Off Matrix</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400">Comparing mechanism, utility advantages, and operational limitations across disclosure techniques.</p>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs flex-wrap">
+                <span className="text-slate-600 dark:text-slate-400 font-medium mr-1">Filter:</span>
+                {(['All', 'Suppression', 'Aggregation', 'Perturbation', 'Synthetic'] as const).map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setTradeoffFilter(cat)}
+                    className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors cursor-pointer ${
+                      tradeoffFilter === cat
+                        ? 'bg-[#005EB8] text-white'
+                        : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 bg-slate-100 dark:bg-slate-800'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
+                  <tr>
+                    <th className="py-3 px-4">SDC Technique</th>
+                    <th className="py-3 px-4">Primary Mechanism</th>
+                    <th className="py-3 px-4 text-[#047857] dark:text-emerald-400">Main Advantage</th>
+                    <th className="py-3 px-4 text-amber-800 dark:text-amber-400">Key Limitation</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200 dark:divide-slate-800 bg-white dark:bg-slate-900">
+                  {SDC_COMPARISON_MATRIX.filter((r) => tradeoffFilter === 'All' || r.category === tradeoffFilter).map((row, idx) => (
+                    <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                      <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white whitespace-nowrap">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-[#005EB8]" />
+                          <span>{row.technique}</span>
+                        </div>
+                      </td>
+                      <td className="py-3.5 px-4 text-slate-700 dark:text-slate-300 leading-relaxed max-w-xs">{row.primaryMechanism}</td>
+                      <td className="py-3.5 px-4 text-[#047857] dark:text-emerald-300 font-medium leading-relaxed max-w-xs">{row.mainAdvantage}</td>
+                      <td className="py-3.5 px-4 text-amber-800 dark:text-amber-300 leading-relaxed max-w-xs">{row.keyLimitation}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* 5 Canonical Statbarns + DataSHIELD Federated Pattern */}
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-5 shadow-xs">
+            <div className="space-y-1.5">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-xs font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider bg-sky-50 dark:bg-sky-950/60 px-2.5 py-0.5 rounded border border-sky-200 dark:border-sky-800">
+                  SDAP &amp; DARE UK SACRO Standard
+                </span>
+                <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400">
+                  5 Canonical Statistical Barns (outputchecking.org)
+                </span>
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+                Statbarn Output Taxonomy &amp; Federated DataSHIELD Companion
+              </h3>
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-w-4xl">
+                Developed by the Safe Data Access Professionals (SDAP) community and Safe Researcher Training, the <strong>Statbarn</strong> taxonomy groups arbitrary research outputs into five structural families (&ldquo;barns&rdquo;) that share identical disclosure mathematics. Automated Policy-as-Code airlocks route candidate files to the matching barn validator rather than treating every chart as an ad-hoc exception.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                {
+                  barn: 'Barn 1 · Frequencies & Counts',
+                  examples: 'Cross-tabulations, histograms, cohort consort flowcharts, bar charts',
+                  primaryRisk: 'Small cells (N < 10), residual differencing across margins, structural vs sampling zeros',
+                  control: 'Primary suppression (N < 10), complementary secondary suppression, or controlled rounding to base 3 / base 5.'
+                },
+                {
+                  barn: 'Barn 2 · Position & Quantiles',
+                  examples: 'Medians, quartiles, IQR, box plots, minimum/maximum extrema',
+                  primaryRisk: 'Unweighted min/max values expose exact extreme outlier patient measurements',
+                  control: 'Suppress raw Min/Max; allow smoothed medians/percentiles only when underlying bin N ≥ 10.'
+                },
+                {
+                  barn: 'Barn 3 · Means, Totals & Ratios',
+                  examples: 'Group means, weighted sums, clinical spend totals, incidence rates',
+                  primaryRisk: 'Dominance (1–2 outliers drive > 80% of sum) allowing subtraction estimation (p%-rule)',
+                  control: 'Verify (1, 80%) and (2, 90%) dominance limits; suppress or winsorize concentrated subgroups.'
+                },
+                {
+                  barn: 'Barn 4 · Correlation & Covariance',
+                  examples: 'Pearson/Spearman matrices, variance-covariance tables, PCA loadings',
+                  primaryRisk: 'High-collinearity near-1.0 fits reconstructing excluded variables from remaining fields',
+                  control: 'Enforce minimum residual degrees of freedom (df ≥ 10) and reject identity/rank-deficient matrices.'
+                },
+                {
+                  barn: 'Barn 5 · Shape, Regression & Survival',
+                  examples: 'Kaplan-Meier curves, Cox PH models, GLMs, residual plots, ROC curves',
+                  primaryRisk: 'Single-patient KM step drops leaking death dates; raw scatter/residual points exposing microdata',
+                  control: 'Require smoothed/binned survival steps or tail truncation (at-risk N ≥ 10); block raw scatter plots.'
+                }
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2.5 flex flex-col justify-between"
+                >
+                  <div className="space-y-1.5">
+                    <span className="text-xs font-bold text-[#0F294A] dark:text-sky-300 block">{item.barn}</span>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400">
+                      <strong className="text-slate-800 dark:text-slate-200">Outputs:</strong> {item.examples}
+                    </p>
+                    <p className="text-[11px] text-amber-800 dark:text-amber-300">
+                      <strong>Disclosure Risk:</strong> {item.primaryRisk}
+                    </p>
+                  </div>
+                  <div className="pt-2 border-t border-slate-200 dark:border-slate-800 text-[11px] text-[#047857] dark:text-emerald-300 font-medium">
+                    <strong>Airlock Mitigation:</strong> {item.control}
+                  </div>
+                </div>
+              ))}
+
+              {/* Companion Pattern: Federated DataSHIELD */}
+              <div className="p-4 rounded-xl bg-sky-50/70 dark:bg-sky-950/30 border border-sky-200 dark:border-sky-800/70 space-y-2.5 flex flex-col justify-between">
+                <div className="space-y-1.5">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#005EB8] dark:text-sky-300">
+                    <Network className="w-4 h-4 shrink-0" />
+                    <span>Companion Pattern: DataSHIELD Federated SDC</span>
+                  </div>
+                  <p className="text-[11px] text-slate-700 dark:text-slate-300 leading-relaxed">
+                    For multi-node federated studies that do not require an interactive workspace IDE or generative coding loop, <strong>DataSHIELD</strong> executes pre-approved non-disclosive server-side R functions at each custodian node and returns only aggregate summary statistics.
+                  </p>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                    Built-in <code className="font-mono text-[#005EB8] dark:text-sky-300">nfilter</code> disclosure traps (<code className="font-mono">nfilter.tab</code>, <code className="font-mono">nfilter.subset</code>, <code className="font-mono">nfilter.glm</code>) reject small-cell subsets or over-parameterized regressions before results leave the node.
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-sky-200 dark:border-sky-800/60 text-[10px] font-mono text-slate-600 dark:text-slate-400">
+                  Scope boundary: Structured federated API calls only (complements, does not replace, enclave IDEs &amp; LLMs).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sparse & Low-Count Analytical Methodologies */}
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-5 shadow-xs">
+            <div className="space-y-1">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">Methodological Approaches for Sparse &amp; Low-Count Data</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                Analyzing small cohorts without sacrificing statistical rigor requires specialized frameworks designed for sparse event counts.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="p-5 rounded-xl bg-slate-50/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider">
+                  <Calculator className="w-4 h-4 text-[#005EB8]" />
+                  <span>Bayesian Hierarchical Modeling</span>
+                </div>
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Borrowing Strength Across Areas</h4>
+                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                  Employs Empirical Bayes and Spatial Conditional Autoregressive (CAR) models to smooth extreme, unstable rate estimates across sparse geographical areas or rare subgroups toward a common global or neighborhood mean.
+                </p>
+                <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-[11px] text-[#005EB8] dark:text-sky-300 font-mono">
+                  theta_i ~ Normal(mu, sigma^2) + Spatial_CAR(W)
+                </div>
+              </div>
+
+              <div className="p-5 rounded-xl bg-[#f0fdf9] dark:bg-slate-950/60 border border-[#a7f3d0] dark:border-slate-800 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#047857] dark:text-emerald-400 uppercase tracking-wider">
+                  <Users className="w-4 h-4 text-[#047857]" />
+                  <span>International Consortia &amp; Registries</span>
+                </div>
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Multi-Center Sample Aggregation</h4>
+                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                  Utilizes harmonized protocols across multi-center cohorts and international rare disease registries to aggregate sample sizes globally while enforcing uniform data protection and safe governance standards.
+                </p>
+                <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-[#a7f3d0] dark:border-slate-700 text-[11px] text-[#065f46] dark:text-emerald-300 font-mono">
+                  Federated aggregation with localized privacy preservation
+                </div>
+              </div>
+
+              <div className="p-5 rounded-xl bg-[#faf5ff] dark:bg-slate-950/60 border border-[#e9d5ff] dark:border-slate-800 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-bold text-purple-900 dark:text-purple-400 uppercase tracking-wider">
+                  <GitBranch className="w-4 h-4 text-purple-700" />
+                  <span>Qualitative &amp; Mixed Methods</span>
+                </div>
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Small Cohort Rigor (N &lt; 30)</h4>
+                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                  When cohort sizes are too small for frequentist significance testing, structured methods (such as detailed case series, process tracing, or Qualitative Comparative Analysis [QCA]) identify necessary and sufficient conditions without requiring massive sample power.
+                </p>
+                <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-[#e9d5ff] dark:border-slate-700 text-[11px] text-purple-900 dark:text-purple-300 font-mono">
+                  Set-theoretic truth tables &amp; Boolean minimization
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Data Governance & Safe Access Models */}
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-5 shadow-xs">
+            <div className="space-y-1">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">Data Governance &amp; Safe Access Models</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                When raw microdata must be analyzed in its unmasked form, controlled access enclaves replace open public data release.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="p-5 rounded-xl bg-slate-50/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider">
+                  <ShieldAlert className="w-4 h-4 text-[#005EB8]" />
+                  <span>The Five Safes Framework</span>
+                </div>
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Comprehensive Access Control</h4>
+                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                  Evaluates data access across five integrated operational dimensions: Safe People (vetted researchers), Safe Projects (public-benefit purpose), Safe Settings (isolated compute), Safe Data (de-identified files), and Safe Outputs (SDC-screened results).
+                </p>
+              </div>
+
+              <div className="p-5 rounded-xl bg-[#f0fdf9] dark:bg-slate-950/60 border border-[#a7f3d0] dark:border-slate-800 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#047857] dark:text-emerald-400 uppercase tracking-wider">
+                  <Network className="w-4 h-4 text-[#047857]" />
+                  <span>Secure Enclaves</span>
+                </div>
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Zero-Egress Compute Enclaves</h4>
+                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                  Partitioned virtual environments allowing statistical code execution on unmasked microdata without permitting raw files to leave the secure server. Ingress and egress are strictly gated by policy decision points.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-xl bg-slate-50/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-3">
+                <div className="flex items-center gap-2 text-xs font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider">
+                  <Eye className="w-4 h-4 text-amber-600" />
+                  <span>Output Checking &amp; Airlocks</span>
+                </div>
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Dual Verification Gateways</h4>
+                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                  All generated tables, regression coefficients, and visual plots pass automated threshold validation and undergo independent disclosure control review by trained data custodians before export authorization is granted.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* TAB 3: MACHINE POLICY-AS-CODE (SHACL & OPA REGO) */}
       {activeTab === 'policy_code' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
@@ -1964,6 +2382,43 @@ const PercentIcon: React.FC<{ className?: string }> = ({ className }) => (
     <circle cx="17.5" cy="17.5" r="2.5" />
   </svg>
 );
+
+const SDC_COMPARISON_MATRIX: Array<{
+  technique: string;
+  category: 'Suppression' | 'Aggregation' | 'Perturbation' | 'Synthetic';
+  primaryMechanism: string;
+  mainAdvantage: string;
+  keyLimitation: string;
+}> = [
+  {
+    technique: 'Primary & Secondary Suppression',
+    category: 'Suppression',
+    primaryMechanism: 'Redact cells below threshold (N < 5 or N < 10) and complementary marginals',
+    mainAdvantage: 'Prevents exact identification and attribute disclosure from row/column sums',
+    keyLimitation: 'Reduces table utility and complicates automated missing data handling'
+  },
+  {
+    technique: 'Category Aggregation',
+    category: 'Aggregation',
+    primaryMechanism: 'Group geographical, temporal, or demographic bands into broader categories',
+    mainAdvantage: 'Preserves overall population totals and marginal mathematical consistency',
+    keyLimitation: 'Eliminates localized, high-resolution, or fine subgroup detail'
+  },
+  {
+    technique: 'Perturbation & Controlled Rounding',
+    category: 'Perturbation',
+    primaryMechanism: 'Adjust cell values by calibrated random noise or round to fixed base (e.g. base 5 or 10)',
+    mainAdvantage: 'Allows publication of complete table layouts without asterisks or blank cells',
+    keyLimitation: 'Distorts precise counts in tiny subgroups; introduces artificial variance'
+  },
+  {
+    technique: 'Synthetic Microdata',
+    category: 'Synthetic',
+    primaryMechanism: 'Generate artificial datasets statistically matching real multivariate distributions',
+    mainAdvantage: 'Zero risk of direct individual identification from released microdata records',
+    keyLimitation: 'Requires complex generative modeling; may fail to capture rare interactions'
+  }
+];
 
 const SHACL_SDC_SNIPPET = `@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix tre: <https://w3id.org/wavebound/tre#> .

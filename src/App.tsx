@@ -19,7 +19,7 @@ import { IGQuickGuide } from './components/IGQuickGuide';
 import { ResourcesPage } from './components/ResourcesPage';
 import { LLMSecurityEnclave } from './components/LLMSecurityEnclave';
 import { ImplementationTrack } from './components/ImplementationTrack';
-import { GovernAssureWorkspace } from './components/GovernAssureWorkspace';
+import { GovernAssureWorkspace, GovernAssureView } from './components/GovernAssureWorkspace';
 import { BuildDeployWorkspace } from './components/BuildDeployWorkspace';
 import { FeedbackModal } from './components/FeedbackModal';
 import { getSectionIdForGlossaryTerm } from './data/glossaryData';
@@ -33,7 +33,16 @@ export default function App() {
   const [targetSectionId, setTargetSectionId] = useState<string | null>(null);
   const [targetHighlightTerm, setTargetHighlightTerm] = useState<string | undefined>(undefined);
   const [targetDecisionId, setTargetDecisionId] = useState<string | null>(null);
+  const [governAssureView, setGovernAssureView] = useState<GovernAssureView>('simulator');
+  const [governAssureViewTrigger, setGovernAssureViewTrigger] = useState<number>(0);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+
+  const handleOpenGovernAssure = (view: GovernAssureView = 'simulator') => {
+    setGovernAssureView(view);
+    setGovernAssureViewTrigger((prev) => prev + 1);
+    setActiveTab('govern-assure');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleNavigateToGlossaryTerm = (termId: string) => {
     setActiveGlossaryTermId(termId);
@@ -75,6 +84,10 @@ export default function App() {
               setTargetSectionId(null);
               setTargetHighlightTerm(undefined);
             }
+            if (tab === 'govern-assure') {
+              handleOpenGovernAssure('simulator');
+              return;
+            }
             setActiveTab(tab);
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
@@ -99,6 +112,8 @@ export default function App() {
 
           {activeTab === 'govern-assure' && (
             <GovernAssureWorkspace
+              initialView={governAssureView}
+              initialViewTrigger={governAssureViewTrigger}
               onNavigateToBuildDeploy={() => {
                 setActiveTab('build-deploy');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -248,10 +263,8 @@ export default function App() {
 
           {activeTab === 'resources' && (
             <ResourcesPage
-              onNavigateToGovernAssure={() => {
-                setActiveTab('govern-assure');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
+              onNavigateToGovernAssure={() => handleOpenGovernAssure('simulator')}
+              onNavigateToSDCHub={() => handleOpenGovernAssure('sdc_hub')}
             />
           )}
 

@@ -36,7 +36,7 @@ const AFFECTED_AREAS = [
   'Enclave & LLM Security',
   'Further Resources & Standards',
   'Glossary',
-  'Wavebound Policy Quiz',
+  'Quiz',
   'Other / General'
 ] as const;
 

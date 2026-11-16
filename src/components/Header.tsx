@@ -109,13 +109,19 @@ export const Header: React.FC<HeaderProps> = ({
     return [...terms.slice(0, 4), ...modules.slice(0, 3)];
   }, [globalSearch]);
 
-  // Pillar 1: Playbook, Ontology & Guides (Learn & Explore)
+  // Pillar 1: Playbook & Guides (playbook, rollout, ontology, concepts primer)
   const playbookGuidesGroup: NavGroupItem[] = [
     {
       id: 'playbook',
       label: 'Wavebound PaC Playbook',
       desc: 'Step-by-step plain-English & technical guide from ontology to safeguards',
       icon: <FileText className="w-4 h-4 text-sky-400" />
+    },
+    {
+      id: 'implementation-track',
+      label: 'Transitioning to Production: Rollout & Decisions',
+      desc: '16-week non-breaking policy adoption roadmap, checklists & D-001–D-009 sign-offs',
+      icon: <Workflow className="w-4 h-4 text-purple-400" />
     },
     {
       id: 'graph',
@@ -128,28 +134,22 @@ export const Header: React.FC<HeaderProps> = ({
       label: 'Concepts Visual Primer',
       desc: 'Quick visual tour of AI Five Safes, Caldicott 1–8, Data Catalogue & SATRE',
       icon: <BookOpen className="w-4 h-4 text-amber-300" />
-    },
-    {
-      id: 'implementation-track',
-      label: 'Transitioning to Production: Rollout & Decisions',
-      desc: '16-week non-breaking policy adoption roadmap, checklists & D-001–D-009 sign-offs',
-      icon: <Workflow className="w-4 h-4 text-purple-400" />
     }
   ];
 
-  // Pillar 2: Evidence, Standards & Further Resources (Accountability & Guidance)
+  // Pillar 2: Evidence & Resources (foundations, evidence pack, glossary, further resources)
   const evidenceResourcesGroup: NavGroupItem[] = [
-    {
-      id: 'resources',
-      label: 'Further Resources & Official Standards',
-      desc: 'Searchable library of laws, ISO standards, DSA, Statbarn, DataSHIELD, RO-Crate & EHDS',
-      icon: <ExternalLink className="w-4 h-4 text-cyan-300" />
-    },
     {
       id: 'governance-atlas',
       label: 'Foundations & 10-Stage Schematic',
       desc: 'Plain-English desk reference, statutory workflow, FOIA summary & templates',
       icon: <HeartHandshake className="w-4 h-4 text-emerald-300" />
+    },
+    {
+      id: 'govern-assure',
+      label: 'Evidence Packs & Caldicott 8 Register',
+      desc: 'Standardised compliance evidence & public transparency log in Govern & Assure',
+      icon: <Scale className="w-4 h-4 text-amber-400" />
     },
     {
       id: 'glossary',
@@ -158,10 +158,10 @@ export const Header: React.FC<HeaderProps> = ({
       icon: <Bookmark className="w-4 h-4 text-slate-300" />
     },
     {
-      id: 'govern-assure',
-      label: 'Evidence Packs & Caldicott 8 Register',
-      desc: 'Standardised compliance evidence & public transparency log in Govern & Assure',
-      icon: <Scale className="w-4 h-4 text-amber-400" />
+      id: 'resources',
+      label: 'Further Resources & Official Standards',
+      desc: 'Searchable library of laws, ISO standards, DSA, Statbarn, DataSHIELD, RO-Crate & EHDS',
+      icon: <ExternalLink className="w-4 h-4 text-cyan-300" />
     }
   ];
 
@@ -395,7 +395,7 @@ export const Header: React.FC<HeaderProps> = ({
                 onMouseLeave={handleMouseLeave}
               >
                 <div className="px-2.5 py-1 text-[11px] font-semibold text-sky-300 border-b border-[#1b3f68]">
-                  Pillar 1 · Explore the Playbook, Graphs &amp; Rollout Plan
+                  Pillar 1 · Playbook, Rollout, Ontology &amp; Concepts Primer
                 </div>
                 {playbookGuidesGroup.map((subItem) => {
                   const isSubActive = activeTab === subItem.id;
@@ -436,7 +436,7 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <button
               onClick={() => {
-                onSelectTab('resources');
+                onSelectTab('governance-atlas');
                 setOpenDropdown(null);
               }}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
@@ -457,7 +457,7 @@ export const Header: React.FC<HeaderProps> = ({
                 onMouseLeave={handleMouseLeave}
               >
                 <div className="px-2.5 py-1 text-[11px] font-semibold text-cyan-300 border-b border-[#1b3f68]">
-                  Pillar 2 · Further Resources, Foundations &amp; Glossary
+                  Pillar 2 · Foundations, Evidence Pack, Glossary &amp; Resources
                 </div>
                 {evidenceResourcesGroup.map((subItem) => {
                   const isSubActive = activeTab === subItem.id;
@@ -562,7 +562,7 @@ export const Header: React.FC<HeaderProps> = ({
             }`}
           >
             <HelpCircle className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Policy Quiz</span>
+            <span>Quiz</span>
           </button>
 
           <button
@@ -703,7 +703,7 @@ export const Header: React.FC<HeaderProps> = ({
                 }`}
               >
                 <HelpCircle className="w-4 h-4 text-cyan-400" />
-                <span>Wavebound Policy Quiz</span>
+                <span>Quiz</span>
               </button>
 
               <button

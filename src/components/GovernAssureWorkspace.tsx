@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { WaveboundLogo } from './WaveboundLogo';
 import { EvidenceDossierModal } from './EvidenceDossierModal';
 import { StatutoryMatrixView } from './StatutoryMatrixView';
@@ -129,7 +129,17 @@ interface GateEvaluation {
   decisionRole: string;
 }
 
+export type GovernAssureView =
+  | 'simulator'
+  | 'statutory_matrix'
+  | 'five_safes_pillars'
+  | 'sdc_hub'
+  | 'transparency_ledger'
+  | 'procurement_readiness';
+
 interface GovernAssureWorkspaceProps {
+  initialView?: GovernAssureView;
+  initialViewTrigger?: number;
   onNavigateToBuildDeploy?: () => void;
   onNavigateToDecisionRegister?: (decisionId?: string) => void;
   onNavigateToSandbox?: () => void;
@@ -137,13 +147,19 @@ interface GovernAssureWorkspaceProps {
 }
 
 export const GovernAssureWorkspace: React.FC<GovernAssureWorkspaceProps> = ({
+  initialView = 'simulator',
+  initialViewTrigger,
   onNavigateToBuildDeploy,
   onNavigateToDecisionRegister,
   onNavigateToSandbox,
   onNavigateToPlaybook
 }) => {
   // Workspace View Selection (Simulator vs Consolidated Statutory Matrix vs Five Safes Pillar Deep-Dive vs SDC Hub vs Caldicott 8 Transparency vs Procurement Readiness)
-  const [workspaceView, setWorkspaceView] = useState<'simulator' | 'statutory_matrix' | 'five_safes_pillars' | 'sdc_hub' | 'transparency_ledger' | 'procurement_readiness'>('simulator');
+  const [workspaceView, setWorkspaceView] = useState<GovernAssureView>(initialView);
+
+  useEffect(() => {
+    setWorkspaceView(initialView);
+  }, [initialView, initialViewTrigger]);
 
   // Active Scenario State
   const [selectedPresetId, setSelectedPresetId] = useState<string>('scen_multi_site');

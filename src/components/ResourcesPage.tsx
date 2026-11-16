@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { COMPREHENSIVE_RESOURCES } from '../data/resourcesData';
-import { QuantitativeSDCHub } from './QuantitativeSDCHub';
 import { ProcurementReadinessHub } from './ProcurementReadinessHub';
 import {
   ExternalLink,
@@ -8,24 +7,25 @@ import {
   BookOpen,
   AlertTriangle,
   Calculator,
-  Tag,
-  FileCheck2,
+  Award,
   CheckCircle2,
-  Award
+  ArrowRight
 } from 'lucide-react';
 
 interface ResourcesPageProps {
   initialSearchQuery?: string;
-  initialView?: 'sdc-guide' | 'compendium' | 'procurement';
+  initialView?: 'compendium' | 'procurement';
   onNavigateToGovernAssure?: () => void;
+  onNavigateToSDCHub?: () => void;
 }
 
 export const ResourcesPage: React.FC<ResourcesPageProps> = ({
   initialSearchQuery = '',
   initialView = 'compendium',
-  onNavigateToGovernAssure
+  onNavigateToGovernAssure,
+  onNavigateToSDCHub
 }) => {
-  const [activeView, setActiveView] = useState<'sdc-guide' | 'compendium' | 'procurement'>(initialView);
+  const [activeView, setActiveView] = useState<'compendium' | 'procurement'>(initialView);
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
@@ -53,6 +53,14 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
     return matchesSearch && matchesCategory;
   });
 
+  const handleOpenSDCGate = () => {
+    if (onNavigateToSDCHub) {
+      onNavigateToSDCHub();
+    } else if (onNavigateToGovernAssure) {
+      onNavigateToGovernAssure();
+    }
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
       {/* Header Banner - Clean Dark Navy Card */}
@@ -76,14 +84,14 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
             </span>
             <span aria-hidden="true">·</span>
             <span>Primary Bodies: UK Parliament, ONS, UKSA, DSA, W3C, DARE UK &amp; EU EHDS</span>
-            {onNavigateToGovernAssure && (
+            {(onNavigateToSDCHub || onNavigateToGovernAssure) && (
               <>
                 <span aria-hidden="true">·</span>
                 <button
-                  onClick={onNavigateToGovernAssure}
+                  onClick={handleOpenSDCGate}
                   className="text-cyan-300 hover:text-white underline font-semibold cursor-pointer"
                 >
-                  Open Live SDC &amp; Gate Simulators
+                  Open Quantitative SDC Gate in Simulators &amp; Lab
                 </button>
               </>
             )}
@@ -91,49 +99,49 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
         </div>
       </div>
 
-      {/* View Switcher: Further Resources Compendium vs SATRE Procurement vs SDC Reference */}
-      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-[#0c2340] rounded-xl border border-cyan-900/50 w-full sm:w-auto">
-        <button
-          onClick={() => setActiveView('compendium')}
-          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
-            activeView === 'compendium'
-              ? 'bg-[#00A389] text-white shadow-md font-bold'
-              : 'text-slate-300 hover:text-white hover:bg-[#07192f]'
-          }`}
-        >
-          <BookOpen className="w-4 h-4" />
-          <span>Further Resources Library ({COMPREHENSIVE_RESOURCES.length})</span>
-        </button>
+      {/* View Switcher: Further Resources Compendium vs SATRE Procurement Matrix + Link to SDC Gate in Simulators */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-2 p-1.5 bg-[#0c2340] rounded-xl border border-cyan-900/50 w-full sm:w-auto">
+          <button
+            onClick={() => setActiveView('compendium')}
+            className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              activeView === 'compendium'
+                ? 'bg-[#00A389] text-white shadow-md font-bold'
+                : 'text-slate-300 hover:text-white hover:bg-[#07192f]'
+            }`}
+          >
+            <BookOpen className="w-4 h-4" />
+            <span>Further Resources Library ({COMPREHENSIVE_RESOURCES.length})</span>
+          </button>
 
-        <button
-          onClick={() => setActiveView('procurement')}
-          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
-            activeView === 'procurement'
-              ? 'bg-[#00A389] text-white shadow-md font-bold'
-              : 'text-slate-300 hover:text-white hover:bg-[#07192f]'
-          }`}
-        >
-          <Award className="w-4 h-4 text-teal-400" />
-          <span>SATRE &amp; Procurement Matrix</span>
-        </button>
+          <button
+            onClick={() => setActiveView('procurement')}
+            className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              activeView === 'procurement'
+                ? 'bg-[#00A389] text-white shadow-md font-bold'
+                : 'text-slate-300 hover:text-white hover:bg-[#07192f]'
+            }`}
+          >
+            <Award className="w-4 h-4 text-teal-400" />
+            <span>SATRE &amp; Procurement Matrix</span>
+          </button>
+        </div>
 
-        <button
-          onClick={() => setActiveView('sdc-guide')}
-          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
-            activeView === 'sdc-guide'
-              ? 'bg-[#00A389] text-white shadow-md font-bold'
-              : 'text-slate-300 hover:text-white hover:bg-[#07192f]'
-          }`}
-        >
-          <Calculator className="w-4 h-4" />
-          <span>SDC &amp; Low-Count Calculator</span>
-        </button>
+        {(onNavigateToSDCHub || onNavigateToGovernAssure) && (
+          <button
+            onClick={handleOpenSDCGate}
+            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#0c2340] hover:bg-[#123154] text-cyan-200 border border-cyan-800/70 text-xs font-semibold transition-colors shadow-xs cursor-pointer"
+            title="Open the comprehensive Quantitative SDC Math & Airlock Governance Gate inside Simulators & Lab"
+          >
+            <Calculator className="w-4 h-4 text-amber-400 shrink-0" />
+            <span>Quantitative SDC &amp; Airlock Gate (Simulators &amp; Lab)</span>
+            <ArrowRight className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+          </button>
+        )}
       </div>
 
-      {/* Conditionally Render SDC Methods Guide, Procurement Matrix, or Compendium */}
-      {activeView === 'sdc-guide' ? (
-        <QuantitativeSDCHub />
-      ) : activeView === 'procurement' ? (
+      {/* Conditionally Render Procurement Matrix or Compendium */}
+      {activeView === 'procurement' ? (
         <ProcurementReadinessHub />
       ) : (
         <>
