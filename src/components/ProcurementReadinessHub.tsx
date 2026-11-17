@@ -231,13 +231,26 @@ export const ProcurementReadinessHub: React.FC<ProcurementReadinessHubProps> = (
     const scorePct = Math.round(((compliant + partially * 0.5) / total) * 100);
     const mandatoryScorePct = Math.round((mandatoryPassed / mandatory.length) * 100);
 
+    const satreControls = controls.filter((c) => c.framework === 'SATRE 2.0');
+    const satrePassed = satreControls.filter((c) => c.status === 'COMPLIANT').length;
+    const ehdsControls = controls.filter((c) => c.framework === 'EHDS (EU 2025/327)');
+    const ehdsPassed = ehdsControls.filter((c) => c.status === 'COMPLIANT').length;
+    const dsptControls = controls.filter((c) => c.framework === 'NHS DSPT 24/25');
+    const dsptPassed = dsptControls.filter((c) => c.status === 'COMPLIANT').length;
+
     return {
       total,
       compliant,
       partially,
       scorePct,
       mandatoryScorePct,
-      isTenderReady: mandatoryScorePct === 100
+      isTenderReady: mandatoryScorePct === 100,
+      satreTotal: satreControls.length,
+      satrePassed,
+      ehdsTotal: ehdsControls.length,
+      ehdsPassed,
+      dsptTotal: dsptControls.length,
+      dsptPassed
     };
   }, [controls]);
 
@@ -277,7 +290,7 @@ export const ProcurementReadinessHub: React.FC<ProcurementReadinessHubProps> = (
   // Export Track 1 Markdown
   const handleExportMarkdown = () => {
     const markdown = `# PROJECT WAVEBOUND: NHS & PUBLIC SECTOR PROCUREMENT READINESS DOSSIER
-**Framework Alignment: SATRE v1.1 · NHS DSPT 2024/25 · ISO/IEC 27001:2022 · DCB0129 / ISO 42001**
+**Framework Alignment: SATRE 2.0 (5 Pillars) · EHDS (EU 2025/327) · NHS DSPT 2024/25 · ISO/IEC 27001:2022 · DCB0129 / ISO 42001**
 **Readiness Score: ${metrics.scorePct}% (${metrics.compliant}/${metrics.total} Verified Controls Compliant)**
 **Mandatory Compliance: ${metrics.mandatoryScorePct}% Pass Rate**
 *Timestamp: ${new Date().toISOString()}*
@@ -1084,7 +1097,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                   NHS &amp; Public Sector Procurement Readiness Hub
                 </h1>
                 <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
-                  Working starter baseline and illustrative compliance mapping against <strong>SATRE v1.1</strong>, <strong>NHS DSPT 2024/25</strong>, <strong>ISO/IEC 27001:2022</strong>, and <strong>DCB0129 Clinical Safety</strong> (work in progress). These reference patterns and sample contractual clauses are provided as starting templates and discussion baselines for your Trust or regional IG committee to adapt, scrutinise, and validate against local risk appetites.
+                  Working starter baseline and illustrative compliance mapping against <strong>SATRE 2.0 (5 Pillars incl. Federation)</strong>, <strong>EU EHDS (Regulation (EU) 2025/327)</strong>, <strong>NHS DSPT 2024/25</strong>, <strong>ISO/IEC 27001:2022</strong>, and <strong>DCB0129 / MHRA Clinical Safety</strong> (work in progress). These reference patterns and sample contractual clauses are provided as starting templates and discussion baselines for your Trust or regional IG committee to adapt, scrutinise, and validate against local risk appetites.
                 </p>
 
                 <div className="flex flex-wrap items-center gap-3 pt-2 text-xs">
@@ -1133,20 +1146,33 @@ In my opinion, the residual clinical risks associated with the deployment and op
                 <span className="text-xs text-teal-400 font-semibold font-mono">Tender Ready</span>
               </div>
               <p className="text-[11px] text-slate-400">
-                Weighted across 17 mandatory &amp; high-criticality controls.
+                Weighted across <span className="tabular-nums">{metrics.total}</span> mandatory &amp; high-criticality controls.
               </p>
             </div>
 
             <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/40 space-y-1 shadow-md">
               <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold block">
-                SATRE v1.1 Alignment
+                SATRE 2.0 (5 Pillars)
               </span>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-extrabold text-white">7/7</span>
-                <span className="text-xs text-teal-400 font-semibold font-mono">100% Passed</span>
+                <span className="text-3xl font-extrabold text-white tabular-nums">{metrics.satrePassed}/{metrics.satreTotal}</span>
+                <span className="text-xs text-teal-400 font-semibold font-mono">Controls Documented</span>
               </div>
               <p className="text-[11px] text-slate-400">
-                Zero-WAN egress, air-gapped mirrors, root-read-only enclaves, quantitative SDC.
+                Zero-WAN egress, air-gapped mirrors, Disclosure Control airlock, Supporting Capabilities &amp; Federation.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/40 space-y-1 shadow-md">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold block">
+                EU EHDS (2025/327) Cross-Walk
+              </span>
+              <div className="flex items-baseline gap-2">
+                <span className="text-3xl font-extrabold text-white tabular-nums">{metrics.ehdsPassed}/{metrics.ehdsTotal}</span>
+                <span className="text-xs text-teal-400 font-semibold font-mono">Technical Correspondence</span>
+              </div>
+              <p className="text-[11px] text-slate-400">
+                Article 50 SPE isolation, Health Data Access Body permit mapping, anonymised output checks &amp; HealthDCAT-AP.
               </p>
             </div>
 
@@ -1155,24 +1181,11 @@ In my opinion, the residual clinical risks associated with the deployment and op
                 NHS DSPT 24/25 Compliance
               </span>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-extrabold text-white">5/5</span>
+                <span className="text-3xl font-extrabold text-white tabular-nums">{metrics.dsptPassed}/{metrics.dsptTotal}</span>
                 <span className="text-xs text-teal-400 font-semibold font-mono">Standards Met</span>
               </div>
               <p className="text-[11px] text-slate-400">
                 NDOO opt-out respect, non-blocking admission webhooks, W3C PROV-O audit ledger.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/40 space-y-1 shadow-md">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold block">
-                Clinical Safety &amp; AI Risk
-              </span>
-              <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-extrabold text-white">2/2</span>
-                <span className="text-xs text-teal-400 font-semibold font-mono">ISO 42001 Bound</span>
-              </div>
-              <p className="text-[11px] text-slate-400">
-                Hazard logging, CSO sign-off, Stanford UIT non-personhood.
               </p>
             </div>
           </div>
@@ -1233,7 +1246,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                 </div>
 
                 <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-                  {['All', 'SATRE v1.1', 'NHS DSPT 24/25', 'ISO 27001:2022', 'DCB0129 / ISO 42001'].map((fw) => (
+                  {['All', 'SATRE 2.0', 'EHDS (EU 2025/327)', 'NHS DSPT 24/25', 'ISO 27001:2022', 'DCB0129 / ISO 42001'].map((fw) => (
                     <button
                       key={fw}
                       onClick={() => setSelectedFramework(fw)}
@@ -1442,7 +1455,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
 
               <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
                 <p>
-                  This document certifies that the <strong>Project Wavebound Policy-as-Code Architecture</strong> satisfies all mandatory controls required by the <strong>Standard Architecture for Trusted Research Environments (SATRE v1.1)</strong> and the <strong>NHS Data Security and Protection Toolkit (DSPT 2024/25)</strong> for Tier 2 pseudonymous and Tier 3 identifiable microdata workloads.
+                  This baseline statement documents how the <strong>Project Wavebound Policy-as-Code Architecture</strong> maps illustrative technical controls against the <strong>Standard Architecture for Trusted Research Environments (SATRE 2.0 — 5 Pillars including Supporting Capabilities &amp; Federation)</strong>, the <strong>NHS Data Security and Protection Toolkit (DSPT 2024/25)</strong>, and technical requirements of <strong>Regulation (EU) 2025/327 (European Health Data Space Chapter IV Secure Processing Environments and anonymised output controls)</strong> for Tier 2 pseudonymous and Tier 3 identifiable microdata workloads, subject to independent local Information Governance review.
                 </p>
 
                 <div className="p-4 rounded-xl bg-slate-950/80 border border-cyan-900/60 space-y-2">

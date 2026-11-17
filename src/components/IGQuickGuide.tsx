@@ -1198,49 +1198,75 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* 1. HERO BANNER - Unified Deep Navy & Turquoise Card */}
       <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-10 relative overflow-hidden shadow-xl text-white">
         <div className="absolute top-0 right-0 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 space-y-3 max-w-3xl">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-mono font-bold text-teal-300 bg-[#07192f] px-2.5 py-1 rounded border border-teal-500/40 flex items-center gap-1.5 shadow-xs">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#00A389]" />
-              <span>Foundations Reference Guide</span>
-            </span>
-            <span className="text-xs font-mono text-slate-300 bg-[#07192f] px-2.5 py-1 rounded border border-cyan-900/60 font-semibold">
-              UK GDPR · Caldicott Principles 1–8 · NHS Act 2006 s251 · DEA 2017 · EHDS
-            </span>
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-8 space-y-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-mono font-bold text-teal-300 bg-[#07192f] px-2.5 py-1 rounded border border-teal-500/40 flex items-center gap-1.5 shadow-xs">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#00A389]" />
+                <span>Foundations Reference Guide</span>
+              </span>
+              <span className="text-xs font-mono text-slate-300 bg-[#07192f] px-2.5 py-1 rounded border border-cyan-900/60 font-semibold">
+                UK GDPR · Caldicott Principles 1–8 · NHS Act 2006 s251 · DEA 2017 · EHDS
+              </span>
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight text-balance">
+              Foundations: Information Governance &amp; Statutory Desk Reference
+            </h1>
+
+            <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
+              A clear, jargon-free starting point for Caldicott Guardians, Data Protection Officers, ethics committees, clinical researchers, and interested members of the public—explaining how legal safeguards, the Five Safes, and Statbarn output checks keep data secure.
+            </p>
+
+            <div className="pt-1 flex flex-wrap items-center gap-3 text-xs sm:text-sm">
+              {onNavigateToGovernAssure && (
+                <button
+                  onClick={onNavigateToGovernAssure}
+                  className="px-4 py-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold flex items-center gap-2 shadow-md shadow-teal-500/20 transition-colors cursor-pointer"
+                >
+                  <Scale className="w-4 h-4 text-slate-950" />
+                  <span>Open Scenario Evaluator &amp; Assurance Engine</span>
+                </button>
+              )}
+              {onNavigateToResources && (
+                <button
+                  onClick={onNavigateToResources}
+                  className="px-4 py-2.5 rounded-xl bg-[#07192f] hover:bg-[#123154] text-cyan-200 border border-cyan-500/40 font-semibold flex items-center gap-2 transition-colors cursor-pointer"
+                >
+                  <BookOpen className="w-4 h-4 text-cyan-400" />
+                  <span>Browse Further Resources</span>
+                </button>
+              )}
+            </div>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight text-balance">
-            Foundations: Information Governance &amp; Statutory Desk Reference
-          </h1>
-
-          <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-            A clear, jargon-free starting point for Caldicott Guardians, Data Protection Officers, ethics committees, clinical researchers, and interested members of the public—explaining how legal safeguards, the Five Safes, and Statbarn output checks keep data secure.
-          </p>
-
-          <div className="pt-2 flex flex-wrap items-center gap-3 text-xs">
-            {onNavigateToGovernAssure && (
-              <button
-                onClick={onNavigateToGovernAssure}
-                className="px-4 py-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold flex items-center gap-2 shadow-md shadow-teal-500/20 transition-colors cursor-pointer"
-              >
-                <Scale className="w-4 h-4 text-slate-950" />
-                <span>Open Scenario Evaluator &amp; Assurance Engine</span>
-              </button>
-            )}
-            {onNavigateToResources && (
-              <button
-                onClick={onNavigateToResources}
-                className="px-4 py-2.5 rounded-xl bg-[#07192f] hover:bg-[#123154] text-cyan-200 border border-cyan-500/40 font-semibold flex items-center gap-2 transition-colors cursor-pointer"
-              >
-                <BookOpen className="w-4 h-4 text-cyan-400" />
-                <span>Browse Further Resources</span>
-              </button>
-            )}
+          <div className="lg:col-span-4 bg-[#07192f]/90 border border-cyan-800/60 rounded-xl p-5 space-y-3">
+            <div className="text-xs font-mono uppercase tracking-wider font-bold text-teal-300">
+              Desk Reference Coverage
+            </div>
+            <div className="grid grid-cols-2 gap-2.5 text-xs">
+              <div className="p-2.5 rounded-lg bg-slate-950/70 border border-cyan-900/50">
+                <div className="text-base font-bold text-white tabular-nums">5</div>
+                <div className="text-slate-300">Five Safes Chapters</div>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-950/70 border border-cyan-900/50">
+                <div className="text-base font-bold text-white tabular-nums">10</div>
+                <div className="text-slate-300">Governance Stages</div>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-950/70 border border-cyan-900/50">
+                <div className="text-base font-bold text-white tabular-nums">8</div>
+                <div className="text-slate-300">Caldicott Principles</div>
+              </div>
+              <div className="p-2.5 rounded-lg bg-slate-950/70 border border-cyan-900/50">
+                <div className="text-base font-bold text-white tabular-nums">5</div>
+                <div className="text-slate-300">Knowledge Check Qs</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1290,14 +1316,14 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                         : 'bg-slate-950/80 border-cyan-900/40 text-slate-300 hover:bg-[#0c2340] hover:border-cyan-500/40 hover:text-white'
                     }`}
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono font-bold text-teal-400">Chapter {ch.number}</span>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#07192f] border border-cyan-900/60 text-slate-300 font-semibold">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-mono font-bold text-teal-400 tabular-nums">Chapter {ch.number}</span>
+                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#07192f] border border-cyan-900/60 text-slate-300 font-semibold">
                         {ch.badge.split('&')[0]}
                       </span>
                     </div>
-                    <strong className="text-sm font-bold block text-white mt-1">{ch.title}</strong>
-                    <p className="text-xs text-slate-300 line-clamp-2 mt-1 leading-relaxed">{ch.shortDesc}</p>
+                    <strong className="text-sm sm:text-base font-bold block text-white mt-1.5">{ch.title}</strong>
+                    <p className="text-xs sm:text-sm text-slate-300 line-clamp-2 mt-1 leading-relaxed">{ch.shortDesc}</p>
                   </button>
                 );
               })}
@@ -1308,13 +1334,13 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
           <div className="lg:col-span-8 bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xl text-white">
             <div className="space-y-2 border-b border-cyan-900/60 pb-5">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono font-bold text-teal-300 bg-[#07192f] px-2.5 py-0.5 rounded border border-teal-500/40">
+                <span className="text-xs font-mono font-bold text-teal-300 bg-[#07192f] px-2.5 py-0.5 rounded border border-teal-500/40 tabular-nums">
                   Chapter {selectedChapter.number}
                 </span>
                 <span className="text-xs font-mono text-cyan-300 font-medium">{selectedChapter.badge}</span>
               </div>
               <h2 className="text-2xl font-bold text-white tracking-tight">{selectedChapter.title}</h2>
-              <p className="text-xs text-cyan-300 font-mono font-medium">Statutory Authority: {renderGlossaryBadges(selectedChapter.statutoryBasis, 'stat-basis')}</p>
+              <p className="text-xs sm:text-sm text-cyan-300 font-mono font-medium">Statutory Authority: {renderGlossaryBadges(selectedChapter.statutoryBasis, 'stat-basis')}</p>
             </div>
 
             {/* Key Safeguards Callout - Dark Navy & Turquoise Container */}
@@ -1323,11 +1349,11 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                 <ShieldCheck className="w-4 h-4 text-[#00A389]" />
                 <span>Foundational Information Governance Safeguards &amp; Core Rules</span>
               </h3>
-              <div className="space-y-2">
+              <div className="space-y-2.5">
                 {selectedChapter.keySafeguards.map((item, idx) => (
-                  <div key={idx} className="p-3.5 rounded-xl bg-slate-950/80 border border-teal-500/40 flex items-start gap-3 shadow-xs">
+                  <div key={idx} className="p-4 rounded-xl bg-slate-950/80 border border-teal-500/40 flex items-start gap-3 shadow-xs">
                     <CheckCircle2 className="w-4 h-4 text-[#00A389] shrink-0 mt-0.5" />
-                    <p className="text-xs text-slate-200 leading-relaxed font-medium">{renderGlossaryBadges(item, `sg-${idx}`)}</p>
+                    <p className="text-sm text-slate-200 leading-relaxed font-medium">{renderGlossaryBadges(item, `sg-${idx}`)}</p>
                   </div>
                 ))}
               </div>
@@ -1341,34 +1367,34 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               </h3>
               <div className="space-y-2.5">
                 {selectedChapter.workflowSteps.map((wf, idx) => (
-                  <div key={idx} className="p-3.5 rounded-xl bg-slate-950/80 border border-[#1b3f68] space-y-1 shadow-xs">
-                    <div className="flex items-center justify-between">
-                      <strong className="text-cyan-200 text-xs font-bold">{renderGlossaryBadges(wf.title, `wft-${idx}`)}</strong>
-                      <span className="text-[10px] font-mono text-cyan-300 bg-[#07192f] px-2 py-0.5 rounded border border-cyan-700/60 font-semibold">
+                  <div key={idx} className="p-4 rounded-xl bg-slate-950/80 border border-[#1b3f68] space-y-1.5 shadow-xs">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <strong className="text-cyan-200 text-sm font-bold">{renderGlossaryBadges(wf.title, `wft-${idx}`)}</strong>
+                      <span className="text-xs font-mono text-cyan-300 bg-[#07192f] px-2.5 py-0.5 rounded border border-cyan-700/60 font-semibold">
                         Role: {wf.responsibleParty}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-300 leading-relaxed">{renderGlossaryBadges(wf.description, `wfd-${idx}`)}</p>
+                    <p className="text-sm text-slate-300 leading-relaxed">{renderGlossaryBadges(wf.description, `wfd-${idx}`)}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Executive Callout - Amber Border on Dark Slate */}
-            <div className="p-4 rounded-xl bg-slate-950/90 border border-amber-500/40 flex items-start gap-3 shadow-xs">
+            <div className="p-4 sm:p-5 rounded-xl bg-slate-950/90 border border-amber-500/40 flex items-start gap-3 shadow-xs">
               <Info className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-              <div className="space-y-1 text-xs">
-                <strong className="text-amber-400 font-mono uppercase text-[10px] block tracking-wider font-bold">
+              <div className="space-y-1">
+                <strong className="text-amber-400 font-mono uppercase text-xs block tracking-wider font-bold">
                   Caldicott &amp; DPO Executive Directive:
                 </strong>
-                <p className="text-amber-200 leading-relaxed italic font-medium">{renderGlossaryBadges(selectedChapter.executiveCallout, 'callout')}</p>
+                <p className="text-sm text-amber-200 leading-relaxed italic font-medium">{renderGlossaryBadges(selectedChapter.executiveCallout, 'callout')}</p>
               </div>
             </div>
           </div>
 
           {/* COMPREHENSIVE EXECUTIVE DESK REFERENCE: 4 FOUNDATIONAL PILLARS (COL-SPAN 12) */}
           <div className="lg:col-span-12 bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 space-y-6 mt-4 shadow-xl text-white">
-            <div className="border-b border-cyan-900/60 pb-4 space-y-1">
+            <div className="border-b border-cyan-900/60 pb-4 space-y-1.5">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-mono font-bold text-teal-300 uppercase tracking-wider bg-[#07192f] px-2.5 py-0.5 rounded border border-teal-500/40">
                   Comprehensive Desk Reference
@@ -1378,21 +1404,21 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Information Governance Principles &amp; Privacy Safeguards Reference
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-4xl">
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
                 An authoritative overview of UK health data law, the 8 Caldicott Principles, the Five Safes framework, and ethical governance invariants for clinical researchers, IG leads, and review panels.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
               {/* Pillar 1: The 8 Caldicott Principles */}
-              <div className="p-5 rounded-xl bg-slate-950/80 border border-purple-900/60 space-y-3 flex flex-col justify-between shadow-md">
-                <div className="space-y-2">
+              <div className="p-5 rounded-xl bg-slate-950/80 border border-purple-900/60 space-y-3 flex flex-col justify-between shadow-md h-full">
+                <div className="space-y-2.5">
                   <div className="flex items-center gap-2 text-xs font-bold text-purple-300 uppercase tracking-wider font-mono">
                     <Scale className="w-4 h-4 text-purple-400" />
                     <span>The 8 Caldicott Principles</span>
                   </div>
-                  <h4 className="text-sm font-bold text-purple-200">National Data Guardian Baseline</h4>
-                  <ul className="text-xs text-slate-300 space-y-1.5 leading-relaxed">
+                  <h4 className="text-sm sm:text-base font-bold text-purple-200">National Data Guardian Baseline</h4>
+                  <ul className="text-xs sm:text-sm text-slate-300 space-y-1.5 leading-relaxed">
                     <li><strong className="text-purple-300">1. Justify Purpose:</strong> Every proposed use must be formally justified.</li>
                     <li><strong className="text-purple-300">2. Essential PCD Only:</strong> Do not use personal confidential data unless essential.</li>
                     <li><strong className="text-purple-300">3. Minimise Data:</strong> Use the strict minimum necessary columns and rows.</li>
@@ -1406,14 +1432,14 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               </div>
 
               {/* Pillar 2: Five Safes Framework - Turquoise Accent */}
-              <div className="p-5 rounded-xl bg-slate-950/80 border border-teal-500/40 space-y-3 flex flex-col justify-between shadow-md">
-                <div className="space-y-2">
+              <div className="p-5 rounded-xl bg-slate-950/80 border border-teal-500/40 space-y-3 flex flex-col justify-between shadow-md h-full">
+                <div className="space-y-2.5">
                   <div className="flex items-center gap-2 text-xs font-bold text-teal-300 uppercase tracking-wider font-mono">
                     <ShieldCheck className="w-4 h-4 text-teal-400" />
                     <span>Five Safes Architecture</span>
                   </div>
-                  <h4 className="text-sm font-bold text-teal-200">Safe Data Intelligence Model</h4>
-                  <ul className="text-xs text-slate-300 space-y-2 leading-relaxed">
+                  <h4 className="text-sm sm:text-base font-bold text-teal-200">Safe Data Intelligence Model</h4>
+                  <ul className="text-xs sm:text-sm text-slate-300 space-y-2 leading-relaxed">
                     <li><strong className="text-teal-300">Safe People:</strong> {renderGlossaryBadges('Vetted researchers with annual accredited Information Governance training and institutional sponsorship.', 'fs-1')}</li>
                     <li><strong className="text-teal-300">Safe Projects:</strong> {renderGlossaryBadges('Protocols evaluated by HRA Research Ethics Committees for valid public interest benefit.', 'fs-2')}</li>
                     <li><strong className="text-teal-300">Safe Settings:</strong> {renderGlossaryBadges('Air-gapped, zero-egress enclaves protected by AES-256 encryption where clipboard and outbound internet are severed.', 'fs-3')}</li>
@@ -1424,14 +1450,14 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               </div>
 
               {/* Pillar 3: Lawful Basis & Statutory Exemptions - Deep Navy / Sky */}
-              <div className="p-5 rounded-xl bg-slate-950/80 border border-sky-800/60 space-y-3 flex flex-col justify-between shadow-md">
-                <div className="space-y-2">
+              <div className="p-5 rounded-xl bg-slate-950/80 border border-sky-800/60 space-y-3 flex flex-col justify-between shadow-md h-full">
+                <div className="space-y-2.5">
                   <div className="flex items-center gap-2 text-xs font-bold text-sky-300 uppercase tracking-wider font-mono">
                     <Building2 className="w-4 h-4 text-sky-400" />
                     <span>Lawful Grounds &amp; Gateway</span>
                   </div>
-                  <h4 className="text-sm font-bold text-sky-200">UK GDPR, Section 251 &amp; FOIA 2000</h4>
-                  <ul className="text-xs text-slate-300 space-y-2 leading-relaxed">
+                  <h4 className="text-sm sm:text-base font-bold text-sky-200">UK GDPR, Section 251 &amp; FOIA 2000</h4>
+                  <ul className="text-xs sm:text-sm text-slate-300 space-y-2 leading-relaxed">
                     <li><strong className="text-sky-300">UK GDPR Article 6(1)(e) &amp; 9(2)(j):</strong> Public interest task paired with DPA 2018 Section 19 research safeguards.</li>
                     <li><strong className="text-sky-300">NHS Act 2006 s251:</strong> Statutory exemption advised by the Confidentiality Advisory Group (CAG) when direct consent is impracticable.</li>
                     <li><strong className="text-sky-300">National Data Opt-Out:</strong> Citizens who register their opt-out preference are systematically purged prior to analytical extraction.</li>
@@ -1441,14 +1467,14 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               </div>
 
               {/* Pillar 4: AI & Autonomous Agent Governance - Warm Ochre */}
-              <div className="p-5 rounded-xl bg-slate-950/80 border border-amber-600/40 space-y-3 flex flex-col justify-between shadow-md">
-                <div className="space-y-2">
+              <div className="p-5 rounded-xl bg-slate-950/80 border border-amber-600/40 space-y-3 flex flex-col justify-between shadow-md h-full">
+                <div className="space-y-2.5">
                   <div className="flex items-center gap-2 text-xs font-bold text-amber-300 uppercase tracking-wider font-mono">
                     <Bot className="w-4 h-4 text-amber-400" />
                     <span>AI &amp; Autonomous Agents</span>
                   </div>
-                  <h4 className="text-sm font-bold text-amber-200">Stanford UIT Doctrine</h4>
-                  <ul className="text-xs text-slate-300 space-y-2 leading-relaxed">
+                  <h4 className="text-sm sm:text-base font-bold text-amber-200">Stanford UIT Doctrine</h4>
+                  <ul className="text-xs sm:text-sm text-slate-300 space-y-2 leading-relaxed">
                     <li><strong className="text-amber-300">Non-Personhood Doctrine:</strong> AI algorithms possess no legal personhood, cannot sign undertakings, and can NEVER be &ldquo;Safe People&rdquo;.</li>
                     <li><strong className="text-amber-300">Human Sponsor Liability:</strong> Every automated AI workload must be legally bound to an accredited human researcher bearing statutory liability.</li>
                     <li><strong className="text-amber-300">Read-Only Tools:</strong> AI agents are restricted to read-only analytical queries; mutative database actions are barred.</li>
@@ -1459,16 +1485,16 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
             </div>
 
             {/* DEA 2017 Statutory Fit & Cyber Security Boundaries */}
-            <div className="pt-2 border-t border-cyan-900/50 grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <div className="p-5 rounded-xl bg-slate-950/80 border border-cyan-800/60 space-y-2.5">
+            <div className="pt-4 border-t border-cyan-900/50 grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
+              <div className="p-5 rounded-xl bg-slate-950/80 border border-cyan-800/60 space-y-2.5 h-full">
                 <div className="flex items-center gap-2 text-xs font-bold text-cyan-300 uppercase tracking-wider font-mono">
                   <Scale className="w-4 h-4 text-cyan-400 shrink-0" />
                   <span>DEA 2017 Statutory Fit</span>
                 </div>
-                <h4 className="text-sm font-bold text-white">
+                <h4 className="text-base font-bold text-white">
                   Is Wavebound Consistent with the Digital Economy Act 2017?
                 </h4>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <p className="text-sm text-slate-300 leading-relaxed">
                   {renderGlossaryBadges(
                     'Yes—for DEA Part 5 Ch. 5 research mechanics and UKSA SAQ V3.1 Five Safes assurance. PaC gates verify Accredited Researcher, Approved Project, and Safe Settings predicates prior to execution while generating W3C PROV-O evidence for RAP audit, without replacing human accreditation panels. Crucially, DEA s64 excludes health and adult social care data; NHS SDEs therefore rely on UK GDPR Art 6/9, Common Law Duty of Confidentiality, and NHS Act s251/CAG.',
                     'foundations-dea'
@@ -1476,15 +1502,15 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                 </p>
               </div>
 
-              <div className="p-5 rounded-xl bg-slate-950/80 border border-emerald-700/60 space-y-2.5">
+              <div className="p-5 rounded-xl bg-slate-950/80 border border-emerald-700/60 space-y-2.5 h-full">
                 <div className="flex items-center gap-2 text-xs font-bold text-emerald-300 uppercase tracking-wider font-mono">
                   <Lock className="w-4 h-4 text-emerald-400 shrink-0" />
                   <span>Cyber Security Fit · Safe Settings Spine</span>
                 </div>
-                <h4 className="text-sm font-bold text-white">
+                <h4 className="text-base font-bold text-white">
                   Where Does Cyber Security Fit Between IG and Disclosure Control?
                 </h4>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <p className="text-sm text-slate-300 leading-relaxed">
                   {renderGlossaryBadges(
                     'Cyber Security anchors Safe Settings inside the ISO/IEC 27001 ISMS—operationalising NCSC Cyber Assessment Framework (CAF), Cyber Essentials Plus, and NHS DSPT through zero-egress VPC/eBPF isolation, pixel-only VDI, FIDO2 MFA, KMS AES-256 encryption, read-only non-root pods, and SIEM logging. It complements legal Information Governance (Caldicott/s251) and Statistical Disclosure Control (Safe Outputs airlock).',
                     'foundations-cyber'
@@ -1502,26 +1528,26 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
           <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 space-y-4 shadow-xl text-white">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cyan-900/60 pb-4">
               <div>
-                <div className="flex flex-wrap items-center gap-2 mb-1">
-                  <span className="text-[11px] font-mono font-bold text-teal-300 bg-teal-950/80 border border-teal-700/60 px-2 py-0.5 rounded uppercase tracking-wider">
+                <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                  <span className="text-xs font-mono font-bold text-teal-300 bg-teal-950/80 border border-teal-700/60 px-2.5 py-0.5 rounded uppercase tracking-wider">
                     Graph 1 of 3 · Human Governance Workflow &amp; Five Safes Stage Map
                   </span>
                   {onNavigateToGraph && (
                     <button
                       onClick={onNavigateToGraph}
-                      className="text-[11px] font-semibold text-cyan-300 hover:text-white underline decoration-cyan-500/60 underline-offset-2 cursor-pointer transition-colors"
+                      className="text-xs font-semibold text-cyan-300 hover:text-white underline decoration-cyan-500/60 underline-offset-2 cursor-pointer transition-colors"
                     >
                       Need rule-to-code internals? Switch to Ontology Topology Graph (Graph 2) &rarr;
                     </button>
                   )}
                 </div>
-                <h2 className="text-xl font-bold text-white tracking-tight">
+                <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                   End-to-End Information Governance &amp; Ethics Schematic
                 </h2>
-                <p className="text-xs text-slate-300 mt-0.5">
+                <p className="text-sm text-slate-300 mt-1">
                   Click any stage node below to inspect statutory hand-offs (including CAG, REC &amp; Statbarn outputs), responsible roles, and privacy safeguards.
                 </p>
-                <div className="mt-2 p-2.5 rounded-xl bg-slate-950/80 border border-amber-500/40 text-[11px] text-amber-200 leading-relaxed flex items-start gap-2 shadow-xs">
+                <div className="mt-3 p-3 rounded-xl bg-slate-950/80 border border-amber-500/40 text-xs sm:text-sm text-amber-200 leading-relaxed flex items-start gap-2.5 shadow-xs">
                   <Info className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                   <span>
                     <strong>Informational Architecture Reference:</strong> This schematic is provided for educational and illustrative purposes. Individual NHS Trusts, research institutes, and universities maintain differing local governance policies, committee designations (e.g. delegated Caldicott panels or local data access boards), and implementation workflows.
@@ -1555,19 +1581,19 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
             </div>
 
             {/* Five Safes Framework Full Coverage Bar */}
-            <div className="p-3.5 rounded-xl bg-slate-950/90 border border-teal-500/40 space-y-2.5 shadow-md">
+            <div className="p-4 rounded-xl bg-slate-950/90 border border-teal-500/40 space-y-2.5 shadow-md">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-teal-400 shrink-0" />
-                  <strong className="text-white text-xs font-bold">Five Safes Framework End-to-End Representation:</strong>
-                  <span className="text-[11px] text-slate-300">All 5 Safes mapped systematically across the 10 stages</span>
+                  <strong className="text-white text-sm font-bold">Five Safes Framework End-to-End Representation:</strong>
+                  <span className="text-xs text-slate-300">All 5 Safes mapped systematically across the 10 stages</span>
                 </div>
-                <div className="text-[10px] font-mono text-cyan-300">
+                <div className="text-xs font-mono text-cyan-300">
                   Select a Safe dimension to filter stages
                 </div>
               </div>
 
-              <div className="flex items-center gap-1.5 flex-wrap">
+              <div className="flex items-center gap-2 flex-wrap">
                 {[
                   { pillar: 'All', label: 'All 10 Stages', color: 'bg-slate-800 border-slate-600 text-white' },
                   { pillar: 'Safe Data', label: '1. Safe Data (Stages 1-2)', color: 'bg-cyan-950 border-cyan-600 text-cyan-300' },
@@ -1587,7 +1613,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                           if (firstMatching) handleSelectSchematicStage(firstMatching);
                         }
                       }}
-                      className={`px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold border transition-all cursor-pointer ${
+                      className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold border transition-all cursor-pointer ${
                         isActive
                           ? 'ring-2 ring-cyan-400 shadow-md font-bold opacity-100 scale-102'
                           : 'opacity-75 hover:opacity-100 hover:scale-[1.01]'
@@ -1601,8 +1627,8 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
             </div>
 
             {/* Pipeline Stage Quick Selector */}
-            <div className="space-y-1.5 pt-1">
-              <div className="flex items-center justify-between text-[11px] text-slate-400 font-mono">
+            <div className="space-y-2 pt-1">
+              <div className="flex items-center justify-between text-xs text-slate-400 font-mono">
                 <span>SELECT PIPELINE STAGE (1–10)</span>
                 <span className="text-teal-400">Click a stage chip or canvas node to inspect full governance specifications</span>
               </div>
@@ -1613,20 +1639,20 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                     <button
                       key={node.id}
                       onClick={() => handleSelectSchematicStage(node)}
-                      className={`shrink-0 px-2.5 py-1.5 rounded-lg text-xs font-medium border flex items-center gap-2 transition-all cursor-pointer ${
+                      className={`shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium border flex items-center gap-2 transition-all cursor-pointer ${
                         isSelected
                           ? 'bg-cyan-500/20 text-cyan-200 border-cyan-400 ring-1 ring-cyan-400/50 shadow-md'
                           : 'bg-slate-950/70 hover:bg-[#07192f] text-slate-300 border-cyan-900/50 hover:border-cyan-700/60'
                       }`}
                     >
                       <span
-                        className="w-5 h-5 rounded-full text-[10px] font-mono font-bold flex items-center justify-center shrink-0 shadow-xs"
+                        className="w-5 h-5 rounded-full text-xs font-mono font-bold tabular-nums flex items-center justify-center shrink-0 shadow-xs"
                         style={{ backgroundColor: node.color, color: '#ffffff' }}
                       >
                         {node.stepNumber}
                       </span>
-                      <span className="truncate max-w-[130px] font-medium">{node.label}</span>
-                      <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 text-teal-300">
+                      <span className="truncate max-w-[160px] font-medium">{node.label}</span>
+                      <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 text-teal-300">
                         {node.fiveSafesPillar.replace('Safe ', '')}
                       </span>
                     </button>
@@ -1638,7 +1664,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
             {/* Cytoscape Canvas */}
             <div
               ref={graphContainerRef}
-              className="w-full h-[450px] bg-slate-950 rounded-xl border border-cyan-900/60 shadow-inner"
+              className="w-full h-[520px] lg:h-[580px] bg-slate-950 rounded-xl border border-cyan-900/60 shadow-inner"
             />
 
             {/* Inspected Node Card with Detailed Statutory, Roles, and Safeguards */}
@@ -1646,25 +1672,25 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               <div className="rounded-2xl bg-slate-950/95 border border-cyan-500/50 p-5 sm:p-6 space-y-5 shadow-2xl">
                 {/* Header Banner */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-cyan-900/60 pb-4">
-                  <div className="space-y-1">
+                  <div className="space-y-1.5">
                     <div className="flex items-center gap-2 flex-wrap">
                       <span
-                        className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-extrabold uppercase tracking-wide text-white"
+                        className="px-2.5 py-0.5 rounded-full text-xs font-mono font-extrabold uppercase tracking-wide text-white tabular-nums"
                         style={{ backgroundColor: selectedSchematicNode.color }}
                       >
                         Stage {selectedSchematicNode.stepNumber} of 10
                       </span>
-                      <span className="px-2 py-0.5 rounded-md bg-teal-950/90 border border-teal-600/80 text-[10px] font-mono font-bold text-teal-300 uppercase">
+                      <span className="px-2.5 py-0.5 rounded-md bg-teal-950/90 border border-teal-600/80 text-xs font-mono font-bold text-teal-300 uppercase">
                         5 Safes: {selectedSchematicNode.fiveSafesPillar}
                       </span>
-                      <span className="px-2 py-0.5 rounded-md bg-cyan-950/80 border border-cyan-800/80 text-[10px] font-mono font-semibold text-cyan-300 uppercase">
+                      <span className="px-2.5 py-0.5 rounded-md bg-cyan-950/80 border border-cyan-800/80 text-xs font-mono font-semibold text-cyan-300 uppercase">
                         {selectedSchematicNode.categoryLabel}
                       </span>
-                      <span className="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-700 text-[10px] font-mono text-slate-300">
+                      <span className="px-2.5 py-0.5 rounded-md bg-slate-900 border border-slate-700 text-xs font-mono text-slate-300">
                         {selectedSchematicNode.statutoryRole}
                       </span>
                     </div>
-                    <h3 className="text-lg sm:text-xl font-black text-white tracking-tight flex items-center gap-2">
+                    <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight flex items-center gap-2">
                       <span>{selectedSchematicNode.label}</span>
                     </h3>
                   </div>
@@ -1675,7 +1701,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                         setSelectedChapterId(selectedSchematicNode.handbookChapterRef);
                         setActiveTab('handbook');
                       }}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-950/90 hover:bg-cyan-900/90 text-cyan-200 border border-cyan-700/80 text-xs font-semibold cursor-pointer transition-colors shrink-0 shadow-xs"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-cyan-950/90 hover:bg-cyan-900/90 text-cyan-200 border border-cyan-700/80 text-xs font-semibold cursor-pointer transition-colors shrink-0 shadow-xs"
                     >
                       <BookOpen className="w-3.5 h-3.5 text-cyan-400" />
                       <span>{selectedSchematicNode.handbookChapterTitle}</span>
@@ -1685,87 +1711,87 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                 </div>
 
                 {/* Narrative Summary */}
-                <div className="p-3.5 rounded-xl bg-slate-900/90 border-l-4 border-l-cyan-400 border border-cyan-950 text-xs text-slate-200 leading-relaxed font-medium">
+                <div className="p-4 rounded-xl bg-slate-900/90 border border-cyan-800/60 text-sm text-slate-200 leading-relaxed font-medium">
                   {renderGlossaryBadges(selectedSchematicNode.shortDesc, 'node-desc')}
                 </div>
 
                 {/* The 3 Core Information Governance Inspection Pillars */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
                   {/* Pillar 1: Statutory Hand-Offs & Legal Gateways */}
-                  <div className="p-4 rounded-xl bg-slate-900/70 border border-sky-800/40 space-y-3 shadow-md flex flex-col justify-between">
+                  <div className="p-4 rounded-xl bg-slate-900/70 border border-sky-800/40 space-y-3 shadow-md flex flex-col justify-between h-full">
                     <div>
                       <div className="flex items-center gap-2 text-xs font-bold text-sky-300 uppercase tracking-wider font-mono border-b border-sky-900/50 pb-2">
                         <Scale className="w-4 h-4 text-sky-400 shrink-0" />
                         <span>Statutory Hand-Offs</span>
                       </div>
-                      <ul className="mt-3 space-y-2 text-xs text-slate-200">
+                      <ul className="mt-3 space-y-2 text-sm text-slate-200">
                         {selectedSchematicNode.statutoryHandoffs.map((item, idx) => (
                           <li key={idx} className="flex items-start gap-2 leading-relaxed">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-sky-400 shrink-0 mt-0.5" />
+                            <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
                             <span>{renderGlossaryBadges(item, `stat-${idx}`)}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
-                    <div className="pt-2 text-[10px] font-mono text-sky-400/80 uppercase">
+                    <div className="pt-2 text-xs font-mono text-sky-400/90 uppercase">
                       Legal Compliance Gate
                     </div>
                   </div>
 
                   {/* Pillar 2: Responsible Roles & Review Panels */}
-                  <div className="p-4 rounded-xl bg-slate-900/70 border border-teal-800/40 space-y-3 shadow-md flex flex-col justify-between">
+                  <div className="p-4 rounded-xl bg-slate-900/70 border border-teal-800/40 space-y-3 shadow-md flex flex-col justify-between h-full">
                     <div>
                       <div className="flex items-center gap-2 text-xs font-bold text-teal-300 uppercase tracking-wider font-mono border-b border-teal-900/50 pb-2">
                         <Users className="w-4 h-4 text-teal-400 shrink-0" />
                         <span>Responsible Roles</span>
                       </div>
-                      <ul className="mt-3 space-y-2 text-xs text-slate-200">
+                      <ul className="mt-3 space-y-2 text-sm text-slate-200">
                         {selectedSchematicNode.responsibleRoles.map((role, idx) => (
                           <li key={idx} className="flex items-start gap-2 leading-relaxed">
-                            <Shield className="w-3.5 h-3.5 text-teal-400 shrink-0 mt-0.5" />
+                            <Shield className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
                             <span className="font-medium text-slate-100">{renderGlossaryBadges(role, `role-${idx}`)}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
-                    <div className="pt-2 text-[10px] font-mono text-teal-400/80 uppercase">
+                    <div className="pt-2 text-xs font-mono text-teal-400/90 uppercase">
                       Governance Accountability
                     </div>
                   </div>
 
                   {/* Pillar 3: Privacy Safeguards & Technical Controls */}
-                  <div className="p-4 rounded-xl bg-slate-900/70 border border-emerald-800/40 space-y-3 shadow-md flex flex-col justify-between">
+                  <div className="p-4 rounded-xl bg-slate-900/70 border border-emerald-800/40 space-y-3 shadow-md flex flex-col justify-between h-full">
                     <div>
                       <div className="flex items-center gap-2 text-xs font-bold text-emerald-300 uppercase tracking-wider font-mono border-b border-emerald-900/50 pb-2">
                         <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
                         <span>Privacy Safeguards</span>
                       </div>
-                      <ul className="mt-3 space-y-2 text-xs text-slate-200">
+                      <ul className="mt-3 space-y-2 text-sm text-slate-200">
                         {selectedSchematicNode.privacySafeguards.map((safeguard, idx) => (
                           <li key={idx} className="flex items-start gap-2 leading-relaxed">
-                            <Lock className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                            <Lock className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                             <span>{renderGlossaryBadges(safeguard, `priv-${idx}`)}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
-                    <div className="pt-2 text-[10px] font-mono text-emerald-400/80 uppercase">
+                    <div className="pt-2 text-xs font-mono text-emerald-400/90 uppercase">
                       Technical Assurance
                     </div>
                   </div>
                 </div>
 
                 {/* Operational Actions & Hand-off Lineage */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1 items-stretch">
                   {/* Operational Actions */}
-                  <div className="p-3.5 rounded-xl bg-slate-900/50 border border-cyan-950 space-y-2">
-                    <span className="text-[10px] font-mono uppercase text-cyan-400 font-bold block">
+                  <div className="p-4 rounded-xl bg-slate-900/50 border border-cyan-950 space-y-2 h-full">
+                    <span className="text-xs font-mono uppercase text-cyan-400 font-bold block">
                       Execution &amp; Operational Actions
                     </span>
-                    <ul className="space-y-1.5 text-xs text-slate-300">
+                    <ul className="space-y-2 text-sm text-slate-200">
                       {selectedSchematicNode.operationalActions.map((action, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0 mt-1.5" />
+                        <li key={idx} className="flex items-start gap-2 leading-relaxed">
+                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0 mt-2" />
                           <span>{renderGlossaryBadges(action, `act-${idx}`)}</span>
                         </li>
                       ))}
@@ -1773,19 +1799,19 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                   </div>
 
                   {/* Lineage & Hand-offs */}
-                  <div className="p-3.5 rounded-xl bg-slate-900/50 border border-cyan-950 space-y-2 flex flex-col justify-between">
-                    <span className="text-[10px] font-mono uppercase text-cyan-400 font-bold block">
+                  <div className="p-4 rounded-xl bg-slate-900/50 border border-cyan-950 space-y-2.5 flex flex-col justify-between h-full">
+                    <span className="text-xs font-mono uppercase text-cyan-400 font-bold block">
                       Governance Hand-off Lineage
                     </span>
-                    <div className="space-y-2 text-xs">
-                      <div className="flex items-start gap-2 text-slate-300">
-                        <span className="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-amber-300 shrink-0">
+                    <div className="space-y-2.5 text-sm">
+                      <div className="flex items-start gap-2 text-slate-200 leading-relaxed">
+                        <span className="px-2 py-0.5 rounded bg-slate-800 text-xs font-mono text-amber-300 shrink-0">
                           INPUT
                         </span>
                         <span>{renderGlossaryBadges(selectedSchematicNode.upstreamHandoff, 'up-handoff')}</span>
                       </div>
-                      <div className="flex items-start gap-2 text-slate-300">
-                        <span className="px-1.5 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-emerald-300 shrink-0">
+                      <div className="flex items-start gap-2 text-slate-200 leading-relaxed">
+                        <span className="px-2 py-0.5 rounded bg-slate-800 text-xs font-mono text-emerald-300 shrink-0">
                           OUTPUT
                         </span>
                         <span>{renderGlossaryBadges(selectedSchematicNode.downstreamHandoff, 'down-handoff')}</span>
@@ -1813,25 +1839,25 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
             </div>
 
             {/* Search Input */}
-            <div className="relative w-full sm:w-72">
-              <Search className="w-3.5 h-3.5 absolute left-3 top-3 text-slate-400" />
+            <div className="relative w-full sm:w-80">
+              <Search className="w-4 h-4 absolute left-3 top-2.5 text-slate-400" />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search terms, DPIA, S251..."
-                className="w-full bg-slate-950 border border-cyan-900/60 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 transition-colors shadow-xs"
+                className="w-full bg-slate-950 border border-cyan-900/60 rounded-xl pl-9 pr-3 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 transition-colors shadow-xs"
               />
             </div>
           </div>
 
           {/* Category Filter Buttons */}
-          <div className="flex flex-wrap items-center gap-1.5 text-xs">
+          <div className="flex flex-wrap items-center gap-2 text-xs">
             {(['All', 'Governance & Frameworks', 'Standards & Clinical Safety', 'Governance Maturity Model', 'Disclosure Control (SDC)', 'AI & Autonomous Agents'] as const).map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedGlossaryCategory(cat)}
-                className={`px-3 py-1 rounded-lg transition-colors cursor-pointer font-medium ${
+                className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer font-medium whitespace-nowrap ${
                   selectedGlossaryCategory === cat
                     ? 'bg-[#00A389] text-white font-bold shadow-md shadow-teal-950/40 border border-teal-400'
                     : 'bg-[#07192f] text-slate-300 hover:text-white border border-[#1b3f68]'
@@ -1843,97 +1869,99 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
           </div>
 
           {/* Term Cards Grid with Expandable Details */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
             {igFilteredGlossary.map((term) => {
               const isExpanded = !!expandedCardIds[term.id];
 
               return (
                 <div
                   key={term.id}
-                  className="p-5 rounded-xl bg-slate-950/80 border border-cyan-900/40 space-y-3 hover:border-cyan-500/40 transition-all shadow-md text-slate-200"
+                  className="p-5 rounded-xl bg-slate-950/80 border border-cyan-900/40 space-y-3 hover:border-cyan-500/40 transition-all shadow-md text-slate-200 flex flex-col justify-between h-full"
                 >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="space-y-0.5">
-                      <div className="flex items-center gap-2">
-                        <strong className="text-white text-sm font-bold">{term.term}</strong>
-                        {term.acronym && (
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#07192f] border border-teal-500/40 text-teal-300 font-bold">
-                            {term.acronym}
-                          </span>
-                        )}
-                      </div>
-                      <span className="text-[10px] font-mono text-cyan-300 uppercase block font-semibold">{term.category}</span>
-                    </div>
-
-                    <button
-                      onClick={() => toggleCardExpanded(term.id)}
-                      className="px-2.5 py-1 rounded-lg bg-[#07192f] hover:bg-[#123154] text-teal-300 border border-[#1b3f68] text-xs font-semibold flex items-center gap-1 shrink-0 cursor-pointer transition-colors"
-                      title={isExpanded ? 'Collapse' : 'Expand full explanation'}
-                    >
-                      <span>{isExpanded ? 'Less' : 'Details'}</span>
-                      {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-                    </button>
-                  </div>
-
-                  <p className="text-xs text-slate-300 leading-relaxed">{term.shortDefinition}</p>
-
-                  {/* Expanded Section with Statutory Authority & Safeguards */}
-                  {isExpanded && (
-                    <div className="space-y-3 pt-3 border-t border-cyan-900/50 text-xs animate-in fade-in duration-150">
+                  <div className="space-y-3">
+                    <div className="flex items-start justify-between gap-2">
                       <div className="space-y-1">
-                        <span className="text-[10px] uppercase font-mono text-slate-400 block font-semibold">
-                          Plain-Language Explanation:
-                        </span>
-                        <p className="text-slate-200 leading-relaxed bg-[#07192f] p-3 rounded-lg border border-[#1b3f68] whitespace-pre-line">
-                          {term.fullDefinition}
-                        </p>
-                      </div>
-
-                      {term.statutoryBasis && (
-                        <div className="p-2.5 rounded-lg bg-slate-900/80 border border-sky-800/60 text-[11px] text-sky-200">
-                          <strong className="block font-mono text-[10px] uppercase text-sky-400 font-bold">Statutory / Regulatory Authority:</strong>
-                          <span>{term.statutoryBasis}</span>
-                        </div>
-                      )}
-
-                      {term.governanceSafeguards && term.governanceSafeguards.length > 0 && (
-                        <div className="space-y-1.5">
-                          <strong className="block font-mono text-[10px] uppercase text-teal-300 font-bold">Key Governance Safeguards:</strong>
-                          <ul className="space-y-1">
-                            {term.governanceSafeguards.map((item, idx) => (
-                              <li key={idx} className="flex items-start gap-2 text-[11px] text-slate-300">
-                                <CheckCircle2 className="w-3.5 h-3.5 text-[#00A389] shrink-0 mt-0.5" />
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {term.externalUrl && (
-                        <div className="pt-2 flex items-center justify-between">
-                          <a
-                            href={term.externalUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-[11px] text-teal-300 hover:text-white font-semibold bg-[#07192f] hover:bg-[#113358] px-3 py-1.5 rounded-lg border border-teal-500/40 transition-colors"
-                          >
-                            <span>Official Statutory Standard / Resource</span>
-                            <ExternalLink className="w-3.5 h-3.5" />
-                          </a>
-
-                          {term.relatedTerms && term.relatedTerms.length > 0 && (
-                            <span className="text-[10px] text-slate-400 font-mono">
-                              Related: {term.relatedTerms.slice(0, 2).join(', ')}
+                        <div className="flex flex-wrap items-center gap-2">
+                          <strong className="text-white text-base font-bold">{term.term}</strong>
+                          {term.acronym && (
+                            <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#07192f] border border-teal-500/40 text-teal-300 font-bold">
+                              {term.acronym}
                             </span>
                           )}
                         </div>
-                      )}
+                        <span className="text-xs font-mono text-cyan-300 uppercase block font-semibold">{term.category}</span>
+                      </div>
+
+                      <button
+                        onClick={() => toggleCardExpanded(term.id)}
+                        className="px-3 py-1.5 rounded-lg bg-[#07192f] hover:bg-[#123154] text-teal-300 border border-[#1b3f68] text-xs font-semibold flex items-center gap-1 shrink-0 cursor-pointer transition-colors"
+                        title={isExpanded ? 'Collapse' : 'Expand full explanation'}
+                      >
+                        <span>{isExpanded ? 'Less' : 'Details'}</span>
+                        {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                      </button>
                     </div>
-                  )}
+
+                    <p className="text-sm text-slate-300 leading-relaxed">{term.shortDefinition}</p>
+
+                    {/* Expanded Section with Statutory Authority & Safeguards */}
+                    {isExpanded && (
+                      <div className="space-y-3 pt-3 border-t border-cyan-900/50 text-sm animate-in fade-in duration-150">
+                        <div className="space-y-1.5">
+                          <span className="text-xs uppercase font-mono text-slate-400 block font-semibold">
+                            Plain-Language Explanation:
+                          </span>
+                          <p className="text-slate-200 leading-relaxed bg-[#07192f] p-3.5 rounded-lg border border-[#1b3f68] whitespace-pre-line">
+                            {term.fullDefinition}
+                          </p>
+                        </div>
+
+                        {term.statutoryBasis && (
+                          <div className="p-3 rounded-lg bg-slate-900/80 border border-sky-800/60 text-xs sm:text-sm text-sky-200">
+                            <strong className="block font-mono text-xs uppercase text-sky-400 font-bold mb-0.5">Statutory / Regulatory Authority:</strong>
+                            <span>{term.statutoryBasis}</span>
+                          </div>
+                        )}
+
+                        {term.governanceSafeguards && term.governanceSafeguards.length > 0 && (
+                          <div className="space-y-1.5">
+                            <strong className="block font-mono text-xs uppercase text-teal-300 font-bold">Key Governance Safeguards:</strong>
+                            <ul className="space-y-1.5">
+                              {term.governanceSafeguards.map((item, idx) => (
+                                <li key={idx} className="flex items-start gap-2 text-sm text-slate-300 leading-relaxed">
+                                  <CheckCircle2 className="w-4 h-4 text-[#00A389] shrink-0 mt-0.5" />
+                                  <span>{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {term.externalUrl && (
+                          <div className="pt-2 flex flex-wrap items-center justify-between gap-2">
+                            <a
+                              href={term.externalUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-xs text-teal-300 hover:text-white font-semibold bg-[#07192f] hover:bg-[#113358] px-3 py-1.5 rounded-lg border border-teal-500/40 transition-colors"
+                            >
+                              <span>Official Statutory Standard / Resource</span>
+                              <ExternalLink className="w-3.5 h-3.5" />
+                            </a>
+
+                            {term.relatedTerms && term.relatedTerms.length > 0 && (
+                              <span className="text-xs text-slate-400 font-mono">
+                                Related: {term.relatedTerms.slice(0, 2).join(', ')}
+                              </span>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
 
                   {!isExpanded && (
-                    <div className="pt-2 border-t border-cyan-900/40 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                    <div className="pt-2 border-t border-cyan-900/40 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400 font-mono">
                       <span>Click Details for statutory authority &amp; safeguards</span>
                       {term.relatedTerms && term.relatedTerms.length > 0 && (
                         <span>Related: {term.relatedTerms.slice(0, 2).join(', ')}</span>
@@ -1957,7 +1985,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
             <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
               Researcher Governance &amp; Ethics Submission Templates
             </h2>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl">
+            <p className="text-sm text-slate-300 leading-relaxed">
               Standard, copyable application templates addressing UK Health Research Authority (HRA), Research Ethics Committee (REC), Section 251 CAG, and institutional Data Access Committee (DAC) requirements.
             </p>
           </div>
@@ -1969,14 +1997,14 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               return (
                 <div key={tmpl.id} className="p-6 rounded-xl bg-slate-950/80 border border-cyan-900/40 space-y-4 shadow-md">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cyan-900/40 pb-3">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#07192f] border border-teal-500/40 text-teal-300 font-bold uppercase">
+                    <div className="space-y-1 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#07192f] border border-teal-500/40 text-teal-300 font-bold uppercase">
                           {tmpl.category}
                         </span>
-                        <h3 className="text-base font-bold text-white">{tmpl.title}</h3>
+                        <h3 className="text-base sm:text-lg font-bold text-white">{tmpl.title}</h3>
                       </div>
-                      <p className="text-xs text-slate-300">{tmpl.description}</p>
+                      <p className="text-sm text-slate-300 leading-relaxed">{tmpl.description}</p>
                     </div>
 
                     <button
@@ -1992,7 +2020,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                     </button>
                   </div>
 
-                  <pre className="p-4 bg-[#07192f] border border-[#1b3f68] rounded-lg font-mono text-xs text-cyan-200 overflow-x-auto leading-relaxed max-h-72">
+                  <pre className="p-4 bg-[#07192f] border border-[#1b3f68] rounded-lg font-mono text-xs sm:text-sm text-cyan-200 overflow-x-auto leading-relaxed max-h-80">
                     <code>{tmpl.markdownContent}</code>
                   </pre>
                 </div>
@@ -2006,19 +2034,19 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
       {activeTab === 'quiz' && (
         <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xl text-white">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-cyan-900/60 pb-4">
-            <div>
+            <div className="flex-1">
               <span className="text-xs font-mono font-bold text-teal-300 uppercase tracking-wider">
                 Self-Assessment
               </span>
-              <h2 className="text-xl font-bold text-white tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Information Governance &amp; Ethics Knowledge Check
               </h2>
-              <p className="text-xs text-slate-300 mt-0.5">
+              <p className="text-sm text-slate-300 mt-1">
                 5 scenario questions testing knowledge of UK GDPR, Caldicott Principles, SDC thresholds, and Section 251.
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3 shrink-0">
               {onNavigateToQuiz && (
                 <button
                   onClick={() => onNavigateToQuiz('Five Safes & Governance')}
@@ -2034,7 +2062,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               {quizSubmitted && (
                 <div className="flex items-center gap-3 bg-slate-950 px-4 py-2 rounded-xl border border-teal-500/40">
                   <Award className="w-5 h-5 text-amber-400" />
-                  <span className="font-bold text-sm text-white">
+                  <span className="font-bold text-sm text-white tabular-nums">
                     Score: {calculateScore()} / {IG_QUIZ_QUESTIONS.length}
                   </span>
                 </div>
@@ -2049,11 +2077,11 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
 
               return (
                 <div key={q.id} className="p-5 rounded-xl bg-slate-950/80 border border-cyan-900/40 space-y-3 shadow-md">
-                  <div className="flex items-start justify-between gap-3">
-                    <strong className="text-sm text-white font-bold">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                    <strong className="text-base text-white font-bold">
                       {qIdx + 1}. {q.question}
                     </strong>
-                    <span className="text-[10px] font-mono text-cyan-300 shrink-0 bg-[#07192f] px-2 py-0.5 rounded border border-cyan-900/60 font-semibold">
+                    <span className="text-xs font-mono text-cyan-300 shrink-0 bg-[#07192f] px-2.5 py-0.5 rounded border border-cyan-900/60 font-semibold w-fit">
                       {q.statutoryReference}
                     </span>
                   </div>
@@ -2078,7 +2106,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                           key={optIdx}
                           disabled={quizSubmitted}
                           onClick={() => handleQuizAnswer(q.id, optIdx)}
-                          className={`w-full text-left p-3 rounded-xl border text-xs transition-colors cursor-pointer flex items-center justify-between ${btnStyle}`}
+                          className={`w-full text-left p-3.5 rounded-xl border text-sm transition-colors cursor-pointer flex items-center justify-between ${btnStyle}`}
                         >
                           <span>{opt}</span>
                           {quizSubmitted && optIdx === q.correctIndex && (
@@ -2094,8 +2122,8 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
 
                   {/* Explanation if submitted */}
                   {quizSubmitted && (
-                    <div className="p-3.5 rounded-xl bg-[#07192f] border border-cyan-900/60 text-xs text-slate-200 space-y-1">
-                      <strong className="text-cyan-400 block font-mono text-[10px] uppercase font-bold">Official Explanation:</strong>
+                    <div className="p-4 rounded-xl bg-[#07192f] border border-cyan-900/60 text-sm text-slate-200 space-y-1.5">
+                      <strong className="text-cyan-400 block font-mono text-xs uppercase font-bold">Official Explanation:</strong>
                       <p className="leading-relaxed">{q.explanation}</p>
                     </div>
                   )}
@@ -2114,7 +2142,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                   setQuizSubmitted(true);
                 }
               }}
-              className="px-5 py-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs flex items-center gap-2 cursor-pointer transition-all shadow-md shadow-teal-500/20"
+              className="px-5 py-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-sm flex items-center gap-2 cursor-pointer transition-all shadow-md shadow-teal-500/20"
             >
               <Award className="w-4 h-4" />
               <span>{quizSubmitted ? 'Retake Quiz' : 'Submit Answers'}</span>
@@ -2123,10 +2151,10 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
             {onNavigateToQuiz && (
               <button
                 onClick={() => onNavigateToQuiz('Five Safes & Governance')}
-                className="text-xs text-cyan-300 font-semibold flex items-center gap-1.5 bg-[#07192f] px-3.5 py-2 rounded-xl border border-cyan-800 hover:border-teal-400 transition-colors cursor-pointer"
+                className="text-xs sm:text-sm text-cyan-300 font-semibold flex items-center gap-1.5 bg-[#07192f] px-4 py-2.5 rounded-xl border border-cyan-800 hover:border-teal-400 transition-colors cursor-pointer"
               >
                 <span>Want an accredited completion certificate? Take the full 30+ Question Exam</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-4 h-4" />
               </button>
             )}
           </div>
@@ -2135,9 +2163,9 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
 
       {/* Floating Tooltip / Quick Definition Card when hovering or clicking a technical term */}
       {activeTooltipTerm && (
-        <div className="fixed bottom-6 right-6 max-w-sm bg-slate-900/95 backdrop-blur-md border border-cyan-400/60 rounded-xl p-4 shadow-2xl z-50 space-y-2.5 animate-in fade-in slide-in-from-bottom-2 duration-200">
+        <div className="fixed bottom-6 right-6 max-w-md bg-slate-900/95 backdrop-blur-md border border-cyan-400/60 rounded-xl p-5 shadow-2xl z-50 space-y-2.5 animate-in fade-in slide-in-from-bottom-2 duration-200">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-400 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/80">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400 bg-cyan-950/80 px-2.5 py-0.5 rounded border border-cyan-800/80">
               {activeTooltipTerm.category}
             </span>
             <button
@@ -2149,26 +2177,26 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
             </button>
           </div>
           <div>
-            <h4 className="text-sm font-bold text-white flex items-center gap-2">
+            <h4 className="text-base font-bold text-white flex items-center gap-2">
               <span>{activeTooltipTerm.term}</span>
               {activeTooltipTerm.acronym && (
-                <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950 px-1.5 py-0.5 rounded border border-cyan-800">
+                <span className="text-xs font-mono text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">
                   {activeTooltipTerm.acronym}
                 </span>
               )}
             </h4>
-            <p className="text-xs text-slate-200 leading-relaxed mt-1 font-medium">
+            <p className="text-sm text-slate-200 leading-relaxed mt-1.5 font-medium">
               {activeTooltipTerm.shortDefinition}
             </p>
           </div>
           {activeTooltipTerm.statutoryBasis && (
-            <div className="text-[11px] text-teal-300 font-mono bg-teal-950/50 p-2 rounded border border-teal-900/50">
-              <strong className="text-teal-200 block text-[10px] uppercase">Statutory Basis:</strong>
+            <div className="text-xs text-teal-300 font-mono bg-teal-950/50 p-2.5 rounded border border-teal-900/50">
+              <strong className="text-teal-200 block text-xs uppercase mb-0.5">Statutory Basis:</strong>
               <span>{activeTooltipTerm.statutoryBasis}</span>
             </div>
           )}
           <div className="pt-2 flex justify-between items-center text-xs border-t border-slate-800">
-            <span className="text-[10px] font-mono text-slate-400">IG Dictionary</span>
+            <span className="text-xs font-mono text-slate-400">IG Dictionary</span>
             <button
               onClick={() => {
                 const termId = activeTooltipTerm.id;
@@ -2184,7 +2212,7 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
               className="text-cyan-400 hover:text-cyan-200 font-semibold flex items-center gap-1 cursor-pointer"
             >
               <span>Full Details</span>
-              <ExternalLink className="w-3 h-3" />
+              <ExternalLink className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>

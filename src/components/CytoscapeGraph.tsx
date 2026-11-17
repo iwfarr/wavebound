@@ -450,12 +450,12 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 space-y-6">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       {/* 1. TOP HEADER BANNER */}
-      <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 relative overflow-hidden shadow-xl">
+      <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 relative overflow-hidden shadow-xl">
         <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="space-y-1.5 max-w-2xl">
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-1.5 flex-1">
             <div className="flex items-center gap-2 text-xs font-semibold text-cyan-300">
               <Layers className="w-4 h-4 text-teal-400" />
               <span>Graph 2 of 3 · Technical Architecture &amp; Rule Compiler Map</span>
@@ -463,16 +463,16 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
               Ontology Topology Graph: Legal Rules to SHACL &amp; Rego
             </h1>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
               See how statutory duties turn into machine-checked rules and verifiable audit records. Looking for step-by-step approval workflows or term definitions instead? Jump directly to the <strong className="text-white">Foundations 10-Stage Process Schematic</strong> or <strong className="text-white">Glossary Concept Map</strong>.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
             {onNavigateToAtlas && (
               <button
                 onClick={onNavigateToAtlas}
-                className="px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-[#0F294A] text-emerald-300 border border-emerald-500/30 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="px-3.5 py-2 rounded-xl bg-slate-900/90 hover:bg-[#0F294A] text-emerald-300 border border-emerald-500/30 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
                 title="Switch to Graph 1 of 3: End-to-End Human Governance Process Schematic"
               >
                 <HeartHandshake className="w-3.5 h-3.5" />
@@ -482,7 +482,7 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
             {onNavigateToGlossaryGraph && (
               <button
                 onClick={onNavigateToGlossaryGraph}
-                className="px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-[#0F294A] text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="px-3.5 py-2 rounded-xl bg-slate-900/90 hover:bg-[#0F294A] text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
                 title="Switch to Graph 3 of 3: Glossary Terminology Cluster Network"
               >
                 <BookOpen className="w-3.5 h-3.5" />
@@ -511,17 +511,17 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
 
         {/* 2. CURATED LENS SELECTOR BAR */}
         <div className="mt-6 pt-5 border-t border-slate-800/80">
-          <div className="flex items-center justify-between gap-2 pb-2">
-            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-cyan-300 flex items-center gap-1.5">
-              <Compass className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="flex items-center justify-between gap-2 pb-2.5">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-300 flex items-center gap-1.5">
+              <Compass className="w-4 h-4 text-cyan-400" />
               <span>Select Curated Knowledge Lens:</span>
             </span>
-            <span className="text-[11px] font-mono text-slate-400">
+            <span className="text-xs font-mono text-slate-400 tabular-nums">
               Showing <strong className="text-white">{currentLensData.nodes.length}</strong> curated nodes
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-stretch">
             {[
               {
                 id: 'statutory-policy' as GraphLensType,
@@ -557,7 +557,7 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
                 <button
                   key={lens.id}
                   onClick={() => setActiveLens(lens.id)}
-                  className={`p-3 rounded-xl border text-left transition-all flex flex-col justify-between gap-1.5 cursor-pointer ${
+                  className={`p-3.5 rounded-xl border text-left transition-all flex flex-col justify-between gap-2 cursor-pointer h-full ${
                     isActive
                       ? 'bg-gradient-to-br from-[#0c2340] to-[#0f294a] border-cyan-400 ring-2 ring-cyan-500/40 shadow-lg'
                       : 'bg-slate-950/70 border-slate-800 hover:bg-slate-900 hover:border-slate-700'
@@ -567,15 +567,15 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
                     <span className={`p-1.5 rounded-lg ${isActive ? 'bg-cyan-500 text-slate-950 font-bold' : 'bg-slate-800 text-slate-400'}`}>
                       {lens.icon}
                     </span>
-                    <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-slate-900 border border-slate-700 text-cyan-300">
+                    <span className="text-xs font-mono font-semibold tabular-nums px-2 py-0.5 rounded-md bg-slate-900 border border-slate-700 text-cyan-300">
                       {lens.nodes} nodes
                     </span>
                   </div>
                   <div>
-                    <h3 className={`text-xs font-bold ${isActive ? 'text-white' : 'text-slate-200'}`}>
+                    <h3 className={`text-sm font-bold ${isActive ? 'text-white' : 'text-slate-200'}`}>
                       {lens.title}
                     </h3>
-                    <span className="text-[10px] font-mono text-slate-400 block">
+                    <span className="text-xs font-mono text-slate-400 block">
                       {lens.badge}
                     </span>
                   </div>
@@ -586,45 +586,45 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
         </div>
 
         {/* 3. ACTIVE LENS CONTEXT BANNER */}
-        <div className="mt-4 p-3.5 rounded-xl bg-slate-950/80 border border-cyan-900/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-md border border-cyan-800/60 font-bold">
+        <div className="mt-4 p-4 rounded-xl bg-slate-950/80 border border-cyan-900/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-sm">
+          <div className="space-y-1 flex-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-mono uppercase tracking-wider text-cyan-300 bg-cyan-950 px-2.5 py-0.5 rounded-md border border-cyan-800/60 font-bold">
                 {LENS_DEFINITIONS[activeLens].badge}
               </span>
               <span className="text-white font-bold">{LENS_DEFINITIONS[activeLens].tagline}</span>
             </div>
-            <p className="text-slate-300 text-xs leading-relaxed max-w-3xl">
+            <p className="text-slate-300 text-sm leading-relaxed">
               {LENS_DEFINITIONS[activeLens].description}
             </p>
           </div>
-          <div className="sm:text-right shrink-0 border-t sm:border-t-0 sm:border-l border-slate-800 pt-2 sm:pt-0 sm:pl-3 max-w-xs text-[11px] text-slate-400">
-            <span className="text-slate-500 block text-[10px] uppercase font-mono">Audience Value</span>
-            <span className="text-slate-300 font-medium">{LENS_DEFINITIONS[activeLens].rationale}</span>
+          <div className="sm:text-right shrink-0 border-t sm:border-t-0 sm:border-l border-slate-800 pt-2 sm:pt-0 sm:pl-4 sm:max-w-sm text-xs text-slate-300">
+            <span className="text-slate-400 block text-xs uppercase font-mono mb-0.5">Audience Value</span>
+            <span className="text-slate-200 font-medium">{LENS_DEFINITIONS[activeLens].rationale}</span>
           </div>
         </div>
       </div>
 
       {/* 4. CANVAS CONTROLS & SEARCH */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#0c2340] border border-slate-800 p-3 rounded-xl shadow-xs">
-        <div className="relative flex-1 w-full max-w-md">
-          <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#0c2340] border border-slate-800 p-3.5 rounded-xl shadow-xs">
+        <div className="relative flex-1 w-full max-w-lg">
+          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search active lens (e.g. SafePerson, SDC, NDOO, Envoy, Caldicott)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-4 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+            className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-4 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500"
           />
         </div>
 
         <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
-          <div className="flex items-center gap-1.5 text-xs text-slate-300">
-            <span className="text-[10px] font-mono text-slate-400">Layout:</span>
+          <div className="flex items-center gap-2 text-xs text-slate-300">
+            <span className="text-xs font-mono text-slate-400">Layout:</span>
             <select
               value={selectedLayout}
               onChange={(e) => setSelectedLayout(e.target.value as any)}
-              className="bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 font-medium"
+              className="bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-cyan-500 font-medium"
             >
               <option value="preset">Curated Flow DAG (Recommended)</option>
               <option value="breadthfirst">Hierarchical Tree (Top-Down)</option>
@@ -633,31 +633,31 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
             </select>
           </div>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1.5">
             <button
               onClick={handleZoomIn}
-              className="p-1.5 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-lg text-slate-300 cursor-pointer"
+              className="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-lg text-slate-300 cursor-pointer"
               title="Zoom In"
             >
               <ZoomIn className="w-4 h-4" />
             </button>
             <button
               onClick={handleZoomOut}
-              className="p-1.5 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-lg text-slate-300 cursor-pointer"
+              className="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-lg text-slate-300 cursor-pointer"
               title="Zoom Out"
             >
               <ZoomOut className="w-4 h-4" />
             </button>
             <button
               onClick={handleFit}
-              className="p-1.5 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-lg text-slate-300 cursor-pointer"
+              className="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-lg text-slate-300 cursor-pointer"
               title="Fit to Screen"
             >
               <Maximize2 className="w-4 h-4" />
             </button>
             <button
               onClick={handleReset}
-              className="p-1.5 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-lg text-slate-300 cursor-pointer"
+              className="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-lg text-slate-300 cursor-pointer"
               title="Reset View"
             >
               <RotateCcw className="w-4 h-4" />
@@ -669,26 +669,26 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
       {/* 5. MAIN GRAPH & DUAL-ANGLE INSPECTOR PANE */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Cytoscape Canvas Container */}
-        <div className="lg:col-span-7 bg-[#071628] border border-cyan-950 rounded-2xl relative overflow-hidden h-[620px] shadow-2xl">
+        <div className="lg:col-span-7 bg-[#071628] border border-cyan-950 rounded-2xl relative overflow-hidden h-[640px] lg:h-[700px] shadow-2xl">
           <div ref={containerRef} className="w-full h-full" />
 
           {/* Topology Overlay Legend */}
-          <div className="absolute bottom-3 left-3 bg-[#0c2340]/95 backdrop-blur border border-slate-800 rounded-xl p-3 text-[11px] space-y-1.5 z-10 pointer-events-none shadow-lg">
-            <div className="font-semibold text-slate-300 uppercase tracking-wider text-[10px] flex items-center gap-1.5">
+          <div className="absolute bottom-3 left-3 bg-[#0c2340]/95 backdrop-blur border border-slate-800 rounded-xl p-3.5 text-xs space-y-1.5 z-10 pointer-events-none shadow-lg">
+            <div className="font-semibold text-slate-300 uppercase tracking-wider text-xs flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-cyan-400" />
               <span>Lens Topology Primitives</span>
             </div>
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-slate-300 text-[10px] font-mono">
-              <span className="flex items-center gap-1">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-slate-300 text-xs font-mono">
+              <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-sm bg-[#0c2340] border border-[#00a389] inline-block" /> Policy / Statute
               </span>
-              <span className="flex items-center gap-1">
+              <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rotate-45 bg-[#0f294a] border border-[#38bdf8] inline-block" /> SHACL Shape
               </span>
-              <span className="flex items-center gap-1">
+              <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-sm bg-[#064e3b] border border-[#10b981] inline-block" /> OPA Rego Rule
               </span>
-              <span className="flex items-center gap-1">
+              <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#451a03] border border-[#f59e0b] inline-block" /> Human Oversight
               </span>
             </div>
@@ -700,11 +700,11 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
           {selectedNode ? (
             <div className="space-y-4">
               {/* Header with Dual-Angle Mode Toggle */}
-              <div className="flex items-center justify-between pb-3 border-b border-slate-800 gap-2">
+              <div className="flex flex-wrap items-center justify-between pb-3 border-b border-slate-800 gap-2">
                 <div className="flex items-center gap-1.5 bg-slate-950 p-1 rounded-lg border border-slate-800">
                   <button
                     onClick={() => setInspectorMode('handbook')}
-                    className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                    className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                       inspectorMode === 'handbook'
                         ? 'bg-teal-500 text-slate-950 shadow-sm'
                         : 'text-slate-400 hover:text-slate-200'
@@ -715,7 +715,7 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
                   </button>
                   <button
                     onClick={() => setInspectorMode('technical')}
-                    className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                    className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                       inspectorMode === 'technical'
                         ? 'bg-cyan-500 text-slate-950 shadow-sm'
                         : 'text-slate-400 hover:text-slate-200'
@@ -726,7 +726,7 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
                   </button>
                 </div>
 
-                <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-md border border-cyan-800/60 font-semibold shrink-0">
+                <span className="text-xs font-mono text-cyan-300 bg-cyan-950 px-2.5 py-0.5 rounded-md border border-cyan-800/60 font-semibold shrink-0">
                   {selectedNode.tier}
                 </span>
               </div>
@@ -735,11 +735,11 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
               <div className="space-y-1">
                 <div className="flex items-center justify-between gap-2">
                   <span className="text-xs font-mono text-cyan-400 font-semibold">{selectedNode.label}</span>
-                  <span className="text-[10px] font-mono text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
+                  <span className="text-xs font-mono text-slate-300 bg-slate-900 px-2.5 py-0.5 rounded border border-slate-800">
                     {selectedNode.badge}
                   </span>
                 </div>
-                <h2 className="text-xl font-extrabold text-white tracking-tight">
+                <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
                   {selectedNode.title}
                 </h2>
               </div>
@@ -748,8 +748,8 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
               {inspectorMode === 'handbook' && (
                 <div className="space-y-3.5 animate-in fade-in duration-150">
                   {/* Summary Callout */}
-                  <div className="p-3.5 bg-slate-950/70 rounded-xl border border-slate-800 space-y-1 text-xs">
-                    <span className="text-cyan-300 font-bold uppercase text-[10px] tracking-wider block font-mono">
+                  <div className="p-4 bg-slate-950/70 rounded-xl border border-slate-800 space-y-1.5 text-sm">
+                    <span className="text-cyan-300 font-bold uppercase text-xs tracking-wider block font-mono">
                       Governance Meaning &amp; Purpose
                     </span>
                     <p className="text-slate-200 leading-relaxed font-medium">
@@ -758,10 +758,10 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
                   </div>
 
                   {/* Citizen Reassurance Box */}
-                  <div className="p-3.5 bg-teal-950/30 rounded-xl border border-teal-500/30 flex items-start gap-2.5 text-xs">
+                  <div className="p-4 bg-teal-950/30 rounded-xl border border-teal-500/30 flex items-start gap-2.5 text-sm">
                     <ShieldCheck className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
-                    <div className="space-y-0.5">
-                      <span className="text-teal-300 font-bold uppercase text-[10px] tracking-wider block font-mono">
+                    <div className="space-y-1">
+                      <span className="text-teal-300 font-bold uppercase text-xs tracking-wider block font-mono">
                         Patient &amp; Citizen Safeguard Reassurance
                       </span>
                       <p className="text-teal-100 leading-relaxed">
@@ -771,27 +771,27 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
                   </div>
 
                   {/* Statutory Basis */}
-                  <div className="p-3 bg-slate-950/50 rounded-lg border border-slate-800 flex items-start gap-2.5 text-xs">
+                  <div className="p-3.5 bg-slate-950/50 rounded-lg border border-slate-800 flex items-start gap-2.5 text-sm">
                     <Scale className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-slate-400 font-bold uppercase text-[10px] tracking-wider block font-mono">
+                      <span className="text-slate-400 font-bold uppercase text-xs tracking-wider block font-mono">
                         Statutory Mandate &amp; Citations
                       </span>
-                      <p className="text-slate-300 font-medium">
+                      <p className="text-slate-200 font-medium leading-relaxed">
                         {selectedNode.statutoryBasis}
                       </p>
                     </div>
                   </div>
 
                   {/* State Hash & Source File */}
-                  <div className="grid grid-cols-2 gap-2 text-[11px] font-mono text-slate-400 pt-1">
-                    <div className="p-2 rounded bg-slate-950/40 border border-slate-800">
-                      <span className="text-slate-500 block text-[9px] uppercase">Source File</span>
+                  <div className="grid grid-cols-2 gap-2.5 text-xs font-mono text-slate-300 pt-1">
+                    <div className="p-2.5 rounded bg-slate-950/40 border border-slate-800">
+                      <span className="text-slate-400 block text-xs uppercase">Source File</span>
                       <span className="text-cyan-300 truncate block">{selectedNode.sourceFile}</span>
                     </div>
-                    <div className="p-2 rounded bg-slate-950/40 border border-slate-800">
-                      <span className="text-slate-500 block text-[9px] uppercase">State Commitment</span>
-                      <span className="text-slate-300 truncate block">{selectedNode.stateHash || 'sha256:7f83b165...'}</span>
+                    <div className="p-2.5 rounded bg-slate-950/40 border border-slate-800">
+                      <span className="text-slate-400 block text-xs uppercase">State Commitment</span>
+                      <span className="text-slate-200 truncate block">{selectedNode.stateHash || 'sha256:7f83b165...'}</span>
                     </div>
                   </div>
                 </div>
@@ -801,8 +801,8 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
               {inspectorMode === 'technical' && (
                 <div className="space-y-3.5 animate-in fade-in duration-150">
                   {/* Detailed Definition */}
-                  <div className="p-3 bg-slate-950/60 rounded-xl border border-slate-800 text-xs text-slate-300 leading-relaxed">
-                    <span className="text-cyan-400 font-bold uppercase text-[10px] tracking-wider block font-mono mb-1">
+                  <div className="p-4 bg-slate-950/60 rounded-xl border border-slate-800 text-sm text-slate-200 leading-relaxed">
+                    <span className="text-cyan-400 font-bold uppercase text-xs tracking-wider block font-mono mb-1">
                       Technical Architecture Specification
                     </span>
                     {selectedNode.fullDefinition}
@@ -810,8 +810,8 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
 
                   {/* Code Implementation Display */}
                   <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-[11px] text-slate-400 font-mono">
-                      <span className="font-semibold uppercase text-[10px] tracking-wider text-cyan-300">
+                    <div className="flex items-center justify-between text-xs text-slate-400 font-mono">
+                      <span className="font-semibold uppercase tracking-wider text-cyan-300">
                         {selectedNode.shaclSnippet
                           ? 'W3C SHACL Shape Constraint'
                           : selectedNode.regoSnippet
@@ -830,23 +830,23 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
                               ''
                           )
                         }
-                        className="text-slate-400 hover:text-cyan-300 flex items-center gap-1 cursor-pointer"
+                        className="text-slate-300 hover:text-cyan-300 flex items-center gap-1 cursor-pointer"
                       >
                         {copiedCode ? (
                           <>
-                            <Check className="w-3 h-3 text-emerald-400" />
+                            <Check className="w-3.5 h-3.5 text-emerald-400" />
                             <span className="text-emerald-400 font-bold">Copied</span>
                           </>
                         ) : (
                           <>
-                            <Copy className="w-3 h-3" />
+                            <Copy className="w-3.5 h-3.5" />
                             <span>Copy</span>
                           </>
                         )}
                       </button>
                     </div>
 
-                    <pre className="p-3 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-cyan-200 overflow-x-auto leading-relaxed max-h-48 shadow-inner">
+                    <pre className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-cyan-200 overflow-x-auto leading-relaxed max-h-52 shadow-inner">
                       <code>
                         {selectedNode.shaclSnippet ||
                           selectedNode.regoSnippet ||
@@ -859,10 +859,10 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
                   {/* PROV-O Triple Trace if available */}
                   {selectedNode.provoSnippet && (
                     <div className="space-y-1">
-                      <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
+                      <span className="text-xs font-mono text-slate-400 uppercase tracking-wider block">
                         W3C PROV-O Audit Event Triple
                       </span>
-                      <pre className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800/80 text-[10px] font-mono text-amber-300 overflow-x-auto leading-relaxed">
+                      <pre className="p-3 rounded-lg bg-slate-950/80 border border-slate-800/80 text-xs font-mono text-amber-300 overflow-x-auto leading-relaxed">
                         <code>{selectedNode.provoSnippet}</code>
                       </pre>
                     </div>
@@ -878,17 +878,17 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
                       <Play className="w-3.5 h-3.5 text-teal-400" />
                       <span>{selectedNode.simulatorConfig.inputLabel}</span>
                     </span>
-                    <span className="text-[10px] font-mono text-slate-400">&lt; 0.5ms PEP</span>
+                    <span className="text-xs font-mono text-slate-400 tabular-nums">&lt; 0.5ms PEP</span>
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-2.5">
                     {selectedNode.simulatorConfig.fields.map((field) => (
-                      <div key={field.key} className="flex items-center justify-between text-xs text-slate-300">
+                      <div key={field.key} className="flex items-center justify-between text-xs sm:text-sm text-slate-200">
                         <span>{field.label}:</span>
                         {field.type === 'boolean' && (
                           <button
                             onClick={() => handleSimulateFieldChange(field.key, !simulatorInputs[field.key])}
-                            className={`px-2.5 py-0.5 rounded font-mono text-[11px] font-bold transition-colors cursor-pointer ${
+                            className={`px-3 py-1 rounded font-mono text-xs font-bold transition-colors cursor-pointer ${
                               simulatorInputs[field.key]
                                 ? 'bg-teal-500 text-slate-950'
                                 : 'bg-rose-950 text-rose-300 border border-rose-800'
@@ -903,50 +903,50 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
 
                   {simulationResult && (
                     <div
-                      className={`p-2.5 rounded-lg border text-xs space-y-1 ${
+                      className={`p-3 rounded-lg border text-xs space-y-1 ${
                         simulationResult.allowed
                           ? 'bg-teal-950/40 border-teal-500/40 text-teal-200'
                           : 'bg-rose-950/40 border-rose-500/40 text-rose-200'
                       }`}
                     >
-                      <div className="flex items-center justify-between font-bold text-[11px]">
-                        <span className="flex items-center gap-1">
+                      <div className="flex items-center justify-between font-bold text-xs">
+                        <span className="flex items-center gap-1.5">
                           {simulationResult.allowed ? (
-                            <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
+                            <CheckCircle2 className="w-4 h-4 text-teal-400" />
                           ) : (
-                            <XCircle className="w-3.5 h-3.5 text-rose-400" />
+                            <XCircle className="w-4 h-4 text-rose-400" />
                           )}
                           <span>Decision: {simulationResult.allowed ? 'ALLOW' : 'DENY / BLOCKED'}</span>
                         </span>
-                        <span className="font-mono text-[10px] opacity-75">{simulationResult.ruleEvaluated}</span>
+                        <span className="font-mono text-xs opacity-80">{simulationResult.ruleEvaluated}</span>
                       </div>
-                      <p className="text-[11px] leading-snug opacity-90">{simulationResult.reason}</p>
+                      <p className="text-xs sm:text-sm leading-snug opacity-95">{simulationResult.reason}</p>
                     </div>
                   )}
                 </div>
               )}
 
               {/* Quick Navigation Links */}
-              <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-xs">
+              <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-xs sm:text-sm">
                 {selectedNode.glossaryTermId && onNavigateToGlossaryTerm ? (
                   <button
                     onClick={() => onNavigateToGlossaryTerm(selectedNode.glossaryTermId!)}
-                    className="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1 cursor-pointer"
+                    className="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1.5 cursor-pointer"
                   >
-                    <BookOpen className="w-3.5 h-3.5" />
+                    <BookOpen className="w-4 h-4" />
                     <span>View in Glossary</span>
                   </button>
                 ) : (
-                  <span className="text-[11px] text-slate-500 font-mono">Phase 9 Curated Lens</span>
+                  <span className="text-xs text-slate-500 font-mono">Phase 9 Curated Lens</span>
                 )}
 
                 {selectedNode.conceptModuleId && onNavigateToConcept && (
                   <button
                     onClick={() => onNavigateToConcept(selectedNode.conceptModuleId!)}
-                    className="text-teal-400 hover:text-teal-300 font-semibold flex items-center gap-1 cursor-pointer"
+                    className="text-teal-400 hover:text-teal-300 font-semibold flex items-center gap-1.5 cursor-pointer"
                   >
                     <span>Read Concept Chapter</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 )}
               </div>
@@ -954,8 +954,8 @@ ${n.data.rdfClassSnippet || n.data.shaclSnippet || `# Class: ${n.data.label}\n${
           ) : (
             <div className="p-8 text-center text-slate-400 space-y-3">
               <Info className="w-8 h-8 mx-auto text-slate-600" />
-              <h4 className="text-sm font-semibold text-slate-300">Select Any Node</h4>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <h4 className="text-base font-semibold text-slate-300">Select Any Node</h4>
+              <p className="text-sm text-slate-400 leading-relaxed">
                 Click any policy, container, or airlock node on the canvas to inspect its dual-angle definition.
               </p>
             </div>

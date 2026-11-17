@@ -301,10 +301,10 @@ export default function App() {
         </main>
 
         {/* Clean Editorial Footer */}
-        <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-8 text-xs text-slate-600 dark:text-slate-400">
-          <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-8 text-sm text-slate-600 dark:text-slate-400">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-[#005EB8]" />
+              <ShieldCheck className="w-4 h-4 text-[#005EB8] shrink-0" />
               <span className="font-medium text-slate-800 dark:text-slate-200">
                 Wavebound · Policy-as-Code for Safe &amp; Secure Data Intelligence Environments
               </span>
@@ -360,7 +360,7 @@ export default function App() {
               </button>
             </div>
           </div>
-          <div className="max-w-7xl mx-auto px-4 mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/60 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/60 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
             <p>
               Decision-support baseline assisting human review panels (DAAG, REC, Caldicott Guardians).
             </p>

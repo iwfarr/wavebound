@@ -104,7 +104,7 @@ export const GRANULAR_16_WEEK_TIMELINE: SprintSchedule[] = [
       },
       {
         artifact: 'Governance & Statutory Mapping',
-        description: 'Classes encoding NHS Section 251 exemptions, UK GDPR legal bases, and SATRE 4 pillars.',
+        description: 'Classes encoding NHS Section 251 exemptions, UK GDPR legal bases, and all 5 SATRE 2.0 pillars (including Federation).',
         path: 'ontology/governance_core.ttl'
       },
       {

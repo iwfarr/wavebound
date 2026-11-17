@@ -82,18 +82,18 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Header Banner - Clean Editorial Card */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 sm:p-8 relative overflow-hidden shadow-xs">
         <div className="absolute top-0 right-0 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-3">
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-3 flex-1">
             <WaveboundLogo variant="badge" size="sm" />
-            <div className="space-y-1">
+            <div className="space-y-2">
               <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 Project Wavebound: Progress Tracker &amp; Mastery
               </h1>
-              <p className="text-slate-700 dark:text-slate-300 text-sm max-w-2xl leading-relaxed">
+              <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
                 Track your journey through the Wavebound Policy-as-Code Playbook. Review your section completion,
                 quiz attempt history, highest test scores, and earned certifications.
               </p>
@@ -101,24 +101,24 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
           </div>
 
           {/* User Rank Card */}
-          <div className={`p-5 rounded-xl border ${userRank.color} min-w-[260px] space-y-2`}>
+          <div className={`p-5 rounded-xl border ${userRank.color} min-w-[280px] lg:max-w-sm shrink-0 space-y-2`}>
             <div className="flex items-center justify-between text-xs font-semibold">
               <span className="flex items-center gap-1.5">
                 <Award className="w-4 h-4" />
                 {userRank.badge}
               </span>
-              <span className="font-mono font-bold">{stats.overallProgressPercentage}% Mastery</span>
+              <span className="font-mono font-bold tabular-nums">{stats.overallProgressPercentage}% Mastery</span>
             </div>
             <h3 className="text-base font-bold text-slate-900 dark:text-white">{userRank.title}</h3>
-            <p className="text-[11px] text-slate-700 dark:text-slate-300 leading-snug">{userRank.desc}</p>
+            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">{userRank.desc}</p>
           </div>
         </div>
 
         {/* Overall Progress Bar */}
         <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-800 space-y-3">
-          <div className="flex items-center justify-between text-xs font-medium">
+          <div className="flex items-center justify-between text-sm font-medium">
             <span className="text-slate-800 dark:text-slate-300 font-bold">Overall Playbook Mastery Score</span>
-            <span className="text-teal-700 dark:text-cyan-400 font-mono font-bold text-base">{stats.overallProgressPercentage}%</span>
+            <span className="text-teal-700 dark:text-cyan-400 font-mono font-bold text-lg tabular-nums">{stats.overallProgressPercentage}%</span>
           </div>
           <div className="w-full bg-slate-100 dark:bg-slate-950 h-3.5 rounded-full overflow-hidden border border-slate-200 dark:border-slate-800">
             <div
@@ -128,37 +128,37 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
           </div>
 
           {/* 4 Pillars Scoring Explanation */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 pt-2 text-[11px]">
-            <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2 text-xs">
+            <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
               <div className="flex justify-between">
                 <span className="text-slate-700 dark:text-slate-400">Playbook Reading</span>
-                <span className="font-mono text-teal-700 dark:text-cyan-400 font-bold">30% Max</span>
+                <span className="font-mono text-teal-700 dark:text-cyan-400 font-bold tabular-nums">30% Max</span>
               </div>
-              <div className="text-slate-900 dark:text-slate-200 font-medium">{stats.playbookSectionsReadCount}/{stats.totalPlaybookSections} sections read</div>
+              <div className="text-slate-900 dark:text-slate-200 font-medium tabular-nums">{stats.playbookSectionsReadCount}/{stats.totalPlaybookSections} sections read</div>
             </div>
 
-            <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
+            <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
               <div className="flex justify-between">
                 <span className="text-slate-700 dark:text-slate-400">Concept Pillars</span>
-                <span className="font-mono text-purple-700 dark:text-purple-400 font-bold">30% Max</span>
+                <span className="font-mono text-purple-700 dark:text-purple-400 font-bold tabular-nums">30% Max</span>
               </div>
-              <div className="text-slate-900 dark:text-slate-200 font-medium">{stats.modulesCompletedCount}/{stats.totalModules} mastered</div>
+              <div className="text-slate-900 dark:text-slate-200 font-medium tabular-nums">{stats.modulesCompletedCount}/{stats.totalModules} mastered</div>
             </div>
 
-            <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
+            <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
               <div className="flex justify-between">
                 <span className="text-slate-700 dark:text-slate-400">Glossary Explored</span>
-                <span className="font-mono text-[#047857] dark:text-emerald-400 font-bold">15% Max</span>
+                <span className="font-mono text-[#047857] dark:text-emerald-400 font-bold tabular-nums">15% Max</span>
               </div>
-              <div className="text-slate-900 dark:text-slate-200 font-medium">{viewedGlossaryTerms.length} terms visited</div>
+              <div className="text-slate-900 dark:text-slate-200 font-medium tabular-nums">{viewedGlossaryTerms.length} terms visited</div>
             </div>
 
-            <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
+            <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
               <div className="flex justify-between">
                 <span className="text-slate-700 dark:text-slate-400">Quizzes &amp; Exams</span>
-                <span className="font-mono text-amber-700 dark:text-amber-400 font-bold">25% Max</span>
+                <span className="font-mono text-amber-700 dark:text-amber-400 font-bold tabular-nums">25% Max</span>
               </div>
-              <div className="text-slate-900 dark:text-slate-200 font-medium">{stats.totalPassed} passed ({stats.totalAttempts} taken)</div>
+              <div className="text-slate-900 dark:text-slate-200 font-medium tabular-nums">{stats.totalPassed} passed ({stats.totalAttempts} taken)</div>
             </div>
           </div>
 
@@ -188,7 +188,7 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
             <History className="w-4 h-4 text-teal-600 dark:text-cyan-400" />
           </div>
           <div className="text-2xl font-bold text-slate-900 dark:text-white">{stats.totalAttempts}</div>
-          <div className="text-[11px] text-slate-600 dark:text-slate-400">Across all categories</div>
+          <div className="text-xs text-slate-600 dark:text-slate-400">Across all categories</div>
         </div>
 
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl space-y-1 shadow-xs">
@@ -284,7 +284,7 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
               <span>Playbook Section Tracker</span>
             </h3>
 
-            <div className="space-y-2 text-xs">
+            <div className="space-y-2 text-sm">
               {[
                 { id: 'sec-overview', label: 'Section 1. Project Overview & Objectives' },
                 { id: 'sec-architecture', label: 'Section 2. Project Architecture & Repository' },
@@ -299,17 +299,17 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
                   <div
                     key={item.id}
                     onClick={() => onNavigateToSection(item.id)}
-                    className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex items-center justify-between hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
+                    className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex items-center justify-between hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
                   >
                     <span className={isRead ? 'text-slate-900 dark:text-slate-200 font-medium' : 'text-slate-600 dark:text-slate-400'}>
                       {item.label}
                     </span>
                     {isRead ? (
-                      <span className="flex items-center gap-1 text-[11px] text-[#047857] dark:text-emerald-400 font-semibold">
+                      <span className="flex items-center gap-1 text-xs text-[#047857] dark:text-emerald-400 font-semibold shrink-0">
                         <CheckCircle2 className="w-3.5 h-3.5" /> Read
                       </span>
                     ) : (
-                      <span className="text-[11px] text-slate-500 font-mono">Unread</span>
+                      <span className="text-xs text-slate-500 font-mono shrink-0">Unread</span>
                     )}
                   </div>
                 );
@@ -377,7 +377,7 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
                           <span className="font-semibold text-slate-900 dark:text-slate-100 text-sm">
                             {attempt.category}
                           </span>
-                          <span className="text-[10px] font-mono text-slate-700 dark:text-slate-400 bg-white dark:bg-slate-900 px-1.5 py-0.5 rounded border border-slate-200 dark:border-slate-800 font-semibold">
+                          <span className="text-xs font-mono text-slate-700 dark:text-slate-400 bg-white dark:bg-slate-900 px-1.5 py-0.5 rounded border border-slate-200 dark:border-slate-800 font-semibold">
                             {attempt.difficulty}
                           </span>
                         </div>

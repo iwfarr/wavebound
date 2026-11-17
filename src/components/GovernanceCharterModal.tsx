@@ -51,7 +51,7 @@ export const GovernanceCharterModal: React.FC<GovernanceCharterModalProps> = ({ 
                 <Shield className="w-3.5 h-3.5 text-cyan-400" />
                 <span>UK GDPR Articles 6(1)(e) &amp; 9(2)(j)</span>
               </strong>
-              <p className="text-[11.5px] text-slate-400 leading-normal">
+              <p className="text-sm text-slate-400 leading-normal">
                 Lawful basis for public-interest archiving, scientific research, and health data linkage with Article 89(1) technical safeguards and strict minimization principles.
               </p>
             </div>
@@ -120,7 +120,7 @@ export const GovernanceCharterModal: React.FC<GovernanceCharterModalProps> = ({ 
                   </span>
                   <span>Principle {p.num}: {p.title}</span>
                 </span>
-                <p className="text-slate-400 text-[11px] pl-6 leading-normal">{p.desc}</p>
+                <p className="text-slate-400 text-xs sm:text-sm pl-6 leading-normal">{p.desc}</p>
               </div>
             ))}
           </div>
@@ -379,7 +379,7 @@ export const GovernanceCharterModal: React.FC<GovernanceCharterModalProps> = ({ 
           </div>
           <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-[11.5px] space-y-2">
             <strong className="text-white block font-bold">Safe, Non-Breaking 4-Stage Operational Rollout:</strong>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[10.5px]">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
               <div className="p-2 rounded bg-slate-900 border border-slate-800">
                 <span className="font-bold text-cyan-300 block">Stage 1: Evaluate-Only</span>
                 <span className="text-slate-400">Passive telemetry; zero requests blocked.</span>
@@ -542,20 +542,20 @@ Wavebound operationalizes this Charter by decoupling enduring governance ontolog
 
   return (
     <div className="fixed inset-0 z-50 bg-slate-900/70 dark:bg-black/85 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5">
-      <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-5xl w-full p-5 sm:p-8 space-y-5 shadow-2xl relative max-h-[92vh] flex flex-col overflow-hidden">
+      <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-6xl w-full p-6 sm:p-8 space-y-5 shadow-2xl relative max-h-[92vh] flex flex-col overflow-hidden">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4 shrink-0">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <WaveboundLogo variant="badge" size="xs" />
-              <span className="text-[10px] font-mono font-bold text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800 uppercase tracking-wider">
+              <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-950/60 px-2.5 py-0.5 rounded border border-cyan-800 uppercase tracking-wider">
                 Authoritative Governance Specification
               </span>
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
               Public Interest Data Governance &amp; Population Health Research Charter
             </h2>
-            <span className="text-[11px] text-slate-400 font-mono block">
+            <span className="text-xs text-slate-400 font-mono block">
               Reference: WAVEBOUND-PAC-GOV-2026-V5 · Ratified for Patient &amp; Population Safe &amp; Secure Data and Intelligence Environments
             </span>
           </div>
@@ -592,7 +592,7 @@ Wavebound operationalizes this Charter by decoupling enduring governance ontolog
             <button
               key={sec.id}
               onClick={() => setActiveSection(sec.id)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 shrink-0 transition-colors cursor-pointer ${
+              className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 shrink-0 transition-colors cursor-pointer ${
                 activeSection === sec.id
                   ? 'bg-cyan-500 text-slate-950 font-bold shadow-xs'
                   : 'bg-slate-950 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800'
@@ -606,13 +606,13 @@ Wavebound operationalizes this Charter by decoupling enduring governance ontolog
 
         {/* Active Section Content Pane */}
         <div className="flex-1 overflow-y-auto pr-1 space-y-4">
-          <div className="p-5 rounded-xl bg-slate-950/70 border border-slate-800 space-y-4">
+          <div className="p-5 sm:p-6 rounded-xl bg-slate-950/70 border border-slate-800 space-y-4">
             <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
               <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
                 {activeSectionObj.icon}
                 <span>{activeSectionObj.title}</span>
               </h3>
-              <span className="text-[10px] font-mono text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/50">
+              <span className="text-xs font-mono text-cyan-400 bg-cyan-950/60 px-2.5 py-0.5 rounded border border-cyan-800/50">
                 Section {activeSectionObj.id} of {CHARTER_SECTIONS.length}
               </span>
             </div>
@@ -631,8 +631,8 @@ Wavebound operationalizes this Charter by decoupling enduring governance ontolog
             <span>{copied ? 'Summary Copied to Clipboard!' : 'Copy Summary'}</span>
           </button>
 
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] text-slate-400">
+          <div className="flex items-center gap-3">
+            <span className="text-xs text-slate-400">
               Authorized by Institutional IG &amp; Ethics Oversight Board
             </span>
             <button

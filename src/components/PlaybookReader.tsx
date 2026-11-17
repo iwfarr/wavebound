@@ -106,7 +106,7 @@ const PLAYBOOK_SECTIONS: PlaybookSection[] = [
       '   - Safe Outputs: tre:SafeOutput requiring quantitative SDC clearance and differential privacy / memorization verification before airlock egress.',
       '• Stanford UIT Agentic AI Security Framework Integration: Formally aligns agentic workloads with Stanford UIT cybersecurity mandates: automated near-instantaneous token revocation, blast radius containment, read-only SELECT permissions, and risk categorization (Section 8702 High Risk vs Section 8938 Very High Risk).',
       '• ISO/IEC 27001:2022 ISMS, Statement of Applicability & DEA 2017 Accreditation: Under Sections 70–71 of the Digital Economy Act 2017 and UKSA TRE Accreditation SOP V1.4, Accredited Processing Environments must maintain independent ISO/IEC 27001 certification. Wavebound binds ISMS management clauses (Clauses 4–10: scope, risk treatment, internal audit, continual improvement) and the Clause 6.1.3(d) Statement of Applicability (SoA) directly to the four 2022 Annex A themes—Organizational (A.5.15–A.5.34), People (A.6.1–A.6.6), Physical (A.7.1–A.7.14), and Technological (A.8.2–A.8.32, including A.8.12 DLP, A.8.15 logging, A.8.20–A.8.22 network segregation, A.8.24 cryptography, and A.8.32 change control)—transforming annual compliance audits into continuous Policy-as-Code verification.',
-      '• SATRE & EHDS Interoperability: Aligns tre-core.ttl with the 4 pillars of SATRE (Information Governance, Computing Infrastructure, Data Management, Software Operations) and maps cleanly to EU EHDS secondary-use Data Permits and Secure Processing Environments (SPEs). Where federated statistical workflows execute structured server-side calls rather than interactive workspace containers, frameworks like DataSHIELD provide built-in non-disclosive node checks (nfilter) that complement interactive enclave controls.'
+      '• SATRE 2.0 (5 Pillars) & European Health Data Space (Regulation (EU) 2025/327) Interoperability: Aligns tre-core.ttl across SATRE v1\'s four core pillars (Information Governance, Computing Technology & Infrastructure, Data Management, Supporting Capabilities—where Software Operations & GitOps live) plus SATRE 2.0 Pillar 5 (Federation via TREvolution). Against Regulation (EU) 2025/327 (in force 26 March 2025; phased application across 2027 Health Data Access Body [HDAB] designation, 2029 core Secure Processing Environment [SPE] go-live, and 2031 genomics/trials expansion), technical safeguards exhibit close correspondence with Chapter IV (Article 50 zero-download SPEs, anonymised/aggregated Safe Outputs, HealthDCAT-AP metadata, and HealthData@EU federation). However, SATRE is not a statutory equivalent to EHDS: SATRE is a voluntary UK architectural framework whereas EHDS empowers compulsory public HDABs; in the UK, domestic law (UK General Data Protection Regulation Articles 6 and 9, the Common Law Duty of Confidentiality, NHS Act 2006 Section 251 advised by the Confidentiality Advisory Group [CAG], and the NHS National Data Opt-Out [NDOO]) continues to govern access. Where federated statistical workflows execute structured server-side calls rather than interactive containers, frameworks like DataSHIELD provide built-in non-disclosive node checks (nfilter) paired with Five Safes RO-Crate manifests.'
     ],
     codeBlock: {
       language: 'turtle',
@@ -511,33 +511,33 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
   const progressPercent = Math.round((completedCount / totalSections) * 100);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-8" ref={contentContainerRef}>
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8" ref={contentContainerRef}>
       {/* Title & Reading Progress Bar Header */}
       <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 relative overflow-hidden">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div className="space-y-3">
+          <div className="space-y-3 flex-1">
             <div className="flex items-center gap-3">
               <WaveboundLogo variant="badge" size="sm" />
               <div className="flex items-center gap-1.5 text-xs font-semibold text-cyan-400 uppercase tracking-wider">
-                <BookOpen className="w-3.5 h-3.5" />
+                <BookOpen className="w-4 h-4" />
                 <span>SemVer 2.4.0-prod</span>
               </div>
             </div>
-            <div className="space-y-1">
+            <div className="space-y-2">
               <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                 Project Wavebound: Policy-as-Code Playbook
               </h1>
-              <p className="text-slate-300 text-sm max-w-2xl leading-relaxed">
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
                 This playbook provides a Policy as Code (PaC) framework, bridging regulatory compliance documentation and real-time execution by compiling human- and machine-readable semantic graph ontologies into Policy Decision Points (PDPs) and Policy Enforcement Points (PEPs) across data intelligence platforms. Please note that this project is a work in progress.
               </p>
             </div>
           </div>
 
           {/* Reading Tracker Widget */}
-          <div className="bg-slate-950/70 p-4 rounded-xl border border-slate-800/80 min-w-[240px] space-y-2">
-            <div className="flex items-center justify-between text-xs">
+          <div className="bg-slate-950/70 p-4 rounded-xl border border-slate-800/80 min-w-[260px] shrink-0 space-y-2">
+            <div className="flex items-center justify-between text-xs sm:text-sm">
               <span className="text-slate-400">Playbook Reading</span>
-              <span className="font-semibold text-cyan-400">{progressPercent}%</span>
+              <span className="font-semibold text-cyan-400 tabular-nums">{progressPercent}%</span>
             </div>
             <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
               <div
@@ -545,12 +545,12 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
-            <div className="text-[11px] text-slate-400 flex items-center justify-between pt-1">
-              <span>{completedCount} of {totalSections} sections</span>
+            <div className="text-xs text-slate-400 flex items-center justify-between pt-1">
+              <span className="tabular-nums">{completedCount} of {totalSections} sections</span>
               {completedCount < totalSections ? (
                 <button
                   onClick={markAllSectionsRead}
-                  className="text-cyan-400 hover:text-cyan-300 font-medium underline decoration-cyan-500/40"
+                  className="text-cyan-400 hover:text-cyan-300 font-medium underline decoration-cyan-500/40 cursor-pointer"
                 >
                   Mark All Read
                 </button>
@@ -585,11 +585,11 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
           </div>
 
           {expandedIntro && (
-            <div className="space-y-6 text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <div className="space-y-6 text-sm text-slate-300 leading-relaxed">
               {/* Context & Wavebound Problem Space */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-                <div className="lg:col-span-2 space-y-3">
-                  <h3 className="text-sm sm:text-base font-semibold text-white flex items-center gap-2">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div className="lg:col-span-8 space-y-3">
+                  <h3 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
                     <Compass className="w-4 h-4 text-cyan-400" />
                     <span>The Wavebound Problem Space &amp; Tidal Flow Model</span>
                   </h3>
@@ -599,20 +599,20 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                   <p>
                     Governance operates across two coordinated directional flows:
                   </p>
-                  <div className="space-y-2 pl-1">
-                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-                      <span className="font-semibold text-cyan-300 block">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+                    <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5 h-full">
+                      <span className="font-semibold text-cyan-300 block text-sm">
                         • Ingress (Inward Flow): Access Controls, Safe People &amp; Safe Projects
                       </span>
-                      <p className="text-slate-300 text-xs leading-relaxed">
+                      <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
                         Inbound flow enforces gateway access controls, researcher accreditation, institutional identity verification, and mandatory Information Governance training (Safe People), alongside approved NHS REC ethics protocols, research purpose justification, and Section 251 CAG exemptions (Safe Projects). Inbound datasets, multi-omics records, and container workloads are verified at the boundary using W3C SHACL shape validation before entering the enclave.
                       </p>
                     </div>
-                    <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-                      <span className="font-semibold text-emerald-300 block">
+                    <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5 h-full">
+                      <span className="font-semibold text-emerald-300 block text-sm">
                         • Egress (Outward Flow): Disclosure Control &amp; Safe Outputs
                       </span>
-                      <p className="text-slate-300 text-xs leading-relaxed">
+                      <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
                         Outbound flow regulates the export of derived analytical findings, statistical summaries, and model parameters. Outputs must pass automated Statistical Disclosure Control (SDC) checks, k-anonymity cell suppression (k ≥ 10), and sub-millisecond Open Policy Agent (OPA) Rego policy evaluations to prevent patient re-identification.
                       </p>
                     </div>
@@ -622,24 +622,24 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                   </p>
                 </div>
 
-                <div className="bg-slate-900/90 border border-slate-800/90 rounded-xl p-4 space-y-2.5">
-                  <span className="text-[11px] font-mono uppercase text-cyan-400 font-bold block">
+                <div className="lg:col-span-4 bg-slate-900/90 border border-slate-800/90 rounded-xl p-5 space-y-3">
+                  <span className="text-xs font-mono uppercase text-cyan-400 font-bold block">
                     Architecture at a Glance
                   </span>
-                  <div className="space-y-2 text-xs">
-                    <div className="flex justify-between items-center py-1 border-b border-slate-800/60">
+                  <div className="space-y-2.5 text-sm">
+                    <div className="flex justify-between items-center py-1.5 border-b border-slate-800/60">
                       <span className="text-slate-400">Release Version</span>
-                      <span className="font-mono text-cyan-300 font-bold">v2.4.0-prod</span>
+                      <span className="font-mono text-cyan-300 font-bold tabular-nums">v2.4.0-prod</span>
                     </div>
-                    <div className="flex justify-between items-center py-1 border-b border-slate-800/60">
+                    <div className="flex justify-between items-center py-1.5 border-b border-slate-800/60">
                       <span className="text-slate-400">Decision Latency</span>
-                      <span className="font-mono text-emerald-400 font-bold">&lt; 1.2 ms (OPA PDP)</span>
+                      <span className="font-mono text-emerald-400 font-bold tabular-nums">&lt; 1.2 ms (OPA PDP)</span>
                     </div>
-                    <div className="flex justify-between items-center py-1 border-b border-slate-800/60">
+                    <div className="flex justify-between items-center py-1.5 border-b border-slate-800/60">
                       <span className="text-slate-400">Disclosure Rule</span>
-                      <span className="font-mono text-amber-300 font-bold">k &ge; 10, Dom &le; 80%</span>
+                      <span className="font-mono text-amber-300 font-bold tabular-nums">k &ge; 10, Dom &le; 80%</span>
                     </div>
-                    <div className="flex justify-between items-center py-1">
+                    <div className="flex justify-between items-center py-1.5">
                       <span className="text-slate-400">Audit Protocol</span>
                       <span className="font-mono text-purple-300 font-bold">W3C PROV-O Triples</span>
                     </div>
@@ -649,36 +649,36 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
 
               {/* 4 Architectural Layers */}
               <div className="space-y-3 pt-2">
-                <h3 className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
                   <Layers className="w-4 h-4 text-cyan-400" />
                   <span>The Four Architectural Layers</span>
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                  <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+                  <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-4 space-y-1.5 h-full">
                     <div className="text-xs font-mono font-bold text-cyan-400">1. Ontological Law</div>
-                    <div className="text-xs text-white font-semibold">RDF / OWL 2 Knowledge Graph</div>
-                    <p className="text-[11px] text-slate-400 leading-normal">
+                    <div className="text-sm text-white font-semibold">RDF / OWL 2 Knowledge Graph</div>
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                       Formalizes Five Safes and Caldicott principles into machine-readable classes (<code className="text-cyan-300 font-mono">tre-core.ttl</code>, <code className="text-cyan-300 font-mono">governance_core.ttl</code>).
                     </p>
                   </div>
-                  <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                  <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-4 space-y-1.5 h-full">
                     <div className="text-xs font-mono font-bold text-purple-400">2. Deterministic Verification</div>
-                    <div className="text-xs text-white font-semibold">Closed-World SHACL &amp; PySHACL</div>
-                    <p className="text-[11px] text-slate-400 leading-normal">
+                    <div className="text-sm text-white font-semibold">Closed-World SHACL &amp; PySHACL</div>
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                       Converts open-world assumptions into deterministic pass/fail constraints with automated pytest CI regression suites.
                     </p>
                   </div>
-                  <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                  <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-4 space-y-1.5 h-full">
                     <div className="text-xs font-mono font-bold text-emerald-400">3. Microsecond PDP</div>
-                    <div className="text-xs text-white font-semibold">Compiled OPA Rego Engine</div>
-                    <p className="text-[11px] text-slate-400 leading-normal">
+                    <div className="text-sm text-white font-semibold">Compiled OPA Rego Engine</div>
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                       The compiler (<code className="text-cyan-300 font-mono">compiler/rdf_to_rego.py</code>) compiles semantic rules into native high-speed Rego policies evaluated in microseconds.
                     </p>
                   </div>
-                  <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                  <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-4 space-y-1.5 h-full">
                     <div className="text-xs font-mono font-bold text-amber-400">4. Interception PEPs</div>
-                    <div className="text-xs text-white font-semibold">Admission, Zero-Egress &amp; Airlock</div>
-                    <p className="text-[11px] text-slate-400 leading-normal">
+                    <div className="text-sm text-white font-semibold">Admission, Zero-Egress &amp; Airlock</div>
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                       K8s Admission Webhooks, Calico zero-egress VPC routing, and SDC airlock gates intercept operations, emitting W3C PROV-O audit trails.
                     </p>
                   </div>
@@ -687,53 +687,53 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
 
               {/* Stakeholder Reading Pathways */}
               <div className="space-y-3 pt-2">
-                <h3 className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
                   <Users className="w-4 h-4 text-cyan-400" />
                   <span>How to Navigate This Playbook By Role</span>
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 space-y-1">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm items-stretch">
+                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-4 space-y-1.5 h-full">
                     <span className="font-bold text-white flex items-center gap-1.5">
-                      <Scale className="w-3.5 h-3.5 text-cyan-400" />
+                      <Scale className="w-4 h-4 text-cyan-400" />
                       <span>Caldicott Guardians &amp; Information Governance (IG) Leads</span>
                     </span>
-                    <p className="text-slate-400 leading-normal">
+                    <p className="text-slate-300 leading-relaxed text-xs sm:text-sm">
                       Start with <strong>Section 0</strong> (Front Matter), <strong>Section 1.2</strong> (Five Safes &amp; SATRE ontologies), and <strong>Section 3.1</strong> (Automated FOI Charters) to review how statutory compliance and ethical approvals are formalized without technical ambiguity.
                     </p>
                   </div>
-                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 space-y-1">
+                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-4 space-y-1.5 h-full">
                     <span className="font-bold text-white flex items-center gap-1.5">
-                      <Server className="w-3.5 h-3.5 text-purple-400" />
+                      <Server className="w-4 h-4 text-purple-400" />
                       <span>DevOps, Cloud Engineers &amp; Platform Architects</span>
                     </span>
-                    <p className="text-slate-400 leading-normal">
+                    <p className="text-slate-300 leading-relaxed text-xs sm:text-sm">
                       Focus on <strong>Section 1.1</strong> (Decoupled Metadata vs Runtime State), <strong>Section 4.1</strong> (OPA Rego compilation), and <strong>Section 4.2</strong> (Admission PEPs). Then jump directly to the <strong>Implementation &amp; Rollout Track</strong> for non-breaking evaluate-only webhook deployment patterns.
                     </p>
                   </div>
-                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 space-y-1">
+                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-4 space-y-1.5 h-full">
                     <span className="font-bold text-white flex items-center gap-1.5">
-                      <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                      <ShieldCheck className="w-4 h-4 text-amber-400" />
                       <span>Airlock Reviewers &amp; Output Disclosure Officers</span>
                     </span>
-                    <p className="text-slate-400 leading-normal">
+                    <p className="text-slate-300 leading-relaxed text-xs sm:text-sm">
                       Examine <strong>Section 2.1</strong> (SDC Shapes) and <strong>Section 4.2</strong> (Airlock PEP) for exact quantitative primary suppression rules (<code className="text-cyan-300 font-mono">k &ge; 10</code>), dominance checks (<code className="text-cyan-300 font-mono">&le; 80%</code>), and secondary masking.
                     </p>
                   </div>
-                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 space-y-1">
+                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-4 space-y-1.5 h-full">
                     <span className="font-bold text-white flex items-center gap-1.5">
-                      <Code2 className="w-3.5 h-3.5 text-emerald-400" />
+                      <Code2 className="w-4 h-4 text-emerald-400" />
                       <span>Security Auditors &amp; Compliance Inspectors</span>
                     </span>
-                    <p className="text-slate-400 leading-normal">
+                    <p className="text-slate-300 leading-relaxed text-xs sm:text-sm">
                       Inspect <strong>Section 2.2</strong> (PySHACL CI test harnesses) and <strong>Section 4.3</strong> (W3C PROV-O audit triples and SHA-256 policy commit signatures) for non-repudiation and post-incident forensic replay capabilities.
                     </p>
                   </div>
-                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-3.5 space-y-1 md:col-span-2">
+                  <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-4 space-y-1.5 md:col-span-2">
                     <span className="font-bold text-white flex items-center gap-1.5">
-                      <ShieldCheck className="w-3.5 h-3.5 text-teal-400" />
+                      <ShieldCheck className="w-4 h-4 text-teal-400" />
                       <span>Clinical Safety Officers (CSO) &amp; AI Governance Leads</span>
                     </span>
-                    <p className="text-slate-400 leading-normal">
+                    <p className="text-slate-300 leading-relaxed text-xs sm:text-sm">
                       Review <strong>Section 3.2</strong> (AI Workload Bounds, ISO 42001 AIMS &amp; 2026 MHRA National Commission Lifecycle Pillars), <strong>Section 4.1</strong> (DCB0129 Hazard Log rules), and <strong>Section 4.2</strong> (UK MDR 2002 SaMD &amp; staged &ldquo;L-plate&rdquo; airlock clearance) for integrating information risk management with algorithmic model training and egress.
                     </p>
                   </div>
@@ -744,19 +744,19 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
         </div>
 
         {/* Operational Bridge Banner to Implementation Track */}
-        <div className="bg-slate-950/90 border border-cyan-900/60 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+        <div className="bg-slate-950/90 border border-cyan-900/60 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-cyan-950 border border-cyan-800 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-cyan-950 border border-cyan-800 flex items-center justify-center shrink-0">
               <Workflow className="w-5 h-5 text-cyan-400" />
             </div>
             <div>
-              <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+              <div className="text-sm sm:text-base font-bold text-white flex items-center gap-2 flex-wrap">
                 <span>Operational Implementation &amp; Safe Rollout Track</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-md bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono font-bold">
+                <span className="text-xs px-2 py-0.5 rounded-md bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono font-bold">
                   Non-Breaking
                 </span>
               </div>
-              <p className="text-[11px] sm:text-xs text-slate-400 mt-0.5">
+              <p className="text-xs sm:text-sm text-slate-300 mt-0.5 leading-relaxed">
                 Moving from this overview into code? Review the <strong>granular 16-week sprint deliverables</strong>, <strong>evaluate-only/shadow rollout stages</strong>, and <strong>Decision Register (D-001–D-009)</strong>.
               </p>
             </div>
@@ -764,76 +764,76 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
           {onNavigateToImplementationTrack && (
             <button
               onClick={onNavigateToImplementationTrack}
-              className="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold flex items-center gap-2 transition-all shrink-0 shadow-sm shadow-cyan-500/20 active:scale-95"
+              className="px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs sm:text-sm font-bold flex items-center gap-2 transition-all shrink-0 shadow-sm shadow-cyan-500/20 active:scale-95 cursor-pointer"
             >
               <span>Explore Implementation Track</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-4 h-4" />
             </button>
           )}
         </div>
 
         {/* Specialized Governance Deep Dives: Caldicott & Data Catalogue */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-slate-950/90 border border-purple-900/50 rounded-xl p-4 flex flex-col justify-between gap-3 shadow-sm">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+          <div className="bg-slate-950/90 border border-purple-900/50 rounded-xl p-5 flex flex-col justify-between gap-3 shadow-sm h-full">
             <div className="space-y-1.5">
               <div className="flex items-center gap-2 text-xs font-bold text-purple-400 uppercase tracking-wider">
                 <Scale className="w-4 h-4" />
                 <span>Statutory Compliance Architecture</span>
               </div>
-              <h3 className="text-sm font-bold text-white">
+              <h3 className="text-base font-bold text-white">
                 The 8 Caldicott Principles in Policy-as-Code
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-sm text-slate-300 leading-relaxed">
                 Disaggregated breakdown of all 8 Caldicott principles into population research applications, SHACL shape validation rules, and OPA Rego policies with gatekeeper checklists.
               </p>
             </div>
             <button
               onClick={() => onNavigateToConcept('caldicott')}
-              className="px-3.5 py-1.5 rounded-lg bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 text-xs font-semibold flex items-center justify-between transition-colors self-start w-full sm:w-auto"
+              className="px-4 py-2 rounded-lg bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 text-xs sm:text-sm font-semibold flex items-center justify-between transition-colors self-start w-full sm:w-auto cursor-pointer"
             >
               <span>Explore 8 Caldicott Principles</span>
-              <ArrowRight className="w-3.5 h-3.5 ml-2" />
+              <ArrowRight className="w-4 h-4 ml-2" />
             </button>
           </div>
 
-          <div className="bg-slate-950/90 border border-emerald-900/50 rounded-xl p-4 flex flex-col justify-between gap-3 shadow-sm">
+          <div className="bg-slate-950/90 border border-emerald-900/50 rounded-xl p-5 flex flex-col justify-between gap-3 shadow-sm h-full">
             <div className="space-y-1.5">
               <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-wider">
                 <Database className="w-4 h-4" />
                 <span>Data Governance &amp; Metadata Engine</span>
               </div>
-              <h3 className="text-sm font-bold text-white">
+              <h3 className="text-base font-bold text-white">
                 Data Catalogue: Metadata &amp; Dependent Constraints
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-sm text-slate-300 leading-relaxed">
                 6 real-world population data assets (GP EHR, Census, Mortality, HES APC, Genomics, Prescribing) with specific cell suppression rules (k ≥ 10), dominance limits, and SHACL targets.
               </p>
             </div>
             <button
               onClick={() => onNavigateToConcept('catalogue')}
-              className="px-3.5 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-semibold flex items-center justify-between transition-colors self-start w-full sm:w-auto"
+              className="px-4 py-2 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs sm:text-sm font-semibold flex items-center justify-between transition-colors self-start w-full sm:w-auto cursor-pointer"
             >
               <span>Explore Data Catalogue Assets</span>
-              <ArrowRight className="w-3.5 h-3.5 ml-2" />
+              <ArrowRight className="w-4 h-4 ml-2" />
             </button>
           </div>
         </div>
 
         {/* Search Bar with Matches Counter and Navigation */}
-        <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800 flex flex-col sm:flex-row items-center gap-3">
+        <div className="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 flex flex-col sm:flex-row items-center gap-3">
           <div className="relative flex-1 w-full">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search playbook for keywords or phrases (e.g., 'SHACL', 'SDC', 'k >= 10', 'Rego', 'Caldicott', 'PROV-O')..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700/80 rounded-lg pl-9 pr-24 py-2 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+              className="w-full bg-slate-900 border border-slate-700/80 rounded-lg pl-10 pr-24 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-200 bg-slate-800 px-2 py-0.5 rounded"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-200 bg-slate-800 px-2 py-0.5 rounded cursor-pointer"
               >
                 Clear
               </button>
@@ -842,12 +842,12 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
 
           {searchQuery && (
             <div className="flex items-center gap-2 text-xs text-slate-400 shrink-0">
-              <span className="font-medium text-slate-200">
+              <span className="font-medium text-slate-200 tabular-nums">
                 {searchMatches.length} match{searchMatches.length !== 1 ? 'es' : ''} found
               </span>
               {searchMatches.length > 0 && (
                 <div className="flex items-center gap-1 border-l border-slate-800 pl-2">
-                  <span className="text-slate-400 text-[11px]">
+                  <span className="text-slate-400 text-xs tabular-nums">
                     {currentMatchIndex + 1}/{searchMatches.length}
                   </span>
                   <button
@@ -856,7 +856,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                       setCurrentMatchIndex(next);
                       handleJumpToMatch(next);
                     }}
-                    className="p-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300"
+                    className="p-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 cursor-pointer"
                     title="Previous match"
                   >
                     <ChevronUp className="w-3.5 h-3.5" />
@@ -867,7 +867,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                       setCurrentMatchIndex(next);
                       handleJumpToMatch(next);
                     }}
-                    className="p-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300"
+                    className="p-1.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 cursor-pointer"
                     title="Next match"
                   >
                     <ChevronDown className="w-3.5 h-3.5" />
@@ -878,14 +878,14 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
           )}
         </div>
 
-        {/* Quick jump anchor links */}
-        <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400 pt-1">
-          <span className="text-slate-500">Jump to section:</span>
+        {/* Quick jump anchor links (mobile/tablet quick index; xl screens also have sticky sidebar) */}
+        <div className="xl:hidden flex flex-wrap items-center gap-2 text-xs text-slate-400 pt-1">
+          <span className="text-slate-400 font-medium">Jump to section:</span>
           {PLAYBOOK_SECTIONS.map((sec) => (
             <a
               key={sec.id}
               href={`#section-${sec.id}`}
-              className="text-slate-400 hover:text-cyan-300 bg-slate-950/60 px-2.5 py-1 rounded border border-slate-800/80 transition-colors"
+              className="text-slate-300 hover:text-cyan-300 bg-slate-950/60 px-2.5 py-1 rounded border border-slate-800/80 transition-colors"
             >
               Sec {sec.number}
             </a>
@@ -893,224 +893,262 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
         </div>
       </div>
 
-      {/* Render Playbook Sections */}
-      <div className="space-y-8">
-        {PLAYBOOK_SECTIONS.map((section) => {
-          const isRead = readSections.includes(section.id);
-
-          return (
-            <div
-              key={section.id}
-              id={`section-${section.id}`}
-              className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 transition-all shadow-sm hover:border-slate-700/80"
-            >
-              {/* Section Header & Mark-as-read control */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800/80">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/60">
-                      Section {section.number}
-                    </span>
-                    <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                      {section.title}
-                    </h2>
-                  </div>
-                  <p className="text-xs sm:text-sm text-slate-400">
-                    {section.subtitle}
-                  </p>
-                </div>
-
-                {/* Mark as read interactive button */}
-                <button
-                  onClick={() => markSectionRead(section.id, !isRead)}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                    isRead
-                      ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/70 hover:bg-emerald-900/60'
-                      : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'
-                  }`}
+      {/* Playbook Sections paired with Sticky Editorial Section Index on xl+ */}
+      <div className="xl:grid xl:grid-cols-12 xl:gap-8 items-start">
+        <aside className="hidden xl:block xl:col-span-3 sticky top-24 bg-slate-900/95 border border-slate-800 rounded-2xl p-5 space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400">
+              Section Index
+            </span>
+            <span className="text-xs font-mono text-slate-400 tabular-nums">
+              {completedCount}/{totalSections} Read
+            </span>
+          </div>
+          <nav className="space-y-1.5" aria-label="Playbook section index">
+            {PLAYBOOK_SECTIONS.map((sec) => {
+              const isRead = readSections.includes(sec.id);
+              return (
+                <a
+                  key={sec.id}
+                  href={`#section-${sec.id}`}
+                  className="flex items-start justify-between gap-2.5 p-2.5 rounded-lg hover:bg-slate-800/80 text-xs transition-colors group"
                 >
+                  <div className="space-y-0.5 min-w-0">
+                    <span className="font-mono font-bold text-cyan-400 block">Section {sec.number}</span>
+                    <span className="text-slate-300 group-hover:text-white leading-snug block line-clamp-2">
+                      {sec.title}
+                    </span>
+                  </div>
                   {isRead ? (
-                    <>
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                      <span>Marked as Read</span>
-                    </>
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   ) : (
-                    <>
-                      <Circle className="w-4 h-4 text-slate-400" />
-                      <span>Mark as Read</span>
-                    </>
+                    <Circle className="w-4 h-4 text-slate-600 shrink-0 mt-0.5" />
                   )}
-                </button>
-              </div>
+                </a>
+              );
+            })}
+          </nav>
+        </aside>
 
-              {/* 2-Sentence Executive Summary Banner */}
-              {section.executiveSummary && (
-                <div className="p-3.5 rounded-xl bg-slate-950 border border-cyan-900/30 flex items-start gap-2.5">
-                  <Sparkles className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-                  <div className="text-xs text-slate-300 leading-relaxed">
-                    <strong className="text-cyan-300 font-mono uppercase text-[10px] block tracking-wider">Executive Summary:</strong>
-                    {renderInteractiveText(section.executiveSummary)}
+        {/* Render Playbook Sections */}
+        <div className="xl:col-span-9 space-y-8">
+          {PLAYBOOK_SECTIONS.map((section) => {
+            const isRead = readSections.includes(section.id);
+
+            return (
+              <div
+                key={section.id}
+                id={`section-${section.id}`}
+                className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6 transition-all shadow-sm hover:border-slate-700/80"
+              >
+                {/* Section Header & Mark-as-read control */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800/80">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2.5 flex-wrap">
+                      <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-950/80 px-2.5 py-0.5 rounded border border-cyan-800/60">
+                        Section {section.number}
+                      </span>
+                      <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                        {section.title}
+                      </h2>
+                    </div>
+                    <p className="text-sm text-slate-400">
+                      {section.subtitle}
+                    </p>
+                  </div>
+
+                  {/* Mark as read interactive button */}
+                  <button
+                    onClick={() => markSectionRead(section.id, !isRead)}
+                    className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-all shrink-0 cursor-pointer ${
+                      isRead
+                        ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/70 hover:bg-emerald-900/60'
+                        : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'
+                    }`}
+                  >
+                    {isRead ? (
+                      <>
+                        <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                        <span>Marked as Read</span>
+                      </>
+                    ) : (
+                      <>
+                        <Circle className="w-4 h-4 text-slate-400" />
+                        <span>Mark as Read</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {/* 2-Sentence Executive Summary Banner */}
+                {section.executiveSummary && (
+                  <div className="p-4 rounded-xl bg-slate-950 border border-cyan-900/30 flex items-start gap-3">
+                    <Sparkles className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                    <div className="text-sm text-slate-300 leading-relaxed space-y-1">
+                      <strong className="text-cyan-300 font-mono uppercase text-xs block tracking-wider">Executive Summary:</strong>
+                      {renderInteractiveText(section.executiveSummary)}
+                    </div>
+                  </div>
+                )}
+
+                {/* Text Paragraphs with Term Highlighting */}
+                <div className="space-y-3.5 text-slate-300 text-sm sm:text-base leading-relaxed">
+                  {section.content.map((paragraph, pIdx) => {
+                    const isList = paragraph.startsWith('•');
+                    const isSublist = paragraph.startsWith('   -');
+
+                    return (
+                      <div
+                        key={pIdx}
+                        className={`${
+                          isSublist
+                            ? 'pl-8 text-slate-300 text-sm sm:text-base'
+                            : isList
+                            ? 'pl-4 text-slate-200'
+                            : ''
+                        }`}
+                      >
+                        {renderInteractiveText(paragraph)}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Collapsible Technical Implementation (OWL/RDF/Code) Accordion */}
+                {section.codeBlock && (
+                  <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-950">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setExpandedTechnicalSchemas((prev) => ({
+                          ...prev,
+                          [section.id]: !prev[section.id]
+                        }));
+                      }}
+                      className="w-full px-4 py-3 bg-slate-900/80 hover:bg-slate-900 flex items-center justify-between text-xs sm:text-sm font-semibold text-slate-300 transition-colors cursor-pointer"
+                    >
+                      <div className="flex items-center gap-2 font-mono">
+                        <Code2 className="w-4 h-4 text-cyan-400" />
+                        <span>View Technical Implementation (OWL / RDF / Shapes)</span>
+                        <span className="text-xs text-slate-400 uppercase px-2 py-0.5 rounded bg-slate-950 border border-slate-800">
+                          {section.codeBlock.language}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-cyan-400 text-xs font-mono">
+                        <span>{expandedTechnicalSchemas[section.id] ? 'Collapse' : 'Expand Schema'}</span>
+                        {expandedTechnicalSchemas[section.id] ? (
+                          <ChevronUp className="w-4 h-4" />
+                        ) : (
+                          <ChevronDown className="w-4 h-4" />
+                        )}
+                      </div>
+                    </button>
+
+                    {expandedTechnicalSchemas[section.id] && (
+                      <div className="p-4 border-t border-slate-800 space-y-2.5">
+                        <div className="flex items-center justify-between text-xs text-slate-400">
+                          <span className="font-mono text-xs">
+                            {section.id === 'sec-architecture' ? 'Repository Directory Tree' : 'Executable Syntax'}
+                          </span>
+                          <button
+                            onClick={() => handleCopyCode(section.id, section.codeBlock!.code)}
+                            className="flex items-center gap-1.5 text-slate-300 hover:text-cyan-300 bg-slate-900 px-3 py-1.5 rounded border border-slate-700 text-xs font-mono transition-colors cursor-pointer"
+                          >
+                            {copiedCodeId === section.id ? (
+                              <>
+                                <Check className="w-3.5 h-3.5 text-emerald-400" />
+                                <span className="text-emerald-400 font-bold">Copied!</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="w-3.5 h-3.5" />
+                                <span>Copy Schema</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+                        <pre className="p-4 rounded-xl bg-slate-950 text-xs sm:text-sm font-mono text-cyan-300 overflow-x-auto leading-relaxed border border-slate-800/80 shadow-inner">
+                          <code>{section.codeBlock.code}</code>
+                        </pre>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Key Takeaways & Interactive Quick Action Links */}
+                <div className="bg-slate-950/50 p-4 sm:p-5 rounded-xl border border-slate-800/60 space-y-3">
+                  <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                    <Sparkles className="w-4 h-4 text-cyan-400" />
+                    <span>Key Architectural Takeaways</span>
+                  </div>
+                  <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-slate-300 items-stretch">
+                    {section.keyTakeaways.map((takeaway, tIdx) => (
+                      <li key={tIdx} className="bg-slate-900/70 p-3.5 rounded-lg border border-slate-800 flex items-start gap-2 leading-relaxed h-full">
+                        <span className="text-cyan-400 font-bold shrink-0">·</span>
+                        <span>{renderInteractiveText(takeaway)}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Direct quick action buttons */}
+                  <div className="flex flex-wrap items-center gap-3 pt-2 text-xs sm:text-sm">
+                    <button
+                      onClick={() => onNavigateToQuiz(
+                        section.id === 'sec-phase-1' ? 'Five Safes & Governance'
+                        : section.id === 'sec-phase-2' ? 'Semantic Modeling & SHACL'
+                        : section.id === 'sec-phase-4' ? 'OPA Rego & Enforcement'
+                        : 'General Architecture'
+                      )}
+                      className="text-cyan-400 hover:text-cyan-300 font-medium flex items-center gap-1 hover:underline cursor-pointer"
+                    >
+                      <span>Take Quiz on Section {section.number}</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
                   </div>
                 </div>
-              )}
-
-              {/* Text Paragraphs with Term Highlighting */}
-              <div className="space-y-3 text-slate-300 text-sm sm:text-base leading-relaxed">
-                {section.content.map((paragraph, pIdx) => {
-                  const isList = paragraph.startsWith('•');
-                  const isSublist = paragraph.startsWith('   -');
-
-                  return (
-                    <div
-                      key={pIdx}
-                      className={`${
-                        isSublist
-                          ? 'pl-8 text-slate-400 text-sm'
-                          : isList
-                          ? 'pl-4 text-slate-200'
-                          : ''
-                      }`}
-                    >
-                      {renderInteractiveText(paragraph)}
-                    </div>
-                  );
-                })}
               </div>
-
-              {/* Collapsible Technical Implementation (OWL/RDF/Code) Accordion */}
-              {section.codeBlock && (
-                <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-950">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setExpandedTechnicalSchemas((prev) => ({
-                        ...prev,
-                        [section.id]: !prev[section.id]
-                      }));
-                    }}
-                    className="w-full px-4 py-3 bg-slate-900/80 hover:bg-slate-900 flex items-center justify-between text-xs font-semibold text-slate-300 transition-colors cursor-pointer"
-                  >
-                    <div className="flex items-center gap-2 font-mono">
-                      <Code2 className="w-3.5 h-3.5 text-cyan-400" />
-                      <span>View Technical Implementation (OWL / RDF / Shapes)</span>
-                      <span className="text-[10px] text-slate-500 uppercase px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800">
-                        {section.codeBlock.language}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-cyan-400 text-[11px] font-mono">
-                      <span>{expandedTechnicalSchemas[section.id] ? 'Collapse' : 'Expand Schema'}</span>
-                      {expandedTechnicalSchemas[section.id] ? (
-                        <ChevronUp className="w-4 h-4" />
-                      ) : (
-                        <ChevronDown className="w-4 h-4" />
-                      )}
-                    </div>
-                  </button>
-
-                  {expandedTechnicalSchemas[section.id] && (
-                    <div className="p-4 border-t border-slate-800 space-y-2">
-                      <div className="flex items-center justify-between text-xs text-slate-400">
-                        <span className="font-mono text-[11px]">
-                          {section.id === 'sec-architecture' ? 'Repository Directory Tree' : 'Executable Syntax'}
-                        </span>
-                        <button
-                          onClick={() => handleCopyCode(section.id, section.codeBlock!.code)}
-                          className="flex items-center gap-1 text-slate-400 hover:text-cyan-300 bg-slate-900 px-2.5 py-1 rounded border border-slate-700 text-[11px] font-mono transition-colors cursor-pointer"
-                        >
-                          {copiedCodeId === section.id ? (
-                            <>
-                              <Check className="w-3.5 h-3.5 text-emerald-400" />
-                              <span className="text-emerald-400 font-bold">Copied!</span>
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-3.5 h-3.5" />
-                              <span>Copy Schema</span>
-                            </>
-                          )}
-                        </button>
-                      </div>
-                      <pre className="p-4 rounded-xl bg-slate-950 text-xs sm:text-sm font-mono text-cyan-300 overflow-x-auto leading-relaxed border border-slate-800/80 shadow-inner">
-                        <code>{section.codeBlock.code}</code>
-                      </pre>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Key Takeaways & Interactive Quick Action Links */}
-              <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800/60 space-y-3">
-                <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Key Architectural Takeaways</span>
-                </div>
-                <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-slate-300">
-                  {section.keyTakeaways.map((takeaway, tIdx) => (
-                    <li key={tIdx} className="bg-slate-900/70 p-3 rounded-lg border border-slate-800 flex items-start gap-2">
-                      <span className="text-cyan-400 font-bold shrink-0">·</span>
-                      <span>{renderInteractiveText(takeaway)}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Direct quick action buttons */}
-                <div className="flex flex-wrap items-center gap-3 pt-2 text-xs">
-                  <button
-                    onClick={() => onNavigateToQuiz(
-                      section.id === 'sec-phase-1' ? 'Five Safes & Governance'
-                      : section.id === 'sec-phase-2' ? 'Semantic Modeling & SHACL'
-                      : section.id === 'sec-phase-4' ? 'OPA Rego & Enforcement'
-                      : 'General Architecture'
-                    )}
-                    className="text-cyan-400 hover:text-cyan-300 font-medium flex items-center gap-1 hover:underline"
-                  >
-                    <span>Take Quiz on Section {section.number}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
 
       {/* Floating Tooltip / Quick Definition Card when hovering a term */}
       {activeTooltipTerm && (
-        <div className="fixed bottom-6 right-6 max-w-sm bg-slate-900/95 backdrop-blur border border-cyan-500/40 rounded-xl p-4 shadow-2xl z-50 space-y-2 animate-in fade-in slide-in-from-bottom-2 duration-200">
+        <div className="fixed bottom-6 right-6 max-w-md bg-slate-900/95 backdrop-blur border border-cyan-500/40 rounded-xl p-4 sm:p-5 shadow-2xl z-50 space-y-2.5 animate-in fade-in slide-in-from-bottom-2 duration-200">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-cyan-400">
+            <span className="text-xs font-semibold uppercase tracking-wider text-cyan-400">
               {activeTooltipTerm.category}
             </span>
             <button
               onClick={() => setActiveTooltipTerm(null)}
-              className="text-xs text-slate-400 hover:text-slate-200"
+              className="text-xs text-slate-400 hover:text-slate-200 cursor-pointer"
             >
               ✕
             </button>
           </div>
-          <h4 className="text-sm font-bold text-white flex items-center gap-2">
+          <h4 className="text-base font-bold text-white flex items-center gap-2">
             <span>{activeTooltipTerm.term}</span>
             {activeTooltipTerm.acronym && (
-              <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950 px-1 py-0.5 rounded">
+              <span className="text-xs font-mono text-cyan-300 bg-cyan-950 px-1.5 py-0.5 rounded">
                 {activeTooltipTerm.acronym}
               </span>
             )}
           </h4>
-          <p className="text-xs text-slate-300 leading-relaxed">
+          <p className="text-sm text-slate-300 leading-relaxed">
             {activeTooltipTerm.shortDefinition}
           </p>
           <div className="pt-2 flex justify-between items-center text-xs border-t border-slate-800">
-            <span className="text-[11px] text-slate-400">{activeTooltipTerm.playbookSection}</span>
+            <span className="text-xs text-slate-400">{activeTooltipTerm.playbookSection}</span>
             <button
               onClick={() => {
                 const id = activeTooltipTerm.id;
                 setActiveTooltipTerm(null);
                 onNavigateToGlossaryTerm(id);
               }}
-              className="text-cyan-400 hover:text-cyan-200 font-medium flex items-center gap-1"
+              className="text-cyan-400 hover:text-cyan-200 font-medium flex items-center gap-1 cursor-pointer"
             >
               <span>View in Glossary</span>
-              <ExternalLink className="w-3 h-3" />
+              <ExternalLink className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>

@@ -322,41 +322,48 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
   }, [searchQuery, viewMode]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Header Banner - Clean Editorial Standard */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-10 shadow-xs relative overflow-hidden">
-        <div className="relative z-10 max-w-3xl space-y-3">
-          <div className="flex items-center gap-2 text-xs font-semibold text-[#0F294A] dark:text-sky-400">
-            <BookOpen className="w-4 h-4 text-[#005EB8]" />
-            <span>Pillar 2 · Plain-English Definitions &amp; Graph 3 of 3 (Term Relationships)</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
-            Governance &amp; Architecture Glossary
-          </h1>
-          <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-            Plain-language definitions for the legal, ethical, statistical, and technical words used across safe research environments. Browse alphabetically below or switch to our Terminology Cluster Graph to see how terms connect.
-          </p>
-
-          <div className="flex flex-wrap items-center gap-3 pt-2 text-xs text-slate-600 dark:text-slate-400">
-            <span>
-              Total Terms: <strong className="text-slate-900 dark:text-white font-semibold tabular-nums">{GLOSSARY_TERMS.length}</strong>
-            </span>
-            <span aria-hidden="true">·</span>
-            <span>
-              Explored by You: <strong className="text-[#047857] dark:text-emerald-400 font-semibold tabular-nums">{viewedGlossaryTerms.length}</strong>
-            </span>
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 shadow-xs relative overflow-hidden">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div className="lg:col-span-8 space-y-3">
+            <div className="flex items-center gap-2 text-xs font-semibold text-[#0F294A] dark:text-sky-400">
+              <BookOpen className="w-4 h-4 text-[#005EB8]" />
+              <span>Pillar 2 · Plain-English Definitions &amp; Graph 3 of 3 (Term Relationships)</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
+              Governance &amp; Architecture Glossary
+            </h1>
+            <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+              Plain-language definitions for the legal, ethical, statistical, and technical words used across safe research environments. Browse alphabetically below or switch to our Terminology Cluster Graph to see how terms connect.
+            </p>
             {onNavigateToResources && (
-              <>
-                <span aria-hidden="true">·</span>
+              <div className="pt-1">
                 <button
                   onClick={onNavigateToResources}
-                  className="font-semibold text-[#005EB8] dark:text-sky-400 hover:underline inline-flex items-center gap-1 cursor-pointer"
+                  className="text-sm font-semibold text-[#005EB8] dark:text-sky-400 hover:underline inline-flex items-center gap-1.5 cursor-pointer"
                 >
                   <span>Browse Further Resources &amp; Official Laws</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
-              </>
+              </div>
             )}
+          </div>
+
+          <div className="lg:col-span-4 bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-xl p-4 sm:p-5 space-y-2.5 text-sm">
+            <div className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
+              Glossary Coverage
+            </div>
+            <div className="grid grid-cols-2 gap-3 pt-1">
+              <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <span className="text-xs text-slate-500 dark:text-slate-400 block">Total Terms</span>
+                <strong className="text-xl font-bold text-slate-900 dark:text-white tabular-nums">{GLOSSARY_TERMS.length}</strong>
+              </div>
+              <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <span className="text-xs text-slate-500 dark:text-slate-400 block">Explored</span>
+                <strong className="text-xl font-bold text-[#047857] dark:text-emerald-400 tabular-nums">{viewedGlossaryTerms.length}</strong>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -465,7 +472,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
               }`}
             >
               <span>{track.label}</span>
-              <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${selectedTrack === track.id ? 'bg-white/20 text-white font-bold' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'}`}>
+              <span className={`text-xs font-mono px-1.5 py-0.5 rounded ${selectedTrack === track.id ? 'bg-white/20 text-white font-bold' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'}`}>
                 {track.badge}
               </span>
             </button>
@@ -508,7 +515,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
         {/* Alphabet Bar (in Card Mode) */}
         {viewMode === 'cards' && (
           <div className="flex items-center gap-1 overflow-x-auto pb-1 text-xs">
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mr-1 shrink-0">
+            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider mr-1 shrink-0">
               A–Z:
             </span>
             {alphabet.map((letter) => (
@@ -536,12 +543,12 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
             <div ref={graphContainerRef} className="w-full h-full" />
 
             {/* Edge Density Notice in bottom-left */}
-            <div className="absolute bottom-4 left-4 bg-white/95 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 backdrop-blur rounded-lg p-3 text-[11px] text-slate-700 dark:text-slate-300 space-y-1 max-w-xs shadow-md">
+            <div className="absolute bottom-4 left-4 bg-white/95 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 backdrop-blur rounded-lg p-3 text-xs text-slate-700 dark:text-slate-300 space-y-1 max-w-xs shadow-md">
               <div className="font-semibold text-[#005EB8] dark:text-cyan-400 flex items-center gap-1">
                 <Info className="w-3.5 h-3.5" />
                 <span>Graph 3 of 3 · Term Cluster Network</span>
               </div>
-              <p className="text-slate-600 dark:text-slate-400 text-[10px] leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
                 {edgeDensity === 'clean'
                   ? 'Explores how glossary definitions cluster by topic. Click any term node to inspect details.'
                   : 'Displays cross-domain semantic bridges connecting related statutory and technical definitions.'}
@@ -700,14 +707,14 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                         </span>
                       )}
                     </h3>
-                    <p className="text-xs text-slate-700 dark:text-slate-300 font-medium leading-relaxed mt-1">
+                    <p className="text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed mt-1.5">
                       {term.shortDefinition}
                     </p>
                   </div>
 
                   {/* Full Definition with Toggle */}
                   <div className="space-y-2">
-                    <div className={`text-xs text-slate-600 dark:text-slate-400 leading-relaxed ${isExpanded ? 'whitespace-pre-line text-slate-800 dark:text-slate-200 bg-slate-50 dark:bg-slate-950 p-3 rounded-lg border border-slate-200 dark:border-slate-800' : 'line-clamp-3'}`}>
+                    <div className={`text-sm text-slate-600 dark:text-slate-400 leading-relaxed ${isExpanded ? 'whitespace-pre-line text-slate-800 dark:text-slate-200 bg-slate-50 dark:bg-slate-950 p-3.5 rounded-lg border border-slate-200 dark:border-slate-800' : 'line-clamp-3'}`}>
                       {term.fullDefinition}
                     </div>
 
@@ -850,10 +857,10 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
 
               {/* Full Unabridged Definition */}
               <div className="space-y-2">
-                <span className="text-[11px] uppercase font-mono tracking-wider text-slate-500 block font-semibold">
+                <span className="text-xs uppercase font-mono tracking-wider text-slate-500 block font-semibold">
                   Full Architectural Explanation &amp; Citations:
                 </span>
-                <div className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed bg-slate-50 dark:bg-slate-950 p-4 rounded-lg border border-slate-200 dark:border-slate-800 whitespace-pre-line space-y-3">
+                <div className="text-sm text-slate-800 dark:text-slate-200 leading-relaxed bg-slate-50 dark:bg-slate-950 p-4 rounded-lg border border-slate-200 dark:border-slate-800 whitespace-pre-line space-y-3">
                   {modalTerm.fullDefinition}
                 </div>
               </div>

@@ -44,11 +44,11 @@ export const PolicySandbox: React.FC = () => {
   const admissionAllowed = accredited && igTrainingValid && ethicsApproved && egressBlocked;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Header Banner - Editorial Document Style */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-4 shadow-xs">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="space-y-1">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-1.5 flex-1">
             <div className="flex items-center gap-2 text-xs font-semibold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider">
               <Cpu className="w-4 h-4 text-[#005EB8] dark:text-sky-400" />
               <span>Interactive Decision-Support &amp; Policy Baseline Synthesizer</span>
@@ -56,15 +56,15 @@ export const PolicySandbox: React.FC = () => {
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Policy &amp; SDC Enforcement Sandbox
             </h1>
-            <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm max-w-2xl">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
               Synthesize production-grade W3C SHACL shapes and OPA Rego rules from natural language, or test decision-support evaluations in the Quantitative SDC Airlock and Namespaced Admission simulators.
             </p>
           </div>
 
-          <div className="flex bg-slate-100 dark:bg-slate-950 p-1 rounded-xl border border-slate-200 dark:border-slate-800 shrink-0">
+          <div className="flex bg-slate-100 dark:bg-slate-950 p-1 rounded-xl border border-slate-200 dark:border-slate-800 shrink-0 flex-wrap">
             <button
               onClick={() => setActiveTab('generator')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              className={`px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold flex items-center gap-1.5 whitespace-nowrap transition-colors cursor-pointer ${
                 activeTab === 'generator'
                   ? 'bg-[#005EB8] text-white shadow-xs'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
@@ -75,7 +75,7 @@ export const PolicySandbox: React.FC = () => {
             </button>
             <button
               onClick={() => setActiveTab('sdc')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
+              className={`px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                 activeTab === 'sdc'
                   ? 'bg-[#005EB8] text-white shadow-xs'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
@@ -85,7 +85,7 @@ export const PolicySandbox: React.FC = () => {
             </button>
             <button
               onClick={() => setActiveTab('admission')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
+              className={`px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                 activeTab === 'admission'
                   ? 'bg-[#005EB8] text-white shadow-xs'
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
@@ -104,10 +104,10 @@ export const PolicySandbox: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Table Editor */}
           <div className="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-5 shadow-xs">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-base">Candidate Research Output Table</h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
+                <h3 className="font-bold text-slate-900 dark:text-white text-lg">Candidate Research Output Table</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
                   Simulate aggregate figures submitted for human airlock panel review prior to export outside the SDE/TRE safe setting.
                 </p>
               </div>
@@ -120,7 +120,7 @@ export const PolicySandbox: React.FC = () => {
                     { id: 'c4', name: 'Cohort D (Control)', count: 80, spend: 11000 }
                   ])
                 }
-                className="text-xs text-[#005EB8] dark:text-sky-400 hover:underline flex items-center gap-1 cursor-pointer font-medium"
+                className="text-xs sm:text-sm text-[#005EB8] dark:text-sky-400 hover:underline flex items-center gap-1.5 cursor-pointer font-medium shrink-0"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Reset to Compliant</span>
@@ -128,22 +128,22 @@ export const PolicySandbox: React.FC = () => {
             </div>
 
             <div className="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-lg">
-              <table className="w-full text-left text-xs border-collapse">
+              <table className="w-full text-left text-sm border-collapse">
                 <thead>
-                  <tr className="bg-slate-50 dark:bg-slate-950/60 border-b border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400 font-medium">
-                    <th className="py-2.5 px-3">Cohort / Subgroup</th>
-                    <th className="py-2.5 px-3">Patient Count (k &ge; 10)</th>
-                    <th className="py-2.5 px-3">Metric Value / Spend (k% &le; 80%)</th>
-                    <th className="py-2.5 px-3">SDC Status</th>
+                  <tr className="bg-slate-50 dark:bg-slate-950/60 border-b border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">
+                    <th className="py-3 px-4">Cohort / Subgroup</th>
+                    <th className="py-3 px-4">Patient Count (k &ge; 10)</th>
+                    <th className="py-3 px-4">Metric Value / Spend (k% &le; 80%)</th>
+                    <th className="py-3 px-4">SDC Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200 dark:divide-slate-800/60 font-mono">
+                <tbody className="divide-y divide-slate-200 dark:divide-slate-800/60 font-mono tabular-nums">
                   {cells.map((cell) => {
                     const isCellViolated = cell.count < 10;
                     return (
                       <tr key={cell.id} className="hover:bg-slate-50/60 dark:hover:bg-slate-800/40">
-                        <td className="py-3 px-3 font-sans text-slate-900 dark:text-slate-200 font-medium">{cell.name}</td>
-                        <td className="py-3 px-3">
+                        <td className="py-3.5 px-4 font-sans text-slate-900 dark:text-slate-200 font-medium">{cell.name}</td>
+                        <td className="py-3.5 px-4">
                           <input
                             type="number"
                             min="0"
@@ -154,14 +154,14 @@ export const PolicySandbox: React.FC = () => {
                                 prev.map((c) => (c.id === cell.id ? { ...c, count: val } : c))
                               );
                             }}
-                            className={`w-20 px-2 py-1 rounded bg-white dark:bg-slate-950 border font-bold ${
+                            className={`w-24 px-2.5 py-1.5 rounded bg-white dark:bg-slate-950 border font-bold tabular-nums ${
                               isCellViolated
                                 ? 'border-red-500 text-red-600 dark:text-red-400 bg-red-50/50 dark:bg-red-950/20'
                                 : 'border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-200'
                             }`}
                           />
                         </td>
-                        <td className="py-3 px-3">
+                        <td className="py-3.5 px-4">
                           <input
                             type="number"
                             min="0"
@@ -172,17 +172,17 @@ export const PolicySandbox: React.FC = () => {
                                 prev.map((c) => (c.id === cell.id ? { ...c, spend: val } : c))
                               );
                             }}
-                            className="w-24 px-2 py-1 rounded bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-200 font-bold"
+                            className="w-28 px-2.5 py-1.5 rounded bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-200 font-bold tabular-nums"
                           />
                         </td>
-                        <td className="py-3 px-3">
+                        <td className="py-3.5 px-4">
                           {isCellViolated ? (
-                            <span className="text-red-700 dark:text-red-400 font-sans text-[11px] font-semibold flex items-center gap-1">
-                              <XCircle className="w-3.5 h-3.5" /> Suppress (k &lt; 10)
+                            <span className="text-red-700 dark:text-red-400 font-sans text-xs font-semibold flex items-center gap-1">
+                              <XCircle className="w-4 h-4" /> Suppress (k &lt; 10)
                             </span>
                           ) : (
-                            <span className="text-[#047857] dark:text-emerald-400 font-sans text-[11px] font-semibold flex items-center gap-1">
-                              <CheckCircle2 className="w-3.5 h-3.5" /> Compliant
+                            <span className="text-[#047857] dark:text-emerald-400 font-sans text-xs font-semibold flex items-center gap-1">
+                              <CheckCircle2 className="w-4 h-4" /> Compliant
                             </span>
                           )}
                         </td>
@@ -193,7 +193,7 @@ export const PolicySandbox: React.FC = () => {
               </table>
             </div>
 
-            <div className="p-3 bg-slate-50 dark:bg-slate-950/60 rounded-lg border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 flex items-center justify-between">
+            <div className="p-3.5 bg-slate-50 dark:bg-slate-950/60 rounded-lg border border-slate-200 dark:border-slate-800 text-sm text-slate-600 dark:text-slate-400 flex items-center justify-between">
               <span>Adjust cell counts to test primary suppression (k &lt; 10) or dominance (&gt; 80%) checks before human airlock submission.</span>
             </div>
           </div>
@@ -231,37 +231,37 @@ export const PolicySandbox: React.FC = () => {
             </div>
 
             {/* Quantitative Check Results */}
-            <div className="space-y-3 text-xs">
-              <div className="p-3 bg-slate-50 dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 space-y-1">
+            <div className="space-y-3 text-sm">
+              <div className="p-3.5 bg-slate-50 dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 space-y-1">
                 <div className="flex justify-between items-center">
                   <span className="text-slate-600 dark:text-slate-400 font-medium">Primary Cell Count (k &ge; 10):</span>
                   <span
-                    className={`font-mono font-bold ${
+                    className={`font-mono font-bold tabular-nums ${
                       passesPrimarySuppression ? 'text-[#047857] dark:text-emerald-400' : 'text-red-600 dark:text-red-400'
                     }`}
                   >
                     Min observed: {minObservedCell}
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-500">
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                   {passesPrimarySuppression
                     ? 'All observed cells have >= 10 individuals satisfying statutory threshold.'
                     : `VIOLATION: Found cell with count ${minObservedCell} (< 10). Primary cell suppression required.`}
                 </p>
               </div>
 
-              <div className="p-3 bg-slate-50 dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 space-y-1">
+              <div className="p-3.5 bg-slate-50 dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 space-y-1">
                 <div className="flex justify-between items-center">
                   <span className="text-slate-600 dark:text-slate-400 font-medium">Dominance Ratio (k% &le; 80%):</span>
                   <span
-                    className={`font-mono font-bold ${
+                    className={`font-mono font-bold tabular-nums ${
                       passesDominance ? 'text-[#047857] dark:text-emerald-400' : 'text-red-600 dark:text-red-400'
                     }`}
                   >
                     {(dominanceRatio * 100).toFixed(1)}%
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-500">
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                   {passesDominance
                     ? 'Top contributor represents <= 80% of aggregate sum.'
                     : `VIOLATION: Top contributor represents ${(dominanceRatio * 100).toFixed(1)}% (> 80%). Secondary suppression required.`}
@@ -271,10 +271,10 @@ export const PolicySandbox: React.FC = () => {
 
             {/* Generated W3C PROV-O Triple preview */}
             <div className="space-y-1.5">
-              <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400 uppercase tracking-wider block">
+              <span className="text-xs font-mono text-slate-600 dark:text-slate-400 uppercase tracking-wider block">
                 Emitted W3C PROV-O Audit Triple (Dossier Evidence)
               </span>
-              <pre className="p-3.5 bg-slate-950 border border-slate-800 rounded-lg text-[11px] font-mono text-cyan-300 overflow-x-auto leading-relaxed">
+              <pre className="p-3.5 bg-slate-950 border border-slate-800 rounded-lg text-xs font-mono text-cyan-300 overflow-x-auto leading-relaxed">
                 <code>{`tre:AirlockReview_${Date.now().toString(36)} a prov:Activity ;
     prov:wasAssociatedWith tre:OPA_Airlock_PDP ;
     tre:decisionResult "${sdcEgressPermitted ? 'PERMIT' : 'DENY'}" ;
@@ -292,8 +292,8 @@ export const PolicySandbox: React.FC = () => {
           {/* Controls */}
           <div className="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-5 shadow-xs">
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-base">Namespaced Admission Session Attributes</h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
+              <h3 className="font-bold text-slate-900 dark:text-white text-lg">Namespaced Admission Session Attributes</h3>
+              <p className="text-sm text-slate-500 dark:text-slate-400">
                 Configure attributes for an incoming research Jupyter / compute pod provisioning request within a restricted namespace.
               </p>
             </div>
@@ -400,14 +400,14 @@ export const PolicySandbox: React.FC = () => {
               </div>
             </div>
 
-            <div className="space-y-2 text-xs">
-              <div className="font-semibold text-slate-800 dark:text-slate-300">SHACL Governance Shape Conformance:</div>
+            <div className="space-y-2.5 text-sm">
+              <div className="font-semibold text-slate-800 dark:text-slate-200">SHACL Governance Shape Conformance:</div>
               {admissionAllowed ? (
-                <div className="p-3 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 rounded-lg text-[#047857] dark:text-emerald-300 font-medium">
+                <div className="p-3.5 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 rounded-lg text-[#047857] dark:text-emerald-300 font-medium leading-relaxed">
                   Conforms = True. No violations detected against high-level IG shapes (`access-shapes.ttl`). Standardized evidence pack ready for audit.
                 </div>
               ) : (
-                <ul className="space-y-1.5 font-mono text-[11px] text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-950/20 p-3 rounded-lg border border-red-200 dark:border-red-800/40">
+                <ul className="space-y-1.5 font-mono text-xs text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-950/20 p-3.5 rounded-lg border border-red-200 dark:border-red-800/40">
                   {!accredited && <li>• Discrepancy: sh:minCount 1 on tre:hasAccreditedResearcher</li>}
                   {!igTrainingValid && <li>• Discrepancy: tre:hasValidIGCertification is false / expired</li>}
                   {!ethicsApproved && <li>• Discrepancy: sh:hasValue true on tre:hasEthicsApproval</li>}

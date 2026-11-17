@@ -1,6 +1,6 @@
 export interface ProcurementControl {
   id: string;
-  framework: 'SATRE v1.1' | 'NHS DSPT 24/25' | 'ISO 27001:2022' | 'DCB0129 / ISO 42001';
+  framework: 'SATRE 2.0' | 'EHDS (EU 2025/327)' | 'NHS DSPT 24/25' | 'ISO 27001:2022' | 'DCB0129 / ISO 42001';
   section: string;
   title: string;
   requirement: string;
@@ -12,11 +12,11 @@ export interface ProcurementControl {
 }
 
 export const PROCUREMENT_CONTROLS: ProcurementControl[] = [
-  // --- SATRE v1.1 (Standard Architecture for Trusted Research Environments) ---
+  // --- SATRE 2.0 (Standard Architecture for Trusted Research Environments · 5 Pillars) ---
   {
     id: 'SATRE-CI-01',
-    framework: 'SATRE v1.1',
-    section: 'Computing Infrastructure § 1.1',
+    framework: 'SATRE 2.0',
+    section: 'Pillar 2 · Computing Technology § 1.1',
     title: 'Zero-WAN Egress & Network Microsegmentation',
     requirement: 'The computing environment must completely prevent outbound network traffic to the public internet, prohibiting unauthorized data exfiltration.',
     waveboundEvidence: 'Calico and eBPF network policies sever all outbound WAN egress from research namespaces. DNS restricted strictly to internal core services; external IP ranges dropped at kernel layer.',
@@ -27,8 +27,8 @@ export const PROCUREMENT_CONTROLS: ProcurementControl[] = [
   },
   {
     id: 'SATRE-CI-02',
-    framework: 'SATRE v1.1',
-    section: 'Computing Infrastructure § 1.4',
+    framework: 'SATRE 2.0',
+    section: 'Pillar 2 · Computing Technology § 1.4',
     title: 'Air-Gapped Package Ingestion Diode',
     requirement: 'Researchers must be prevented from pulling untrusted packages from public PyPI/CRAN, utilizing quarantined internal mirrors with vulnerability scanning.',
     waveboundEvidence: 'Quarantined Harbor DMZ mirror with automated Trivy CVE gates, Cosign cryptographic signature verification, and restricted pip.conf / .Rprofile index configs.',
@@ -39,8 +39,8 @@ export const PROCUREMENT_CONTROLS: ProcurementControl[] = [
   },
   {
     id: 'SATRE-CI-03',
-    framework: 'SATRE v1.1',
-    section: 'Computing Infrastructure § 2.2',
+    framework: 'SATRE 2.0',
+    section: 'Pillar 2 · Computing Technology § 2.2',
     title: 'Root-Read-Only Pod Enclaves & Least Privilege',
     requirement: 'User workloads must run without host access, with read-only root filesystems, dropped Linux capabilities, and non-root UIDs.',
     waveboundEvidence: 'Pod Security Standards enforce runAsNonRoot: true, runAsUser: 10001, readOnlyRootFilesystem: true, drop: ["ALL"] capabilities, and ephemeral 50Gi /scratch volume.',
@@ -51,8 +51,8 @@ export const PROCUREMENT_CONTROLS: ProcurementControl[] = [
   },
   {
     id: 'SATRE-DG-01',
-    framework: 'SATRE v1.1',
-    section: 'Data Governance § 3.1',
+    framework: 'SATRE 2.0',
+    section: 'Pillar 3 · Data Management § 3.1',
     title: 'Deterministic Pseudonymisation & Identifier Expungement',
     requirement: 'Direct identifiers must be segregated at source and replaced with project-specific salted pseudonyms to prevent cross-study re-identification.',
     waveboundEvidence: 'Salted HMAC SHA-256 pseudonymisation engine with rotating KMS-backed salt seeds; direct patient identifiers scrubbed before enclave mounting.',
@@ -63,8 +63,8 @@ export const PROCUREMENT_CONTROLS: ProcurementControl[] = [
   },
   {
     id: 'SATRE-OC-01',
-    framework: 'SATRE v1.1',
-    section: 'Output Checking § 4.1',
+    framework: 'SATRE 2.0',
+    section: 'Pillar 3 · Data Management (Output Checking § 4.1)',
     title: 'Quantitative SDC & Primary Cell Suppression (k ≥ 10)',
     requirement: 'All candidate research outputs must enforce small cell suppression (k ≥ 10) and secondary suppression to eliminate marginal deduction leaks.',
     waveboundEvidence: 'Mathematical tabular SDC solver with automated primary suppression (<10*) and secondary complementary suppression; W3C SHACL shape validation at airlock PEP.',
@@ -75,8 +75,8 @@ export const PROCUREMENT_CONTROLS: ProcurementControl[] = [
   },
   {
     id: 'SATRE-OC-02',
-    framework: 'SATRE v1.1',
-    section: 'Output Checking § 4.3',
+    framework: 'SATRE 2.0',
+    section: 'Pillar 3 · Data Management (Output Checking § 4.3)',
     title: 'Top-Contributor Dominance Ceiling (≤ 80%)',
     requirement: 'Continuous financial and clinical metrics must be checked for concentration where top contributors dominate aggregate sums.',
     waveboundEvidence: 'Automated (1, 80%) and (2, 85%) dominance rule evaluation engine flagging disproportionate single-patient contributions.',
@@ -87,15 +87,77 @@ export const PROCUREMENT_CONTROLS: ProcurementControl[] = [
   },
   {
     id: 'SATRE-IS-01',
-    framework: 'SATRE v1.1',
-    section: 'Information Security § 5.2',
-    title: 'Two-Person Cryptographic Airlock Protocol',
-    requirement: 'Outputs must not be released via single-person action; dual-signoff with cryptographic audit trail is required.',
+    framework: 'SATRE 2.0',
+    section: 'Pillar 4 · Supporting Capabilities § 5.2',
+    title: 'Two-Person Cryptographic Airlock & Provenance Operations',
+    requirement: 'Outputs must not be released via single-person action; dual-signoff, operational ITSM auditability, and cryptographic trail are required.',
     waveboundEvidence: 'Two-person airlock protocol pairing automated PEP shape verification with accredited SDC Lead review and Web Crypto SHA-256 seal.',
     technicalAsset: 'src/components/QuantitativeSDCHub.tsx & airlock/release_tickets/',
     status: 'COMPLIANT',
     criticality: 'MANDATORY',
     caldicottPrinciple: 'Principle 7 (Duty to share is as important as duty to protect)'
+  },
+  {
+    id: 'SATRE-FED-01',
+    framework: 'SATRE 2.0',
+    section: 'Pillar 5 · Federation (TREvolution)',
+    title: 'Portable Five Safes RO-Crate & Federated Execution',
+    requirement: 'Federated multi-TRE workflows must preserve host-level disclosure controls and package governance proofs in interoperable manifests.',
+    waveboundEvidence: 'Schema.org / JSON-LD Five Safes RO-Crate bundles (ro-crate-metadata.json) paired with W3C PROV-O traces and DataSHIELD nfilter non-disclosive node checks.',
+    technicalAsset: 'src/components/QuantitativeSDCHub.tsx & ro-crate-metadata.json',
+    status: 'COMPLIANT',
+    criticality: 'HIGH',
+    caldicottPrinciple: 'Principle 7 (Duty to share) & Principle 8 (No surprises)'
+  },
+
+  // --- EUROPEAN HEALTH DATA SPACE REGULATION (EU 2025/327 · Chapter IV Alignment) ---
+  {
+    id: 'EHDS-HDAB-01',
+    framework: 'EHDS (EU 2025/327)',
+    section: 'Chapter IV · Art. 46–49 & 51 (Data Permits & Prohibited Uses)',
+    title: 'Purpose-Bound Data Permit & Secondary Opt-Out Correspondence',
+    requirement: 'Secondary health data access in the EU requires a formal Health Data Access Body (HDAB) Data Permit enforcing permitted purposes, citizen opt-outs, and prohibitions against advertising or insurance underwriting.',
+    waveboundEvidence: 'Structural correspondence (non-statutory in the UK): SHACL admission shapes bind UK Health Research Authority (HRA) Research Ethics Committee (REC) and Section 251 CAG approvals to permitted purposes while upstream National Data Opt-Out (NDOO) filters exclude opted-out records.',
+    technicalAsset: 'ontology/shapes/access-shapes.ttl & pipeline/ndoo_purge.py',
+    status: 'COMPLIANT',
+    criticality: 'MANDATORY',
+    caldicottPrinciple: 'Principle 1 (Justify purpose) & Principle 6 (Comply with the law)'
+  },
+  {
+    id: 'EHDS-SPE-01',
+    framework: 'EHDS (EU 2025/327)',
+    section: 'Chapter IV · Art. 50 (Secure Processing Environments)',
+    title: 'Zero-Download Remote SPE Isolation & Full Audit Trail',
+    requirement: 'Data users may not download personal or pseudonymised microdata; analysis must execute remotely inside an audited Secure Processing Environment (SPE) enforcing multi-factor authentication and session logging.',
+    waveboundEvidence: 'Technical alignment: zero-egress Virtual Private Cloud (VPC) isolation, pixel-only Virtual Desktop Infrastructure (VDI), FIDO2 Multi-Factor Authentication, non-root ephemeral containers, and W3C PROV-O Security Information and Event Management (SIEM) logs correspond to Article 50 criteria (subject to EU implementing acts).',
+    technicalAsset: 'k8s/network/zero-egress-calico.yaml & security/opa/authz.rego',
+    status: 'COMPLIANT',
+    criticality: 'MANDATORY',
+    caldicottPrinciple: 'Principle 3 (Minimum necessary) & Principle 4 (Need to know)'
+  },
+  {
+    id: 'EHDS-OUT-01',
+    framework: 'EHDS (EU 2025/327)',
+    section: 'Chapter IV · Art. 50(1)(c) (Output Checking)',
+    title: 'Strict Anonymised & Aggregated Output Export Control',
+    requirement: 'Exports from an EHDS Secure Processing Environment (SPE) are restricted to non-personal, anonymised or aggregated statistical results verified against individual re-identification risk.',
+    waveboundEvidence: 'Automated Statistical Disclosure Control (SDC) rules enforce primary suppression (k >= 10), complementary secondary masking, and dominance ceilings (<= 80%), paired with two-person independent reviewer verification and SHA-256 airlock sealing.',
+    technicalAsset: 'src/components/QuantitativeSDCHub.tsx & ontology/shapes/sdc_shapes.ttl',
+    status: 'COMPLIANT',
+    criticality: 'MANDATORY',
+    caldicottPrinciple: 'Principle 8 (No surprises)'
+  },
+  {
+    id: 'EHDS-FED-01',
+    framework: 'EHDS (EU 2025/327)',
+    section: 'Chapter IV · Art. 55–57 & 75 (HealthDCAT-AP & HealthData@EU)',
+    title: 'Cross-Border Catalogue Interoperability & 2025–2031 Transition',
+    requirement: 'Establishes standardised HealthDCAT-AP dataset descriptions and HealthData@EU cross-border analytics nodes ahead of 2027 HDAB designation and 2029 mandatory SPE operation.',
+    waveboundEvidence: 'SNOMED-CT / ICD-10 / OPCS-4 semantic data dictionaries and Five Safes RO-Crate provenance bundles provide structured technical interoperability for bilateral UK–EU research consortia, subject to UK GDPR third-country transfer safeguards.',
+    technicalAsset: 'src/components/TechnicalConcepts.tsx (SATRE 2.0 & EHDS Cross-Walk)',
+    status: 'COMPLIANT',
+    criticality: 'HIGH',
+    caldicottPrinciple: 'Principle 7 (Duty to share safely)'
   },
 
   // --- NHS DATA SECURITY & PROTECTION TOOLKIT (DSPT 2024/25) ---

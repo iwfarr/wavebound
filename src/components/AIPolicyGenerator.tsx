@@ -1157,16 +1157,16 @@ allow {
             Governance Requirement to Policy-as-Code Synthesizer
           </h2>
 
-          <p className="text-slate-300 text-xs sm:text-sm max-w-3xl leading-relaxed">
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
             Specify a research data governance requirement, clinical disclosure threshold, or compute isolation rule in plain English.
             The engine deterministically synthesizes closed-world <strong>W3C SHACL shapes</strong>, compiles high-performance <strong>OPA Rego authorization rules</strong>, and generates live test fixtures for instant sandbox verification across data analysis &amp; intelligence platforms and secure research enclaves.
           </p>
 
           {/* Educational Purpose & Point-of-Implementation Responsibility Disclaimer */}
-          <div className="p-3.5 sm:p-4 rounded-xl bg-amber-950/30 border border-amber-500/40 text-amber-200 text-xs flex items-start gap-3">
-            <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+          <div className="p-4 rounded-xl bg-amber-950/30 border border-amber-500/40 text-amber-200 text-xs sm:text-sm flex items-start gap-3">
+            <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-1" />
             <div className="space-y-1">
-              <strong className="text-amber-300 font-semibold uppercase tracking-wider block">
+              <strong className="text-amber-300 font-semibold uppercase tracking-wider text-xs block">
                 Educational &amp; Reference Notice
               </strong>
               <p className="text-amber-100/90 leading-relaxed">
@@ -1179,15 +1179,15 @@ allow {
 
       {/* Preset Quick-Picks */}
       <div className="space-y-3">
-        <div className="flex items-center justify-between text-xs text-slate-400">
-          <span className="font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+        <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
+          <span className="font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
             <Sliders className="w-3.5 h-3.5 text-cyan-400" />
             <span>Curated Clinical Security Archetypes</span>
           </span>
-          <span className="text-[11px] text-slate-500">Click any preset to pre-fill requirement</span>
+          <span className="text-xs text-slate-400">Click any preset to pre-fill requirement</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-stretch">
           {PRESET_REQUIREMENTS.map((preset) => (
             <button
               key={preset.id}
@@ -1195,21 +1195,21 @@ allow {
                 setRequirementText(preset.prompt);
                 setEnforcementPoint(preset.enforcementPoint);
               }}
-              className="p-3 rounded-xl bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-cyan-500/50 text-left transition-all group flex flex-col justify-between space-y-2 cursor-pointer shadow-sm"
+              className="p-3.5 rounded-xl bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-cyan-500/50 text-left transition-all group flex flex-col justify-between space-y-2 cursor-pointer shadow-sm h-full"
             >
               <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-center text-cyan-400 group-hover:text-cyan-300">
-                  {preset.icon === 'Dna' && <Dna className="w-3.5 h-3.5" />}
-                  {preset.icon === 'Bot' && <Bot className="w-3.5 h-3.5" />}
-                  {preset.icon === 'Lock' && <Lock className="w-3.5 h-3.5" />}
-                  {preset.icon === 'Scale' && <Scale className="w-3.5 h-3.5" />}
-                  {preset.icon === 'Layers' && <Layers className="w-3.5 h-3.5" />}
+                <div className="w-7 h-7 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-center text-cyan-400 group-hover:text-cyan-300 shrink-0">
+                  {preset.icon === 'Dna' && <Dna className="w-4 h-4" />}
+                  {preset.icon === 'Bot' && <Bot className="w-4 h-4" />}
+                  {preset.icon === 'Lock' && <Lock className="w-4 h-4" />}
+                  {preset.icon === 'Scale' && <Scale className="w-4 h-4" />}
+                  {preset.icon === 'Layers' && <Layers className="w-4 h-4" />}
                 </div>
-                <span className="font-bold text-xs text-slate-200 group-hover:text-white line-clamp-1">
+                <span className="font-bold text-xs sm:text-sm text-slate-100 group-hover:text-white line-clamp-1">
                   {preset.label}
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">
+              <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed">
                 {preset.shortPrompt}
               </p>
             </button>
@@ -1218,18 +1218,18 @@ allow {
       </div>
 
       {/* Requirement Input Form */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-7 space-y-5 shadow-sm">
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-7 space-y-5 shadow-sm">
         <div className="space-y-2">
-          <label className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center justify-between">
+          <label className="text-xs font-bold uppercase tracking-wider text-slate-300 flex flex-wrap items-center justify-between gap-2">
             <span>Natural Language Requirement Description</span>
-            <span className="text-[11px] font-normal text-slate-500">Describe who, what data tier, what isolation, and what thresholds apply</span>
+            <span className="text-xs font-normal text-slate-400 normal-case">Describe who, what data tier, what isolation, and what thresholds apply</span>
           </label>
           <textarea
             rows={4}
             value={requirementText}
             onChange={(e) => setRequirementText(e.target.value)}
             placeholder="e.g. Any tabular release involving whole-genome sequencing must enforce cohort size >= 25 individuals, zero rare allele indicators, and explicit NHS REC genomic ethics protocol endorsement..."
-            className="w-full bg-slate-950 border border-slate-700/80 rounded-xl p-3.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500 leading-relaxed font-mono transition-colors"
+            className="w-full bg-slate-950 border border-slate-700/80 rounded-xl p-4 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500 leading-relaxed font-mono transition-colors"
           />
         </div>
 
@@ -1240,7 +1240,7 @@ allow {
             <select
               value={enforcementPoint}
               onChange={(e) => setEnforcementPoint(e.target.value)}
-              className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-[#005EB8]"
+              className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg px-3.5 py-2.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none focus:border-[#005EB8]"
             >
               <option value="Airlock Egress PEP (Airgap Gate)">Airlock Egress PEP (Airgap Gate &amp; SDC)</option>
               <option value="Namespaced Admission Controller (Audit & Alert)">Namespaced Admission Controller (Audit &amp; Alert · failurePolicy: Ignore)</option>
@@ -1254,7 +1254,7 @@ allow {
             <select
               value={strictness}
               onChange={(e) => setStrictness(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500"
+              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-cyan-500"
             >
               <option value="Standard (Five Safes & SATRE)">Standard (Five Safes & SATRE Pillars)</option>
               <option value="Strict Caldicott & NHS Section 251">Strict Caldicott & NHS Section 251</option>
@@ -1266,13 +1266,13 @@ allow {
 
         {/* Action Button */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-slate-800">
-          <span className="text-[11px] text-slate-400">
+          <span className="text-xs text-slate-400">
             Generates production W3C SHACL shapes, compiled OPA Rego, test JSON, and PROV-O audit trails.
           </span>
           <button
             onClick={() => handleGenerate()}
             disabled={isLoading || !requirementText.trim()}
-            className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 disabled:opacity-50 text-slate-950 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-cyan-500/20 active:scale-95 cursor-pointer"
+            className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 disabled:opacity-50 text-slate-950 text-sm font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-cyan-500/20 active:scale-95 cursor-pointer"
           >
             {isLoading ? (
               <>
@@ -1289,7 +1289,7 @@ allow {
         </div>
 
         {error && (
-          <div className="p-3 bg-red-950/40 border border-red-800/80 rounded-xl text-xs text-red-300 flex items-center gap-2">
+          <div className="p-3.5 bg-red-950/40 border border-red-800/80 rounded-xl text-sm text-red-300 flex items-center gap-2">
             <AlertTriangle className="w-4 h-4 shrink-0 text-red-400" />
             <span>{error}</span>
           </div>
@@ -1300,7 +1300,7 @@ allow {
       {generatedPolicy && (
         <div className="space-y-6 animate-in fade-in duration-300">
           {modeNotice && (
-            <div className={`p-3 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs ${
+            <div className={`p-3.5 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs sm:text-sm ${
               modeNotice.mode === 'static-fallback'
                 ? 'bg-amber-950/40 border-amber-800/80 text-amber-200'
                 : 'bg-emerald-950/40 border-emerald-800/80 text-emerald-200'
@@ -1309,43 +1309,43 @@ allow {
                 <Sparkles className="w-4 h-4 shrink-0 text-cyan-400" />
                 <span>{modeNotice.message}</span>
               </div>
-              <span className="text-[11px] font-mono px-2.5 py-0.5 rounded bg-black/40 border border-white/10 shrink-0 self-start sm:self-auto">
+              <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-black/40 border border-white/10 shrink-0 self-start sm:self-auto">
                 {modeNotice.mode === 'static-fallback' ? 'Static / GitHub Pages Mode' : 'Cloud Run / Server Mode'}
               </span>
             </div>
           )}
 
           {/* Overview Card */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-7 space-y-4">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-7 space-y-4">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-800">
-              <div className="space-y-1">
+              <div className="space-y-1.5 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/80">
+                  <span className="text-xs font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/80">
                     {generatedPolicy.targetClass}
                   </span>
-                  <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800/80">
+                  <span className="text-xs font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800/80">
                     {generatedPolicy.enforcementPoint}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-white tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                   {generatedPolicy.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-300 max-w-3xl leading-relaxed">
+                <p className="text-sm text-slate-300 leading-relaxed">
                   {generatedPolicy.summary}
                 </p>
               </div>
 
               {/* Badges Bar */}
-              <div className="bg-slate-950 p-3 rounded-xl border border-slate-800/80 space-y-1.5 shrink-0 min-w-[240px] text-xs">
-                <div className="flex justify-between items-center text-[11px]">
+              <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 space-y-1.5 shrink-0 min-w-[260px] text-xs">
+                <div className="flex justify-between items-center gap-3">
                   <span className="text-slate-400">Five Safes:</span>
                   <span className="font-bold text-cyan-300">{generatedPolicy.governanceMapping.fiveSafesDimension}</span>
                 </div>
-                <div className="flex justify-between items-center text-[11px]">
+                <div className="flex justify-between items-center gap-3">
                   <span className="text-slate-400">SATRE Pillar:</span>
                   <span className="font-bold text-purple-300">{generatedPolicy.governanceMapping.satrePillar}</span>
                 </div>
-                <div className="flex justify-between items-center text-[11px]">
+                <div className="flex justify-between items-center gap-3">
                   <span className="text-slate-400">Legal Basis:</span>
                   <span className="font-bold text-amber-300 line-clamp-1">{generatedPolicy.governanceMapping.statutoryBasis}</span>
                 </div>
@@ -1461,11 +1461,11 @@ allow {
             <div className="mt-3">
               {activeCodeTab === 'shacl' && (
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-[11px] text-slate-400 px-1 font-mono">
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400 px-1 font-mono">
                     <span>Closed-World W3C SHACL Shapes &middot; ontology/shapes/custom-shapes.ttl</span>
                     <span className="text-cyan-400">Deterministic Pass/Fail Constraint Model</span>
                   </div>
-                  <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-cyan-300 overflow-x-auto leading-relaxed max-h-[380px] shadow-inner">
+                  <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-mono text-cyan-300 overflow-x-auto leading-relaxed max-h-[380px] shadow-inner">
                     <code>{generatedPolicy.shacl}</code>
                   </pre>
                 </div>
@@ -1473,11 +1473,11 @@ allow {
 
               {activeCodeTab === 'rego' && (
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-[11px] text-slate-400 px-1 font-mono">
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400 px-1 font-mono">
                     <span>Open Policy Agent (OPA) PDP &middot; security/opa/authz.rego</span>
                     <span className="text-emerald-400">Microsecond Line-Rate PEP Decision Rules</span>
                   </div>
-                  <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-emerald-300 overflow-x-auto leading-relaxed max-h-[380px] shadow-inner">
+                  <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-mono text-emerald-300 overflow-x-auto leading-relaxed max-h-[380px] shadow-inner">
                     <code>{generatedPolicy.rego}</code>
                   </pre>
                 </div>
@@ -1485,11 +1485,11 @@ allow {
 
               {activeCodeTab === 'prov' && (
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-[11px] text-slate-400 px-1 font-mono">
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400 px-1 font-mono">
                     <span>Cryptographic Audit Provenance &middot; W3C PROV-O RDF Triples</span>
                     <span className="text-purple-400">Non-Repudiation Decision Ledger</span>
                   </div>
-                  <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-purple-300 overflow-x-auto leading-relaxed max-h-[380px] shadow-inner">
+                  <pre className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-mono text-purple-300 overflow-x-auto leading-relaxed max-h-[380px] shadow-inner">
                     <code>{generatedPolicy.provOTriple}</code>
                   </pre>
                 </div>
@@ -1499,19 +1499,19 @@ allow {
                 <div className="bg-slate-950 border border-slate-800 rounded-xl p-5 space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="space-y-1">
-                      <span className="text-[10px] font-mono uppercase text-cyan-400 font-bold block">Five Safes Dimension</span>
-                      <p className="text-xs font-bold text-white">{generatedPolicy.governanceMapping.fiveSafesDimension}</p>
+                      <span className="text-xs font-mono uppercase text-cyan-400 font-bold block">Five Safes Dimension</span>
+                      <p className="text-sm font-bold text-white">{generatedPolicy.governanceMapping.fiveSafesDimension}</p>
                     </div>
                     <div className="space-y-1">
-                      <span className="text-[10px] font-mono uppercase text-purple-400 font-bold block">SATRE Technical Pillar</span>
-                      <p className="text-xs font-bold text-white">{generatedPolicy.governanceMapping.satrePillar}</p>
+                      <span className="text-xs font-mono uppercase text-purple-400 font-bold block">SATRE Technical Pillar</span>
+                      <p className="text-sm font-bold text-white">{generatedPolicy.governanceMapping.satrePillar}</p>
                     </div>
                     <div className="space-y-1">
-                      <span className="text-[10px] font-mono uppercase text-amber-400 font-bold block">Statutory Mandate</span>
-                      <p className="text-xs font-bold text-white">{generatedPolicy.governanceMapping.statutoryBasis}</p>
+                      <span className="text-xs font-mono uppercase text-amber-400 font-bold block">Statutory Mandate</span>
+                      <p className="text-sm font-bold text-white">{generatedPolicy.governanceMapping.statutoryBasis}</p>
                     </div>
                   </div>
-                  <div className="pt-2 border-t border-slate-800 text-xs text-slate-400 space-y-1 leading-relaxed">
+                  <div className="pt-3 border-t border-slate-800 text-sm text-slate-300 space-y-1 leading-relaxed">
                     <p>
                       <strong>Compliance Assurance:</strong> When evaluated in CI via PySHACL (<code className="text-cyan-300 font-mono">pytest tests/test_shapes.py</code>),
                       conformance guarantees that no researcher compute or airlock export can breach these statutory boundaries.
@@ -1523,7 +1523,7 @@ allow {
           </div>
 
           {/* Interactive Live Sandbox Evaluator for Generated Policy */}
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-7 space-y-5">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-7 space-y-5">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
               <div>
                 <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider block">
@@ -1532,23 +1532,23 @@ allow {
                 <h4 className="text-lg font-bold text-white">
                   Test-Drive Policy Against Candidate JSON Inputs
                 </h4>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-sm text-slate-400 mt-0.5">
                   Load compliant or violating payloads, modify attributes, and execute real-time decision simulation.
                 </p>
               </div>
 
               {/* Sample Loader Buttons */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 shrink-0">
                 <button
                   onClick={() => handleLoadSample('compliant')}
-                  className="px-3 py-1.5 rounded-lg bg-emerald-950/70 hover:bg-emerald-900/80 border border-emerald-800 text-emerald-300 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="px-3.5 py-2 rounded-lg bg-emerald-950/70 hover:bg-emerald-900/80 border border-emerald-800 text-emerald-300 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                   <span>Load Compliant Case</span>
                 </button>
                 <button
                   onClick={() => handleLoadSample('violating')}
-                  className="px-3 py-1.5 rounded-lg bg-red-950/70 hover:bg-red-900/80 border border-red-800 text-red-300 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="px-3.5 py-2 rounded-lg bg-red-950/70 hover:bg-red-900/80 border border-red-800 text-red-300 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <XCircle className="w-3.5 h-3.5 text-red-400" />
                   <span>Load Violating Case</span>
@@ -1566,7 +1566,7 @@ allow {
                     onClick={handleRunManualEvaluation}
                     className="text-cyan-400 hover:text-cyan-300 font-bold flex items-center gap-1 cursor-pointer"
                   >
-                    <Play className="w-3 h-3 fill-current" />
+                    <Play className="w-3.5 h-3.5 fill-current" />
                     <span>Run Evaluation</span>
                   </button>
                 </div>
@@ -1574,7 +1574,7 @@ allow {
                   rows={12}
                   value={evaluatorInputJson}
                   onChange={(e) => setEvaluatorInputJson(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3.5 text-xs font-mono text-cyan-200 focus:outline-none focus:border-cyan-500 leading-relaxed"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs sm:text-sm font-mono text-cyan-200 focus:outline-none focus:border-cyan-500 leading-relaxed"
                 />
               </div>
 
@@ -1603,23 +1603,23 @@ allow {
                         <div className="text-base font-bold">
                           {evaluatorResult.permitted ? 'REQUEST AUTHORIZED (allow = true)' : 'REQUEST REJECTED (allow = false)'}
                         </div>
-                        <div className="text-[11px] opacity-90 mt-0.5">
+                        <div className="text-xs sm:text-sm opacity-95 mt-0.5">
                           {evaluatorResult.reason}
                         </div>
                       </div>
                     </div>
 
                     {/* Step-by-Step Rule Checks */}
-                    <div className="bg-slate-950 border border-slate-800 rounded-xl p-3.5 space-y-2">
-                      <span className="text-[10px] font-mono uppercase text-slate-400 font-bold block">
+                    <div className="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-2">
+                      <span className="text-xs font-mono uppercase text-slate-400 font-bold block">
                         Evaluated Policy Invariants
                       </span>
-                      <div className="space-y-1.5">
+                      <div className="space-y-2">
                         {evaluatorResult.checks.map((c, i) => (
                           <div key={i} className="flex items-start justify-between text-xs gap-2 py-1 border-b border-slate-900 last:border-0">
-                            <span className="text-slate-300 font-mono text-[11px]">{c.name}</span>
+                            <span className="text-slate-200 font-mono text-xs">{c.name}</span>
                             <span
-                              className={`font-mono text-[10px] font-bold px-1.5 py-0.5 rounded shrink-0 ${
+                              className={`font-mono text-xs font-bold px-2 py-0.5 rounded shrink-0 ${
                                 c.passed
                                   ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
                                   : 'bg-red-950 text-red-300 border border-red-800'
@@ -1634,10 +1634,10 @@ allow {
 
                     {/* Dynamically emitted PROV-O Activity */}
                     <div className="space-y-1">
-                      <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">
+                      <span className="text-xs font-mono text-slate-400 uppercase tracking-wider block">
                         Live Emitted PROV-O Triple
                       </span>
-                      <pre className="p-3 bg-slate-950 border border-slate-800/80 rounded-lg text-[10px] font-mono text-cyan-300 overflow-x-auto leading-relaxed">
+                      <pre className="p-3.5 bg-slate-950 border border-slate-800/80 rounded-lg text-xs font-mono text-cyan-300 overflow-x-auto leading-relaxed">
                         <code>{`tre:EvalActivity_${Date.now().toString(36)} a prov:Activity ;
     prov:wasAssociatedWith tre:OPA_DecisionEngine ;
     tre:decisionResult "${evaluatorResult.permitted ? 'PERMIT' : 'DENY'}" ;
@@ -1646,7 +1646,7 @@ allow {
                     </div>
                   </div>
                 ) : (
-                  <div className="p-6 rounded-xl bg-slate-950 border border-slate-800 text-center text-xs text-slate-500">
+                  <div className="p-6 rounded-xl bg-slate-950 border border-slate-800 text-center text-sm text-slate-500">
                     Click "Run Evaluation" to simulate the decision.
                   </div>
                 )}
@@ -1656,14 +1656,14 @@ allow {
 
           {/* Key Architectural Considerations */}
           {generatedPolicy.keyConsiderations?.length > 0 && (
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3">
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-3">
               <span className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-amber-400" />
                 <span>Production Deployment Considerations &amp; Pitfalls</span>
               </span>
-              <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-slate-300">
+              <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-slate-300 items-stretch">
                 {generatedPolicy.keyConsiderations.map((note, idx) => (
-                  <li key={idx} className="bg-slate-950/70 p-3 rounded-xl border border-slate-800 flex items-start gap-2">
+                  <li key={idx} className="bg-slate-950/70 p-4 rounded-xl border border-slate-800 flex items-start gap-2 h-full">
                     <span className="text-cyan-400 font-bold shrink-0">·</span>
                     <span className="leading-relaxed">{note}</span>
                   </li>

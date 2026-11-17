@@ -295,11 +295,11 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
   const passed = finalScorePercent >= 80;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8 space-y-8">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Quiz Engine Main Header */}
       <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-4 relative overflow-hidden">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="space-y-1">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-2 flex-1">
             <div className="flex items-center gap-2 text-xs font-semibold text-cyan-400 uppercase tracking-wider">
               <Sparkles className="w-4 h-4" />
               <span>Interactive Technical Verification</span>
@@ -307,7 +307,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
               Wavebound Quiz
             </h1>
-            <p className="text-slate-300 text-xs sm:text-sm max-w-xl">
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
               Challenge yourself on Five Safes governance, ISO/IEC 27001:2022 ISMS &amp; DEA 2017 accreditation, SHACL closed-world validation,
               quantitative SDC math (<span className="font-mono text-cyan-300 font-semibold">k &ge; 10</span>), OPA Rego compilation, and clinical safety standards (ISO 42001, DCB0129/0160).
             </p>
@@ -315,7 +315,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
 
           <button
             onClick={onViewProgress}
-            className="px-4 py-2 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs font-semibold text-slate-300 flex items-center gap-2 transition-colors shrink-0"
+            className="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs sm:text-sm font-semibold text-slate-200 flex items-center gap-2 transition-colors shrink-0 cursor-pointer"
           >
             <BarChart3 className="w-4 h-4 text-cyan-400" />
             <span>View Attempt History</span>
@@ -323,8 +323,8 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
         </div>
 
         {notice && (
-          <div className="text-xs text-cyan-300 bg-cyan-950/60 border border-cyan-800/60 p-2.5 rounded-lg flex items-center gap-2">
-            <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="text-xs sm:text-sm text-cyan-300 bg-cyan-950/60 border border-cyan-800/60 p-3 rounded-lg flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
             <span>{notice}</span>
           </div>
         )}
@@ -359,7 +359,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <label className="text-xs font-semibold text-slate-300">Target Difficulty</label>
-                <span className="text-[10px] font-mono text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-800/50">
+                <span className="text-xs font-mono text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-800/50">
                   {availableMatchingCount} in bank
                 </span>
               </div>
@@ -418,7 +418,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
               <Info className="w-4 h-4 text-cyan-400 shrink-0" />
               <span>Can I bring my own API key to the Quiz, or should I run a local instance of Wavebound?</span>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1 text-[11px] text-slate-400 leading-relaxed">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1 text-xs sm:text-sm text-slate-400 leading-relaxed">
               <div className="space-y-1 p-3 rounded-lg bg-slate-900/80 border border-slate-800">
                 <span className="font-bold text-emerald-300 block">1. 100% Self-Contained by Default (No Keys Needed)</span>
                 <p>
@@ -485,7 +485,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
                   key={optIdx}
                   onClick={() => handleSelectOption(optIdx)}
                   disabled={isAnswered}
-                  className={`w-full p-4 rounded-xl border text-left text-xs sm:text-sm font-medium transition-all flex items-start gap-3 ${btnStyle}`}
+                  className={`w-full p-4 rounded-xl border text-left text-sm sm:text-base font-medium transition-all flex items-start gap-3 ${btnStyle}`}
                 >
                   <span className="font-mono font-bold text-xs shrink-0 w-6 h-6 rounded-md bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-300">
                     {String.fromCharCode(65 + optIdx)}

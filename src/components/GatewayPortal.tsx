@@ -105,14 +105,14 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-10">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
       {/* 1. EXECUTIVE STATUTORY PROPOSITION */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 sm:p-12 shadow-xs">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
+        <div className="max-w-5xl mx-auto text-center space-y-6">
           {/* Institutional Context Strip */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 text-xs text-slate-600 dark:text-slate-400">
+          <div className="flex flex-wrap items-center justify-center gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
             <span className="inline-flex items-center gap-1.5 font-semibold text-teal-800 dark:text-teal-300">
-              <ShieldCheck className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
+              <ShieldCheck className="w-4 h-4 text-teal-600 dark:text-teal-400" />
               <span>Safe &amp; Secure Data Intelligence Environments</span>
             </span>
             <span aria-hidden="true">·</span>
@@ -125,14 +125,14 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
 
           <WaveboundLogo variant="hero" size="lg" className="mx-auto" />
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight text-balance">
               Streamlined Information Governance for Safe &amp; Secure Data Intelligence Environments
             </h1>
-            <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 max-w-4xl mx-auto leading-relaxed">
               Navigation of IG via semantic ontology, standardised evidence packs, clear, structured compliance reviews, and progress tracked and certificated learning.
             </p>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-4xl mx-auto leading-relaxed">
               Designed for patients, public contributors, researchers, governance leads, and engineering teams—start with plain-English foundations, explore the step-by-step Playbook, or test live policy simulators below. A work in progress.{' '}
               <button
                 type="button"
@@ -146,52 +146,52 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
           </div>
 
           {/* Focused Pathway Filter Bar */}
-          <div className="pt-2 pb-1 max-w-2xl mx-auto">
+          <div className="pt-2 pb-1 max-w-3xl mx-auto">
             <div className="p-1.5 bg-slate-100 dark:bg-slate-800/90 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-xs flex flex-col sm:flex-row items-center gap-1.5">
               <button
                 onClick={() => setPersonaFocus('all')}
-                className={`w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                className={`w-full sm:w-auto px-4 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap ${
                   personaFocus === 'all'
                     ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs font-bold'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
-                <Filter className="w-3.5 h-3.5" />
+                <Filter className="w-4 h-4" />
                 <span>All 4 Core Pillars</span>
               </button>
 
               <button
                 onClick={() => setPersonaFocus('ig-handbook')}
-                className={`w-full sm:flex-1 py-2 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                className={`w-full sm:flex-1 py-2.5 px-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
                   personaFocus === 'ig-handbook'
                     ? 'bg-[#00A389] text-white shadow-xs font-bold'
                     : 'text-slate-700 dark:text-slate-300 hover:text-[#00A389] hover:bg-white/60 dark:hover:bg-slate-800'
                 }`}
                 title="Filter Overview to Foundations: Plain-English desk reference for Caldicott Guardians, IG Leads, Ethics Committees, researchers, and the public"
               >
-                <HeartHandshake className="w-3.5 h-3.5" />
+                <HeartHandshake className="w-4 h-4" />
                 <span>Foundations Lens</span>
               </button>
 
               <button
                 onClick={() => setPersonaFocus('data-technical')}
-                className={`w-full sm:flex-1 py-2 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                className={`w-full sm:flex-1 py-2.5 px-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
                   personaFocus === 'data-technical'
                     ? 'bg-[#005EB8] text-white shadow-xs font-bold'
                     : 'text-slate-700 dark:text-slate-300 hover:text-[#005EB8] hover:bg-white/60 dark:hover:bg-slate-800'
                 }`}
                 title="Filter Overview to PaC Playbook: Ontology rules, OPA Rego sandboxes, enclaves, and manifests"
               >
-                <Code2 className="w-3.5 h-3.5" />
+                <Code2 className="w-4 h-4" />
                 <span>PaC Playbook Lens</span>
               </button>
             </div>
           </div>
 
           {/* Caldicott Human Accountability Notice */}
-          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-left max-w-3xl mx-auto flex items-start gap-3">
+          <div className="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-left max-w-4xl mx-auto flex items-start gap-3.5">
             <HeartHandshake className="w-5 h-5 text-[#005EB8] dark:text-sky-400 shrink-0 mt-0.5" />
-            <div className="text-xs space-y-1">
+            <div className="text-sm space-y-1">
               <strong className="text-slate-900 dark:text-slate-100 font-bold block">
                 People First: Technology Assists Human Decisions (Caldicott Principle 8)
               </strong>
@@ -205,56 +205,56 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
 
       {/* 2. DYNAMIC FOCUSED OVERVIEW CONTENT (No Duplicated Grids) */}
       {personaFocus === 'all' && (
-        <div className="space-y-4 animate-in fade-in duration-200">
-          <div className="text-center space-y-1">
-            <span className="text-xs font-semibold text-[#005EB8] dark:text-sky-400">
+        <div className="space-y-5 animate-in fade-in duration-200">
+          <div className="text-center space-y-1.5">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#005EB8] dark:text-sky-400">
               Explore by Pillar
             </span>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
               Start Where You Need
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
               Pick any of the four pillars below, or switch the lens filter above to step through a Foundations or PaC Playbook pathway.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
             {/* Pillar 1: Playbook & Guides */}
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 space-y-4 flex flex-col justify-between shadow-xs">
-              <div className="space-y-2.5">
-                <div className="w-9 h-9 rounded-lg bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 flex items-center justify-center text-teal-700 dark:text-teal-400">
-                  <Layers className="w-4 h-4" />
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 space-y-5 flex flex-col justify-between shadow-xs h-full">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-lg bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 flex items-center justify-center text-teal-700 dark:text-teal-400">
+                  <Layers className="w-5 h-5" />
                 </div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-sm">
+                <h3 className="font-bold text-slate-900 dark:text-white text-base">
                   1. Playbook &amp; Guides
                 </h3>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                   Read the step-by-step Wavebound PaC Playbook, plan production rollout without breaking services, trace our Ontology Topology Graph, or inspect the Concepts Primer.
                 </p>
               </div>
-              <div className="space-y-1.5 pt-2 border-t border-slate-100 dark:border-slate-800">
+              <div className="space-y-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   onClick={() => onSelectTab('playbook')}
-                  className="w-full py-2 px-3 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                  className="w-full py-2.5 px-3 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white font-semibold text-sm flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <span>Read PaC Playbook</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => onSelectTab('implementation-track')}
-                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                  className="w-full py-2 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium transition-colors cursor-pointer"
                 >
                   Transitioning to Production &amp; Decisions
                 </button>
                 <button
                   onClick={() => onSelectTab('graph')}
-                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                  className="w-full py-2 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium transition-colors cursor-pointer"
                 >
                   Explore Ontology Topology Graph
                 </button>
                 <button
                   onClick={() => onSelectTab('concepts')}
-                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                  className="w-full py-2 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium transition-colors cursor-pointer"
                 >
                   Concepts Visual Primer
                 </button>
@@ -262,41 +262,41 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
             </div>
 
             {/* Pillar 2: Evidence & Resources */}
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 space-y-4 flex flex-col justify-between shadow-xs">
-              <div className="space-y-2.5">
-                <div className="w-9 h-9 rounded-lg bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 flex items-center justify-center text-[#005EB8] dark:text-sky-400">
-                  <FileCheck2 className="w-4 h-4" />
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 space-y-5 flex flex-col justify-between shadow-xs h-full">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-lg bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 flex items-center justify-center text-[#005EB8] dark:text-sky-400">
+                  <FileCheck2 className="w-5 h-5" />
                 </div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-sm">
+                <h3 className="font-bold text-slate-900 dark:text-white text-base">
                   2. Evidence &amp; Resources
                 </h3>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                   Open Foundations &amp; 10-Stage Schematic, preview Evidence Packs, explore the A–Z Glossary, or browse Further Resources (UK law, DSA, Statbarn, DataSHIELD, RO-Crate, EHDS).
                 </p>
               </div>
-              <div className="space-y-1.5 pt-2 border-t border-slate-100 dark:border-slate-800">
+              <div className="space-y-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   onClick={() => onSelectTab('governance-atlas')}
-                  className="w-full py-2 px-3 rounded-lg bg-[#005EB8] hover:bg-[#0c2340] text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                  className="w-full py-2.5 px-3 rounded-lg bg-[#005EB8] hover:bg-[#0c2340] text-white font-semibold text-sm flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <span>Open Foundations &amp; Schematic</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setIsEvidenceModalOpen(true)}
-                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                  className="w-full py-2 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium transition-colors cursor-pointer"
                 >
                   Preview Standardised Evidence Pack
                 </button>
                 <button
                   onClick={() => onSelectTab('glossary')}
-                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                  className="w-full py-2 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium transition-colors cursor-pointer"
                 >
                   Governance &amp; Architecture Glossary
                 </button>
                 <button
                   onClick={() => onSelectTab('resources')}
-                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                  className="w-full py-2 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium transition-colors cursor-pointer"
                 >
                   Browse Further Resources
                 </button>
@@ -304,35 +304,35 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
             </div>
 
             {/* Pillar 3: Interactive Simulators & Review Lab */}
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 space-y-4 flex flex-col justify-between shadow-xs">
-              <div className="space-y-2.5">
-                <div className="w-9 h-9 rounded-lg bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 flex items-center justify-center text-amber-700 dark:text-amber-400">
-                  <Scale className="w-4 h-4" />
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 space-y-5 flex flex-col justify-between shadow-xs h-full">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-lg bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 flex items-center justify-center text-amber-700 dark:text-amber-400">
+                  <Scale className="w-5 h-5" />
                 </div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-sm">
+                <h3 className="font-bold text-slate-900 dark:text-white text-base">
                   3. Simulators &amp; Review Lab
                 </h3>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                   Try interactive tools hands-on: evaluate study protocols, run Statbarn SDC suppression checks, test OPA Rego rules, scrub LLM prompts, or generate manifests.
                 </p>
               </div>
-              <div className="space-y-1.5 pt-2 border-t border-slate-100 dark:border-slate-800">
+              <div className="space-y-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   onClick={() => onSelectTab('govern-assure')}
-                  className="w-full py-2 px-3 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                  className="w-full py-2.5 px-3 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-semibold text-sm flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <span>Govern &amp; Assure + SDC</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => onSelectTab('sandbox')}
-                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                  className="w-full py-2 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium transition-colors cursor-pointer"
                 >
                   OPA Rego Policy Sandbox
                 </button>
                 <button
                   onClick={() => onSelectTab('llm-security')}
-                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                  className="w-full py-2 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium transition-colors cursor-pointer"
                 >
                   LLM Redaction &amp; Enclave Lab
                 </button>
@@ -340,29 +340,29 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
             </div>
 
             {/* Pillar 4: Progress Tracked & Certificated Learning */}
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 space-y-4 flex flex-col justify-between shadow-xs">
-              <div className="space-y-2.5">
-                <div className="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-[#047857] dark:text-emerald-400">
-                  <Sparkles className="w-4 h-4" />
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 space-y-5 flex flex-col justify-between shadow-xs h-full">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center text-[#047857] dark:text-emerald-400">
+                  <Sparkles className="w-5 h-5" />
                 </div>
-                <h3 className="font-bold text-slate-900 dark:text-white text-sm">
+                <h3 className="font-bold text-slate-900 dark:text-white text-base">
                   4. Tracked Quizzes &amp; Learning
                 </h3>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                   Check your confidence across Five Safes, SHACL, OPA Rego, SDC thresholds, FOIA, and enclave security with downloadable completion certificates.
                 </p>
               </div>
-              <div className="space-y-1.5 pt-2 border-t border-slate-100 dark:border-slate-800">
+              <div className="space-y-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   onClick={() => onSelectTab('quiz')}
-                  className="w-full py-2 px-3 rounded-lg bg-[#00A389] hover:bg-emerald-700 text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                  className="w-full py-2.5 px-3 rounded-lg bg-[#00A389] hover:bg-emerald-700 text-white font-semibold text-sm flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <span>Launch Quiz</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => onSelectTab('progress')}
-                  className="w-full py-1.5 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                  className="w-full py-2 px-3 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium transition-colors cursor-pointer"
                 >
                   View Progress &amp; Certificates
                 </button>
@@ -375,11 +375,11 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
       {/* FOCUSED FILTER: FOUNDATIONS LENS */}
       {personaFocus === 'ig-handbook' && (
         <div className="space-y-5 animate-in fade-in duration-200">
-          <div className="p-4 rounded-xl bg-[#ecfdf5] dark:bg-emerald-950/40 border border-[#a7f3d0] dark:border-emerald-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-start gap-2.5">
+          <div className="p-5 rounded-xl bg-[#ecfdf5] dark:bg-emerald-950/40 border border-[#a7f3d0] dark:border-emerald-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-start gap-3">
               <HeartHandshake className="w-5 h-5 text-[#047857] dark:text-emerald-400 shrink-0 mt-0.5" />
-              <div className="text-xs space-y-0.5">
-                <strong className="text-[#065f46] dark:text-emerald-300 font-bold block text-sm">
+              <div className="text-sm space-y-0.5">
+                <strong className="text-[#065f46] dark:text-emerald-300 font-bold block text-base">
                   Foundations Pathway Active (High-Level Desk Reference &amp; Statutory Overview)
                 </strong>
                 <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
@@ -389,69 +389,69 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
             </div>
             <button
               onClick={() => setPersonaFocus('all')}
-              className="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-emerald-300 dark:border-emerald-700 text-[#047857] dark:text-emerald-300 text-xs font-semibold shrink-0 cursor-pointer hover:bg-emerald-50"
+              className="px-4 py-2 rounded-lg bg-white dark:bg-slate-900 border border-emerald-300 dark:border-emerald-700 text-[#047857] dark:text-emerald-300 text-sm font-semibold shrink-0 cursor-pointer hover:bg-emerald-50"
             >
               Show All Pillars
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs">
-              <div className="space-y-2">
-                <span className="text-[11px] font-mono font-bold text-[#047857] dark:text-emerald-400 uppercase">Step 1 · Statutory Baseline</span>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">Foundations Desk Reference &amp; Schematic</h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs h-full">
+              <div className="space-y-2.5">
+                <span className="text-xs font-mono font-bold text-[#047857] dark:text-emerald-400 uppercase">Step 1 · Statutory Baseline</span>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">Foundations Desk Reference &amp; Schematic</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   Walk through the 10-stage IG &amp; Ethics schematic with statutory hand-offs across Caldicott 1–8, Section 251, UK GDPR, Statbarn outputs, and FOIA readiness.
                 </p>
               </div>
               <button
                 onClick={() => onSelectTab('governance-atlas')}
-                className="w-full py-2.5 rounded-lg bg-[#00A389] hover:bg-emerald-700 text-white font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-2.5 rounded-lg bg-[#00A389] hover:bg-emerald-700 text-white font-semibold text-sm flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Open Foundations</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
 
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs">
-              <div className="space-y-2">
-                <span className="text-[11px] font-mono font-bold text-[#047857] dark:text-emerald-400 uppercase">Step 2 · Panel Review</span>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">Assurance Workspace &amp; Evidence Packs</h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs h-full">
+              <div className="space-y-2.5">
+                <span className="text-xs font-mono font-bold text-[#047857] dark:text-emerald-400 uppercase">Step 2 · Panel Review</span>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">Assurance Workspace &amp; Evidence Packs</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   Simulate ethics/IG protocol gates, review Caldicott 8 public register templates, and inspect a standardized evidence pack before committee sign-off.
                 </p>
               </div>
               <div className="space-y-2">
                 <button
                   onClick={() => onSelectTab('govern-assure')}
-                  className="w-full py-2.5 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-2.5 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white font-semibold text-sm flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Enter Review Workspace</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setIsEvidenceModalOpen(true)}
-                  className="w-full py-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-[#047857] dark:text-emerald-300 font-medium text-xs cursor-pointer"
+                  className="w-full py-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-[#047857] dark:text-emerald-300 font-medium text-sm cursor-pointer"
                 >
                   Preview Evidence Pack
                 </button>
               </div>
             </div>
 
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs">
-              <div className="space-y-2">
-                <span className="text-[11px] font-mono font-bold text-[#047857] dark:text-emerald-400 uppercase">Step 3 · Competency Check</span>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">Certificated IG &amp; SDC Quizzes</h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-emerald-200 dark:border-emerald-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs h-full">
+              <div className="space-y-2.5">
+                <span className="text-xs font-mono font-bold text-[#047857] dark:text-emerald-400 uppercase">Step 3 · Competency Check</span>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">Certificated IG &amp; SDC Quizzes</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   Complete Five Safes, Quantitative SDC, and AI Governance quiz domains with tracked progress and verifiable completion certificates.
                 </p>
               </div>
               <button
                 onClick={() => onSelectTab('quiz')}
-                className="w-full py-2.5 rounded-lg bg-slate-900 dark:bg-slate-800 hover:bg-[#005EB8] text-white font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-2.5 rounded-lg bg-slate-900 dark:bg-slate-800 hover:bg-[#005EB8] text-white font-semibold text-sm flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Open Quiz</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -461,11 +461,11 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
       {/* FOCUSED FILTER: PAC PLAYBOOK LENS */}
       {personaFocus === 'data-technical' && (
         <div className="space-y-5 animate-in fade-in duration-200">
-          <div className="p-4 rounded-xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-start gap-2.5">
+          <div className="p-5 rounded-xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-start gap-3">
               <Code2 className="w-5 h-5 text-[#005EB8] dark:text-sky-400 shrink-0 mt-0.5" />
-              <div className="text-xs space-y-0.5">
-                <strong className="text-[#0c2340] dark:text-sky-300 font-bold block text-sm">
+              <div className="text-sm space-y-0.5">
+                <strong className="text-[#0c2340] dark:text-sky-300 font-bold block text-base">
                   PaC Playbook Pathway Active (Architecture, Manifests &amp; Ontologies)
                 </strong>
                 <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
@@ -475,82 +475,82 @@ export const GatewayPortal: React.FC<GatewayPortalProps> = ({
             </div>
             <button
               onClick={() => setPersonaFocus('all')}
-              className="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-sky-300 dark:border-sky-700 text-[#005EB8] dark:text-sky-300 text-xs font-semibold shrink-0 cursor-pointer hover:bg-sky-50"
+              className="px-4 py-2 rounded-lg bg-white dark:bg-slate-900 border border-sky-300 dark:border-sky-700 text-[#005EB8] dark:text-sky-300 text-sm font-semibold shrink-0 cursor-pointer hover:bg-sky-50"
             >
               Show All Pillars
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-sky-200 dark:border-sky-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs">
-              <div className="space-y-2">
-                <span className="text-[11px] font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase">Step 1 · Ontology &amp; Spec</span>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">PaC Playbook &amp; Semantic Topology</h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-sky-200 dark:border-sky-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs h-full">
+              <div className="space-y-2.5">
+                <span className="text-xs font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase">Step 1 · Ontology &amp; Spec</span>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">PaC Playbook &amp; Semantic Topology</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   Inspect how OWL/RDF metadata resolves Open-World Assumptions via W3C SHACL shapes and compiles to deterministic Rego bundles &amp; PROV-O / RO-Crate records.
                 </p>
               </div>
               <div className="space-y-2">
                 <button
                   onClick={() => onSelectTab('playbook')}
-                  className="w-full py-2.5 rounded-lg bg-[#005EB8] hover:bg-[#0c2340] text-white font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-2.5 rounded-lg bg-[#005EB8] hover:bg-[#0c2340] text-white font-semibold text-sm flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Read PaC Playbook</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => onSelectTab('graph')}
-                  className="w-full py-2 rounded-lg bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 text-[#005EB8] dark:text-sky-300 font-medium text-xs cursor-pointer"
+                  className="w-full py-2 rounded-lg bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800 text-[#005EB8] dark:text-sky-300 font-medium text-sm cursor-pointer"
                 >
                   Explore Semantic Topology Graph
                 </button>
               </div>
             </div>
 
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-sky-200 dark:border-sky-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs">
-              <div className="space-y-2">
-                <span className="text-[11px] font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase">Step 2 · Policy &amp; Enclave Hardening</span>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">OPA Sandbox &amp; AI Enclave Security</h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-sky-200 dark:border-sky-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs h-full">
+              <div className="space-y-2.5">
+                <span className="text-xs font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase">Step 2 · Policy &amp; Enclave Hardening</span>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">OPA Sandbox &amp; AI Enclave Security</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   Test fail-closed OPA Rego evaluation, inspect .harness_ignore &amp; AST scrubbing proxies, and enforce air-gapped CRAN/PyPI/Docker mirrors.
                 </p>
               </div>
               <div className="space-y-2">
                 <button
                   onClick={() => onSelectTab('sandbox')}
-                  className="w-full py-2.5 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-2.5 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white font-semibold text-sm flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Launch OPA Rego Sandbox</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => onSelectTab('llm-security')}
-                  className="w-full py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-xs cursor-pointer"
+                  className="w-full py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm cursor-pointer"
                 >
                   Inspect Enclave &amp; LLM Security
                 </button>
               </div>
             </div>
 
-            <div className="rounded-xl bg-white dark:bg-slate-900 border border-sky-200 dark:border-sky-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs">
-              <div className="space-y-2">
-                <span className="text-[11px] font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase">Step 3 · Least-Privilege Rollout</span>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">Build, Webhook &amp; Rollout Schedule</h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            <div className="rounded-xl bg-white dark:bg-slate-900 border border-sky-200 dark:border-sky-800/70 p-6 space-y-4 flex flex-col justify-between shadow-xs h-full">
+              <div className="space-y-2.5">
+                <span className="text-xs font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase">Step 3 · Least-Privilege Rollout</span>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">Build, Webhook &amp; Rollout Schedule</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                   Deploy namespaced evaluate-only ValidatingWebhookConfiguration manifests with break-glass selectors and decision gate traceability.
                 </p>
               </div>
               <div className="space-y-2">
                 <button
                   onClick={() => onSelectTab('build-deploy')}
-                  className="w-full py-2.5 rounded-lg bg-slate-900 dark:bg-slate-800 hover:bg-[#005EB8] text-white font-semibold text-xs flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-2.5 rounded-lg bg-slate-900 dark:bg-slate-800 hover:bg-[#005EB8] text-white font-semibold text-sm flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Open Build &amp; Deploy Workstation</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => onSelectTab('implementation-track')}
-                  className="w-full py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-xs cursor-pointer"
+                  className="w-full py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium text-sm cursor-pointer"
                 >
                   View Rollout Schedule &amp; Decisions
                 </button>

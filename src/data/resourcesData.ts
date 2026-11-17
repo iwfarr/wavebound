@@ -201,15 +201,15 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
   },
   {
     id: 'res-ehds',
-    title: 'European Health Data Space (EHDS) Regulation',
+    title: 'European Health Data Space (EHDS) Regulation (EU 2025/327)',
     organization: 'European Commission / European Parliament & Council',
     category: 'Statutory Legislation & Regulatory Guidance',
     url: 'https://health.ec.europa.eu/ehealth-digital-health-and-care/european-health-data-space-regulation-ehds_en',
-    shortDesc: 'EU statutory regulation establishing standardized rules for primary clinical interoperability and secondary use of electronic health data via Health Data Access Bodies (HDABs), Data Permits, and air-gapped Secure Processing Environments (SPEs).',
-    playbookRelevance: 'Demonstrates direct international structural overlap with UK Five Safes, CAG/HRA permits, and accredited TRE/SDE settings—enabling harmonized cross-border federated analytics ontologies.',
+    shortDesc: 'Regulation (EU) 2025/327 (entered into force March 2025; phased 2027–2031 application) mandating national Health Data Access Bodies (HDABs), purpose-bound Data Permits, HealthDCAT-AP catalogues, and zero-download Secure Processing Environments (SPEs).',
+    playbookRelevance: 'Establishes strong technical parity with UK Five Safes, CAG/HRA gateways, and SATRE 2.0 (especially Pillar 5 Federation) for cross-border federated analytics without overriding domestic UK health law.',
     isStatutory: true,
-    citation: 'European Union. Regulation on the European Health Data Space (EHDS). Brussels: European Commission DG SANTE; 2024.',
-    tags: ['EHDS', 'EU Regulation', 'HDAB', 'Data Permit', 'SPE', 'Secondary Use', 'Federated Analytics']
+    citation: 'European Union. Regulation (EU) 2025/327 on the European Health Data Space (EHDS). Official Journal of the European Union; 2025.',
+    tags: ['EHDS', 'EU 2025/327', 'HDAB', 'Data Permit', 'SPE', 'HealthDCAT-AP', 'Secondary Use']
   },
 
   // --- Statistical Disclosure Control (SDC) & Airlocks ---
@@ -554,9 +554,9 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
     organization: 'DARE UK / UKRI / Alan Turing Institute',
     category: 'Policy-as-Code, IAM & Fine-Grained Access Control',
     url: 'https://satre-specification.readthedocs.io/en/latest/',
-    shortDesc: 'The UK reference standard specification for Trusted Research Environments across 4 core operational pillars.',
-    playbookRelevance: 'The foundational architectural blueprint aligned throughout the entire repository and ontology.',
-    tags: ['SATRE', 'DARE UK', 'TRE Architecture', 'Turing Institute']
+    shortDesc: 'The UK reference standard specification spanning 4 core v1 pillars (Information Governance, Computing Technology, Data Management, Supporting Capabilities) plus Federation as the 5th pillar in SATRE 2.0.',
+    playbookRelevance: 'The foundational architectural blueprint aligned throughout the entire repository, ontology, and cross-TRE federation model.',
+    tags: ['SATRE 2.0', 'DARE UK', 'TRE Architecture', 'Federation', 'Turing Institute']
   },
   {
     id: 'res-dare-uk',

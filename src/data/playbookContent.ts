@@ -448,6 +448,33 @@ export interface SatrePillarDetail {
   icon: string;
 }
 
+export type EhdsComparisonDomain =
+  | 'All'
+  | 'Gateway & Permits'
+  | 'SPE Security'
+  | 'Output Checking'
+  | 'Federation & Standards';
+
+export interface EhdsCrosswalkRow {
+  id: string;
+  domain: Exclude<EhdsComparisonDomain, 'All'>;
+  ehdsArticle: string;
+  ehdsMandate: string;
+  satrePillar: string;
+  waveboundControl: string;
+  ukBoundaryNote: string;
+}
+
+export interface EhdsTimelineMilestone {
+  year: string;
+  dateLabel: string;
+  phaseTitle: string;
+  legalDeliverables: string;
+  sdeImpact: string;
+  custodianImpact: string;
+  researcherImpact: string;
+}
+
 export interface ExternalResource {
   title: string;
   organization: string;
@@ -461,59 +488,178 @@ export const SATRE_PILLARS: SatrePillarDetail[] = [
     id: 'satre-ig',
     name: 'Information Governance',
     shortDesc: 'Statutory compliance, Caldicott 8 principles, NHS Section 251, UK GDPR Art 6/9, and ethics approvals.',
-    fullDesc: 'Information Governance is the statutory cornerstone of the SATRE specification. It mandates that any Trusted Research Environment operationally embeds legal compliance into researcher accreditation, project registration, and data sharing protocols. Rather than ad-hoc agreements, SATRE requires machine-auditable mappings between project ethics reviews, Caldicott guardian mandates, and user identity.',
+    fullDesc: 'Pillar 1 of SATRE 2.0 embeds statutory compliance, ethical oversight, Information Governance (IG) risk management, and Patient and Public Involvement and Engagement (PPIE) into researcher accreditation, project registration, and data-sharing protocols through auditable governance assertions.',
     keyRequirements: [
-      'Documented legal basis under UK GDPR Article 6(1)(e) (Public Task) and Article 9(2)(j) (Scientific Research).',
-      'Caldicott 8 Principles embedded into researcher verification and data minimization workflows.',
-      'NHS Health Research Authority (HRA) Research Ethics Committee (REC) approval letter verification.',
-      'Confidentiality Advisory Group (CAG) Section 251 statutory exemption validation for unconsented clinical data.',
-      'Mandatory annual Information Governance (IG) training certification tracking.'
+      'Documented lawful basis under UK General Data Protection Regulation (UK GDPR) Article 6(1)(e) (Public Task) and Article 9(2)(j) (Scientific Research), alongside the Common Law Duty of Confidentiality.',
+      'Caldicott Eight Principles and Patient and Public Involvement and Engagement (PPIE) embedded into access appraisal workflows.',
+      'NHS Health Research Authority (HRA) Research Ethics Committee (REC) favourable opinion verification.',
+      'Confidentiality Advisory Group (CAG) Section 251 (NHS Act 2006) statutory support validation where consent is impracticable.',
+      'Mandatory annual Information Governance (IG) training certification and accredited Safe Researcher status verification.'
     ],
-    playbookMapping: 'Modeled in ontology/governance_core.ttl and validated in ontology/shapes/access-shapes.ttl.',
+    playbookMapping: 'Modelled in ontology/governance_core.ttl and evaluated in ontology/shapes/access-shapes.ttl.',
     icon: 'Scale'
   },
   {
     id: 'satre-infra',
-    name: 'Computing Infrastructure',
-    shortDesc: 'Zero-egress hardened cloud enclaves, microsegmented VPCs, ephemeral compute, and isolated subnets.',
-    fullDesc: 'The SATRE Computing Infrastructure pillar specifies technical boundaries guaranteeing that data stays inside the environment. Compute nodes (analytical containers, Jupyter workspaces, virtual desktops) are instantiated in locked-down Virtual Private Clouds (VPCs) with external internet routing disabled.',
+    name: 'Computing Technology & Infrastructure',
+    shortDesc: 'Zero-egress isolated cloud enclaves, microsegmented VPCs, FIDO2 MFA, and ephemeral compute.',
+    fullDesc: 'Pillar 2 (Computing Technology & Information Security) specifies technical boundaries ensuring sensitive health data remains confined within an isolated Trusted Research Environment (TRE)—implementing zero outbound internet (WAN) egress, pixel-only remote desktops, phishing-resistant Multi-Factor Authentication (MFA), and ephemeral non-root workloads.',
     keyRequirements: [
-      'Zero external internet egress routing (egress disabled at the VPC and network security group level).',
-      'Microsegmentation preventing unauthorized inter-project network communication.',
-      'Ephemeral workspace lifecycles where compute resources terminate cleanly upon session close.',
-      'Centralized identity management with multi-factor authentication (MFA) and single sign-on (SSO).',
-      'Strict isolation between raw database tiers and researcher analytics compute nodes.'
+      'Zero external internet egress routing (disabled across Virtual Private Cloud (VPC) gateways, Calico/eBPF kernel policies, and network firewalls).',
+      'Microsegmentation preventing unauthorised inter-project network traffic and lateral host traversal.',
+      'Ephemeral, non-root read-only workspace lifecycles that terminate cleanly upon session closure.',
+      'Centralised identity management enforcing FIDO2 Multi-Factor Authentication (MFA) and short-lived scoped tokens.',
+      'Quarantined internal PyPI/CRAN package mirrors and strict network segregation between storage tiers and analytical compute nodes.'
     ],
-    playbookMapping: 'Enforced via tre:enclaveEgressBlocked true in access-shapes.ttl and OPA allow rules.',
+    playbookMapping: 'Evaluated via tre:enclaveEgressBlocked true in access-shapes.ttl and Open Policy Agent (OPA) admission rules.',
     icon: 'Server'
   },
   {
     id: 'satre-data',
     name: 'Data Management',
     shortDesc: 'Clinical data tiering, de-identification pipelines, data dictionary ontologies, and integrity hashing.',
-    fullDesc: 'SATRE Data Management dictates the ingestion, transformation, curation, and preservation of data. It ensures that clinical datasets are structured with rigorous metadata, direct identifiers are permanently expunged, and data is partitioned into distinct sensitivity tiers.',
+    fullDesc: 'Pillar 3 (Data Management) governs the complete clinical data lifecycle: ingestion, curation, de-identification, semantic metadata catalogues, SHA-256 cryptographic lineage hashing, and Statistical Disclosure Control (SDC) verification prior to output release.',
     keyRequirements: [
-      'Formal hospital operational tiering (Tier 1: Aggregate/Synthetic, Tier 2: Pseudonymous, Tier 3: Sensitive Clinical under s251).',
-      'Permanent exclusion of direct identifiers (names, NHS numbers, full postcodes, contact info).',
-      'Semantic data dictionary mapping tables and columns to standardized clinical ontologies (SNOMED-CT, ICD-10, OPCS-4).',
-      'Cryptographic checksumming (SHA-256) verifying dataset immutability throughout project lifecycles.'
+      'Structured hospital operational tiering (Tier 1: Aggregate/Synthetic, Tier 2: De-identified Pseudonymous, Tier 3: Sensitive Clinical under Section 251).',
+      'Systematic separation of direct identifiers (names, NHS numbers, full postcodes) paired with upstream NHS National Data Opt-Out (NDOO) exclusion.',
+      'Semantic data dictionaries mapping clinical tables to SNOMED-CT, ICD-10, OPCS-4, and DCAT-AP / HealthDCAT-AP metadata standards.',
+      'Cryptographic checksumming (SHA-256) and W3C PROV-O lineage records verifying dataset integrity and Statistical Disclosure Control (SDC) output clearance.'
     ],
-    playbookMapping: 'Formalized in ontology/tre-core.ttl and mapped to clinical hospital tiers in governance_core.ttl.',
+    playbookMapping: 'Formalised in ontology/tre-core.ttl and mapped to hospital sensitivity tiers in ontology/governance_core.ttl.',
     icon: 'Database'
   },
   {
-    id: 'satre-ops',
-    name: 'Software Operations',
-    shortDesc: 'GitOps version control, PySHACL CI linting, automated OPA Rego compilation, and PROV-O audit trails.',
-    fullDesc: 'Software Operations governs how software, analytical libraries, and policies are built, maintained, tested, and deployed. SATRE mandates that all policy logic and infrastructure configurations be managed through version-controlled GitOps workflows with automated CI/CD validation and cryptographic provenance logging.',
+    id: 'satre-supporting',
+    name: 'Supporting Capabilities',
+    shortDesc: 'Service management, GitOps Policy-as-Code pipelines, PySHACL validation, training, and continuity.',
+    fullDesc: 'Pillar 4 (Supporting Capabilities in SATRE v1 and 2.0) encompasses the organisational, service management, and software engineering processes needed to sustain an environment safely over time—including Information Technology Service Management (ITSM), user training, procurement, business continuity, GitOps policy validation, and immutable provenance logging.',
     keyRequirements: [
-      'Version-controlled Policy-as-Code repository with semantic linting and tests in GitHub Actions CI.',
-      'PySHACL automated test harness validating test fixtures against Closed-World shapes before release.',
-      'Automated compilation pipeline (compiler/rdf_to_rego.py) translating Turtle definitions into low-latency OPA Rego.',
-      'Append-only audit lineage using W3C PROV-O RDF triples recording every authorization decision and airlock review.'
+      'Information Technology Service Management (ITSM), incident response, business continuity planning, and ISO/IEC 27001 Information Security Management System (ISMS) governance.',
+      'Structured researcher onboarding, Safe Researcher Training delivery, and operational helpdesk support.',
+      'Version-controlled GitOps Policy-as-Code (PaC) repository with PySHACL closed-world validation and Open Policy Agent (OPA) Rego compilation in Continuous Integration (CI).',
+      'Append-only audit lineage using W3C PROV-O RDF triples recording every admission decision and two-person airlock sign-off.'
     ],
-    playbookMapping: 'Implemented across .github/workflows/ci.yml, compiler/, tests/, and Makefile.',
+    playbookMapping: 'Documented across .github/workflows/ci.yml, compiler/, tests/, and ISMS SOP-01 to SOP-04.',
     icon: 'Workflow'
+  },
+  {
+    id: 'satre-federation',
+    name: 'Federation',
+    shortDesc: 'SATRE 2.0 fifth pillar: multi-TRE interoperability, federated queries, RO-Crate, and cross-site trust.',
+    fullDesc: 'Introduced in SATRE 2.0 (DARE UK TREvolution), Pillar 5 establishes specifications for multi-TRE interoperability—addressing federated dataset discovery, distributed non-disclosive analysis (such as DataSHIELD), portable Five Safes RO-Crate audit bundles, and technical correspondence with European Health Data Space (EHDS) nodes.',
+    keyRequirements: [
+      'Cross-TRE federated identity federation, mutual accreditation recognition, and harmonised Data Access Committee assurance.',
+      'Bring-code-to-data distributed execution (DataSHIELD nfilter disclosure checks or federated workflow containers) without centralising row-level Patient Identifiable Data (PID).',
+      'Portable audit packaging via Five Safes RO-Crate (ro-crate-metadata.json) carrying W3C PROV-O traces and airlock release tickets.',
+      'Interoperable metadata exchange schemas aligned with the Health Data Research Innovation Gateway (HDR UK) and European HealthDCAT-AP catalogues.'
+    ],
+    playbookMapping: 'Implemented conceptually via Five Safes RO-Crate packaging, federated OPA bundles, and the EU EHDS cross-walk.',
+    icon: 'Globe'
+  }
+];
+
+export const EHDS_CROSSWALK_ROWS: EhdsCrosswalkRow[] = [
+  {
+    id: 'ehds-cw-1',
+    domain: 'Gateway & Permits',
+    ehdsArticle: 'Art. 46–49 · Health Data Access Body (HDAB) Data Permits',
+    ehdsMandate: 'Secondary health data access requires a formal, purpose-bound Data Permit issued by a Member State Health Data Access Body (HDAB); raw datasets cannot be requested directly from hospitals.',
+    satrePillar: 'Pillar 1 · Information Governance',
+    ukBoundaryNote: 'Significant institutional difference: EHDS creates statutory HDABs empowered to compel data holders to share records under mandatory time-limits. In the UK, SATRE is non-statutory; access relies on voluntary Trust/SDE participation, HRA Research Ethics Committee (REC) review, Confidentiality Advisory Group (CAG) Section 251 support, and local Data Access Committees.',
+    waveboundControl: 'tre:SafeProject binds verified HRA/REC ethics opinions, Section 251 approvals, and lawful basis assertions to SHACL admission shapes prior to workspace provisioning.'
+  },
+  {
+    id: 'ehds-cw-2',
+    domain: 'Gateway & Permits',
+    ehdsArticle: 'Art. 51–54 & 71 · Citizen Opt-Out & Prohibited Uses',
+    ehdsMandate: 'Prohibits secondary use for commercial advertising, insurance underwriting, or detrimental decisions against individuals; mandates Member State enforcement of citizen secondary-use opt-outs.',
+    satrePillar: 'Pillar 1 · Information Governance & Pillar 3 · Data Management',
+    ukBoundaryNote: 'Strong functional correspondence: the EHDS EU-wide opt-out parallels the NHS National Data Opt-Out (NDOO) and statutory restrictions under the Data Protection Act 2018. Statutory enforcement mechanisms differ across jurisdictions.',
+    waveboundControl: 'Automated NHS National Data Opt-Out (NDOO) exclusion filter applied upstream of ingestion, paired with Open Policy Agent (OPA) Rego purpose allowlists rejecting non-approved analytical scopes.'
+  },
+  {
+    id: 'ehds-cw-3',
+    domain: 'SPE Security',
+    ehdsArticle: 'Art. 50 · Zero-Download Secure Processing Environment (SPE)',
+    ehdsMandate: 'Data users are prohibited from downloading personal or pseudonymised microdata; all computation must execute remotely inside audited Secure Processing Environments (SPEs).',
+    satrePillar: 'Pillar 2 · Computing Technology & Infrastructure',
+    ukBoundaryNote: 'Very close technical alignment: EHDS Article 50 SPE isolation corresponds directly to UK NHS Secure Data Environment (SDE) specifications and UKSA TRE accreditation criteria (SAQ V3.1), though detailed EU implementing acts are pending until 2027.',
+    waveboundControl: 'Calico/eBPF zero-WAN egress policies, pixel-only Virtual Desktop Infrastructure (no clipboard or local drive mounting), FIDO2 Multi-Factor Authentication, and Key Management Service (KMS) AES-256 encryption.'
+  },
+  {
+    id: 'ehds-cw-4',
+    domain: 'SPE Security',
+    ehdsArticle: 'Art. 50(1)(d)–(f) · Granular Audit Trails & Workload Isolation',
+    ehdsMandate: 'Mandates continuous activity logging, identity attribution, session monitoring, and strict isolation between concurrent research workspaces inside the SPE.',
+    satrePillar: 'Pillar 2 · Computing Technology & Pillar 4 · Supporting Capabilities',
+    ukBoundaryNote: 'Close technical alignment with ISO/IEC 27001:2022 Annex A.8.15 (Logging) and A.8.22 (Network Segregation) expected under UKSA TRE Standard Operating Procedures, subject to formal verification in EU implementing specifications.',
+    waveboundControl: 'Non-root readOnlyRootFilesystem containers, per-project namespace microsegmentation, and append-only W3C PROV-O Security Information and Event Management (SIEM) audit logs.'
+  },
+  {
+    id: 'ehds-cw-5',
+    domain: 'Output Checking',
+    ehdsArticle: 'Art. 50(1)(c) · Strictly Anonymised Output Export',
+    ehdsMandate: 'Restricts exports from Secure Processing Environments solely to non-personal, anonymised or aggregated statistical outputs verified against re-identification risk.',
+    satrePillar: 'Pillar 3 · Data Management (Output Checking)',
+    ukBoundaryNote: 'High methodological alignment: matches UK Safe Data Access Professionals (SDAP) Statbarn and DARE UK SACRO output-checking conventions, while recognising that member-state HDABs will apply harmonised EU anonymisation guidance.',
+    waveboundControl: 'Quantitative Statistical Disclosure Control (SDC) rules enforcing primary suppression (k >= 10), complementary secondary masking, dominance ceilings (<= 80%), and two-person SHA-256 airlock release.'
+  },
+  {
+    id: 'ehds-cw-6',
+    domain: 'Federation & Standards',
+    ehdsArticle: 'Art. 55–57 · Dataset Discovery Catalogues (HealthDCAT-AP)',
+    ehdsMandate: 'Requires data holders to publish standardised dataset metadata and data quality and utility labels so authorised applicants can discover cohorts across EU Member States.',
+    satrePillar: 'Pillar 3 · Data Management & Pillar 5 · Federation',
+    ukBoundaryNote: 'Convergence requires deliberate schema mapping: UK SDEs typically publish via the HDR UK Innovation Gateway, whereas EHDS mandates the European HealthDCAT-AP profile alongside quality labels.',
+    waveboundControl: 'Semantic clinical data dictionary (SNOMED-CT, ICD-10, OPCS-4) structured to support bilateral crosswalks between HDR UK metadata records and DCAT-AP / HealthDCAT-AP profiles.'
+  },
+  {
+    id: 'ehds-cw-7',
+    domain: 'Federation & Standards',
+    ehdsArticle: 'Art. 75 · HealthData@EU Cross-Border Network',
+    ehdsMandate: 'Establishes a central cross-border infrastructure connecting national Health Data Access Bodies and authorised SPE nodes for multi-country research and regulatory queries.',
+    satrePillar: 'Pillar 5 · Federation (SATRE 2.0 / TREvolution)',
+    ukBoundaryNote: 'Critical post-Brexit boundary: as a third country outside the EU, the UK has no automatic statutory seat on HealthData@EU. UK participation depends on international data-transfer adequacy, bilateral consortia agreements, and third-country node rules under Article 63.',
+    waveboundControl: 'Portable Five Safes RO-Crate (ro-crate-metadata.json) provenance bundles, DataSHIELD nfilter non-disclosive node checks, and verifiable W3C PROV-O release records.'
+  }
+];
+
+export const EHDS_TIMELINE_MILESTONES: EhdsTimelineMilestone[] = [
+  {
+    year: '2025',
+    dateLabel: '26 March 2025',
+    phaseTitle: 'Regulation (EU) 2025/327 Enters into Force',
+    legalDeliverables: 'Publication in the Official Journal of the European Union commences a 24-month legislative transition period. The European Commission begins drafting secondary Implementing Acts defining binding technical specifications for Secure Processing Environments (Article 50), HealthDCAT-AP metadata schemas, Data Permit templates, and HealthData@EU federation protocols.',
+    sdeImpact: 'Provides UK SDE architects and DARE UK working groups with the statutory European reference baseline for technical alignment—without creating immediate legal obligations on NHS Trusts.',
+    custodianImpact: 'NHS and academic TRE operators should map existing SATRE 2.0 Pillars 2–5 controls against Article 50 SPE criteria and adopt HealthDCAT-AP-compatible metadata fields early to avoid costly retrofits.',
+    researcherImpact: 'UK–EU consortium grant bids (e.g., Horizon Europe / NIHR international cohorts) can reference Wavebound and SATRE 2.0 controls as prospective technical equivalence alongside UK GDPR transfer safeguards.'
+  },
+  {
+    year: '2027',
+    dateLabel: 'March 2027',
+    phaseTitle: 'General Application & National HDAB Designation',
+    legalDeliverables: 'General date of application of the Regulation across EU Member States. Each Member State must designate one or more national Health Data Access Bodies (HDABs) with statutory powers, and the European Commission formally adopts core Implementing Acts covering SPE security baselines, fee structures, and cross-border query standards.',
+    sdeImpact: 'Formalises the EU-wide single-gateway model (HDABs), sharpens UK–EU bilateral governance requirements (third-country node rules and UK GDPR adequacy), and crystallises technical SPE compliance checklists.',
+    custodianImpact: 'EU hospitals and registries begin formal catalogue onboarding with national HDABs; UK platforms partnering with EU institutions must verify dual conformance across UKSA SAQ V3.1 and published EU Article 50 implementing specs.',
+    researcherImpact: 'Researchers pursuing multi-country European studies transition toward standardised single-application EU Data Permit workflows rather than negotiating disparate hospital-by-hospital bilateral agreements.'
+  },
+  {
+    year: '2029',
+    dateLabel: 'March 2029',
+    phaseTitle: 'Core Secondary Use & Mandatory SPE Operations Commence',
+    legalDeliverables: 'Binding obligations take effect for primary electronic health record (EHR) systems, patient registries, claims databases, and mortality records. Secondary-use data access must execute exclusively within accredited, zero-download Secure Processing Environments under HDAB Data Permits, enforcing mandatory citizen opt-outs and Article 50(1)(c) anonymised output checks.',
+    sdeImpact: 'Zero-download SPEs, quantitative Statistical Disclosure Control airlocks, and machine-readable audit logs shift from best-practice recommendations to legally enforceable cross-border operating requirements across the EEA.',
+    custodianImpact: 'Any federated UK TRE acting as a host or partner analytics node in European trials will face stringent external audit expectations covering FIDO2 MFA, kernel egress blocking, and two-person output release provenance.',
+    researcherImpact: 'Direct raw microdata transfers between EU and UK research workstations become untenable for core EHR datasets; studies rely predominantly on remote in-SPE analysis or federated bring-code-to-data protocols (e.g., DataSHIELD).'
+  },
+  {
+    year: '2031',
+    dateLabel: 'March 2031',
+    phaseTitle: 'Full Scope Expansion to Genomics, Biobanks & Clinical Trials',
+    legalDeliverables: 'Secondary-use mandates expand to higher-risk data categories: human genetic, genomic, and proteomic data, biobanks, wellness and mobile health applications, and clinical trial datasets—accompanied by stricter safeguards against single-individual re-identification and unauthorised algorithmic extraction.',
+    sdeImpact: 'Elevates the criticality of Wavebound multi-tier isolation (Hospital Tiers 1–3), strict AI model weight disclosure review, and non-disclosive omics summary gates within federated TREs.',
+    custodianImpact: 'Genomic and multimodal custodians must segregate raw sequencing files behind high-assurance Safe Data controls and validate that trained machine learning checkpoints cannot memorise or leak rare variant carriers.',
+    researcherImpact: 'International genomic and clinical-trial meta-analyses operate inside tightly governed cross-border SPE federations, requiring researcher accreditation, ethical provenance, and disclosure-checked outputs packaged in interoperable manifests (such as Five Safes RO-Crate).'
   }
 ];
 
@@ -523,7 +669,7 @@ export const EXTERNAL_RESOURCES: ExternalResource[] = [
     organization: 'DARE UK / UKRI / Alan Turing Institute',
     category: 'Standards & Architecture',
     url: 'https://satre-specification.readthedocs.io/',
-    description: 'The definitive Standard Architecture for Trusted Research Environments (SATRE) reference specification, defining the 4 pillars and evaluation statements.'
+    description: 'The definitive Standard Architecture for Trusted Research Environments (SATRE) reference specification—spanning the 4 v1 core pillars (Information Governance, Computing Technology, Data Management, Supporting Capabilities) plus Federation in SATRE 2.0.'
   },
   {
     title: 'DARE UK (Data and Analytics Research Environments UK)',

@@ -82,7 +82,7 @@ const SEARCH_SIMULATORS_AND_VIEWS: SearchDestinationItem[] = [
   {
     id: 'sim-iso27001-isms',
     title: 'ISO 27001 ISMS, SoA & DEA Build-Up Simulator',
-    desc: '4 audit roles, 6-phase 24-week playbook, 11 mandatory Clauses 4–10 artifacts, 3-year cadence & Docs-to-OPA claim simulator',
+    desc: '4 audit roles, 6-phase 24-week playbook, Clauses 4–10 checklists, UKSA SAQ V3.1 Five Safes map & Docs-to-OPA claim simulator',
     keywords: ['iso27001', 'iso 27001', '27001', 'isms', 'soa', 'statement of applicability', 'dea', 'buildup', 'simulator', 'roles', 'cadence', 'roadmap', 'clause', 'audit'],
     badge: 'Simulator',
     action: 'govern-assure',
@@ -90,9 +90,9 @@ const SEARCH_SIMULATORS_AND_VIEWS: SearchDestinationItem[] = [
   },
   {
     id: 'sim-iso27001-procurement',
-    title: 'Procurement, SATRE, DSPT & ISO 27001:2022 Matrix',
-    desc: 'Interactive ISO/IEC 27001:2022 Annex A.5–A.8, SATRE v1.1, NHS DSPT & DCB0129 compliance matrix and clinical hazard log',
-    keywords: ['iso27001', 'iso 27001', 'procurement', 'matrix', 'satre', 'dspt', 'annex a', 'dcb0129', 'compliance', 'simulator'],
+    title: 'Procurement, SATRE 2.0, EHDS, DSPT & ISO 27001:2022 Matrix',
+    desc: 'Interactive ISO/IEC 27001:2022 Annex A.5–A.8, SATRE 2.0 (5 pillars), EU EHDS (2025/327), NHS DSPT & DCB0129 compliance matrix and clinical hazard log',
+    keywords: ['iso27001', 'iso 27001', 'procurement', 'matrix', 'satre', 'satre 2.0', 'federation', 'ehds', '2025/327', 'dspt', 'annex a', 'dcb0129', 'compliance', 'simulator'],
     badge: 'Simulator',
     action: 'govern-assure',
     governAssureView: 'procurement_readiness'
@@ -355,7 +355,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-[#0c2340] dark:bg-[#071628] border-b border-[#1b3f68] text-white shadow-md">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-2 sm:gap-4">
           {/* Logo & Platform Wordmark - crisp on Navy */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
@@ -369,8 +369,8 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Quick Search */}
-          <div className="relative flex-1 max-w-xs sm:max-w-sm hidden md:block">
-            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <div className="relative flex-1 max-w-sm lg:max-w-md hidden md:block">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search ISO 27001, Simulator, Caldicott, Rego..."
@@ -387,7 +387,7 @@ export const Header: React.FC<HeaderProps> = ({
                   handleSelectSearchResult(searchResults[0]);
                 }
               }}
-              className="w-full bg-[#07192f] border border-[#1b3f68] rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:bg-[#0a223f] transition-colors"
+              className="w-full bg-[#07192f] border border-[#1b3f68] rounded-lg pl-9 pr-3 py-1.5 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:bg-[#0a223f] transition-colors"
             />
 
             {/* Quick Search Dropdown */}
@@ -403,12 +403,12 @@ export const Header: React.FC<HeaderProps> = ({
                     className="w-full text-left p-2 rounded-lg hover:bg-[#123154] text-xs space-y-0.5 transition-colors cursor-pointer"
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className="font-semibold text-white truncate">{item.title}</span>
-                      <span className="text-[10px] uppercase font-mono text-cyan-400 shrink-0">
+                      <span className="font-semibold text-sm text-white truncate">{item.title}</span>
+                      <span className="text-xs uppercase font-mono text-cyan-400 shrink-0">
                         {item.badge}
                       </span>
                     </div>
-                    <p className="text-[11px] text-slate-300 line-clamp-1">{item.desc}</p>
+                    <p className="text-xs text-slate-300 line-clamp-1">{item.desc}</p>
                   </button>
                 ))}
               </div>
@@ -454,12 +454,12 @@ export const Header: React.FC<HeaderProps> = ({
               {isDark ? (
                 <>
                   <Moon className="w-3.5 h-3.5 text-cyan-400" />
-                  <span className="hidden xl:inline text-[11px]">Dark Mode</span>
+                  <span className="hidden xl:inline text-xs">Dark Mode</span>
                 </>
               ) : (
                 <>
                   <Sun className="w-3.5 h-3.5 text-amber-400" />
-                  <span className="hidden xl:inline text-[11px]">Light Mode</span>
+                  <span className="hidden xl:inline text-xs">Light Mode</span>
                 </>
               )}
             </button>
@@ -511,17 +511,17 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* 4-Pillar Aligned Desktop Navigation Row */}
-        <nav className="hidden md:flex items-center space-x-1 py-1.5 border-t border-[#18375b] relative">
+        <nav className="hidden md:flex items-center space-x-1.5 py-2 border-t border-[#18375b] relative">
           {/* Home / Overview */}
           <button
             onClick={() => onSelectTab('gateway')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
               activeTab === 'gateway'
                 ? 'bg-[#133760] text-cyan-300 font-bold border-b-2 border-cyan-400'
                 : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
             }`}
           >
-            <Shield className="w-3.5 h-3.5 text-cyan-400" />
+            <Shield className="w-4 h-4 text-cyan-400" />
             <span>Overview</span>
           </button>
 
@@ -536,24 +536,24 @@ export const Header: React.FC<HeaderProps> = ({
                 onSelectTab('playbook');
                 setOpenDropdown(null);
               }}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                 isPlaybookGuidesActive
                   ? 'bg-[#133760] text-sky-300 font-bold border-b-2 border-sky-400'
                   : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
               }`}
             >
-              <BookOpen className="w-3.5 h-3.5 text-sky-400" />
+              <BookOpen className="w-4 h-4 text-sky-400" />
               <span>Playbook &amp; Guides</span>
-              <ChevronDown className="w-3 h-3 text-slate-400" />
+              <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
             </button>
 
             {openDropdown === 'playbook-guides' && (
               <div
-                className="absolute top-full left-0 mt-1 w-88 bg-[#0c2340] border border-[#1b3f68] rounded-xl shadow-2xl p-2 z-50 space-y-1 backdrop-blur-md"
+                className="absolute top-full left-0 mt-1 w-96 bg-[#0c2340] border border-[#1b3f68] rounded-xl shadow-2xl p-2 z-50 space-y-1 backdrop-blur-md"
                 onMouseEnter={() => handleMouseEnter('playbook-guides')}
                 onMouseLeave={handleMouseLeave}
               >
-                <div className="px-2.5 py-1 text-[11px] font-semibold text-sky-300 border-b border-[#1b3f68]">
+                <div className="px-2.5 py-1.5 text-xs font-semibold text-sky-300 border-b border-[#1b3f68]">
                   Pillar 1 · Playbook, Rollout, Ontology &amp; Concepts Primer
                 </div>
                 {playbookGuidesGroup.map((subItem) => {
@@ -573,10 +573,10 @@ export const Header: React.FC<HeaderProps> = ({
                     >
                       <div className="mt-0.5 shrink-0">{subItem.icon}</div>
                       <div>
-                        <div className="text-xs font-semibold leading-tight text-white">
+                        <div className="text-sm font-semibold leading-tight text-white">
                           {subItem.label}
                         </div>
-                        <div className="text-[11px] text-slate-300 leading-snug mt-0.5">
+                        <div className="text-xs text-slate-300 leading-snug mt-0.5">
                           {subItem.desc}
                         </div>
                       </div>
@@ -598,24 +598,24 @@ export const Header: React.FC<HeaderProps> = ({
                 onSelectTab('governance-atlas');
                 setOpenDropdown(null);
               }}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                 isEvidenceResourcesActive && !isSimulatorsLabActive
                   ? 'bg-[#133760] text-cyan-300 font-bold border-b-2 border-cyan-400'
                   : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
               }`}
             >
-              <Bookmark className="w-3.5 h-3.5 text-cyan-300" />
+              <Bookmark className="w-4 h-4 text-cyan-300" />
               <span>Evidence &amp; Resources</span>
-              <ChevronDown className="w-3 h-3 text-slate-400" />
+              <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
             </button>
 
             {openDropdown === 'evidence-resources' && (
               <div
-                className="absolute top-full left-0 mt-1 w-84 bg-[#0c2340] border border-[#1b3f68] rounded-xl shadow-2xl p-2 z-50 space-y-1 backdrop-blur-md"
+                className="absolute top-full left-0 mt-1 w-96 bg-[#0c2340] border border-[#1b3f68] rounded-xl shadow-2xl p-2 z-50 space-y-1 backdrop-blur-md"
                 onMouseEnter={() => handleMouseEnter('evidence-resources')}
                 onMouseLeave={handleMouseLeave}
               >
-                <div className="px-2.5 py-1 text-[11px] font-semibold text-cyan-300 border-b border-[#1b3f68]">
+                <div className="px-2.5 py-1.5 text-xs font-semibold text-cyan-300 border-b border-[#1b3f68]">
                   Pillar 2 · Foundations, Glossary &amp; Further Resources
                 </div>
                 {evidenceResourcesGroup.map((subItem) => {
@@ -635,10 +635,10 @@ export const Header: React.FC<HeaderProps> = ({
                     >
                       <div className="mt-0.5 shrink-0">{subItem.icon}</div>
                       <div>
-                        <div className="text-xs font-semibold leading-tight text-white">
+                        <div className="text-sm font-semibold leading-tight text-white">
                           {subItem.label}
                         </div>
-                        <div className="text-[11px] text-slate-300 leading-snug mt-0.5">
+                        <div className="text-xs text-slate-300 leading-snug mt-0.5">
                           {subItem.desc}
                         </div>
                       </div>
@@ -660,24 +660,24 @@ export const Header: React.FC<HeaderProps> = ({
                 onSelectTab('govern-assure');
                 setOpenDropdown(null);
               }}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                 isSimulatorsLabActive
                   ? 'bg-[#133760] text-amber-300 font-bold border-b-2 border-amber-400'
                   : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
               }`}
             >
-              <Scale className="w-3.5 h-3.5 text-amber-400" />
+              <Scale className="w-4 h-4 text-amber-400" />
               <span>Simulators &amp; Lab</span>
-              <ChevronDown className="w-3 h-3 text-slate-400" />
+              <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
             </button>
 
             {openDropdown === 'simulators-lab' && (
               <div
-                className="absolute top-full left-0 mt-1 w-88 bg-[#0c2340] border border-[#1b3f68] rounded-xl shadow-2xl p-2 z-50 space-y-1 backdrop-blur-md"
+                className="absolute top-full left-0 mt-1 w-96 bg-[#0c2340] border border-[#1b3f68] rounded-xl shadow-2xl p-2 z-50 space-y-1 backdrop-blur-md"
                 onMouseEnter={() => handleMouseEnter('simulators-lab')}
                 onMouseLeave={handleMouseLeave}
               >
-                <div className="px-2.5 py-1 text-[11px] font-semibold text-amber-300 border-b border-[#1b3f68]">
+                <div className="px-2.5 py-1.5 text-xs font-semibold text-amber-300 border-b border-[#1b3f68]">
                   Pillar 3 · Interactive Reviews, SDC, Rego &amp; Enclaves
                 </div>
                 {simulatorsLabGroup.map((subItem) => {
@@ -697,10 +697,10 @@ export const Header: React.FC<HeaderProps> = ({
                     >
                       <div className="mt-0.5 shrink-0">{subItem.icon}</div>
                       <div>
-                        <div className="text-xs font-semibold leading-tight text-white">
+                        <div className="text-sm font-semibold leading-tight text-white">
                           {subItem.label}
                         </div>
-                        <div className="text-[11px] text-slate-300 leading-snug mt-0.5">
+                        <div className="text-xs text-slate-300 leading-snug mt-0.5">
                           {subItem.desc}
                         </div>
                       </div>
@@ -714,25 +714,25 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Pillar 4: Quizzes & Progress */}
           <button
             onClick={() => onSelectTab('quiz')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
               activeTab === 'quiz'
                 ? 'bg-[#133760] text-cyan-300 font-bold border-b-2 border-cyan-400'
                 : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
             }`}
           >
-            <HelpCircle className="w-3.5 h-3.5 text-cyan-400" />
+            <HelpCircle className="w-4 h-4 text-cyan-400" />
             <span>Quiz</span>
           </button>
 
           <button
             onClick={() => onSelectTab('progress')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
               activeTab === 'progress'
                 ? 'bg-[#133760] text-emerald-300 font-bold border-b-2 border-emerald-400'
                 : 'text-slate-300 hover:text-white hover:bg-[#102b4c]'
             }`}
           >
-            <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
+            <TrendingUp className="w-4 h-4 text-emerald-400" />
             <span>Progress &amp; Certs</span>
           </button>
         </nav>
@@ -783,7 +783,7 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* Mobile Pillar 1: Playbook & Guides */}
             <div className="space-y-1 pt-1">
-              <div className="px-3 text-[11px] font-semibold text-sky-300">
+              <div className="px-3 text-xs font-semibold text-sky-300">
                 1. Playbook, Ontology &amp; Guides
               </div>
               {playbookGuidesGroup.map((item) => (
@@ -805,7 +805,7 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* Mobile Pillar 2: Evidence & Further Resources */}
             <div className="space-y-1 pt-1">
-              <div className="px-3 text-[11px] font-semibold text-cyan-300">
+              <div className="px-3 text-xs font-semibold text-cyan-300">
                 2. Evidence, Standards &amp; Resources
               </div>
               {evidenceResourcesGroup.map((item) => (
@@ -827,7 +827,7 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* Mobile Pillar 3: Simulators & Review Lab */}
             <div className="space-y-1 pt-1">
-              <div className="px-3 text-[11px] font-semibold text-amber-300">
+              <div className="px-3 text-xs font-semibold text-amber-300">
                 3. Simulators &amp; Review Lab
               </div>
               {simulatorsLabGroup.map((item) => (
@@ -849,7 +849,7 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* Mobile Pillar 4: Quizzes & Progress */}
             <div className="pt-2 border-t border-[#18375b] space-y-1">
-              <div className="px-3 text-[11px] font-semibold text-emerald-300">
+              <div className="px-3 text-xs font-semibold text-emerald-300">
                 4. Quizzes &amp; Progress
               </div>
               <button
