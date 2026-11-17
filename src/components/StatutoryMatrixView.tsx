@@ -333,39 +333,39 @@ export const StatutoryMatrixView: React.FC<StatutoryMatrixViewProps> = ({
   const failCount = matrixRows.filter((r) => r.currentStatus === 'FAIL').length;
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
+    <div className="w-full space-y-6 animate-in fade-in duration-200">
       {/* 1. STATUTORY MATRIX KPI BAR */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/60 space-y-1 shadow-md text-white">
-          <span className="text-[10px] text-cyan-400 uppercase font-mono block font-bold">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+        <div className="p-4 sm:p-5 rounded-xl bg-[#0c2340] border border-cyan-900/60 shadow-md text-white h-full flex flex-col justify-between gap-2">
+          <span className="text-xs text-cyan-400 uppercase font-mono block font-bold tracking-wider">
             Statutory Directives Mapped
           </span>
-          <div className="text-xl font-bold text-white">
+          <div className="text-2xl font-bold text-white tabular-nums">
             {matrixRows.length} Core Gates
           </div>
-          <span className="text-[11px] text-slate-300 block">
+          <span className="text-xs sm:text-sm text-slate-300 block leading-snug">
             DEA 2017 · NHS s251 · HRA REC · DSPT · ONS
           </span>
         </div>
 
-        <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/60 space-y-1 shadow-md text-white">
-          <span className="text-[10px] text-cyan-400 uppercase font-mono block font-bold">
+        <div className="p-4 sm:p-5 rounded-xl bg-[#0c2340] border border-cyan-900/60 shadow-md text-white h-full flex flex-col justify-between gap-2">
+          <span className="text-xs text-cyan-400 uppercase font-mono block font-bold tracking-wider">
             Caldicott 1–8 Mapping
           </span>
-          <div className="text-xl font-bold text-sky-300">
+          <div className="text-2xl font-bold text-sky-300 tabular-nums">
             8 / 8 Principles
           </div>
-          <span className="text-[11px] text-slate-300 block">
+          <span className="text-xs sm:text-sm text-slate-300 block leading-snug">
             Comprehensive National Data Guardian alignment
           </span>
         </div>
 
-        <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/60 space-y-1 shadow-md text-white">
-          <span className="text-[10px] text-cyan-400 uppercase font-mono block font-bold">
+        <div className="p-4 sm:p-5 rounded-xl bg-[#0c2340] border border-cyan-900/60 shadow-md text-white h-full flex flex-col justify-between gap-2">
+          <span className="text-xs text-cyan-400 uppercase font-mono block font-bold tracking-wider">
             Live Protocol Compliance
           </span>
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-teal-400">
+          <div className="flex flex-wrap items-center gap-2 tabular-nums">
+            <span className="text-2xl font-bold text-teal-400">
               {passCount} Pass
             </span>
             {warnCount > 0 && (
@@ -379,20 +379,20 @@ export const StatutoryMatrixView: React.FC<StatutoryMatrixViewProps> = ({
               </span>
             )}
           </div>
-          <span className="text-[11px] text-slate-300 block">
+          <span className="text-xs sm:text-sm text-slate-300 block leading-snug">
             Evaluated in real time from active scenario
           </span>
         </div>
 
-        <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/60 space-y-2 shadow-md flex flex-col justify-between text-white">
-          <span className="text-[10px] text-cyan-400 uppercase font-mono block font-bold">
+        <div className="p-4 sm:p-5 rounded-xl bg-[#0c2340] border border-cyan-900/60 shadow-md flex flex-col justify-between gap-3 text-white h-full">
+          <span className="text-xs text-cyan-400 uppercase font-mono block font-bold tracking-wider">
             Standardized Evidence Pack
           </span>
           <button
             onClick={onOpenEvidenceDossier}
-            className="w-full py-1.5 px-3 rounded-lg bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-md shadow-teal-500/20"
+            className="w-full py-2 px-3 rounded-lg bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-md shadow-teal-500/20 whitespace-nowrap"
           >
-            <FileCheck2 className="w-3.5 h-3.5 text-slate-950" />
+            <FileCheck2 className="w-4 h-4 text-slate-950 shrink-0" />
             <span>Generate Dossier</span>
           </button>
         </div>
@@ -400,11 +400,11 @@ export const StatutoryMatrixView: React.FC<StatutoryMatrixViewProps> = ({
 
       {/* 2. CONTROLS, SEARCH & EXPORT BAR */}
       <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl p-4 sm:p-5 shadow-xl space-y-4 text-white">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           {/* Pillar Filters */}
-          <div className="flex flex-wrap items-center gap-1.5 text-xs">
-            <span className="text-slate-400 mr-1 hidden sm:inline flex items-center gap-1">
-              <Filter className="w-3 h-3 text-cyan-400" />
+          <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
+            <span className="text-slate-300 mr-1 hidden sm:inline-flex items-center gap-1.5 font-medium">
+              <Filter className="w-3.5 h-3.5 text-cyan-400" />
               <span>Pillar:</span>
             </span>
             {[
@@ -418,7 +418,7 @@ export const StatutoryMatrixView: React.FC<StatutoryMatrixViewProps> = ({
               <button
                 key={p.id}
                 onClick={() => setSelectedPillar(p.id)}
-                className={`px-2.5 py-1 rounded text-xs font-semibold transition-colors cursor-pointer ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${
                   selectedPillar === p.id
                     ? 'bg-[#00A389] text-white shadow-md font-bold'
                     : 'bg-[#07192f] text-slate-300 hover:text-white border border-[#1b3f68]'
@@ -430,10 +430,10 @@ export const StatutoryMatrixView: React.FC<StatutoryMatrixViewProps> = ({
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-2 shrink-0">
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <button
               onClick={handleCopyCsv}
-              className="px-3 py-1.5 rounded-lg bg-[#07192f] hover:bg-[#123154] text-slate-200 border border-[#1b3f68] text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-colors"
+              className="px-3.5 py-2 rounded-lg bg-[#07192f] hover:bg-[#123154] text-slate-200 border border-[#1b3f68] text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-colors whitespace-nowrap"
               title="Copy matrix as CSV for spreadsheets"
             >
               {copiedMatrix ? <Check className="w-3.5 h-3.5 text-teal-400" /> : <Copy className="w-3.5 h-3.5" />}
@@ -442,7 +442,7 @@ export const StatutoryMatrixView: React.FC<StatutoryMatrixViewProps> = ({
 
             <button
               onClick={handleExportMarkdown}
-              className="px-3 py-1.5 rounded-lg bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-md shadow-teal-500/20 transition-colors"
+              className="px-3.5 py-2 rounded-lg bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-md shadow-teal-500/20 transition-colors whitespace-nowrap"
               title="Download full statutory matrix as Markdown"
             >
               <Download className="w-3.5 h-3.5" />
@@ -452,25 +452,25 @@ export const StatutoryMatrixView: React.FC<StatutoryMatrixViewProps> = ({
         </div>
 
         {/* Search & Status Filter Row */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-cyan-900/60">
-          <div className="relative flex-1 max-w-md">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-cyan-900/60">
+          <div className="relative flex-1">
             <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search statutes, citations, Caldicott principles, or policy nodes..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 bg-slate-950 border border-cyan-900/60 rounded-lg text-xs text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-400 transition-colors"
+              className="w-full pl-9 pr-3 py-2 bg-slate-950 border border-cyan-900/60 rounded-lg text-sm text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-400 transition-colors"
             />
           </div>
 
-          <div className="flex items-center gap-2 text-xs">
-            <span className="text-slate-400 text-[11px]">Filter Status:</span>
+          <div className="flex flex-wrap items-center gap-2 text-xs shrink-0">
+            <span className="text-slate-300 text-xs font-medium">Filter Status:</span>
             {['all', 'PASS', 'WARN', 'FAIL'].map((st) => (
               <button
                 key={st}
                 onClick={() => setSelectedStatus(st)}
-                className={`px-2 py-0.5 rounded text-[11px] font-mono font-bold transition-colors cursor-pointer ${
+                className={`px-2.5 py-1 rounded text-xs font-mono font-bold transition-colors cursor-pointer whitespace-nowrap ${
                   selectedStatus === st
                     ? 'bg-teal-500 text-slate-950 font-extrabold shadow-sm'
                     : 'bg-[#07192f] text-slate-300 border border-[#1b3f68]'
@@ -485,91 +485,91 @@ export const StatutoryMatrixView: React.FC<StatutoryMatrixViewProps> = ({
 
       {/* 3. CONSOLIDATED STATUTORY MATRIX DATA TABLE */}
       <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl overflow-hidden shadow-xl text-white">
-        <div className="p-4 sm:p-5 border-b border-cyan-900/60 flex items-center justify-between">
-          <div>
-            <h3 className="font-bold text-white text-base">
+        <div className="p-4 sm:p-6 border-b border-cyan-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div className="space-y-1">
+            <h3 className="font-bold text-white text-lg">
               Five Safes Statutory Assurance Matrix
             </h3>
-            <p className="text-xs text-slate-300">
+            <p className="text-sm text-slate-300 leading-relaxed">
               Cross-cutting statutory basis mapping machine-verifiable constraints to primary UK legislation and Caldicott Principles 1–8.
             </p>
           </div>
-          <span className="text-xs font-mono text-cyan-300">
+          <span className="text-xs font-mono text-cyan-300 tabular-nums shrink-0">
             Showing {filteredRows.length} of {matrixRows.length} Directives
           </span>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs border-collapse">
-            <thead className="bg-[#07192f] text-cyan-300 font-mono text-[11px] border-b border-cyan-900/60">
+          <table className="w-full text-left text-sm border-collapse">
+            <thead className="bg-[#07192f] text-cyan-300 font-mono text-xs border-b border-cyan-900/60 uppercase tracking-wider">
               <tr>
-                <th className="p-3 w-28">Pillar</th>
-                <th className="p-3">Statutory Directive &amp; Citation</th>
-                <th className="p-3">Caldicott 1–8 &amp; UK GDPR</th>
-                <th className="p-3">Machine Policy Node</th>
-                <th className="p-3">Finding &amp; Remedial Action</th>
-                <th className="p-3 w-24 text-center">Status</th>
-                <th className="p-3 w-28">ADR Cross-Ref</th>
+                <th className="p-3.5 min-w-[140px]">Pillar</th>
+                <th className="p-3.5 min-w-[230px]">Statutory Directive &amp; Citation</th>
+                <th className="p-3.5 min-w-[210px]">Caldicott 1–8 &amp; UK GDPR</th>
+                <th className="p-3.5 min-w-[190px]">Machine Policy Node</th>
+                <th className="p-3.5 min-w-[260px]">Finding &amp; Remedial Action</th>
+                <th className="p-3.5 w-24 text-center">Status</th>
+                <th className="p-3.5 min-w-[140px]">ADR Cross-Ref</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-cyan-900/40 bg-slate-950/70">
               {filteredRows.map((row) => (
                 <tr
                   key={row.id}
-                  className="hover:bg-[#112f54]/50 transition-colors text-xs"
+                  className="hover:bg-[#112f54]/50 transition-colors text-xs sm:text-sm"
                 >
                   {/* Pillar */}
-                  <td className="p-3 align-top">
-                    <span className="font-bold text-slate-900 dark:text-white block font-mono text-[11px]">
+                  <td className="p-3.5 align-top">
+                    <span className="font-bold text-white block font-mono text-xs sm:text-sm">
                       {row.pillar}
                     </span>
-                    <span className="text-[10px] text-slate-500 block mt-0.5">
+                    <span className="text-xs text-slate-300 block mt-1 leading-snug">
                       {row.accountableRole.split('&')[0]}
                     </span>
                   </td>
 
                   {/* Directive & Statutory Citation */}
-                  <td className="p-3 align-top space-y-1 max-w-xs">
-                    <strong className="text-slate-900 dark:text-slate-100 font-semibold block text-xs">
+                  <td className="p-3.5 align-top space-y-1.5">
+                    <strong className="text-white font-semibold block text-sm">
                       {row.gateName}
                     </strong>
-                    <div className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <div className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                       {row.statutoryInstrument}
                     </div>
-                    <div className="text-[10px] font-mono text-amber-800 dark:text-amber-300 bg-amber-50/60 dark:bg-amber-950/40 px-1.5 py-0.5 rounded border border-amber-200 dark:border-amber-800 inline-block">
+                    <div className="text-xs font-mono text-amber-300 bg-amber-950/50 px-2 py-0.5 rounded border border-amber-700/60 inline-block">
                       {row.statutorySection}
                     </div>
                   </td>
 
                   {/* Caldicott & UK GDPR Basis */}
-                  <td className="p-3 align-top space-y-1.5 max-w-xs">
-                    <div className="space-y-0.5">
+                  <td className="p-3.5 align-top space-y-2">
+                    <div className="space-y-1">
                       {row.caldicottPrinciples.map((cp, idx) => (
-                        <div key={idx} className="text-[10px] font-medium text-slate-700 dark:text-slate-300 flex items-center gap-1">
-                          <span className="text-[#047857] font-bold">✓</span>
+                        <div key={idx} className="text-xs font-medium text-slate-200 flex items-start gap-1.5">
+                          <span className="text-teal-400 font-bold shrink-0">✓</span>
                           <span>{cp}</span>
                         </div>
                       ))}
                     </div>
-                    <div className="text-[10px] font-mono text-slate-500">
+                    <div className="text-xs font-mono text-slate-400 leading-snug">
                       Basis: {row.ukGdprBasis}
                     </div>
                   </td>
 
                   {/* Machine Policy Node */}
-                  <td className="p-3 align-top font-mono text-[11px] text-cyan-300">
-                    <div className="p-1.5 bg-[#07192f] rounded border border-cyan-900/60 break-all text-[10px] text-cyan-200">
+                  <td className="p-3.5 align-top font-mono text-xs text-cyan-300">
+                    <div className="p-2 bg-[#07192f] rounded border border-cyan-900/60 break-words text-xs text-cyan-200 leading-relaxed">
                       {row.machinePolicyNode}
                     </div>
                   </td>
 
                   {/* Live Protocol Finding & Remedial Action */}
-                  <td className="p-3 align-top space-y-1.5 max-w-md">
-                    <p className="text-[11px] text-slate-200 leading-relaxed font-medium">
+                  <td className="p-3.5 align-top space-y-2">
+                    <p className="text-xs sm:text-sm text-slate-100 leading-relaxed font-medium">
                       {row.liveFinding}
                     </p>
-                    <div className="p-2 rounded bg-[#07192f] border border-cyan-900/50 text-[10px] text-slate-300">
-                      <strong className="text-cyan-300 block font-semibold">
+                    <div className="p-2.5 rounded bg-[#07192f] border border-cyan-900/50 text-xs text-slate-200 leading-relaxed">
+                      <strong className="text-cyan-300 block font-semibold mb-0.5">
                         Action Required:
                       </strong>
                       <span>{row.remedialAction}</span>
@@ -577,9 +577,9 @@ export const StatutoryMatrixView: React.FC<StatutoryMatrixViewProps> = ({
                   </td>
 
                   {/* Status Badge */}
-                  <td className="p-3 align-top text-center">
+                  <td className="p-3.5 align-top text-center">
                     <span
-                      className={`inline-block px-2 py-0.5 rounded text-[10px] font-mono font-bold border ${
+                      className={`inline-block px-2.5 py-1 rounded text-xs font-mono font-bold border whitespace-nowrap ${
                         row.currentStatus === 'PASS'
                           ? 'bg-teal-950/80 text-teal-300 border-teal-600'
                           : row.currentStatus === 'WARN'
@@ -592,20 +592,20 @@ export const StatutoryMatrixView: React.FC<StatutoryMatrixViewProps> = ({
                   </td>
 
                   {/* Decision Ref */}
-                  <td className="p-3 align-top">
+                  <td className="p-3.5 align-top">
                     {onNavigateToDecisionRegister ? (
                       <button
                         onClick={() => onNavigateToDecisionRegister(row.decisionRef)}
-                        className="font-mono text-xs text-cyan-400 hover:text-white hover:underline flex items-center gap-1 cursor-pointer"
+                        className="font-mono text-xs sm:text-sm text-cyan-400 hover:text-white hover:underline flex items-center gap-1 cursor-pointer whitespace-nowrap"
                         title={`Open Decision ${row.decisionRef}`}
                       >
                         <span>{row.decisionRef}</span>
-                        <ExternalLink className="w-3 h-3" />
+                        <ExternalLink className="w-3.5 h-3.5" />
                       </button>
                     ) : (
-                      <span className="font-mono text-xs text-slate-400">{row.decisionRef}</span>
+                      <span className="font-mono text-xs sm:text-sm text-slate-300">{row.decisionRef}</span>
                     )}
-                    <span className="text-[10px] text-slate-400 block truncate mt-0.5">
+                    <span className="text-xs text-slate-300 block mt-1 leading-snug">
                       {row.decisionTitle}
                     </span>
                   </td>
@@ -617,13 +617,13 @@ export const StatutoryMatrixView: React.FC<StatutoryMatrixViewProps> = ({
       </div>
 
       {/* 4. STATUTORY DECISION-SUPPORT NOTICE */}
-      <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/60 flex items-start gap-3 text-xs shadow-md text-white">
-        <Info className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+      <div className="p-5 rounded-xl bg-[#0c2340] border border-cyan-900/60 flex items-start gap-3 text-sm shadow-md text-white">
+        <Info className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
         <div className="space-y-1">
           <strong className="text-white font-bold block">
             Statutory Legal Interpretation &amp; Human Governance Notice
           </strong>
-          <p className="text-slate-300 leading-relaxed text-[11px]">
+          <p className="text-slate-200 leading-relaxed text-xs sm:text-sm">
             This matrix establishes the deterministic statutory baseline compiled by Project Wavebound. In alignment with UK public sector information governance principles, automated evaluation informs human decision-makers (Caldicott Guardians, Data Access Advisory Groups, and Research Ethics Committees); it does not supplant statutory human responsibility.
           </p>
         </div>

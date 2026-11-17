@@ -425,7 +425,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
   const LIKELIHOODS: ClinicalLikelihood[] = ['Very High', 'High', 'Medium', 'Low', 'Very Low'];
 
   return (
-    <div className="space-y-8 max-w-6xl mx-auto">
+    <div className="space-y-8 w-full">
       {/* =========================================================================
           TOP TRACK SWITCHER: VENDOR PROCUREMENT vs IN-HOUSE NHS SOFTWARE (DCB)
           ========================================================================= */}
@@ -452,7 +452,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
         >
           <Stethoscope className="w-4 h-4 shrink-0" />
           <span>Track 2: In-House NHS Software &amp; AI Development (DCB0129 / DCB0160)</span>
-          <span className="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-950/20 border border-slate-950/20">
+          <span className="px-2 py-0.5 rounded text-xs font-mono font-bold bg-slate-950/20 border border-slate-950/20 whitespace-nowrap">
             For NHS Dev Teams
           </span>
         </button>
@@ -466,8 +466,8 @@ In my opinion, the residual clinical risks associated with the deployment and op
           {/* Hero Banner for In-House Track */}
           <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 relative overflow-hidden shadow-xl text-white">
             <div className="absolute top-0 right-0 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-              <div className="space-y-2 max-w-3xl">
+            <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+              <div className="space-y-3 flex-1">
                 <div className="flex flex-wrap items-center gap-2 text-xs font-mono font-bold text-teal-300 uppercase tracking-wider">
                   <Stethoscope className="w-4 h-4 text-teal-400" />
                   <span>Statutory Clinical Risk Management · Health and Social Care Act 2012 § 250</span>
@@ -475,20 +475,20 @@ In my opinion, the residual clinical risks associated with the deployment and op
                 <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                   In-House NHS Software, Analytics &amp; AI Safety Hub
                 </h1>
-                <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
                   When clinical and engineering teams develop software, analytics pipelines, feature stores, or diagnostic AI models in-house for patient and population safe and secure data and intelligence environments, they are classified as <strong>Health IT Manufacturers under DCB0129</strong>. This interactive hub operationalises the mandatory Clinical Risk Management lifecycle: Clinical Safety Officer (CSO) governance, living Hazard Log tracking with 5×5 NHS risk matrices, mitigation validation, and one-click Clinical Safety Case Report (CSCR) generation for clinical governance sign-off.
                 </p>
 
                 <div className="flex flex-wrap items-center gap-3 pt-2 text-xs">
-                  <span className="text-slate-300 font-mono">
+                  <span className="text-slate-300 font-mono tabular-nums">
                     CSO Approval: <strong className="text-teal-400">{inHouseMetrics.approved}/{inHouseMetrics.total} Hazards ({inHouseMetrics.csoApprovalPct}%)</strong>
                   </span>
                   <span className="text-slate-500">·</span>
-                  <span className="text-slate-300 font-mono">
+                  <span className="text-slate-300 font-mono tabular-nums">
                     Residual Risk Acceptable: <strong className="text-cyan-300">{inHouseMetrics.residualAcceptablePct}%</strong>
                   </span>
                   <span className="text-slate-500">·</span>
-                  <span className="px-2 py-0.5 rounded-md bg-[#07192f] text-teal-300 border border-teal-500/40 font-mono text-[11px] font-bold">
+                  <span className="px-2.5 py-0.5 rounded-md bg-[#07192f] text-teal-300 border border-teal-500/40 font-mono text-xs font-bold">
                     DCB0129 / DCB0160 COMPLIANT
                   </span>
                 </div>
@@ -529,7 +529,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                   <UserCheck className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-teal-400">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-teal-400">
                     Statutory DCB0129 Role Mandate
                   </span>
                   <h3 className="text-lg font-bold text-white">
@@ -545,7 +545,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                 </span>
                 <button
                   onClick={() => setEditingCso(!editingCso)}
-                  className="px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-xs text-slate-300 border border-slate-700 cursor-pointer"
+                  className="px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-xs text-slate-300 border border-slate-700 cursor-pointer whitespace-nowrap"
                 >
                   {editingCso ? 'Close Edit' : 'Edit Credentials'}
                 </button>
@@ -553,22 +553,22 @@ In my opinion, the residual clinical risks associated with the deployment and op
             </div>
 
             {editingCso ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-xl bg-[#07192f] border border-cyan-900/60 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-xl bg-[#07192f] border border-cyan-900/60 text-sm">
                 <div>
-                  <label className="block text-slate-400 mb-1 font-semibold">Clinician Name</label>
+                  <label className="block text-slate-400 mb-1 font-semibold text-xs">Clinician Name</label>
                   <input
                     type="text"
                     value={csoProfile.name}
                     onChange={(e) => setCsoProfile({ ...csoProfile, name: e.target.value })}
-                    className="w-full px-2.5 py-1.5 rounded bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-cyan-400"
+                    className="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-cyan-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1 font-semibold">Professional Body</label>
+                  <label className="block text-slate-400 mb-1 font-semibold text-xs">Professional Body</label>
                   <select
                     value={csoProfile.professionalBody}
                     onChange={(e) => setCsoProfile({ ...csoProfile, professionalBody: e.target.value as any })}
-                    className="w-full px-2.5 py-1.5 rounded bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-cyan-400"
+                    className="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-cyan-400"
                   >
                     <option value="GMC">GMC (General Medical Council)</option>
                     <option value="NMC">NMC (Nursing &amp; Midwifery Council)</option>
@@ -577,52 +577,52 @@ In my opinion, the residual clinical risks associated with the deployment and op
                   </select>
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1 font-semibold">Registration Number</label>
+                  <label className="block text-slate-400 mb-1 font-semibold text-xs">Registration Number</label>
                   <input
                     type="text"
                     value={csoProfile.registrationNumber}
                     onChange={(e) => setCsoProfile({ ...csoProfile, registrationNumber: e.target.value })}
-                    className="w-full px-2.5 py-1.5 rounded bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-cyan-400"
+                    className="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-cyan-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1 font-semibold">Clinical Speciality</label>
+                  <label className="block text-slate-400 mb-1 font-semibold text-xs">Clinical Speciality</label>
                   <input
                     type="text"
                     value={csoProfile.clinicalSpeciality}
                     onChange={(e) => setCsoProfile({ ...csoProfile, clinicalSpeciality: e.target.value })}
-                    className="w-full px-2.5 py-1.5 rounded bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-cyan-400"
+                    className="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-cyan-400"
                   />
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-                <div className="p-3 rounded-xl bg-[#07192f] border border-cyan-900/60 space-y-1">
-                  <span className="text-slate-400 font-mono text-[10px] uppercase">Named Clinician</span>
-                  <div className="font-bold text-white text-sm">{csoProfile.name}</div>
-                  <div className="text-cyan-400 text-[11px]">{csoProfile.title}</div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch text-sm">
+                <div className="h-full p-4 rounded-xl bg-[#07192f] border border-cyan-900/60 space-y-1">
+                  <span className="text-slate-400 font-mono text-xs uppercase">Named Clinician</span>
+                  <div className="font-bold text-white text-base">{csoProfile.name}</div>
+                  <div className="text-cyan-400 text-xs">{csoProfile.title}</div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-[#07192f] border border-cyan-900/60 space-y-1">
-                  <span className="text-slate-400 font-mono text-[10px] uppercase">Statutory Registration</span>
-                  <div className="font-bold text-white text-sm flex items-center gap-1.5">
-                    <span className="px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-300 font-mono text-xs border border-cyan-700/50">
+                <div className="h-full p-4 rounded-xl bg-[#07192f] border border-cyan-900/60 space-y-1">
+                  <span className="text-slate-400 font-mono text-xs uppercase">Statutory Registration</span>
+                  <div className="font-bold text-white text-base flex items-center gap-1.5 tabular-nums">
+                    <span className="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 font-mono text-xs border border-cyan-700/50">
                       {csoProfile.professionalBody}
                     </span>
                     <span>#{csoProfile.registrationNumber}</span>
                   </div>
-                  <div className="text-slate-400 text-[11px]">{csoProfile.clinicalSpeciality}</div>
+                  <div className="text-slate-300 text-xs">{csoProfile.clinicalSpeciality}</div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-[#07192f] border border-cyan-900/60 space-y-1">
-                  <span className="text-slate-400 font-mono text-[10px] uppercase">Accreditation</span>
-                  <div className="font-semibold text-slate-200 text-xs">{csoProfile.accreditedTraining}</div>
-                  <div className="text-teal-400 text-[11px]">Appointment: {csoProfile.appointmentDate}</div>
+                <div className="h-full p-4 rounded-xl bg-[#07192f] border border-cyan-900/60 space-y-1">
+                  <span className="text-slate-400 font-mono text-xs uppercase">Accreditation</span>
+                  <div className="font-semibold text-slate-200 text-sm">{csoProfile.accreditedTraining}</div>
+                  <div className="text-teal-400 text-xs tabular-nums">Appointment: {csoProfile.appointmentDate}</div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-[#07192f] border border-teal-500/40 space-y-1">
-                  <span className="text-teal-400 font-mono text-[10px] uppercase font-bold">Statutory Veto Power</span>
-                  <div className="text-[11px] text-slate-300 leading-snug">
+                <div className="h-full p-4 rounded-xl bg-[#07192f] border border-teal-500/40 space-y-1">
+                  <span className="text-teal-400 font-mono text-xs uppercase font-bold">Statutory Veto Power</span>
+                  <div className="text-xs text-slate-300 leading-relaxed">
                     Under DCB0129, the CSO holds statutory veto over release. Cannot be overridden by project managers or developers.
                   </div>
                 </div>
@@ -631,53 +631,61 @@ In my opinion, the residual clinical risks associated with the deployment and op
           </div>
 
           {/* Section 2: The 4 Mandatory DCB0129 In-House Safety Artifacts */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-white">
-            <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/60 space-y-2 shadow-md">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-teal-400">ARTIFACT 1</span>
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch text-white">
+            <div className="h-full p-5 rounded-xl bg-[#0c2340] border border-cyan-900/60 flex flex-col justify-between space-y-3 shadow-md">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-bold text-teal-400">ARTIFACT 1</span>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                </div>
+                <h4 className="font-bold text-base text-white">Clinical Risk Management Plan (CRMP)</h4>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  Governs clinical safety activities across agile sprints, detailing hazard identification methodologies (HAZOP/SWIFT), CSO review gates, and clinical escalation paths.
+                </p>
               </div>
-              <h4 className="font-bold text-sm text-white">Clinical Risk Management Plan (CRMP)</h4>
-              <p className="text-[11px] text-slate-300 leading-relaxed">
-                Governs clinical safety activities across agile sprints, detailing hazard identification methodologies (HAZOP/SWIFT), CSO review gates, and clinical escalation paths.
-              </p>
-              <div className="text-[10px] font-mono text-cyan-400 pt-1">Status: Active &amp; Baselined</div>
+              <div className="text-xs font-mono text-cyan-400 pt-1">Status: Active &amp; Baselined</div>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/60 space-y-2 shadow-md">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-teal-400">ARTIFACT 2</span>
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <div className="h-full p-5 rounded-xl bg-[#0c2340] border border-cyan-900/60 flex flex-col justify-between space-y-3 shadow-md">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-bold text-teal-400">ARTIFACT 2</span>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                </div>
+                <h4 className="font-bold text-base text-white">Clinical Hazard Workshops (HAZOP)</h4>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  Structured clinical hazard identification sessions involving senior clinicians, data engineers, UI designers, and Caldicott guardians using guide words.
+                </p>
               </div>
-              <h4 className="font-bold text-sm text-white">Clinical Hazard Workshops (HAZOP)</h4>
-              <p className="text-[11px] text-slate-300 leading-relaxed">
-                Structured clinical hazard identification sessions involving senior clinicians, data engineers, UI designers, and Caldicott guardians using guide words.
-              </p>
-              <div className="text-[10px] font-mono text-cyan-400 pt-1">Method: Structured SWIFT Log</div>
+              <div className="text-xs font-mono text-cyan-400 pt-1">Method: Structured SWIFT Log</div>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/60 space-y-2 shadow-md">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-teal-400">ARTIFACT 3</span>
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <div className="h-full p-5 rounded-xl bg-[#0c2340] border border-cyan-900/60 flex flex-col justify-between space-y-3 shadow-md">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-bold text-teal-400">ARTIFACT 3</span>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                </div>
+                <h4 className="font-bold text-base text-white">Living Clinical Hazard Log</h4>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  Interactive repository documenting hazards, causes, initial risk scores, clinical mitigations, residual risk scores, and CSO approval status.
+                </p>
               </div>
-              <h4 className="font-bold text-sm text-white">Living Clinical Hazard Log</h4>
-              <p className="text-[11px] text-slate-300 leading-relaxed">
-                Interactive repository documenting hazards, causes, initial risk scores, clinical mitigations, residual risk scores, and CSO approval status.
-              </p>
-              <div className="text-[10px] font-mono text-cyan-400 pt-1">Active: {hazards.length} Hazards Logged</div>
+              <div className="text-xs font-mono text-cyan-400 pt-1 tabular-nums">Active: {hazards.length} Hazards Logged</div>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/60 space-y-2 shadow-md">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-teal-400">ARTIFACT 4</span>
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <div className="h-full p-5 rounded-xl bg-[#0c2340] border border-cyan-900/60 flex flex-col justify-between space-y-3 shadow-md">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-bold text-teal-400">ARTIFACT 4</span>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                </div>
+                <h4 className="font-bold text-base text-white">Clinical Safety Case Report (CSCR)</h4>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  Synthesised safety argument justifying release for clinical operational deployment, signed off by the CSO for Trust Governance committees.
+                </p>
               </div>
-              <h4 className="font-bold text-sm text-white">Clinical Safety Case Report (CSCR)</h4>
-              <p className="text-[11px] text-slate-300 leading-relaxed">
-                Synthesised safety argument justifying release for clinical operational deployment, signed off by the CSO for Trust Governance committees.
-              </p>
-              <div className="text-[10px] font-mono text-cyan-400 pt-1">Export: One-Click Ready</div>
+              <div className="text-xs font-mono text-cyan-400 pt-1">Export: One-Click Ready</div>
             </div>
           </div>
 
@@ -685,10 +693,10 @@ In my opinion, the residual clinical risks associated with the deployment and op
           <div className="p-6 rounded-2xl bg-[#0c2340] border border-cyan-900/60 shadow-lg space-y-4 text-white">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cyan-900/60 pb-3">
               <div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-400">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400">
                   NHS Digital Risk Matrix Calibration
                 </span>
-                <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                <h3 className="text-lg font-bold text-white flex flex-wrap items-center gap-2">
                   <span>NHS 5×5 Clinical Risk Matrix Heatmap</span>
                   <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-900 text-teal-300 border border-slate-700">
                     Severity × Likelihood
@@ -696,12 +704,12 @@ In my opinion, the residual clinical risks associated with the deployment and op
                 </h3>
               </div>
 
-              <div className="flex items-center gap-2 text-xs">
+              <div className="flex items-center gap-2 text-xs shrink-0">
                 <span className="text-slate-400">Display:</span>
                 <div className="flex bg-[#07192f] p-1 rounded-lg border border-cyan-900/60">
                   <button
                     onClick={() => setMatrixFilter('all')}
-                    className={`px-2.5 py-1 rounded text-xs font-medium cursor-pointer ${
+                    className={`px-2.5 py-1 rounded text-xs font-medium cursor-pointer whitespace-nowrap ${
                       matrixFilter === 'all' ? 'bg-cyan-600 text-white font-bold' : 'text-slate-400 hover:text-white'
                     }`}
                   >
@@ -709,7 +717,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                   </button>
                   <button
                     onClick={() => setMatrixFilter('initial')}
-                    className={`px-2.5 py-1 rounded text-xs font-medium cursor-pointer ${
+                    className={`px-2.5 py-1 rounded text-xs font-medium cursor-pointer whitespace-nowrap ${
                       matrixFilter === 'initial' ? 'bg-cyan-600 text-white font-bold' : 'text-slate-400 hover:text-white'
                     }`}
                   >
@@ -717,7 +725,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                   </button>
                   <button
                     onClick={() => setMatrixFilter('residual')}
-                    className={`px-2.5 py-1 rounded text-xs font-medium cursor-pointer ${
+                    className={`px-2.5 py-1 rounded text-xs font-medium cursor-pointer whitespace-nowrap ${
                       matrixFilter === 'residual' ? 'bg-cyan-600 text-white font-bold' : 'text-slate-400 hover:text-white'
                     }`}
                   >
@@ -727,15 +735,15 @@ In my opinion, the residual clinical risks associated with the deployment and op
               </div>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-sm text-slate-300 leading-relaxed">
               Under DCB0129, every hazard is evaluated for <strong>Initial Risk</strong> (prior to mitigations) and <strong>Residual Risk</strong> (after software guards, eBPF drop rules, and SDC airlocks are active). All residual risks must fall into the Broadly Acceptable (Green) or ALARP (Amber) regions before clinical sign-off.
             </p>
 
             {/* 5x5 Matrix Grid */}
             <div className="overflow-x-auto pt-2">
-              <div className="min-w-[640px]">
+              <div className="min-w-[680px]">
                 {/* Header row: Likelihoods */}
-                <div className="grid grid-cols-6 gap-1 text-[11px] font-mono text-center font-bold text-slate-300 pb-1">
+                <div className="grid grid-cols-6 gap-1.5 text-xs font-mono text-center font-bold text-slate-300 pb-1.5">
                   <div className="text-left text-slate-400 text-xs">Likelihood →<br />Severity ↓</div>
                   <div>Very Low</div>
                   <div>Low</div>
@@ -784,9 +792,9 @@ In my opinion, the residual clinical risks associated with the deployment and op
                       return (
                         <div
                           key={`${sev}-${lik}`}
-                          className={`p-2 rounded-lg border text-center min-h-[64px] flex flex-col items-center justify-center gap-1 transition-all ${bgColors[cellBand]}`}
+                          className={`p-2.5 rounded-lg border text-center min-h-[72px] flex flex-col items-center justify-center gap-1.5 transition-all ${bgColors[cellBand]}`}
                         >
-                          <span className="text-[9px] font-mono font-bold uppercase tracking-wider opacity-60">
+                          <span className="text-xs font-mono font-bold uppercase tracking-wider opacity-75">
                             {cellBand}
                           </span>
 
@@ -796,7 +804,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                                 <span
                                   key={`init-${h.id}`}
                                   title={`Initial Risk: ${h.id} (${h.category})`}
-                                  className="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-600/80 text-white border border-rose-400 shadow-xs"
+                                  className="px-1.5 py-0.5 rounded text-xs font-mono font-bold bg-rose-600/80 text-white border border-rose-400 shadow-xs"
                                 >
                                   {h.id.replace('HAZ-IH-', 'H')} (Init)
                                 </span>
@@ -807,7 +815,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                                 <span
                                   key={`res-${h.id}`}
                                   title={`Residual Risk: ${h.id} (${h.category})`}
-                                  className="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-600/90 text-white border border-emerald-300 shadow-xs"
+                                  className="px-1.5 py-0.5 rounded text-xs font-mono font-bold bg-emerald-600/90 text-white border border-emerald-300 shadow-xs"
                                 >
                                   {h.id.replace('HAZ-IH-', 'H')} (Res)
                                 </span>
@@ -821,7 +829,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center justify-between text-xs text-slate-300 pt-2 border-t border-cyan-900/60">
+            <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300 pt-2 border-t border-cyan-900/60">
               <div className="flex items-center gap-4">
                 <span className="flex items-center gap-1.5">
                   <span className="w-3 h-3 rounded bg-rose-600 inline-block" />
@@ -832,7 +840,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                   <span>Residual Risk (Post-Mitigation)</span>
                 </span>
               </div>
-              <div className="text-teal-300 font-mono text-[11px]">
+              <div className="text-teal-300 font-mono text-xs">
                 Notice all hazards shift leftwards into safe residual bands after Wavebound policy-as-code enforcement.
               </div>
             </div>
@@ -840,34 +848,34 @@ In my opinion, the residual clinical risks associated with the deployment and op
 
           {/* Section 4: Interactive In-House Clinical Hazard Log */}
           <div className="space-y-4">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-              <div>
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+              <div className="flex-1">
                 <h3 className="text-lg font-bold text-white flex items-center gap-2">
                   <FileText className="w-5 h-5 text-teal-400" />
                   <span>Illustrative Clinical Hazard Log ({hazards.length} Example Records Only — Starter Template)</span>
                 </h3>
-                <p className="text-xs text-slate-300 max-w-3xl leading-relaxed pt-1">
+                <p className="text-sm text-slate-300 leading-relaxed pt-1">
                   <strong>Example Baseline Only:</strong> These 5 clinical hazard entries demonstrate the structure of a live DCB0129 hazard log. In-house NHS development squads must hold their own multi-disciplinary clinical hazard workshops (HAZOP/SWIFT) with local clinicians and their designated CSO to identify project-specific hazards, root causes, and operational mitigations.
                 </p>
               </div>
 
               {/* Filters */}
-              <div className="flex items-center gap-2 w-full sm:w-auto">
+              <div className="flex items-center gap-2 w-full lg:w-auto shrink-0">
                 <div className="relative flex-1 sm:w-64">
-                  <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                   <input
                     type="text"
                     placeholder="Search hazards, causes, harms..."
                     value={hazardSearchQuery}
                     onChange={(e) => setHazardSearchQuery(e.target.value)}
-                    className="w-full pl-8 pr-3 py-1.5 rounded-lg bg-[#07192f] border border-cyan-900/60 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400"
+                    className="w-full pl-9 pr-3 py-2 rounded-lg bg-[#07192f] border border-cyan-900/60 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400"
                   />
                 </div>
 
                 <select
                   value={selectedHazardCategory}
                   onChange={(e) => setSelectedHazardCategory(e.target.value)}
-                  className="px-3 py-1.5 rounded-lg bg-[#07192f] border border-cyan-900/60 text-xs text-white focus:outline-none focus:border-cyan-400 cursor-pointer"
+                  className="px-3 py-2 rounded-lg bg-[#07192f] border border-cyan-900/60 text-sm text-white focus:outline-none focus:border-cyan-400 cursor-pointer"
                 >
                   <option value="All">All Categories</option>
                   <option value="Patient Identity & Linkage">Patient Identity</option>
@@ -901,7 +909,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                             {hazard.category}
                           </span>
                         </div>
-                        <h4 className="text-base font-bold text-white leading-snug">
+                        <h4 className="text-base sm:text-lg font-bold text-white leading-snug">
                           {hazard.hazardDescription}
                         </h4>
                       </div>
@@ -909,7 +917,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                       {/* CSO Status Toggle Button */}
                       <button
                         onClick={() => handleToggleCsoStatus(hazard.id)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center gap-1.5 border transition-all cursor-pointer shrink-0 ${
+                        className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center gap-1.5 border transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                           isApproved
                             ? 'bg-emerald-950/80 text-emerald-300 border-emerald-500/50 hover:bg-emerald-900'
                             : isInReview
@@ -938,18 +946,18 @@ In my opinion, the residual clinical risks associated with the deployment and op
                     </div>
 
                     {/* Details: Cause & Harm */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                      <div className="p-3.5 rounded-xl bg-[#07192f] border border-cyan-900/60 space-y-1">
-                        <span className="text-slate-400 font-mono text-[10px] uppercase font-bold flex items-center gap-1">
-                          <AlertTriangle className="w-3 h-3 text-amber-400" />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch text-sm">
+                      <div className="h-full p-4 rounded-xl bg-[#07192f] border border-cyan-900/60 space-y-1.5">
+                        <span className="text-slate-400 font-mono text-xs uppercase font-bold flex items-center gap-1.5">
+                          <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
                           Potential Clinical Cause
                         </span>
                         <p className="text-slate-200 leading-relaxed">{hazard.potentialCause}</p>
                       </div>
 
-                      <div className="p-3.5 rounded-xl bg-[#07192f] border border-cyan-900/60 space-y-1">
-                        <span className="text-slate-400 font-mono text-[10px] uppercase font-bold flex items-center gap-1">
-                          <Stethoscope className="w-3 h-3 text-rose-400" />
+                      <div className="h-full p-4 rounded-xl bg-[#07192f] border border-cyan-900/60 space-y-1.5">
+                        <span className="text-slate-400 font-mono text-xs uppercase font-bold flex items-center gap-1.5">
+                          <Stethoscope className="w-3.5 h-3.5 text-rose-400" />
                           Clinical Harm Scenario
                         </span>
                         <p className="text-slate-200 leading-relaxed">{hazard.clinicalHarm}</p>
@@ -957,12 +965,12 @@ In my opinion, the residual clinical risks associated with the deployment and op
                     </div>
 
                     {/* Risk Comparison Strip */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                       {/* Initial Risk */}
-                      <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
+                      <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
                         <div>
-                          <span className="text-[10px] font-mono uppercase text-slate-400 block">Initial Clinical Risk</span>
-                          <span className="font-semibold text-slate-300">
+                          <span className="text-xs font-mono uppercase text-slate-400 block">Initial Clinical Risk</span>
+                          <span className="font-semibold text-slate-200">
                             {hazard.initialSeverity} · {hazard.initialLikelihood}
                           </span>
                         </div>
@@ -972,10 +980,10 @@ In my opinion, the residual clinical risks associated with the deployment and op
                       </div>
 
                       {/* Residual Risk */}
-                      <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
+                      <div className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 flex items-center justify-between">
                         <div>
-                          <span className="text-[10px] font-mono uppercase text-teal-400 block">Residual Clinical Risk</span>
-                          <span className="font-semibold text-slate-300">
+                          <span className="text-xs font-mono uppercase text-teal-400 block">Residual Clinical Risk</span>
+                          <span className="font-semibold text-slate-200">
                             {hazard.residualSeverity} · {hazard.residualLikelihood}
                           </span>
                         </div>
@@ -992,19 +1000,19 @@ In my opinion, the residual clinical risks associated with the deployment and op
                           <ShieldCheck className="w-4 h-4 text-teal-400" />
                           <span>Implemented Clinical &amp; Technical Mitigation</span>
                         </span>
-                        <span className="text-[10px] font-mono text-cyan-400">Policy-as-Code Enforced</span>
+                        <span className="text-xs font-mono text-cyan-400">Policy-as-Code Enforced</span>
                       </div>
-                      <p className="text-xs text-slate-200 leading-relaxed font-sans">
+                      <p className="text-sm text-slate-200 leading-relaxed font-sans">
                         {hazard.clinicalMitigation}
                       </p>
                     </div>
 
                     {/* DCB0160 Deployment Mandate for Hospitals */}
-                    <div className="p-3 rounded-xl bg-[#07192f] border border-cyan-900/60 text-xs flex items-start gap-2.5">
+                    <div className="p-3.5 rounded-xl bg-[#07192f] border border-cyan-900/60 text-sm flex items-start gap-2.5">
                       <Building2 className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
                       <div>
                         <strong className="text-cyan-300">DCB0160 Deployment Handover Note: </strong>
-                        <span className="text-slate-300">{hazard.dcb0160DeploymentNote}</span>
+                        <span className="text-slate-200">{hazard.dcb0160DeploymentNote}</span>
                       </div>
                     </div>
                   </div>
@@ -1017,19 +1025,19 @@ In my opinion, the residual clinical risks associated with the deployment and op
           <div className="p-6 rounded-2xl bg-[#0c2340] border border-cyan-900/60 shadow-lg space-y-4 text-white">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cyan-900/60 pb-3">
               <div>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-teal-400">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-teal-400">
                   Deploying Health Organisation Obligations
                 </span>
                 <h3 className="text-lg font-bold text-white flex items-center gap-2">
                   <span>DCB0160 Trust Deployment Readiness Checklist</span>
                 </h3>
               </div>
-              <div className="text-xs font-mono text-teal-300">
+              <div className="text-sm font-mono text-teal-300 tabular-nums">
                 {inHouseMetrics.checklistCompliant}/{inHouseMetrics.checklistTotal} Verified Compliant
               </div>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-sm text-slate-300 leading-relaxed">
               When an NHS organisation deploys internally developed software, the hospital Trust governance committee must review the manufacturer DCB0129 safety case and complete the <strong>DCB0160 Operational Safety Handover</strong> before clinical activation.
             </p>
 
@@ -1040,7 +1048,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                   <div
                     key={item.id}
                     onClick={() => handleToggleChecklist(item.id)}
-                    className="p-3.5 rounded-xl bg-[#07192f] border border-cyan-900/60 flex items-start justify-between gap-3 hover:border-cyan-500/50 transition-all cursor-pointer"
+                    className="p-4 rounded-xl bg-[#07192f] border border-cyan-900/60 flex items-start justify-between gap-3 hover:border-cyan-500/50 transition-all cursor-pointer"
                   >
                     <div className="flex items-start gap-3">
                       <div className="mt-0.5">
@@ -1050,20 +1058,20 @@ In my opinion, the residual clinical risks associated with the deployment and op
                           <Square className="w-4 h-4 text-slate-500" />
                         )}
                       </div>
-                      <div className="space-y-0.5">
-                        <div className="text-xs font-bold text-white flex items-center gap-2">
+                      <div className="space-y-1">
+                        <div className="text-sm font-bold text-white flex items-center gap-2">
                           <span>{item.title}</span>
-                          <span className="text-[10px] font-mono text-cyan-400">({item.id})</span>
+                          <span className="text-xs font-mono text-cyan-400">({item.id})</span>
                         </div>
-                        <p className="text-[11px] text-slate-300 leading-relaxed">{item.description}</p>
-                        <div className="text-[10px] font-mono text-slate-400 pt-0.5">
+                        <p className="text-sm text-slate-300 leading-relaxed">{item.description}</p>
+                        <div className="text-xs font-mono text-slate-400 pt-0.5">
                           Assigned Lead: <strong className="text-slate-200">{item.owner}</strong>
                         </div>
                       </div>
                     </div>
 
                     <span
-                      className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase shrink-0 border ${
+                      className={`px-2.5 py-0.5 rounded text-xs font-mono font-bold uppercase shrink-0 border ${
                         isDone
                           ? 'bg-emerald-950 text-emerald-300 border-emerald-800'
                           : 'bg-amber-950 text-amber-300 border-amber-800'
@@ -1087,8 +1095,8 @@ In my opinion, the residual clinical risks associated with the deployment and op
           {/* 1. HERO HEADER */}
           <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 relative overflow-hidden shadow-xl text-white">
             <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-              <div className="space-y-2 max-w-3xl">
+            <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+              <div className="space-y-3 flex-1">
                 <div className="flex flex-wrap items-center gap-2 text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider">
                   <Award className="w-4 h-4 text-teal-400" />
                   <span>Phase 10 · Enterprise Procurement &amp; Trust Preparation (Exploratory Baseline)</span>
@@ -1096,37 +1104,37 @@ In my opinion, the residual clinical risks associated with the deployment and op
                 <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                   NHS &amp; Public Sector Procurement Readiness Hub
                 </h1>
-                <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
                   Working starter baseline and illustrative compliance mapping against <strong>SATRE 2.0 (5 Pillars incl. Federation)</strong>, <strong>EU EHDS (Regulation (EU) 2025/327)</strong>, <strong>NHS DSPT 2024/25</strong>, <strong>ISO/IEC 27001:2022</strong>, and <strong>DCB0129 / MHRA Clinical Safety</strong> (work in progress). These reference patterns and sample contractual clauses are provided as starting templates and discussion baselines for your Trust or regional IG committee to adapt, scrutinise, and validate against local risk appetites.
                 </p>
 
                 <div className="flex flex-wrap items-center gap-3 pt-2 text-xs">
-                  <span className="text-slate-300 font-mono">
+                  <span className="text-slate-300 font-mono tabular-nums">
                     Mandatory Pass: <strong className="text-teal-400">{metrics.mandatoryScorePct}%</strong>
                   </span>
                   <span className="text-slate-500">·</span>
-                  <span className="text-slate-300 font-mono">
+                  <span className="text-slate-300 font-mono tabular-nums">
                     Sample Verified Controls: <strong className="text-cyan-300">{metrics.compliant}/{metrics.total}</strong>
                   </span>
                   <span className="text-slate-500">·</span>
-                  <span className="px-2 py-0.5 rounded-md bg-[#07192f] text-teal-300 border border-teal-500/40 font-mono text-[11px] font-bold">
+                  <span className="px-2.5 py-0.5 rounded-md bg-[#07192f] text-teal-300 border border-teal-500/40 font-mono text-xs font-bold">
                     STARTER BASELINE
                   </span>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row md:flex-col gap-2 shrink-0">
+              <div className="flex flex-col sm:flex-row lg:flex-col gap-2 shrink-0">
                 <button
                   onClick={handleExportMarkdown}
-                  className="px-4 py-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md shadow-teal-500/20 cursor-pointer"
+                  className="px-4 py-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-teal-500/20 cursor-pointer whitespace-nowrap"
                 >
                   <Download className="w-4 h-4" />
                   <span>Export Dossier (.md)</span>
                 </button>
                 <button
                   onClick={() => window.print()}
-                  className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs font-medium flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 text-xs sm:text-sm font-medium flex items-center justify-center gap-2 transition-all cursor-pointer whitespace-nowrap"
                 >
                   <Printer className="w-4 h-4 text-slate-400" />
                   <span>Print Evidence</span>
@@ -1136,65 +1144,65 @@ In my opinion, the residual clinical risks associated with the deployment and op
           </div>
 
           {/* 2. READINESS GAUGES & SCORE STRIP */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-white">
-            <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/40 space-y-1 shadow-md">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold block">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch text-white">
+            <div className="h-full p-5 rounded-xl bg-[#0c2340] border border-cyan-900/40 space-y-1.5 shadow-md">
+              <span className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold block">
                 Overall Readiness Score
               </span>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-extrabold text-white">{metrics.scorePct}%</span>
+                <span className="text-3xl font-extrabold text-white tabular-nums">{metrics.scorePct}%</span>
                 <span className="text-xs text-teal-400 font-semibold font-mono">Tender Ready</span>
               </div>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-xs text-slate-300 leading-relaxed">
                 Weighted across <span className="tabular-nums">{metrics.total}</span> mandatory &amp; high-criticality controls.
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/40 space-y-1 shadow-md">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold block">
+            <div className="h-full p-5 rounded-xl bg-[#0c2340] border border-cyan-900/40 space-y-1.5 shadow-md">
+              <span className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold block">
                 SATRE 2.0 (5 Pillars)
               </span>
               <div className="flex items-baseline gap-2">
                 <span className="text-3xl font-extrabold text-white tabular-nums">{metrics.satrePassed}/{metrics.satreTotal}</span>
                 <span className="text-xs text-teal-400 font-semibold font-mono">Controls Documented</span>
               </div>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-xs text-slate-300 leading-relaxed">
                 Zero-WAN egress, air-gapped mirrors, Disclosure Control airlock, Supporting Capabilities &amp; Federation.
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/40 space-y-1 shadow-md">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold block">
+            <div className="h-full p-5 rounded-xl bg-[#0c2340] border border-cyan-900/40 space-y-1.5 shadow-md">
+              <span className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold block">
                 EU EHDS (2025/327) Cross-Walk
               </span>
               <div className="flex items-baseline gap-2">
                 <span className="text-3xl font-extrabold text-white tabular-nums">{metrics.ehdsPassed}/{metrics.ehdsTotal}</span>
                 <span className="text-xs text-teal-400 font-semibold font-mono">Technical Correspondence</span>
               </div>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-xs text-slate-300 leading-relaxed">
                 Article 50 SPE isolation, Health Data Access Body permit mapping, anonymised output checks &amp; HealthDCAT-AP.
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/40 space-y-1 shadow-md">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold block">
+            <div className="h-full p-5 rounded-xl bg-[#0c2340] border border-cyan-900/40 space-y-1.5 shadow-md">
+              <span className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold block">
                 NHS DSPT 24/25 Compliance
               </span>
               <div className="flex items-baseline gap-2">
                 <span className="text-3xl font-extrabold text-white tabular-nums">{metrics.dsptPassed}/{metrics.dsptTotal}</span>
                 <span className="text-xs text-teal-400 font-semibold font-mono">Standards Met</span>
               </div>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-xs text-slate-300 leading-relaxed">
                 NDOO opt-out respect, non-blocking admission webhooks, W3C PROV-O audit ledger.
               </p>
             </div>
           </div>
 
           {/* 3. SUB-VIEW TABS */}
-          <div className="flex items-center gap-2 border-b border-cyan-900/60 pb-2">
+          <div className="flex items-center gap-2 border-b border-cyan-900/60 pb-2 overflow-x-auto">
             <button
               onClick={() => setActiveTab('matrix')}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
                 activeTab === 'matrix'
                   ? 'bg-[#0c2340] text-cyan-300 border border-cyan-500/50 shadow-md shadow-cyan-950/40'
                   : 'text-slate-400 hover:text-white hover:bg-slate-900'
@@ -1206,7 +1214,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
 
             <button
               onClick={() => setActiveTab('schedules')}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
                 activeTab === 'schedules'
                   ? 'bg-[#0c2340] text-cyan-300 border border-cyan-500/50 shadow-md shadow-cyan-950/40'
                   : 'text-slate-400 hover:text-white hover:bg-slate-900'
@@ -1218,7 +1226,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
 
             <button
               onClick={() => setActiveTab('declaration')}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
                 activeTab === 'declaration'
                   ? 'bg-[#0c2340] text-cyan-300 border border-cyan-500/50 shadow-md shadow-cyan-950/40'
                   : 'text-slate-400 hover:text-white hover:bg-slate-900'
@@ -1241,7 +1249,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                     placeholder="Search audit controls (e.g., zero-WAN, air-gapped, k >= 10, NDOO, OPA)..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-[#07192f] border border-cyan-900/60 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500 shadow-xs"
+                    className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-[#07192f] border border-cyan-900/60 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500 shadow-xs"
                   />
                 </div>
 
@@ -1283,7 +1291,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                               {control.framework} · {control.section}
                             </span>
                             <span
-                              className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase ${
+                              className={`text-xs font-mono px-2 py-0.5 rounded font-bold uppercase ${
                                 control.criticality === 'MANDATORY'
                                   ? 'bg-rose-950 text-rose-300 border border-rose-800'
                                   : control.criticality === 'HIGH'
@@ -1294,7 +1302,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                               {control.criticality}
                             </span>
                           </div>
-                          <h4 className="text-base font-bold text-white">
+                          <h4 className="text-base sm:text-lg font-bold text-white">
                             {control.title}
                           </h4>
                         </div>
@@ -1302,7 +1310,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                         {/* Interactive Status Toggle */}
                         <button
                           onClick={() => handleToggleStatus(control.id)}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center gap-1.5 border transition-all cursor-pointer shrink-0 ${
+                          className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold flex items-center gap-1.5 border transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                             isCompliant
                               ? 'bg-emerald-950/80 text-emerald-300 border-emerald-500/50 hover:bg-emerald-900'
                               : isPartial
@@ -1331,8 +1339,8 @@ In my opinion, the residual clinical risks associated with the deployment and op
                       </div>
 
                       {/* Requirement specification */}
-                      <div className="p-3.5 rounded-xl bg-[#07192f] border border-cyan-900/60 text-xs space-y-1">
-                        <span className="text-slate-400 font-mono text-[10px] uppercase font-bold">
+                      <div className="p-4 rounded-xl bg-[#07192f] border border-cyan-900/60 text-sm space-y-1">
+                        <span className="text-slate-400 font-mono text-xs uppercase font-bold">
                           Mandated Procurement Specification
                         </span>
                         <p className="text-slate-200 leading-relaxed font-sans">
@@ -1347,22 +1355,22 @@ In my opinion, the residual clinical risks associated with the deployment and op
                             <ShieldCheck className="w-4 h-4 text-teal-400" />
                             <span>Project Wavebound Implemented Evidence</span>
                           </span>
-                          <span className="text-[10px] font-mono text-cyan-400">Policy-as-Code</span>
+                          <span className="text-xs font-mono text-cyan-400">Policy-as-Code</span>
                         </div>
-                        <p className="text-xs text-slate-200 leading-relaxed font-sans">
+                        <p className="text-sm text-slate-200 leading-relaxed font-sans">
                           {control.waveboundEvidence}
                         </p>
                       </div>
 
                       {/* Footer: Caldicott Principle & Technical Reference */}
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1 border-t border-cyan-900/60 text-xs">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-cyan-900/60 text-xs sm:text-sm">
                         <div className="flex items-center gap-2">
-                          <Scale className="w-3.5 h-3.5 text-teal-400 shrink-0" />
-                          <span className="text-slate-300 font-semibold">{control.caldicottPrinciple}</span>
+                          <Scale className="w-4 h-4 text-teal-400 shrink-0" />
+                          <span className="text-slate-200 font-semibold">{control.caldicottPrinciple}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="text-slate-400 font-mono text-[11px]">Repo Artifact:</span>
-                          <code className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#07192f] text-cyan-300 border border-cyan-900/60">
+                          <span className="text-slate-400 font-mono text-xs">Repo Artifact:</span>
+                          <code className="text-xs font-mono px-2.5 py-0.5 rounded bg-[#07192f] text-cyan-300 border border-cyan-900/60">
                             {control.technicalAsset}
                           </code>
                         </div>
@@ -1377,9 +1385,9 @@ In my opinion, the residual clinical risks associated with the deployment and op
           {/* 5. TAB 2: CONTRACTUAL SCHEDULES */}
           {activeTab === 'schedules' && (
             <div className="space-y-6 text-white">
-              <div className="p-4 rounded-xl bg-[#0c2340] border border-cyan-900/60 text-xs text-slate-300 space-y-1">
-                <span className="font-bold text-white text-sm block">Standard Contractual Schedules for Procurement</span>
-                <p>
+              <div className="p-5 rounded-xl bg-[#0c2340] border border-cyan-900/60 text-sm text-slate-300 space-y-1.5">
+                <span className="font-bold text-white text-base block">Standard Contractual Schedules for Procurement</span>
+                <p className="leading-relaxed">
                   These contractual clauses are designed to be copied directly into Section G (Information Governance &amp; Security Schedules) of supply contracts, framework call-offs, or partnering agreements across patient and population safe and secure data and intelligence environments.
                 </p>
               </div>
@@ -1393,15 +1401,15 @@ In my opinion, the residual clinical risks associated with the deployment and op
                       key={schedule.id}
                       className="p-6 rounded-2xl bg-[#0c2340] border border-cyan-900/60 shadow-md space-y-4 text-white"
                     >
-                      <div className="flex items-center justify-between">
-                        <h4 className="text-base font-bold text-white flex items-center gap-2">
+                      <div className="flex items-center justify-between gap-3">
+                        <h4 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
                           <FileText className="w-4 h-4 text-teal-400" />
                           <span>{schedule.title}</span>
                         </h4>
 
                         <button
                           onClick={() => handleCopySchedule(schedule.id, schedule.clause)}
-                          className="px-3 py-1.5 rounded-lg bg-[#07192f] hover:bg-slate-800 text-xs font-semibold flex items-center gap-1.5 transition-colors border border-cyan-900/60 cursor-pointer"
+                          className="px-3.5 py-1.5 rounded-lg bg-[#07192f] hover:bg-slate-800 text-xs font-semibold flex items-center gap-1.5 transition-colors border border-cyan-900/60 cursor-pointer shrink-0 whitespace-nowrap"
                         >
                           {isCopied ? (
                             <>
@@ -1417,7 +1425,7 @@ In my opinion, the residual clinical risks associated with the deployment and op
                         </button>
                       </div>
 
-                      <pre className="p-4 rounded-xl bg-[#07192f] border border-cyan-900/60 font-mono text-xs text-cyan-200 whitespace-pre-wrap leading-relaxed shadow-inner">
+                      <pre className="p-4 rounded-xl bg-[#07192f] border border-cyan-900/60 font-mono text-xs sm:text-sm text-cyan-200 whitespace-pre-wrap leading-relaxed shadow-inner">
                         {schedule.clause}
                       </pre>
                     </div>
@@ -1430,39 +1438,39 @@ In my opinion, the residual clinical risks associated with the deployment and op
           {/* 6. TAB 3: EXECUTIVE DECLARATION */}
           {activeTab === 'declaration' && (
             <div className="p-6 sm:p-10 rounded-2xl bg-[#0c2340] border border-cyan-900/60 shadow-xl space-y-6 text-white">
-              <div className="flex items-start justify-between gap-4 border-b border-cyan-900/60 pb-5">
-                <div className="space-y-1">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-teal-300 bg-[#07192f] px-2 py-0.5 rounded border border-teal-500/40">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-cyan-900/60 pb-5">
+                <div className="space-y-1.5">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-teal-300 bg-[#07192f] px-2.5 py-0.5 rounded border border-teal-500/40 inline-block">
                     Official Declaration of Conformance
                   </span>
                   <h2 className="text-2xl font-extrabold text-white">
                     Project Wavebound Tender Readiness Certification
                   </h2>
-                  <p className="text-xs sm:text-sm text-slate-300">
+                  <p className="text-sm text-slate-300">
                     Issued for submission to NHS England, Health Research Authority (HRA), and University IG Boards.
                   </p>
                 </div>
 
-                <div className="p-3 rounded-xl bg-[#07192f] border border-teal-500/40 text-center shrink-0">
-                  <span className="text-2xl font-extrabold text-teal-300 block font-mono">
+                <div className="p-4 rounded-xl bg-[#07192f] border border-teal-500/40 text-center shrink-0">
+                  <span className="text-2xl font-extrabold text-teal-300 block font-mono tabular-nums">
                     100%
                   </span>
-                  <span className="text-[10px] font-mono uppercase text-teal-400 font-bold block">
+                  <span className="text-xs font-mono uppercase text-teal-400 font-bold block">
                     Mandatory Pass
                   </span>
                 </div>
               </div>
 
-              <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <div className="space-y-4 text-sm sm:text-base text-slate-200 leading-relaxed">
                 <p>
                   This baseline statement documents how the <strong>Project Wavebound Policy-as-Code Architecture</strong> maps illustrative technical controls against the <strong>Standard Architecture for Trusted Research Environments (SATRE 2.0 — 5 Pillars including Supporting Capabilities &amp; Federation)</strong>, the <strong>NHS Data Security and Protection Toolkit (DSPT 2024/25)</strong>, and technical requirements of <strong>Regulation (EU) 2025/327 (European Health Data Space Chapter IV Secure Processing Environments and anonymised output controls)</strong> for Tier 2 pseudonymous and Tier 3 identifiable microdata workloads, subject to independent local Information Governance review.
                 </p>
 
-                <div className="p-4 rounded-xl bg-slate-950/80 border border-cyan-900/60 space-y-2">
+                <div className="p-5 rounded-xl bg-slate-950/80 border border-cyan-900/60 space-y-2.5">
                   <h4 className="font-bold text-white text-xs uppercase tracking-wider font-mono">
                     Statutory Architecture Commitments:
                   </h4>
-                  <ul className="space-y-1.5 text-xs text-slate-300 list-disc list-inside">
+                  <ul className="space-y-1.5 text-sm text-slate-300 list-disc list-inside">
                     <li>Zero-WAN egress enforced via kernel-level eBPF &amp; Calico drop rules;</li>
                     <li>Quarantined air-gapped package mirrors (Harbor, Devpi, Nexus) with Trivy CVE gates;</li>
                     <li>Root-read-only pod filesystems (UID 10001) with dropped Linux capabilities;</li>
@@ -1472,16 +1480,16 @@ In my opinion, the residual clinical risks associated with the deployment and op
                   </ul>
                 </div>
 
-                <div className="pt-4 border-t border-cyan-900/60 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                  <div className="p-3 rounded-lg bg-[#07192f] border border-cyan-900/60 space-y-1">
-                    <span className="text-slate-400 font-mono text-[10px] uppercase">Lead Caldicott Assurance Role</span>
+                <div className="pt-4 border-t border-cyan-900/60 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                  <div className="p-4 rounded-lg bg-[#07192f] border border-cyan-900/60 space-y-1">
+                    <span className="text-slate-400 font-mono text-xs uppercase">Lead Caldicott Assurance Role</span>
                     <span className="font-bold text-white block">Designated Caldicott Assurance Lead [Example Signatory]</span>
-                    <span className="text-slate-400 text-[11px]">Chair, NHS SDE IG &amp; Caldicott Advisory Board</span>
+                    <span className="text-slate-300 text-xs">Chair, NHS SDE IG &amp; Caldicott Advisory Board</span>
                   </div>
-                  <div className="p-3 rounded-lg bg-[#07192f] border border-cyan-900/60 space-y-1">
-                    <span className="text-slate-400 font-mono text-[10px] uppercase">Lead Security Architect Role</span>
+                  <div className="p-4 rounded-lg bg-[#07192f] border border-cyan-900/60 space-y-1">
+                    <span className="text-slate-400 font-mono text-xs uppercase">Lead Security Architect Role</span>
                     <span className="font-bold text-white block">Designated Security Architecture Lead [Example Signatory]</span>
-                    <span className="text-slate-400 text-[11px]">Director of Secure Cloud Infrastructure &amp; SDE PEPs</span>
+                    <span className="text-slate-300 text-xs">Director of Secure Cloud Infrastructure &amp; SDE PEPs</span>
                   </div>
                 </div>
               </div>
@@ -1495,21 +1503,21 @@ In my opinion, the residual clinical risks associated with the deployment and op
           ========================================================================= */}
       {showAddHazardModal && (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl max-w-2xl w-full p-6 text-white space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+          <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl max-w-3xl w-full p-6 text-white space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-cyan-900/60 pb-3">
               <div className="flex items-center gap-2">
                 <Stethoscope className="w-5 h-5 text-teal-400" />
-                <h3 className="font-bold text-base text-white">Log In-House Clinical Hazard (DCB0129)</h3>
+                <h3 className="font-bold text-lg text-white">Log In-House Clinical Hazard (DCB0129)</h3>
               </div>
               <button
                 onClick={() => setShowAddHazardModal(false)}
-                className="text-slate-400 hover:text-white text-xs font-mono px-2 py-1 rounded bg-slate-900"
+                className="text-slate-300 hover:text-white text-xs font-mono px-2.5 py-1 rounded bg-slate-900"
               >
                 Cancel
               </button>
             </div>
 
-            <div className="space-y-3 text-xs">
+            <div className="space-y-3 text-sm">
               <div>
                 <label className="block text-slate-300 font-bold mb-1">Hazard Category</label>
                 <select
@@ -1561,13 +1569,13 @@ In my opinion, the residual clinical risks associated with the deployment and op
               </div>
 
               {/* Initial Risk Ratings */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 rounded-xl bg-[#07192f] border border-cyan-900/60">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 rounded-xl bg-[#07192f] border border-cyan-900/60">
                 <div>
-                  <label className="block text-slate-400 font-mono text-[10px] uppercase font-bold mb-1">Initial Severity</label>
+                  <label className="block text-slate-400 font-mono text-xs uppercase font-bold mb-1">Initial Severity</label>
                   <select
                     value={newHazard.initialSeverity}
                     onChange={(e) => setNewHazard({ ...newHazard, initialSeverity: e.target.value as any })}
-                    className="w-full px-2 py-1 rounded bg-slate-900 border border-slate-700 text-white text-xs"
+                    className="w-full px-2.5 py-1.5 rounded bg-slate-900 border border-slate-700 text-white text-sm"
                   >
                     {SEVERITIES.map((s) => (
                       <option key={s} value={s}>{s}</option>
@@ -1575,11 +1583,11 @@ In my opinion, the residual clinical risks associated with the deployment and op
                   </select>
                 </div>
                 <div>
-                  <label className="block text-slate-400 font-mono text-[10px] uppercase font-bold mb-1">Initial Likelihood</label>
+                  <label className="block text-slate-400 font-mono text-xs uppercase font-bold mb-1">Initial Likelihood</label>
                   <select
                     value={newHazard.initialLikelihood}
                     onChange={(e) => setNewHazard({ ...newHazard, initialLikelihood: e.target.value as any })}
-                    className="w-full px-2 py-1 rounded bg-slate-900 border border-slate-700 text-white text-xs"
+                    className="w-full px-2.5 py-1.5 rounded bg-slate-900 border border-slate-700 text-white text-sm"
                   >
                     {LIKELIHOODS.map((l) => (
                       <option key={l} value={l}>{l}</option>
@@ -1587,11 +1595,11 @@ In my opinion, the residual clinical risks associated with the deployment and op
                   </select>
                 </div>
                 <div>
-                  <label className="block text-slate-400 font-mono text-[10px] uppercase font-bold mb-1">Initial Risk Level</label>
+                  <label className="block text-slate-400 font-mono text-xs uppercase font-bold mb-1">Initial Risk Level</label>
                   <select
                     value={newHazard.initialRisk}
                     onChange={(e) => setNewHazard({ ...newHazard, initialRisk: e.target.value as any })}
-                    className="w-full px-2 py-1 rounded bg-slate-900 border border-slate-700 text-white text-xs"
+                    className="w-full px-2.5 py-1.5 rounded bg-slate-900 border border-slate-700 text-white text-sm"
                   >
                     <option value="Very High">Very High</option>
                     <option value="High">High</option>
@@ -1613,13 +1621,13 @@ In my opinion, the residual clinical risks associated with the deployment and op
               </div>
 
               {/* Residual Risk Ratings */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 rounded-xl bg-[#07192f] border border-cyan-900/60">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 rounded-xl bg-[#07192f] border border-cyan-900/60">
                 <div>
-                  <label className="block text-teal-400 font-mono text-[10px] uppercase font-bold mb-1">Residual Severity</label>
+                  <label className="block text-teal-400 font-mono text-xs uppercase font-bold mb-1">Residual Severity</label>
                   <select
                     value={newHazard.residualSeverity}
                     onChange={(e) => setNewHazard({ ...newHazard, residualSeverity: e.target.value as any })}
-                    className="w-full px-2 py-1 rounded bg-slate-900 border border-slate-700 text-white text-xs"
+                    className="w-full px-2.5 py-1.5 rounded bg-slate-900 border border-slate-700 text-white text-sm"
                   >
                     {SEVERITIES.map((s) => (
                       <option key={s} value={s}>{s}</option>
@@ -1627,11 +1635,11 @@ In my opinion, the residual clinical risks associated with the deployment and op
                   </select>
                 </div>
                 <div>
-                  <label className="block text-teal-400 font-mono text-[10px] uppercase font-bold mb-1">Residual Likelihood</label>
+                  <label className="block text-teal-400 font-mono text-xs uppercase font-bold mb-1">Residual Likelihood</label>
                   <select
                     value={newHazard.residualLikelihood}
                     onChange={(e) => setNewHazard({ ...newHazard, residualLikelihood: e.target.value as any })}
-                    className="w-full px-2 py-1 rounded bg-slate-900 border border-slate-700 text-white text-xs"
+                    className="w-full px-2.5 py-1.5 rounded bg-slate-900 border border-slate-700 text-white text-sm"
                   >
                     {LIKELIHOODS.map((l) => (
                       <option key={l} value={l}>{l}</option>
@@ -1639,11 +1647,11 @@ In my opinion, the residual clinical risks associated with the deployment and op
                   </select>
                 </div>
                 <div>
-                  <label className="block text-teal-400 font-mono text-[10px] uppercase font-bold mb-1">Residual Risk Level</label>
+                  <label className="block text-teal-400 font-mono text-xs uppercase font-bold mb-1">Residual Risk Level</label>
                   <select
                     value={newHazard.residualRisk}
                     onChange={(e) => setNewHazard({ ...newHazard, residualRisk: e.target.value as any })}
-                    className="w-full px-2 py-1 rounded bg-slate-900 border border-slate-700 text-white text-xs"
+                    className="w-full px-2.5 py-1.5 rounded bg-slate-900 border border-slate-700 text-white text-sm"
                   >
                     <option value="Low">Low (Broadly Acceptable)</option>
                     <option value="Medium">Medium (ALARP)</option>
@@ -1667,13 +1675,13 @@ In my opinion, the residual clinical risks associated with the deployment and op
             <div className="flex items-center justify-end gap-2 pt-3 border-t border-cyan-900/60">
               <button
                 onClick={() => setShowAddHazardModal(false)}
-                className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-semibold"
+                className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-sm font-semibold"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSaveNewHazard}
-                className="px-4 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 text-xs font-bold shadow-md cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 text-sm font-bold shadow-md cursor-pointer"
               >
                 Save to Hazard Log
               </button>

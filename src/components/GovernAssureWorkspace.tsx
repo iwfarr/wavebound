@@ -553,39 +553,39 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
   ]);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* 1. WORKSPACE HEADER */}
-      <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl p-6 sm:p-8 shadow-xl text-white">
-        <div className="space-y-4 max-w-4xl">
+      <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 shadow-xl text-white">
+        <div className="space-y-5">
           <div className="flex flex-wrap items-center gap-2 text-xs">
             <span className="font-semibold text-amber-300 bg-[#07192f] px-2.5 py-0.5 rounded border border-amber-500/40 flex items-center gap-1.5 shadow-xs">
               <Scale className="w-3.5 h-3.5 text-amber-400" />
               <span>Phase 3: Govern &amp; Assure Operational Workspace</span>
             </span>
-            <span className="font-mono text-slate-300 bg-[#07192f] px-2 py-0.5 rounded border border-cyan-900/60">
+            <span className="font-mono text-slate-300 bg-[#07192f] px-2.5 py-0.5 rounded border border-cyan-900/60">
               Caldicott 1–8 · Section 251 CAG · HRA REC · ONS SDC
             </span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
             Governance Review Aid &amp; Evidence Summary Compiler
           </h1>
 
-          <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
             A practical workspace to help research teams and Information Governance panels check study proposals against standard UK health data rules (Caldicott Principles, Section 251, REC ethics, and SDC thresholds). It evaluates proposal details against working policy shapes and compiles a standardized evidence summary to help human reviewers spot issues early.
           </p>
 
-          <div className="pt-2 flex flex-wrap items-center gap-3 text-xs">
+          <div className="pt-1 flex flex-wrap items-center gap-3 text-sm">
             <button
               onClick={() => setIsReportModalOpen(true)}
-              className="px-4 py-2 rounded-lg bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold flex items-center gap-2 transition-colors cursor-pointer shadow-md shadow-teal-500/20"
+              className="px-4 py-2.5 rounded-lg bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold flex items-center gap-2 transition-colors cursor-pointer shadow-md shadow-teal-500/20 whitespace-nowrap"
             >
               <FileCheck2 className="w-4 h-4 text-slate-950" />
               <span>Compile Standardized Evidence Pack</span>
             </button>
             <button
               onClick={() => setIsCharterModalOpen(true)}
-              className="px-4 py-2 rounded-lg bg-[#07192f] hover:bg-[#123154] text-slate-200 border border-[#1b3f68] font-medium flex items-center gap-2 transition-colors cursor-pointer"
+              className="px-4 py-2.5 rounded-lg bg-[#07192f] hover:bg-[#123154] text-slate-200 border border-[#1b3f68] font-medium flex items-center gap-2 transition-colors cursor-pointer whitespace-nowrap"
             >
               <FileText className="w-4 h-4 text-cyan-400" />
               <span>View Institutional Governance Charter</span>
@@ -593,33 +593,33 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
           </div>
 
           {/* Practical Note: Mandatory Documents vs Operational Aid */}
-          <div className="p-3.5 rounded-lg bg-amber-950/40 border border-amber-800/60 text-xs text-amber-200 space-y-1.5 text-left">
+          <div className="p-4 rounded-xl bg-amber-950/40 border border-amber-800/60 text-sm text-amber-200 space-y-1.5 text-left">
             <div className="flex items-center gap-2 font-bold text-amber-300">
               <ShieldAlert className="w-4 h-4 text-amber-400 shrink-0" />
               <span>Are these decision-support summaries or &quot;dossiers&quot; legally mandatory documents?</span>
             </div>
-            <p className="text-slate-300 text-[11px] leading-relaxed">
+            <p className="text-slate-200 text-sm leading-relaxed">
               <strong>No.</strong> There is no statutory requirement under UK law to create an automated &quot;compliance dossier&quot;. The actual legally mandated documents are your <strong>Data Protection Impact Assessment (DPIA under UK GDPR Art 35)</strong>, <strong>Data Sharing Agreement (DSA)</strong>, <strong>HRA REC Ethical Approval</strong>, <strong>Section 251 CAG Clearance</strong> (when using confidential patient data without consent), and annual <strong>Data Security &amp; Protection Toolkit (DSPT)</strong> submissions. This evidence summary is simply an operational tool to help Caldicott Guardians and Data Access Committees review applications without tedious manual checklists.
             </p>
           </div>
 
           {/* Context Strip: Evidence Pack vs Governance Charter */}
-          <div className="p-3.5 rounded-lg bg-slate-950/80 border border-cyan-900/60 grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px] text-slate-300 text-left">
-            <div className="space-y-1 border-b md:border-b-0 md:border-r border-cyan-900/60 pb-2 md:pb-0 md:pr-3">
-              <strong className="text-amber-300 block font-semibold flex items-center gap-1.5">
-                <FileCheck2 className="w-3.5 h-3.5 text-amber-400" />
+          <div className="p-4 rounded-xl bg-slate-950/80 border border-cyan-900/60 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-300 text-left">
+            <div className="space-y-1 border-b md:border-b-0 md:border-r border-cyan-900/60 pb-3 md:pb-0 md:pr-4">
+              <strong className="text-amber-300 font-semibold flex items-center gap-1.5">
+                <FileCheck2 className="w-4 h-4 text-amber-400 shrink-0" />
                 <span>Standardized Evidence Pack (Session Decision-Support):</span>
               </strong>
-              <p className="text-slate-400 leading-relaxed">
+              <p className="text-slate-300 leading-relaxed">
                 Compiled when an accredited researcher requests workspace access or airlock export. Evaluates the specific study protocol against working SHACL and policy rules, producing a standardized evidence summary to assist human DAAG and Caldicott review panels.
               </p>
             </div>
             <div className="space-y-1">
-              <strong className="text-cyan-300 block font-semibold flex items-center gap-1.5">
-                <FileText className="w-3.5 h-3.5 text-cyan-400" />
+              <strong className="text-cyan-300 font-semibold flex items-center gap-1.5">
+                <FileText className="w-4 h-4 text-cyan-400 shrink-0" />
                 <span>Governance Charter (Static Framework Baseline):</span>
               </strong>
-              <p className="text-slate-400 leading-relaxed">
+              <p className="text-slate-300 leading-relaxed">
                 Referenced during <strong>institutional procurement and Trust onboarding</strong>. Sets out the baseline statutory mandates (DEA 2017, UK GDPR, Section 251) and clinical safety standards (DCB0129, DSPT).
               </p>
             </div>
@@ -628,11 +628,11 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
       </div>
 
       {/* PHASE 3: CONSOLIDATED NAVIGATION TABS */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cyan-900/50 pb-2">
-        <div className="flex flex-wrap bg-[#0c2340] p-1 rounded-xl border border-cyan-900/60 gap-1">
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-3 border-b border-cyan-900/50 pb-3">
+        <div className="flex flex-wrap bg-[#0c2340] p-1.5 rounded-xl border border-cyan-900/60 gap-1.5">
           <button
             onClick={() => setWorkspaceView('simulator')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap ${
               workspaceView === 'simulator'
                 ? 'bg-[#00A389] text-white shadow-md font-bold'
                 : 'text-slate-300 hover:text-white hover:bg-[#112f54]'
@@ -643,7 +643,7 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
           </button>
           <button
             onClick={() => setWorkspaceView('statutory_matrix')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap ${
               workspaceView === 'statutory_matrix'
                 ? 'bg-[#00A389] text-white shadow-md font-bold'
                 : 'text-slate-300 hover:text-white hover:bg-[#112f54]'
@@ -654,7 +654,7 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
           </button>
           <button
             onClick={() => setWorkspaceView('five_safes_pillars')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap ${
               workspaceView === 'five_safes_pillars'
                 ? 'bg-[#00A389] text-white shadow-md font-bold'
                 : 'text-slate-300 hover:text-white hover:bg-[#112f54]'
@@ -665,7 +665,7 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
           </button>
           <button
             onClick={() => setWorkspaceView('sdc_hub')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap ${
               workspaceView === 'sdc_hub'
                 ? 'bg-[#00A389] text-white shadow-md font-bold'
                 : 'text-slate-300 hover:text-white hover:bg-[#112f54]'
@@ -676,7 +676,7 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
           </button>
           <button
             onClick={() => setWorkspaceView('transparency_ledger')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap ${
               workspaceView === 'transparency_ledger'
                 ? 'bg-[#00A389] text-white shadow-md font-bold'
                 : 'text-slate-300 hover:text-white hover:bg-[#112f54]'
@@ -687,7 +687,7 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
           </button>
           <button
             onClick={() => setWorkspaceView('procurement_readiness')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap ${
               workspaceView === 'procurement_readiness'
                 ? 'bg-[#00A389] text-white shadow-md font-bold'
                 : 'text-slate-300 hover:text-white hover:bg-[#112f54]'
@@ -698,7 +698,7 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
           </button>
           <button
             onClick={() => setWorkspaceView('isms_dea_buildup')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap ${
               workspaceView === 'isms_dea_buildup'
                 ? 'bg-[#00A389] text-white shadow-md font-bold'
                 : 'text-slate-300 hover:text-white hover:bg-[#112f54]'
@@ -709,7 +709,7 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
           </button>
         </div>
 
-        <div className="flex items-center gap-2 text-xs font-mono">
+        <div className="flex items-center gap-2 text-xs font-mono shrink-0">
           <span className="text-slate-400">Evaluated Baseline:</span>
           <span
             className={`px-2.5 py-0.5 rounded font-bold border ${
@@ -760,25 +760,25 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
         </div>
 
         {/* Preset Description Banner */}
-        <div className="p-3.5 rounded-lg bg-slate-950/80 border border-cyan-900/60 text-xs text-slate-300 flex items-center justify-between gap-2 shadow-xs">
+        <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/60 text-sm text-slate-300 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-xs">
           <span>{PRESET_SCENARIOS.find((p) => p.id === selectedPresetId)?.description}</span>
           <button
             onClick={() => handleApplyPreset(PRESET_SCENARIOS[0])}
-            className="text-[11px] text-cyan-400 hover:text-white hover:underline font-mono flex items-center gap-1 shrink-0 cursor-pointer"
+            className="text-xs text-cyan-400 hover:text-white hover:underline font-mono flex items-center gap-1 shrink-0 cursor-pointer whitespace-nowrap"
           >
-            <RotateCcw className="w-3 h-3 text-cyan-400" />
+            <RotateCcw className="w-3.5 h-3.5 text-cyan-400" />
             <span>Reset Default</span>
           </button>
         </div>
 
         {/* Safe Outputs SDC Evaluation Mode Toggle */}
         <div className="p-4 rounded-xl bg-slate-950/90 border border-cyan-900/60 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs font-bold text-teal-300">
-              <Scale className="w-4 h-4 text-teal-400" />
+          <div className="space-y-1 flex-1">
+            <div className="flex items-center gap-2 text-sm font-bold text-teal-300">
+              <Scale className="w-4 h-4 text-teal-400 shrink-0" />
               <span>Safe Outputs Check Mode: Principles-Based Triage vs. Strict Rules-Based</span>
             </div>
-            <p className="text-[11px] text-slate-300 leading-relaxed max-w-2xl">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               Compare how <strong>k &lt; 10</strong> or <strong>dominance &gt; 80%</strong> behaves under Felix Ritchie&apos;s principles-based triage (flagging human airlock review) versus a rigid automated threshold block. Try the <strong>Rare</strong> preset above to see the difference.
             </p>
           </div>
@@ -786,7 +786,7 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
             <button
               type="button"
               onClick={() => setSdcMode('principles_triage')}
-              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
                 sdcMode === 'principles_triage'
                   ? 'bg-[#00A389] text-white shadow-sm font-bold'
                   : 'text-slate-300 hover:text-white'
@@ -797,7 +797,7 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
             <button
               type="button"
               onClick={() => setSdcMode('strict_rules')}
-              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
                 sdcMode === 'strict_rules'
                   ? 'bg-[#005EB8] text-white shadow-sm font-bold'
                   : 'text-slate-300 hover:text-white'
@@ -809,99 +809,109 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
         </div>
 
         {/* Dynamic Parameter Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch text-sm">
           {/* Parameter 1: Researcher Status */}
-          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
-            <label className="font-bold text-white block">Researcher Accreditation</label>
-            <select
-              value={researcherStatus}
-              onChange={(e) => {
-                setResearcherStatus(e.target.value as any);
-                setSelectedPresetId('custom');
-              }}
-              className="w-full bg-[#07192f] border border-cyan-900/60 rounded-md p-2 text-xs text-white focus:outline-none focus:border-cyan-400"
-            >
-              <option value="accredited">Accredited (DEA 2017 &amp; DSPT)</option>
-              <option value="pending">Renewal Pending (IG Incomplete)</option>
-              <option value="unaccredited">Unaccredited / External</option>
-            </select>
-            <span className="text-[10px] text-slate-400 block font-mono">Safe People Accreditation Gate</span>
+          <div className="h-full p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2 flex flex-col justify-between">
+            <div className="space-y-2">
+              <label className="font-bold text-white block">Researcher Accreditation</label>
+              <select
+                value={researcherStatus}
+                onChange={(e) => {
+                  setResearcherStatus(e.target.value as any);
+                  setSelectedPresetId('custom');
+                }}
+                className="w-full bg-[#07192f] border border-cyan-900/60 rounded-md p-2.5 text-sm text-white focus:outline-none focus:border-cyan-400"
+              >
+                <option value="accredited">Accredited (DEA 2017 &amp; DSPT)</option>
+                <option value="pending">Renewal Pending (IG Incomplete)</option>
+                <option value="unaccredited">Unaccredited / External</option>
+              </select>
+            </div>
+            <span className="text-xs text-slate-400 block font-mono">Safe People Accreditation Gate</span>
           </div>
 
           {/* Parameter 2: Ethics Approval */}
-          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
-            <label className="font-bold text-white block">HRA Research Ethics (REC)</label>
-            <select
-              value={ethicsStatus}
-              onChange={(e) => {
-                setEthicsStatus(e.target.value as any);
-                setSelectedPresetId('custom');
-              }}
-              className="w-full bg-[#07192f] border border-cyan-900/60 rounded-md p-2 text-xs text-white focus:outline-none focus:border-cyan-400"
-            >
-              <option value="approved">Approved (Active IRAS Ref)</option>
-              <option value="in_review">In Review / Substantial Amendment</option>
-              <option value="none">No Ethics Approval</option>
-            </select>
-            <span className="text-[10px] text-slate-400 block font-mono">Safe Projects Mandate</span>
+          <div className="h-full p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2 flex flex-col justify-between">
+            <div className="space-y-2">
+              <label className="font-bold text-white block">HRA Research Ethics (REC)</label>
+              <select
+                value={ethicsStatus}
+                onChange={(e) => {
+                  setEthicsStatus(e.target.value as any);
+                  setSelectedPresetId('custom');
+                }}
+                className="w-full bg-[#07192f] border border-cyan-900/60 rounded-md p-2.5 text-sm text-white focus:outline-none focus:border-cyan-400"
+              >
+                <option value="approved">Approved (Active IRAS Ref)</option>
+                <option value="in_review">In Review / Substantial Amendment</option>
+                <option value="none">No Ethics Approval</option>
+              </select>
+            </div>
+            <span className="text-xs text-slate-400 block font-mono">Safe Projects Mandate</span>
           </div>
 
           {/* Parameter 3: Section 251 CAG */}
-          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
-            <label className="font-bold text-white block">Section 251 CAG Clearance</label>
-            <select
-              value={s251Status}
-              onChange={(e) => {
-                setS251Status(e.target.value as any);
-                setSelectedPresetId('custom');
-              }}
-              className="w-full bg-[#07192f] border border-cyan-900/60 rounded-md p-2 text-xs text-white focus:outline-none focus:border-cyan-400"
-            >
-              <option value="exempt">Not Required (De-identified/Consented)</option>
-              <option value="authorized">Authorized (Active CAG Reference)</option>
-              <option value="missing">Missing / Unconsented Identifiers</option>
-            </select>
-            <span className="text-[10px] text-slate-400 block font-mono">NHS Act 2006 Statutory Shield</span>
+          <div className="h-full p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2 flex flex-col justify-between">
+            <div className="space-y-2">
+              <label className="font-bold text-white block">Section 251 CAG Clearance</label>
+              <select
+                value={s251Status}
+                onChange={(e) => {
+                  setS251Status(e.target.value as any);
+                  setSelectedPresetId('custom');
+                }}
+                className="w-full bg-[#07192f] border border-cyan-900/60 rounded-md p-2.5 text-sm text-white focus:outline-none focus:border-cyan-400"
+              >
+                <option value="exempt">Not Required (De-identified/Consented)</option>
+                <option value="authorized">Authorized (Active CAG Reference)</option>
+                <option value="missing">Missing / Unconsented Identifiers</option>
+              </select>
+            </div>
+            <span className="text-xs text-slate-400 block font-mono">NHS Act 2006 Statutory Shield</span>
           </div>
 
           {/* Parameter 4: Data Sensitivity Tier */}
-          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
-            <label className="font-bold text-white block">Data Classification Tier</label>
-            <select
-              value={dataTier}
-              onChange={(e) => {
-                setDataTier(e.target.value as any);
-                setSelectedPresetId('custom');
-              }}
-              className="w-full bg-[#07192f] border border-cyan-900/60 rounded-md p-2 text-xs text-white focus:outline-none focus:border-cyan-400"
-            >
-              <option value="tier2_pseudonymised">Tier 2: Pseudonymised Cohort</option>
-              <option value="tier1_aggregate">Tier 1: Synthetic / Pre-aggregated</option>
-              <option value="tier3_identifiable">Tier 3: Identifiable Clinical Data</option>
-            </select>
-            <span className="text-[10px] text-slate-400 block font-mono">Hospital Operational Tiering</span>
+          <div className="h-full p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2 flex flex-col justify-between">
+            <div className="space-y-2">
+              <label className="font-bold text-white block">Data Classification Tier</label>
+              <select
+                value={dataTier}
+                onChange={(e) => {
+                  setDataTier(e.target.value as any);
+                  setSelectedPresetId('custom');
+                }}
+                className="w-full bg-[#07192f] border border-cyan-900/60 rounded-md p-2.5 text-sm text-white focus:outline-none focus:border-cyan-400"
+              >
+                <option value="tier2_pseudonymised">Tier 2: Pseudonymised Cohort</option>
+                <option value="tier1_aggregate">Tier 1: Synthetic / Pre-aggregated</option>
+                <option value="tier3_identifiable">Tier 3: Identifiable Clinical Data</option>
+              </select>
+            </div>
+            <span className="text-xs text-slate-400 block font-mono">Hospital Operational Tiering</span>
           </div>
 
           {/* Parameter 5: SDC Minimum Cell Count (k) */}
-          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
-            <div className="flex items-center justify-between">
-              <label className="font-bold text-white">SDC Cell Count (k)</label>
-              <span className={`font-mono font-bold ${minCellCount >= 10 ? 'text-teal-400' : 'text-rose-400'}`}>
-                N = {minCellCount}
-              </span>
+          <div className="h-full p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2 flex flex-col justify-between">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <label className="font-bold text-white">SDC Cell Count (k)</label>
+                <span className={`font-mono font-bold tabular-nums ${minCellCount >= 10 ? 'text-teal-400' : 'text-rose-400'}`}>
+                  N = {minCellCount}
+                </span>
+              </div>
+              <input
+                type="range"
+                min={1}
+                max={25}
+                value={minCellCount}
+                onChange={(e) => {
+                  setMinCellCount(parseInt(e.target.value, 10));
+                  setSelectedPresetId('custom');
+                }}
+                className="w-full accent-[#00A389] cursor-pointer"
+              />
             </div>
-            <input
-              type="range"
-              min={1}
-              max={25}
-              value={minCellCount}
-              onChange={(e) => {
-                setMinCellCount(parseInt(e.target.value, 10));
-                setSelectedPresetId('custom');
-              }}
-              className="w-full accent-[#00A389] cursor-pointer"
-            />
-            <span className="text-[10px] text-slate-400 block font-mono">
+            <span className="text-xs text-slate-400 block font-mono">
               {sdcMode === 'principles_triage'
                 ? 'Rule-of-thumb benchmark: k < 10 flags human triage'
                 : 'Strict gate: k ≥ 10 required automatically'}
@@ -909,25 +919,27 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
           </div>
 
           {/* Parameter 6: Dominance Ratio */}
-          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
-            <div className="flex items-center justify-between">
-              <label className="font-bold text-white">Top Contributor Dominance</label>
-              <span className={`font-mono font-bold ${dominanceRatio <= 80 ? 'text-teal-400' : 'text-rose-400'}`}>
-                {dominanceRatio}%
-              </span>
+          <div className="h-full p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2 flex flex-col justify-between">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <label className="font-bold text-white">Top Contributor Dominance</label>
+                <span className={`font-mono font-bold tabular-nums ${dominanceRatio <= 80 ? 'text-teal-400' : 'text-rose-400'}`}>
+                  {dominanceRatio}%
+                </span>
+              </div>
+              <input
+                type="range"
+                min={10}
+                max={100}
+                value={dominanceRatio}
+                onChange={(e) => {
+                  setDominanceRatio(parseInt(e.target.value, 10));
+                  setSelectedPresetId('custom');
+                }}
+                className="w-full accent-[#00A389] cursor-pointer"
+              />
             </div>
-            <input
-              type="range"
-              min={10}
-              max={100}
-              value={dominanceRatio}
-              onChange={(e) => {
-                setDominanceRatio(parseInt(e.target.value, 10));
-                setSelectedPresetId('custom');
-              }}
-              className="w-full accent-[#00A389] cursor-pointer"
-            />
-            <span className="text-[10px] text-slate-400 block font-mono">
+            <span className="text-xs text-slate-400 block font-mono">
               {sdcMode === 'principles_triage'
                 ? 'Rule-of-thumb ceiling: > 80% flags context review'
                 : 'Strict ceiling: ≤ 80% maximum contribution'}
@@ -935,57 +947,61 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
           </div>
 
           {/* Parameter 7: Network Egress Isolation */}
-          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
-            <label className="font-bold text-white block">Enclave Network Routing</label>
-            <div className="flex items-center gap-2 pt-1">
-              <button
-                type="button"
-                onClick={() => {
-                  setEnclaveEgressBlocked(true);
-                  setSelectedPresetId('custom');
-                }}
-                className={`px-2.5 py-1.5 rounded text-xs font-semibold flex-1 transition-colors cursor-pointer ${
-                  enclaveEgressBlocked
-                    ? 'bg-teal-950/80 text-teal-300 border border-teal-600 font-bold'
-                    : 'bg-[#07192f] text-slate-300 border border-[#1b3f68]'
-                }`}
-              >
-                Zero-Egress VPC
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setEnclaveEgressBlocked(false);
-                  setSelectedPresetId('custom');
-                }}
-                className={`px-2.5 py-1.5 rounded text-xs font-semibold flex-1 transition-colors cursor-pointer ${
-                  !enclaveEgressBlocked
-                    ? 'bg-rose-950/80 text-rose-300 border border-rose-600 font-bold'
-                    : 'bg-[#07192f] text-slate-300 border border-[#1b3f68]'
-                }`}
-              >
-                Open WAN
-              </button>
+          <div className="h-full p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2 flex flex-col justify-between">
+            <div className="space-y-2">
+              <label className="font-bold text-white block">Enclave Network Routing</label>
+              <div className="flex items-center gap-2 pt-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEnclaveEgressBlocked(true);
+                    setSelectedPresetId('custom');
+                  }}
+                  className={`px-2.5 py-2 rounded text-xs font-semibold flex-1 transition-colors cursor-pointer ${
+                    enclaveEgressBlocked
+                      ? 'bg-teal-950/80 text-teal-300 border border-teal-600 font-bold'
+                      : 'bg-[#07192f] text-slate-300 border border-[#1b3f68]'
+                  }`}
+                >
+                  Zero-Egress VPC
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEnclaveEgressBlocked(false);
+                    setSelectedPresetId('custom');
+                  }}
+                  className={`px-2.5 py-2 rounded text-xs font-semibold flex-1 transition-colors cursor-pointer ${
+                    !enclaveEgressBlocked
+                      ? 'bg-rose-950/80 text-rose-300 border border-rose-600 font-bold'
+                      : 'bg-[#07192f] text-slate-300 border border-[#1b3f68]'
+                  }`}
+                >
+                  Open WAN
+                </button>
+              </div>
             </div>
-            <span className="text-[10px] text-slate-400 block font-mono">Calico CNI Egress Enforcement</span>
+            <span className="text-xs text-slate-400 block font-mono">Calico CNI Egress Enforcement</span>
           </div>
 
           {/* Parameter 8: AI Workload Governance */}
-          <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2">
-            <label className="font-bold text-white block">Assistive AI Model</label>
-            <select
-              value={aiWorkloadType}
-              onChange={(e) => {
-                setAiWorkloadType(e.target.value as any);
-                setSelectedPresetId('custom');
-              }}
-              className="w-full bg-[#07192f] border border-cyan-900/60 rounded-md p-2 text-xs text-white focus:outline-none focus:border-cyan-400"
-            >
-              <option value="none">Standard Human Analytics</option>
-              <option value="assistive">Assistive Code Completion (Cline/Cursor)</option>
-              <option value="autonomous_high_risk">Autonomous Agent (Stanford #8702)</option>
-            </select>
-            {aiWorkloadType === 'autonomous_high_risk' && (
+          <div className="h-full p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2 flex flex-col justify-between">
+            <div className="space-y-2">
+              <label className="font-bold text-white block">Assistive AI Model</label>
+              <select
+                value={aiWorkloadType}
+                onChange={(e) => {
+                  setAiWorkloadType(e.target.value as any);
+                  setSelectedPresetId('custom');
+                }}
+                className="w-full bg-[#07192f] border border-cyan-900/60 rounded-md p-2.5 text-sm text-white focus:outline-none focus:border-cyan-400"
+              >
+                <option value="none">Standard Human Analytics</option>
+                <option value="assistive">Assistive Code Completion (Cline/Cursor)</option>
+                <option value="autonomous_high_risk">Autonomous Agent (Stanford #8702)</option>
+              </select>
+            </div>
+            {aiWorkloadType === 'autonomous_high_risk' ? (
               <label className="flex items-center gap-2 pt-1 cursor-pointer">
                 <input
                   type="checkbox"
@@ -993,8 +1009,10 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
                   onChange={(e) => setAiHumanSponsorLinked(e.target.checked)}
                   className="rounded text-teal-400"
                 />
-                <span className="text-[11px] text-cyan-300">Human Sponsor Linked</span>
+                <span className="text-xs text-cyan-300">Human Sponsor Linked</span>
               </label>
+            ) : (
+              <span className="text-xs text-slate-400 block font-mono">ISO 42001 &amp; MHRA Safeguard</span>
             )}
           </div>
         </div>
@@ -1014,7 +1032,7 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
           </div>
 
           {/* Outcome Status Banner */}
-          <div className={`px-4 py-2 rounded-lg border flex items-center gap-2.5 font-bold text-xs ${
+          <div className={`px-4 py-2 rounded-lg border flex items-center gap-2.5 font-bold text-xs sm:text-sm ${
             evaluation.overallDecision === 'APPROVED'
               ? 'bg-teal-950/80 text-teal-300 border-teal-600'
               : evaluation.overallDecision === 'REQUIRES LOCAL REVIEW'
@@ -1033,7 +1051,7 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
         </div>
 
         {/* Narrative Reason Card */}
-        <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/60 flex items-start gap-3 text-xs text-slate-300">
+        <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/60 flex items-start gap-3 text-sm text-slate-300">
           <Info className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
           <div className="space-y-1">
             <strong className="text-white block font-bold">Policy Decision Point (PDP) Evidence Rationale:</strong>
@@ -1069,15 +1087,15 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
                   <div className="flex items-start sm:items-center gap-3">
                     {icon}
                     <div className="space-y-0.5">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
                           {gate.gateName}
                         </span>
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#07192f] text-cyan-300 border border-cyan-900/60">
+                        <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#07192f] text-cyan-300 border border-cyan-900/60">
                           {gate.pillar}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-300 line-clamp-1">{gate.plainEnglishSummary}</p>
+                      <p className="text-xs sm:text-sm text-slate-300 line-clamp-1">{gate.plainEnglishSummary}</p>
                     </div>
                   </div>
 
@@ -1088,9 +1106,9 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
                           e.stopPropagation();
                           setWorkspaceView('sdc_hub');
                         }}
-                        className="text-[11px] font-semibold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 hover:bg-amber-100 px-2 py-0.5 rounded border border-amber-200 dark:border-amber-800 flex items-center gap-1 transition-colors cursor-pointer"
+                        className="text-xs font-semibold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 hover:bg-amber-100 px-2.5 py-1 rounded border border-amber-200 dark:border-amber-800 flex items-center gap-1 transition-colors cursor-pointer whitespace-nowrap"
                       >
-                        <Calculator className="w-3 h-3 text-amber-600" />
+                        <Calculator className="w-3.5 h-3.5 text-amber-600" />
                         <span>Launch SDC Simulator</span>
                       </button>
                     )}
@@ -1100,16 +1118,16 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
                           e.stopPropagation();
                           setWorkspaceView('transparency_ledger');
                         }}
-                        className="text-[11px] font-semibold text-[#005EB8] dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 hover:bg-sky-100 px-2 py-0.5 rounded border border-sky-200 dark:border-sky-800 flex items-center gap-1 transition-colors cursor-pointer"
+                        className="text-xs font-semibold text-[#005EB8] dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 hover:bg-sky-100 px-2.5 py-1 rounded border border-sky-200 dark:border-sky-800 flex items-center gap-1 transition-colors cursor-pointer whitespace-nowrap"
                       >
-                        <HeartHandshake className="w-3 h-3 text-[#005EB8]" />
+                        <HeartHandshake className="w-3.5 h-3.5 text-[#005EB8]" />
                         <span>View Public Register</span>
                       </button>
                     )}
-                    <span className={`text-[10px] font-mono px-2.5 py-0.5 rounded border uppercase font-bold ${badgeBg}`}>
+                    <span className={`text-xs font-mono px-2.5 py-0.5 rounded border uppercase font-bold ${badgeBg}`}>
                       {gate.status}
                     </span>
-                    <span className="text-xs text-[#005EB8] dark:text-sky-400 font-medium flex items-center gap-1 group-hover:underline">
+                    <span className="text-xs text-[#005EB8] dark:text-sky-400 font-medium flex items-center gap-1 group-hover:underline whitespace-nowrap">
                       <span>Inspect Rule</span>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </span>
@@ -1224,10 +1242,10 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
     />
   )}
 
-  {/* 4. THE PLAIN-ENGLISH POLICY INSPECTOR MODAL/DRAWER */}
-  {inspectedGate && (
+      {/* 4. THE PLAIN-ENGLISH POLICY INSPECTOR MODAL/DRAWER */}
+      {inspectedGate && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl max-w-3xl w-full p-6 sm:p-8 space-y-6 shadow-2xl relative">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
               <div className="space-y-1">
                 <span className="text-xs font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider">
@@ -1237,41 +1255,41 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
               </div>
               <button
                 onClick={() => setInspectedGate(null)}
-                className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 cursor-pointer"
+                className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
-            <div className="space-y-4 text-xs">
+            <div className="space-y-4 text-sm">
               <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1.5">
-                <strong className="text-slate-700 dark:text-slate-300 uppercase tracking-wider text-[11px] block">
+                <strong className="text-slate-700 dark:text-slate-300 uppercase tracking-wider text-xs block">
                   Plain-English Statutory Translation:
                 </strong>
-                <p className="text-slate-900 dark:text-slate-100 text-sm leading-relaxed">{inspectedGate.plainEnglishSummary}</p>
+                <p className="text-slate-900 dark:text-slate-100 text-sm sm:text-base leading-relaxed">{inspectedGate.plainEnglishSummary}</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-lg border border-slate-200 dark:border-slate-700 space-y-1">
-                  <span className="text-[10px] text-slate-500 uppercase font-mono block">Statutory Authority</span>
-                  <span className="text-xs font-semibold text-amber-800 dark:text-amber-300 block">{inspectedGate.statutoryBasis}</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="p-3.5 bg-slate-50 dark:bg-slate-800/60 rounded-lg border border-slate-200 dark:border-slate-700 space-y-1">
+                  <span className="text-xs text-slate-500 uppercase font-mono block">Statutory Authority</span>
+                  <span className="text-sm font-semibold text-amber-800 dark:text-amber-300 block">{inspectedGate.statutoryBasis}</span>
                 </div>
-                <div className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-lg border border-slate-200 dark:border-slate-700 space-y-1">
-                  <span className="text-[10px] text-slate-500 uppercase font-mono block">Triggered Policy Node</span>
-                  <span className="text-xs font-mono text-[#005EB8] dark:text-sky-300 block">{inspectedGate.triggerNode}</span>
+                <div className="p-3.5 bg-slate-50 dark:bg-slate-800/60 rounded-lg border border-slate-200 dark:border-slate-700 space-y-1">
+                  <span className="text-xs text-slate-500 uppercase font-mono block">Triggered Policy Node</span>
+                  <span className="text-sm font-mono text-[#005EB8] dark:text-sky-300 block">{inspectedGate.triggerNode}</span>
                 </div>
               </div>
 
               {/* Architecture Decision Register Linkage Block */}
-              <div className="p-3.5 bg-sky-50 dark:bg-slate-800 rounded-lg border border-sky-200 dark:border-sky-900/40 flex items-center justify-between gap-3">
-                <div className="space-y-0.5">
+              <div className="p-4 bg-sky-50 dark:bg-slate-800 rounded-lg border border-sky-200 dark:border-sky-900/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#005EB8] text-white font-bold">
+                    <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#005EB8] text-white font-bold">
                       {inspectedGate.decisionRef}
                     </span>
-                    <strong className="text-slate-900 dark:text-white text-xs">{inspectedGate.decisionTitle}</strong>
+                    <strong className="text-slate-900 dark:text-white text-sm">{inspectedGate.decisionTitle}</strong>
                   </div>
-                  <span className="text-[11px] text-slate-600 dark:text-slate-400 block">
+                  <span className="text-xs text-slate-600 dark:text-slate-400 block">
                     Accountable Authority: <span className="font-medium text-slate-800 dark:text-slate-200">{inspectedGate.decisionRole}</span>
                   </span>
                 </div>
@@ -1282,7 +1300,7 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
                       setInspectedGate(null);
                       onNavigateToDecisionRegister(ref);
                     }}
-                    className="px-3 py-1.5 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white text-xs font-semibold flex items-center gap-1.5 shrink-0 transition-colors cursor-pointer"
+                    className="px-3.5 py-2 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white text-xs font-semibold flex items-center gap-1.5 shrink-0 transition-colors cursor-pointer whitespace-nowrap"
                   >
                     <span>Open Decision Record</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -1292,16 +1310,16 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
 
               {/* Scoped Dark Terminal for Rule */}
               <div className="space-y-1.5">
-                <span className="text-slate-500 font-mono text-[11px] block">
+                <span className="text-slate-500 font-mono text-xs block">
                   Machine-Executable Constraint Shape:
                 </span>
-                <pre className="p-3.5 bg-slate-950 rounded-lg border border-slate-800 text-slate-200 font-mono text-xs overflow-x-auto leading-relaxed">
+                <pre className="p-4 bg-slate-950 rounded-lg border border-slate-800 text-slate-200 font-mono text-xs overflow-x-auto leading-relaxed">
                   <code>{inspectedGate.codeSnippet}</code>
                 </pre>
               </div>
             </div>
 
-            <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
               {onNavigateToDecisionRegister ? (
                 <button
                   onClick={() => {
@@ -1309,15 +1327,15 @@ sdc:contextualChecks "Verify zero group disclosure & table differencing risk" .`
                     setInspectedGate(null);
                     onNavigateToDecisionRegister(ref);
                   }}
-                  className="text-xs font-medium text-[#005EB8] dark:text-sky-400 hover:underline flex items-center gap-1 cursor-pointer"
+                  className="text-sm font-medium text-[#005EB8] dark:text-sky-400 hover:underline flex items-center gap-1.5 cursor-pointer"
                 >
-                  <Workflow className="w-3.5 h-3.5" />
+                  <Workflow className="w-4 h-4" />
                   <span>View Governance Track ({inspectedGate.decisionRef})</span>
                 </button>
               ) : <div />}
               <button
                 onClick={() => setInspectedGate(null)}
-                className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-medium text-xs cursor-pointer"
+                className="px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-medium text-sm cursor-pointer"
               >
                 Close Inspector
               </button>

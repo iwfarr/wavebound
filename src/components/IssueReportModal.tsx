@@ -179,7 +179,7 @@ ${description.trim()}
         {/* Modal Header */}
         <div className="flex items-start justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
           <div className="space-y-1">
-            <span className="text-[11px] font-mono font-bold text-[#00A389] dark:text-teal-400 uppercase tracking-wider flex items-center gap-1.5">
+            <span className="text-xs font-mono font-bold text-[#00A389] dark:text-teal-400 uppercase tracking-wider flex items-center gap-1.5">
               <MessageSquarePlus className="w-3.5 h-3.5" />
               <span>Contributions Welcome</span>
             </span>
@@ -189,7 +189,7 @@ ${description.trim()}
             >
               Raise an Issue or Suggest an Improvement
             </h2>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
               Spot unclear wording, a legal nuance, a broken rule, or an idea to make Wavebound more helpful? Share it here.
             </p>
           </div>
@@ -207,7 +207,7 @@ ${description.trim()}
           <div className="space-y-4">
             <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 text-[#047857] dark:text-emerald-400 shrink-0 mt-0.5" />
-              <div className="space-y-1 text-xs">
+              <div className="space-y-1 text-xs sm:text-sm">
                 <div className="font-bold text-emerald-900 dark:text-emerald-200 text-sm">
                   Issue Logged ({submittedIssue.id})
                 </div>
@@ -217,7 +217,7 @@ ${description.trim()}
               </div>
             </div>
 
-            <pre className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-[11px] font-mono text-slate-800 dark:text-slate-200 overflow-x-auto whitespace-pre-wrap leading-relaxed">
+            <pre className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs font-mono text-slate-800 dark:text-slate-200 overflow-x-auto whitespace-pre-wrap leading-relaxed">
               {submittedIssue.markdown}
             </pre>
 
@@ -361,14 +361,14 @@ ${description.trim()}
               <button
                 type="button"
                 onClick={onClose}
-                className="px-3.5 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold cursor-pointer"
+                className="px-3.5 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold cursor-pointer whitespace-nowrap"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-4 py-2 rounded-lg bg-[#00A389] hover:bg-emerald-700 disabled:opacity-60 text-white font-semibold flex items-center gap-1.5 cursor-pointer shadow-xs"
+                className="px-4 py-2 rounded-lg bg-[#00A389] hover:bg-emerald-700 disabled:opacity-60 text-white font-semibold flex items-center gap-1.5 cursor-pointer shadow-xs whitespace-nowrap"
               >
                 <Send className="w-3.5 h-3.5" />
                 <span>{isSubmitting ? 'Submitting...' : 'Submit Issue'}</span>

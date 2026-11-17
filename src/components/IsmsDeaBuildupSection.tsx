@@ -266,11 +266,11 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="w-full space-y-6">
       {/* 1. Tech-Agnostic Platform Readiness Header + KPI Strip */}
       <div className="bg-white dark:bg-[#0c2340] border border-slate-200 dark:border-cyan-900/60 rounded-xl p-6 space-y-5 shadow-sm">
         <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 border-b border-slate-200 dark:border-cyan-900/50 pb-5">
-          <div className="space-y-2 max-w-3xl">
+          <div className="space-y-2 flex-1">
             <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-[#005EB8] dark:text-cyan-300">
               <span>ISO/IEC 27001:2022 Clauses 4–10</span>
               <span aria-hidden="true">·</span>
@@ -283,27 +283,27 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
               ISO/IEC 27001:2022 &amp; DEA 2017 Platform Preparation Playbook
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-200 leading-relaxed">
               What any safe &amp; secure data intelligence platform must establish—people roles, scoping, risk methodology, 93-control Statement of Applicability, 60–90 days of operational evidence, internal audit, and run-state cadence—<strong>independently of any specific policy engine</strong>. Optional Policy-as-Code / OPA automation lives cleanly in Tab 5.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 shrink-0">
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <button
               type="button"
               onClick={handleExportReadinessMarkdown}
-              className="px-3.5 py-2 rounded-lg bg-[#00A389] hover:bg-teal-600 text-white text-xs font-semibold flex items-center gap-2 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+              className="px-3.5 py-2 rounded-lg bg-[#00A389] hover:bg-teal-600 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
-              <Download className="w-3.5 h-3.5" />
+              <Download className="w-4 h-4" />
               <span>Export Platform Playbook (.md)</span>
             </button>
             {onNavigateToDecisionRegister && (
               <button
                 type="button"
                 onClick={() => onNavigateToDecisionRegister('D-001')}
-                className="px-3.5 py-2 rounded-lg bg-slate-100 dark:bg-[#07192f] hover:bg-slate-200 dark:hover:bg-[#123154] text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-[#1b3f68] text-xs font-semibold flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                className="px-3.5 py-2 rounded-lg bg-slate-100 dark:bg-[#07192f] hover:bg-slate-200 dark:hover:bg-[#123154] text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-[#1b3f68] text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
               >
-                <Scale className="w-3.5 h-3.5 text-[#005EB8] dark:text-cyan-400" />
+                <Scale className="w-4 h-4 text-[#005EB8] dark:text-cyan-400" />
                 <span>Decision Register</span>
               </button>
             )}
@@ -311,47 +311,47 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
         </div>
 
         {/* Platform Readiness Counters (Technology-Agnostic, Tabular Figures) */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-cyan-900/40 space-y-1">
-            <span className="text-xs text-slate-500 dark:text-slate-400 block">Certification Timeline</span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+          <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-cyan-900/40 space-y-1.5 h-full flex flex-col justify-between">
+            <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Certification Timeline</span>
             <div className="text-lg sm:text-xl font-bold font-mono tabular-nums text-slate-900 dark:text-white">
               16–24 Wks <span className="text-xs font-normal text-slate-500 dark:text-slate-400">(SME / 1 BU)</span>
             </div>
-            <div className="text-[11px] text-slate-500 dark:text-slate-400">6–12 mos for multi-site enterprise</div>
+            <div className="text-xs text-slate-600 dark:text-slate-300">6–12 mos for multi-site enterprise</div>
           </div>
 
-          <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-cyan-900/40 space-y-1">
-            <span className="text-xs text-slate-500 dark:text-slate-400 block">Stage 1 Clauses 4–10 Ready</span>
+          <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-cyan-900/40 space-y-1.5 h-full flex flex-col justify-between">
+            <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Stage 1 Clauses 4–10 Ready</span>
             <div className="text-lg sm:text-xl font-bold font-mono tabular-nums text-slate-900 dark:text-white">
               {stageOneReadyCount} / {stageOneMandatoryCount}{' '}
               <span className="text-xs font-normal text-slate-500 dark:text-slate-400">critical</span>
             </div>
-            <div className="text-[11px] text-slate-500 dark:text-slate-400">Checked first before Stage 2</div>
+            <div className="text-xs text-slate-600 dark:text-slate-300">Checked first before Stage 2</div>
           </div>
 
-          <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-cyan-900/40 space-y-1">
-            <span className="text-xs text-slate-500 dark:text-slate-400 block">Full Build-Up Pack</span>
+          <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-cyan-900/40 space-y-1.5 h-full flex flex-col justify-between">
+            <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Full Build-Up Pack</span>
             <div className="text-lg sm:text-xl font-bold font-mono tabular-nums text-slate-900 dark:text-white">
               {readyCount} / {totalCount}{' '}
               <span className="text-sm font-semibold text-[#00A389] dark:text-emerald-400">({readinessPct}%)</span>
             </div>
-            <div className="text-[11px] text-slate-500 dark:text-slate-400">Clauses, SoA, SOPs &amp; DEA</div>
+            <div className="text-xs text-slate-600 dark:text-slate-300">Clauses, SoA, SOPs &amp; DEA</div>
           </div>
 
-          <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-cyan-900/40 space-y-1">
-            <span className="text-xs text-slate-500 dark:text-slate-400 block">Audit &amp; Cert Cycle</span>
+          <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-cyan-900/40 space-y-1.5 h-full flex flex-col justify-between">
+            <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Audit &amp; Cert Cycle</span>
             <div className="text-lg sm:text-xl font-bold font-mono tabular-nums text-slate-900 dark:text-white">
               3-Year <span className="text-xs font-normal text-slate-500 dark:text-slate-400">+ 60–90d proof</span>
             </div>
-            <div className="text-[11px] text-slate-500 dark:text-slate-400">Yr 1 &amp; 2 surveillance · Yr 3 recert</div>
+            <div className="text-xs text-slate-600 dark:text-slate-300">Yr 1 &amp; 2 surveillance · Yr 3 recert</div>
           </div>
         </div>
 
         {/* Statutory Clarity Strip: DEA 2017 Accredited Processor vs. ISO 27001 Certification */}
-        <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/75 border border-slate-200 dark:border-cyan-900/50 flex items-start gap-3">
-          <Info className="w-4 h-4 text-[#005EB8] dark:text-cyan-400 shrink-0 mt-0.5" />
-          <div className="space-y-1 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
-            <strong className="text-slate-900 dark:text-white font-semibold">
+        <div className="p-5 rounded-lg bg-slate-50 dark:bg-slate-950/75 border border-slate-200 dark:border-cyan-900/50 flex items-start gap-3">
+          <Info className="w-5 h-5 text-[#005EB8] dark:text-cyan-400 shrink-0 mt-0.5" />
+          <div className="space-y-1.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
+            <strong className="text-slate-900 dark:text-white font-semibold block">
               DEA 2017 Fact-Check: Is formal ISO/IEC 27001 certification strictly mandatory for an Accredited Processor?
             </strong>
             <p>
@@ -365,31 +365,31 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
         </div>
 
         {/* DEA 2017 Consistency & Where Cyber Security Fits Overview */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/75 border border-slate-200 dark:border-cyan-900/50 space-y-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
+          <div className="p-5 rounded-lg bg-slate-50 dark:bg-slate-950/75 border border-slate-200 dark:border-cyan-900/50 space-y-2 h-full flex flex-col">
             <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[#005EB8] dark:text-cyan-300">
               <Scale className="w-4 h-4 shrink-0" />
               <span>DEA 2017 Consistency · Statutory Scope &amp; Alignment</span>
             </div>
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">
               Is this wavebound approach consistent with DEA 2017?
             </h3>
-            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-200 leading-relaxed">
               <strong>Yes—for Research Code mechanics, with an explicit statutory boundary for health data.</strong> Wavebound operationalises DEA Part 5 Ch. 5 (s64–73) and the UKSA TRE SAQ V3.1 Five Safes via pre-execution SHACL/OPA gates and immutable W3C PROV-O evidence, while keeping human{' '}
               <strong>Research Accreditation Panel (RAP)</strong> decisions supreme. Crucially, <strong>DEA s64 excludes health and adult social care data</strong>, which remain governed by UK GDPR Art 6/9, Common Law Duty of Confidentiality, and NHS Act 2006 s251/CAG.
             </p>
           </div>
 
-          <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/75 border border-slate-200 dark:border-cyan-900/50 space-y-2">
+          <div className="p-5 rounded-lg bg-slate-50 dark:bg-slate-950/75 border border-slate-200 dark:border-cyan-900/50 space-y-2 h-full flex flex-col">
             <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[#00A389] dark:text-emerald-300">
               <ShieldCheck className="w-4 h-4 shrink-0" />
               <span>Architecture Placement · NCSC CAF · DSPT · Annex A.8</span>
             </div>
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">
               Where does Cyber Security fit alongside IG &amp; Statistical Disclosure?
             </h3>
-            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              <strong>Cyber Security forms the technical &ldquo;Safe Settings&rdquo; spine of the ISMS</strong>—distinct from Information Governance (legal basis, Caldicott, s251) and Statistical Disclosure Control (<strong>Safe Outputs</strong> k&ge;10 airlock). It maps <strong>NCSC Cyber Assessment Framework (CAF)</strong>, <strong>Cyber Essentials Plus</strong>, <strong>NHS DSPT</strong>, and <strong>ISO/IEC 27001:2022 Annex A.8</strong> onto zero-egress VPC/eBPF boundaries, pixel-only VDI, FIDO2 MFA, KMS AES-256 encryption, read-only rootless pods, and centralised SIEM alerting.
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-200 leading-relaxed">
+              <strong>Cyber Security forms the technical &ldquo;Safe Settings&rdquo; spine of the ISMS</strong>—distinct from Information Governance (legal basis, Caldicott, s251) and Statistical Disclosure Control (<strong>Safe Outputs</strong> k&ge;10 airlock). It maps <strong>NCSC Cyber Assessment Framework (CAF)</strong>, <strong>Cyber Essentials Plus</strong>, <strong>NHS DSPT</strong>, and <strong>ISO/IEC 27001:2022 Annex A.8</strong> onto zero-egress VPC/eBPF boundaries, pixel-only VDI, FIDO2 MFA, KMS AES-256, read-only rootless pods, and centralised SIEM alerting.
             </p>
           </div>
         </div>
@@ -403,7 +403,7 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveSubTab(tab.id)}
-                className={`px-3 py-2 rounded-md text-xs font-semibold flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                className={`px-3.5 py-2 rounded-md text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                   active
                     ? 'bg-white dark:bg-[#00A389] text-slate-900 dark:text-white shadow-xs'
                     : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
@@ -420,48 +420,48 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
       {/* SUB-TAB 1: 4 CORE GOVERNANCE ROLES & AUDITOR INDEPENDENCE */}
       {activeSubTab === 'roles' && (
         <div className="bg-white dark:bg-[#0c2340] border border-slate-200 dark:border-cyan-900/60 rounded-xl p-6 space-y-5 shadow-sm">
-          <div className="border-b border-slate-200 dark:border-cyan-900/50 pb-4 space-y-1">
+          <div className="border-b border-slate-200 dark:border-cyan-900/50 pb-4 space-y-1.5">
             <div className="text-xs font-mono font-semibold text-[#005EB8] dark:text-cyan-300">
               Pre-Phase 1 Accountability Assignment · Tech-Agnostic
             </div>
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+            <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
               Four Distinct Audit Roles Required Before Starting Phase 1
             </h3>
-            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-200 leading-relaxed">
               Accredited Certification Bodies verify clear separation between leadership sponsorship, daily ISMS coordination, hands-on control operation, and independent pre-certification auditing.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
             {CORE_ISMS_ROLES.map((role) => (
               <div
                 key={role.id}
-                className="p-5 rounded-lg bg-slate-50 dark:bg-slate-950/75 border border-slate-200 dark:border-cyan-900/50 flex flex-col justify-between space-y-4"
+                className="p-5 rounded-lg bg-slate-50 dark:bg-slate-950/75 border border-slate-200 dark:border-cyan-900/50 flex flex-col justify-between space-y-4 h-full"
               >
                 <div className="space-y-2.5">
-                  <div className="flex items-center justify-between gap-2 text-[11px] font-mono text-[#005EB8] dark:text-cyan-300">
+                  <div className="flex items-center justify-between gap-2 text-xs font-mono text-[#005EB8] dark:text-cyan-300">
                     <span>{role.clauseAnchor}</span>
                   </div>
                   <h4 className="text-base font-bold text-slate-900 dark:text-white">
                     {role.roleTitle}
                   </h4>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-200 leading-relaxed">
                     {role.accountabilitySummary}
                   </p>
                   <ul className="space-y-1.5 pt-1">
                     {role.keyResponsibilities.map((resp, idx) => (
                       <li
                         key={idx}
-                        className="text-xs text-slate-700 dark:text-slate-300 flex items-start gap-2 leading-relaxed"
+                        className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 flex items-start gap-2 leading-relaxed"
                       >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#00A389] dark:text-emerald-400 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-[#00A389] dark:text-emerald-400 shrink-0 mt-0.5" />
                         <span>{resp}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="pt-3 border-t border-slate-200 dark:border-cyan-900/40 text-[11px] text-slate-600 dark:text-amber-200/90 leading-relaxed">
+                <div className="pt-3 border-t border-slate-200 dark:border-cyan-900/40 text-xs text-slate-600 dark:text-amber-200/90 leading-relaxed">
                   <strong className="text-slate-800 dark:text-amber-300">Audit Checkpoint: </strong>
                   {role.platformAuditRule}
                 </div>
@@ -474,21 +474,21 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
       {/* SUB-TAB 2: 6-PHASE 24-WEEK IMPLEMENTATION PLAYBOOK */}
       {activeSubTab === 'roadmap' && (
         <div className="bg-white dark:bg-[#0c2340] border border-slate-200 dark:border-cyan-900/60 rounded-xl p-6 space-y-5 shadow-sm">
-          <div className="border-b border-slate-200 dark:border-cyan-900/50 pb-4 space-y-1">
+          <div className="border-b border-slate-200 dark:border-cyan-900/50 pb-4 space-y-1.5">
             <div className="text-xs font-mono font-semibold text-[#005EB8] dark:text-cyan-300">
               End-to-End Build-Up · 16–24 Weeks (SME / Single Platform Unit) · 6–12 Months (Multi-Site Enterprise)
             </div>
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+            <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
               Six-Phase ISO/IEC 27001:2022 Implementation Playbook
             </h3>
-            <p className="text-xs text-slate-600 dark:text-slate-300">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-200 leading-relaxed">
               Select any phase below to inspect concrete platform deliverables, Clauses 4–10 milestones, and operational proof expectations.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
             {/* Phase Rail */}
-            <div className="lg:col-span-5 space-y-2">
+            <div className="lg:col-span-5 space-y-2.5">
               {SIX_PHASE_PLAYBOOK.map((phase) => {
                 const isSelected = phase.id === selectedPhase.id;
                 return (
@@ -496,14 +496,14 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
                     key={phase.id}
                     type="button"
                     onClick={() => setSelectedPhaseId(phase.id)}
-                    className={`w-full text-left p-3.5 rounded-lg border transition-colors cursor-pointer ${
+                    className={`w-full text-left p-4 rounded-lg border transition-colors cursor-pointer ${
                       isSelected
                         ? 'bg-sky-50 dark:bg-[#07192f] border-[#005EB8] dark:border-[#00A389]'
                         : 'bg-slate-50 dark:bg-slate-950/60 border-slate-200 dark:border-cyan-900/40 hover:border-cyan-500/60'
                     }`}
                   >
-                    <div className="flex items-center justify-between gap-2 text-[11px] font-mono">
-                      <span className="font-bold text-[#005EB8] dark:text-cyan-300">
+                    <div className="flex items-center justify-between gap-2 text-xs font-mono">
+                      <span className="font-bold text-[#005EB8] dark:text-cyan-300 tabular-nums">
                         Phase {phase.phaseNumber} · {phase.timelineWeeks}
                       </span>
                       <span className="text-slate-500 dark:text-slate-400">
@@ -513,7 +513,7 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
                     <div className="text-sm font-bold text-slate-900 dark:text-white mt-1">
                       {phase.title}
                     </div>
-                    <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 line-clamp-2">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 mt-1 line-clamp-2 leading-relaxed">
                       {phase.focusSummary}
                     </p>
                   </button>
@@ -524,7 +524,7 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
             {/* Active Phase Detail */}
             <div className="lg:col-span-7 p-5 sm:p-6 rounded-lg bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-cyan-900/50 space-y-4">
               <div className="space-y-1.5 border-b border-slate-200 dark:border-cyan-900/40 pb-3.5">
-                <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-[#005EB8] dark:text-cyan-300">
+                <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-[#005EB8] dark:text-cyan-300 tabular-nums">
                   <span className="font-bold">Phase {selectedPhase.phaseNumber}</span>
                   <span aria-hidden="true">·</span>
                   <span>{selectedPhase.timelineWeeks}</span>
@@ -534,19 +534,19 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
                 <h4 className="text-lg font-bold text-slate-900 dark:text-white">
                   {selectedPhase.title}
                 </h4>
-                <p className="text-xs text-slate-600 dark:text-slate-300">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-200 leading-relaxed">
                   {selectedPhase.focusSummary}
                 </p>
               </div>
 
               <div className="space-y-2.5">
-                <div className="text-xs font-semibold text-slate-800 dark:text-slate-200">
+                <div className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200">
                   Key Execution Steps &amp; Platform Deliverables
                 </div>
                 {selectedPhase.deliverables.map((deliv, i) => (
                   <div
                     key={i}
-                    className="p-3 rounded-lg bg-white dark:bg-[#0c2340]/80 border border-slate-200 dark:border-cyan-900/40 flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-200 leading-relaxed"
+                    className="p-3.5 rounded-lg bg-white dark:bg-[#0c2340]/80 border border-slate-200 dark:border-cyan-900/40 flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed"
                   >
                     <CheckCircle2 className="w-4 h-4 text-[#00A389] dark:text-emerald-400 shrink-0 mt-0.5" />
                     <span>{deliv}</span>
@@ -554,7 +554,7 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
                 ))}
               </div>
 
-              <div className="pt-2 border-t border-slate-200 dark:border-cyan-900/40 text-xs text-slate-700 dark:text-amber-200 leading-relaxed">
+              <div className="pt-3 border-t border-slate-200 dark:border-cyan-900/40 text-xs sm:text-sm text-slate-700 dark:text-amber-200 leading-relaxed">
                 <strong className="text-slate-900 dark:text-amber-300">Practical Platform Note: </strong>
                 {selectedPhase.platformPracticeNote}
               </div>
@@ -567,12 +567,12 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
       {activeSubTab === 'artifacts' && (
         <div className="bg-white dark:bg-[#0c2340] border border-slate-200 dark:border-cyan-900/60 rounded-xl p-6 space-y-5 shadow-sm">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200 dark:border-cyan-900/50 pb-4">
-            <div className="space-y-1">
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <div className="space-y-1.5 flex-1">
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <FileText className="w-5 h-5 text-[#005EB8] dark:text-cyan-400" />
                 <span>Mandatory Clauses 4–10 Artifacts, SoA, Operational SOPs &amp; DEA Dossier</span>
               </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 External auditors check the 11 Clauses 4–10 deliverables first during Stage 1—missing any single mandatory document causes an immediate major nonconformity. Expand any item to inspect tech-agnostic preparation steps, copyable outlines, and (optionally) how it bridges to Policy-as-Code.
               </p>
             </div>
@@ -581,10 +581,10 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
               <button
                 type="button"
                 onClick={onNavigateToMatrix}
-                className="text-xs font-semibold text-[#005EB8] dark:text-cyan-300 hover:underline flex items-center gap-1 self-start lg:self-center shrink-0 cursor-pointer"
+                className="text-xs sm:text-sm font-semibold text-[#005EB8] dark:text-cyan-300 hover:underline flex items-center gap-1.5 self-start lg:self-center shrink-0 cursor-pointer whitespace-nowrap"
               >
                 <span>Inspect Consolidated Statutory Matrix</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-4 h-4" />
               </button>
             )}
           </div>
@@ -608,14 +608,14 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
               ))}
             </div>
 
-            <div className="relative w-full xl:w-80">
+            <div className="relative w-full xl:w-96">
               <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search clause (e.g. 6.2, 7.2, 9.3), SOP, owner..."
-                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-cyan-900/60 rounded-lg pl-9 pr-3 py-2 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-500"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-cyan-900/60 rounded-lg pl-9 pr-3 py-2 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-500"
               />
             </div>
           </div>
@@ -624,10 +624,10 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
           {filteredArtefacts.length === 0 ? (
             <div className="p-8 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-cyan-900/40 text-center space-y-3">
               <AlertTriangle className="w-6 h-6 text-amber-500 mx-auto" />
-              <div className="text-sm font-semibold text-slate-900 dark:text-white">
+              <div className="text-base font-semibold text-slate-900 dark:text-white">
                 No matching ISMS or DEA build-up artefacts
               </div>
-              <p className="text-xs text-slate-600 dark:text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
                 Adjust your search filter or reset category selection to view all {totalCount} artefacts.
               </p>
               <button
@@ -636,7 +636,7 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
                   setSelectedCategory('All');
                   setSearchQuery('');
                 }}
-                className="px-3 py-1.5 rounded-lg bg-[#005EB8] text-white text-xs font-semibold inline-flex items-center gap-1.5 cursor-pointer"
+                className="px-3.5 py-2 rounded-lg bg-[#005EB8] text-white text-xs sm:text-sm font-semibold inline-flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Reset Filters</span>
@@ -672,10 +672,10 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
                             </>
                           )}
                         </div>
-                        <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+                        <h4 className="text-base font-bold text-slate-900 dark:text-white">
                           {item.title}
                         </h4>
-                        <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                           {item.purpose}
                         </p>
                       </div>
@@ -707,45 +707,45 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
 
                     {/* Expanded Details: Tech-Agnostic Preparation + Template + Optional OPA Bridge */}
                     {isExpanded && (
-                      <div className="px-4 sm:px-5 pb-5 pt-3 border-t border-slate-200 dark:border-cyan-900/40 bg-slate-50/70 dark:bg-[#07192f]/70 space-y-4">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                          <div className="space-y-1">
+                      <div className="px-4 sm:px-5 pb-5 pt-4 border-t border-slate-200 dark:border-cyan-900/40 bg-slate-50/70 dark:bg-[#07192f]/70 space-y-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+                          <div className="space-y-1.5">
                             <span className="font-semibold text-slate-800 dark:text-cyan-300 block">
                               Practical Audit Format &amp; Cadence
                             </span>
                             <p className="text-slate-700 dark:text-slate-200 leading-relaxed font-medium">
                               {item.practicalFormat}
                             </p>
-                            <div className="text-[11px] text-slate-500 dark:text-slate-400 pt-1">
+                            <div className="text-xs text-slate-500 dark:text-slate-400 pt-1">
                               Review Cadence: {item.reviewCadence}
                             </div>
                           </div>
 
-                          <div className="space-y-1">
+                          <div className="space-y-1.5">
                             <span className="font-semibold text-slate-800 dark:text-emerald-300 block">
                               What a Safe Data Intelligence Platform Must Prepare (Tech-Agnostic)
                             </span>
-                            <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                            <p className="text-slate-600 dark:text-slate-200 leading-relaxed">
                               {item.platformPreparationRequirement}
                             </p>
                           </div>
                         </div>
 
                         <div className="space-y-2">
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">
+                          <div className="flex flex-wrap items-center justify-between gap-2">
+                            <span className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200">
                               Starter Deliverable Outline (Copyable Markdown Template)
                             </span>
                             <button
                               type="button"
                               onClick={() => handleCopyText(item.id, item.templateMarkdown)}
-                              className="px-2.5 py-1 rounded bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-[11px] font-mono text-slate-700 dark:text-cyan-300 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1 cursor-pointer"
+                              className="px-3 py-1.5 rounded bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs font-mono text-slate-700 dark:text-cyan-300 hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
                             >
-                              {copiedId === item.id ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
+                              {copiedId === item.id ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
                               <span>{copiedId === item.id ? 'Copied Markdown' : 'Copy Template'}</span>
                             </button>
                           </div>
-                          <pre className="p-3.5 rounded-lg bg-slate-950 border border-slate-800 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed whitespace-pre-wrap">
+                          <pre className="p-4 rounded-lg bg-slate-950 border border-slate-800 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed whitespace-pre-wrap">
                             <code>{item.templateMarkdown}</code>
                           </pre>
                         </div>
@@ -755,9 +755,9 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
                           <button
                             type="button"
                             onClick={() => toggleOptionalOpa(item.id)}
-                            className="text-xs font-semibold text-[#005EB8] dark:text-cyan-300 hover:underline flex items-center gap-1.5 cursor-pointer"
+                            className="text-xs sm:text-sm font-semibold text-[#005EB8] dark:text-cyan-300 hover:underline flex items-center gap-1.5 cursor-pointer"
                           >
-                            <Workflow className="w-3.5 h-3.5" />
+                            <Workflow className="w-4 h-4" />
                             <span>
                               {opaVisible
                                 ? 'Hide Optional OPA / Policy-as-Code Mapping'
@@ -766,8 +766,8 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
                           </button>
 
                           {opaVisible && (
-                            <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                              <div className="space-y-1">
+                            <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+                              <div className="space-y-1.5">
                                 <span className="font-semibold text-slate-800 dark:text-cyan-300 block">
                                   Optional Policy Design Impact
                                 </span>
@@ -775,14 +775,14 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
                                   {item.optionalOpaRuleImpact}
                                 </p>
                               </div>
-                              <div className="space-y-1.5">
+                              <div className="space-y-2">
                                 <span className="font-semibold text-slate-800 dark:text-emerald-300 block">
                                   Optional JSON Claim &amp; Rego Assertion
                                 </span>
-                                <code className="block p-2 rounded bg-slate-950 text-cyan-300 border border-slate-800 font-mono text-[11px] overflow-x-auto">
+                                <code className="block p-2.5 rounded bg-slate-950 text-cyan-300 border border-slate-800 font-mono text-xs overflow-x-auto">
                                   {item.optionalRuntimeClaim}
                                 </code>
-                                <pre className="p-2.5 rounded bg-slate-950 text-emerald-300 border border-slate-800 font-mono text-[11px] overflow-x-auto leading-relaxed">
+                                <pre className="p-3 rounded bg-slate-950 text-emerald-300 border border-slate-800 font-mono text-xs overflow-x-auto leading-relaxed">
                                   <code>{item.optionalRegoPreview}</code>
                                 </pre>
                               </div>
@@ -802,26 +802,26 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
       {/* SUB-TAB 4: 3-YEAR POST-CERTIFICATION OPERATING CADENCE */}
       {activeSubTab === 'cadence' && (
         <div className="bg-white dark:bg-[#0c2340] border border-slate-200 dark:border-cyan-900/60 rounded-xl p-6 space-y-5 shadow-sm">
-          <div className="border-b border-slate-200 dark:border-cyan-900/50 pb-4 space-y-1">
+          <div className="border-b border-slate-200 dark:border-cyan-900/50 pb-4 space-y-1.5">
             <div className="text-xs font-mono font-semibold text-[#005EB8] dark:text-cyan-300">
               3-Year Certificate Cycle · Year 1 Surveillance 1 · Year 2 Surveillance 2 · Year 3 Recertification
             </div>
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+            <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
               Post-Certification Run-State Operating Calendar
             </h3>
-            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-200 leading-relaxed">
               ISO/IEC 27001 certification is maintained through continuous operational hygiene rather than annual panic ahead of Surveillance Audits 1 &amp; 2 and Year 3 Recertification.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
             {POST_CERT_CADENCE.map((item) => (
               <div
                 key={item.id}
-                className="p-5 rounded-lg bg-slate-50 dark:bg-slate-950/75 border border-slate-200 dark:border-cyan-900/50 flex flex-col justify-between space-y-4"
+                className="p-5 rounded-lg bg-slate-50 dark:bg-slate-950/75 border border-slate-200 dark:border-cyan-900/50 flex flex-col justify-between space-y-4 h-full"
               >
                 <div className="space-y-2.5">
-                  <div className="flex items-center justify-between gap-2 text-[11px] font-mono">
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
                     <span className="font-bold text-[#00A389] dark:text-emerald-300 uppercase">
                       {item.frequency}
                     </span>
@@ -834,16 +834,16 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
                     {item.activities.map((act, idx) => (
                       <li
                         key={idx}
-                        className="text-xs text-slate-700 dark:text-slate-300 flex items-start gap-2 leading-relaxed"
+                        className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 flex items-start gap-2 leading-relaxed"
                       >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#005EB8] dark:text-cyan-400 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-[#005EB8] dark:text-cyan-400 shrink-0 mt-0.5" />
                         <span>{act}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="pt-3 border-t border-slate-200 dark:border-cyan-900/40 text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                <div className="pt-3 border-t border-slate-200 dark:border-cyan-900/40 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                   <strong className="text-slate-800 dark:text-cyan-300">Audit Evidence Retained: </strong>
                   {item.auditEvidenceProduced}
                 </div>
@@ -856,46 +856,46 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
       {/* SUB-TAB 5: OPTIONAL DOCS-TO-OPA PIPELINE & JSON CLAIM MAPPER */}
       {activeSubTab === 'opa_mapper' && (
         <div className="bg-white dark:bg-[#0c2340] border border-slate-200 dark:border-cyan-900/60 rounded-xl p-6 space-y-5 shadow-sm">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-cyan-900/50 pb-4">
-            <div className="space-y-1 max-w-2xl">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200 dark:border-cyan-900/50 pb-4">
+            <div className="space-y-1.5 flex-1">
               <div className="flex items-center gap-2 text-xs font-semibold text-[#005EB8] dark:text-cyan-300">
                 <Workflow className="w-4 h-4" />
                 <span>Optional Automation Layer · Interactive Docs-to-OPA Claim Mapper</span>
               </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
                 How Governance Documents &amp; ISMS Processes Optionally Feed OPA Decisions
               </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-200 leading-relaxed">
                 Documents do not compile verbatim into Rego. Signed ISO/DEA artefacts (SoA, Climate Context, RAP) set policy baselines, while operational processes (Clause 6.2 KPIs, Clause 7.2 Competence Logs, IG training, CVE scans, Airlock sign-off) emit trusted JSON <code className="font-mono text-[#005EB8] dark:text-cyan-300">input.*</code> claims.
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-1.5 shrink-0">
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
               <button
                 type="button"
                 onClick={() => applyClaimPreset('compliant')}
-                className="px-2.5 py-1.5 rounded-md text-xs font-medium bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-md text-xs font-medium bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 transition-colors cursor-pointer whitespace-nowrap"
               >
                 All Verified
               </button>
               <button
                 type="button"
                 onClick={() => applyClaimPreset('missing_soa')}
-                className="px-2.5 py-1.5 rounded-md text-xs font-medium bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 hover:bg-amber-100 dark:hover:bg-amber-900/60 transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-md text-xs font-medium bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 hover:bg-amber-100 dark:hover:bg-amber-900/60 transition-colors cursor-pointer whitespace-nowrap"
               >
                 SoA / Climate Gap
               </button>
               <button
                 type="button"
                 onClick={() => applyClaimPreset('kpi_competence_fail')}
-                className="px-2.5 py-1.5 rounded-md text-xs font-medium bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800 hover:bg-rose-100 dark:hover:bg-rose-900/60 transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-md text-xs font-medium bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800 hover:bg-rose-100 dark:hover:bg-rose-900/60 transition-colors cursor-pointer whitespace-nowrap"
               >
                 KPI / Clause 7.2 Fail
               </button>
               <button
                 type="button"
                 onClick={() => applyClaimPreset('cve_airlock_fail')}
-                className="px-2.5 py-1.5 rounded-md text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-md text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer whitespace-nowrap"
               >
                 CVE / Airlock Fail
               </button>
@@ -903,13 +903,13 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
           </div>
 
           {/* Live OPA Verdict Strip */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-cyan-900/40 space-y-1">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+            <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-cyan-900/40 space-y-1.5 h-full">
               <span className="text-xs text-slate-500 dark:text-slate-400 block">
                 Simulated OPA Enclave Admission Verdict
               </span>
               <div
-                className={`text-sm font-bold font-mono flex items-center gap-1.5 pt-0.5 ${
+                className={`text-sm sm:text-base font-bold font-mono flex items-center gap-2 pt-0.5 ${
                   opaEvaluation.admissionAllowed
                     ? 'text-emerald-700 dark:text-emerald-400'
                     : 'text-rose-700 dark:text-rose-400'
@@ -928,12 +928,12 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
               </div>
             </div>
 
-            <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-cyan-900/40 space-y-1">
+            <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-cyan-900/40 space-y-1.5 h-full">
               <span className="text-xs text-slate-500 dark:text-slate-400 block">
                 Simulated OPA Airlock Egress Verdict
               </span>
               <div
-                className={`text-sm font-bold font-mono flex items-center gap-1.5 pt-0.5 ${
+                className={`text-sm sm:text-base font-bold font-mono flex items-center gap-2 pt-0.5 ${
                   opaEvaluation.egressPermitted
                     ? 'text-emerald-700 dark:text-emerald-400'
                     : 'text-rose-700 dark:text-rose-400'
@@ -957,7 +957,7 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             {/* Left: Interactive Document & Process Attestation Switches */}
             <div className="lg:col-span-6 space-y-2.5">
-              <div className="text-xs font-semibold text-slate-700 dark:text-slate-300 pb-1">
+              <div className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 pb-1">
                 Toggle Upstream Documents &amp; Operational Processes (incl. Clauses 6.2, 7.2 &amp; Amd 1:2024)
               </div>
               {DOCS_TO_OPA_SWITCHES.map((sw) => {
@@ -967,36 +967,36 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
                     key={sw.id}
                     type="button"
                     onClick={() => toggleClaim(sw.id)}
-                    className={`w-full text-left p-3.5 rounded-lg border transition-colors flex items-start justify-between gap-3 cursor-pointer ${
+                    className={`w-full text-left p-4 rounded-lg border transition-colors flex items-start justify-between gap-3 cursor-pointer ${
                       active
                         ? 'bg-slate-50 dark:bg-slate-950/80 border-slate-200 dark:border-cyan-900/50 hover:border-cyan-500/60'
                         : 'bg-rose-50/70 dark:bg-rose-950/30 border-rose-300 dark:border-rose-800/80'
                     }`}
                   >
                     <div className="space-y-1 min-w-0">
-                      <div className="flex flex-wrap items-center gap-2 text-[11px] font-mono text-slate-500 dark:text-slate-400">
+                      <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-500 dark:text-slate-400">
                         <span>{sw.clauseRef}</span>
                         <span aria-hidden="true">·</span>
                         <span className="text-[#005EB8] dark:text-cyan-400">{sw.feedLayer}</span>
                       </div>
-                      <div className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white">
+                      <div className="text-sm font-semibold text-slate-900 dark:text-white">
                         {sw.label}
                       </div>
-                      <div className="text-[11px] text-slate-600 dark:text-slate-400">
+                      <div className="text-xs text-slate-600 dark:text-slate-300">
                         Source: {sw.sourceDocOrProcess}
                       </div>
-                      <div className="text-[11px] font-mono text-slate-500 dark:text-cyan-300/90 truncate">
+                      <div className="text-xs font-mono text-slate-500 dark:text-cyan-300/90 truncate">
                         Emits: {sw.jsonPath} = {active ? 'true' : 'false'}
                       </div>
                       {!active && (
-                        <div className="text-[11px] text-rose-700 dark:text-rose-300 pt-1">
+                        <div className="text-xs text-rose-700 dark:text-rose-300 pt-1">
                           Impact: {sw.failureImpact}
                         </div>
                       )}
                     </div>
 
                     <div
-                      className={`px-2.5 py-1 rounded text-[11px] font-mono font-bold shrink-0 flex items-center gap-1 ${
+                      className={`px-2.5 py-1 rounded text-xs font-mono font-bold shrink-0 flex items-center gap-1 whitespace-nowrap ${
                         active
                           ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700'
                           : 'bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-300 border border-rose-300 dark:border-rose-700'
@@ -1013,9 +1013,9 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
             {/* Right: Live Synthesized OPA JSON Input + Real-Time Rego Trace */}
             <div className="lg:col-span-6 space-y-4">
               <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
+                <div className="flex items-center justify-between text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
                   <span className="flex items-center gap-1.5">
-                    <Terminal className="w-3.5 h-3.5 text-[#005EB8] dark:text-cyan-400" />
+                    <Terminal className="w-4 h-4 text-[#005EB8] dark:text-cyan-400" />
                     <span>Synthesized Runtime JSON Claim Payload (`input`)</span>
                   </span>
                   <button
@@ -1026,23 +1026,23 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
                         JSON.stringify(opaEvaluation.synthesizedInputJson, null, 2)
                       )
                     }
-                    className="text-[11px] font-mono text-slate-500 dark:text-cyan-300 hover:underline flex items-center gap-1 cursor-pointer"
+                    className="text-xs font-mono text-slate-500 dark:text-cyan-300 hover:underline flex items-center gap-1 cursor-pointer whitespace-nowrap"
                   >
-                    {copiedId === 'opa-input-json' ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                    {copiedId === 'opa-input-json' ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                     <span>{copiedId === 'opa-input-json' ? 'Copied' : 'Copy JSON'}</span>
                   </button>
                 </div>
-                <pre className="p-4 rounded-lg bg-slate-950 border border-slate-800 text-[11px] sm:text-xs font-mono text-cyan-300 overflow-x-auto leading-relaxed tabular-nums">
+                <pre className="p-4 rounded-lg bg-slate-950 border border-slate-800 text-xs font-mono text-cyan-300 overflow-x-auto leading-relaxed tabular-nums">
                   <code>{JSON.stringify(opaEvaluation.synthesizedInputJson, null, 2)}</code>
                 </pre>
               </div>
 
               <div className="space-y-2">
-                <div className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                  <Cpu className="w-3.5 h-3.5 text-[#00A389] dark:text-emerald-400" />
+                <div className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 flex items-center gap-1.5">
+                  <Cpu className="w-4 h-4 text-[#00A389] dark:text-emerald-400" />
                   <span>OPA Policy Evaluation (`package tre.isms.authz`)</span>
                 </div>
-                <div className="p-4 rounded-lg bg-slate-950 border border-slate-800 space-y-2 font-mono text-[11px] sm:text-xs">
+                <div className="p-4 rounded-lg bg-slate-950 border border-slate-800 space-y-2 font-mono text-xs">
                   <div className="text-slate-400">default allow = false</div>
                   <div className="text-slate-400 pb-1">default egress_permitted = false</div>
                   <div className="pt-1 border-t border-slate-800 space-y-1">

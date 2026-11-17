@@ -472,16 +472,16 @@ When presenting aggregate tables or public reports containing small cell counts,
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full">
       {/* 1. EDITORIAL HEADER & ONS/CALDICOTT BASELINE */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 shadow-xs">
-        <div className="space-y-4 max-w-4xl">
+        <div className="space-y-4">
           <div className="flex flex-wrap items-center gap-2 text-xs">
-            <span className="font-semibold text-[#005EB8] dark:text-sky-400 bg-sky-50 dark:bg-sky-950/60 px-2.5 py-0.5 rounded border border-sky-200 dark:border-sky-800 flex items-center gap-1.5">
-              <Calculator className="w-3.5 h-3.5" />
+            <span className="font-semibold text-[#005EB8] dark:text-sky-400 bg-sky-50 dark:bg-sky-950/60 px-2.5 py-0.5 rounded border border-sky-200 dark:border-sky-800 flex items-center gap-1.5 whitespace-nowrap">
+              <Calculator className="w-3.5 h-3.5 shrink-0" />
               <span>Phase 6: Quantitative Statistical Disclosure Control (SDC) &amp; Airlock Review</span>
             </span>
-            <span className="font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700">
+            <span className="font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 rounded border border-slate-200 dark:border-slate-700 whitespace-nowrap tabular-nums">
               ONS SDC Handbook · k ≥ 10 · (1, 80%) Dominance · 2-Person Airlock
             </span>
           </div>
@@ -492,45 +492,45 @@ When presenting aggregate tables or public reports containing small cell counts,
             </h1>
             <button
               onClick={handleCopyMarkdownSOP}
-              className="self-start shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-medium border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
+              className="self-start shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-medium border border-slate-200 dark:border-slate-700 transition-colors whitespace-nowrap cursor-pointer"
             >
-              {sopCopied ? <Check className="w-3.5 h-3.5 text-[#047857]" /> : <Copy className="w-3.5 h-3.5 text-[#005EB8]" />}
+              {sopCopied ? <Check className="w-3.5 h-3.5 text-[#047857] shrink-0" /> : <Copy className="w-3.5 h-3.5 text-[#005EB8] shrink-0" />}
               <span>{sopCopied ? 'Copied SOP!' : 'Copy Markdown SOP'}</span>
             </button>
           </div>
 
-          <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
             Applies graph-navigated and machine-audited Information Governance to outbound clinical research exports. Mathematically models primary cell suppression, complementary secondary suppression to prevent marginal deduction, top-contributor dominance thresholds, and degrees-of-freedom bounds before candidate tables leave the airlock.
           </p>
 
           {/* Key Guarantees Strip */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
-            <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-1">
-              <span className="font-bold text-[#005EB8] dark:text-sky-400 flex items-center gap-1.5">
-                <ShieldAlert className="w-3.5 h-3.5" />
-                <span>Rule-of-Thumb: Primary Suppression (k ≥ 10)</span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2 text-xs sm:text-sm items-stretch">
+            <div className="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-1.5 h-full flex flex-col">
+              <span className="font-bold text-[#005EB8] dark:text-sky-400 flex items-center gap-1.5 text-xs sm:text-sm">
+                <ShieldAlert className="w-4 h-4 shrink-0" />
+                <span>Rule-of-Thumb: Primary Suppression (<span className="tabular-nums">k ≥ 10</span>)</span>
               </span>
-              <p className="text-[11px] text-slate-600 dark:text-slate-400">
-                Flags cell counts under 10 (or 5 for local operational audits) as triage thresholds—reviewed in context under principles-based checking.
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                Flags cell counts under <span className="tabular-nums">10</span> (or <span className="tabular-nums">5</span> for local operational audits) as triage thresholds—reviewed in context under principles-based checking.
               </p>
             </div>
 
-            <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-1">
-              <span className="font-bold text-amber-700 dark:text-amber-400 flex items-center gap-1.5">
-                <Hash className="w-3.5 h-3.5" />
+            <div className="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-1.5 h-full flex flex-col">
+              <span className="font-bold text-amber-700 dark:text-amber-400 flex items-center gap-1.5 text-xs sm:text-sm">
+                <Hash className="w-4 h-4 shrink-0" />
                 <span>Secondary Deduction Shield</span>
               </span>
-              <p className="text-[11px] text-slate-600 dark:text-slate-400">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 Suppresses complementary safe cells so values cannot be calculated from row or column marginal totals.
               </p>
             </div>
 
-            <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-1">
-              <span className="font-bold text-[#047857] dark:text-emerald-400 flex items-center gap-1.5">
-                <Users className="w-3.5 h-3.5" />
+            <div className="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-1.5 h-full flex flex-col">
+              <span className="font-bold text-[#047857] dark:text-emerald-400 flex items-center gap-1.5 text-xs sm:text-sm">
+                <Users className="w-4 h-4 shrink-0" />
                 <span>2-Person Cryptographic Airlock</span>
               </span>
-              <p className="text-[11px] text-slate-600 dark:text-slate-400">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 Combines automated SHACL/OPA shape checks with human SDC Lead sign-off and SHA-256 seal.
               </p>
             </div>
@@ -539,69 +539,69 @@ When presenting aggregate tables or public reports containing small cell counts,
       </div>
 
       {/* 2. SUB-NAVIGATION TABS */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-2">
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-3">
         <div className="flex flex-wrap bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-800 gap-1">
           <button
             onClick={() => setActiveTab('simulator')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer ${
               activeTab === 'simulator'
                 ? 'bg-[#005EB8] text-white shadow-xs'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            <Sliders className="w-3.5 h-3.5" />
+            <Sliders className="w-3.5 h-3.5 shrink-0" />
             <span>Interactive Tabular SDC Simulator</span>
           </button>
           <button
             onClick={() => setActiveTab('methods_matrix')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer ${
               activeTab === 'methods_matrix'
                 ? 'bg-[#005EB8] text-white shadow-xs'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            <TableIcon className="w-3.5 h-3.5" />
+            <TableIcon className="w-3.5 h-3.5 shrink-0" />
             <span>SDC Policy &amp; SOP (7 Output Classes)</span>
           </button>
           <button
             onClick={() => setActiveTab('low_count_reference')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer ${
               activeTab === 'low_count_reference'
                 ? 'bg-[#005EB8] text-white shadow-xs'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            <Layers className="w-3.5 h-3.5" />
+            <Layers className="w-3.5 h-3.5 shrink-0" />
             <span>Low-Count Methods, Statbarns &amp; Trade-Offs</span>
           </button>
           <button
             onClick={() => setActiveTab('policy_code')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer ${
               activeTab === 'policy_code'
                 ? 'bg-[#005EB8] text-white shadow-xs'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            <FileCode className="w-3.5 h-3.5" />
+            <FileCode className="w-3.5 h-3.5 shrink-0" />
             <span>SHACL Shape &amp; OPA Rego SDC</span>
           </button>
           <button
             onClick={() => setActiveTab('airlock_gate')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer ${
               activeTab === 'airlock_gate'
                 ? 'bg-[#005EB8] text-white shadow-xs'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            <FileCheck2 className="w-3.5 h-3.5" />
+            <FileCheck2 className="w-3.5 h-3.5 shrink-0" />
             <span>2-Person Airlock Gate &amp; SHA-256 Seal</span>
           </button>
         </div>
 
-        <div className="flex items-center gap-2 text-xs font-mono">
+        <div className="flex items-center gap-2 text-xs font-mono shrink-0">
           <span className="text-slate-500">Airlock Verdict:</span>
           <span
-            className={`px-2.5 py-0.5 rounded font-bold border ${
+            className={`px-2.5 py-1 rounded font-bold border whitespace-nowrap ${
               tableAnalysis.isCleanAirlock
                 ? 'bg-emerald-50 dark:bg-emerald-950/60 text-[#047857] dark:text-emerald-300 border-emerald-300 dark:border-emerald-700'
                 : 'bg-red-50 dark:bg-red-950/60 text-red-700 dark:text-red-400 border-red-300 dark:border-red-700'
@@ -633,7 +633,7 @@ When presenting aggregate tables or public reports containing small cell counts,
                   <button
                     key={preset.id}
                     onClick={() => setSelectedPresetId(preset.id)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap cursor-pointer ${
                       selectedPresetId === preset.id
                         ? 'bg-[#005EB8] text-white shadow-xs'
                         : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-750 border border-slate-200 dark:border-slate-700'
@@ -645,27 +645,27 @@ When presenting aggregate tables or public reports containing small cell counts,
               </div>
             </div>
 
-            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
               {activePreset.description}
             </p>
 
             {/* SDC Tuning Controls Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 text-xs">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 text-xs items-stretch">
               {/* Primary threshold */}
-              <div className="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-2">
-                <div className="flex items-center justify-between">
+              <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-2.5 h-full flex flex-col justify-between">
+                <div className="flex items-center justify-between gap-2">
                   <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                    <ShieldAlert className="w-3.5 h-3.5 text-[#005EB8]" />
+                    <ShieldAlert className="w-4 h-4 text-[#005EB8] shrink-0" />
                     <span>Primary Threshold (k)</span>
                   </span>
-                  <span className="font-mono font-bold text-[#005EB8] dark:text-sky-400 bg-sky-50 dark:bg-sky-950 px-2 py-0.5 rounded border border-sky-200 dark:border-sky-800">
+                  <span className="font-mono font-bold text-[#005EB8] dark:text-sky-400 bg-sky-50 dark:bg-sky-950 px-2 py-0.5 rounded border border-sky-200 dark:border-sky-800 whitespace-nowrap tabular-nums">
                     k ≥ {kThreshold}
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => setKThreshold(5)}
-                    className={`flex-1 py-1 rounded text-xs font-medium cursor-pointer transition-colors ${
+                    className={`flex-1 py-1.5 rounded text-xs font-medium whitespace-nowrap cursor-pointer transition-colors tabular-nums ${
                       kThreshold === 5
                         ? 'bg-[#005EB8] text-white'
                         : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
@@ -675,7 +675,7 @@ When presenting aggregate tables or public reports containing small cell counts,
                   </button>
                   <button
                     onClick={() => setKThreshold(10)}
-                    className={`flex-1 py-1 rounded text-xs font-medium cursor-pointer transition-colors ${
+                    className={`flex-1 py-1.5 rounded text-xs font-medium whitespace-nowrap cursor-pointer transition-colors tabular-nums ${
                       kThreshold === 10
                         ? 'bg-[#005EB8] text-white'
                         : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
@@ -684,20 +684,20 @@ When presenting aggregate tables or public reports containing small cell counts,
                     k ≥ 10 (SDE/TRE Norm)
                   </button>
                 </div>
-                <p className="text-[10px] text-slate-500">
-                  National research enclaves mandate k ≥ 10 to balance public confidentiality with utility.
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                  National research enclaves mandate <span className="tabular-nums">k ≥ 10</span> to balance public confidentiality with utility.
                 </p>
               </div>
 
               {/* Suppression Algorithm Mode */}
-              <div className="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-2">
-                <div className="flex items-center justify-between">
+              <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-2.5 h-full flex flex-col justify-between">
+                <div className="flex items-center justify-between gap-2">
                   <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                    <Hash className="w-3.5 h-3.5 text-amber-600" />
+                    <Hash className="w-4 h-4 text-amber-600 shrink-0" />
                     <span>Suppression Mode</span>
                   </span>
                   {suppressionMode === 'rounded' && (
-                    <span className="text-[10px] font-mono text-[#047857] dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-950 px-1.5 py-0.5 rounded border border-emerald-300 dark:border-emerald-700">
+                    <span className="text-xs font-mono text-[#047857] dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded border border-emerald-300 dark:border-emerald-700 whitespace-nowrap tabular-nums">
                       Base {roundingBase}
                     </span>
                   )}
@@ -705,7 +705,7 @@ When presenting aggregate tables or public reports containing small cell counts,
                 <div className="grid grid-cols-2 gap-1.5">
                   <button
                     onClick={() => setSuppressionMode('raw')}
-                    className={`py-1 px-2 rounded text-xs font-medium cursor-pointer transition-colors ${
+                    className={`py-1.5 px-2 rounded text-xs font-medium whitespace-nowrap cursor-pointer transition-colors ${
                       suppressionMode === 'raw'
                         ? 'bg-red-700 text-white font-bold'
                         : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
@@ -715,7 +715,7 @@ When presenting aggregate tables or public reports containing small cell counts,
                   </button>
                   <button
                     onClick={() => setSuppressionMode('primary')}
-                    className={`py-1 px-2 rounded text-xs font-medium cursor-pointer transition-colors ${
+                    className={`py-1.5 px-2 rounded text-xs font-medium whitespace-nowrap cursor-pointer transition-colors ${
                       suppressionMode === 'primary'
                         ? 'bg-amber-600 text-white font-bold'
                         : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
@@ -725,7 +725,7 @@ When presenting aggregate tables or public reports containing small cell counts,
                   </button>
                   <button
                     onClick={() => setSuppressionMode('secondary')}
-                    className={`py-1 px-2 rounded text-xs font-bold cursor-pointer transition-colors ${
+                    className={`py-1.5 px-2 rounded text-xs font-bold whitespace-nowrap cursor-pointer transition-colors ${
                       suppressionMode === 'secondary'
                         ? 'bg-[#005EB8] text-white shadow-xs'
                         : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
@@ -735,7 +735,7 @@ When presenting aggregate tables or public reports containing small cell counts,
                   </button>
                   <button
                     onClick={() => setSuppressionMode('rounded')}
-                    className={`py-1 px-2 rounded text-xs font-bold cursor-pointer transition-colors ${
+                    className={`py-1.5 px-2 rounded text-xs font-bold whitespace-nowrap cursor-pointer transition-colors ${
                       suppressionMode === 'rounded'
                         ? 'bg-[#047857] text-white shadow-xs'
                         : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
@@ -745,11 +745,11 @@ When presenting aggregate tables or public reports containing small cell counts,
                   </button>
                 </div>
                 {suppressionMode === 'rounded' && (
-                  <div className="flex items-center gap-1.5 pt-1">
-                    <span className="text-[10px] text-slate-500 font-medium">Rounding Base:</span>
+                  <div className="flex items-center gap-1.5 pt-1 flex-wrap">
+                    <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Rounding Base:</span>
                     <button
                       onClick={() => setRoundingBase(5)}
-                      className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold cursor-pointer ${
+                      className={`px-2 py-0.5 rounded text-xs font-mono font-bold whitespace-nowrap cursor-pointer tabular-nums ${
                         roundingBase === 5
                           ? 'bg-[#047857] text-white'
                           : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
@@ -759,7 +759,7 @@ When presenting aggregate tables or public reports containing small cell counts,
                     </button>
                     <button
                       onClick={() => setRoundingBase(10)}
-                      className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold cursor-pointer ${
+                      className={`px-2 py-0.5 rounded text-xs font-mono font-bold whitespace-nowrap cursor-pointer tabular-nums ${
                         roundingBase === 10
                           ? 'bg-[#047857] text-white'
                           : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
@@ -772,13 +772,13 @@ When presenting aggregate tables or public reports containing small cell counts,
               </div>
 
               {/* Dominance threshold */}
-              <div className="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-2">
-                <div className="flex items-center justify-between">
+              <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-2.5 h-full flex flex-col justify-between">
+                <div className="flex items-center justify-between gap-2">
                   <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                    <PercentIcon className="w-3.5 h-3.5 text-purple-600" />
+                    <PercentIcon className="w-4 h-4 text-purple-600 shrink-0" />
                     <span>(1, p%) Dominance Rule</span>
                   </span>
-                  <span className="font-mono font-bold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950 px-2 py-0.5 rounded border border-purple-200 dark:border-purple-800">
+                  <span className="font-mono font-bold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950 px-2 py-0.5 rounded border border-purple-200 dark:border-purple-800 whitespace-nowrap tabular-nums">
                     p ≤ {dominancePPercent}%
                   </span>
                 </div>
@@ -790,8 +790,8 @@ When presenting aggregate tables or public reports containing small cell counts,
                   onChange={(e) => setDominancePPercent(parseInt(e.target.value, 10))}
                   className="w-full accent-[#005EB8]"
                 />
-                <p className="text-[10px] text-slate-500">
-                  Prevents attribute disclosure when a single patient represents &gt;{dominancePPercent}% of an aggregate metric.
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                  Prevents attribute disclosure when a single patient represents <span className="tabular-nums">&gt;{dominancePPercent}%</span> of an aggregate metric.
                 </p>
               </div>
             </div>
@@ -800,43 +800,43 @@ When presenting aggregate tables or public reports containing small cell counts,
           {/* Interactive Output Table */}
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-4 shadow-xs">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
-              <div className="space-y-0.5">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-slate-900 dark:text-white">
+              <div className="space-y-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-sm font-bold text-slate-900 dark:text-white">
                     {activePreset.name}
                   </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                  <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 whitespace-nowrap">
                     {activePreset.metricLabel}
                   </span>
                 </div>
-                <span className="text-[11px] text-slate-600 dark:text-slate-300 font-mono">
+                <span className="text-xs text-slate-600 dark:text-slate-300 font-mono tabular-nums block">
                   Rows: {activePreset.rows.length} · Columns: {activePreset.cols.length} · Grand Total: {tableAnalysis.grandTotal}
                 </span>
               </div>
 
               {/* Status Pill */}
-              <div className="flex items-center gap-2 text-xs">
+              <div className="flex items-center gap-2 text-xs shrink-0">
                 {tableAnalysis.totalPrimaryDisclosive > 0 && suppressionMode === 'raw' && (
-                  <span className="px-2.5 py-1 rounded bg-red-100 dark:bg-red-950 text-red-800 dark:text-red-300 font-bold border border-red-300 dark:border-red-800 flex items-center gap-1.5">
-                    <XCircle className="w-3.5 h-3.5 text-red-600" />
+                  <span className="px-2.5 py-1 rounded bg-red-100 dark:bg-red-950 text-red-800 dark:text-red-300 font-bold border border-red-300 dark:border-red-800 flex items-center gap-1.5 whitespace-nowrap tabular-nums">
+                    <XCircle className="w-3.5 h-3.5 text-red-600 shrink-0" />
                     <span>{tableAnalysis.totalPrimaryDisclosive} Disclosive Cells (Raw)</span>
                   </span>
                 )}
                 {suppressionMode === 'primary' && (
-                  <span className="px-2.5 py-1 rounded bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300 dark:border-amber-800 flex items-center gap-1.5">
-                    <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
+                  <span className="px-2.5 py-1 rounded bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300 dark:border-amber-800 flex items-center gap-1.5 whitespace-nowrap">
+                    <AlertTriangle className="w-3.5 h-3.5 text-amber-600 shrink-0" />
                     <span>Vulnerable to Marginal Deduction</span>
                   </span>
                 )}
                 {suppressionMode === 'secondary' && (
-                  <span className="px-2.5 py-1 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-semibold border border-emerald-300 dark:border-emerald-800 flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="px-2.5 py-1 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-semibold border border-emerald-300 dark:border-emerald-800 flex items-center gap-1.5 whitespace-nowrap tabular-nums">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                     <span>Protected: {tableAnalysis.totalPrimaryDisclosive} Primary + {tableAnalysis.totalSecondarySuppressed} Complementary</span>
                   </span>
                 )}
                 {suppressionMode === 'rounded' && (
-                  <span className="px-2.5 py-1 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-semibold border border-emerald-300 dark:border-emerald-800 flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="px-2.5 py-1 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-semibold border border-emerald-300 dark:border-emerald-800 flex items-center gap-1.5 whitespace-nowrap tabular-nums">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                     <span>Protected: Suppression through Rounding (Base {roundingBase} Applied)</span>
                   </span>
                 )}
@@ -913,7 +913,7 @@ When presenting aggregate tables or public reports containing small cell counts,
                                     {tableAnalysis.roundedCells[`${row}__${col}`]}
                                   </span>
                                   {isPrimary && (
-                                    <span className="text-[9px] text-[#047857] dark:text-emerald-400 font-sans font-semibold">
+                                    <span className="text-xs text-[#047857] dark:text-emerald-400 font-sans font-semibold mt-0.5 tabular-nums">
                                       Masked (&lt;{kThreshold})
                                     </span>
                                   )}
@@ -976,13 +976,13 @@ When presenting aggregate tables or public reports containing small cell counts,
             {/* Dominance Breakdown if Continuous Scenario */}
             {activePreset.continuousValues && (
               <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-3 text-xs">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-2">
                   <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                    <PercentIcon className="w-3.5 h-3.5 text-purple-600" />
+                    <PercentIcon className="w-4 h-4 text-purple-600 shrink-0" />
                     <span>Continuous Attribute Dominance Analysis</span>
                   </span>
                   <span
-                    className={`px-2 py-0.5 rounded font-mono font-bold text-[11px] ${
+                    className={`px-2.5 py-0.5 rounded font-mono font-bold text-xs whitespace-nowrap shrink-0 ${
                       tableAnalysis.dominanceViolation
                         ? 'bg-red-100 dark:bg-red-950 text-red-800 dark:text-red-300 border border-red-300 dark:border-red-800'
                         : 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800'
@@ -992,20 +992,20 @@ When presenting aggregate tables or public reports containing small cell counts,
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="p-3 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800 space-y-1">
-                    <span className="text-[11px] text-slate-500">Top 1 Contributor Share (Threshold: ≤ {dominancePPercent}%):</span>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-xl font-bold font-mono text-slate-900 dark:text-white">{tableAnalysis.top1Share}%</span>
-                      <span className="text-[11px] text-slate-500">(Patient #1 = £780k of £980k total)</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-stretch">
+                  <div className="p-3.5 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800 space-y-1 h-full flex flex-col justify-between">
+                    <span className="text-xs text-slate-500 dark:text-slate-400">Top 1 Contributor Share (Threshold: <span className="tabular-nums">≤ {dominancePPercent}%</span>):</span>
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      <span className="text-xl font-bold font-mono text-slate-900 dark:text-white tabular-nums">{tableAnalysis.top1Share}%</span>
+                      <span className="text-xs text-slate-500 dark:text-slate-400 tabular-nums">(Patient #1 = £780k of £980k total)</span>
                     </div>
                   </div>
 
-                  <div className="p-3 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800 space-y-1">
-                    <span className="text-[11px] text-slate-500">Top 2 Contributors Combined (Threshold: ≤ 85%):</span>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-xl font-bold font-mono text-slate-900 dark:text-white">{tableAnalysis.top2Share}%</span>
-                      <span className="text-[11px] text-slate-500">(Patients #1 &amp; #2 = £865k of £980k total)</span>
+                  <div className="p-3.5 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800 space-y-1 h-full flex flex-col justify-between">
+                    <span className="text-xs text-slate-500 dark:text-slate-400">Top 2 Contributors Combined (Threshold: <span className="tabular-nums">≤ 85%</span>):</span>
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      <span className="text-xl font-bold font-mono text-slate-900 dark:text-white tabular-nums">{tableAnalysis.top2Share}%</span>
+                      <span className="text-xs text-slate-500 dark:text-slate-400 tabular-nums">(Patients #1 &amp; #2 = £865k of £980k total)</span>
                     </div>
                   </div>
                 </div>
@@ -1019,38 +1019,38 @@ When presenting aggregate tables or public reports containing small cell counts,
       {activeTab === 'methods_matrix' && (
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-6 shadow-xs">
           {/* Header & Literature Citations */}
-          <div className="space-y-2 border-b border-slate-200 dark:border-slate-800 pb-5">
+          <div className="space-y-2.5 border-b border-slate-200 dark:border-slate-800 pb-5">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider bg-sky-50 dark:bg-sky-950/60 px-2.5 py-0.5 rounded border border-sky-200 dark:border-sky-800 flex items-center gap-1.5">
-                <ShieldAlert className="w-3.5 h-3.5" />
+              <span className="text-xs font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider bg-sky-50 dark:bg-sky-950/60 px-2.5 py-0.5 rounded border border-sky-200 dark:border-sky-800 flex items-center gap-1.5 whitespace-nowrap">
+                <ShieldAlert className="w-3.5 h-3.5 shrink-0" />
                 <span>Authoritative SOP Egress Standards</span>
               </span>
-              <span className="text-[11px] font-mono text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700">
+              <span className="text-xs font-mono text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 rounded border border-slate-200 dark:border-slate-700">
                 ONS SDC Handbook · UK LLC Output Checking SOP · SDAP StatBarn · Caldicott Principle 8
               </span>
             </div>
             <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
               Statistical Output Classes &amp; Airlock Egress Rulebook
             </h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-4xl">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
               Statistical Disclosure Control in patient and population Secure Data Environments (SDEs) extends far beyond simple frequency table cross-tabulation. Every statistical artifact—including survival curves, regression parameter sets, summary moments, scatterplots, and machine learning checkpoints—is governed by strict mathematical disclosure limits before passing the airlock.
             </p>
 
             {/* Statbarn & DataSHIELD Scope Bridge */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-xs">
-              <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 space-y-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-xs sm:text-sm items-stretch">
+              <div className="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 space-y-1.5 h-full flex flex-col">
                 <strong className="text-[#0F294A] dark:text-sky-300 block">
                   Mapping to the 5 Statbarns (SDAP &amp; DARE UK SACRO)
                 </strong>
-                <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                   Classes 1–7 operationalize the 5 canonical Statbarns: <em>Frequencies</em> (Class 1), <em>Position &amp; Quantiles</em> (Class 4), <em>Means &amp; Totals</em> (Classes 1 &amp; 4), <em>Correlation</em> (Class 2), and <em>Shape &amp; Endpoints</em> (Classes 3, 5 &amp; 7), plus ML weight controls (Class 6).
                 </p>
               </div>
-              <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 space-y-1">
+              <div className="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 space-y-1.5 h-full flex flex-col">
                 <strong className="text-[#0F294A] dark:text-sky-300 block">
                   Federated Alternative: DataSHIELD Server-Side Filters
                 </strong>
-                <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                   In multi-node federated studies without interactive IDEs, <strong>DataSHIELD</strong> enforces built-in <code className="font-mono text-[#005EB8] dark:text-sky-300">nfilter</code> disclosure checks on server-side summary calls rather than post-hoc airlock inspection.
                 </p>
               </div>
@@ -1078,13 +1078,13 @@ When presenting aggregate tables or public reports containing small cell counts,
                 <button
                   key={cls.id}
                   onClick={() => setSelectedSopClass(cls.id as any)}
-                  className={`px-3 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+                  className={`px-3 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all whitespace-nowrap cursor-pointer ${
                     isSelected
                       ? 'bg-[#005EB8] text-white shadow-xs'
                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-750'
                   }`}
                 >
-                  <Icon className="w-3.5 h-3.5" />
+                  <Icon className="w-3.5 h-3.5 shrink-0" />
                   <span>{cls.label}</span>
                 </button>
               );
@@ -1154,7 +1154,7 @@ When presenting aggregate tables or public reports containing small cell counts,
                   <Code2 className="w-3.5 h-3.5 text-[#005EB8]" />
                   <span>Standard R &amp; Python Suppression Script (SDAP Compliant):</span>
                 </span>
-                <pre className="p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-[11px] font-mono text-[#005EB8] dark:text-cyan-300 overflow-x-auto">
+                <pre className="p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-xs font-mono text-[#005EB8] dark:text-cyan-300 overflow-x-auto leading-relaxed">
 {`# R Statistical Disclosure Control Pipeline
 library(sdcTable)
 dim_list <- list(region = c("North", "Central", "South"), condition = c("ToF", "HLHS", "TGA"))
@@ -1236,19 +1236,19 @@ clean_table <- protectTable(problem, method = "HITAS", verbose = FALSE)`}
                           : 'bg-red-50 dark:bg-red-950/60 border-red-300 dark:border-red-800 text-red-900 dark:text-red-200'
                       }`}
                     >
-                      <div className="space-y-0.5">
+                      <div className="space-y-1">
                         <span className="font-bold flex items-center gap-1.5">
-                          {pass ? <CheckCircle2 className="w-4 h-4 text-[#047857]" /> : <XCircle className="w-4 h-4 text-red-600" />}
-                          <span>Calculated Residual Degrees of Freedom: df = {df} (Threshold: df &ge; 10)</span>
+                          {pass ? <CheckCircle2 className="w-4 h-4 text-[#047857] shrink-0" /> : <XCircle className="w-4 h-4 text-red-600 shrink-0" />}
+                          <span>Calculated Residual Degrees of Freedom: <span className="tabular-nums">df = {df}</span> (Threshold: <span className="tabular-nums">df &ge; 10</span>)</span>
                         </span>
-                        <p className="text-[11px] opacity-90">
+                        <p className="text-xs opacity-90 leading-relaxed">
                           {!dfPass && '• Residual degrees of freedom < 10 allows mathematical inversion of coefficients to reconstruct individual patient responses. '}
                           {!plotPass && '• Raw residual scatterplots are classified as unsuppressed microdata and strictly forbidden.'}
                           {pass && '• Full mathematical compliance with ONS SDC Section 4. Safe for airlock egress.'}
                         </p>
                       </div>
                       <span
-                        className={`px-3 py-1 rounded font-mono font-bold text-xs uppercase shrink-0 ${
+                        className={`px-3 py-1 rounded font-mono font-bold text-xs uppercase shrink-0 whitespace-nowrap ${
                           pass ? 'bg-emerald-200 dark:bg-emerald-800 text-emerald-900 dark:text-emerald-100' : 'bg-red-200 dark:bg-red-800 text-red-900 dark:text-red-100'
                         }`}
                       >
@@ -1345,7 +1345,7 @@ clean_table <- protectTable(problem, method = "HITAS", verbose = FALSE)`}
                       onChange={(e) => setSandboxStepDropN(Math.max(1, parseInt(e.target.value) || 0))}
                       className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-slate-900 dark:text-white disabled:opacity-50"
                     />
-                    <span className="text-[11px] text-slate-500 mt-1 block">
+                    <span className="text-xs text-slate-500 dark:text-slate-400 mt-1 block">
                       {sandboxCurveSmoothed ? 'Discrete steps eliminated by spline smoothing' : 'Mandatory Threshold: ≥ 10 events per step'}
                     </span>
                   </div>
@@ -1358,9 +1358,9 @@ clean_table <- protectTable(problem, method = "HITAS", verbose = FALSE)`}
                       disabled={sandboxCurveSmoothed}
                       value={sandboxTailRiskN}
                       onChange={(e) => setSandboxTailRiskN(Math.max(1, parseInt(e.target.value) || 0))}
-                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-slate-900 dark:text-white disabled:opacity-50"
+                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-slate-900 dark:text-white disabled:opacity-50 tabular-nums"
                     />
-                    <span className="text-[11px] text-slate-500 mt-1 block">
+                    <span className="text-xs text-slate-500 dark:text-slate-400 mt-1 block">
                       {sandboxCurveSmoothed ? 'Continuous tail density bounds applied' : 'Mandatory Threshold: ≥ 10 at risk (or truncate curve)'}
                     </span>
                   </div>
@@ -1379,15 +1379,15 @@ clean_table <- protectTable(problem, method = "HITAS", verbose = FALSE)`}
                           : 'bg-red-50 dark:bg-red-950/60 border-red-300 dark:border-red-800 text-red-900 dark:text-red-200'
                       }`}
                     >
-                      <div className="space-y-0.5">
+                      <div className="space-y-1">
                         <span className="font-bold flex items-center gap-1.5">
-                          {pass ? <CheckCircle2 className="w-4 h-4 text-[#047857]" /> : <XCircle className="w-4 h-4 text-red-600" />}
+                          {pass ? <CheckCircle2 className="w-4 h-4 text-[#047857] shrink-0" /> : <XCircle className="w-4 h-4 text-red-600 shrink-0" />}
                           <span>
                             Kaplan-Meier Airlock Verdict:{' '}
                             {sandboxCurveSmoothed ? 'COMPLIANT (SMOOTHED SPLINE / KERNEL APPLIED)' : pass ? 'COMPLIANT (TRUNCATED)' : 'DISCLOSURE HAZARD'}
                           </span>
                         </span>
-                        <p className="text-[11px] opacity-90">
+                        <p className="text-xs opacity-90 leading-relaxed">
                           {sandboxCurveSmoothed
                             ? '• Spline / kernel smoothing replaces step drops with continuous non-parametric hazard bands, preventing individual mortality derivation.'
                             : !stepPass
@@ -1398,7 +1398,7 @@ clean_table <- protectTable(problem, method = "HITAS", verbose = FALSE)`}
                         </p>
                       </div>
                       <span
-                        className={`px-3 py-1 rounded font-mono font-bold text-xs uppercase shrink-0 ${
+                        className={`px-3 py-1 rounded font-mono font-bold text-xs uppercase shrink-0 whitespace-nowrap ${
                           pass ? 'bg-emerald-200 dark:bg-emerald-800 text-emerald-900 dark:text-emerald-100' : 'bg-red-200 dark:bg-red-800 text-red-900 dark:text-red-100'
                         }`}
                       >
@@ -1412,10 +1412,10 @@ clean_table <- protectTable(problem, method = "HITAS", verbose = FALSE)`}
               {/* R Code Transformation Snippet */}
               <div className="space-y-2">
                 <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                  <Code2 className="w-3.5 h-3.5 text-purple-600" />
+                  <Code2 className="w-3.5 h-3.5 text-purple-600 shrink-0" />
                   <span>Compliant Survival Curve Solutions in R (Smoothing vs Truncation):</span>
                 </span>
-                <pre className="p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-[11px] font-mono text-[#005EB8] dark:text-cyan-300 overflow-x-auto">
+                <pre className="p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-xs font-mono text-[#005EB8] dark:text-cyan-300 overflow-x-auto leading-relaxed">
 {`# SOLUTION 1: Kernel / Spline Smoothing (Approved alternative to truncation)
 library(bshazard)
 # Fit non-parametric B-spline smoothed hazard rate
@@ -1475,7 +1475,7 @@ plot(fit, xlim = c(0, cutoff_time), mark.time = FALSE, # Suppress individual tic
                       onChange={(e) => setSandboxMomentsSampleN(Math.max(1, parseInt(e.target.value) || 0))}
                       className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-slate-900 dark:text-white"
                     />
-                    <span className="text-[11px] text-slate-500 mt-1 block">Mandatory Threshold: &ge; 10 observations</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400 mt-1 block">Mandatory Threshold: &ge; 10 observations</span>
                   </div>
                 </div>
 
@@ -1492,19 +1492,19 @@ plot(fit, xlim = c(0, cutoff_time), mark.time = FALSE, # Suppress individual tic
                           : 'bg-red-50 dark:bg-red-950/60 border-red-300 dark:border-red-800 text-red-900 dark:text-red-200'
                       }`}
                     >
-                      <div className="space-y-0.5">
+                      <div className="space-y-1">
                         <span className="font-bold flex items-center gap-1.5">
-                          {pass ? <CheckCircle2 className="w-4 h-4 text-[#047857]" /> : <XCircle className="w-4 h-4 text-red-600" />}
+                          {pass ? <CheckCircle2 className="w-4 h-4 text-[#047857] shrink-0" /> : <XCircle className="w-4 h-4 text-red-600 shrink-0" />}
                           <span>Moments Egress Verdict: {pass ? 'SAFE FOR EGRESS' : 'HARD EGRESS BLOCK'}</span>
                         </span>
-                        <p className="text-[11px] opacity-90">
+                        <p className="text-xs opacity-90 leading-relaxed">
                           {!extremaPass && '• CRITICAL VIOLATION: Raw Min and Max detected. Raw extrema are direct microdata observations of single individuals. Must be replaced with 5th & 95th percentiles. '}
                           {!samplePass && `• Cohort sample size ${sandboxMomentsSampleN} is < 10. Summary moments cannot be published on cohorts under 10.`}
                           {pass && '• Satisfies ONS SDC Extrema Rule. Safe for research publication.'}
                         </p>
                       </div>
                       <span
-                        className={`px-3 py-1 rounded font-mono font-bold text-xs uppercase shrink-0 ${
+                        className={`px-3 py-1 rounded font-mono font-bold text-xs uppercase shrink-0 whitespace-nowrap ${
                           pass ? 'bg-emerald-200 dark:bg-emerald-800 text-emerald-900 dark:text-emerald-100' : 'bg-red-200 dark:bg-red-800 text-red-900 dark:text-red-100'
                         }`}
                       >
@@ -1518,10 +1518,10 @@ plot(fit, xlim = c(0, cutoff_time), mark.time = FALSE, # Suppress individual tic
               {/* Python Transformation Snippet */}
               <div className="space-y-2">
                 <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                  <Code2 className="w-3.5 h-3.5 text-amber-600" />
+                  <Code2 className="w-3.5 h-3.5 text-amber-600 shrink-0" />
                   <span>Compliant Summary Moments Pipeline in Python:</span>
                 </span>
-                <pre className="p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-[11px] font-mono text-[#005EB8] dark:text-cyan-300 overflow-x-auto">
+                <pre className="p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-xs font-mono text-[#005EB8] dark:text-cyan-300 overflow-x-auto leading-relaxed">
 {`# Python Pandas pipeline: enforce percentile bounds instead of raw extrema
 def safe_moments_export(df, col_name, min_n=10):
     if len(df[col_name].dropna()) < min_n:
@@ -1582,7 +1582,7 @@ def safe_moments_export(df, col_name, min_n=10):
                       onChange={(e) => setSandboxMinBinCount(Math.max(1, parseInt(e.target.value) || 0))}
                       className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-slate-900 dark:text-white"
                     />
-                    <span className="text-[11px] text-slate-500 mt-1 block">Mandatory Threshold: &ge; 10 per hexbin</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400 mt-1 block">Mandatory Threshold: &ge; 10 per hexbin</span>
                   </div>
                 </div>
 
@@ -1599,19 +1599,19 @@ def safe_moments_export(df, col_name, min_n=10):
                           : 'bg-red-50 dark:bg-red-950/60 border-red-300 dark:border-red-800 text-red-900 dark:text-red-200'
                       }`}
                     >
-                      <div className="space-y-0.5">
+                      <div className="space-y-1">
                         <span className="font-bold flex items-center gap-1.5">
-                          {pass ? <CheckCircle2 className="w-4 h-4 text-[#047857]" /> : <XCircle className="w-4 h-4 text-red-600" />}
+                          {pass ? <CheckCircle2 className="w-4 h-4 text-[#047857] shrink-0" /> : <XCircle className="w-4 h-4 text-red-600 shrink-0" />}
                           <span>Visualization Verdict: {pass ? 'SAFE FOR EGRESS' : 'DISCLOSURE BLOCKED'}</span>
                         </span>
-                        <p className="text-[11px] opacity-90">
+                        <p className="text-xs opacity-90 leading-relaxed">
                           {isScatter && '• Point scatterplots plot raw patient microdata coordinates and cannot be exported outside the enclave. '}
                           {!binPass && `• Visual bins with count ${sandboxMinBinCount} (< 10) violate primary suppression. `}
                           {pass && '• Satisfies ONS SDC Chapter 5 (Graphic Presentations). Safe for airlock release.'}
                         </p>
                       </div>
                       <span
-                        className={`px-3 py-1 rounded font-mono font-bold text-xs uppercase shrink-0 ${
+                        className={`px-3 py-1 rounded font-mono font-bold text-xs uppercase shrink-0 whitespace-nowrap ${
                           pass ? 'bg-emerald-200 dark:bg-emerald-800 text-emerald-900 dark:text-emerald-100' : 'bg-red-200 dark:bg-red-800 text-red-900 dark:text-red-100'
                         }`}
                       >
@@ -1625,10 +1625,10 @@ def safe_moments_export(df, col_name, min_n=10):
               {/* R ggplot2 Hexbin Transformation Snippet */}
               <div className="space-y-2">
                 <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                  <Code2 className="w-3.5 h-3.5 text-teal-600" />
+                  <Code2 className="w-3.5 h-3.5 text-teal-600 shrink-0" />
                   <span>Compliant ggplot2 Hexbinning with Primary Suppression in R:</span>
                 </span>
-                <pre className="p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-[11px] font-mono text-[#005EB8] dark:text-cyan-300 overflow-x-auto">
+                <pre className="p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-xs font-mono text-[#005EB8] dark:text-cyan-300 overflow-x-auto leading-relaxed">
 {`# R ggplot2: Convert scatterplot to hexbin and suppress bins where count < 10
 library(ggplot2)
 ggplot(cohort, aes(x = age_years, y = ejection_fraction)) +
@@ -1667,9 +1667,9 @@ ggplot(cohort, aes(x = age_years, y = ejection_fraction)) +
                       step="0.05"
                       value={sandboxEpsilon}
                       onChange={(e) => setSandboxEpsilon(parseFloat(e.target.value) || 0)}
-                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-slate-900 dark:text-white"
+                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-slate-900 dark:text-white tabular-nums"
                     />
-                    <span className="text-[11px] text-slate-500 mt-1 block">Mandatory Threshold: &epsilon; &le; 1.0</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400 mt-1 block">Mandatory Threshold: &epsilon; &le; 1.0</span>
                   </div>
                   <div>
                     <label className="block text-slate-600 dark:text-slate-400 font-medium mb-1">
@@ -1679,9 +1679,9 @@ ggplot(cohort, aes(x = age_years, y = ejection_fraction)) +
                       type="number"
                       value={sandboxLeafN}
                       onChange={(e) => setSandboxLeafN(Math.max(1, parseInt(e.target.value) || 0))}
-                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-slate-900 dark:text-white"
+                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-slate-900 dark:text-white tabular-nums"
                     />
-                    <span className="text-[11px] text-slate-500 mt-1 block">Mandatory Threshold: &ge; 10 samples</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400 mt-1 block">Mandatory Threshold: &ge; 10 samples</span>
                   </div>
                   <div>
                     <label className="block text-slate-600 dark:text-slate-400 font-medium mb-1">
@@ -1691,9 +1691,9 @@ ggplot(cohort, aes(x = age_years, y = ejection_fraction)) +
                       type="number"
                       value={sandboxMiaScore}
                       onChange={(e) => setSandboxMiaScore(parseFloat(e.target.value) || 0)}
-                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-slate-900 dark:text-white"
+                      className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-mono text-slate-900 dark:text-white tabular-nums"
                     />
-                    <span className="text-[11px] text-slate-500 mt-1 block">Mandatory Threshold: &le; 60%</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400 mt-1 block">Mandatory Threshold: &le; 60%</span>
                   </div>
                 </div>
 
@@ -1711,12 +1711,12 @@ ggplot(cohort, aes(x = age_years, y = ejection_fraction)) +
                           : 'bg-red-50 dark:bg-red-950/60 border-red-300 dark:border-red-800 text-red-900 dark:text-red-200'
                       }`}
                     >
-                      <div className="space-y-0.5">
+                      <div className="space-y-1">
                         <span className="font-bold flex items-center gap-1.5">
-                          {pass ? <CheckCircle2 className="w-4 h-4 text-[#047857]" /> : <XCircle className="w-4 h-4 text-red-600" />}
+                          {pass ? <CheckCircle2 className="w-4 h-4 text-[#047857] shrink-0" /> : <XCircle className="w-4 h-4 text-red-600 shrink-0" />}
                           <span>ML Weights Airlock Verdict: {pass ? 'APPROVED' : 'MODEL EGRESS BLOCKED'}</span>
                         </span>
-                        <p className="text-[11px] opacity-90">
+                        <p className="text-xs opacity-90 leading-relaxed">
                           {!epsPass && `• Privacy budget ε = ${sandboxEpsilon} exceeds 1.0 limit. Model memorization risk is unacceptable. `}
                           {!leafPass && `• Minimum leaf size of ${sandboxLeafN} (< 10) allows tree to isolate individual clinical subjects. `}
                           {!miaPass && `• MIA score ${sandboxMiaScore}% exceeds 60% threshold: model vulnerable to membership inference.`}
@@ -1724,7 +1724,7 @@ ggplot(cohort, aes(x = age_years, y = ejection_fraction)) +
                         </p>
                       </div>
                       <span
-                        className={`px-3 py-1 rounded font-mono font-bold text-xs uppercase shrink-0 ${
+                        className={`px-3 py-1 rounded font-mono font-bold text-xs uppercase shrink-0 whitespace-nowrap ${
                           pass ? 'bg-emerald-200 dark:bg-emerald-800 text-emerald-900 dark:text-emerald-100' : 'bg-red-200 dark:bg-red-800 text-red-900 dark:text-red-100'
                         }`}
                       >
@@ -1738,10 +1738,10 @@ ggplot(cohort, aes(x = age_years, y = ejection_fraction)) +
               {/* Python Scikit-Learn / PyTorch DP Snippet */}
               <div className="space-y-2">
                 <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                  <Code2 className="w-3.5 h-3.5 text-indigo-600" />
+                  <Code2 className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
                   <span>Enforcing Leaf Bounds &amp; Differential Privacy in Python:</span>
                 </span>
-                <pre className="p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-[11px] font-mono text-[#005EB8] dark:text-cyan-300 overflow-x-auto">
+                <pre className="p-3.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-xs font-mono text-[#005EB8] dark:text-cyan-300 overflow-x-auto leading-relaxed">
 {`# 1. Enforce min_samples_leaf >= 10 in gradient boosted trees
 from sklearn.ensemble import GradientBoostingClassifier
 model = GradientBoostingClassifier(min_samples_leaf=10, max_depth=4)
@@ -1812,34 +1812,34 @@ model, optimizer, train_loader = privacy_engine.make_private(
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-6 shadow-xs">
             <div className="space-y-1.5">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#0F294A] dark:text-sky-400">
-                <Calculator className="w-4 h-4 text-[#005EB8]" />
+                <Calculator className="w-4 h-4 text-[#005EB8] shrink-0" />
                 <span>Practitioner Reference &amp; Core Disclosure Mechanisms</span>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
                 Core SDC Techniques &amp; Graphical Plots Mandate
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-4xl">
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
                 Standard operating approaches for presenting aggregate tables, public reports, and epidemiological analyses containing small cell counts (N &lt; 5 or N &lt; 10), preventing re-identification while preserving scientific utility.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
               {/* 1. Cell Suppression */}
-              <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3">
+              <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3 h-full flex flex-col">
                 <div className="flex items-center gap-2 text-xs font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider">
-                  <EyeOff className="w-4 h-4 text-amber-600" />
+                  <EyeOff className="w-4 h-4 text-amber-600 shrink-0" />
                   <span>1. Cell Suppression</span>
                 </div>
                 <h4 className="text-base font-bold text-slate-900 dark:text-white">Hiding Disclosive Counts</h4>
-                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                   Directly suppresses low numbers to prevent re-identification through direct observation or indirect arithmetic deduction.
                 </p>
-                <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
-                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300 mt-auto">
+                  <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 leading-relaxed">
                     <strong className="text-slate-900 dark:text-slate-100 block mb-0.5">Primary Suppression</strong>
                     Replacing counts below threshold (N &lt; 5 or N &lt; 10) with masking symbols (e.g. &ldquo;*&rdquo; or &ldquo;&lt;10&rdquo;).
                   </div>
-                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                  <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 leading-relaxed">
                     <strong className="text-slate-900 dark:text-slate-100 block mb-0.5">Secondary (Complementary) Suppression</strong>
                     Masking adjacent non-sensitive cells within the same row or column to prevent calculating the suppressed value using marginal totals.
                   </div>
@@ -1847,21 +1847,21 @@ model, optimizer, train_loader = privacy_engine.make_private(
               </div>
 
               {/* 2. Data Aggregation */}
-              <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3">
+              <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3 h-full flex flex-col">
                 <div className="flex items-center gap-2 text-xs font-bold text-purple-900 dark:text-purple-300 uppercase tracking-wider">
-                  <Layers className="w-4 h-4 text-purple-700" />
+                  <Layers className="w-4 h-4 text-purple-700 shrink-0" />
                   <span>2. Data Aggregation</span>
                 </div>
                 <h4 className="text-base font-bold text-slate-900 dark:text-white">Grouping Granular Categories</h4>
-                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                   Collapses granular observations into broader categorical buckets to elevate small frequencies safely above threshold.
                 </p>
-                <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
-                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300 mt-auto">
+                  <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 leading-relaxed">
                     <strong className="text-slate-900 dark:text-slate-100 block mb-0.5">Spatial Aggregation</strong>
                     Reporting data at county, regional, or ICB boundaries rather than census output areas or postal districts.
                   </div>
-                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                  <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 leading-relaxed">
                     <strong className="text-slate-900 dark:text-slate-100 block mb-0.5">Temporal &amp; Demographic Aggregation</strong>
                     Pooling counts across 3- or 5-year moving averages, 10-year age bands, or parent diagnostic ICD chapters.
                   </div>
@@ -1869,21 +1869,21 @@ model, optimizer, train_loader = privacy_engine.make_private(
               </div>
 
               {/* 3. Perturbation & Noise */}
-              <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3">
+              <div className="bg-slate-50/60 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-3 h-full flex flex-col">
                 <div className="flex items-center gap-2 text-xs font-bold text-[#047857] dark:text-emerald-300 uppercase tracking-wider">
-                  <Calculator className="w-4 h-4 text-[#047857]" />
+                  <Calculator className="w-4 h-4 text-[#047857] shrink-0" />
                   <span>3. Perturbation &amp; Noise</span>
                 </div>
                 <h4 className="text-base font-bold text-slate-900 dark:text-white">Mathematical Modification</h4>
-                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                   Injects controlled noise or rounds counts to obscure exact frequencies while preserving distribution and statistical properties.
                 </p>
-                <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
-                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300 mt-auto">
+                  <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 leading-relaxed">
                     <strong className="text-slate-900 dark:text-slate-100 block mb-0.5">Controlled Rounding &amp; PRAM</strong>
                     Rounding table counts to base 5 or 10 (preserving additive marginals) or Post-Randomization Attribute Swapping.
                   </div>
-                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                  <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 leading-relaxed">
                     <strong className="text-slate-900 dark:text-slate-100 block mb-0.5">Differential Privacy</strong>
                     Injecting mathematically calibrated noise (&epsilon; &le; 1.0) so an individual&rsquo;s presence cannot be inferred with certainty.
                   </div>
@@ -1894,28 +1894,28 @@ model, optimizer, train_loader = privacy_engine.make_private(
             {/* Graphical Plots & Visualisations SDC Mandate Callout */}
             <div className="p-5 rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 space-y-3">
               <div className="flex items-center gap-2 text-xs font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider">
-                <AlertTriangle className="w-4 h-4 text-amber-600" />
+                <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
                 <span>Critical Mandate: SDC Applies Equally to Graphical Plots &amp; Visualisations</span>
               </div>
               <p className="text-xs sm:text-sm text-slate-800 dark:text-amber-100 leading-relaxed">
                 Disclosure control does not stop at tabular numbers. Visualisations such as <strong>scatter plots</strong>, <strong>Kaplan-Meier survival curves</strong>, and <strong>box plots</strong> carry identical re-identification liabilities under UK GDPR if they render single patient points or tail events with fewer than 10 patients at risk.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                <div className="p-3 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 space-y-1">
-                  <span className="text-slate-900 dark:text-white font-semibold block text-[11px]">Scatter Plots</span>
-                  <span className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed block">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs items-stretch">
+                <div className="p-3.5 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 space-y-1.5 h-full flex flex-col">
+                  <span className="text-slate-900 dark:text-white font-semibold block text-xs sm:text-sm">Scatter Plots</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed block">
                     Individual (x, y) coordinates must be converted to 2D hexbins or density contours where every bin represents &ge; 10 patients.
                   </span>
                 </div>
-                <div className="p-3 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 space-y-1">
-                  <span className="text-slate-900 dark:text-white font-semibold block text-[11px]">Survival Curves</span>
-                  <span className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed block">
+                <div className="p-3.5 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 space-y-1.5 h-full flex flex-col">
+                  <span className="text-slate-900 dark:text-white font-semibold block text-xs sm:text-sm">Survival Curves</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed block">
                     Right-censored tails must be truncated or spline-smoothed once the at-risk count falls below 10, preventing death date extraction.
                   </span>
                 </div>
-                <div className="p-3 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 space-y-1">
-                  <span className="text-slate-900 dark:text-white font-semibold block text-[11px]">Same PaC Engine</span>
-                  <span className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed block">
+                <div className="p-3.5 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 space-y-1.5 h-full flex flex-col">
+                  <span className="text-slate-900 dark:text-white font-semibold block text-xs sm:text-sm">Same PaC Engine</span>
+                  <span className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed block">
                     The Wavebound OPA PDP parses plot metadata ASTs and enforces identical k &ge; 10 rules prior to airlock export sign-off.
                   </span>
                 </div>
@@ -1927,8 +1927,8 @@ model, optimizer, train_loader = privacy_engine.make_private(
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-4 shadow-xs">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">SDC Technique Trade-Off Matrix</h3>
-                <p className="text-xs text-slate-600 dark:text-slate-400">Comparing mechanism, utility advantages, and operational limitations across disclosure techniques.</p>
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">SDC Technique Trade-Off Matrix</h3>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Comparing mechanism, utility advantages, and operational limitations across disclosure techniques.</p>
               </div>
               <div className="flex items-center gap-1.5 text-xs flex-wrap">
                 <span className="text-slate-600 dark:text-slate-400 font-medium mr-1">Filter:</span>
@@ -1936,7 +1936,7 @@ model, optimizer, train_loader = privacy_engine.make_private(
                   <button
                     key={cat}
                     onClick={() => setTradeoffFilter(cat)}
-                    className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors whitespace-nowrap cursor-pointer ${
                       tradeoffFilter === cat
                         ? 'bg-[#005EB8] text-white'
                         : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 bg-slate-100 dark:bg-slate-800'
@@ -1949,8 +1949,8 @@ model, optimizer, train_loader = privacy_engine.make_private(
             </div>
 
             <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
-              <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
+              <table className="w-full text-left text-xs sm:text-sm">
+                <thead className="bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800 text-xs">
                   <tr>
                     <th className="py-3 px-4">SDC Technique</th>
                     <th className="py-3 px-4">Primary Mechanism</th>
@@ -1963,13 +1963,13 @@ model, optimizer, train_loader = privacy_engine.make_private(
                     <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
                       <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white whitespace-nowrap">
                         <div className="flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-[#005EB8]" />
+                          <span className="w-2 h-2 rounded-full bg-[#005EB8] shrink-0" />
                           <span>{row.technique}</span>
                         </div>
                       </td>
-                      <td className="py-3.5 px-4 text-slate-700 dark:text-slate-300 leading-relaxed max-w-xs">{row.primaryMechanism}</td>
-                      <td className="py-3.5 px-4 text-[#047857] dark:text-emerald-300 font-medium leading-relaxed max-w-xs">{row.mainAdvantage}</td>
-                      <td className="py-3.5 px-4 text-amber-800 dark:text-amber-300 leading-relaxed max-w-xs">{row.keyLimitation}</td>
+                      <td className="py-3.5 px-4 text-slate-700 dark:text-slate-300 leading-relaxed">{row.primaryMechanism}</td>
+                      <td className="py-3.5 px-4 text-[#047857] dark:text-emerald-300 font-medium leading-relaxed">{row.mainAdvantage}</td>
+                      <td className="py-3.5 px-4 text-amber-800 dark:text-amber-300 leading-relaxed">{row.keyLimitation}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -1981,22 +1981,22 @@ model, optimizer, train_loader = privacy_engine.make_private(
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-5 shadow-xs">
             <div className="space-y-1.5">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider bg-sky-50 dark:bg-sky-950/60 px-2.5 py-0.5 rounded border border-sky-200 dark:border-sky-800">
+                <span className="text-xs font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider bg-sky-50 dark:bg-sky-950/60 px-2.5 py-0.5 rounded border border-sky-200 dark:border-sky-800 whitespace-nowrap">
                   SDAP &amp; DARE UK SACRO Standard
                 </span>
-                <span className="text-[11px] font-mono text-slate-600 dark:text-slate-400">
+                <span className="text-xs font-mono text-slate-600 dark:text-slate-400">
                   5 Canonical Statistical Barns (outputchecking.org)
                 </span>
               </div>
               <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
                 Statbarn Output Taxonomy &amp; Federated DataSHIELD Companion
               </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-w-4xl">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 Developed by the Safe Data Access Professionals (SDAP) community and Safe Researcher Training, the <strong>Statbarn</strong> taxonomy groups arbitrary research outputs into five structural families (&ldquo;barns&rdquo;) that share identical disclosure mathematics. Automated Policy-as-Code airlocks route candidate files to the matching barn validator rather than treating every chart as an ad-hoc exception.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
               {[
                 {
                   barn: 'Barn 1 · Frequencies & Counts',
@@ -2031,38 +2031,38 @@ model, optimizer, train_loader = privacy_engine.make_private(
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2.5 flex flex-col justify-between"
+                  className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2.5 flex flex-col justify-between h-full"
                 >
                   <div className="space-y-1.5">
-                    <span className="text-xs font-bold text-[#0F294A] dark:text-sky-300 block">{item.barn}</span>
-                    <p className="text-[11px] text-slate-600 dark:text-slate-400">
+                    <span className="text-xs sm:text-sm font-bold text-[#0F294A] dark:text-sky-300 block">{item.barn}</span>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                       <strong className="text-slate-800 dark:text-slate-200">Outputs:</strong> {item.examples}
                     </p>
-                    <p className="text-[11px] text-amber-800 dark:text-amber-300">
+                    <p className="text-xs text-amber-800 dark:text-amber-300 leading-relaxed">
                       <strong>Disclosure Risk:</strong> {item.primaryRisk}
                     </p>
                   </div>
-                  <div className="pt-2 border-t border-slate-200 dark:border-slate-800 text-[11px] text-[#047857] dark:text-emerald-300 font-medium">
+                  <div className="pt-2.5 border-t border-slate-200 dark:border-slate-800 text-xs text-[#047857] dark:text-emerald-300 font-medium leading-relaxed">
                     <strong>Airlock Mitigation:</strong> {item.control}
                   </div>
                 </div>
               ))}
 
               {/* Companion Pattern: Federated DataSHIELD */}
-              <div className="p-4 rounded-xl bg-sky-50/70 dark:bg-sky-950/30 border border-sky-200 dark:border-sky-800/70 space-y-2.5 flex flex-col justify-between">
+              <div className="p-4 rounded-xl bg-sky-50/70 dark:bg-sky-950/30 border border-sky-200 dark:border-sky-800/70 space-y-2.5 flex flex-col justify-between h-full">
                 <div className="space-y-1.5">
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#005EB8] dark:text-sky-300">
+                  <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#005EB8] dark:text-sky-300">
                     <Network className="w-4 h-4 shrink-0" />
                     <span>Companion Pattern: DataSHIELD Federated SDC</span>
                   </div>
-                  <p className="text-[11px] text-slate-700 dark:text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
                     For multi-node federated studies that do not require an interactive workspace IDE or generative coding loop, <strong>DataSHIELD</strong> executes pre-approved non-disclosive server-side R functions at each custodian node and returns only aggregate summary statistics.
                   </p>
-                  <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                     Built-in <code className="font-mono text-[#005EB8] dark:text-sky-300">nfilter</code> disclosure traps (<code className="font-mono">nfilter.tab</code>, <code className="font-mono">nfilter.subset</code>, <code className="font-mono">nfilter.glm</code>) reject small-cell subsets or over-parameterized regressions before results leave the node.
                   </p>
                 </div>
-                <div className="pt-2 border-t border-sky-200 dark:border-sky-800/60 text-[10px] font-mono text-slate-600 dark:text-slate-400">
+                <div className="pt-2.5 border-t border-sky-200 dark:border-sky-800/60 text-xs font-mono text-slate-600 dark:text-slate-400 leading-relaxed">
                   Scope boundary: Structured federated API calls only (complements, does not replace, enclave IDEs &amp; LLMs).
                 </div>
               </div>
@@ -2072,51 +2072,51 @@ model, optimizer, train_loader = privacy_engine.make_private(
           {/* Sparse & Low-Count Analytical Methodologies */}
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-5 shadow-xs">
             <div className="space-y-1">
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">Methodological Approaches for Sparse &amp; Low-Count Data</h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">Methodological Approaches for Sparse &amp; Low-Count Data</h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                 Analyzing small cohorts without sacrificing statistical rigor requires specialized frameworks designed for sparse event counts.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-5 rounded-xl bg-slate-50/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+              <div className="p-5 rounded-xl bg-slate-50/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-3 h-full flex flex-col">
                 <div className="flex items-center gap-2 text-xs font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider">
-                  <Calculator className="w-4 h-4 text-[#005EB8]" />
+                  <Calculator className="w-4 h-4 text-[#005EB8] shrink-0" />
                   <span>Bayesian Hierarchical Modeling</span>
                 </div>
-                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Borrowing Strength Across Areas</h4>
-                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Borrowing Strength Across Areas</h4>
+                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed flex-1">
                   Employs Empirical Bayes and Spatial Conditional Autoregressive (CAR) models to smooth extreme, unstable rate estimates across sparse geographical areas or rare subgroups toward a common global or neighborhood mean.
                 </p>
-                <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-[11px] text-[#005EB8] dark:text-sky-300 font-mono">
+                <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs text-[#005EB8] dark:text-sky-300 font-mono">
                   theta_i ~ Normal(mu, sigma^2) + Spatial_CAR(W)
                 </div>
               </div>
 
-              <div className="p-5 rounded-xl bg-[#f0fdf9] dark:bg-slate-950/60 border border-[#a7f3d0] dark:border-slate-800 space-y-3">
+              <div className="p-5 rounded-xl bg-[#f0fdf9] dark:bg-slate-950/60 border border-[#a7f3d0] dark:border-slate-800 space-y-3 h-full flex flex-col">
                 <div className="flex items-center gap-2 text-xs font-bold text-[#047857] dark:text-emerald-400 uppercase tracking-wider">
-                  <Users className="w-4 h-4 text-[#047857]" />
+                  <Users className="w-4 h-4 text-[#047857] shrink-0" />
                   <span>International Consortia &amp; Registries</span>
                 </div>
-                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Multi-Center Sample Aggregation</h4>
-                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Multi-Center Sample Aggregation</h4>
+                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed flex-1">
                   Utilizes harmonized protocols across multi-center cohorts and international rare disease registries to aggregate sample sizes globally while enforcing uniform data protection and safe governance standards.
                 </p>
-                <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-[#a7f3d0] dark:border-slate-700 text-[11px] text-[#065f46] dark:text-emerald-300 font-mono">
+                <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-[#a7f3d0] dark:border-slate-700 text-xs text-[#065f46] dark:text-emerald-300 font-mono">
                   Federated aggregation with localized privacy preservation
                 </div>
               </div>
 
-              <div className="p-5 rounded-xl bg-[#faf5ff] dark:bg-slate-950/60 border border-[#e9d5ff] dark:border-slate-800 space-y-3">
+              <div className="p-5 rounded-xl bg-[#faf5ff] dark:bg-slate-950/60 border border-[#e9d5ff] dark:border-slate-800 space-y-3 h-full flex flex-col">
                 <div className="flex items-center gap-2 text-xs font-bold text-purple-900 dark:text-purple-400 uppercase tracking-wider">
-                  <GitBranch className="w-4 h-4 text-purple-700" />
+                  <GitBranch className="w-4 h-4 text-purple-700 shrink-0" />
                   <span>Qualitative &amp; Mixed Methods</span>
                 </div>
-                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Small Cohort Rigor (N &lt; 30)</h4>
-                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Small Cohort Rigor (N &lt; 30)</h4>
+                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed flex-1">
                   When cohort sizes are too small for frequentist significance testing, structured methods (such as detailed case series, process tracing, or Qualitative Comparative Analysis [QCA]) identify necessary and sufficient conditions without requiring massive sample power.
                 </p>
-                <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-[#e9d5ff] dark:border-slate-700 text-[11px] text-purple-900 dark:text-purple-300 font-mono">
+                <div className="p-3 rounded-lg bg-white dark:bg-slate-900 border border-[#e9d5ff] dark:border-slate-700 text-xs text-purple-900 dark:text-purple-300 font-mono">
                   Set-theoretic truth tables &amp; Boolean minimization
                 </div>
               </div>
@@ -2126,42 +2126,42 @@ model, optimizer, train_loader = privacy_engine.make_private(
           {/* Data Governance & Safe Access Models */}
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-5 shadow-xs">
             <div className="space-y-1">
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">Data Governance &amp; Safe Access Models</h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">Data Governance &amp; Safe Access Models</h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                 When raw microdata must be analyzed in its unmasked form, controlled access enclaves replace open public data release.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-5 rounded-xl bg-slate-50/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+              <div className="p-5 rounded-xl bg-slate-50/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-3 h-full flex flex-col">
                 <div className="flex items-center gap-2 text-xs font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider">
-                  <ShieldAlert className="w-4 h-4 text-[#005EB8]" />
+                  <ShieldAlert className="w-4 h-4 text-[#005EB8] shrink-0" />
                   <span>The Five Safes Framework</span>
                 </div>
-                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Comprehensive Access Control</h4>
-                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Comprehensive Access Control</h4>
+                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                   Evaluates data access across five integrated operational dimensions: Safe People (vetted researchers), Safe Projects (public-benefit purpose), Safe Settings (isolated compute), Safe Data (de-identified files), and Safe Outputs (SDC-screened results).
                 </p>
               </div>
 
-              <div className="p-5 rounded-xl bg-[#f0fdf9] dark:bg-slate-950/60 border border-[#a7f3d0] dark:border-slate-800 space-y-3">
+              <div className="p-5 rounded-xl bg-[#f0fdf9] dark:bg-slate-950/60 border border-[#a7f3d0] dark:border-slate-800 space-y-3 h-full flex flex-col">
                 <div className="flex items-center gap-2 text-xs font-bold text-[#047857] dark:text-emerald-400 uppercase tracking-wider">
-                  <Network className="w-4 h-4 text-[#047857]" />
+                  <Network className="w-4 h-4 text-[#047857] shrink-0" />
                   <span>Secure Enclaves</span>
                 </div>
-                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Zero-Egress Compute Enclaves</h4>
-                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Zero-Egress Compute Enclaves</h4>
+                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                   Partitioned virtual environments allowing statistical code execution on unmasked microdata without permitting raw files to leave the secure server. Ingress and egress are strictly gated by policy decision points.
                 </p>
               </div>
 
-              <div className="p-5 rounded-xl bg-slate-50/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-3">
+              <div className="p-5 rounded-xl bg-slate-50/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-3 h-full flex flex-col">
                 <div className="flex items-center gap-2 text-xs font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider">
-                  <Eye className="w-4 h-4 text-amber-600" />
+                  <Eye className="w-4 h-4 text-amber-600 shrink-0" />
                   <span>Output Checking &amp; Airlocks</span>
                 </div>
-                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Dual Verification Gateways</h4>
-                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Dual Verification Gateways</h4>
+                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                   All generated tables, regression coefficients, and visual plots pass automated threshold validation and undergo independent disclosure control review by trained data custodians before export authorization is granted.
                 </p>
               </div>
@@ -2243,47 +2243,47 @@ model, optimizer, train_loader = privacy_engine.make_private(
               <span className="text-xs font-mono font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider block">
                 Two-Person Airlock Review Protocol
               </span>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
                 Cryptographic Output Release Gate &amp; Compliance Seal
               </h3>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
               <button
                 onClick={generateCryptographicSeal}
-                className="px-3.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="px-3.5 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
+                <RotateCcw className="w-3.5 h-3.5 shrink-0" />
                 <span>Recalculate SHA-256</span>
               </button>
 
               <button
                 onClick={handleDownloadDossier}
-                className="px-3.5 py-1.5 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
+                className="px-3.5 py-2 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white text-xs font-semibold flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer shadow-xs"
               >
-                <Download className="w-3.5 h-3.5 text-amber-400" />
+                <Download className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                 <span>Export SDC Audit Dossier (.md)</span>
               </button>
             </div>
           </div>
 
           {/* Two-Gate Workflow Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
             {/* Gate 1: Machine Validation */}
-            <div className="p-5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 text-xs">
-                  <CheckCircle2 className="w-4 h-4 text-[#047857]" />
+            <div className="p-5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-3 h-full flex flex-col">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 text-xs sm:text-sm">
+                  <CheckCircle2 className="w-4 h-4 text-[#047857] shrink-0" />
                   <span>Reviewer 1: Automated SDC Shape PEP</span>
                 </span>
-                <span className="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-[#047857] dark:text-emerald-300 font-mono text-[10px] font-bold">
+                <span className="px-2.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-[#047857] dark:text-emerald-300 font-mono text-xs font-bold whitespace-nowrap shrink-0">
                   {tableAnalysis.isCleanAirlock ? 'VERIFIED PASSED' : 'BLOCKED'}
                 </span>
               </div>
-              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                Automated validation executed against <code>sdc_shapes.ttl</code>. Evaluates that zero unsuppressed cells exist below k ≥ {kThreshold} and dominance ratio is compliant.
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed flex-1">
+                Automated validation executed against <code>sdc_shapes.ttl</code>. Evaluates that zero unsuppressed cells exist below <span className="tabular-nums">k ≥ {kThreshold}</span> and dominance ratio is compliant.
               </p>
-              <div className="p-3 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800 space-y-1 font-mono text-[11px] text-slate-600 dark:text-slate-400">
+              <div className="p-3.5 bg-white dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800 space-y-1.5 font-mono text-xs text-slate-600 dark:text-slate-400 tabular-nums">
                 <div>Primary Violations: <strong>{suppressionMode === 'raw' ? tableAnalysis.totalPrimaryDisclosive : 0}</strong></div>
                 <div>Complementary Suppressions: <strong>{tableAnalysis.totalSecondarySuppressed}</strong></div>
                 <div>Status: <strong className="text-[#047857]">{tableAnalysis.isCleanAirlock ? 'CONFORMANT' : 'NON-CONFORMANT'}</strong></div>
@@ -2291,39 +2291,39 @@ model, optimizer, train_loader = privacy_engine.make_private(
             </div>
 
             {/* Gate 2: Human Output Checker */}
-            <div className="p-5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 text-xs">
-                  <Users className="w-4 h-4 text-[#005EB8]" />
+            <div className="p-5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-3 h-full flex flex-col">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 text-xs sm:text-sm">
+                  <Users className="w-4 h-4 text-[#005EB8] shrink-0" />
                   <span>Reviewer 2: Human Output Checker (SDC Lead)</span>
                 </span>
-                <span className="px-2 py-0.5 rounded bg-sky-100 dark:bg-sky-950 text-[#005EB8] dark:text-sky-300 font-mono text-[10px] font-bold">
+                <span className="px-2.5 py-0.5 rounded bg-sky-100 dark:bg-sky-950 text-[#005EB8] dark:text-sky-300 font-mono text-xs font-bold whitespace-nowrap shrink-0">
                   {reviewer2Approved ? 'APPROVED' : 'PENDING'}
                 </span>
               </div>
 
-              <div className="space-y-2 text-xs">
+              <div className="space-y-3 text-xs">
                 <div>
-                  <label className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
                     Accredited Reviewer Name:
                   </label>
                   <input
                     type="text"
                     value={reviewer2Name}
                     onChange={(e) => setReviewer2Name(e.target.value)}
-                    className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded p-1.5 text-xs text-slate-900 dark:text-white"
+                    className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded p-2 text-xs sm:text-sm text-slate-900 dark:text-white"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
                     Review Rationale &amp; Audit Notes:
                   </label>
                   <textarea
                     rows={2}
                     value={airlockRationale}
                     onChange={(e) => setAirlockRationale(e.target.value)}
-                    className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded p-1.5 text-xs text-slate-900 dark:text-white"
+                    className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded p-2 text-xs sm:text-sm text-slate-900 dark:text-white"
                   />
                 </div>
               </div>
@@ -2331,31 +2331,31 @@ model, optimizer, train_loader = privacy_engine.make_private(
           </div>
 
           {/* Cryptographic Release Ticket */}
-          <div className="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-3 font-mono text-xs text-slate-300">
-            <div className="flex items-center justify-between text-slate-400 pb-2 border-b border-slate-800 text-[11px]">
+          <div className="p-5 bg-slate-950 rounded-xl border border-slate-800 space-y-3 font-mono text-xs text-slate-300">
+            <div className="flex items-center justify-between text-slate-400 pb-2.5 border-b border-slate-800 text-xs">
               <span className="text-white font-bold flex items-center gap-1.5">
-                <Lock className="w-3.5 h-3.5 text-amber-400" />
+                <Lock className="w-4 h-4 text-amber-400 shrink-0" />
                 <span>CRYPTOGRAPHIC AIRLOCK RELEASE TICKET</span>
               </span>
-              <span>SHA-256 Web Crypto Seal</span>
+              <span className="whitespace-nowrap">SHA-256 Web Crypto Seal</span>
             </div>
 
-            <div className="space-y-1 text-[11px]">
-              <div className="flex items-center gap-2">
+            <div className="space-y-1.5 text-xs">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className="text-slate-500">Digest:</span>
                 <span className="text-emerald-400 break-all select-all">{airlockSealHash}</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className="text-slate-500">Sign-off Token:</span>
                 <span className="text-cyan-400">sde-airlock-tok-{airlockSealHash.substring(0, 16)}</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className="text-slate-500">Authority:</span>
                 <span className="text-slate-200">ONS SDC Standard · Caldicott Principle 8 · DAAG Mandate D-005</span>
               </div>
             </div>
 
-            <div className="pt-2.5 border-t border-slate-800 text-[11px] text-slate-400 leading-relaxed">
+            <div className="pt-3 border-t border-slate-800 text-xs text-slate-400 leading-relaxed">
               <strong className="text-sky-300">Five Safes RO-Crate Packaging (Recommended Profile):</strong>{' '}
               This signed release ticket, alongside <code className="text-cyan-300">W3C PROV-O</code> execution traces and approved Safe Outputs, can be bundled into a machine-readable Schema.org / JSON-LD <strong>Five Safes RO-Crate</strong> archive (<code className="text-cyan-300">ro-crate-metadata.json</code>) for portable auditability across federated TREs and EHDS Secure Processing Environments.
             </div>

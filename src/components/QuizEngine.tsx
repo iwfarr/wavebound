@@ -315,9 +315,9 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
 
           <button
             onClick={onViewProgress}
-            className="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs sm:text-sm font-semibold text-slate-200 flex items-center gap-2 transition-colors shrink-0 cursor-pointer"
+            className="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs sm:text-sm font-semibold text-slate-200 flex items-center gap-2 transition-colors shrink-0 cursor-pointer whitespace-nowrap"
           >
-            <BarChart3 className="w-4 h-4 text-cyan-400" />
+            <BarChart3 className="w-4 h-4 text-cyan-400 shrink-0" />
             <span>View Attempt History</span>
           </button>
         </div>
@@ -338,14 +338,14 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
             <span>Configure Assessment Parameters</span>
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
             {/* Category Select */}
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-slate-300">Category Domain</label>
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-cyan-500"
               >
                 {categories.map((c) => (
                   <option key={c} value={c}>
@@ -357,16 +357,16 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
 
             {/* Difficulty Select */}
             <div className="space-y-1.5">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between gap-2">
                 <label className="text-xs font-semibold text-slate-300">Target Difficulty</label>
-                <span className="text-xs font-mono text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-800/50">
+                <span className="text-xs font-mono text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/50 whitespace-nowrap tabular-nums">
                   {availableMatchingCount} in bank
                 </span>
               </div>
               <select
                 value={selectedDifficulty}
                 onChange={(e) => setSelectedDifficulty(e.target.value as any)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-cyan-500"
               >
                 <option value="All">All Levels (Mixed)</option>
                 <option value="Foundation">Foundation</option>
@@ -381,7 +381,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
               <select
                 value={questionCount}
                 onChange={(e) => setQuestionCount(parseInt(e.target.value))}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500"
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-cyan-500"
               >
                 <option value={3}>3 Questions (Quick Drill)</option>
                 <option value={5}>5 Questions (Standard)</option>
@@ -397,35 +397,35 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <button
               onClick={() => handleStartCuratedQuiz()}
-              className="flex-1 py-3 px-6 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
+              className="flex-1 py-3 px-6 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs sm:text-sm font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
             >
-              <Zap className="w-4 h-4" />
+              <Zap className="w-4 h-4 shrink-0" />
               <span>Start Curated Playbook Exam</span>
             </button>
 
             <button
               onClick={() => handleStartCuratedQuiz(3)}
-              className="py-3 px-6 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
+              className="py-3 px-6 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 text-xs sm:text-sm font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
             >
-              <RotateCcw className="w-4 h-4" />
+              <RotateCcw className="w-4 h-4 shrink-0" />
               <span>3-Question Quick Drill</span>
             </button>
           </div>
 
           {/* Architectural Notice: Bringing Your Own API vs Running a Local Instance */}
-          <div className="p-4 rounded-xl bg-slate-950 border border-cyan-900/60 text-xs text-slate-300 space-y-2">
+          <div className="p-4 sm:p-5 rounded-xl bg-slate-950 border border-cyan-900/60 text-xs sm:text-sm text-slate-300 space-y-3">
             <div className="flex items-center gap-2 text-cyan-300 font-bold">
               <Info className="w-4 h-4 text-cyan-400 shrink-0" />
               <span>Can I bring my own API key to the Quiz, or should I run a local instance of Wavebound?</span>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1 text-xs sm:text-sm text-slate-400 leading-relaxed">
-              <div className="space-y-1 p-3 rounded-lg bg-slate-900/80 border border-slate-800">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-1 text-xs sm:text-sm text-slate-400 leading-relaxed items-stretch">
+              <div className="h-full space-y-1.5 p-3.5 rounded-lg bg-slate-900/80 border border-slate-800">
                 <span className="font-bold text-emerald-300 block">1. 100% Self-Contained by Default (No Keys Needed)</span>
                 <p>
                   Wavebound is designed to run self-contained in your browser with zero external network calls. All 270+ curated questions, randomized answer checks, and certificate downloads execute locally on your device. You do <strong>not</strong> need to supply an OpenAI, Anthropic, or cloud API key to practice or take assessments.
                 </p>
               </div>
-              <div className="space-y-1 p-3 rounded-lg bg-slate-900/80 border border-slate-800">
+              <div className="h-full space-y-1.5 p-3.5 rounded-lg bg-slate-900/80 border border-slate-800">
                 <span className="font-bold text-cyan-300 block">2. Bring Your Own Local Model or Private Endpoint</span>
                 <p>
                   By contrast, if you want to dynamically generate custom questions from your own notes or local policy files, avoid pasting personal API keys into hosted web apps where credentials and prompts cross third-party servers. Instead, <strong>run a local copy of Wavebound on your own machine</strong> connected to a local model (e.g. Ollama, LM Studio, or vLLM) or your own private API environment.
@@ -438,20 +438,20 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
         /* Active Quiz Taking Screen */
         <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6">
           {/* Progress & Timer Bar */}
-          <div className="flex items-center justify-between text-xs pb-4 border-b border-slate-800">
-            <div className="flex items-center gap-2">
-              <span className="font-mono font-bold text-cyan-400 bg-cyan-950 px-2.5 py-1 rounded border border-cyan-800/60">
+          <div className="flex flex-wrap items-center justify-between gap-2 text-xs pb-4 border-b border-slate-800">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="font-mono font-bold text-cyan-400 bg-cyan-950 px-2.5 py-1 rounded border border-cyan-800/60 whitespace-nowrap tabular-nums">
                 Question {currentIndex + 1} of {activeQuestions.length}
               </span>
               <span className="text-slate-400">{currentQ.category}</span>
             </div>
 
-            <div className="flex items-center gap-3">
-              <span className="text-[11px] font-mono text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
+            <div className="flex items-center gap-3 shrink-0">
+              <span className="text-xs font-mono text-slate-400 bg-slate-950 px-2.5 py-0.5 rounded border border-slate-800 whitespace-nowrap">
                 {currentQ.difficulty}
               </span>
-              <div className="flex items-center gap-1 text-slate-400 font-mono text-xs">
-                <Clock className="w-3.5 h-3.5 text-cyan-400" />
+              <div className="flex items-center gap-1 text-slate-400 font-mono text-xs whitespace-nowrap tabular-nums">
+                <Clock className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
                 <span>{elapsedSeconds}s</span>
               </div>
             </div>
@@ -524,8 +524,8 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
                   )}
                 </span>
 
-                <span className="text-[11px] font-mono text-slate-400 flex items-center gap-1">
-                  <Bookmark className="w-3 h-3 text-cyan-400" />
+                <span className="text-xs font-mono text-slate-400 flex items-center gap-1">
+                  <Bookmark className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
                   {currentQ.citation}
                 </span>
               </div>
@@ -537,12 +537,12 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
               <div className="pt-2 flex justify-end">
                 <button
                   onClick={handleNextQuestion}
-                  className="px-5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold transition-colors flex items-center gap-2 shadow-sm"
+                  className="px-5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold transition-colors flex items-center gap-2 shadow-sm whitespace-nowrap cursor-pointer"
                 >
                   <span>
                     {currentIndex < activeQuestions.length - 1 ? 'Next Question' : 'Complete Quiz & View Score'}
                   </span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3.5 h-3.5 shrink-0" />
                 </button>
               </div>
             </div>
@@ -551,7 +551,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
       ) : (
         /* Quiz Completed & Detailed Score Breakdown */
         <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-8 text-slate-100">
-          <div className="text-center space-y-3 max-w-md mx-auto">
+          <div className="text-center space-y-3 max-w-xl mx-auto">
             {passed ? (
               <Trophy className="w-14 h-14 text-emerald-400 mx-auto" />
             ) : (
@@ -569,18 +569,18 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
 
             <div className="py-2">
               <div
-                className={`text-5xl font-extrabold font-mono ${
+                className={`text-5xl font-extrabold font-mono tabular-nums ${
                   passed ? 'text-emerald-400' : 'text-amber-400'
                 }`}
               >
                 {finalScorePercent}%
               </div>
-              <div className="text-xs text-slate-400 mt-1">
+              <div className="text-xs sm:text-sm text-slate-400 mt-1 tabular-nums">
                 {correctCount} of {activeQuestions.length} questions answered correctly · {elapsedSeconds}s elapsed
               </div>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               {passed
                 ? 'Outstanding performance. Your score and passing attempt have been recorded to your progress ledger.'
                 : 'Good effort. Review the question explanations below and consult the playbook sections to improve.'}
@@ -589,17 +589,17 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
             <div className="flex flex-wrap justify-center gap-3 pt-3">
               <button
                 onClick={() => handleStartCuratedQuiz()}
-                className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold rounded-xl flex items-center gap-1.5 transition-colors"
+                className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold rounded-xl flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
+                <RotateCcw className="w-3.5 h-3.5 shrink-0" />
                 <span>Retake Quiz</span>
               </button>
 
               <button
                 onClick={onViewProgress}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-xl flex items-center gap-1.5 transition-colors"
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-xl flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer"
               >
-                <BarChart3 className="w-3.5 h-3.5 text-cyan-400" />
+                <BarChart3 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
                 <span>View Progress Dashboard</span>
               </button>
             </div>
@@ -625,7 +625,7 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 shrink-0">
                   <button
                     onClick={() => {
                       try {
@@ -634,9 +634,9 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
                         console.warn('Direct print failed, generating standalone HTML download', err);
                       }
                     }}
-                    className="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-2 transition-colors shadow-md cursor-pointer"
+                    className="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-2 transition-colors shadow-md cursor-pointer whitespace-nowrap"
                   >
-                    <Printer className="w-4 h-4" />
+                    <Printer className="w-4 h-4 shrink-0" />
                     <span>Print / Save PDF</span>
                   </button>
 
@@ -695,10 +695,10 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
                       document.body.removeChild(a);
                       URL.revokeObjectURL(url);
                     }}
-                    className="px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                    className="px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap"
                     title="Download clean standalone printable HTML file"
                   >
-                    <Download className="w-3.5 h-3.5 text-cyan-400" />
+                    <Download className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
                     <span>Download (.html)</span>
                   </button>
                 </div>
@@ -715,12 +715,12 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
                     value={candidateName}
                     onChange={(e) => setCandidateName(e.target.value)}
                     placeholder="e.g. Dr. Jane Smith, Information Asset Owner"
-                    className="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                    className="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
                   />
                   {candidateName && (
                     <button
                       onClick={() => setCandidateName('')}
-                      className="text-xs text-slate-500 hover:text-slate-300 px-2 py-1"
+                      className="text-xs text-slate-500 hover:text-slate-300 px-2 py-1 whitespace-nowrap"
                     >
                       Clear
                     </button>
@@ -733,9 +733,9 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
                 id="certificate-print-view"
                 className="bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 border-2 border-cyan-500/50 rounded-2xl p-8 sm:p-10 space-y-6 text-center relative print:border-black print:bg-white print:text-black shadow-xl"
               >
-                <div className="space-y-1">
-                  <div className="inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-cyan-400 bg-cyan-950/80 px-3 py-1 rounded-md border border-cyan-800/60 print:bg-transparent print:text-black">
-                    <ShieldCheck className="w-3.5 h-3.5 text-cyan-400 print:text-black" />
+                <div className="space-y-1.5">
+                  <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-cyan-400 bg-cyan-950/80 px-3 py-1 rounded-md border border-cyan-800/60 print:bg-transparent print:text-black whitespace-nowrap">
+                    <ShieldCheck className="w-3.5 h-3.5 text-cyan-400 print:text-black shrink-0" />
                     <span>Wavebound Policy-as-Code Enclave Assurance</span>
                   </div>
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight pt-2 print:text-black">
@@ -753,31 +753,31 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
                   <div className="text-xl sm:text-2xl font-bold text-cyan-300 border-b border-cyan-500/40 pb-2 max-w-md mx-auto print:text-black print:border-black">
                     {candidateName.trim() || 'Candidate Name / Designated Enclave Operator'}
                   </div>
-                  <p className="text-xs text-slate-300 max-w-lg mx-auto leading-relaxed pt-1 print:text-gray-700">
+                  <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed pt-1 print:text-gray-700">
                     has completed a rigorous technical assessment evaluating automated governance policy,
                     information governance safeguards, and line-rate disclosure control enforcement.
                   </p>
                 </div>
 
                 {/* Certificate Metadata Grid showing combination of Domain, Difficulty, Question Count */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left max-w-2xl mx-auto pt-2">
-                  <div className="p-3 bg-slate-900/90 rounded-xl border border-slate-800 print:bg-gray-100 print:border-gray-300">
-                    <span className="text-[10px] uppercase font-mono text-slate-500 block">Category Domain</span>
-                    <span className="text-xs font-bold text-white block mt-0.5 print:text-black">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left max-w-3xl mx-auto pt-2 items-stretch">
+                  <div className="h-full p-3.5 bg-slate-900/90 rounded-xl border border-slate-800 print:bg-gray-100 print:border-gray-300">
+                    <span className="text-xs uppercase font-mono text-slate-500 block">Category Domain</span>
+                    <span className="text-xs sm:text-sm font-bold text-white block mt-0.5 print:text-black">
                       {lastQuizMeta.category}
                     </span>
                   </div>
 
-                  <div className="p-3 bg-slate-900/90 rounded-xl border border-slate-800 print:bg-gray-100 print:border-gray-300">
-                    <span className="text-[10px] uppercase font-mono text-slate-500 block">Target Difficulty</span>
-                    <span className="text-xs font-bold text-cyan-300 block mt-0.5 print:text-black">
+                  <div className="h-full p-3.5 bg-slate-900/90 rounded-xl border border-slate-800 print:bg-gray-100 print:border-gray-300">
+                    <span className="text-xs uppercase font-mono text-slate-500 block">Target Difficulty</span>
+                    <span className="text-xs sm:text-sm font-bold text-cyan-300 block mt-0.5 print:text-black">
                       {lastQuizMeta.difficulty} Level
                     </span>
                   </div>
 
-                  <div className="p-3 bg-slate-900/90 rounded-xl border border-slate-800 print:bg-gray-100 print:border-gray-300">
-                    <span className="text-[10px] uppercase font-mono text-slate-500 block">Evaluated Questions</span>
-                    <span className="text-xs font-bold text-white block mt-0.5 print:text-black">
+                  <div className="h-full p-3.5 bg-slate-900/90 rounded-xl border border-slate-800 print:bg-gray-100 print:border-gray-300">
+                    <span className="text-xs uppercase font-mono text-slate-500 block">Evaluated Questions</span>
+                    <span className="text-xs sm:text-sm font-bold text-white block mt-0.5 tabular-nums print:text-black">
                       {lastQuizMeta.count} Items ({lastQuizMeta.score}% Score)
                     </span>
                   </div>
@@ -786,13 +786,13 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
                 {/* Footer Sign-off & Verification Token */}
                 <div className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400 print:border-gray-300 print:text-gray-700">
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-mono">Date Issued:</span>
-                    <strong className="text-slate-200 print:text-black font-mono">{lastQuizMeta.date}</strong>
+                    <span className="text-xs font-mono">Date Issued:</span>
+                    <strong className="text-slate-200 print:text-black font-mono tabular-nums">{lastQuizMeta.date}</strong>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-slate-500">Audit Hash:</span>
-                    <code className="text-[11px] font-mono text-cyan-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800 print:bg-transparent print:text-black">
+                    <span className="text-xs font-mono text-slate-500">Audit Hash:</span>
+                    <code className="text-xs font-mono text-cyan-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800 print:bg-transparent print:text-black">
                       {lastQuizMeta.hash}
                     </code>
                   </div>
@@ -819,23 +819,23 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
                         : 'bg-slate-950/60 border-red-900/40'
                     }`}
                   >
-                    <div className="flex items-start justify-between gap-3 text-xs">
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono font-bold text-slate-400">Q{qIdx + 1}.</span>
+                    <div className="flex items-start justify-between gap-3 text-xs sm:text-sm">
+                      <div className="flex items-start gap-2">
+                        <span className="font-mono font-bold text-slate-400 shrink-0 tabular-nums">Q{qIdx + 1}.</span>
                         <span className="font-bold text-slate-200">{q.question}</span>
                       </div>
                       {isCorrect ? (
-                        <span className="text-emerald-400 font-semibold flex items-center gap-1 shrink-0">
-                          <CheckCircle2 className="w-4 h-4" /> Correct
+                        <span className="text-emerald-400 font-semibold flex items-center gap-1 shrink-0 whitespace-nowrap">
+                          <CheckCircle2 className="w-4 h-4 shrink-0" /> Correct
                         </span>
                       ) : (
-                        <span className="text-red-400 font-semibold flex items-center gap-1 shrink-0">
-                          <XCircle className="w-4 h-4" /> Incorrect
+                        <span className="text-red-400 font-semibold flex items-center gap-1 shrink-0 whitespace-nowrap">
+                          <XCircle className="w-4 h-4 shrink-0" /> Incorrect
                         </span>
                       )}
                     </div>
 
-                    <div className="text-xs space-y-1 text-slate-300">
+                    <div className="text-xs sm:text-sm space-y-1 text-slate-300">
                       <div>
                         Your choice:{' '}
                         <strong className={isCorrect ? 'text-emerald-300' : 'text-red-300'}>
@@ -850,9 +850,9 @@ export const QuizEngine: React.FC<QuizEngineProps> = ({
                       )}
                     </div>
 
-                    <div className="text-xs text-slate-400 bg-slate-900/60 p-3 rounded-lg border border-slate-800/80 leading-relaxed space-y-1">
+                    <div className="text-xs sm:text-sm text-slate-400 bg-slate-900/60 p-3.5 rounded-lg border border-slate-800/80 leading-relaxed space-y-1.5">
                       <p>{q.explanation}</p>
-                      <div className="text-[11px] font-mono text-cyan-400 pt-1">
+                      <div className="text-xs font-mono text-cyan-400 pt-1">
                         Citation: {q.citation}
                       </div>
                     </div>

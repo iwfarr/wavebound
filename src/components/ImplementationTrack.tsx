@@ -179,11 +179,11 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
   const checklistPercent = Math.round((completedChecklistCount / IMPLEMENTATION_CHECKLIST.length) * 100);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Hero Header */}
       <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative z-10 space-y-4">
+        <div className="relative z-10 space-y-5">
           <div className="flex flex-wrap items-center gap-3">
             <WaveboundLogo variant="badge" size="sm" />
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-cyan-950/80 border border-cyan-800 text-cyan-300 text-xs font-mono font-semibold">
@@ -196,28 +196,28 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
             Transitioning from Policy Design to Production Without Breaking Deployed Services
           </h1>
 
-          <p className="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed">
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
             A practical, non-breaking engineering roadmap taking an institution from blank policy definitions
             to automated service admission controls and airlock enforcement. Combines a granular <strong>16-week sprint schedule</strong>,
             staged <strong>non-breaking rollout modes (Evaluate-Only &rarr; Shadow &rarr; Canary &rarr; Active)</strong>, and an accountable <strong>Decision Register (D-001 &ndash; D-009)</strong>.
           </p>
 
           {/* Clarity Callout: Playbook vs Implementation Track */}
-          <div className="p-4 rounded-xl bg-slate-950/90 border border-cyan-800/60 text-xs space-y-2">
+          <div className="p-5 rounded-xl bg-slate-950/90 border border-cyan-800/60 text-sm space-y-3">
             <div className="flex items-center gap-2 text-cyan-300 font-bold">
               <Sparkles className="w-4 h-4 text-cyan-400" />
               <span>How the Playbook &amp; Implementation Track Work Together (Without Duplication)</span>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-slate-300 pt-1 text-[11px]">
-              <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 space-y-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch text-slate-300 pt-1">
+              <div className="h-full p-4 rounded-lg bg-slate-900 border border-slate-800 space-y-1.5">
                 <span className="font-bold text-cyan-300 block">The Playbook (The Rules &amp; Rationale)</span>
-                <p className="text-slate-400 leading-relaxed">
+                <p className="text-slate-300 text-sm leading-relaxed">
                   Your conceptual curriculum and governance standard. Explains <em>why</em> rules exist (Five Safes, Caldicott Principles, statutory roots, and semantic graph modelling). Designed for IG Leads, Caldicott Guardians, and architects to align on definitions.
                 </p>
               </div>
-              <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 space-y-1">
+              <div className="h-full p-4 rounded-lg bg-slate-900 border border-slate-800 space-y-1.5">
                 <span className="font-bold text-teal-300 block">The Implementation Track (The Technical Delivery)</span>
-                <p className="text-slate-400 leading-relaxed">
+                <p className="text-slate-300 text-sm leading-relaxed">
                   Your operational delivery track. Explains <em>how</em> to safely introduce policy-as-code into running hospital clusters without outages. Provides the GitOps tree, decision sign-offs, canary stages, and verified rollback runbooks.
                 </p>
               </div>
@@ -225,44 +225,44 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
           </div>
 
           {/* Spoon-Fed 5-Step Starter Walkthrough */}
-          <div className="p-4 rounded-xl bg-[#07192f] border border-[#1b3f68] text-xs space-y-3">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-cyan-900/40 pb-2">
-              <span className="font-bold text-white flex items-center gap-1.5 text-sm">
+          <div className="p-5 rounded-xl bg-[#07192f] border border-[#1b3f68] text-sm space-y-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-cyan-900/40 pb-2.5">
+              <span className="font-bold text-white flex items-center gap-1.5 text-sm sm:text-base">
                 <CheckCircle2 className="w-4 h-4 text-teal-400" />
                 <span>Start Here: Implementing Policy-as-Code in 5 Simple Steps (Least-Knowledge Quickstart)</span>
               </span>
-              <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">
+              <span className="text-xs font-mono text-cyan-300 bg-cyan-950 px-2.5 py-0.5 rounded border border-cyan-800 whitespace-nowrap self-start sm:self-auto">
                 Beginner Friendly · Pragmatic Path
               </span>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 text-[11px]">
-              <div className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 space-y-1">
-                <span className="font-mono font-bold text-cyan-400 block">1. Write in English</span>
-                <p className="text-slate-400 text-[10px] leading-relaxed">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-stretch">
+              <div className="h-full p-3.5 rounded-lg bg-slate-950/80 border border-slate-800 space-y-1.5">
+                <span className="font-mono font-bold text-xs text-cyan-400 block">1. Write in English</span>
+                <p className="text-slate-300 text-xs leading-relaxed">
                   Agree on simple human rules first (e.g. &quot;IG training valid within 12 months&quot;, &quot;Cell count &ge; 10&quot;). No code needed yet.
                 </p>
               </div>
-              <div className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 space-y-1">
-                <span className="font-mono font-bold text-cyan-400 block">2. Express Declaratively</span>
-                <p className="text-slate-400 text-[10px] leading-relaxed">
+              <div className="h-full p-3.5 rounded-lg bg-slate-950/80 border border-slate-800 space-y-1.5">
+                <span className="font-mono font-bold text-xs text-cyan-400 block">2. Express Declaratively</span>
+                <p className="text-slate-300 text-xs leading-relaxed">
                   Write rules as testable declarations: SHACL shapes or OPA Rego rules (e.g. <code className="text-teal-300">cell_count &gt;= 10</code>).
                 </p>
               </div>
-              <div className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 space-y-1">
-                <span className="font-mono font-bold text-cyan-400 block">3. Test on Synthetic Data</span>
-                <p className="text-slate-400 text-[10px] leading-relaxed">
+              <div className="h-full p-3.5 rounded-lg bg-slate-950/80 border border-slate-800 space-y-1.5">
+                <span className="font-mono font-bold text-xs text-cyan-400 block">3. Test on Synthetic Data</span>
+                <p className="text-slate-300 text-xs leading-relaxed">
                   Run test scripts against mock JSON/RDF fixtures on your laptop to verify that disclosive requests fail before connecting to servers.
                 </p>
               </div>
-              <div className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 space-y-1">
-                <span className="font-mono font-bold text-cyan-400 block">4. Deploy in Audit Mode</span>
-                <p className="text-slate-400 text-[10px] leading-relaxed">
+              <div className="h-full p-3.5 rounded-lg bg-slate-950/80 border border-slate-800 space-y-1.5">
+                <span className="font-mono font-bold text-xs text-cyan-400 block">4. Deploy in Audit Mode</span>
+                <p className="text-slate-300 text-xs leading-relaxed">
                   Connect to your admission service in non-blocking evaluate-only mode. Record decisions in logs for 2–4 weeks; zero researchers are blocked.
                 </p>
               </div>
-              <div className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 space-y-1">
-                <span className="font-mono font-bold text-teal-300 block">5. Enable with Fail-Open</span>
-                <p className="text-slate-400 text-[10px] leading-relaxed">
+              <div className="h-full p-3.5 rounded-lg bg-slate-950/80 border border-slate-800 space-y-1.5">
+                <span className="font-mono font-bold text-xs text-teal-300 block">5. Enable with Fail-Open</span>
+                <p className="text-slate-300 text-xs leading-relaxed">
                   Once false positives hit 0%, switch on active checks. Keep an emergency bypass switch active in case of unexpected outages.
                 </p>
               </div>
@@ -271,25 +271,25 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
 
           {/* Quick Metrics Bar */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
-            <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3">
-              <span className="text-[10px] text-slate-500 uppercase font-mono block">Timeline</span>
-              <span className="text-lg font-bold text-cyan-300 font-mono">16 Weeks</span>
-              <span className="text-[11px] text-slate-400 block">8 two-week sprints</span>
+            <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
+              <span className="text-xs text-slate-400 uppercase font-mono block">Timeline</span>
+              <span className="text-xl font-bold text-cyan-300 font-mono tabular-nums">16 Weeks</span>
+              <span className="text-xs text-slate-400 block mt-0.5 tabular-nums">8 two-week sprints</span>
             </div>
-            <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3">
-              <span className="text-[10px] text-slate-500 uppercase font-mono block">Decision Gates</span>
-              <span className="text-lg font-bold text-amber-300 font-mono">9 Gates (D-001&ndash;D-009)</span>
-              <span className="text-[11px] text-slate-400 block">Mandatory sign-off</span>
+            <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
+              <span className="text-xs text-slate-400 uppercase font-mono block">Decision Gates</span>
+              <span className="text-xl font-bold text-amber-300 font-mono tabular-nums">9 Gates (D-001&ndash;D-009)</span>
+              <span className="text-xs text-slate-400 block mt-0.5">Mandatory sign-off</span>
             </div>
-            <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3">
-              <span className="text-[10px] text-slate-500 uppercase font-mono block">Rollout Stages</span>
-              <span className="text-lg font-bold text-emerald-400 font-mono">5 Safe Stages</span>
-              <span className="text-[11px] text-slate-400 block">0% live disruption</span>
+            <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
+              <span className="text-xs text-slate-400 uppercase font-mono block">Rollout Stages</span>
+              <span className="text-xl font-bold text-emerald-400 font-mono tabular-nums">5 Safe Stages</span>
+              <span className="text-xs text-slate-400 block mt-0.5 tabular-nums">0% live disruption</span>
             </div>
-            <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3">
-              <span className="text-[10px] text-slate-500 uppercase font-mono block">Audit Lineage</span>
-              <span className="text-lg font-bold text-purple-300 font-mono">W3C PROV-O</span>
-              <span className="text-[11px] text-slate-400 block">Immutable RDF triples</span>
+            <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-4">
+              <span className="text-xs text-slate-400 uppercase font-mono block">Audit Lineage</span>
+              <span className="text-xl font-bold text-purple-300 font-mono">W3C PROV-O</span>
+              <span className="text-xs text-slate-400 block mt-0.5">Immutable RDF triples</span>
             </div>
           </div>
 
@@ -306,7 +306,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all ${
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 transition-all whitespace-nowrap ${
                   activeTab === tab.id
                     ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20'
                     : 'bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800'
@@ -323,7 +323,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
       {/* TAB 1: GRANULAR 16-WEEK OPERATIONAL TIMELINE */}
       {activeTab === 'timeline' && (
         <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6">
             <div>
               <div className="text-xs font-bold text-cyan-400 uppercase tracking-wider">
                 Sprint-by-Sprint Operational Schedule
@@ -331,14 +331,14 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
               <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Detailed 16-Week Implementation Blueprint
               </h2>
-              <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl">
+              <p className="text-slate-300 text-sm mt-1">
                 Unlike high-level summaries, each 2-week sprint defines exact code artifacts, accountable roles,
                 zero-disruption safeguards, and binding exit gates before advancing.
               </p>
             </div>
-            <div className="text-right shrink-0">
-              <span className="text-[11px] text-slate-400 block font-mono">Total Sprints</span>
-              <span className="text-base font-bold text-white">8 Sprints &middot; 4 Phases</span>
+            <div className="text-left sm:text-right shrink-0">
+              <span className="text-xs text-slate-400 block font-mono">Total Sprints</span>
+              <span className="text-base font-bold text-white tabular-nums">8 Sprints &middot; 4 Phases</span>
             </div>
           </div>
 
@@ -359,22 +359,22 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                     onClick={() => setExpandedSprintIndex(isExpanded ? null : idx)}
                     className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer select-none"
                   >
-                    <div className="flex items-start sm:items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-slate-950 border border-cyan-500/30 flex flex-col items-center justify-center shrink-0">
-                        <span className="text-[10px] text-cyan-400 font-mono font-bold leading-none">WEEKS</span>
-                        <span className="text-xs font-bold text-white font-mono mt-0.5">{sprint.weeks.replace('Weeks ', '')}</span>
+                    <div className="flex items-start sm:items-center gap-3.5">
+                      <div className="w-12 h-12 rounded-xl bg-slate-950 border border-cyan-500/30 flex flex-col items-center justify-center shrink-0">
+                        <span className="text-xs text-cyan-400 font-mono font-bold leading-none">WKS</span>
+                        <span className="text-xs font-bold text-white font-mono mt-0.5 tabular-nums">{sprint.weeks.replace('Weeks ', '')}</span>
                       </div>
-                      <div className="space-y-0.5">
+                      <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/60">
+                          <span className="text-xs font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/60">
                             {sprint.phase}
                           </span>
-                          <span className="text-xs text-slate-400 font-mono">{sprint.sprint}</span>
+                          <span className="text-xs text-slate-400 font-mono tabular-nums">{sprint.sprint}</span>
                         </div>
                         <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
                           {sprint.title}
                         </h3>
-                        <p className="text-xs text-slate-400 line-clamp-1">{sprint.subtitle}</p>
+                        <p className="text-sm text-slate-400 line-clamp-1">{sprint.subtitle}</p>
                       </div>
                     </div>
 
@@ -390,24 +390,24 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
 
                   {/* Expanded Sprint Details */}
                   {isExpanded && (
-                    <div className="px-5 pb-6 pt-2 border-t border-slate-800/80 space-y-5">
+                    <div className="px-5 pb-6 pt-3 border-t border-slate-800/80 space-y-5">
                       {/* Objective & Roles */}
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-950/70 p-4 rounded-xl border border-slate-800/80">
-                        <div className="md:col-span-2 space-y-1">
-                          <span className="text-[10px] uppercase font-mono font-bold text-cyan-400 block">
+                        <div className="md:col-span-2 space-y-1.5">
+                          <span className="text-xs uppercase font-mono font-bold text-cyan-400 block">
                             Sprint Objective
                           </span>
-                          <p className="text-xs text-slate-200 leading-relaxed">{sprint.goal}</p>
+                          <p className="text-sm text-slate-200 leading-relaxed">{sprint.goal}</p>
                         </div>
-                        <div className="space-y-1">
-                          <span className="text-[10px] uppercase font-mono font-bold text-slate-400 block">
+                        <div className="space-y-1.5">
+                          <span className="text-xs uppercase font-mono font-bold text-slate-400 block">
                             Accountable Roles
                           </span>
                           <div className="flex flex-wrap gap-1.5 pt-0.5">
                             {sprint.accountableRoles.map((role) => (
                               <span
                                 key={role}
-                                className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-slate-900 border border-slate-700 text-slate-300"
+                                className="text-xs font-medium px-2.5 py-0.5 rounded-md bg-slate-900 border border-slate-700 text-slate-200"
                               >
                                 {role}
                               </span>
@@ -417,23 +417,23 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                       </div>
 
                       {/* Concrete Code Artifacts */}
-                      <div className="space-y-2">
-                        <div className="text-xs font-bold text-slate-300 flex items-center gap-2">
-                          <Terminal className="w-3.5 h-3.5 text-cyan-400" />
-                          <span>Code Artifacts &amp; Operational Deliverables:</span>
+                      <div className="space-y-2.5">
+                        <div className="text-xs font-bold text-slate-300 flex items-center gap-2 uppercase tracking-wider">
+                          <Terminal className="w-4 h-4 text-cyan-400" />
+                          <span>Code Artifacts &amp; Operational Deliverables</span>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-stretch">
                           {sprint.operationalDeliverables.map((item, dIdx) => (
                             <div
                               key={dIdx}
-                              className="p-3 bg-slate-950/90 rounded-xl border border-slate-800 flex flex-col justify-between space-y-2"
+                              className="h-full p-4 bg-slate-950/90 rounded-xl border border-slate-800 flex flex-col justify-between space-y-2.5"
                             >
                               <div>
-                                <span className="text-xs font-bold text-white block">{item.artifact}</span>
-                                <p className="text-[11px] text-slate-400 mt-1 leading-snug">{item.description}</p>
+                                <span className="text-sm font-bold text-white block">{item.artifact}</span>
+                                <p className="text-xs text-slate-300 mt-1 leading-relaxed">{item.description}</p>
                               </div>
                               {item.path && (
-                                <code className="text-[10px] font-mono text-cyan-300 bg-slate-900 px-2 py-1 rounded border border-slate-800 block truncate">
+                                <code className="text-xs font-mono text-cyan-300 bg-slate-900 px-2.5 py-1 rounded border border-slate-800 block truncate">
                                   {item.path}
                                 </code>
                               )}
@@ -443,13 +443,13 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                       </div>
 
                       {/* Non-Breaking Safeguards & Exit Gates */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
-                        <div className="p-4 bg-emerald-950/20 border border-emerald-900/40 rounded-xl space-y-2">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch pt-1">
+                        <div className="h-full p-4 bg-emerald-950/20 border border-emerald-900/40 rounded-xl space-y-2">
                           <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400 uppercase tracking-wider">
-                            <ShieldCheck className="w-3.5 h-3.5" />
+                            <ShieldCheck className="w-4 h-4" />
                             <span>Zero-Disruption Safeguards</span>
                           </div>
-                          <ul className="space-y-1 text-xs text-slate-300">
+                          <ul className="space-y-1.5 text-sm text-slate-300">
                             {sprint.safeguardsAndNonBreaking.map((sg, sIdx) => (
                               <li key={sIdx} className="flex items-start gap-2">
                                 <span className="text-emerald-400 font-bold select-none">•</span>
@@ -459,12 +459,12 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                           </ul>
                         </div>
 
-                        <div className="p-4 bg-amber-950/20 border border-amber-900/40 rounded-xl space-y-2">
+                        <div className="h-full p-4 bg-amber-950/20 border border-amber-900/40 rounded-xl space-y-2">
                           <div className="flex items-center gap-1.5 text-xs font-bold text-amber-400 uppercase tracking-wider">
-                            <CheckCircle2 className="w-3.5 h-3.5" />
+                            <CheckCircle2 className="w-4 h-4" />
                             <span>Mandatory Exit Gates</span>
                           </div>
-                          <ul className="space-y-1 text-xs text-slate-300">
+                          <ul className="space-y-1.5 text-sm text-slate-300">
                             {sprint.exitGates.map((gate, gIdx) => (
                               <li key={gIdx} className="flex items-start gap-2">
                                 <span className="text-amber-400 font-bold select-none">✓</span>
@@ -494,28 +494,30 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
             <h2 className="text-2xl font-bold text-white tracking-tight">
               How to Introduce Policy Enforcement Without Breaking Live Hospital &amp; Research Workflows
             </h2>
-            <p className="text-slate-300 text-sm max-w-3xl leading-relaxed">
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
               The #1 hazard in clinical Policy-as-Code is a "big-bang" deployment that mistakenly locks out accredited researchers
               or halts clinical analytics jobs due to schema drift. Wavebound employs a strict <strong>5-Stage Progressive Rollout</strong>:
             </p>
 
             {/* Stage Selector Pills */}
-            <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 pt-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-stretch pt-3">
               {ROLLOUT_STAGES.map((stg) => (
                 <button
                   key={stg.stage}
                   onClick={() => setSelectedStage(stg)}
-                  className={`p-3 rounded-xl border text-left transition-all ${
+                  className={`h-full p-3.5 rounded-xl border text-left transition-all flex flex-col justify-between ${
                     selectedStage.stage === stg.stage
                       ? 'bg-cyan-950/60 border-cyan-500 shadow-md ring-1 ring-cyan-500/30'
                       : 'bg-slate-950/70 border-slate-800 hover:border-slate-700'
                   }`}
                 >
-                  <div className="text-[10px] font-mono text-cyan-400 font-bold uppercase">
-                    Stage {stg.stage}
+                  <div>
+                    <div className="text-xs font-mono text-cyan-400 font-bold uppercase tabular-nums">
+                      Stage {stg.stage}
+                    </div>
+                    <div className="text-sm font-bold text-white truncate mt-0.5">{stg.name.split(':')[1]?.trim() || stg.name}</div>
                   </div>
-                  <div className="text-xs font-bold text-white truncate mt-0.5">{stg.name.split(':')[1]?.trim() || stg.name}</div>
-                  <div className="text-[10px] text-slate-400 truncate mt-1">{stg.trafficPercentage}</div>
+                  <div className="text-xs text-slate-400 truncate mt-1.5 tabular-nums">{stg.trafficPercentage}</div>
                 </button>
               ))}
             </div>
@@ -526,49 +528,49 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold bg-cyan-950 text-cyan-300 border border-cyan-800">
+                  <span className="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold bg-cyan-950 text-cyan-300 border border-cyan-800 tabular-nums">
                     STAGE {selectedStage.stage}
                   </span>
                   <span className="text-xs font-mono uppercase text-slate-400">Mode: {selectedStage.mode}</span>
                 </div>
                 <h3 className="text-2xl font-bold text-white mt-1.5">{selectedStage.name}</h3>
-                <p className="text-slate-300 text-sm mt-1">{selectedStage.tagline}</p>
+                <p className="text-slate-300 text-sm sm:text-base mt-1">{selectedStage.tagline}</p>
               </div>
 
-              <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 text-right shrink-0">
-                <span className="text-[10px] text-slate-500 uppercase font-mono block">Production Disruption Risk</span>
-                <span className="text-xs font-bold text-emerald-400 font-mono">{selectedStage.productionImpact}</span>
-                <span className="text-[10px] text-slate-400 block mt-0.5">{selectedStage.trafficPercentage}</span>
+              <div className="p-3.5 bg-slate-950 rounded-xl border border-slate-800 text-left sm:text-right shrink-0">
+                <span className="text-xs text-slate-400 uppercase font-mono block">Production Disruption Risk</span>
+                <span className="text-sm font-bold text-emerald-400 font-mono">{selectedStage.productionImpact}</span>
+                <span className="text-xs text-slate-400 block mt-0.5 tabular-nums">{selectedStage.trafficPercentage}</span>
               </div>
             </div>
 
             {/* Mechanics Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-slate-950/70 p-5 rounded-2xl border border-slate-800 space-y-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+              <div className="h-full bg-slate-950/70 p-5 rounded-2xl border border-slate-800 space-y-2">
                 <div className="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <Server className="w-3.5 h-3.5" />
+                  <Server className="w-4 h-4" />
                   <span>Traffic Handling &amp; Decision Delegation</span>
                 </div>
-                <p className="text-xs text-slate-300 leading-relaxed">{selectedStage.trafficHandling}</p>
+                <p className="text-sm text-slate-300 leading-relaxed">{selectedStage.trafficHandling}</p>
               </div>
 
-              <div className="bg-slate-950/70 p-5 rounded-2xl border border-slate-800 space-y-2">
+              <div className="h-full bg-slate-950/70 p-5 rounded-2xl border border-slate-800 space-y-2">
                 <div className="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <AlertTriangle className="w-3.5 h-3.5" />
+                  <AlertTriangle className="w-4 h-4" />
                   <span>Failure Mode &amp; Safety Defaults</span>
                 </div>
-                <p className="text-xs text-slate-300 leading-relaxed">{selectedStage.failureMode}</p>
+                <p className="text-sm text-slate-300 leading-relaxed">{selectedStage.failureMode}</p>
               </div>
             </div>
 
             {/* Exit Criteria & Tested Rollback */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-5 bg-slate-950/70 rounded-2xl border border-slate-800 space-y-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+              <div className="h-full p-5 bg-slate-950/70 rounded-2xl border border-slate-800 space-y-2.5">
                 <div className="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <CheckCircle2 className="w-4 h-4" />
                   <span>Criteria to Advance to Next Stage</span>
                 </div>
-                <ul className="space-y-1.5 text-xs text-slate-300">
+                <ul className="space-y-1.5 text-sm text-slate-300">
                   {selectedStage.exitCriteria.map((c, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <span className="text-emerald-400 font-bold select-none">✓</span>
@@ -578,14 +580,16 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                 </ul>
               </div>
 
-              <div className="p-5 bg-slate-950/70 rounded-2xl border border-rose-900/40 space-y-2">
-                <div className="text-xs font-bold text-rose-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <RotateCcw className="w-3.5 h-3.5" />
-                  <span>Instant Rollback Procedure (Tested &lt;60s)</span>
+              <div className="h-full p-5 bg-slate-950/70 rounded-2xl border border-rose-900/40 space-y-2.5 flex flex-col justify-between">
+                <div className="space-y-2">
+                  <div className="text-xs font-bold text-rose-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <RotateCcw className="w-4 h-4" />
+                    <span>Instant Rollback Procedure (Tested &lt;60s)</span>
+                  </div>
+                  <p className="text-sm text-slate-300 leading-relaxed">{selectedStage.rollbackProcedure}</p>
                 </div>
-                <p className="text-xs text-slate-300 leading-relaxed">{selectedStage.rollbackProcedure}</p>
                 <div className="pt-2">
-                  <code className="text-[11px] font-mono text-rose-300 bg-slate-900 px-2 py-1 rounded border border-rose-950 block">
+                  <code className="text-xs font-mono text-rose-300 bg-slate-900 px-3 py-1.5 rounded border border-rose-950 block overflow-x-auto">
                     kubectl scale deployment wavebound-opa --replicas=0 || make rollback-shadow
                   </code>
                 </div>
@@ -606,7 +610,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
             <h2 className="text-2xl font-bold text-white tracking-tight">
               Policy Decision Register (D-001 &ndash; D-009)
             </h2>
-            <p className="text-slate-300 text-sm max-w-3xl leading-relaxed">
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
               Every item below is a binding architectural gate, not a default or assumption. Code must not enforce
               assumed policy thresholds until the accountable owner records a signed approval.
             </p>
@@ -684,7 +688,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                           type="button"
                           onClick={() => updateDecisionStatus(dec.id, opt.value)}
                           aria-pressed={isActive}
-                          className={`px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase border transition-all cursor-pointer ${
+                          className={`px-3 py-1 rounded-md text-xs font-mono font-bold uppercase border transition-all cursor-pointer ${
                             isActive
                               ? `${opt.activeClass} shadow-xs`
                               : 'border-transparent text-slate-400 hover:text-white hover:bg-slate-900'
@@ -699,16 +703,16 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
 
                 {/* Decision Statement */}
                 <div className="space-y-1">
-                  <span className="text-[10px] uppercase font-mono font-bold text-slate-400">Decision Statement</span>
-                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">{dec.decisionStatement}</p>
+                  <span className="text-xs uppercase font-mono font-bold text-slate-400">Decision Statement</span>
+                  <p className="text-sm text-slate-200 leading-relaxed">{dec.decisionStatement}</p>
                 </div>
 
                 {/* Options Considered */}
-                <div className="space-y-1">
-                  <span className="text-[10px] uppercase font-mono font-bold text-cyan-400">Options Considered</span>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div className="space-y-1.5">
+                  <span className="text-xs uppercase font-mono font-bold text-cyan-400">Options Considered</span>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-stretch">
                     {dec.optionsConsidered.map((opt, i) => (
-                      <div key={i} className="p-2.5 rounded-lg bg-slate-950 border border-slate-800/80 text-[11px] text-slate-300">
+                      <div key={i} className="h-full p-3 rounded-lg bg-slate-950 border border-slate-800/80 text-xs text-slate-300 leading-relaxed">
                         {opt}
                       </div>
                     ))}
@@ -716,17 +720,17 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                 </div>
 
                 {/* Metadata Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs bg-slate-950/60 p-3 rounded-xl border border-slate-800/60">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-sm bg-slate-950/60 p-4 rounded-xl border border-slate-800/60">
                   <div>
-                    <span className="text-[10px] text-slate-500 font-mono uppercase block">Accountable Owner</span>
+                    <span className="text-xs text-slate-400 font-mono uppercase block">Accountable Owner</span>
                     <span className="text-slate-200 font-medium">{dec.accountableOwner}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-slate-500 font-mono uppercase block">What It Blocks</span>
+                    <span className="text-xs text-slate-400 font-mono uppercase block">What It Blocks</span>
                     <span className="text-amber-300 font-medium">{dec.blocks}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-slate-500 font-mono uppercase block">Non-Breaking Safeguard</span>
+                    <span className="text-xs text-slate-400 font-mono uppercase block">Non-Breaking Safeguard</span>
                     <span className="text-emerald-300 font-medium">{dec.nonBreakingImpact}</span>
                   </div>
                 </div>
@@ -741,7 +745,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
         <div className="space-y-6">
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
+              <div className="flex-1">
                 <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider">
                   <FileCheck2 className="w-4 h-4" />
                   <span>Interactive Audit Readiness Checklist</span>
@@ -749,17 +753,17 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                 <h2 className="text-2xl font-bold text-white tracking-tight">
                   Phased Engineering Verification Checklist
                 </h2>
-                <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-xl">
+                <p className="text-slate-300 text-sm mt-1 leading-relaxed">
                   Mirrors the repository's <code>policy-as-code/checklist.md</code>. A phase is not complete until every
                   decision gate is approved and verified with attached evidence.
                 </p>
               </div>
 
               {/* Progress Indicator */}
-              <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 min-w-[200px] space-y-2">
+              <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 min-w-[220px] space-y-2 shrink-0">
                 <div className="flex items-center justify-between text-xs font-mono">
                   <span className="text-slate-400">Audit Readiness</span>
-                  <span className="text-cyan-400 font-bold">{checklistPercent}%</span>
+                  <span className="text-cyan-400 font-bold tabular-nums">{checklistPercent}%</span>
                 </div>
                 <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
                   <div
@@ -767,7 +771,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                     style={{ width: `${checklistPercent}%` }}
                   />
                 </div>
-                <div className="text-[10px] text-slate-500 text-right">
+                <div className="text-xs text-slate-400 text-right tabular-nums">
                   {completedChecklistCount} of {IMPLEMENTATION_CHECKLIST.length} completed
                 </div>
               </div>
@@ -779,7 +783,7 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                 <button
                   key={cat}
                   onClick={() => setChecklistFilter(cat)}
-                  className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap tabular-nums ${
                     checklistFilter === cat
                       ? 'bg-cyan-500 text-slate-950 font-bold'
                       : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
@@ -817,13 +821,13 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                     </div>
                   </div>
 
-                  <div className="space-y-1 flex-1">
+                  <div className="space-y-1.5 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-slate-950 text-slate-400 border border-slate-800">
+                      <span className="text-xs font-mono font-bold uppercase px-2 py-0.5 rounded bg-slate-950 text-slate-300 border border-slate-800">
                         Phase {item.phaseNumber}: {item.phaseName}
                       </span>
                       <span
-                        className={`text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded ${
+                        className={`text-xs font-mono font-bold uppercase px-2 py-0.5 rounded ${
                           item.type === 'DECISION REQUIRED'
                             ? 'bg-amber-950/80 text-amber-300 border border-amber-800/80'
                             : item.type === 'IMPLEMENT'
@@ -836,24 +840,24 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
                         [{item.type}]
                       </span>
                       {item.decisionRef && (
-                        <span className="text-[10px] font-mono font-bold text-amber-400">
+                        <span className="text-xs font-mono font-bold text-amber-400">
                           Gate: {item.decisionRef}
                         </span>
                       )}
                     </div>
 
                     <h4
-                      className={`text-sm font-semibold transition-colors ${
+                      className={`text-sm sm:text-base font-semibold transition-colors ${
                         isChecked ? 'line-through text-slate-400' : 'text-slate-100'
                       }`}
                     >
                       {item.text}
                     </h4>
 
-                    <p className="text-xs text-slate-400 leading-relaxed">{item.details}</p>
+                    <p className="text-sm text-slate-300 leading-relaxed">{item.details}</p>
 
-                    <div className="pt-1 flex items-center gap-2 text-[11px] text-cyan-400/90 font-mono">
-                      <span className="text-slate-500">Evidence Required:</span>
+                    <div className="pt-1 flex flex-wrap items-center gap-2 text-xs text-cyan-400/90 font-mono">
+                      <span className="text-slate-400">Evidence Required:</span>
                       <span>{item.verificationEvidence}</span>
                     </div>
                   </div>
@@ -867,14 +871,14 @@ export const ImplementationTrack: React.FC<ImplementationTrackProps> = ({
       {/* TAB 5: ZERO-DOWNTIME DEPLOYMENT CODE & PRODUCTION ARCHITECTURE */}
       {activeTab === 'architecture-code' && (
         <div className="space-y-8">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 space-y-2">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 space-y-2">
             <div className="text-xs font-bold text-cyan-400 uppercase tracking-wider">
               Technical Implementation Deep Dive
             </div>
             <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
               Production Architecture &amp; Zero-Downtime Deployment Manifests
             </h2>
-            <p className="text-slate-400 text-xs sm:text-sm max-w-3xl leading-relaxed">
+            <p className="text-slate-300 text-sm leading-relaxed">
               Moving from high-level governance into production requires concrete, battle-tested code patterns.
               Below are the exact Kubernetes admission webhooks, OPA daemon manifests, PySHACL CI workflows,
               and telemetry configurations designed to guarantee <strong>zero disruption</strong> to running research enclaves.
@@ -1398,13 +1402,13 @@ tre-service-cli status --all`}</code>
           {/* Header Card */}
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-4">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">
+              <span className="text-xs font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">
                 Production Policy Engine
               </span>
-              <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-teal-950 text-teal-300 border border-teal-800">
+              <span className="text-xs font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-teal-950 text-teal-300 border border-teal-800">
                 OPA PDP &amp; W3C SHACL
               </span>
-              <span className="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
+              <span className="text-xs font-mono font-bold uppercase px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">
                 Zero-Downtime GitOps
               </span>
             </div>
@@ -1413,7 +1417,7 @@ tre-service-cli status --all`}</code>
               Enterprise Policy-as-Code Engine Rollout, Health Check &amp; Verification Pipeline
             </h3>
 
-            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-4xl">
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
               How does an organization or NHS Trust engineering team roll out ontology-led policy-as-code into their secure analytical environment?
               Wavebound decouples enduring governance definitions (<code className="text-cyan-300 font-mono">ontology/</code>) from high-speed runtime policy enforcement points (PEPs).
               Below is the step-by-step technical runbook to deploy the Open Policy Agent (OPA) Policy Decision Point (PDP) daemon and W3C SHACL shape validator alongside your analytical services without breaking existing workloads.
@@ -1422,15 +1426,15 @@ tre-service-cli status --all`}</code>
 
           {/* Mode Comparison Table */}
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-            <h4 className="text-base font-bold text-white flex items-center gap-2">
-              <Server className="w-4 h-4 text-cyan-400" />
+            <h4 className="text-lg font-bold text-white flex items-center gap-2">
+              <Server className="w-5 h-5 text-cyan-400" />
               <span>Deployment Topology: Sidecar Daemon (Mode A) vs Centralized Cluster PDP (Mode B)</span>
             </h4>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
+              <table className="w-full text-left text-sm border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-800 text-slate-400 font-mono text-[11px]">
+                  <tr className="border-b border-slate-800 text-slate-400 font-mono text-xs uppercase">
                     <th className="py-3 px-4">Evaluation Dimension</th>
                     <th className="py-3 px-4 text-cyan-300">Topology A: In-Process / Sidecar OPA Daemon</th>
                     <th className="py-3 px-4 text-purple-300">Topology B: Centralized High-Availability PDP Service</th>
@@ -1438,33 +1442,33 @@ tre-service-cli status --all`}</code>
                 </thead>
                 <tbody className="divide-y divide-slate-800/60 text-slate-300">
                   <tr>
-                    <td className="py-3 px-4 font-semibold text-white">Evaluation Latency</td>
-                    <td className="py-3 px-4 text-emerald-300">Sub-millisecond (&lt; 1ms line-rate, local UNIX socket/localhost)</td>
-                    <td className="py-3 px-4 text-slate-300">2–5ms (internal VPC gRPC / REST network roundtrip)</td>
+                    <td className="py-3.5 px-4 font-semibold text-white">Evaluation Latency</td>
+                    <td className="py-3.5 px-4 text-emerald-300 tabular-nums">Sub-millisecond (&lt; 1ms line-rate, local UNIX socket/localhost)</td>
+                    <td className="py-3.5 px-4 text-slate-300 tabular-nums">2–5ms (internal VPC gRPC / REST network roundtrip)</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 font-semibold text-white">Network Failure Blast Radius</td>
-                    <td className="py-3 px-4 text-emerald-300">Zero network dependency (runs on same node as PEP gateway)</td>
-                    <td className="py-3 px-4 text-slate-300">Requires local caching or fail-open bypass if network partitions</td>
+                    <td className="py-3.5 px-4 font-semibold text-white">Network Failure Blast Radius</td>
+                    <td className="py-3.5 px-4 text-emerald-300">Zero network dependency (runs on same node as PEP gateway)</td>
+                    <td className="py-3.5 px-4 text-slate-300">Requires local caching or fail-open bypass if network partitions</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 font-semibold text-white">Policy Bundle Distribution</td>
-                    <td className="py-3 px-4">
+                    <td className="py-3.5 px-4 font-semibold text-white">Policy Bundle Distribution</td>
+                    <td className="py-3.5 px-4">
                       GitOps agent pulls compiled bundles (<code className="text-cyan-400">authz.rego</code>) on git commit
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="py-3.5 px-4">
                       Centralized bundle server broadcasts updates to OPA cluster replicas in real time
                     </td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 font-semibold text-white">Audit Triples (W3C PROV-O)</td>
-                    <td className="py-3 px-4 text-slate-300">Local log forwarder streams PROV-O triples to append-only storage</td>
-                    <td className="py-3 px-4 text-emerald-300">Direct write to centralized immutable ledger / object store</td>
+                    <td className="py-3.5 px-4 font-semibold text-white">Audit Triples (W3C PROV-O)</td>
+                    <td className="py-3.5 px-4 text-slate-300">Local log forwarder streams PROV-O triples to append-only storage</td>
+                    <td className="py-3.5 px-4 text-emerald-300">Direct write to centralized immutable ledger / object store</td>
                   </tr>
                   <tr>
-                    <td className="py-3 px-4 font-semibold text-white">Recommended Use Case</td>
-                    <td className="py-3 px-4 text-cyan-300 font-medium">Service admission webhooks and high-throughput query airlocks</td>
-                    <td className="py-3 px-4 text-purple-300 font-medium">Multi-tenant institutional research portals and data access committees</td>
+                    <td className="py-3.5 px-4 font-semibold text-white">Recommended Use Case</td>
+                    <td className="py-3.5 px-4 text-cyan-300 font-medium">Service admission webhooks and high-throughput query airlocks</td>
+                    <td className="py-3.5 px-4 text-purple-300 font-medium">Multi-tenant institutional research portals and data access committees</td>
                   </tr>
                 </tbody>
               </table>
@@ -1481,7 +1485,7 @@ tre-service-cli status --all`}</code>
                     Step-by-Step Production Rollout Runbook
                   </h4>
                 </div>
-                <p className="text-xs text-slate-400">
+                <p className="text-sm text-slate-400">
                   Deploying the compiled OPA policy bundle into your organization&apos;s infrastructure with automated parity verification.
                 </p>
               </div>
@@ -1507,7 +1511,7 @@ curl -X POST http://localhost:8181/v1/data/tre/authz/allow \\
   -d '{"input": {"researcher": {"accreditation_valid": true, "ig_training_expiry": 1893456000000000000}, "project": {"ethics_approval_active": true}, "enclave": {"egress_blocked": true}}}'`
                   )
                 }
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 hover:text-cyan-300 hover:border-slate-700 transition-colors self-start sm:self-auto cursor-pointer"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 hover:text-cyan-300 hover:border-slate-700 transition-colors self-start sm:self-auto cursor-pointer whitespace-nowrap"
               >
                 {copiedSnippetId === 'policy-rollout-runbook' ? (
                   <>
@@ -1523,7 +1527,7 @@ curl -X POST http://localhost:8181/v1/data/tre/authz/allow \\
               </button>
             </div>
 
-            <ol className="list-decimal list-inside space-y-2 text-xs text-slate-300 pl-1">
+            <ol className="list-decimal list-inside space-y-2.5 text-sm text-slate-300 pl-1 leading-relaxed">
               <li>
                 <strong>Step 1: Scaffolding and Verification</strong>: Clone the policy repository. Run <code className="text-cyan-300 font-mono">python3 tests/test_compiler_parity.py</code> to prove that high-level SHACL shapes and compiled low-level Rego rules return 100% identical pass/fail decisions across synthetic clinical cohorts.
               </li>
@@ -1566,7 +1570,7 @@ $ curl http://127.0.0.1:8181/health
                     Automated Continuous Compliance &amp; Health Probe
                   </h4>
                 </div>
-                <p className="text-xs text-slate-400">
+                <p className="text-sm text-slate-400">
                   Continuous integration test suite executed before every policy commit is approved for production deployment.
                 </p>
               </div>
@@ -1594,7 +1598,7 @@ python3 tests/test_sdc_math.py --min-k 10 --dominance-p 80
 echo "ALL CHECKS PASSED: Policy bundle is verified and ready for deployment."`
                   )
                 }
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 hover:text-cyan-300 hover:border-slate-700 transition-colors self-start sm:self-auto cursor-pointer"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 hover:text-cyan-300 hover:border-slate-700 transition-colors self-start sm:self-auto cursor-pointer whitespace-nowrap"
               >
                 {copiedSnippetId === 'ci-health-check' ? (
                   <>
@@ -1610,31 +1614,31 @@ echo "ALL CHECKS PASSED: Policy bundle is verified and ready for deployment."`
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
-              <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
-                <span className="font-bold text-cyan-300 flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch pt-1">
+              <div className="h-full bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-1.5">
+                <span className="font-bold text-sm text-cyan-300 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
                   <span>1. Turtle Shape Linter</span>
                 </span>
-                <p className="text-slate-400 text-[11px] leading-relaxed">
+                <p className="text-slate-300 text-sm leading-relaxed">
                   Validates URI namespaces, prefix bindings, and closed-world constraints in W3C SHACL before compiling.
                 </p>
               </div>
-              <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
-                <span className="font-bold text-teal-300 flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-teal-400" />
+              <div className="h-full bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-1.5">
+                <span className="font-bold text-sm text-teal-300 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />
                   <span>2. OPA Native Unit Tests</span>
                 </span>
-                <p className="text-slate-400 text-[11px] leading-relaxed">
+                <p className="text-slate-300 text-sm leading-relaxed">
                   Executes <code className="text-teal-300 font-mono">opa test</code> over test suites asserting expected allow/deny decisions on synthetic tokens.
                 </p>
               </div>
-              <div className="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
-                <span className="font-bold text-purple-300 flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-purple-400" />
+              <div className="h-full bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-1.5">
+                <span className="font-bold text-sm text-purple-300 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-purple-400 shrink-0" />
                   <span>3. SDC Airlock Math Suite</span>
                 </span>
-                <p className="text-slate-400 text-[11px] leading-relaxed">
+                <p className="text-slate-300 text-sm leading-relaxed">
                   Verifies mathematical correctness of primary suppression, complementary secondary masking, rounding, and $(1, p\%)$ dominance rules.
                 </p>
               </div>
@@ -1651,7 +1655,7 @@ echo "ALL CHECKS PASSED: Policy bundle is verified and ready for deployment."`
                     Emergency Rollback &amp; Fail-Open Runbook
                   </h4>
                 </div>
-                <p className="text-xs text-slate-400">
+                <p className="text-sm text-slate-400">
                   If an unexpected policy edge-case blocks legitimate clinical research, three safe recovery mechanisms exist to restore service instantly.
                 </p>
               </div>
@@ -1675,7 +1679,7 @@ git push origin main
 tre-admission-cli set-mode --audit-only --failure-policy=Ignore`
                   )
                 }
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 hover:text-cyan-300 hover:border-slate-700 transition-colors self-start sm:self-auto cursor-pointer"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 hover:text-cyan-300 hover:border-slate-700 transition-colors self-start sm:self-auto cursor-pointer whitespace-nowrap"
               >
                 {copiedSnippetId === 'rollback-guide' ? (
                   <>
@@ -1691,22 +1695,22 @@ tre-admission-cli set-mode --audit-only --failure-policy=Ignore`
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-              <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-xs">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch pt-2">
+              <div className="h-full bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-sm">
                 <span className="font-bold text-amber-300 block">Option 1: Emergency Circuit Breaker</span>
-                <p className="text-slate-400 text-[11px] leading-relaxed">
+                <p className="text-slate-300 text-sm leading-relaxed">
                   Flip the runtime fail-open flag via REST API or Redis key (<code className="text-cyan-300 font-mono">tre:policy:bypass = 1</code>). Bypasses blocking checks within 1 second while logging all requests for post-incident review.
                 </p>
               </div>
-              <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-xs">
+              <div className="h-full bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-sm">
                 <span className="font-bold text-amber-300 block">Option 2: GitOps Revert Commit</span>
-                <p className="text-slate-400 text-[11px] leading-relaxed">
+                <p className="text-slate-300 text-sm leading-relaxed">
                   Run <code className="text-cyan-300 font-mono">git revert HEAD</code> on the policy repository. CI automatically recompiles and distributes the previous verified bundle to all PDP nodes in &lt; 60 seconds.
                 </p>
               </div>
-              <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-xs">
+              <div className="h-full bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-sm">
                 <span className="font-bold text-amber-300 block">Option 3: Switch PEP to Audit-Only</span>
-                <p className="text-slate-400 text-[11px] leading-relaxed">
+                <p className="text-slate-300 text-sm leading-relaxed">
                   Set the admission interceptor to <code className="text-cyan-300 font-mono">failurePolicy: Ignore</code>. Traffic flows without impediment while OPA continues logging discrepancy telemetry.
                 </p>
               </div>
@@ -1722,18 +1726,18 @@ tre-admission-cli set-mode --audit-only --failure-policy=Ignore`
               </h4>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-sm text-slate-300 leading-relaxed">
               To achieve accredited processor status under Section 71 of the Digital Economy Act 2017, health data TREs and Secure Data Environments (SDEs) must formally align with the UK Statistics Authority (UKSA) accreditation trilogy:
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-              <div className="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch pt-2">
+              <div className="h-full bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between">
                 <div className="space-y-2">
-                  <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800 font-bold">
+                  <span className="text-xs font-mono uppercase px-2.5 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800 font-bold inline-block">
                     Statutory Policy
                   </span>
-                  <h5 className="text-sm font-bold text-white">UKSA Research Accreditation Policy (V1.4)</h5>
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <h5 className="text-base font-bold text-white">UKSA Research Accreditation Policy (V1.4)</h5>
+                  <p className="text-sm text-slate-300 leading-relaxed">
                     Overarching statutory policy setting out the principles, legal requirements, governance responsibilities, and review cycles under the DEA 2017.
                   </p>
                 </div>
@@ -1741,20 +1745,20 @@ tre-admission-cli set-mode --audit-only --failure-policy=Ignore`
                   href="https://s42615.pcdn.co/wp-content/uploads/Accreditation-Policy-V1.4-1.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 font-semibold pt-2"
+                  className="inline-flex items-center gap-1.5 text-sm text-cyan-400 hover:text-cyan-300 font-semibold pt-2"
                 >
                   <span>Download Policy V1.4 (PDF)</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
 
-              <div className="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between">
+              <div className="h-full bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between">
                 <div className="space-y-2">
-                  <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 font-bold">
+                  <span className="text-xs font-mono uppercase px-2.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 font-bold inline-block">
                     Operational SOP
                   </span>
-                  <h5 className="text-sm font-bold text-white">Accreditation of a TRE Standard Operating Procedure (V1.4)</h5>
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <h5 className="text-base font-bold text-white">Accreditation of a TRE Standard Operating Procedure (V1.4)</h5>
+                  <p className="text-sm text-slate-300 leading-relaxed">
                     Detailed step-by-step operational SOP for certifying secure enclaves as DEA Accredited Processors under Section 71.
                   </p>
                 </div>
@@ -1762,20 +1766,20 @@ tre-admission-cli set-mode --audit-only --failure-policy=Ignore`
                   href="https://s42615.pcdn.co/wp-content/uploads/Accreditation-of-a-Trusted-Research-Environment-standard-operating-procedure-V1.4-1.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 font-semibold pt-2"
+                  className="inline-flex items-center gap-1.5 text-sm text-cyan-400 hover:text-cyan-300 font-semibold pt-2"
                 >
                   <span>Download TRE SOP V1.4 (PDF)</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
 
-              <div className="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between">
+              <div className="h-full bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between">
                 <div className="space-y-2">
-                  <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800 font-bold">
+                  <span className="text-xs font-mono uppercase px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800 font-bold inline-block">
                     Audit Matrix
                   </span>
-                  <h5 className="text-sm font-bold text-white">TRE Accreditation Self-Assessment Questionnaire (SAQ V3.1)</h5>
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <h5 className="text-base font-bold text-white">TRE Accreditation Self-Assessment Questionnaire (SAQ V3.1)</h5>
+                  <p className="text-sm text-slate-300 leading-relaxed">
                     Official technical questionnaire and evaluation spreadsheet assessing Five Safes technical compliance, egress airgaps, and audit logging.
                   </p>
                 </div>
@@ -1783,7 +1787,7 @@ tre-admission-cli set-mode --audit-only --failure-policy=Ignore`
                   href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fs42615.pcdn.co%2Fwp-content%2Fuploads%2FTRE-Accreditation-Self-Assessment-Questionnaire-V3.1.xlsx&wdOrigin=BROWSELINK"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs text-purple-300 hover:text-purple-200 font-semibold pt-2"
+                  className="inline-flex items-center gap-1.5 text-sm text-purple-300 hover:text-purple-200 font-semibold pt-2"
                 >
                   <span>View SAQ V3.1 (Excel / Office Viewer)</span>
                   <ExternalLink className="w-3.5 h-3.5" />

@@ -373,26 +373,26 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
         <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
           <button
             onClick={() => setViewMode('cards')}
-            className={`flex-1 sm:flex-none px-4 py-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+            className={`flex-1 sm:flex-none px-4 py-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
               viewMode === 'cards'
                 ? 'bg-[#0F294A] text-white shadow-xs'
                 : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
             }`}
           >
-            <Bookmark className="w-4 h-4" />
-            <span>A–Z Card Directory ({filteredTerms.length})</span>
+            <Bookmark className="w-4 h-4 shrink-0" />
+            <span className="tabular-nums">A–Z Card Directory ({filteredTerms.length})</span>
           </button>
 
           <button
             onClick={() => setViewMode('graph')}
-            className={`flex-1 sm:flex-none px-4 py-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+            className={`flex-1 sm:flex-none px-4 py-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
               viewMode === 'graph'
                 ? 'bg-[#0F294A] text-white shadow-xs'
                 : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
             }`}
             title="Graph 3 of 3: Interactive visual clusters of glossary terms"
           >
-            <Network className="w-4 h-4" />
+            <Network className="w-4 h-4 shrink-0" />
             <span>Term Cluster Graph (Graph 3 of 3)</span>
           </button>
         </div>
@@ -403,7 +403,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
             <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg p-1">
               <button
                 onClick={() => setEdgeDensity('clean')}
-                className={`px-3 py-1 rounded-md font-medium transition-colors cursor-pointer ${
+                className={`px-3 py-1 rounded-md font-medium transition-colors cursor-pointer whitespace-nowrap ${
                   edgeDensity === 'clean'
                     ? 'bg-[#005EB8] text-white'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
@@ -414,7 +414,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
               </button>
               <button
                 onClick={() => setEdgeDensity('bridges')}
-                className={`px-3 py-1 rounded-md font-medium transition-colors cursor-pointer ${
+                className={`px-3 py-1 rounded-md font-medium transition-colors cursor-pointer whitespace-nowrap ${
                   edgeDensity === 'bridges'
                     ? 'bg-[#005EB8] text-white'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
@@ -465,14 +465,14 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
             <button
               key={track.id}
               onClick={() => setSelectedTrack(track.id as any)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
                 selectedTrack === track.id
                   ? 'bg-[#0F294A] text-white font-bold shadow-xs'
                   : 'bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800'
               }`}
             >
               <span>{track.label}</span>
-              <span className={`text-xs font-mono px-1.5 py-0.5 rounded ${selectedTrack === track.id ? 'bg-white/20 text-white font-bold' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'}`}>
+              <span className={`text-xs font-mono px-1.5 py-0.5 rounded whitespace-nowrap ${selectedTrack === track.id ? 'bg-white/20 text-white font-bold' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400'}`}>
                 {track.badge}
               </span>
             </button>
@@ -558,39 +558,39 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
 
           {/* Right: Selected Term Inspector Card */}
           <div className="lg:col-span-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-5 sticky top-24 max-h-[680px] overflow-y-auto shadow-xs">
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-[#005EB8] dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 px-2 py-0.5 rounded border border-sky-200 dark:border-sky-800">
+            <div className="flex items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#005EB8] dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 px-2.5 py-0.5 rounded border border-sky-200 dark:border-sky-800 whitespace-nowrap">
                 {activeTerm.category}
               </span>
               <button
                 onClick={() => setModalTerm(activeTerm)}
-                className="text-xs text-[#005EB8] dark:text-sky-400 hover:underline font-mono flex items-center gap-1 cursor-pointer"
+                className="text-xs text-[#005EB8] dark:text-sky-400 hover:underline font-mono flex items-center gap-1 cursor-pointer whitespace-nowrap shrink-0"
                 title="Open full sheet view"
               >
-                <Maximize2 className="w-3.5 h-3.5" />
+                <Maximize2 className="w-3.5 h-3.5 shrink-0" />
                 <span>Full Sheet</span>
               </button>
             </div>
 
-            <div className="space-y-1">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+            <div className="space-y-1.5">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight flex flex-wrap items-center gap-2">
                 <span>{activeTerm.term}</span>
                 {activeTerm.acronym && (
-                  <span className="text-xs font-mono font-semibold text-[#005EB8] dark:text-sky-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700">
+                  <span className="text-xs font-mono font-semibold text-[#005EB8] dark:text-sky-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700 whitespace-nowrap">
                     {activeTerm.acronym}
                   </span>
                 )}
               </h3>
-              <p className="text-xs text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+              <p className="text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
                 {activeTerm.shortDefinition}
               </p>
             </div>
 
             <div className="space-y-2">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 block font-semibold">
+              <span className="text-xs uppercase font-mono tracking-wider text-slate-500 block font-semibold">
                 Full Architectural Definition
               </span>
-              <div className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-950 p-4 rounded-lg border border-slate-200 dark:border-slate-800 whitespace-pre-line">
+              <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-950 p-4 rounded-lg border border-slate-200 dark:border-slate-800 whitespace-pre-line">
                 {activeTerm.fullDefinition}
               </div>
             </div>
@@ -598,10 +598,10 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
             {/* If example code or SDC rules matrix exists */}
             {activeTerm.exampleSnippet && (
               <div className="space-y-1.5">
-                <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 block font-semibold">
+                <span className="text-xs uppercase font-mono tracking-wider text-slate-500 block font-semibold">
                   Rules &amp; Code Representation
                 </span>
-                <pre className="p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-[11px] font-mono text-[#005EB8] dark:text-cyan-300 overflow-x-auto leading-relaxed shadow-xs">
+                <pre className="p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg text-xs font-mono text-[#005EB8] dark:text-cyan-300 overflow-x-auto leading-relaxed shadow-xs">
                   <code>{activeTerm.exampleSnippet}</code>
                 </pre>
               </div>
@@ -614,9 +614,9 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                   href={activeTerm.externalUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-sky-50 dark:bg-sky-950/60 hover:bg-sky-100 dark:hover:bg-sky-900/60 text-[#005EB8] dark:text-sky-300 border border-sky-200 dark:border-sky-800 text-xs font-semibold transition-colors shadow-xs"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-sky-50 dark:bg-sky-950/60 hover:bg-sky-100 dark:hover:bg-sky-900/60 text-[#005EB8] dark:text-sky-300 border border-sky-200 dark:border-sky-800 text-xs font-semibold transition-colors shadow-xs whitespace-nowrap"
                 >
-                  <ExternalLink className="w-3.5 h-3.5 text-[#005EB8] dark:text-sky-400" />
+                  <ExternalLink className="w-3.5 h-3.5 text-[#005EB8] dark:text-sky-400 shrink-0" />
                   <span>Authoritative Guidance</span>
                 </a>
               </div>
@@ -625,7 +625,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
             {/* Related Concepts */}
             {activeTerm.relatedTerms && activeTerm.relatedTerms.length > 0 && (
               <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-                <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 block font-semibold">
+                <span className="text-xs uppercase font-mono tracking-wider text-slate-500 block font-semibold">
                   Related Concepts:
                 </span>
                 <div className="flex flex-wrap gap-1.5">
@@ -651,7 +651,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
 
       {/* MODE 2: CARD DIRECTORY VIEW */}
       {viewMode === 'cards' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           {filteredTerms.map((term) => {
             const isViewed = viewedGlossaryTerms.includes(term.id);
             const isSelected = activeTermId === term.id;
@@ -662,7 +662,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                 key={term.id}
                 id={`term-${term.id}`}
                 onClick={() => handleSelectTerm(term)}
-                className={`bg-white dark:bg-slate-900 border rounded-xl p-6 space-y-4 transition-all duration-200 cursor-pointer flex flex-col justify-between shadow-xs ${
+                className={`h-full bg-white dark:bg-slate-900 border rounded-xl p-6 space-y-4 transition-all duration-200 cursor-pointer flex flex-col justify-between shadow-xs ${
                   isSelected
                     ? 'border-[#005EB8] dark:border-sky-500 ring-2 ring-[#005EB8]/20 dark:ring-sky-500/20 shadow-md'
                     : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
@@ -670,18 +670,18 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
               >
                 <div className="space-y-3">
                   {/* Category and View Status */}
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-[10px] uppercase font-mono font-bold tracking-wider text-[#005EB8] dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 px-2 py-0.5 rounded border border-sky-200 dark:border-sky-800">
+                  <div className="flex items-center justify-between gap-2 text-xs">
+                    <span className="text-xs uppercase font-mono font-bold tracking-wider text-[#005EB8] dark:text-sky-300 bg-sky-50 dark:bg-sky-950/60 px-2.5 py-0.5 rounded border border-sky-200 dark:border-sky-800 whitespace-nowrap truncate">
                       {term.category}
                     </span>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 shrink-0">
                       {isViewed ? (
-                        <span className="text-[#047857] dark:text-emerald-400 flex items-center gap-1 text-[11px] font-medium">
-                          <CheckCircle2 className="w-3.5 h-3.5" />
+                        <span className="text-[#047857] dark:text-emerald-400 flex items-center gap-1 text-xs font-medium whitespace-nowrap">
+                          <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
                           <span>Explored</span>
                         </span>
                       ) : (
-                        <span className="text-slate-400 text-[10px] font-mono">Unread</span>
+                        <span className="text-slate-400 text-xs font-mono whitespace-nowrap">Unread</span>
                       )}
                       <button
                         onClick={(e) => {
@@ -689,7 +689,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                           setModalTerm(term);
                           recordGlossaryTermView(term.id);
                         }}
-                        className="text-slate-400 hover:text-[#005EB8] dark:hover:text-sky-300 p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+                        className="text-slate-400 hover:text-[#005EB8] dark:hover:text-sky-300 p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer shrink-0"
                         title="Open in Full Sheet"
                       >
                         <Maximize2 className="w-3.5 h-3.5" />
@@ -699,10 +699,10 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
 
                   {/* Term Title & Acronym */}
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight flex items-baseline gap-2">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight flex flex-wrap items-baseline gap-2">
                       <span>{term.term}</span>
                       {term.acronym && (
-                        <span className="text-xs font-mono font-semibold text-[#005EB8] dark:text-sky-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700">
+                        <span className="text-xs font-mono font-semibold text-[#005EB8] dark:text-sky-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700 whitespace-nowrap">
                           {term.acronym}
                         </span>
                       )}
@@ -718,29 +718,29 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                       {term.fullDefinition}
                     </div>
 
-                    <div className="flex items-center justify-between pt-1">
+                    <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           toggleCardExpanded(term.id);
                         }}
-                        className="text-[11px] font-semibold text-[#005EB8] dark:text-sky-400 hover:underline flex items-center gap-1 cursor-pointer"
+                        className="text-xs font-semibold text-[#005EB8] dark:text-sky-400 hover:underline flex items-center gap-1 cursor-pointer whitespace-nowrap"
                       >
                         <span>{isExpanded ? 'Collapse definition' : 'Read full explanation'}</span>
-                        {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                        {isExpanded ? <ChevronUp className="w-3.5 h-3.5 shrink-0" /> : <ChevronDown className="w-3.5 h-3.5 shrink-0" />}
                       </button>
 
-                      <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-1.5 shrink-0">
                         {term.externalUrl && (
                           <a
                             href={term.externalUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="text-[10px] font-mono text-cyan-700 dark:text-cyan-400 hover:text-cyan-900 bg-cyan-50 dark:bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-200 dark:border-cyan-800 flex items-center gap-1"
+                            className="text-xs font-mono text-cyan-700 dark:text-cyan-400 hover:text-cyan-900 bg-cyan-50 dark:bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-200 dark:border-cyan-800 flex items-center gap-1 whitespace-nowrap"
                             title="Open external standard / guidance"
                           >
-                            <ExternalLink className="w-3 h-3" />
+                            <ExternalLink className="w-3 h-3 shrink-0" />
                             <span>Guide</span>
                           </a>
                         )}
@@ -751,9 +751,9 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                             setModalTerm(term);
                             recordGlossaryTermView(term.id);
                           }}
-                          className="text-[10px] font-mono text-slate-600 dark:text-slate-400 hover:text-slate-900 bg-slate-50 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700 flex items-center gap-1 cursor-pointer"
+                          className="text-xs font-mono text-slate-600 dark:text-slate-400 hover:text-slate-900 bg-slate-50 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700 flex items-center gap-1 cursor-pointer whitespace-nowrap"
                         >
-                          <BookOpen className="w-3 h-3 text-[#005EB8]" />
+                          <BookOpen className="w-3 h-3 text-[#005EB8] shrink-0" />
                           <span>Focused Sheet</span>
                         </button>
                       </div>
@@ -764,25 +764,25 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                   {isExpanded && (
                     <div className="space-y-3 pt-2 border-t border-slate-100 dark:border-slate-800 animate-in fade-in duration-200">
                       <div className="space-y-1">
-                        <span className="text-[10px] uppercase font-mono text-slate-500 block font-semibold">Enforcement Context:</span>
-                        <p className="text-[11px] text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-950/60 p-2.5 rounded-lg border border-slate-200 dark:border-slate-800">
+                        <span className="text-xs uppercase font-mono text-slate-500 block font-semibold">Enforcement Context:</span>
+                        <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-950/60 p-3 rounded-lg border border-slate-200 dark:border-slate-800">
                           {term.playbookContext}
                         </p>
                       </div>
 
                       {term.exampleSnippet && (
                         <div className="space-y-1">
-                          <span className="text-[10px] uppercase font-mono text-slate-500 block font-semibold">Rules &amp; Code:</span>
-                          <pre className="p-3 bg-slate-50 dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 font-mono text-[10px] text-[#005EB8] dark:text-cyan-300 overflow-x-auto leading-relaxed max-h-48">
+                          <span className="text-xs uppercase font-mono text-slate-500 block font-semibold">Rules &amp; Code:</span>
+                          <pre className="p-3 bg-slate-50 dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 font-mono text-xs text-[#005EB8] dark:text-cyan-300 overflow-x-auto leading-relaxed max-h-48">
                             <code>{term.exampleSnippet}</code>
                           </pre>
                         </div>
                       )}
 
                       {term.relatedTerms && term.relatedTerms.length > 0 && (
-                        <div className="space-y-1">
-                          <span className="text-[10px] uppercase font-mono text-slate-500 block font-semibold">Related Primitives:</span>
-                          <div className="flex flex-wrap gap-1">
+                        <div className="space-y-1.5">
+                          <span className="text-xs uppercase font-mono text-slate-500 block font-semibold">Related Primitives:</span>
+                          <div className="flex flex-wrap gap-1.5">
                             {term.relatedTerms.map((relId) => {
                               const rel = GLOSSARY_TERMS.find((t) => t.id === relId);
                               if (!rel) return null;
@@ -794,7 +794,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                                     setModalTerm(rel);
                                     recordGlossaryTermView(rel.id);
                                   }}
-                                  className="text-[10px] bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-[#005EB8] dark:text-sky-300 border border-slate-200 dark:border-slate-700 px-2 py-0.5 rounded transition-colors cursor-pointer"
+                                  className="text-xs bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-[#005EB8] dark:text-sky-300 border border-slate-200 dark:border-slate-700 px-2.5 py-0.5 rounded transition-colors cursor-pointer"
                                 >
                                   {rel.term}
                                 </button>
@@ -819,18 +819,18 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
           onClick={() => setModalTerm(null)}
         >
           <div
-            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 w-full sm:max-w-2xl max-h-[88vh] sm:max-h-[85vh] rounded-t-2xl sm:rounded-xl flex flex-col shadow-2xl overflow-hidden animate-in slide-in-from-bottom duration-200"
+            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 w-full sm:max-w-3xl lg:max-w-4xl max-h-[88vh] sm:max-h-[85vh] rounded-t-2xl sm:rounded-xl flex flex-col shadow-2xl overflow-hidden animate-in slide-in-from-bottom duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
             <div className="p-5 sm:p-6 border-b border-slate-100 dark:border-slate-800 flex items-start justify-between gap-4 bg-slate-50 dark:bg-slate-950 sticky top-0 z-10">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#005EB8] dark:text-sky-300 bg-sky-50 dark:bg-sky-950 px-2 py-0.5 rounded border border-sky-200 dark:border-sky-800">
+              <div className="space-y-1.5">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#005EB8] dark:text-sky-300 bg-sky-50 dark:bg-sky-950 px-2.5 py-0.5 rounded border border-sky-200 dark:border-sky-800 whitespace-nowrap">
                     {modalTerm.category}
                   </span>
                   {modalTerm.acronym && (
-                    <span className="text-xs font-mono font-semibold text-[#005EB8] dark:text-sky-300 bg-white dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700">
+                    <span className="text-xs font-mono font-semibold text-[#005EB8] dark:text-sky-300 bg-white dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700 whitespace-nowrap">
                       {modalTerm.acronym}
                     </span>
                   )}
@@ -841,7 +841,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
               </div>
               <button
                 onClick={() => setModalTerm(null)}
-                className="p-2 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors border border-slate-200 dark:border-slate-700 cursor-pointer"
+                className="p-2 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors border border-slate-200 dark:border-slate-700 cursor-pointer shrink-0"
                 aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
@@ -851,7 +851,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
             {/* Modal Scrollable Body */}
             <div className="p-5 sm:p-6 space-y-6 overflow-y-auto flex-1 text-slate-700 dark:text-slate-200">
               {/* Short definition callout */}
-              <div className="p-4 bg-sky-50 dark:bg-cyan-950/30 rounded-lg border border-sky-200 dark:border-cyan-800/40 text-xs sm:text-sm text-slate-800 dark:text-cyan-200 font-medium leading-relaxed">
+              <div className="p-4 bg-sky-50 dark:bg-cyan-950/30 rounded-lg border border-sky-200 dark:border-cyan-800/40 text-sm sm:text-base text-slate-800 dark:text-cyan-200 font-medium leading-relaxed">
                 {modalTerm.shortDefinition}
               </div>
 
@@ -860,7 +860,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                 <span className="text-xs uppercase font-mono tracking-wider text-slate-500 block font-semibold">
                   Full Architectural Explanation &amp; Citations:
                 </span>
-                <div className="text-sm text-slate-800 dark:text-slate-200 leading-relaxed bg-slate-50 dark:bg-slate-950 p-4 rounded-lg border border-slate-200 dark:border-slate-800 whitespace-pre-line space-y-3">
+                <div className="text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed bg-slate-50 dark:bg-slate-950 p-4 rounded-lg border border-slate-200 dark:border-slate-800 whitespace-pre-line space-y-3">
                   {modalTerm.fullDefinition}
                 </div>
               </div>
@@ -868,7 +868,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
               {/* Example rules / Code snippet if present */}
               {modalTerm.exampleSnippet && (
                 <div className="space-y-2">
-                  <span className="text-[11px] uppercase font-mono tracking-wider text-slate-500 block font-semibold">
+                  <span className="text-xs uppercase font-mono tracking-wider text-slate-500 block font-semibold">
                     Rules Representation &amp; Code:
                   </span>
                   <pre className="p-4 bg-slate-50 dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 font-mono text-xs text-[#005EB8] dark:text-cyan-300 overflow-x-auto leading-relaxed shadow-xs">
@@ -879,15 +879,15 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
 
               {/* Key Governance Safeguards if present */}
               {modalTerm.governanceSafeguards && modalTerm.governanceSafeguards.length > 0 && (
-                <div className="space-y-2 p-4 bg-[#f0fdf9] dark:bg-slate-950 rounded-lg border border-[#a7f3d0] dark:border-slate-800">
-                  <span className="text-[11px] uppercase font-mono tracking-wider text-[#047857] dark:text-emerald-400 block font-semibold flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
+                <div className="space-y-2.5 p-4 bg-[#f0fdf9] dark:bg-slate-950 rounded-lg border border-[#a7f3d0] dark:border-slate-800">
+                  <span className="text-xs uppercase font-mono tracking-wider text-[#047857] dark:text-emerald-400 font-semibold flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 shrink-0" />
                     <span>Mandated Governance Safeguards</span>
                   </span>
-                  <ul className="space-y-1.5">
+                  <ul className="space-y-2">
                     {modalTerm.governanceSafeguards.map((safeguard, idx) => (
-                      <li key={idx} className="text-xs text-slate-700 dark:text-slate-300 flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#047857] mt-1.5 shrink-0" />
+                      <li key={idx} className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 flex items-start gap-2 leading-relaxed">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#047857] mt-2 shrink-0" />
                         <span>{safeguard}</span>
                       </li>
                     ))}
@@ -897,10 +897,10 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
 
               {/* Enclave Implementation Context */}
               <div className="space-y-2">
-                <span className="text-[11px] uppercase font-mono tracking-wider text-slate-500 block font-semibold">
+                <span className="text-xs uppercase font-mono tracking-wider text-slate-500 block font-semibold">
                   Enforcement &amp; Playbook Context:
                 </span>
-                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-950/60 p-3.5 rounded-lg border border-slate-200 dark:border-slate-800">
+                <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-950/60 p-4 rounded-lg border border-slate-200 dark:border-slate-800">
                   {modalTerm.playbookContext}
                 </p>
               </div>
@@ -912,9 +912,9 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                     href={modalTerm.externalUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white dark:bg-slate-950 hover:bg-slate-50 text-[#005EB8] dark:text-cyan-300 border border-slate-200 dark:border-slate-800 text-xs font-semibold transition-colors shadow-xs"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white dark:bg-slate-950 hover:bg-slate-50 text-[#005EB8] dark:text-cyan-300 border border-slate-200 dark:border-slate-800 text-xs font-semibold transition-colors shadow-xs whitespace-nowrap"
                   >
-                    <ExternalLink className="w-4 h-4 text-[#005EB8]" />
+                    <ExternalLink className="w-4 h-4 text-[#005EB8] shrink-0" />
                     <span>Open Authoritative Guidance &amp; Reference</span>
                   </a>
                 </div>
@@ -923,7 +923,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
               {/* Related terms */}
               {modalTerm.relatedTerms && modalTerm.relatedTerms.length > 0 && (
                 <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-                  <span className="text-[11px] uppercase font-mono tracking-wider text-slate-500 block font-semibold">
+                  <span className="text-xs uppercase font-mono tracking-wider text-slate-500 block font-semibold">
                     Related Concepts (Tap to Inspect):
                   </span>
                   <div className="flex flex-wrap gap-2">
@@ -941,7 +941,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                           className="text-xs bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-[#005EB8] dark:text-sky-300 border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-lg transition-colors font-medium flex items-center gap-1.5 cursor-pointer"
                         >
                           <span>{rel.term}</span>
-                          <ArrowRight className="w-3 h-3 text-[#005EB8]" />
+                          <ArrowRight className="w-3 h-3 text-[#005EB8] shrink-0" />
                         </button>
                       );
                     })}
@@ -960,7 +960,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
               <div className="flex items-center gap-2 w-full sm:w-auto flex-wrap">
                 <button
                   onClick={() => setModalTerm(null)}
-                  className="flex-1 sm:flex-none px-4 py-2 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
+                  className="flex-1 sm:flex-none px-4 py-2 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer whitespace-nowrap"
                 >
                   Close
                 </button>
@@ -971,7 +971,7 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                       setModalTerm(null);
                       onNavigateToResources();
                     }}
-                    className="flex-1 sm:flex-none px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-[#005EB8] dark:text-sky-300 font-semibold text-xs border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
+                    className="flex-1 sm:flex-none px-4 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-[#005EB8] dark:text-sky-300 font-semibold text-xs border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer whitespace-nowrap"
                   >
                     Further Resources
                   </button>
@@ -983,10 +983,10 @@ export const GlossaryPage: React.FC<GlossaryPageProps> = ({
                       setModalTerm(null);
                       onNavigateToSection(modalTerm.id, modalTerm.term);
                     }}
-                    className="flex-1 sm:flex-none px-4 py-2 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-xs cursor-pointer"
+                    className="flex-1 sm:flex-none px-4 py-2 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-xs cursor-pointer whitespace-nowrap"
                   >
                     <span>Read In Playbook</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 shrink-0" />
                   </button>
                 )}
               </div>

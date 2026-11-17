@@ -136,13 +136,13 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Header Banner */}
       <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative z-10 max-w-3xl space-y-3">
+        <div className="relative z-10 max-w-5xl space-y-3">
           <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider">
-            <Bot className="w-4 h-4" />
+            <Bot className="w-4 h-4 shrink-0" />
             <span>AI Coding Assistants & Enclave Security</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
@@ -156,16 +156,16 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
           {/* Sub-navigation tabs */}
           <div className="flex flex-wrap items-center gap-2 pt-2">
             {[
-              { id: 'in-enclave-inference', label: 'In-Enclave Inference & Policy Modes', icon: <Server className="w-3.5 h-3.5" /> },
-              { id: 'nhs-external-guidance', label: 'NHS Guidance: AI Outside TRE', icon: <Scale className="w-3.5 h-3.5" /> },
-              { id: 'simulator', label: 'Interactive Pre-Prompt PEP Simulator', icon: <Terminal className="w-3.5 h-3.5" /> },
-              { id: 'safeguards', label: '5 Core Enclave Safeguards', icon: <Lock className="w-3.5 h-3.5" /> },
-              { id: 'config-generator', label: 'IDE & Ignore Config Generator', icon: <FileCode2 className="w-3.5 h-3.5" /> }
+              { id: 'in-enclave-inference', label: 'In-Enclave Inference & Policy Modes', icon: <Server className="w-3.5 h-3.5 shrink-0" /> },
+              { id: 'nhs-external-guidance', label: 'NHS Guidance: AI Outside TRE', icon: <Scale className="w-3.5 h-3.5 shrink-0" /> },
+              { id: 'simulator', label: 'Interactive Pre-Prompt PEP Simulator', icon: <Terminal className="w-3.5 h-3.5 shrink-0" /> },
+              { id: 'safeguards', label: '5 Core Enclave Safeguards', icon: <Lock className="w-3.5 h-3.5 shrink-0" /> },
+              { id: 'config-generator', label: 'IDE & Ignore Config Generator', icon: <FileCode2 className="w-3.5 h-3.5 shrink-0" /> }
             ].map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-colors whitespace-nowrap cursor-pointer ${
                   activeTab === tab.id
                     ? 'bg-cyan-500 text-slate-950 font-bold shadow-sm'
                     : 'bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800'
@@ -185,24 +185,24 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
           {/* Section 1: In-Enclave Inference Compute Architecture */}
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
-              <div className="space-y-1">
+              <div className="space-y-1.5">
                 <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider">
-                  <Server className="w-4 h-4" />
+                  <Server className="w-4 h-4 shrink-0" />
                   <span>On-Premise / In-Enclave Foundation Model Architecture</span>
                 </div>
                 <h2 className="text-2xl font-bold text-white tracking-tight">
                   Air-Gapped In-Enclave Inference Architecture
                 </h2>
-                <p className="text-slate-400 text-xs sm:text-sm max-w-2xl leading-relaxed">
+                <p className="text-slate-400 text-sm sm:text-base max-w-4xl leading-relaxed">
                   Reference specification for self-hosting high-throughput foundation models (vLLM, Triton, or TensorRT-LLM)
                   on dedicated in-enclave accelerator clusters inside the secure TRE boundary with zero external telemetry and zero data egress.
                 </p>
               </div>
 
-              <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 text-right shrink-0">
-                <span className="text-[10px] text-slate-500 uppercase font-mono block">Compute Fabric</span>
-                <span className="text-xs font-bold text-emerald-400 font-mono">Dedicated In-Enclave Accelerator Cluster</span>
-                <span className="text-[10px] text-slate-400 block">Air-gapped private subnet · Zero WAN gateway</span>
+              <div className="p-3.5 bg-slate-950 rounded-xl border border-slate-800 text-right shrink-0">
+                <span className="text-xs text-slate-400 uppercase font-mono block">Compute Fabric</span>
+                <span className="text-sm font-bold text-emerald-400 font-mono">Dedicated In-Enclave Accelerator Cluster</span>
+                <span className="text-xs text-slate-400 block">Air-gapped private subnet · Zero WAN gateway</span>
               </div>
             </div>
 
@@ -236,28 +236,28 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-                <div className="p-3 bg-slate-900 rounded-xl border border-slate-800 space-y-1">
-                  <span className="font-bold text-amber-300 block">1. AI is NEVER a Safe Person</span>
-                  <p className="text-slate-300 leading-relaxed text-[11px]">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
+                <div className="p-4 bg-slate-900 rounded-xl border border-slate-800 space-y-1.5 h-full flex flex-col">
+                  <span className="font-bold text-sm text-amber-300 block">1. AI is NEVER a Safe Person</span>
+                  <p className="text-slate-300 leading-relaxed text-xs sm:text-sm">
                     Under DEA 2017 &amp; UK GDPR, a Safe Person requires natural personhood and criminal liability. AI runs strictly as a delegated machine workload under an accredited human sponsor.
                   </p>
                 </div>
-                <div className="p-3 bg-slate-900 rounded-xl border border-slate-800 space-y-1">
-                  <span className="font-bold text-purple-300 block">2. Model Weights ARE Data Assets</span>
-                  <p className="text-slate-300 leading-relaxed text-[11px]">
+                <div className="p-4 bg-slate-900 rounded-xl border border-slate-800 space-y-1.5 h-full flex flex-col">
+                  <span className="font-bold text-sm text-purple-300 block">2. Model Weights ARE Data Assets</span>
+                  <p className="text-slate-300 leading-relaxed text-xs sm:text-sm">
                     Neural weights memorize training records. Fine-tuned checkpoints sit in Safe Data and must undergo differential privacy and airlock verification before egress.
                   </p>
                 </div>
-                <div className="p-3 bg-slate-900 rounded-xl border border-slate-800 space-y-1">
-                  <span className="font-bold text-sky-300 block">3. Automated Near-Instant Revocation</span>
-                  <p className="text-slate-300 leading-relaxed text-[11px]">
+                <div className="p-4 bg-slate-900 rounded-xl border border-slate-800 space-y-1.5 h-full flex flex-col">
+                  <span className="font-bold text-sm text-sky-300 block">3. Automated Near-Instant Revocation</span>
+                  <p className="text-slate-300 leading-relaxed text-xs sm:text-sm">
                     Following Stanford UIT standards, agent identities must be revocable near-instantaneously without long-lived keys. Database tools are confined to read-only SELECT statements.
                   </p>
                 </div>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-900/90 border border-sky-800/50 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px]">
+              <div className="p-3.5 rounded-xl bg-slate-900/90 border border-sky-800/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs sm:text-sm">
                 <div className="text-slate-300 leading-relaxed">
                   <strong className="text-sky-300">Algorithmic Transparency Recording Standard (ATRS) · Advisory Interoperability Guidance:</strong>{' '}
                   When AI workflows produce analytical models or decision-support tools, UK GDS/DSA&apos;s optional two-tier ATRS record format complements Caldicott Principle 8 (&quot;No Surprises&quot;) and ISO/IEC 42001 documentation without altering enclave admission rules.
@@ -266,69 +266,69 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
                   href="https://www.gov.uk/government/collections/algorithmic-transparency-recording-standard-hub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sky-300 hover:text-sky-200 font-mono inline-flex items-center gap-1 shrink-0 hover:underline"
+                  className="text-sky-300 hover:text-sky-200 font-mono text-xs inline-flex items-center gap-1 shrink-0 whitespace-nowrap hover:underline"
                 >
                   <span>GOV.UK ATRS Hub</span>
-                  <ExternalLink className="w-3 h-3" />
+                  <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-900/90 border border-amber-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px]">
+              <div className="p-3.5 rounded-xl bg-slate-900/90 border border-amber-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs sm:text-sm">
                 <div className="text-slate-300 leading-relaxed">
-                  <strong className="text-amber-300">MHRA National Commission into the Regulation of AI in Healthcare (Final Report, Sept 2026) · 3 Pillars &amp; 44 Recommendations:</strong>{' '}
-                  Accepted in full by UK Government (Oct 2026). Introduces proportionate lifecycle rules including staged <strong>&ldquo;L-plate&rdquo; conditional authorisation</strong>—allowing supervised AI deployment inside sovereign TRE/clinical enclaves with continuous drift/safety telemetry—paired with <strong>System-Wide Responsibility</strong> across developers, Trusts, CSOs, and regulators.
+                  <strong className="text-amber-300">MHRA National Commission into the Regulation of AI in Healthcare (Final Report, Sept <span className="tabular-nums">2026</span>) · <span className="tabular-nums">3</span> Pillars &amp; <span className="tabular-nums">44</span> Recommendations:</strong>{' '}
+                  Accepted in full by UK Government (Oct <span className="tabular-nums">2026</span>). Introduces proportionate lifecycle rules including staged <strong>&ldquo;L-plate&rdquo; conditional authorisation</strong>—allowing supervised AI deployment inside sovereign TRE/clinical enclaves with continuous drift/safety telemetry—paired with <strong>System-Wide Responsibility</strong> across developers, Trusts, CSOs, and regulators.
                 </div>
                 <a
                   href="https://assets.publishing.service.gov.uk/media/6aa2662962ec7fe7bedf52b9/Full_National_Commission_Report_-_Publication__1_.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-amber-300 hover:text-amber-200 font-mono inline-flex items-center gap-1 shrink-0 hover:underline"
+                  className="text-amber-300 hover:text-amber-200 font-mono text-xs inline-flex items-center gap-1 shrink-0 whitespace-nowrap hover:underline"
                 >
                   <span>MHRA Commission PDF</span>
-                  <ExternalLink className="w-3 h-3" />
+                  <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
             </div>
 
             {/* Architecture Flow Diagram */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="p-4 bg-slate-950/70 rounded-xl border border-slate-800 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-semibold text-cyan-300">
-                  <Terminal className="w-4 h-4 text-cyan-400" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+              <div className="p-4 bg-slate-950/70 rounded-xl border border-slate-800 space-y-2 h-full flex flex-col">
+                <div className="flex items-center gap-2 text-sm font-semibold text-cyan-300">
+                  <Terminal className="w-4 h-4 text-cyan-400 shrink-0" />
                   <span>1. Researcher IDE</span>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
                   Researcher operates in Cline, Cursor, or VS Code Continue on an air-gapped Virtual Desktop (VDI) without copy-paste or local disk mounting.
                 </p>
               </div>
 
-              <div className="p-4 bg-slate-950/70 rounded-xl border border-slate-800 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-semibold text-purple-300">
-                  <ShieldAlert className="w-4 h-4 text-purple-400" />
+              <div className="p-4 bg-slate-950/70 rounded-xl border border-slate-800 space-y-2 h-full flex flex-col">
+                <div className="flex items-center gap-2 text-sm font-semibold text-purple-300">
+                  <ShieldAlert className="w-4 h-4 text-purple-400 shrink-0" />
                   <span>2. In-Enclave PEP Proxy</span>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
                   Pre-prompt Policy Enforcement Point (PEP) intercepts outgoing JSON context. Performs AST parsing, regex validation, and SDC cell checks.
                 </p>
               </div>
 
-              <div className="p-4 bg-slate-950/70 rounded-xl border border-slate-800 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-semibold text-emerald-300">
-                  <Cpu className="w-4 h-4 text-emerald-400" />
+              <div className="p-4 bg-slate-950/70 rounded-xl border border-slate-800 space-y-2 h-full flex flex-col">
+                <div className="flex items-center gap-2 text-sm font-semibold text-emerald-300">
+                  <Cpu className="w-4 h-4 text-emerald-400 shrink-0" />
                   <span>3. In-Enclave Model Serving</span>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
                   High-throughput container (vLLM / Triton / TensorRT-LLM) hosting open-weight models over a private internal VPC with zero external Internet routes.
                 </p>
               </div>
 
-              <div className="p-4 bg-slate-950/70 rounded-xl border border-slate-800 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-semibold text-amber-300">
-                  <Lock className="w-4 h-4 text-amber-400" />
+              <div className="p-4 bg-slate-950/70 rounded-xl border border-slate-800 space-y-2 h-full flex flex-col">
+                <div className="flex items-center gap-2 text-sm font-semibold text-amber-300">
+                  <Lock className="w-4 h-4 text-amber-400 shrink-0" />
                   <span>4. Airlock Output SDC</span>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
-                  Analytical outputs, tables, and serialized models are routed to the airlock for automated SHACL SDC evaluation (k ≥ 10, dominance ≤ 80%).
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                  Analytical outputs, tables, and serialized models are routed to the airlock for automated SHACL SDC evaluation (<span className="tabular-nums">k ≥ 10</span>, dominance <span className="tabular-nums">≤ 80%</span>).
                 </p>
               </div>
             </div>
@@ -336,97 +336,97 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
 
           {/* Section 2: Comparative Analysis of Policy Enforcement Modes */}
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6">
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider">
-                <Sparkles className="w-4 h-4" />
+                <Sparkles className="w-4 h-4 shrink-0" />
                 <span>Architecture Reference</span>
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Comparative Analysis of Policy Enforcement Modes
               </h3>
-              <p className="text-slate-400 text-xs sm:text-sm max-w-3xl leading-relaxed">
+              <p className="text-slate-400 text-sm sm:text-base max-w-4xl leading-relaxed">
                 This reference specification analyzes three operational enforcement archetypes for LLM integration in trusted research environments, comparing access mechanics, operational velocity, and residual re-identification exposure.
               </p>
             </div>
 
             {/* Side-by-Side Comparison Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
               {/* Mode 1: Hard Blocking */}
-              <div className="p-5 rounded-2xl bg-slate-950 border border-red-900/40 space-y-3 relative overflow-hidden">
-                <div className="flex items-center justify-between">
+              <div className="p-5 rounded-2xl bg-slate-950 border border-red-900/40 space-y-3 relative overflow-hidden h-full flex flex-col">
+                <div className="flex items-center justify-between gap-2">
                   <span className="text-xs font-bold text-red-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <XCircle className="w-4 h-4" />
+                    <XCircle className="w-4 h-4 shrink-0" />
                     <span>Mode A: Hard Blocking</span>
                   </span>
-                  <span className="text-[10px] font-mono bg-red-950 text-red-300 px-2 py-0.5 rounded border border-red-800">
+                  <span className="text-xs font-mono bg-red-950 text-red-300 px-2.5 py-0.5 rounded border border-red-800 whitespace-nowrap shrink-0">
                     Fail-Closed PEP
                   </span>
                 </div>
                 <h4 className="text-base font-bold text-white">Strict Fail-Closed Rejection</h4>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  If the PEP detects any unmasked direct identifier, patient birth date, full postcode, or small cell count ($k &lt; 10$), the request is aborted immediately with HTTP 403.
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                  If the PEP detects any unmasked direct identifier, patient birth date, full postcode, or small cell count (<span className="tabular-nums">k &lt; 10</span>), the request is aborted immediately with HTTP <span className="tabular-nums">403</span>.
                 </p>
-                <div className="pt-2 border-t border-slate-900 space-y-1.5 text-xs">
-                  <div className="text-slate-300 font-semibold text-[11px]">Operational Workflow:</div>
-                  <p className="text-slate-400 text-[11px] leading-relaxed">
-                    Live raw tables cannot be piped directly into prompts. Code is authored against schema definitions, synthetic datasets, or empty frames (`df.head(0)`).
+                <div className="pt-3 mt-auto border-t border-slate-900 space-y-1.5 text-xs sm:text-sm">
+                  <div className="text-slate-300 font-semibold text-xs">Operational Workflow:</div>
+                  <p className="text-slate-400 text-xs leading-relaxed">
+                    Live raw tables cannot be piped directly into prompts. Code is authored against schema definitions, synthetic datasets, or empty frames (<code>df.head(0)</code>).
                   </p>
-                  <div className="text-emerald-400 font-semibold text-[11px] pt-1">Security Boundary:</div>
-                  <p className="text-slate-400 text-[11px] leading-relaxed">
+                  <div className="text-emerald-400 font-semibold text-xs pt-1">Security Boundary:</div>
+                  <p className="text-slate-400 text-xs leading-relaxed">
                     Zero microdata ingestion: Confidential patient records never enter accelerator memory or inference KV-caches.
                   </p>
                 </div>
               </div>
 
               {/* Mode 2: Dynamic Scrubbing */}
-              <div className="p-5 rounded-2xl bg-slate-950 border border-amber-900/40 space-y-3 relative overflow-hidden">
-                <div className="flex items-center justify-between">
+              <div className="p-5 rounded-2xl bg-slate-950 border border-amber-900/40 space-y-3 relative overflow-hidden h-full flex flex-col">
+                <div className="flex items-center justify-between gap-2">
                   <span className="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4" />
+                    <Sparkles className="w-4 h-4 shrink-0" />
                     <span>Mode B: Dynamic Scrubbing</span>
                   </span>
-                  <span className="text-[10px] font-mono bg-amber-950 text-amber-300 px-2 py-0.5 rounded border border-amber-800">
+                  <span className="text-xs font-mono bg-amber-950 text-amber-300 px-2.5 py-0.5 rounded border border-amber-800 whitespace-nowrap shrink-0">
                     Permissive Masking
                   </span>
                 </div>
                 <h4 className="text-base font-bold text-white">On-The-Fly Pseudonymization</h4>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  The proxy parses outgoing prompt buffers in real time, replacing primary direct identifiers with synthetic surrogates (`&lt;PATIENT_ID_01&gt;`, `&lt;DATE_OFFSET&gt;`).
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                  The proxy parses outgoing prompt buffers in real time, replacing primary direct identifiers with synthetic surrogates (<code>&lt;PATIENT_ID_01&gt;</code>, <code>&lt;DATE_OFFSET&gt;</code>).
                 </p>
-                <div className="pt-2 border-t border-slate-900 space-y-1.5 text-xs">
-                  <div className="text-slate-300 font-semibold text-[11px]">Operational Workflow:</div>
-                  <p className="text-slate-400 text-[11px] leading-relaxed">
+                <div className="pt-3 mt-auto border-t border-slate-900 space-y-1.5 text-xs sm:text-sm">
+                  <div className="text-slate-300 font-semibold text-xs">Operational Workflow:</div>
+                  <p className="text-slate-400 text-xs leading-relaxed">
                     Low friction. Queries can be issued directly from interactive analysis notebooks without manual test fixture authoring.
                   </p>
-                  <div className="text-amber-400 font-semibold text-[11px] pt-1">Residual Re-Identification Risk:</div>
-                  <p className="text-slate-400 text-[11px] leading-relaxed">
+                  <div className="text-amber-400 font-semibold text-xs pt-1">Residual Re-Identification Risk:</div>
+                  <p className="text-slate-400 text-xs leading-relaxed">
                     <strong>Quasi-Identifier Linkage Exposure:</strong> Direct identifier removal does not confer statistical anonymity. Longitudinal attributes (rare diagnoses, admission timestamps) remain vulnerable to external linkage.
                   </p>
                 </div>
               </div>
 
               {/* Mode 3: Schema-Only RAG */}
-              <div className="p-5 rounded-2xl bg-slate-950 border border-cyan-900/40 space-y-3 relative overflow-hidden">
-                <div className="flex items-center justify-between">
+              <div className="p-5 rounded-2xl bg-slate-950 border border-cyan-900/40 space-y-3 relative overflow-hidden h-full flex flex-col">
+                <div className="flex items-center justify-between gap-2">
                   <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <Database className="w-4 h-4" />
+                    <Database className="w-4 h-4 shrink-0" />
                     <span>Mode C: Schema-Only</span>
                   </span>
-                  <span className="text-[10px] font-mono bg-cyan-950 text-cyan-300 px-2 py-0.5 rounded border border-cyan-800">
+                  <span className="text-xs font-mono bg-cyan-950 text-cyan-300 px-2.5 py-0.5 rounded border border-cyan-800 whitespace-nowrap shrink-0">
                     Zero-Data RAG
                   </span>
                 </div>
                 <h4 className="text-base font-bold text-white">Metadata &amp; Script Synthesis</h4>
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
                   The in-enclave model receives only table schemas, column types, and data dictionary descriptions (excluding row instances and records).
                 </p>
-                <div className="pt-2 border-t border-slate-900 space-y-1.5 text-xs">
-                  <div className="text-slate-300 font-semibold text-[11px]">Operational Workflow:</div>
-                  <p className="text-slate-400 text-[11px] leading-relaxed">
+                <div className="pt-3 mt-auto border-t border-slate-900 space-y-1.5 text-xs sm:text-sm">
+                  <div className="text-slate-300 font-semibold text-xs">Operational Workflow:</div>
+                  <p className="text-slate-400 text-xs leading-relaxed">
                     The model generates analytical scripts (PySpark, SQL, R); the researcher executes the synthesized code locally within their isolated container kernel.
                   </p>
-                  <div className="text-cyan-400 font-semibold text-[11px] pt-1">Security Boundary:</div>
-                  <p className="text-slate-400 text-[11px] leading-relaxed">
+                  <div className="text-cyan-400 font-semibold text-xs pt-1">Security Boundary:</div>
+                  <p className="text-slate-400 text-xs leading-relaxed">
                     Decouples code synthesis from raw data instances, preventing patient microdata from ever entering model context buffers.
                   </p>
                 </div>
@@ -436,35 +436,35 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
             {/* Crucial Concept Box: Quasi-Identifiers & SDC Rules */}
             <div className="p-5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-3">
               <div className="flex items-center gap-2 text-xs font-bold text-amber-300 uppercase tracking-wider">
-                <AlertTriangle className="w-4 h-4 text-amber-400" />
+                <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
                 <span>Regulatory Reference: Multi-Dimensional Quasi-Identifiers &amp; Linkage Vectors</span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Under UK GDPR Article 4(1), NHS Information Governance standards, and Sweeney’s $k$-anonymity theorem, removing direct names does not establish statistical anonymity. High-entropy combinations of indirect quasi-identifiers create deterministic re-identification fingerprints:
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Under UK GDPR Article 4(1), NHS Information Governance standards, and Sweeney’s <span className="italic">k</span>-anonymity theorem, removing direct names does not establish statistical anonymity. High-entropy combinations of indirect quasi-identifiers create deterministic re-identification fingerprints:
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 pt-1">
-                <div className="p-3 bg-slate-900 rounded-lg border border-slate-800 space-y-1">
-                  <span className="text-[11px] font-bold text-cyan-300 block">Appointment Timestamps</span>
-                  <p className="text-[10px] text-slate-400">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1 items-stretch">
+                <div className="p-3.5 bg-slate-900 rounded-lg border border-slate-800 space-y-1.5 h-full flex flex-col">
+                  <span className="text-xs font-bold text-cyan-300 block">Appointment Timestamps</span>
+                  <p className="text-xs text-slate-400 leading-relaxed">
                     Exact admission and discharge date-times can be cross-referenced with public dispatch logs or municipal registries.
                   </p>
                 </div>
-                <div className="p-3 bg-slate-900 rounded-lg border border-slate-800 space-y-1">
-                  <span className="text-[11px] font-bold text-cyan-300 block">Partial Postcodes</span>
-                  <p className="text-[10px] text-slate-400">
+                <div className="p-3.5 bg-slate-900 rounded-lg border border-slate-800 space-y-1.5 h-full flex flex-col">
+                  <span className="text-xs font-bold text-cyan-300 block">Partial Postcodes</span>
+                  <p className="text-xs text-slate-400 leading-relaxed">
                     A 3-digit postcode district combined with birth month/year narrows individual identity down to minimal household sets.
                   </p>
                 </div>
-                <div className="p-3 bg-slate-900 rounded-lg border border-slate-800 space-y-1">
-                  <span className="text-[11px] font-bold text-cyan-300 block">Survival Analysis Tails</span>
-                  <p className="text-[10px] text-slate-400">
-                    When the Kaplan-Meier risk set falls below 10, individual step-down drops disclose the exact timing of clinical events.
+                <div className="p-3.5 bg-slate-900 rounded-lg border border-slate-800 space-y-1.5 h-full flex flex-col">
+                  <span className="text-xs font-bold text-cyan-300 block">Survival Analysis Tails</span>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    When the Kaplan-Meier risk set falls below <span className="tabular-nums">10</span>, individual step-down drops disclose the exact timing of clinical events.
                   </p>
                 </div>
-                <div className="p-3 bg-slate-900 rounded-lg border border-slate-800 space-y-1">
-                  <span className="text-[11px] font-bold text-cyan-300 block">Extreme Logistic Odds</span>
-                  <p className="text-[10px] text-slate-400">
-                    Extreme odds ratios and quasi-complete separation in regression reveal sparse contingency cells ($k &lt; 10$).
+                <div className="p-3.5 bg-slate-900 rounded-lg border border-slate-800 space-y-1.5 h-full flex flex-col">
+                  <span className="text-xs font-bold text-cyan-300 block">Extreme Logistic Odds</span>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    Extreme odds ratios and quasi-complete separation in regression reveal sparse contingency cells (<span className="tabular-nums">k &lt; 10</span>).
                   </p>
                 </div>
               </div>
@@ -473,35 +473,35 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
             {/* Defense in depth architectural standard box */}
             <div className="p-5 rounded-xl bg-slate-950 border border-cyan-900/40 space-y-3">
               <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider">
-                <ShieldCheck className="w-4 h-4 text-cyan-400" />
+                <ShieldCheck className="w-4 h-4 text-cyan-400 shrink-0" />
                 <span>Defense-in-Depth Specification: Layered Isolation vs. Advisory Client Filters</span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 In a production data analysis platform, security boundaries must be structured hierarchically. Client-side ignore files (<code>.harness_ignore</code>, mapped to client-specific files like <code>.clineignore</code>, <code>.copilotignore</code>, or <code>.cursorignore</code>) are advisory developer hints, not cryptographic or security guarantees:
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs pt-1">
-                <div className="p-3 bg-slate-900/90 rounded-lg border border-slate-800 space-y-1">
-                  <span className="text-[11px] font-bold text-purple-300 block">Layer 1: Advisory Client Filters</span>
-                  <p className="text-[10px] text-slate-400 leading-relaxed">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs pt-1 items-stretch">
+                <div className="p-3.5 bg-slate-900/90 rounded-lg border border-slate-800 space-y-1.5 h-full flex flex-col">
+                  <span className="text-xs font-bold text-purple-300 block">Layer 1: Advisory Client Filters</span>
+                  <p className="text-xs text-slate-400 leading-relaxed">
                     <code>.harness_ignore</code> (and tool bindings such as <code>.clineignore</code> / <code>.copilotignore</code>) prevent IDE agents from routinely scraping data folders into prompt windows. (Can be bypassed by subshells or misconfiguration).
                   </p>
                 </div>
-                <div className="p-3 bg-slate-900/90 rounded-lg border border-slate-800 space-y-1">
-                  <span className="text-[11px] font-bold text-emerald-300 block">Layer 2: Filesystem Permissions</span>
-                  <p className="text-[10px] text-slate-400 leading-relaxed">
+                <div className="p-3.5 bg-slate-900/90 rounded-lg border border-slate-800 space-y-1.5 h-full flex flex-col">
+                  <span className="text-xs font-bold text-emerald-300 block">Layer 2: Filesystem Permissions</span>
+                  <p className="text-xs text-slate-400 leading-relaxed">
                     POSIX read-only bind mounts (<code>chmod 400</code>), separate user UID/GID namespaces, and SELinux policies preventing unprivileged processes from reading raw data vaults.
                   </p>
                 </div>
-                <div className="p-3 bg-slate-900/90 rounded-lg border border-slate-800 space-y-1">
-                  <span className="text-[11px] font-bold text-cyan-300 block">Layer 3: Network Zero-Egress</span>
-                  <p className="text-[10px] text-slate-400 leading-relaxed">
+                <div className="p-3.5 bg-slate-900/90 rounded-lg border border-slate-800 space-y-1.5 h-full flex flex-col">
+                  <span className="text-xs font-bold text-cyan-300 block">Layer 3: Network Zero-Egress</span>
+                  <p className="text-xs text-slate-400 leading-relaxed">
                     Calico CNI GlobalNetworkPolicies enforce zero outbound WAN egress. Model traffic is restricted to internal mTLS endpoints with no external routing.
                   </p>
                 </div>
-                <div className="p-3 bg-slate-900/90 rounded-lg border border-slate-800 space-y-1">
-                  <span className="text-[11px] font-bold text-amber-300 block">Layer 4: AST Proxy &amp; Airlock</span>
-                  <p className="text-[10px] text-slate-400 leading-relaxed">
-                    Pre-prompt AST tokenizer proxies scrub residual PII, and airlock export gates validate all outbound artifacts against SHACL SDC rules (k ≥ 10, dominance ≤ 80%).
+                <div className="p-3.5 bg-slate-900/90 rounded-lg border border-slate-800 space-y-1.5 h-full flex flex-col">
+                  <span className="text-xs font-bold text-amber-300 block">Layer 4: AST Proxy &amp; Airlock</span>
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    Pre-prompt AST tokenizer proxies scrub residual PII, and airlock export gates validate all outbound artifacts against SHACL SDC rules (<span className="tabular-nums">k ≥ 10</span>, dominance <span className="tabular-nums">≤ 80%</span>).
                   </p>
                 </div>
               </div>
@@ -510,83 +510,83 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
             {/* Section 3: The NHS VPN Split-Tunneling Illusion vs. True Air-Gapped TRE Enclaves */}
             <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border border-amber-900/40 space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
-                <div className="space-y-1">
+                <div className="space-y-1.5">
                   <div className="flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-wider">
-                    <AlertTriangle className="w-4 h-4 text-amber-400" />
+                    <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
                     <span>Information Governance &amp; Network Topology Analysis</span>
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                     The NHS VPN Split-Tunneling Illusion vs. True Air-Gapped TRE Enclaves
                   </h3>
-                  <p className="text-slate-300 text-xs sm:text-sm max-w-3xl leading-relaxed">
+                  <p className="text-slate-300 text-sm sm:text-base max-w-4xl leading-relaxed">
                     Addressing developer LLM/CLI use: Why working over an NHS Trust VPN connection creates a deceptive false sense of security, and how true Trusted Research Environments (TREs) physically and cryptographically prevent data exfiltration.
                   </p>
                 </div>
-                <div className="p-3 bg-slate-950 rounded-xl border border-amber-900/60 text-right shrink-0">
-                  <span className="text-[10px] text-slate-500 uppercase font-mono block">Governance Warning</span>
-                  <span className="text-xs font-bold text-amber-300 font-mono">NHS VPN ≠ TRE Security</span>
-                  <span className="text-[10px] text-slate-400 block">Outbound WAN egress remains active</span>
+                <div className="p-3.5 bg-slate-950 rounded-xl border border-amber-900/60 text-right shrink-0">
+                  <span className="text-xs text-slate-400 uppercase font-mono block">Governance Warning</span>
+                  <span className="text-sm font-bold text-amber-300 font-mono">NHS VPN ≠ TRE Security</span>
+                  <span className="text-xs text-slate-400 block">Outbound WAN egress remains active</span>
                 </div>
               </div>
 
               {/* Explanatory Context: Why NHS VPN Oddly Allows Internet Access */}
-              <div className="p-4 rounded-xl bg-amber-950/20 border border-amber-800/40 space-y-2">
-                <h4 className="text-sm font-bold text-amber-300 flex items-center gap-2">
+              <div className="p-4 sm:p-5 rounded-xl bg-amber-950/20 border border-amber-800/40 space-y-2">
+                <h4 className="text-sm sm:text-base font-bold text-amber-300 flex items-center gap-2">
                   <span>The Core Hazard: Split-Tunneling &amp; Developer AI Tooling</span>
                 </h4>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                   NHS Trust, ICB, and regional health board VPNs (e.g., Cisco AnyConnect, FortiClient, Pulse Secure) are configured to authenticate trusted clinical staff and grant access to internal intranet portals, pathology databases, and electronic patient records (EPRs).
                   Crucially, <strong>most NHS VPN configurations permit split-tunneling or route general internet egress through an outbound corporate web gateway</strong> to allow standard web browsing, package installations (<code>pip</code>, <code>npm</code>), and email.
                 </p>
-                <p className="text-xs text-slate-400 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
                   When a data scientist or software engineer runs modern AI-assisted coding extensions (such as <strong>GitHub Copilot, Cursor, Cline, or Claude Code</strong>) on a laptop connected to the NHS VPN, <strong>the IDE silently transmits active editor buffers, open diagnostic files, SQL queries, and terminal logs across external commercial LLM APIs</strong> hosted on public cloud infrastructure outside the NHS sovereign boundary.
                 </p>
               </div>
 
               {/* Side-by-Side Architectural Contrast Table */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
                 {/* Left Card: NHS VPN Workstation Scenario */}
-                <div className="p-5 rounded-xl bg-slate-950 border border-red-900/50 space-y-4">
-                  <div className="flex items-center justify-between">
+                <div className="p-5 rounded-xl bg-slate-950 border border-red-900/50 space-y-4 h-full flex flex-col">
+                  <div className="flex items-center justify-between gap-2">
                     <span className="text-xs font-bold text-red-400 uppercase tracking-wider flex items-center gap-1.5">
-                      <XCircle className="w-4 h-4 text-red-400" />
+                      <XCircle className="w-4 h-4 text-red-400 shrink-0" />
                       <span>Developer Laptop on NHS VPN (High Risk)</span>
                     </span>
-                    <span className="text-[10px] font-mono bg-red-950/80 text-red-300 px-2 py-0.5 rounded border border-red-800">
+                    <span className="text-xs font-mono bg-red-950/80 text-red-300 px-2.5 py-0.5 rounded border border-red-800 whitespace-nowrap shrink-0">
                       Uncontrolled Egress
                     </span>
                   </div>
 
-                  <div className="space-y-3 text-xs">
+                  <div className="space-y-3 text-xs sm:text-sm flex-1 flex flex-col">
                     <div className="space-y-1">
                       <span className="font-semibold text-slate-300 block">Network Perimeter:</span>
-                      <p className="text-slate-400 text-[11px] leading-relaxed">
-                        VPN grants access to internal NHS shares, but local workstation retains active default route to the public internet (split-tunneling) or permits HTTPS port 443 egress to arbitrary web domains.
+                      <p className="text-slate-400 text-xs leading-relaxed">
+                        VPN grants access to internal NHS shares, but local workstation retains active default route to the public internet (split-tunneling) or permits HTTPS port <span className="tabular-nums">443</span> egress to arbitrary web domains.
                       </p>
                     </div>
 
                     <div className="space-y-1">
                       <span className="font-semibold text-slate-300 block">AI Coding Tool Behavior:</span>
-                      <p className="text-slate-400 text-[11px] leading-relaxed">
+                      <p className="text-slate-400 text-xs leading-relaxed">
                         Cursor, Copilot, or Cline automatically scan open tabs, local <code>.env</code> files, and SQL extracts for context window indexing, sending payloads directly to <code>api.openai.com</code>, <code>api.anthropic.com</code>, or Microsoft telemetry servers.
                       </p>
                     </div>
 
                     <div className="space-y-1">
                       <span className="font-semibold text-slate-300 block">Data Protection Impact:</span>
-                      <p className="text-slate-400 text-[11px] leading-relaxed">
+                      <p className="text-slate-400 text-xs leading-relaxed">
                         Person-level NHS numbers, unmasked patient demographics, and confidential cohort definitions leave the UK sovereign boundary without DPA/DSA coverage.
                       </p>
                     </div>
 
                     <div className="space-y-1">
                       <span className="font-semibold text-slate-300 block">Inspection &amp; Auditability:</span>
-                      <p className="text-slate-400 text-[11px] leading-relaxed">
+                      <p className="text-slate-400 text-xs leading-relaxed">
                         Zero prompt inspection. No Caldicott oversight. No record of which patient records were ingested into commercial LLM model context caches.
                       </p>
                     </div>
 
-                    <div className="pt-2 border-t border-slate-900 flex items-center justify-between text-[11px] text-red-400 font-mono font-semibold">
+                    <div className="pt-3 mt-auto border-t border-slate-900 flex items-center justify-between gap-2 text-xs text-red-400 font-mono font-semibold">
                       <span>Status: Non-Compliant</span>
                       <span>UK GDPR Art. 32 / 33 Breach Risk</span>
                     </div>
@@ -594,47 +594,47 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
                 </div>
 
                 {/* Right Card: True Air-Gapped TRE Enclave */}
-                <div className="p-5 rounded-xl bg-slate-950 border border-emerald-900/50 space-y-4">
-                  <div className="flex items-center justify-between">
+                <div className="p-5 rounded-xl bg-slate-950 border border-emerald-900/50 space-y-4 h-full flex flex-col">
+                  <div className="flex items-center justify-between gap-2">
                     <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
-                      <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                      <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
                       <span>Wavebound TRE Enclave (Zero-Egress Isolation)</span>
                     </span>
-                    <span className="text-[10px] font-mono bg-emerald-950/80 text-emerald-300 px-2 py-0.5 rounded border border-emerald-800">
+                    <span className="text-xs font-mono bg-emerald-950/80 text-emerald-300 px-2.5 py-0.5 rounded border border-emerald-800 whitespace-nowrap shrink-0">
                       SATRE 2.0 Compliant
                     </span>
                   </div>
 
-                  <div className="space-y-3 text-xs">
+                  <div className="space-y-3 text-xs sm:text-sm flex-1 flex flex-col">
                     <div className="space-y-1">
                       <span className="font-semibold text-slate-300 block">Network Perimeter:</span>
-                      <p className="text-slate-400 text-[11px] leading-relaxed">
+                      <p className="text-slate-400 text-xs leading-relaxed">
                         Calico CNI <code>GlobalNetworkPolicy</code> drops all outbound WAN packets at the Linux kernel level. No external IP routing exists; internet DNS queries are sinkholed.
                       </p>
                     </div>
 
                     <div className="space-y-1">
                       <span className="font-semibold text-slate-300 block">AI Coding Tool Behavior:</span>
-                      <p className="text-slate-400 text-[11px] leading-relaxed">
+                      <p className="text-slate-400 text-xs leading-relaxed">
                         IDE extensions are reconfigured with <code>baseURL</code> pointed exclusively to an <strong>in-enclave vLLM / Triton cluster</strong> running open-weight models (Llama-3, DeepSeek-Coder) over private mTLS.
                       </p>
                     </div>
 
                     <div className="space-y-1">
                       <span className="font-semibold text-slate-300 block">Data Protection Impact:</span>
-                      <p className="text-slate-400 text-[11px] leading-relaxed">
+                      <p className="text-slate-400 text-xs leading-relaxed">
                         Data remains within the certified enclave boundary. No token, prompt buffer, or gradient can ever traverse beyond the private cluster subnets.
                       </p>
                     </div>
 
                     <div className="space-y-1">
                       <span className="font-semibold text-slate-300 block">Inspection &amp; Auditability:</span>
-                      <p className="text-slate-400 text-[11px] leading-relaxed">
+                      <p className="text-slate-400 text-xs leading-relaxed">
                         Pre-prompt PEP AST validator scrubs any residual direct PII before inference; all prompt requests and model completions are logged in immutable, cryptographically sealed audit ledgers.
                       </p>
                     </div>
 
-                    <div className="pt-2 border-t border-slate-900 flex items-center justify-between text-[11px] text-emerald-400 font-mono font-semibold">
+                    <div className="pt-3 mt-auto border-t border-slate-900 flex items-center justify-between gap-2 text-xs text-emerald-400 font-mono font-semibold">
                       <span>Status: Fully Compliant</span>
                       <span>Goldacre Review Rec 1 &amp; SATRE Standard</span>
                     </div>
@@ -643,46 +643,46 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
               </div>
 
               {/* Network Packet Route Comparison Visual */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+              <div className="p-4 sm:p-5 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
                 <div className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
-                  <Terminal className="w-3.5 h-3.5 text-cyan-400" />
+                  <Terminal className="w-4 h-4 text-cyan-400 shrink-0" />
                   <span>Packet Egress Trace Comparison</span>
                 </div>
                 <div className="space-y-3">
-                  <div className="p-3 rounded-lg bg-red-950/20 border border-red-900/40 text-[11px] font-mono space-y-1">
+                  <div className="p-3.5 rounded-lg bg-red-950/20 border border-red-900/40 text-xs font-mono space-y-1.5">
                     <span className="text-red-400 font-bold block">[VULNERABLE] Laptop over NHS VPN (Split-Tunneling Active):</span>
                     <div className="text-slate-300 flex flex-wrap items-center gap-2">
-                      <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">IDE Editor / Terminal</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-red-400" />
-                      <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Local OS Network Stack</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-red-400" />
-                      <span className="px-2 py-0.5 rounded bg-slate-900 border border-amber-800 text-amber-300">NHS VPN Adapter (Bypassed)</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-red-400" />
-                      <span className="px-2 py-0.5 rounded bg-red-950 text-red-200 border border-red-700 font-bold">Public Cloud LLM API (Data Exfiltrated)</span>
+                      <span className="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 whitespace-nowrap">IDE Editor / Terminal</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-red-400 shrink-0" />
+                      <span className="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 whitespace-nowrap">Local OS Network Stack</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-red-400 shrink-0" />
+                      <span className="px-2.5 py-1 rounded bg-slate-900 border border-amber-800 text-amber-300 whitespace-nowrap">NHS VPN Adapter (Bypassed)</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-red-400 shrink-0" />
+                      <span className="px-2.5 py-1 rounded bg-red-950 text-red-200 border border-red-700 font-bold whitespace-nowrap">Public Cloud LLM API (Data Exfiltrated)</span>
                     </div>
                   </div>
 
-                  <div className="p-3 rounded-lg bg-emerald-950/20 border border-emerald-900/40 text-[11px] font-mono space-y-1">
+                  <div className="p-3.5 rounded-lg bg-emerald-950/20 border border-emerald-900/40 text-xs font-mono space-y-1.5">
                     <span className="text-emerald-400 font-bold block">[SECURE] Wavebound Air-Gapped TRE Enclave Architecture:</span>
                     <div className="text-slate-300 flex flex-wrap items-center gap-2">
-                      <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Air-Gapped VDI Session</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-emerald-400" />
-                      <span className="px-2 py-0.5 rounded bg-slate-900 border border-purple-800 text-purple-300">Pre-Prompt PEP Proxy (AST Scrubber)</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-emerald-400" />
-                      <span className="px-2 py-0.5 rounded bg-slate-900 border border-emerald-800 text-emerald-300">In-Enclave vLLM Cluster</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-emerald-400" />
-                      <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-200 border border-emerald-700 font-bold">Local Ephemeral Memory (0% Egress)</span>
+                      <span className="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 whitespace-nowrap">Air-Gapped VDI Session</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span className="px-2.5 py-1 rounded bg-slate-900 border border-purple-800 text-purple-300 whitespace-nowrap">Pre-Prompt PEP Proxy (AST Scrubber)</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span className="px-2.5 py-1 rounded bg-slate-900 border border-emerald-800 text-emerald-300 whitespace-nowrap">In-Enclave vLLM Cluster</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span className="px-2.5 py-1 rounded bg-emerald-950 text-emerald-200 border border-emerald-700 font-bold whitespace-nowrap">Local Ephemeral Memory (0% Egress)</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Guidance for Institutional Governance Boards */}
-              <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+              <div className="p-4 sm:p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
                 <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider block">
                   Actionable Policy Directive for NHS Trusts &amp; Research Sponsors:
                 </span>
-                <ul className="text-xs text-slate-300 space-y-1.5 list-disc list-inside leading-relaxed">
+                <ul className="text-xs sm:text-sm text-slate-300 space-y-1.5 list-disc list-inside leading-relaxed">
                   <li>
                     <strong>Prohibit raw patient cohort extracts on developer laptops:</strong> Never download or decompress patient-level datasets onto local machines, regardless of active VPN status.
                   </li>
@@ -702,26 +702,26 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
       {/* TAB 1: INTERACTIVE PROMPT SANITIZER & PEP SIMULATOR */}
       {activeTab === 'simulator' && (
         <div className="space-y-6">
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider">
-              <Terminal className="w-4 h-4" />
+              <Terminal className="w-4 h-4 shrink-0" />
               <span>Interactive Policy Enforcement Point (PEP)</span>
             </div>
             <h2 className="text-2xl font-bold text-white tracking-tight">
-              Pre-Prompt PII Redactor & LLM Egress Interceptor
+              Pre-Prompt PII Redactor &amp; LLM Egress Interceptor
             </h2>
-            <p className="text-xs sm:text-sm text-slate-400 max-w-2xl">
+            <p className="text-sm sm:text-base text-slate-400 max-w-4xl leading-relaxed">
               See what happens when a developer using an AI assistant (Copilot, Cline, Cursor) has confidential patient records
               or small cohort counts in their active editor buffer.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
             {/* Left: Input Code Editor */}
-            <div className="lg:col-span-6 bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
-                  <FileCode2 className="w-4 h-4 text-cyan-400" />
+            <div className="lg:col-span-6 bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 space-y-4 flex flex-col">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-sm font-bold text-slate-200 flex items-center gap-2">
+                  <FileCode2 className="w-4 h-4 text-cyan-400 shrink-0" />
                   <span>Developer Editor Buffer (Active Workspace)</span>
                 </span>
                 <div className="flex items-center gap-2">
@@ -732,7 +732,7 @@ import pandas as pd
 df = pd.DataFrame({'cohort_id': [1, 2], 'sample_rate': [0.1, 0.2]})
 def process(data): return data.mean()`)
                     }
-                    className="text-[11px] text-slate-400 hover:text-slate-200"
+                    className="text-xs text-slate-400 hover:text-slate-200 whitespace-nowrap cursor-pointer"
                   >
                     Load Clean Sample
                   </button>
@@ -761,24 +761,24 @@ def process(data): return data.mean()`)
 
                 <button
                   onClick={handleRunSimulation}
-                  className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm"
+                  className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-sm whitespace-nowrap cursor-pointer"
                 >
-                  <Cpu className="w-4 h-4" />
-                  <span>Intercept & Evaluate Prompt</span>
+                  <Cpu className="w-4 h-4 shrink-0" />
+                  <span>Intercept &amp; Evaluate Prompt</span>
                 </button>
               </div>
             </div>
 
             {/* Right: PEP Inspection Verdict */}
-            <div className="lg:col-span-6 bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
-                  <Bot className="w-4 h-4 text-purple-400" />
-                  <span>Enclave PEP Interceptor & Local LLM Dispatch</span>
+            <div className="lg:col-span-6 bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 space-y-4 flex flex-col">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-sm font-bold text-slate-200 flex items-center gap-2">
+                  <Bot className="w-4 h-4 text-purple-400 shrink-0" />
+                  <span>Enclave PEP Interceptor &amp; Local LLM Dispatch</span>
                 </span>
                 {simulationResult && (
                   <span
-                    className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${
+                    className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded border whitespace-nowrap shrink-0 ${
                       simulationResult.status === 'CLEAN'
                         ? 'bg-emerald-950 text-emerald-400 border-emerald-800'
                         : simulationResult.status === 'BLOCKED'
@@ -811,15 +811,15 @@ def process(data): return data.mean()`)
                       <Sparkles className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                     )}
 
-                    <div className="space-y-1 text-xs">
-                      <div className="font-bold text-sm">
+                    <div className="space-y-1 text-xs sm:text-sm">
+                      <div className="font-bold text-sm sm:text-base">
                         {simulationResult.status === 'CLEAN'
                           ? 'Prompt Cleared: No Person-Level Data'
                           : simulationResult.status === 'BLOCKED'
                           ? 'Prompt Rejected: Person-Level Data Intercepted'
                           : 'Prompt Sanitized: PII Replaced with Synthetic Tokens'}
                       </div>
-                      <p className="text-slate-300">
+                      <p className="text-slate-300 leading-relaxed">
                         {simulationResult.status === 'CLEAN'
                           ? 'Prompt context contains zero patient identifiers and conforms to Statistical Disclosure Control rules.'
                           : simulationResult.status === 'BLOCKED'
@@ -832,10 +832,10 @@ def process(data): return data.mean()`)
                   {/* Violations List */}
                   {simulationResult.violations.length > 0 && (
                     <div className="space-y-1.5 text-xs">
-                      <span className="font-bold text-slate-300 uppercase tracking-wider text-[10px]">
-                        Detected Enclave Violations ({simulationResult.violations.length}):
+                      <span className="font-bold text-slate-300 uppercase tracking-wider text-xs block">
+                        Detected Enclave Violations (<span className="tabular-nums">{simulationResult.violations.length}</span>):
                       </span>
-                      <ul className="space-y-1 text-red-300 font-mono text-[11px] bg-slate-950 p-3 rounded-xl border border-red-900/40">
+                      <ul className="space-y-1.5 text-red-300 font-mono text-xs bg-slate-950 p-3.5 rounded-xl border border-red-900/40">
                         {simulationResult.violations.map((v, idx) => (
                           <li key={idx} className="flex items-center gap-1.5">
                             <span className="text-red-400">&bull;</span>
@@ -848,7 +848,7 @@ def process(data): return data.mean()`)
 
                   {/* Sanitized Payload Preview */}
                   <div className="space-y-1.5">
-                    <span className="font-semibold text-slate-400 uppercase tracking-wider text-[10px] block">
+                    <span className="font-semibold text-slate-400 uppercase tracking-wider text-xs block">
                       Actual Transmitted Payload (To In-Enclave LLM):
                     </span>
                     <pre className="p-3.5 bg-slate-950 border border-slate-800 rounded-xl text-xs font-mono text-cyan-300 overflow-x-auto leading-relaxed max-h-56 shadow-inner">
@@ -857,10 +857,10 @@ def process(data): return data.mean()`)
                   </div>
                 </div>
               ) : (
-                <div className="p-12 text-center text-slate-400 space-y-3 bg-slate-950/40 rounded-xl border border-slate-800">
+                <div className="p-12 text-center text-slate-400 space-y-3 bg-slate-950/40 rounded-xl border border-slate-800 flex-1 flex flex-col items-center justify-center">
                   <Terminal className="w-8 h-8 mx-auto text-slate-600" />
                   <h4 className="text-sm font-semibold text-slate-200">Test Your Prompt</h4>
-                  <p className="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
                     Click &ldquo;Intercept &amp; Evaluate Prompt&rdquo; to test how the enclave Policy Enforcement Point (PEP)
                     protects NHS patient data from leaking to LLM coding assistants.
                   </p>
@@ -874,86 +874,86 @@ def process(data): return data.mean()`)
       {/* TAB 2: 5 CORE ENCLAVE SAFEGUARDS */}
       {activeTab === 'safeguards' && (
         <div className="space-y-6">
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider">
-              <Lock className="w-4 h-4" />
+              <Lock className="w-4 h-4 shrink-0" />
               <span>Architectural Blueprint</span>
             </div>
             <h2 className="text-2xl font-bold text-white tracking-tight">
               5 Architectural Safeguards for AI Coding Tools in Enclaves
             </h2>
-            <p className="text-xs sm:text-sm text-slate-400 max-w-2xl">
+            <p className="text-sm sm:text-base text-slate-400 max-w-4xl leading-relaxed">
               Concrete architectural patterns ensuring researchers and developers can benefit from AI code completion
               without violating Caldicott principles or UK GDPR.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-              <div className="w-9 h-9 rounded-xl bg-cyan-950 flex items-center justify-center text-cyan-400 border border-cyan-800 font-bold font-mono">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3 h-full flex flex-col">
+              <div className="w-9 h-9 rounded-xl bg-cyan-950 flex items-center justify-center text-cyan-400 border border-cyan-800 font-bold font-mono tabular-nums">
                 1
               </div>
-              <h3 className="font-bold text-white text-base">In-Enclave Air-Gapped LLM Inference</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <h3 className="font-bold text-white text-base sm:text-lg">In-Enclave Air-Gapped LLM Inference</h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed flex-1">
                 Rather than connecting developer IDEs to public cloud endpoints (e.g. OpenAI, GitHub Copilot multi-tenant cloud),
                 the enclave hosts an open-weights coding model (e.g. <strong>Qwen-2.5-Coder 32B, DeepSeek-Coder-V2, or Llama-3-Code</strong>)
                 on dedicated internal GPU nodes via <strong>vLLM or Ollama</strong>.
               </p>
-              <div className="text-[11px] font-mono text-cyan-300 bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+              <div className="text-xs font-mono text-cyan-300 bg-slate-950 p-3 rounded-lg border border-slate-800">
                 zero-egress: true | All prompt tokens remain inside the VPC perimeter.
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-              <div className="w-9 h-9 rounded-xl bg-purple-950 flex items-center justify-center text-purple-400 border border-purple-800 font-bold font-mono">
+            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3 h-full flex flex-col">
+              <div className="w-9 h-9 rounded-xl bg-purple-950 flex items-center justify-center text-purple-400 border border-purple-800 font-bold font-mono tabular-nums">
                 2
               </div>
-              <h3 className="font-bold text-white text-base">Content Exclusion Policies (.harness_ignore)</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <h3 className="font-bold text-white text-base sm:text-lg">Content Exclusion Policies (.harness_ignore)</h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed flex-1">
                 Repositories define a unified <strong>.harness_ignore</strong> exclusion policy (which GitOps automation mirrors to tool-specific bindings such as <code>.clineignore</code>, <code>.copilotignore</code>, or <code>.cursorignore</code>) to omit data folders
                 (<code className="text-purple-300">/data/**, *.csv, *.parquet</code>) from IDE indexing buffers during interactive coding.
               </p>
-              <div className="text-[11px] text-amber-300 bg-amber-950/40 p-2.5 rounded-lg border border-amber-800/50 leading-relaxed">
+              <div className="text-xs text-amber-300 bg-amber-950/40 p-3 rounded-lg border border-amber-800/50 leading-relaxed">
                 <strong>Enclave Security Standard:</strong> Client-side ignore files are an advisory developer heuristic, not an isolation guarantee. In accredited enclaves, <code>.harness_ignore</code> must be backed by non-bypassable host controls: read-only POSIX directory mounts (<code className="text-amber-200">chmod 400</code>) and network-level air-gapping.
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-              <div className="w-9 h-9 rounded-xl bg-emerald-950 flex items-center justify-center text-emerald-400 border border-emerald-800 font-bold font-mono">
+            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3 h-full flex flex-col">
+              <div className="w-9 h-9 rounded-xl bg-emerald-950 flex items-center justify-center text-emerald-400 border border-emerald-800 font-bold font-mono tabular-nums">
                 3
               </div>
-              <h3 className="font-bold text-white text-base">Pre-Prompt AST & Regex Redaction Proxy</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <h3 className="font-bold text-white text-base sm:text-lg">Pre-Prompt AST &amp; Regex Redaction Proxy</h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed flex-1">
                 An outbound LSP or local reverse proxy intercepts all requests dispatched to the LLM. It parses the
                 Abstract Syntax Tree (AST), identifying string literals that resemble <strong>NHS numbers, dates of birth, full postcodes,
                 or patient names</strong>, replacing them with synthetic aliases before transmission.
               </p>
-              <div className="text-[11px] font-mono text-emerald-300 bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+              <div className="text-xs font-mono text-emerald-300 bg-slate-950 p-3 rounded-lg border border-slate-800">
                 Automated DLP: Prevents developer copy-paste accidents into chat panels.
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-              <div className="w-9 h-9 rounded-xl bg-amber-950 flex items-center justify-center text-amber-400 border border-amber-800 font-bold font-mono">
+            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3 h-full flex flex-col">
+              <div className="w-9 h-9 rounded-xl bg-amber-950 flex items-center justify-center text-amber-400 border border-amber-800 font-bold font-mono tabular-nums">
                 4
               </div>
-              <h3 className="font-bold text-white text-base">Model Context Protocol (MCP) Sandboxing</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <h3 className="font-bold text-white text-base sm:text-lg">Model Context Protocol (MCP) Sandboxing</h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed flex-1">
                 For agentic assistants like <strong>Cline, Cursor Agent, or Codex</strong> that execute terminal tools,
                 MCP boundaries (<code className="text-amber-300">ontology/agent_mcp.ttl</code>) restrict filesystem operations
                 strictly to <code className="text-amber-300">/workspace/src</code>, barring directory traversal to raw data vaults.
               </p>
-              <div className="text-[11px] font-mono text-amber-300 bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+              <div className="text-xs font-mono text-amber-300 bg-slate-950 p-3 rounded-lg border border-slate-800">
                 mcp:allowedStatements: SELECT, EXPLAIN only | No curl/wget egress.
               </div>
             </div>
 
             <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3 md:col-span-2">
-              <div className="w-9 h-9 rounded-xl bg-pink-950 flex items-center justify-center text-pink-400 border border-pink-800 font-bold font-mono">
+              <div className="w-9 h-9 rounded-xl bg-pink-950 flex items-center justify-center text-pink-400 border border-pink-800 font-bold font-mono tabular-nums">
                 5
               </div>
-              <h3 className="font-bold text-white text-base">Zero Data Retention (ZDR) & Enterprise Private Endpoints</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <h3 className="font-bold text-white text-base sm:text-lg">Zero Data Retention (ZDR) &amp; Enterprise Private Endpoints</h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 If sovereign cloud APIs (such as Azure OpenAI or AWS Bedrock) must be accessed, connections are routed strictly over
                 <strong> VPC Private Service Connect (Private Endpoints)</strong> without traversing the public internet.
                 The agreement must legally enforce <strong>Zero Data Retention (ZDR)</strong> (prompts are never cached on disk)
@@ -967,22 +967,22 @@ def process(data): return data.mean()`)
       {/* TAB 4: IDE & IGNORE CONFIG GENERATOR */}
       {activeTab === 'config-generator' && (
         <div className="space-y-6">
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             <div className="flex items-center gap-2 text-xs font-bold text-cyan-400 uppercase tracking-wider">
-              <FileCode2 className="w-4 h-4" />
+              <FileCode2 className="w-4 h-4 shrink-0" />
               <span>Developer Workspace Configuration</span>
             </div>
             <h2 className="text-2xl font-bold text-white tracking-tight">
-              Ready-to-Use IDE & Agent Lockdown Configurations
+              Ready-to-Use IDE &amp; Agent Lockdown Configurations
             </h2>
-            <p className="text-xs sm:text-sm text-slate-400 max-w-2xl">
+            <p className="text-sm sm:text-base text-slate-400 max-w-4xl leading-relaxed">
               Deploy a standardized <code className="text-cyan-300">.harness_ignore</code> exclusion policy and local inference configuration into your enclave workspace to lock down agentic coding harnesses without tying policies to a single vendor tool.
             </p>
           </div>
 
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-800">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 {[
                   { id: 'harness', label: '.harness_ignore (Standard Policy)' },
                   { id: 'bindings', label: 'Client Symlink Sync (Makefile)' },
@@ -991,7 +991,7 @@ def process(data): return data.mean()`)
                   <button
                     key={item.id}
                     onClick={() => setActiveToolConfig(item.id as any)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors whitespace-nowrap cursor-pointer ${
                       activeToolConfig === item.id
                         ? 'bg-cyan-500 text-slate-950 font-bold'
                         : 'bg-slate-950 text-slate-400 hover:text-slate-200'
@@ -1038,16 +1038,16 @@ MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`
                   };
                   handleCopyConfig(snippets[activeToolConfig]);
                 }}
-                className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors border border-slate-700 cursor-pointer"
+                className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors border border-slate-700 whitespace-nowrap cursor-pointer"
               >
                 {copiedConfig ? (
                   <>
-                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                     <span className="text-emerald-400">Copied to Clipboard</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-3.5 h-3.5" />
+                    <Copy className="w-3.5 h-3.5 shrink-0" />
                     <span>Copy Config</span>
                   </>
                 )}
@@ -1105,7 +1105,7 @@ MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`}</code>
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-cyan-900/60 pb-4">
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">
-                  <Scale className="w-4 h-4 text-amber-400" />
+                  <Scale className="w-4 h-4 text-amber-400 shrink-0" />
                   <span>NHS England &amp; UK Information Commissioner Mandate</span>
                 </div>
                 <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
@@ -1114,69 +1114,69 @@ MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`}</code>
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="px-3 py-1 rounded-lg bg-red-950/90 text-red-300 border border-red-700/80 font-mono text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
-                  <XCircle className="w-4 h-4 text-red-400" />
+                <span className="px-3 py-1 rounded-lg bg-red-950/90 text-red-300 border border-red-700/80 font-mono text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-sm whitespace-nowrap shrink-0">
+                  <XCircle className="w-4 h-4 text-red-400 shrink-0" />
                   <span>Prohibited on Patient Data</span>
                 </span>
               </div>
             </div>
 
             {/* Direct Statutory Answer */}
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-red-900/50 space-y-2">
+            <div className="p-4 sm:p-5 rounded-xl bg-slate-950/80 border border-red-900/50 space-y-2">
               <div className="flex items-center gap-2 text-sm font-bold text-red-400 font-mono">
                 <AlertTriangle className="w-4 h-4 text-red-400 shrink-0" />
                 <span>The Definitive NHS Statutory Answer:</span>
               </div>
-              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-medium">
+              <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-medium">
                 <strong>No. Under official NHS England guidance and UK data protection law, clinical staff, data scientists, and software engineers must NEVER enter patient-identifiable data (PID) or confidential patient information (CPI) into commercial, consumer, or public cloud AI tools on developer workstations or outside a certified TRE/SDE boundary.</strong>
               </p>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 Even when connected to an NHS Trust VPN, modern AI coding extensions (such as GitHub Copilot, Cursor, Cline, or Claude Code) automatically scan open editor buffers, local database connection strings, terminal logs, and SQL scripts. These tools transmit code context across commercial cloud APIs hosted on public infrastructure outside NHS sovereign control, constituting an unlawful disclosure under the <strong>Common Law Duty of Confidentiality</strong>, <strong>Caldicott Principles 1, 2 &amp; 8</strong>, and <strong>UK GDPR Articles 5(1)(f), 6, and 9</strong>.
               </p>
             </div>
 
             {/* Four Authoritative Regulatory Frameworks Strip */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
-              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-cyan-900/60 space-y-1.5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 pt-2 items-stretch">
+              <div className="p-4 rounded-xl bg-slate-950/70 border border-cyan-900/60 space-y-1.5 h-full flex flex-col">
                 <div className="flex items-center gap-1.5 text-xs font-bold text-sky-400">
-                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <ShieldCheck className="w-4 h-4 shrink-0" />
                   <span>NHS England / DHSC</span>
                 </div>
-                <div className="text-[11px] text-slate-300 font-semibold">Generative AI Policy (2024)</div>
-                <p className="text-[11px] text-slate-400 leading-normal">
+                <div className="text-xs text-slate-200 font-semibold">Generative AI Policy (<span className="tabular-nums">2024</span>)</div>
+                <p className="text-xs text-slate-400 leading-relaxed">
                   Strictly prohibits inputting identifiable or confidential health information into commercial or uncontracted AI platforms. Mandates formal DPIAs and sovereign environments.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-cyan-900/60 space-y-1.5">
+              <div className="p-4 rounded-xl bg-slate-950/70 border border-cyan-900/60 space-y-1.5 h-full flex flex-col">
                 <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
-                  <Scale className="w-3.5 h-3.5" />
+                  <Scale className="w-4 h-4 shrink-0" />
                   <span>National Data Guardian</span>
                 </div>
-                <div className="text-[11px] text-slate-300 font-semibold">Caldicott Principles 1, 2, 7 &amp; 8</div>
-                <p className="text-[11px] text-slate-400 leading-normal">
+                <div className="text-xs text-slate-200 font-semibold">Caldicott Principles 1, 2, 7 &amp; 8</div>
+                <p className="text-xs text-slate-400 leading-relaxed">
                   Patients have a reasonable expectation that their confidential records are not transmitted to third-party commercial machine learning models without statutory Section 251 CAG clearance.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-cyan-900/60 space-y-1.5">
+              <div className="p-4 rounded-xl bg-slate-950/70 border border-cyan-900/60 space-y-1.5 h-full flex flex-col">
                 <div className="flex items-center gap-1.5 text-xs font-bold text-purple-400">
-                  <Lock className="w-3.5 h-3.5" />
+                  <Lock className="w-4 h-4 shrink-0" />
                   <span>Information Commissioner</span>
                 </div>
-                <div className="text-[11px] text-slate-300 font-semibold">ICO Generative AI Guidance</div>
-                <p className="text-[11px] text-slate-400 leading-normal">
+                <div className="text-xs text-slate-200 font-semibold">ICO Generative AI Guidance</div>
+                <p className="text-xs text-slate-400 leading-relaxed">
                   Requires valid Article 9 condition for special category health data, prohibits unauthorized model retraining, and mandates Article 28 data processor agreements.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-950/70 border border-cyan-900/60 space-y-1.5">
+              <div className="p-4 rounded-xl bg-slate-950/70 border border-cyan-900/60 space-y-1.5 h-full flex flex-col">
                 <div className="flex items-center gap-1.5 text-xs font-bold text-amber-400">
-                  <BookOpen className="w-3.5 h-3.5" />
+                  <BookOpen className="w-4 h-4 shrink-0" />
                   <span>MHRA &amp; DCB0129</span>
                 </div>
-                <div className="text-[11px] text-slate-300 font-semibold">Software as a Medical Device</div>
-                <p className="text-[11px] text-slate-400 leading-normal">
+                <div className="text-xs text-slate-200 font-semibold">Software as a Medical Device</div>
+                <p className="text-xs text-slate-400 leading-relaxed">
                   If AI generated code calculates clinical dosages, triages patients, or influences diagnostic outcomes, it is a Medical Device requiring Clinical Safety Officer (CSO) sign-off.
                 </p>
               </div>
@@ -1189,11 +1189,11 @@ MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`}</code>
                   <BookOpen className="w-4 h-4 shrink-0" />
                   <span className="font-bold">MHRA National Commission into the Regulation of AI in Healthcare</span>
                   <span aria-hidden="true">·</span>
-                  <span>Final Report (10 Sept 2026)</span>
+                  <span>Final Report (10 Sept <span className="tabular-nums">2026</span>)</span>
                   <span aria-hidden="true">·</span>
-                  <span>44 Recommendations Accepted Oct 2026</span>
+                  <span><span className="tabular-nums">44</span> Recommendations Accepted Oct <span className="tabular-nums">2026</span></span>
                 </div>
-                <p className="text-xs text-slate-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                   Sets a 3-pillar framework—<strong>Proportionate Lifecycle Regulation</strong> (including staged <strong>&ldquo;L-plate&rdquo; conditional authorisation</strong> with live post-deployment drift/safety monitoring), <strong>System-Wide Responsibility</strong> across vendors, NHS Trusts, and Clinical Safety Officers, and <strong>Trust, Transparency &amp; Enforcement</strong>—directly shaping how sovereign AI enclaves govern clinical AI models.
                 </p>
               </div>
@@ -1201,10 +1201,10 @@ MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`}</code>
                 href="https://assets.publishing.service.gov.uk/media/6aa2662962ec7fe7bedf52b9/Full_National_Commission_Report_-_Publication__1_.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3.5 py-2 rounded-lg bg-amber-950/60 hover:bg-amber-900/60 border border-amber-700/60 text-amber-200 text-xs font-mono font-semibold inline-flex items-center gap-1.5 shrink-0 transition-colors"
+                className="px-3.5 py-2 rounded-lg bg-amber-950/60 hover:bg-amber-900/60 border border-amber-700/60 text-amber-200 text-xs font-mono font-semibold inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap transition-colors"
               >
                 <span>Open Full Commission Report (PDF)</span>
-                <ExternalLink className="w-3.5 h-3.5" />
+                <ExternalLink className="w-3.5 h-3.5 shrink-0" />
               </a>
             </div>
           </div>
@@ -1212,15 +1212,15 @@ MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`}</code>
           {/* CRITICAL DEEP DIVE: CAN ENTERPRISE VERSIONS BE USED ON PATIENT DATA? */}
           <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 space-y-5 shadow-xl text-white">
             <div className="flex items-center gap-2 text-xs font-mono font-bold text-teal-400 uppercase tracking-wider">
-              <ShieldAlert className="w-4 h-4 text-teal-400" />
+              <ShieldAlert className="w-4 h-4 text-teal-400 shrink-0" />
               <span>Crucial Regulatory Distinction · Enterprise vs Consumer AI Tiers</span>
             </div>
             
-            <div className="space-y-2 max-w-4xl">
+            <div className="space-y-2 max-w-5xl">
               <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
                 Can Enterprise Versions (ChatGPT Enterprise, Claude Enterprise, Copilot Enterprise) Be Used on Patient Data?
               </h3>
-              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
                 Many NHS data teams and digital health startups ask: <em>&ldquo;Our Trust or company has purchased an Enterprise subscription (with Zero Data Retention and a BAA). Does that mean we can now process identifiable patient records or run Copilot on live EHR database schemas?&rdquo;</em>
               </p>
             </div>
@@ -1231,16 +1231,16 @@ MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`}</code>
                 <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />
                 <span>The Statutory Reality in NHS Healthcare:</span>
               </div>
-              <p className="text-xs sm:text-sm text-slate-100 leading-relaxed font-sans">
+              <p className="text-sm sm:text-base text-slate-100 leading-relaxed font-sans">
                 <strong>NO for identifiable patient data outside an accredited TRE/SDE.</strong> Purchasing an Enterprise plan resolves certain commercial IP and model retraining concerns, but <strong>an enterprise contract CANNOT and DOES NOT grant statutory authority to bypass UK health data privacy laws or the Common Law Duty of Confidentiality.</strong>
               </p>
             </div>
 
             {/* 2-Column Comparison: What Enterprise Solves vs What It Cannot Bypass */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              <div className="p-4 rounded-xl bg-[#07192f] border border-emerald-500/30 space-y-3">
-                <div className="flex items-center gap-2 font-bold text-emerald-300 text-sm border-b border-emerald-500/30 pb-2">
-                  <Check className="w-4 h-4 text-emerald-400" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm items-stretch">
+              <div className="p-5 rounded-xl bg-[#07192f] border border-emerald-500/30 space-y-3 h-full flex flex-col">
+                <div className="flex items-center gap-2 font-bold text-emerald-300 text-sm sm:text-base border-b border-emerald-500/30 pb-2.5">
+                  <Check className="w-4 h-4 text-emerald-400 shrink-0" />
                   <span>What Enterprise Subscriptions Actually Provide</span>
                 </div>
                 <ul className="space-y-2 text-slate-300 leading-relaxed">
@@ -1263,9 +1263,9 @@ MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`}</code>
                 </ul>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#07192f] border border-rose-500/30 space-y-3">
-                <div className="flex items-center gap-2 font-bold text-rose-300 text-sm border-b border-rose-500/30 pb-2">
-                  <XCircle className="w-4 h-4 text-rose-400" />
+              <div className="p-5 rounded-xl bg-[#07192f] border border-rose-500/30 space-y-3 h-full flex flex-col">
+                <div className="flex items-center gap-2 font-bold text-rose-300 text-sm sm:text-base border-b border-rose-500/30 pb-2.5">
+                  <XCircle className="w-4 h-4 text-rose-400 shrink-0" />
                   <span>What Enterprise Subscriptions CANNOT Bypass Under UK Law</span>
                 </div>
                 <ul className="space-y-2 text-slate-300 leading-relaxed">
@@ -1294,11 +1294,11 @@ MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`}</code>
             </div>
 
             {/* How Enterprise LLMs CAN Be Lawfully Deployed */}
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-cyan-800/60 space-y-2">
+            <div className="p-4 sm:p-5 rounded-xl bg-slate-950/80 border border-cyan-800/60 space-y-2">
               <span className="text-xs font-mono font-bold text-cyan-300 uppercase tracking-wider block">
                 The Lawful Formula for Enterprise LLMs on Health Data:
               </span>
-              <p className="text-xs text-slate-200 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
                 If your organisation wants to use an enterprise LLM (e.g. Azure OpenAI or AWS Bedrock) with healthcare records, you must deploy it <strong>within an accredited TRE / SDE boundary via Private VPC Endpoints</strong> (with zero public internet routing), under a <strong>Trust Caldicott-approved DPIA</strong>, and with <strong>pre-prompt deterministic pseudonymisation or statistical disclosure control (SDC)</strong> active at the egress gateway.
               </p>
             </div>
@@ -1310,154 +1310,154 @@ MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`}</code>
               <span className="text-xs font-mono font-bold text-teal-400 uppercase tracking-wider block">
                 Practical Workplace Compliance Matrix
               </span>
-              <h3 className="text-xl font-bold text-white tracking-tight">
+              <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Evaluating Common Clinical &amp; Analytical AI Scenarios
               </h3>
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-xs text-left border-collapse">
+              <table className="w-full text-xs sm:text-sm text-left border-collapse">
                 <thead>
-                  <tr className="bg-slate-950/90 text-slate-300 border-b border-cyan-900/80 font-mono">
-                    <th className="py-2.5 px-3 font-semibold">Proposed Scenario</th>
-                    <th className="py-2.5 px-3 font-semibold">Data Handled</th>
-                    <th className="py-2.5 px-3 font-semibold">Compliance Status</th>
-                    <th className="py-2.5 px-3 font-semibold">Statutory Rationale &amp; Required Remediation</th>
+                  <tr className="bg-slate-950/90 text-slate-300 border-b border-cyan-900/80 font-mono text-xs">
+                    <th className="py-3 px-3.5 font-semibold">Proposed Scenario</th>
+                    <th className="py-3 px-3.5 font-semibold">Data Handled</th>
+                    <th className="py-3 px-3.5 font-semibold">Compliance Status</th>
+                    <th className="py-3 px-3.5 font-semibold">Statutory Rationale &amp; Required Remediation</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-cyan-950/60 text-slate-200">
                   <tr className="hover:bg-slate-900/40">
-                    <td className="py-3 px-3 font-semibold text-white">
+                    <td className="py-3.5 px-3.5 font-semibold text-white">
                       GitHub Copilot / Cursor on NHS laptop connected to Trust VPN
                     </td>
-                    <td className="py-3 px-3 font-mono text-amber-300">
+                    <td className="py-3.5 px-3.5 font-mono text-xs text-amber-300">
                       SQL scripts querying EPR, real NHS numbers, postcodes
                     </td>
-                    <td className="py-3 px-3">
-                      <span className="px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-700 font-mono font-bold text-[10px] block w-fit">
+                    <td className="py-3.5 px-3.5">
+                      <span className="px-2.5 py-0.5 rounded bg-red-950 text-red-300 border border-red-700 font-mono font-bold text-xs inline-block whitespace-nowrap">
                         STRICTLY PROHIBITED
                       </span>
                     </td>
-                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                    <td className="py-3.5 px-3.5 text-slate-300 leading-relaxed">
                       VPN split-tunneling allows active document context to leave for OpenAI/Microsoft endpoints. Breach of confidentiality. Must reconfigure IDE to point to in-enclave vLLM cluster.
                     </td>
                   </tr>
 
                   <tr className="hover:bg-slate-900/40">
-                    <td className="py-3 px-3 font-semibold text-white">
+                    <td className="py-3.5 px-3.5 font-semibold text-white">
                       Pasting clinical free-text clinic letters into public ChatGPT or Claude
                     </td>
-                    <td className="py-3 px-3 font-mono text-amber-300">
+                    <td className="py-3.5 px-3.5 font-mono text-xs text-amber-300">
                       Unstructured clinic notes with names redacted
                     </td>
-                    <td className="py-3 px-3">
-                      <span className="px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-700 font-mono font-bold text-[10px] block w-fit">
+                    <td className="py-3.5 px-3.5">
+                      <span className="px-2.5 py-0.5 rounded bg-red-950 text-red-300 border border-red-700 font-mono font-bold text-xs inline-block whitespace-nowrap">
                         STRICTLY PROHIBITED
                       </span>
                     </td>
-                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                    <td className="py-3.5 px-3.5 text-slate-300 leading-relaxed">
                       Free-text contains deductive identifiers (rare symptoms, exact treatment dates). Public tiers may use prompts for model retraining. Zero Section 251 clearance.
                     </td>
                   </tr>
 
                   <tr className="hover:bg-slate-900/40">
-                    <td className="py-3 px-3 font-semibold text-white">
+                    <td className="py-3.5 px-3.5 font-semibold text-white">
                       Copilot on purely synthetic or open non-health datasets (e.g. Synthetic Mass, open synthetic OMOP)
                     </td>
-                    <td className="py-3 px-3 font-mono text-emerald-300">
+                    <td className="py-3.5 px-3.5 font-mono text-xs text-emerald-300">
                       100% statistically generated synthetic data (no real patients)
                     </td>
-                    <td className="py-3 px-3">
-                      <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono font-bold text-[10px] block w-fit">
+                    <td className="py-3.5 px-3.5">
+                      <span className="px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono font-bold text-xs inline-block whitespace-nowrap">
                         PERMITTED
                       </span>
                     </td>
-                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                    <td className="py-3.5 px-3.5 text-slate-300 leading-relaxed">
                       Synthetic data contains zero real patient confidentiality risks. Ideal for algorithm prototyping, mock testing, and training coding pipelines before deploying into the TRE.
                     </td>
                   </tr>
 
                   <tr className="hover:bg-slate-900/40">
-                    <td className="py-3 px-3 font-semibold text-white">
+                    <td className="py-3.5 px-3.5 font-semibold text-white">
                       ChatGPT Enterprise / Claude Enterprise on analyst workstation (with ZDR active)
                     </td>
-                    <td className="py-3 px-3 font-mono text-amber-300">
+                    <td className="py-3.5 px-3.5 font-mono text-xs text-amber-300">
                       Unmasked patient microdata, hospital numbers, clinical episode text
                     </td>
-                    <td className="py-3 px-3">
-                      <span className="px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-700 font-mono font-bold text-[10px] block w-fit">
+                    <td className="py-3.5 px-3.5">
+                      <span className="px-2.5 py-0.5 rounded bg-red-950 text-red-300 border border-red-700 font-mono font-bold text-xs inline-block whitespace-nowrap">
                         PROHIBITED OUTSIDE TRE
                       </span>
                     </td>
-                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                    <td className="py-3.5 px-3.5 text-slate-300 leading-relaxed">
                       ZDR contract solves vendor training but does NOT bypass Common Law Duty of Confidentiality or provide Section 251 statutory research clearance. Unconsented disclosure of identifiable records to commercial infrastructure.
                     </td>
                   </tr>
 
                   <tr className="hover:bg-slate-900/40">
-                    <td className="py-3 px-3 font-semibold text-white">
+                    <td className="py-3.5 px-3.5 font-semibold text-white">
                       GitHub Copilot Enterprise querying live EHR databases on developer laptop
                     </td>
-                    <td className="py-3 px-3 font-mono text-amber-300">
+                    <td className="py-3.5 px-3.5 font-mono text-xs text-amber-300">
                       Live SQL results containing patient identifiable demographics
                     </td>
-                    <td className="py-3 px-3">
-                      <span className="px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-700 font-mono font-bold text-[10px] block w-fit">
+                    <td className="py-3.5 px-3.5">
+                      <span className="px-2.5 py-0.5 rounded bg-red-950 text-red-300 border border-red-700 font-mono font-bold text-xs inline-block whitespace-nowrap">
                         PROHIBITED OUTSIDE TRE
                       </span>
                     </td>
-                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                    <td className="py-3.5 px-3.5 text-slate-300 leading-relaxed">
                       Local IDE context windows capture database buffers, query outputs, and schemas into local unencrypted swap space and telemetry queues. Bypasses the audited clinical perimeter.
                     </td>
                   </tr>
 
                   <tr className="hover:bg-slate-900/40">
-                    <td className="py-3 px-3 font-semibold text-white">
+                    <td className="py-3.5 px-3.5 font-semibold text-white">
                       Microsoft 365 Copilot within NHS Central Enterprise Tenant
                     </td>
-                    <td className="py-3 px-3 font-mono text-sky-300">
+                    <td className="py-3.5 px-3.5 font-mono text-xs text-sky-300">
                       Internal NHS emails, administrative documents, care guidelines
                     </td>
-                    <td className="py-3 px-3">
-                      <span className="px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-700 font-mono font-bold text-[10px] block w-fit">
+                    <td className="py-3.5 px-3.5">
+                      <span className="px-2.5 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-700 font-mono font-bold text-xs inline-block whitespace-nowrap">
                         CONDITIONALLY PERMITTED
                       </span>
                     </td>
-                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                    <td className="py-3.5 px-3.5 text-slate-300 leading-relaxed">
                       Permitted only if enrolled under the official NHS Central Tenant with Commercial Data Protection (CDP) and zero model training agreements active. Individual Trust DPIA required.
                     </td>
                   </tr>
 
                   <tr className="hover:bg-slate-900/40">
-                    <td className="py-3 px-3 font-semibold text-white">
+                    <td className="py-3.5 px-3.5 font-semibold text-white">
                       Azure OpenAI / AWS Bedrock Enterprise via Private VPC Endpoint inside certified SDE
                     </td>
-                    <td className="py-3 px-3 font-mono text-teal-300">
+                    <td className="py-3.5 px-3.5 font-mono text-xs text-teal-300">
                       Enclave-partitioned pseudonymous research data
                     </td>
-                    <td className="py-3 px-3">
-                      <span className="px-2 py-0.5 rounded bg-teal-950 text-teal-300 border border-teal-700 font-mono font-bold text-[10px] block w-fit">
+                    <td className="py-3.5 px-3.5">
+                      <span className="px-2.5 py-0.5 rounded bg-teal-950 text-teal-300 border border-teal-700 font-mono font-bold text-xs inline-block whitespace-nowrap">
                         CONDITIONALLY PERMITTED
                       </span>
                     </td>
-                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                    <td className="py-3.5 px-3.5 text-slate-300 leading-relaxed">
                       Permitted when routed strictly over internal VPC Private Link (zero public internet transit), backed by Trust Caldicott Guardian approval, signed NHS DPA, and automated pre-prompt SDC tokenization.
                     </td>
                   </tr>
 
                   <tr className="hover:bg-slate-900/40">
-                    <td className="py-3 px-3 font-semibold text-white">
+                    <td className="py-3.5 px-3.5 font-semibold text-white">
                       Air-Gapped In-Enclave vLLM cluster inside TRE / SDE
                     </td>
-                    <td className="py-3 px-3 font-mono text-emerald-300">
+                    <td className="py-3.5 px-3.5 font-mono text-xs text-emerald-300">
                       De-identified microdata, research cohorts, hospital extracts
                     </td>
-                    <td className="py-3 px-3">
-                      <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono font-bold text-[10px] block w-fit">
+                    <td className="py-3.5 px-3.5">
+                      <span className="px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono font-bold text-xs inline-block whitespace-nowrap">
                         RECOMMENDED &amp; COMPLIANT
                       </span>
                     </td>
-                    <td className="py-3 px-3 text-slate-300 leading-relaxed">
+                    <td className="py-3.5 px-3.5 text-slate-300 leading-relaxed">
                       Gold standard architecture. GPU node runs inside certified enclave behind Calico zero-WAN egress policies. No data ever leaves the boundary. Meets Goldacre Review Rec 1.
                     </td>
                   </tr>
@@ -1468,94 +1468,94 @@ MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`}</code>
 
           {/* The 3 Approved Pathways Card */}
           <div className="bg-[#0c2340] border border-cyan-900/60 rounded-2xl p-6 sm:p-8 space-y-5 shadow-xl">
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider block">
                 Compliant Enterprise Architectures
               </span>
-              <h3 className="text-xl font-bold text-white tracking-tight">
+              <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 The 3 Approved Pathways to Run AI &amp; LLMs on Health Data
               </h3>
-              <p className="text-xs text-slate-300 leading-relaxed max-w-3xl">
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-4xl">
                 If your research or clinical engineering team needs the productivity of AI coding assistants or generative LLMs, you must deploy one of these three recognized architectures:
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1 items-stretch">
               {/* Pathway 1 */}
-              <div className="p-4 rounded-xl bg-slate-950/80 border border-teal-500/50 space-y-3 flex flex-col justify-between">
+              <div className="p-5 rounded-xl bg-slate-950/80 border border-teal-500/50 space-y-3 flex flex-col justify-between h-full">
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="px-2 py-0.5 rounded bg-teal-950 text-teal-300 border border-teal-700 text-[10px] font-mono font-bold">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="px-2.5 py-0.5 rounded bg-teal-950 text-teal-300 border border-teal-700 text-xs font-mono font-bold whitespace-nowrap">
                       PATHWAY 1 (GOLD STANDARD)
                     </span>
-                    <Server className="w-4 h-4 text-teal-400" />
+                    <Server className="w-4 h-4 text-teal-400 shrink-0" />
                   </div>
-                  <h4 className="text-sm font-bold text-white">
+                  <h4 className="text-base font-bold text-white">
                     Air-Gapped In-Enclave Inference
                   </h4>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                     Host open-weights foundation models (such as Qwen 2.5 Coder, Llama 3.3, or DeepSeek Coder) directly inside your secure enclave or TRE on dedicated GPU nodes running vLLM or Triton.
                   </p>
-                  <ul className="text-[11px] text-slate-400 space-y-1 list-disc list-inside">
+                  <ul className="text-xs text-slate-400 space-y-1.5 list-disc list-inside">
                     <li>Zero packets routed to the public internet.</li>
                     <li>eBPF &amp; Calico drop rules enforce absolute network isolation.</li>
                     <li>Developers point IDE extensions to private internal cluster DNS.</li>
                   </ul>
                 </div>
-                <div className="pt-2 border-t border-slate-900 text-[11px] font-mono text-teal-400 font-semibold">
-                  SATRE v1.1 &amp; DSPT 100% Compliant
+                <div className="pt-3 border-t border-slate-900 text-xs font-mono text-teal-400 font-semibold">
+                  SATRE 2.0 &amp; DSPT <span className="tabular-nums">100%</span> Compliant
                 </div>
               </div>
 
               {/* Pathway 2 */}
-              <div className="p-4 rounded-xl bg-slate-950/80 border border-sky-500/50 space-y-3 flex flex-col justify-between">
+              <div className="p-5 rounded-xl bg-slate-950/80 border border-sky-500/50 space-y-3 flex flex-col justify-between h-full">
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-700 text-[10px] font-mono font-bold">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="px-2.5 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-700 text-xs font-mono font-bold whitespace-nowrap">
                       PATHWAY 2 (MANAGED CLOUD)
                     </span>
-                    <ShieldCheck className="w-4 h-4 text-sky-400" />
+                    <ShieldCheck className="w-4 h-4 text-sky-400 shrink-0" />
                   </div>
-                  <h4 className="text-sm font-bold text-white">
+                  <h4 className="text-base font-bold text-white">
                     NHS Enterprise Sovereign Tenants (ZDR)
                   </h4>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                     Deploy managed enterprise endpoints (e.g. Azure OpenAI Private Endpoint or AWS Bedrock VPC Interconnect) under formal NHS procurement frameworks with signed Business Associate Agreements.
                   </p>
-                  <ul className="text-[11px] text-slate-400 space-y-1 list-disc list-inside">
+                  <ul className="text-xs text-slate-400 space-y-1.5 list-disc list-inside">
                     <li>Zero Data Retention (ZDR) enabled (prompts never saved to disk).</li>
                     <li>Model retraining explicitly disabled by contractual DPA.</li>
                     <li>Private IP routing via ExpressRoute / AWS Direct Connect.</li>
                   </ul>
                 </div>
-                <div className="pt-2 border-t border-slate-900 text-[11px] font-mono text-sky-400 font-semibold">
+                <div className="pt-3 border-t border-slate-900 text-xs font-mono text-sky-400 font-semibold">
                   Requires Trust SIRO &amp; Caldicott Sign-off
                 </div>
               </div>
 
               {/* Pathway 3 */}
-              <div className="p-4 rounded-xl bg-slate-950/80 border border-purple-500/50 space-y-3 flex flex-col justify-between">
+              <div className="p-5 rounded-xl bg-slate-950/80 border border-purple-500/50 space-y-3 flex flex-col justify-between h-full">
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-700 text-[10px] font-mono font-bold">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-700 text-xs font-mono font-bold whitespace-nowrap">
                       PATHWAY 3 (CLIENT GUARD)
                     </span>
-                    <Lock className="w-4 h-4 text-purple-400" />
+                    <Lock className="w-4 h-4 text-purple-400 shrink-0" />
                   </div>
-                  <h4 className="text-sm font-bold text-white">
+                  <h4 className="text-base font-bold text-white">
                     Pre-Prompt PEP Proxy &amp; AST Scrubbers
                   </h4>
-                  <p className="text-xs text-slate-300 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                     Implement client-side abstract syntax tree (AST) linters and local PEP proxy daemons that inspect outbound code buffers before transmission, scrubbing direct identifiers and small cell numbers.
                   </p>
-                  <ul className="text-[11px] text-slate-400 space-y-1 list-disc list-inside">
+                  <ul className="text-xs text-slate-400 space-y-1.5 list-disc list-inside">
                     <li>Mandatory <code>.harness_ignore</code> exclusion policy (synced to IDE bindings).</li>
                     <li>Regex and named-entity recognition (NER) for NHS numbers.</li>
                     <li>Blocks un-sanitized prompts at local localhost port before WAN.</li>
                   </ul>
                 </div>
-                <div className="pt-2 border-t border-slate-900 text-[11px] font-mono text-purple-400 font-semibold">
-                  Interactive Simulator in Tab 2
+                <div className="pt-3 border-t border-slate-900 text-xs font-mono text-purple-400 font-semibold">
+                  Interactive Simulator in Tab 3
                 </div>
               </div>
             </div>

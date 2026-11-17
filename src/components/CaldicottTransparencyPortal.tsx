@@ -130,16 +130,16 @@ ${p.commercialInvolvement}
   };
 
   return (
-    <div className="space-y-6">
+    <div className="w-full space-y-6">
       {/* 1. EDITORIAL HEADER & DUAL-LENS CONTROLLER */}
       <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl p-6 sm:p-8 shadow-xl text-white">
-        <div className="space-y-4 max-w-4xl">
+        <div className="space-y-4 w-full">
           <div className="flex flex-wrap items-center gap-2 text-xs">
-            <span className="font-semibold text-cyan-300 bg-[#07192f] px-2.5 py-0.5 rounded border border-cyan-900/60 flex items-center gap-1.5">
+            <span className="font-semibold text-cyan-300 bg-[#07192f] px-2.5 py-1 rounded border border-cyan-900/60 flex items-center gap-1.5">
               <HeartHandshake className="w-3.5 h-3.5 text-teal-400" />
               <span>Phase 7: Caldicott Principle 8 Transparency &amp; Lineage (Example Register)</span>
             </span>
-            <span className="font-mono text-cyan-200 bg-[#07192f] px-2 py-0.5 rounded border border-cyan-900/50">
+            <span className="font-mono text-cyan-200 bg-[#07192f] px-2.5 py-1 rounded border border-cyan-900/50">
               Caldicott 8 &quot;No Surprises&quot; · PPIE Co-Design · W3C PROV-O Graph · SHA-256 DAG
             </span>
           </div>
@@ -148,20 +148,20 @@ ${p.commercialInvolvement}
             Caldicott Principle 8 Transparency &amp; Lineage (Example Register)
           </h1>
 
-          <p className="text-slate-200 text-xs sm:text-sm leading-relaxed">
+          <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
             Operationalizes NHS Caldicott Principle 8 across two coordinated perspectives: publishing plain-language lay summaries, public benefit statements, and patient involvement scorecards for non-technical stakeholders, while maintaining an immutable, graph-navigated W3C PROV-O provenance ledger for technical security and audit teams. Note: Case studies and project records below are illustrative examples to help teams model their own registers.
           </p>
 
           {/* DUAL-ANGLE SWITCHER */}
-          <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-cyan-900/50 mt-4 pt-4">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 border-t border-cyan-900/50 mt-4 pt-4">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs font-semibold text-slate-300">
                 Operating Angle:
               </span>
-              <div className="inline-flex p-1 rounded-lg bg-[#07192f] border border-cyan-900/60">
+              <div className="inline-flex flex-wrap p-1 rounded-lg bg-[#07192f] border border-cyan-900/60 gap-1">
                 <button
                   onClick={() => setLensMode('ig_handbook')}
-                  className={`px-3 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
                     lensMode === 'ig_handbook'
                       ? 'bg-[#00A389] text-white shadow-md font-bold'
                       : 'text-slate-300 hover:text-white'
@@ -173,7 +173,7 @@ ${p.commercialInvolvement}
 
                 <button
                   onClick={() => setLensMode('data_technical')}
-                  className={`px-3 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap ${
                     lensMode === 'data_technical'
                       ? 'bg-[#005EB8] text-white shadow-md font-bold'
                       : 'text-slate-300 hover:text-white'
@@ -187,9 +187,9 @@ ${p.commercialInvolvement}
 
             <button
               onClick={handleDownloadRegisterMarkdown}
-              className="px-3.5 py-1.5 rounded-lg bg-[#07192f] hover:bg-[#123154] text-white text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer border border-cyan-900/60 shadow-md self-start sm:self-auto"
+              className="px-3.5 py-2 rounded-lg bg-[#07192f] hover:bg-[#123154] text-white text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors cursor-pointer border border-cyan-900/60 shadow-md self-start lg:self-auto whitespace-nowrap"
             >
-              <Download className="w-3.5 h-3.5 text-amber-400" />
+              <Download className="w-4 h-4 text-amber-400" />
               <span>Export Open Register (.md)</span>
             </button>
           </div>
@@ -197,26 +197,26 @@ ${p.commercialInvolvement}
       </div>
 
       {/* PROJECT SELECTOR STRIP */}
-      <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl p-4 sm:p-5 shadow-xl text-white space-y-3">
+      <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl p-4 sm:p-5 shadow-xl text-white space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <Search className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="flex items-center gap-2 flex-1">
+            <Search className="w-4 h-4 text-cyan-400 shrink-0" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search sample studies by title, investigator, or topic..."
-              className="bg-[#07192f] border border-cyan-900/60 rounded-lg px-3 py-1 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 w-56 sm:w-72"
+              className="bg-[#07192f] border border-cyan-900/60 rounded-lg px-3 py-1.5 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 w-full sm:max-w-md"
             />
           </div>
 
           <div className="flex flex-wrap items-center gap-1.5 text-xs">
-            <span className="text-slate-400 text-[11px] font-medium mr-1">Category:</span>
+            <span className="text-slate-300 text-xs font-medium mr-1">Category:</span>
             {['All', 'Cardiovascular', 'Rare Diseases', 'Oncology'].map((cat) => (
               <button
                 key={cat}
                 onClick={() => setCategoryFilter(cat)}
-                className={`px-2.5 py-1 rounded text-xs font-medium transition-colors cursor-pointer ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer whitespace-nowrap ${
                   categoryFilter === cat
                     ? 'bg-[#00A389] text-white font-bold shadow-sm'
                     : 'bg-[#07192f] text-slate-300 hover:text-white hover:bg-[#123154] border border-cyan-900/50'
@@ -229,7 +229,7 @@ ${p.commercialInvolvement}
         </div>
 
         {/* Project Tab Buttons */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1 items-stretch">
           {filteredProjects.map((p) => {
             const isSelected = p.id === selectedProjectId;
             return (
@@ -239,24 +239,24 @@ ${p.commercialInvolvement}
                   setSelectedProjectId(p.id);
                   setSelectedProvNodeId(null);
                 }}
-                className={`p-3 rounded-lg border text-left transition-all cursor-pointer ${
+                className={`p-4 rounded-xl border text-left transition-all cursor-pointer h-full flex flex-col justify-between gap-1.5 ${
                   isSelected
                     ? 'bg-slate-950/90 border-[#00A389] ring-2 ring-[#00A389]/60 shadow-md text-white'
                     : 'bg-[#07192f] border-cyan-900/50 hover:border-cyan-500/40 text-slate-300'
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[10px] font-bold text-cyan-300">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-mono text-xs font-bold text-cyan-300 tabular-nums">
                     {p.code} (Example)
                   </span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-slate-950 text-cyan-200 border border-cyan-900/50">
+                  <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-950 text-cyan-200 border border-cyan-900/50 whitespace-nowrap">
                     {p.category}
                   </span>
                 </div>
-                <h4 className="text-xs font-bold text-white line-clamp-1 mt-1">
+                <h4 className="text-sm font-bold text-white line-clamp-1">
                   {p.title}
                 </h4>
-                <p className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">
+                <p className="text-xs text-slate-300 line-clamp-1">
                   {p.leadInvestigator}
                 </p>
               </button>
@@ -270,14 +270,14 @@ ${p.commercialInvolvement}
         <div className="space-y-6">
           {/* Main Active Project Public Record Card */}
           <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl p-6 sm:p-8 space-y-6 shadow-xl text-white">
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-cyan-900/50 pb-5">
-              <div className="space-y-1.5 max-w-3xl">
+            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 border-b border-cyan-900/50 pb-5">
+              <div className="space-y-2 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-mono text-xs font-bold text-cyan-300 bg-[#07192f] px-2 py-0.5 rounded border border-cyan-900/60">
+                  <span className="font-mono text-xs font-bold text-cyan-300 bg-[#07192f] px-2.5 py-0.5 rounded border border-cyan-900/60 tabular-nums">
                     {activeProject.code} (Example)
                   </span>
-                  <span className="text-xs font-medium px-2 py-0.5 rounded bg-teal-950/80 text-teal-300 border border-teal-500/40 flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3 text-teal-400" />
+                  <span className="text-xs font-medium px-2.5 py-0.5 rounded bg-teal-950/80 text-teal-300 border border-teal-500/40 flex items-center gap-1">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
                     <span>Caldicott 8 Registered (Illustrative Template)</span>
                   </span>
                 </div>
@@ -286,7 +286,7 @@ ${p.commercialInvolvement}
                   {activeProject.title}
                 </h2>
 
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-300">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs sm:text-sm text-slate-200">
                   <span><strong>Lead:</strong> {activeProject.leadInvestigator}</span>
                   <span>·</span>
                   <span><strong>Institution:</strong> {activeProject.institution}</span>
@@ -296,11 +296,11 @@ ${p.commercialInvolvement}
               </div>
 
               {/* Status Badge */}
-              <div className="p-3 bg-[#07192f] rounded-lg border border-cyan-900/60 text-xs shrink-0 space-y-1">
-                <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-semibold">
+              <div className="p-3.5 bg-[#07192f] rounded-lg border border-cyan-900/60 text-xs shrink-0 space-y-1 self-start">
+                <span className="text-xs text-slate-300 uppercase tracking-wider block font-semibold">
                   Airlock Status:
                 </span>
-                <span className="font-bold text-teal-300 flex items-center gap-1.5 font-mono">
+                <span className="font-bold text-teal-300 flex items-center gap-1.5 font-mono text-xs sm:text-sm">
                   <ShieldCheck className="w-4 h-4 text-teal-400" />
                   <span>{activeProject.airlockStatus}</span>
                 </span>
@@ -313,7 +313,7 @@ ${p.commercialInvolvement}
                 <BookOpen className="w-4 h-4 text-cyan-400" />
                 <span>Plain-English Lay Summary (Written for Patients &amp; Public)</span>
               </div>
-              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans">
+              <p className="text-sm sm:text-base text-slate-100 leading-relaxed font-sans">
                 {activeProject.laySummary}
               </p>
             </div>
@@ -324,89 +324,91 @@ ${p.commercialInvolvement}
                 <Sparkles className="w-4 h-4 text-teal-400" />
                 <span>Anticipated NHS &amp; Societal Health Benefit</span>
               </div>
-              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans">
+              <p className="text-sm sm:text-base text-slate-100 leading-relaxed font-sans">
                 {activeProject.publicBenefitStatement}
               </p>
             </div>
 
             {/* Governance & PPIE Details Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch text-xs sm:text-sm">
               {/* PPIE Involvement */}
-              <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2 text-slate-200">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-white flex items-center gap-1.5">
-                    <Users className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>Patient &amp; Public Involvement (PPIE)</span>
-                  </span>
-                  <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-[#07192f] text-teal-300 border border-teal-500/40">
-                    {activeProject.ppieInvolvement.score} Engagement
-                  </span>
+              <div className="p-5 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2.5 text-slate-200 h-full flex flex-col justify-between">
+                <div className="space-y-2">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="font-bold text-white flex items-center gap-1.5 text-sm">
+                      <Users className="w-4 h-4 text-cyan-400" />
+                      <span>Patient &amp; Public Involvement (PPIE)</span>
+                    </span>
+                    <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded bg-[#07192f] text-teal-300 border border-teal-500/40 tabular-nums whitespace-nowrap">
+                      {activeProject.ppieInvolvement.score} Engagement
+                    </span>
+                  </div>
+                  <div className="text-xs sm:text-sm text-cyan-300 font-semibold">
+                    {activeProject.ppieInvolvement.groupName} <span className="text-slate-400 font-normal">(Illustrative Co-Design Advisory Group)</span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                    {activeProject.ppieInvolvement.description}
+                  </p>
                 </div>
-                <div className="text-[11px] text-cyan-300 font-semibold">
-                  {activeProject.ppieInvolvement.groupName} <span className="text-slate-400 font-normal">(Illustrative Co-Design Advisory Group)</span>
-                </div>
-                <p className="text-[11px] text-slate-200 leading-relaxed">
-                  {activeProject.ppieInvolvement.description}
-                </p>
                 {activeProject.ppieInvolvement.patientCoAuthor && (
-                  <div className="text-[11px] text-teal-400 font-semibold flex items-center gap-1 pt-1">
-                    <Check className="w-3.5 h-3.5" />
+                  <div className="text-xs sm:text-sm text-teal-400 font-semibold flex items-center gap-1.5 pt-1">
+                    <Check className="w-4 h-4" />
                     <span>Patient representatives included as study co-authors</span>
                   </div>
                 )}
               </div>
 
               {/* National Data Opt-Out & Commercial Transparency */}
-              <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-2 text-slate-200">
-                <span className="font-bold text-white flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-teal-400" />
+              <div className="p-5 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-3 text-slate-200 h-full flex flex-col justify-between">
+                <span className="font-bold text-white flex items-center gap-1.5 text-sm">
+                  <ShieldCheck className="w-4 h-4 text-teal-400" />
                   <span>National Data Opt-Out (NDOO) &amp; Ethics</span>
                 </span>
-                <div className="space-y-1.5 text-[11px]">
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-400">Opt-Out Filtering:</span>
+                <div className="space-y-2 text-xs sm:text-sm">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="text-slate-300">Opt-Out Filtering:</span>
                     <strong className="text-teal-300 font-mono">
                       Simulated Test Pass (Example Baseline)
                     </strong>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-400">Purged Patient Records:</span>
-                    <span className="font-mono text-white">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="text-slate-300">Purged Patient Records:</span>
+                    <span className="font-mono text-white tabular-nums">
                       {activeProject.nationalOptOut.purgedRecordCount.toLocaleString()} opt-outs respected
                     </span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-400">Section 251 CAG Clearance:</span>
-                    <span className="font-mono text-cyan-200">{activeProject.legalBasis.s251Ref}</span>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="text-slate-300">Section 251 CAG Clearance:</span>
+                    <span className="font-mono text-cyan-200 tabular-nums">{activeProject.legalBasis.s251Ref}</span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-400">HRA REC Ethical Approval:</span>
-                    <span className="font-mono text-cyan-200">{activeProject.legalBasis.recApprovalRef}</span>
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="text-slate-300">HRA REC Ethical Approval:</span>
+                    <span className="font-mono text-cyan-200 tabular-nums">{activeProject.legalBasis.recApprovalRef}</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Caldicott Principle 8 Lay Checklist */}
-            <div className="p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-3">
+            <div className="p-5 rounded-lg bg-slate-950/80 border border-cyan-900/50 space-y-3">
               <span className="text-xs font-bold text-cyan-300 uppercase tracking-wider block">
                 Caldicott Principle 8 Checklist (Suggested Verification Starting Points)
               </span>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                <div className="p-2.5 rounded bg-[#07192f] border border-cyan-900/50 flex items-center gap-2 text-slate-200">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm items-stretch">
+                <div className="p-3 rounded bg-[#07192f] border border-cyan-900/50 flex items-center gap-2.5 text-slate-100 h-full">
                   <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />
                   <span>Plain-English summary accessible at Reading Age 11</span>
                 </div>
-                <div className="p-2.5 rounded bg-[#07192f] border border-cyan-900/50 flex items-center gap-2 text-slate-200">
+                <div className="p-3 rounded bg-[#07192f] border border-cyan-900/50 flex items-center gap-2.5 text-slate-100 h-full">
                   <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />
                   <span>Explicit direct healthcare / NHS benefit demonstrated</span>
                 </div>
-                <div className="p-2.5 rounded bg-[#07192f] border border-cyan-900/50 flex items-center gap-2 text-slate-200">
+                <div className="p-3 rounded bg-[#07192f] border border-cyan-900/50 flex items-center gap-2.5 text-slate-100 h-full">
                   <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />
                   <span>Patient &amp; public involvement (PPIE) advisory record published</span>
                 </div>
-                <div className="p-2.5 rounded bg-[#07192f] border border-cyan-900/50 flex items-center gap-2 text-slate-200">
+                <div className="p-3 rounded bg-[#07192f] border border-cyan-900/50 flex items-center gap-2.5 text-slate-100 h-full">
                   <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />
                   <span>Zero commercial exclusivity; open-access scientific findings</span>
                 </div>
@@ -414,18 +416,18 @@ ${p.commercialInvolvement}
             </div>
 
             {/* Compact Governance Domain Note: Freedom of Information Act 2000 */}
-            <div className="p-3 rounded-lg bg-slate-950/60 border border-cyan-900/40 text-[11px] text-slate-300 leading-relaxed flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="p-4 rounded-lg bg-slate-950/60 border border-cyan-900/40 text-xs sm:text-sm text-slate-200 leading-relaxed flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <strong className="text-sky-300">Related Domain — FOIA 2000 Alignment:</strong>{' '}
                 Publishing Caldicott 8 registers and <code className="text-cyan-300">GOVERNANCE_CHARTER.md</code> satisfies proactive s19 publication duties while upholding s40(2) personal data, s41 confidentiality, s22 pre-publication exemptions, and SDC differencing checks.
               </div>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#07192f] text-slate-400 border border-cyan-900/50 shrink-0 self-start sm:self-center">
+              <span className="text-xs font-mono px-2.5 py-1 rounded bg-[#07192f] text-slate-300 border border-cyan-900/50 shrink-0 self-start sm:self-center whitespace-nowrap">
                 s19 · s22 · s40(2) · s41
               </span>
             </div>
 
             {/* Advisory Open Standard: Algorithmic Transparency Recording Standard (ATRS) */}
-            <div className="p-3.5 rounded-lg bg-slate-950/60 border border-sky-800/40 text-[11px] text-slate-300 leading-relaxed flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="p-4 rounded-lg bg-slate-950/60 border border-sky-800/40 text-xs sm:text-sm text-slate-200 leading-relaxed flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <strong className="text-sky-300">Algorithmic Transparency Recording Standard (ATRS) · Open Interoperability Guidance:</strong>{' '}
                 Where approved research uses predictive models or AI decision support, UK Government ATRS offers a recommended two-tier public disclosure format (plain-English summary plus technical, data, and risk record) that complements Caldicott Principle 8 Data Use Registers without replacing statutory IG review.
@@ -434,10 +436,10 @@ ${p.commercialInvolvement}
                 href="https://www.gov.uk/government/collections/algorithmic-transparency-recording-standard-hub"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] font-mono px-2.5 py-1 rounded bg-[#07192f] hover:bg-[#123154] text-sky-300 border border-sky-700/50 shrink-0 self-start sm:self-center inline-flex items-center gap-1 transition-colors"
+                className="text-xs font-mono px-3 py-1.5 rounded bg-[#07192f] hover:bg-[#123154] text-sky-300 border border-sky-700/50 shrink-0 self-start sm:self-center inline-flex items-center gap-1.5 transition-colors whitespace-nowrap"
               >
                 <span>ATRS Hub</span>
-                <ExternalLink className="w-3 h-3" />
+                <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
@@ -462,20 +464,20 @@ ${p.commercialInvolvement}
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleSimulateVerifyLineage}
-                  className="px-3 py-1.5 rounded-lg bg-[#07192f] hover:bg-[#123154] text-slate-200 border border-cyan-900/60 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="px-3.5 py-2 rounded-lg bg-[#07192f] hover:bg-[#123154] text-slate-200 border border-cyan-900/60 text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap"
                 >
-                  <ShieldCheck className="w-3.5 h-3.5 text-teal-400" />
+                  <ShieldCheck className="w-4 h-4 text-teal-400" />
                   <span>{lineageVerifyStatus === 'verifying' ? 'Verifying DAG...' : 'Simulate Cryptographic Verification'}</span>
                 </button>
               </div>
             </div>
 
-            <p className="text-xs text-slate-200 leading-relaxed">
+            <p className="text-sm text-slate-200 leading-relaxed">
               Every data extract, ingestion filter, analytical transformation, and airlock export emits W3C PROV-O triples (<code>prov:Entity</code>, <code>prov:Activity</code>, <code>prov:Agent</code>). Select any node in the chain to inspect its semantic properties and SHA-256 cryptographic attestation.
             </p>
 
             {/* Provenance DAG Flow Nodes */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 pt-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 pt-2 items-stretch">
               {activeProject.provGraph.nodes.filter((n) => n.type !== 'Agent').map((node, idx) => {
                 const isSelected = selectedProvNode.id === node.id;
                 const isEntity = node.type === 'Entity';
@@ -484,34 +486,34 @@ ${p.commercialInvolvement}
                   <button
                     key={node.id}
                     onClick={() => setSelectedProvNodeId(node.id)}
-                    className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
+                    className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between h-full ${
                       isSelected
                         ? 'bg-slate-950/95 border-[#00A389] ring-2 ring-[#00A389]/60 shadow-md text-white'
                         : 'bg-[#07192f] border-cyan-900/50 hover:border-cyan-500/40 text-slate-300'
                     }`}
                   >
-                    <div className="space-y-1">
-                      <div className="flex items-center justify-between">
-                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded uppercase font-bold ${
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className={`text-xs font-mono px-2 py-0.5 rounded uppercase font-bold whitespace-nowrap ${
                           isEntity
                             ? 'bg-purple-950/90 text-purple-300 border border-purple-800'
                             : 'bg-amber-950/90 text-amber-300 border border-amber-800'
                         }`}>
                           prov:{node.type}
                         </span>
-                        <span className="text-[10px] font-mono text-slate-400">Step {idx + 1}</span>
+                        <span className="text-xs font-mono text-slate-300 tabular-nums">Step {idx + 1}</span>
                       </div>
-                      <h4 className="text-xs font-bold text-white pt-1">
+                      <h4 className="text-sm font-bold text-white pt-1">
                         {node.label}
                       </h4>
-                      <p className="text-[11px] text-slate-300 line-clamp-2">
+                      <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed">
                         {node.description}
                       </p>
                     </div>
 
-                    <div className="pt-3 border-t border-cyan-900/40 mt-2 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                    <div className="pt-3 border-t border-cyan-900/40 mt-3 flex items-center justify-between text-xs font-mono text-slate-300 gap-2">
                       <span>Hash Commit:</span>
-                      <span className="text-cyan-300 font-bold truncate max-w-[90px]">
+                      <span className="text-cyan-300 font-bold truncate max-w-[120px] tabular-nums">
                         {node.sha256Hash?.substring(0, 10)}...
                       </span>
                     </div>
@@ -523,24 +525,24 @@ ${p.commercialInvolvement}
             {/* Selected Node Inspector Card */}
             <div className="p-5 rounded-lg bg-slate-950/90 border border-cyan-500/40 space-y-4 text-white">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div className="space-y-0.5">
-                  <div className="flex items-center gap-2">
+                <div className="space-y-1">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className="text-xs font-bold font-mono text-cyan-300">
                       {selectedProvNode.id}
                     </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#07192f] text-cyan-200 border border-cyan-900/60">
+                    <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#07192f] text-cyan-200 border border-cyan-900/60">
                       prov:{selectedProvNode.type}
                     </span>
                   </div>
-                  <h4 className="text-sm font-bold text-white">
+                  <h4 className="text-base font-bold text-white">
                     {selectedProvNode.label}
                   </h4>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 shrink-0">
                   <button
                     onClick={() => handleCopy(`hash-${selectedProvNode.id}`, selectedProvNode.sha256Hash || '')}
-                    className="px-2.5 py-1 rounded bg-[#07192f] hover:bg-[#123154] text-slate-200 border border-cyan-900/60 text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer"
+                    className="px-3 py-1.5 rounded-lg bg-[#07192f] hover:bg-[#123154] text-slate-200 border border-cyan-900/60 text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap"
                   >
                     {copiedId === `hash-${selectedProvNode.id}` ? (
                       <>
@@ -557,30 +559,30 @@ ${p.commercialInvolvement}
                 </div>
               </div>
 
-              <p className="text-xs text-slate-200 leading-relaxed">
+              <p className="text-sm text-slate-200 leading-relaxed">
                 {selectedProvNode.description}
               </p>
 
               {/* Node Metadata & Cryptographic Hash */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
-                <div className="p-3 bg-[#07192f] rounded border border-cyan-900/60 space-y-1">
-                  <span className="text-[10px] text-slate-400 uppercase block font-semibold">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono items-stretch">
+                <div className="p-3.5 bg-[#07192f] rounded-lg border border-cyan-900/60 space-y-1.5 h-full">
+                  <span className="text-xs text-slate-300 uppercase block font-semibold">
                     Cryptographic SHA-256 State Commitment:
                   </span>
-                  <span className="text-teal-300 break-all select-all font-mono text-[11px]">
+                  <span className="text-teal-300 break-all select-all font-mono text-xs leading-relaxed">
                     {selectedProvNode.sha256Hash || 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'}
                   </span>
                 </div>
 
-                <div className="p-3 bg-[#07192f] rounded border border-cyan-900/60 space-y-1">
-                  <span className="text-[10px] text-slate-400 uppercase block font-semibold">
+                <div className="p-3.5 bg-[#07192f] rounded-lg border border-cyan-900/60 space-y-1.5 h-full">
+                  <span className="text-xs text-slate-300 uppercase block font-semibold">
                     Node Attributes:
                   </span>
-                  <div className="space-y-0.5 text-[11px] text-slate-200">
+                  <div className="space-y-1 text-xs text-slate-200 tabular-nums">
                     {selectedProvNode.attributes && Object.entries(selectedProvNode.attributes).map(([k, v]) => (
-                      <div key={k} className="flex items-center justify-between">
+                      <div key={k} className="flex items-center justify-between gap-2">
                         <span className="text-slate-400">{k}:</span>
-                        <strong className="text-white">{v}</strong>
+                        <strong className="text-white text-right">{v}</strong>
                       </div>
                     ))}
                   </div>
@@ -590,63 +592,63 @@ ${p.commercialInvolvement}
           </div>
 
           {/* Machine Artifacts Grid (Turtle RDF & SPARQL Audit Query) */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
             {/* W3C Turtle PROV-O Triples */}
-            <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl p-6 space-y-4 shadow-xl text-white">
-              <div className="flex items-center justify-between border-b border-cyan-900/50 pb-3">
+            <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl p-6 space-y-4 shadow-xl text-white h-full flex flex-col">
+              <div className="flex items-center justify-between gap-3 border-b border-cyan-900/50 pb-3">
                 <div className="space-y-0.5">
                   <span className="text-xs font-mono font-bold text-cyan-300 uppercase">
                     W3C PROV-O Turtle RDF (Example)
                   </span>
-                  <h4 className="text-sm font-bold text-white">
+                  <h4 className="text-sm sm:text-base font-bold text-white">
                     prov_ledger_{activeProject.id}.ttl
                   </h4>
                 </div>
 
                 <button
                   onClick={() => handleCopy(`turtle-${activeProject.id}`, activeProject.provGraph.turtleRdf)}
-                  className="px-2.5 py-1 rounded bg-[#07192f] hover:bg-[#123154] text-slate-200 text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer border border-cyan-900/60"
+                  className="px-3 py-1.5 rounded-lg bg-[#07192f] hover:bg-[#123154] text-slate-200 text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer border border-cyan-900/60 whitespace-nowrap"
                 >
                   {copiedId === `turtle-${activeProject.id}` ? <Check className="w-3.5 h-3.5 text-teal-400" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copiedId === `turtle-${activeProject.id}` ? 'Copied' : 'Copy'}</span>
                 </button>
               </div>
 
-              <p className="text-xs text-slate-200 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
                 Standardized Subject-Predicate-Object triples modeling entity derivations, activities, and agent attestation for this sample study.
               </p>
 
-              <pre className="p-4 bg-slate-950 rounded-xl border border-cyan-900/60 text-cyan-200 font-mono text-xs overflow-x-auto leading-relaxed max-h-[320px]">
+              <pre className="p-4 bg-slate-950 rounded-xl border border-cyan-900/60 text-cyan-200 font-mono text-xs overflow-x-auto leading-relaxed max-h-[340px] flex-1">
                 <code>{activeProject.provGraph.turtleRdf}</code>
               </pre>
             </div>
 
             {/* SPARQL Audit Query & OPA Rego Rule */}
-            <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl p-6 space-y-4 shadow-xl text-white">
-              <div className="flex items-center justify-between border-b border-cyan-900/50 pb-3">
+            <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl p-6 space-y-4 shadow-xl text-white h-full flex flex-col">
+              <div className="flex items-center justify-between gap-3 border-b border-cyan-900/50 pb-3">
                 <div className="space-y-0.5">
                   <span className="text-xs font-mono font-bold text-purple-300 uppercase">
                     SPARQL Lineage Audit Query (Example)
                   </span>
-                  <h4 className="text-sm font-bold text-white">
+                  <h4 className="text-sm sm:text-base font-bold text-white">
                     verify_caldicott8_provenance.rq
                   </h4>
                 </div>
 
                 <button
                   onClick={() => handleCopy(`sparql-${activeProject.id}`, activeProject.provGraph.sparqlAuditQuery)}
-                  className="px-2.5 py-1 rounded bg-[#07192f] hover:bg-[#123154] text-slate-200 text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer border border-cyan-900/60"
+                  className="px-3 py-1.5 rounded-lg bg-[#07192f] hover:bg-[#123154] text-slate-200 text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer border border-cyan-900/60 whitespace-nowrap"
                 >
                   {copiedId === `sparql-${activeProject.id}` ? <Check className="w-3.5 h-3.5 text-teal-400" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copiedId === `sparql-${activeProject.id}` ? 'Copied' : 'Copy'}</span>
                 </button>
               </div>
 
-              <p className="text-xs text-slate-200 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
                 Deterministic SPARQL query executed by automated auditors to verify that every airlocked table traces back to an approved ethics clearance and NDOO ingestion purge.
               </p>
 
-              <pre className="p-4 bg-slate-950 rounded-xl border border-cyan-900/60 text-cyan-200 font-mono text-xs overflow-x-auto leading-relaxed max-h-[320px]">
+              <pre className="p-4 bg-slate-950 rounded-xl border border-cyan-900/60 text-cyan-200 font-mono text-xs overflow-x-auto leading-relaxed max-h-[340px] flex-1">
                 <code>{activeProject.provGraph.sparqlAuditQuery}</code>
               </pre>
             </div>

@@ -128,35 +128,35 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
           </div>
 
           {/* 4 Pillars Scoring Explanation */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2 text-xs">
-            <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
-              <div className="flex justify-between">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2 text-xs items-stretch">
+            <div className="h-full p-3 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
+              <div className="flex justify-between gap-2">
                 <span className="text-slate-700 dark:text-slate-400">Playbook Reading</span>
-                <span className="font-mono text-teal-700 dark:text-cyan-400 font-bold tabular-nums">30% Max</span>
+                <span className="font-mono text-teal-700 dark:text-cyan-400 font-bold tabular-nums whitespace-nowrap">30% Max</span>
               </div>
               <div className="text-slate-900 dark:text-slate-200 font-medium tabular-nums">{stats.playbookSectionsReadCount}/{stats.totalPlaybookSections} sections read</div>
             </div>
 
-            <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
-              <div className="flex justify-between">
+            <div className="h-full p-3 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
+              <div className="flex justify-between gap-2">
                 <span className="text-slate-700 dark:text-slate-400">Concept Pillars</span>
-                <span className="font-mono text-purple-700 dark:text-purple-400 font-bold tabular-nums">30% Max</span>
+                <span className="font-mono text-purple-700 dark:text-purple-400 font-bold tabular-nums whitespace-nowrap">30% Max</span>
               </div>
               <div className="text-slate-900 dark:text-slate-200 font-medium tabular-nums">{stats.modulesCompletedCount}/{stats.totalModules} mastered</div>
             </div>
 
-            <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
-              <div className="flex justify-between">
+            <div className="h-full p-3 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
+              <div className="flex justify-between gap-2">
                 <span className="text-slate-700 dark:text-slate-400">Glossary Explored</span>
-                <span className="font-mono text-[#047857] dark:text-emerald-400 font-bold tabular-nums">15% Max</span>
+                <span className="font-mono text-[#047857] dark:text-emerald-400 font-bold tabular-nums whitespace-nowrap">15% Max</span>
               </div>
               <div className="text-slate-900 dark:text-slate-200 font-medium tabular-nums">{viewedGlossaryTerms.length} terms visited</div>
             </div>
 
-            <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
-              <div className="flex justify-between">
+            <div className="h-full p-3 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-1">
+              <div className="flex justify-between gap-2">
                 <span className="text-slate-700 dark:text-slate-400">Quizzes &amp; Exams</span>
-                <span className="font-mono text-amber-700 dark:text-amber-400 font-bold tabular-nums">25% Max</span>
+                <span className="font-mono text-amber-700 dark:text-amber-400 font-bold tabular-nums whitespace-nowrap">25% Max</span>
               </div>
               <div className="text-slate-900 dark:text-slate-200 font-medium tabular-nums">{stats.totalPassed} passed ({stats.totalAttempts} taken)</div>
             </div>
@@ -166,13 +166,13 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
           <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
             <button
               onClick={markAllSectionsRead}
-              className="px-3 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-teal-800 dark:text-cyan-300 rounded-md border border-slate-300 dark:border-slate-700 font-medium transition-colors cursor-pointer"
+              className="px-3 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-teal-800 dark:text-cyan-300 rounded-md border border-slate-300 dark:border-slate-700 font-medium transition-colors cursor-pointer whitespace-nowrap"
             >
               Mark All Sections Read
             </button>
             <button
               onClick={markAllModulesComplete}
-              className="px-3 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-purple-800 dark:text-purple-300 rounded-md border border-slate-300 dark:border-slate-700 font-medium transition-colors cursor-pointer"
+              className="px-3 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-purple-800 dark:text-purple-300 rounded-md border border-slate-300 dark:border-slate-700 font-medium transition-colors cursor-pointer whitespace-nowrap"
             >
               Mark All Concept Pillars Mastered
             </button>
@@ -181,47 +181,47 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
       </div>
 
       {/* 4 Stat Overview Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl space-y-1 shadow-xs">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+        <div className="h-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl space-y-1 shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs font-medium">
             <span>Total Quiz Attempts</span>
-            <History className="w-4 h-4 text-teal-600 dark:text-cyan-400" />
+            <History className="w-4 h-4 text-teal-600 dark:text-cyan-400 shrink-0" />
           </div>
-          <div className="text-2xl font-bold text-slate-900 dark:text-white">{stats.totalAttempts}</div>
+          <div className="text-2xl font-bold text-slate-900 dark:text-white tabular-nums">{stats.totalAttempts}</div>
           <div className="text-xs text-slate-600 dark:text-slate-400">Across all categories</div>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl space-y-1 shadow-xs">
+        <div className="h-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl space-y-1 shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs font-medium">
             <span>Highest Score</span>
-            <Trophy className="w-4 h-4 text-amber-500" />
+            <Trophy className="w-4 h-4 text-amber-500 shrink-0" />
           </div>
-          <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">
+          <div className="text-2xl font-bold text-amber-600 dark:text-amber-400 tabular-nums">
             {stats.highestScore > 0 ? `${stats.highestScore}%` : 'N/A'}
           </div>
-          <div className="text-[11px] text-slate-600 dark:text-slate-400">Personal best</div>
+          <div className="text-xs text-slate-600 dark:text-slate-400">Personal best</div>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl space-y-1 shadow-xs">
+        <div className="h-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl space-y-1 shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs font-medium">
             <span>Average Score</span>
-            <TrendingUp className="w-4 h-4 text-[#047857] dark:text-emerald-400" />
+            <TrendingUp className="w-4 h-4 text-[#047857] dark:text-emerald-400 shrink-0" />
           </div>
-          <div className="text-2xl font-bold text-slate-900 dark:text-white">
+          <div className="text-2xl font-bold text-slate-900 dark:text-white tabular-nums">
             {stats.averageScore > 0 ? `${stats.averageScore}%` : 'N/A'}
           </div>
-          <div className="text-[11px] text-slate-600 dark:text-slate-400">Across completed exams</div>
+          <div className="text-xs text-slate-600 dark:text-slate-400">Across completed exams</div>
         </div>
 
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl space-y-1 shadow-xs">
+        <div className="h-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl space-y-1 shadow-xs flex flex-col justify-between">
           <div className="flex items-center justify-between text-slate-600 dark:text-slate-400 text-xs font-medium">
             <span>Glossary Terms Explored</span>
-            <BookOpen className="w-4 h-4 text-[#005EB8] dark:text-cyan-400" />
+            <BookOpen className="w-4 h-4 text-[#005EB8] dark:text-cyan-400 shrink-0" />
           </div>
-          <div className="text-2xl font-bold text-[#005EB8] dark:text-cyan-300">
+          <div className="text-2xl font-bold text-[#005EB8] dark:text-cyan-300 tabular-nums">
             {viewedGlossaryTerms.length}
           </div>
-          <div className="text-[11px] text-slate-600 dark:text-slate-400">Scanned and verified</div>
+          <div className="text-xs text-slate-600 dark:text-slate-400">Scanned and verified</div>
         </div>
       </div>
 
@@ -250,9 +250,9 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
               <div className="space-y-3">
                 {Object.entries(stats.attemptsByCategory).map(([catName, catData]) => (
                   <div key={catName} className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2">
-                    <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center justify-between gap-2 text-xs">
                       <span className="font-semibold text-slate-900 dark:text-slate-200">{catName}</span>
-                      <span className="font-mono text-teal-700 dark:text-cyan-300 font-bold">{catData.bestScore}% Best</span>
+                      <span className="font-mono text-teal-700 dark:text-cyan-300 font-bold tabular-nums whitespace-nowrap">{catData.bestScore}% Best</span>
                     </div>
                     <div className="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
                       <div
@@ -260,7 +260,7 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
                         style={{ width: `${catData.bestScore}%` }}
                       />
                     </div>
-                    <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400">
+                    <div className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-400 tabular-nums">
                       <span>{catData.attempts} attempt{catData.attempts !== 1 ? 's' : ''}</span>
                       <span>Latest: {catData.latestScore}%</span>
                     </div>
@@ -271,7 +271,7 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
 
             <button
               onClick={() => onNavigateToQuiz()}
-              className="w-full py-2.5 px-4 rounded-xl bg-[#00A389] hover:bg-[#008f77] text-white text-xs font-bold transition-colors shadow-xs cursor-pointer"
+              className="w-full py-2.5 px-4 rounded-xl bg-[#00A389] hover:bg-[#008f77] text-white text-xs font-bold transition-colors shadow-xs cursor-pointer whitespace-nowrap"
             >
               Take Another Quiz
             </button>
@@ -396,20 +396,20 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
 
                       <div className="flex items-center gap-3 shrink-0">
                         <div className="text-right">
-                          <div className={`text-base font-extrabold font-mono ${
+                          <div className={`text-base font-extrabold font-mono tabular-nums ${
                             attempt.passed ? 'text-[#047857] dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'
                           }`}>
                             {attempt.percentage}%
                           </div>
-                          <div className="text-[10px] text-slate-600 dark:text-slate-400 font-semibold">
-                            {attempt.passed ? 'PASSED (>=80%)' : 'NEEDS REVIEW'}
+                          <div className="text-xs text-slate-600 dark:text-slate-400 font-semibold whitespace-nowrap">
+                            {attempt.passed ? 'PASSED (≥80%)' : 'NEEDS REVIEW'}
                           </div>
                         </div>
 
                         {attempt.passed ? (
-                          <CheckCircle2 className="w-5 h-5 text-[#047857] dark:text-emerald-400" />
+                          <CheckCircle2 className="w-5 h-5 text-[#047857] dark:text-emerald-400 shrink-0" />
                         ) : (
-                          <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                          <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0" />
                         )}
                       </div>
                     </div>
@@ -458,10 +458,10 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
       {/* Certificate Modal */}
       {showCertificate && (
         <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-cyan-500/50 rounded-2xl max-w-2xl w-full p-8 space-y-6 shadow-2xl relative text-slate-100">
+          <div className="bg-slate-900 border border-cyan-500/50 rounded-2xl max-w-3xl w-full p-8 space-y-6 shadow-2xl relative text-slate-100">
             <button
               onClick={() => setShowCertificate(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-200 text-lg"
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-200 text-lg cursor-pointer"
             >
               ✕
             </button>
@@ -479,27 +479,27 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
                 </h2>
               </div>
 
-              <p className="text-sm text-slate-300 max-w-md mx-auto">
+              <p className="text-sm text-slate-300 max-w-xl mx-auto leading-relaxed">
                 This acknowledges demonstrated technical comprehension of OWL 2 semantic ontologies,
                 Closed-World SHACL shape verification, OPA Rego compilation, and Quantitative Statistical Disclosure Control (SDC).
               </p>
 
-              <div className="py-2 border-y border-slate-800 text-xs text-slate-400 flex justify-around font-mono">
+              <div className="py-3 border-y border-slate-800 text-xs text-slate-400 grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono">
                 <div>
                   <div className="text-slate-500">Current Rank</div>
-                  <div className="text-white font-bold">{userRank.title}</div>
+                  <div className="text-white font-bold mt-0.5">{userRank.title}</div>
                 </div>
                 <div>
                   <div className="text-slate-500">Mastery Level</div>
-                  <div className="text-cyan-400 font-bold">{stats.overallProgressPercentage}%</div>
+                  <div className="text-cyan-400 font-bold tabular-nums mt-0.5">{stats.overallProgressPercentage}%</div>
                 </div>
                 <div>
                   <div className="text-slate-500">High Score</div>
-                  <div className="text-amber-400 font-bold">{stats.highestScore}%</div>
+                  <div className="text-amber-400 font-bold tabular-nums mt-0.5">{stats.highestScore}%</div>
                 </div>
               </div>
 
-              <div className="text-[11px] text-slate-500">
+              <div className="text-xs text-slate-500 font-mono">
                 Verified via AI Studio Playbook Test Suite · Reference ID: TRE-PAC-{Date.now().toString(36).toUpperCase()}
               </div>
             </div>
@@ -507,15 +507,15 @@ export const ProgressDashboard: React.FC<ProgressDashboardProps> = ({
             <div className="flex justify-end gap-3 pt-2">
               <button
                 onClick={() => setShowCertificate(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg"
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg whitespace-nowrap cursor-pointer"
               >
                 Close
               </button>
               <button
                 onClick={handlePrintCertificate}
-                className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold rounded-lg flex items-center gap-1.5"
+                className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold rounded-lg flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
               >
-                <Printer className="w-4 h-4" />
+                <Printer className="w-4 h-4 shrink-0" />
                 <span>Print / Save PDF</span>
               </button>
             </div>

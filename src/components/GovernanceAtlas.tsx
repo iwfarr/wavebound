@@ -475,12 +475,12 @@ Accountability is distributed across independent roles without reliance on singl
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Main Public Atlas Navigation Tabs */}
       <div className="flex items-center gap-2 border-b border-slate-800 pb-2 overflow-x-auto">
         <button
           onClick={() => setActiveAtlasTab('journey')}
-          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
+          className={`px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
             activeAtlasTab === 'journey'
               ? 'bg-[#0c2340] text-cyan-300 border border-cyan-500/50 shadow-md shadow-cyan-950/40'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
@@ -492,7 +492,7 @@ Accountability is distributed across independent roles without reliance on singl
 
         <button
           onClick={() => setActiveAtlasTab('glossary')}
-          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
+          className={`px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
             activeAtlasTab === 'glossary'
               ? 'bg-[#0c2340] text-cyan-300 border border-cyan-500/50 shadow-md shadow-cyan-950/40'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
@@ -504,7 +504,7 @@ Accountability is distributed across independent roles without reliance on singl
 
         <button
           onClick={() => setActiveAtlasTab('graph')}
-          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
+          className={`px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all whitespace-nowrap cursor-pointer ${
             activeAtlasTab === 'graph'
               ? 'bg-[#0c2340] text-cyan-300 border border-cyan-500/50 shadow-md shadow-cyan-950/40'
               : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
@@ -521,35 +521,60 @@ Accountability is distributed across independent roles without reliance on singl
           {/* Hero Banner */}
           <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="relative z-10 max-w-3xl space-y-4">
-              <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-wider">
-                <HeartHandshake className="w-4 h-4" />
-                <span>Public, Citizen &amp; Research Oversight Portal</span>
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+              <div className="lg:col-span-8 space-y-4">
+                <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-wider">
+                  <HeartHandshake className="w-4 h-4" />
+                  <span>Public, Citizen &amp; Research Oversight Portal</span>
+                </div>
+                <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                  How Population &amp; Individual Data Is Protected
+                </h1>
+                <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                  A guide to the safety principles, statutory laws, and computer safeguards
+                  governing modern data analysis &amp; intelligence platforms such as TREs and SDEs, enabling vital epidemiological, demographic, and scientific discoveries while keeping confidential records strictly anonymous.
+                </p>
+
+                <div className="flex flex-wrap items-center gap-3 pt-2">
+                  <button
+                    onClick={handleDownloadCharter}
+                    className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl flex items-center gap-2 text-sm transition-colors shadow-md shadow-emerald-500/20 whitespace-nowrap"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>{downloaded ? 'Downloaded Charter (.md)' : 'Download Full Governance Charter (.md)'}</span>
+                  </button>
+
+                  <button
+                    onClick={() => setShowFullCharter(true)}
+                    className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-xl flex items-center gap-2 text-sm transition-colors border border-slate-700 whitespace-nowrap"
+                  >
+                    <FileText className="w-4 h-4 text-cyan-400" />
+                    <span>Read Full Governance Charter Online</span>
+                  </button>
+                </div>
               </div>
-              <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                How Population &amp; Individual Data Is Protected
-              </h1>
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                A guide to the safety principles, statutory laws, and computer safeguards
-                governing modern data analysis &amp; intelligence platforms such as TREs and SDEs, enabling vital epidemiological, demographic, and scientific discoveries while keeping confidential records strictly anonymous.
-              </p>
 
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <button
-                  onClick={handleDownloadCharter}
-                  className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl flex items-center gap-2 text-xs transition-colors shadow-md shadow-emerald-500/20"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>{downloaded ? 'Downloaded Charter (.md)' : 'Download Full Governance Charter (.md)'}</span>
-                </button>
-
-                <button
-                  onClick={() => setShowFullCharter(true)}
-                  className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-xl flex items-center gap-2 text-xs transition-colors border border-slate-700"
-                >
-                  <FileText className="w-4 h-4 text-cyan-400" />
-                  <span>Read Full Governance Charter Online</span>
-                </button>
+              <div className="lg:col-span-4 grid grid-cols-2 gap-3">
+                <div className="p-4 rounded-2xl bg-slate-950/75 border border-slate-800">
+                  <div className="text-xs font-mono text-slate-400 uppercase">Safeguard Stages</div>
+                  <div className="text-2xl font-black text-emerald-400 font-mono tabular-nums mt-1">5 Stages</div>
+                  <div className="text-xs text-slate-400 mt-0.5">Ingress to release</div>
+                </div>
+                <div className="p-4 rounded-2xl bg-slate-950/75 border border-slate-800">
+                  <div className="text-xs font-mono text-slate-400 uppercase">Caldicott Duty</div>
+                  <div className="text-2xl font-black text-cyan-400 font-mono tabular-nums mt-1">8 Principles</div>
+                  <div className="text-xs text-slate-400 mt-0.5">NHS statutory norm</div>
+                </div>
+                <div className="p-4 rounded-2xl bg-slate-950/75 border border-slate-800">
+                  <div className="text-xs font-mono text-slate-400 uppercase">Egress Threshold</div>
+                  <div className="text-2xl font-black text-amber-300 font-mono tabular-nums mt-1">k &ge; 10</div>
+                  <div className="text-xs text-slate-400 mt-0.5">Cell suppression</div>
+                </div>
+                <div className="p-4 rounded-2xl bg-slate-950/75 border border-slate-800">
+                  <div className="text-xs font-mono text-slate-400 uppercase">Public Opt-Out</div>
+                  <div className="text-2xl font-black text-white font-mono tabular-nums mt-1">100%</div>
+                  <div className="text-xs text-slate-400 mt-0.5">National Opt-Out</div>
+                </div>
               </div>
             </div>
           </div>
@@ -563,10 +588,10 @@ Accountability is distributed across independent roles without reliance on singl
             <h2 className="text-2xl font-bold text-white tracking-tight">
               Navigating Dynamic Flow: The Tidal Ingress &amp; Egress Model
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm text-slate-300 leading-relaxed pt-2">
-              <div className="p-4 rounded-2xl bg-slate-950/70 border border-cyan-900/40 space-y-2">
-                <div className="flex items-center gap-2 text-cyan-300 font-bold">
-                  <Waves className="w-4 h-4" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch text-sm text-slate-300 leading-relaxed pt-2">
+              <div className="h-full p-5 rounded-2xl bg-slate-950/70 border border-cyan-900/40 space-y-2.5">
+                <div className="flex items-center gap-2 text-cyan-300 font-bold text-base">
+                  <Waves className="w-4 h-4 shrink-0" />
                   <span>The Dynamic Problem Space</span>
                 </div>
                 <p>
@@ -574,9 +599,9 @@ Accountability is distributed across independent roles without reliance on singl
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-950/70 border border-cyan-900/40 space-y-2">
-                <div className="flex items-center gap-2 text-emerald-300 font-bold">
-                  <Activity className="w-4 h-4" />
+              <div className="h-full p-5 rounded-2xl bg-slate-950/70 border border-cyan-900/40 space-y-2.5">
+                <div className="flex items-center gap-2 text-emerald-300 font-bold text-base">
+                  <Activity className="w-4 h-4 shrink-0" />
                   <span>Ingress: Access, Safe People &amp; Projects</span>
                 </div>
                 <p>
@@ -584,9 +609,9 @@ Accountability is distributed across independent roles without reliance on singl
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-950/70 border border-cyan-900/40 space-y-2">
-                <div className="flex items-center gap-2 text-amber-300 font-bold">
-                  <ShieldCheck className="w-4 h-4" />
+              <div className="h-full p-5 rounded-2xl bg-slate-950/70 border border-cyan-900/40 space-y-2.5">
+                <div className="flex items-center gap-2 text-amber-300 font-bold text-base">
+                  <ShieldCheck className="w-4 h-4 shrink-0" />
                   <span>Egress: Disclosure Control &amp; Safe Outputs</span>
                 </div>
                 <p>
@@ -606,19 +631,19 @@ Accountability is distributed across independent roles without reliance on singl
               <h2 className="text-2xl font-bold text-white tracking-tight">
                 The 5 Steps from Source Records to Public Benefit Discoveries
               </h2>
-              <p className="text-xs sm:text-sm text-slate-400">
+              <p className="text-sm text-slate-400">
                 Click any stage along the path to learn how individual privacy is protected by statutory principles and digital locks.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-3 items-stretch">
               {PUBLIC_STEPS.map((step) => {
                 const isSelected = selectedStep.step === step.step;
                 return (
                   <button
                     key={step.step}
                     onClick={() => setSelectedStep(step)}
-                    className={`p-4 rounded-2xl border text-left transition-all flex flex-col justify-between relative group ${
+                    className={`h-full p-4 rounded-2xl border text-left transition-all flex flex-col justify-between relative group ${
                       isSelected
                         ? `bg-slate-900 border-cyan-400 ring-2 ring-cyan-500/30 shadow-lg`
                         : 'bg-slate-900/60 border-slate-800/80 hover:bg-slate-800 hover:border-slate-700'
@@ -627,7 +652,7 @@ Accountability is distributed across independent roles without reliance on singl
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
                         <span
-                          className={`w-6 h-6 rounded-full font-mono text-xs font-extrabold flex items-center justify-center ${
+                          className={`w-6 h-6 rounded-full font-mono text-xs font-extrabold flex items-center justify-center tabular-nums ${
                             isSelected
                               ? 'bg-cyan-500 text-slate-950 font-bold'
                               : 'bg-slate-800 text-slate-400'
@@ -635,16 +660,16 @@ Accountability is distributed across independent roles without reliance on singl
                         >
                           {step.step}
                         </span>
-                        <span className="text-[10px] font-mono text-slate-400 uppercase">
+                        <span className="text-xs font-mono text-slate-400 uppercase tabular-nums">
                           Stage {step.step}
                         </span>
                       </div>
-                      <h3 className="font-bold text-sm text-slate-100 group-hover:text-cyan-300 transition-colors leading-snug">
+                      <h3 className="font-bold text-sm sm:text-base text-slate-100 group-hover:text-cyan-300 transition-colors leading-snug">
                         {step.title}
                       </h3>
                     </div>
 
-                    <div className="pt-3 text-[11px] text-slate-400 border-t border-slate-800/60 mt-3">
+                    <div className="pt-3 text-xs text-slate-400 border-t border-slate-800/60 mt-3">
                       <span className="font-medium text-slate-300">{step.badge}</span>
                     </div>
                   </button>
@@ -674,8 +699,8 @@ Accountability is distributed across independent roles without reliance on singl
 
               <div className="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/30 flex items-start gap-3">
                 <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                <div className="space-y-0.5 text-xs sm:text-sm">
-                  <span className="font-bold text-emerald-300 uppercase tracking-wider text-[11px] block">
+                <div className="space-y-1 text-sm">
+                  <span className="font-bold text-emerald-300 uppercase tracking-wider text-xs block">
                     Direct Patient Safeguard Assurance
                   </span>
                   <p className="text-emerald-100 leading-relaxed font-medium">
@@ -696,12 +721,12 @@ Accountability is distributed across independent roles without reliance on singl
               <h2 className="text-2xl font-bold text-white tracking-tight">
                 The Eight Caldicott Principles in Action
               </h2>
-              <p className="text-xs sm:text-sm text-slate-400">
+              <p className="text-sm text-slate-400">
                 Established by Dame Fiona Caldicott, these 8 principles govern every aspect of how NHS and health research data is handled.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
               {[
                 {
                   num: 1,
@@ -746,14 +771,14 @@ Accountability is distributed across independent roles without reliance on singl
               ].map((principle) => (
                 <div
                   key={principle.num}
-                  className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80 space-y-1.5 flex items-start gap-3"
+                  className="h-full p-5 rounded-xl bg-slate-950/60 border border-slate-800/80 space-y-1.5 flex items-start gap-3.5"
                 >
-                  <span className="w-6 h-6 rounded-lg bg-cyan-950 text-cyan-400 font-mono font-bold text-xs flex items-center justify-center shrink-0 border border-cyan-800">
+                  <span className="w-7 h-7 rounded-lg bg-cyan-950 text-cyan-400 font-mono font-bold text-xs flex items-center justify-center shrink-0 border border-cyan-800 tabular-nums">
                     {principle.num}
                   </span>
-                  <div>
-                    <h4 className="font-bold text-slate-200 text-sm">{principle.title}</h4>
-                    <p className="text-slate-400 leading-relaxed text-xs">{principle.desc}</p>
+                  <div className="space-y-1">
+                    <h4 className="font-bold text-slate-200 text-base">{principle.title}</h4>
+                    <p className="text-slate-400 leading-relaxed text-sm">{principle.desc}</p>
                   </div>
                 </div>
               ))}
@@ -772,16 +797,16 @@ Accountability is distributed across independent roles without reliance on singl
                 <span>Public Knowledge Base</span>
               </div>
               <h2 className="text-2xl font-bold text-white">
-                Public Governance & Clinical Safety Glossary
+                Public Governance &amp; Clinical Safety Glossary
               </h2>
-              <p className="text-xs sm:text-sm text-slate-400">
+              <p className="text-sm text-slate-400">
                 Clear explanations of medical research terms, statutory privacy laws, and international standards.
               </p>
             </div>
 
             <button
               onClick={() => setActiveAtlasTab('graph')}
-              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 font-semibold rounded-xl text-xs flex items-center gap-2 border border-emerald-500/30 transition-colors shrink-0"
+              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-emerald-300 font-semibold rounded-xl text-sm flex items-center gap-2 border border-emerald-500/30 transition-colors shrink-0 whitespace-nowrap"
             >
               <Network className="w-4 h-4 text-emerald-400" />
               <span>Switch to Knowledge Graph View</span>
@@ -797,7 +822,7 @@ Accountability is distributed across independent roles without reliance on singl
                 placeholder="Search public terms (e.g., Caldicott, k-anonymity, Section 251, ISO 42001, DCB0129)..."
                 value={glossarySearch}
                 onChange={(e) => setGlossarySearch(e.target.value)}
-                className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+                className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500"
               />
             </div>
 
@@ -819,36 +844,38 @@ Accountability is distributed across independent roles without reliance on singl
           </div>
 
           {/* Glossary Term Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
             {filteredGlossary.map((term) => (
               <div
                 key={term.id}
                 onClick={() => setSelectedGlossaryTerm(term)}
-                className="p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition-all cursor-pointer space-y-3 group hover:shadow-lg hover:shadow-emerald-950/20"
+                className="h-full p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 transition-all cursor-pointer flex flex-col justify-between gap-4 group hover:shadow-lg hover:shadow-emerald-950/20"
               >
-                <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <h3 className="font-bold text-white text-base group-hover:text-emerald-300 transition-colors">
-                      {term.term}
-                    </h3>
-                    {term.acronym && (
-                      <span className="text-[11px] font-mono text-cyan-400 font-semibold">
-                        {term.acronym}
-                      </span>
-                    )}
+                <div className="space-y-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <h3 className="font-bold text-white text-base group-hover:text-emerald-300 transition-colors">
+                        {term.term}
+                      </h3>
+                      {term.acronym && (
+                        <span className="text-xs font-mono text-cyan-400 font-semibold">
+                          {term.acronym}
+                        </span>
+                      )}
+                    </div>
+                    <span className="px-2.5 py-0.5 rounded-md bg-slate-800 text-xs text-slate-300 font-mono border border-slate-700 shrink-0">
+                      {term.category}
+                    </span>
                   </div>
-                  <span className="px-2 py-0.5 rounded-md bg-slate-800 text-[10px] text-slate-400 font-mono border border-slate-700">
-                    {term.category}
-                  </span>
+
+                  <p className="text-sm text-slate-300 leading-relaxed">
+                    {term.shortDefinition}
+                  </p>
                 </div>
 
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  {term.shortDefinition}
-                </p>
-
-                <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+                <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
                   <span className="line-clamp-1">{term.playbookSection}</span>
-                  <span className="text-emerald-400 group-hover:underline flex items-center gap-1 font-semibold">
+                  <span className="text-emerald-400 group-hover:underline flex items-center gap-1 font-semibold shrink-0">
                     Read Details <ChevronRight className="w-3.5 h-3.5" />
                   </span>
                 </div>
@@ -870,29 +897,29 @@ Accountability is distributed across independent roles without reliance on singl
               <h2 className="text-2xl font-bold text-white">
                 Public Governance Knowledge Graph
               </h2>
-              <p className="text-xs sm:text-sm text-slate-400">
+              <p className="text-sm text-slate-400">
                 Visualizing how patient confidentiality flows through ethical reviews, digital airlocks, and international safety standards.
               </p>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 shrink-0">
               <button
                 onClick={() => cyRef.current?.zoom(cyRef.current.zoom() * 1.25)}
-                className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700"
+                className="p-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700"
                 title="Zoom In"
               >
                 <ZoomIn className="w-4 h-4" />
               </button>
               <button
                 onClick={() => cyRef.current?.zoom(cyRef.current.zoom() * 0.8)}
-                className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700"
+                className="p-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700"
                 title="Zoom Out"
               >
                 <ZoomOut className="w-4 h-4" />
               </button>
               <button
                 onClick={() => cyRef.current?.fit(undefined, 30)}
-                className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700"
+                className="p-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700"
                 title="Reset View"
               >
                 <RotateCcw className="w-4 h-4" />
@@ -901,20 +928,20 @@ Accountability is distributed across independent roles without reliance on singl
           </div>
 
           {/* Interactive Cytoscape Canvas */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 rounded-2xl bg-slate-950 border border-slate-800 overflow-hidden relative h-[540px] shadow-2xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            <div className="lg:col-span-8 rounded-2xl bg-slate-950 border border-slate-800 overflow-hidden relative h-[560px] lg:h-[640px] shadow-2xl">
               <div ref={graphContainerRef} className="w-full h-full" />
-              <div className="absolute bottom-3 left-3 bg-slate-900/90 backdrop-blur px-3 py-1.5 rounded-lg border border-slate-800 text-[10px] text-slate-400 font-mono">
+              <div className="absolute bottom-3 left-3 bg-slate-900/90 backdrop-blur px-3 py-1.5 rounded-lg border border-slate-800 text-xs text-slate-300 font-mono">
                 Click any node to inspect patient safeguards and legal anchors
               </div>
             </div>
 
             {/* Inspector Panel for Selected Graph Node */}
-            <div className="rounded-2xl bg-slate-900 border border-slate-800 p-6 flex flex-col justify-between space-y-4">
+            <div className="lg:col-span-4 rounded-2xl bg-slate-900 border border-slate-800 p-6 flex flex-col justify-between space-y-4">
               {selectedGraphNode ? (
                 <div className="space-y-4">
                   <div className="space-y-1 pb-3 border-b border-slate-800">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold">
+                    <span className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold">
                       Selected Governance Node
                     </span>
                     <h3 className="text-xl font-bold text-white">
@@ -924,9 +951,9 @@ Accountability is distributed across independent roles without reliance on singl
 
                   <div className="space-y-2">
                     <span className="text-xs font-semibold text-slate-300 block">
-                      Description & Purpose
+                      Description &amp; Purpose
                     </span>
-                    <p className="text-xs text-slate-300 leading-relaxed bg-slate-950/60 p-3 rounded-xl border border-slate-800/80">
+                    <p className="text-sm text-slate-300 leading-relaxed bg-slate-950/60 p-3.5 rounded-xl border border-slate-800/80">
                       {selectedGraphNode.shortDesc}
                     </p>
                   </div>
@@ -936,22 +963,22 @@ Accountability is distributed across independent roles without reliance on singl
                       <ShieldCheck className="w-4 h-4" />
                       <span>Direct Patient Safeguard</span>
                     </span>
-                    <p className="text-xs text-emerald-100 leading-relaxed bg-emerald-950/20 p-3 rounded-xl border border-emerald-500/30 font-medium">
+                    <p className="text-sm text-emerald-100 leading-relaxed bg-emerald-950/20 p-3.5 rounded-xl border border-emerald-500/30 font-medium">
                       {selectedGraphNode.safeguard}
                     </p>
                   </div>
 
                   <div className="space-y-2">
                     <span className="text-xs font-semibold text-slate-400 block">
-                      Statutory & Legal Basis
+                      Statutory &amp; Legal Basis
                     </span>
-                    <div className="text-xs text-slate-200 font-mono bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                    <div className="text-xs text-slate-200 font-mono bg-slate-950/80 p-3 rounded-xl border border-slate-800">
                       {selectedGraphNode.legalBasis}
                     </div>
                   </div>
                 </div>
               ) : (
-                <div className="text-center py-12 text-slate-500 text-xs">
+                <div className="text-center py-12 text-slate-400 text-sm">
                   Click any node on the graph to view details
                 </div>
               )}
@@ -959,7 +986,7 @@ Accountability is distributed across independent roles without reliance on singl
               <div className="pt-4 border-t border-slate-800 text-center">
                 <button
                   onClick={() => setActiveAtlasTab('journey')}
-                  className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold transition-colors"
+                  className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-sm font-semibold transition-colors"
                 >
                   Return to Patient Journey Map
                 </button>
@@ -972,26 +999,26 @@ Accountability is distributed across independent roles without reliance on singl
       {/* Modal for Term Detail */}
       {selectedGlossaryTerm && (
         <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+          <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
             <div className="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950/70">
-              <div className="space-y-0.5">
-                <span className="text-[10px] font-mono text-emerald-400 uppercase font-bold">
+              <div className="space-y-1">
+                <span className="text-xs font-mono text-emerald-400 uppercase font-bold">
                   {selectedGlossaryTerm.category}
                 </span>
-                <h3 className="font-bold text-white text-lg">
+                <h3 className="font-bold text-white text-xl">
                   {selectedGlossaryTerm.term} {selectedGlossaryTerm.acronym && `(${selectedGlossaryTerm.acronym})`}
                 </h3>
               </div>
               <button
                 onClick={() => setSelectedGlossaryTerm(null)}
-                className="text-slate-400 hover:text-white px-2 py-1 text-sm font-bold"
+                className="text-slate-400 hover:text-white px-2.5 py-1 text-base font-bold"
               >
                 ✕
               </button>
             </div>
 
-            <div className="p-6 overflow-y-auto space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed bg-slate-950/40">
-              <div className="space-y-1">
+            <div className="p-6 overflow-y-auto space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed bg-slate-950/40">
+              <div className="space-y-1.5">
                 <span className="font-bold text-slate-200 text-xs uppercase tracking-wider block">
                   Full Explanation
                 </span>
@@ -1000,25 +1027,25 @@ Accountability is distributed across independent roles without reliance on singl
                 </p>
               </div>
 
-              <div className="space-y-1 p-3.5 rounded-xl bg-slate-900 border border-slate-800">
-                <span className="font-bold text-cyan-300 text-xs block">
-                  Platform & Playbook Context
+              <div className="space-y-1.5 p-4 rounded-xl bg-slate-900 border border-slate-800">
+                <span className="font-bold text-cyan-300 text-xs uppercase tracking-wider block">
+                  Platform &amp; Playbook Context
                 </span>
-                <p className="text-slate-400 text-xs leading-relaxed">
+                <p className="text-slate-300 text-sm leading-relaxed">
                   {selectedGlossaryTerm.playbookContext}
                 </p>
               </div>
 
               {selectedGlossaryTerm.relatedTerms && selectedGlossaryTerm.relatedTerms.length > 0 && (
-                <div className="space-y-1">
-                  <span className="text-[11px] font-mono text-slate-400 block uppercase">
+                <div className="space-y-1.5">
+                  <span className="text-xs font-mono text-slate-400 block uppercase">
                     Related Concepts
                   </span>
-                  <div className="flex flex-wrap gap-1.5 pt-1">
+                  <div className="flex flex-wrap gap-2 pt-1">
                     {selectedGlossaryTerm.relatedTerms.map((rt) => (
                       <span
                         key={rt}
-                        className="px-2 py-0.5 rounded bg-slate-800 text-[11px] font-mono text-slate-300"
+                        className="px-2.5 py-1 rounded bg-slate-800 text-xs font-mono text-slate-200"
                       >
                         {rt}
                       </span>
@@ -1034,7 +1061,7 @@ Accountability is distributed across independent roles without reliance on singl
               </span>
               <button
                 onClick={() => setSelectedGlossaryTerm(null)}
-                className="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-lg text-xs"
+                className="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-lg text-sm"
               >
                 Close
               </button>

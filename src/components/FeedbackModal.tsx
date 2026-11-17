@@ -118,12 +118,12 @@ ${description || 'No description provided.'}
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 overflow-y-auto space-y-5 text-xs text-slate-200">
+        <div className="p-6 overflow-y-auto space-y-5 text-sm text-slate-200">
           {submitted ? (
             <div className="p-6 rounded-xl bg-emerald-950/30 border border-emerald-500/40 text-center space-y-2">
               <Check className="w-8 h-8 text-emerald-400 mx-auto" />
-              <h4 className="text-sm font-bold text-emerald-300">Feedback Recorded</h4>
-              <p className="text-xs text-emerald-200/80">
+              <h4 className="text-base font-bold text-emerald-300">Feedback Recorded</h4>
+              <p className="text-xs sm:text-sm text-emerald-200/80">
                 Thank you! Your feedback has been stored. You can also raise this directly as an issue on the public GitHub repository.
               </p>
             </div>
@@ -131,67 +131,67 @@ ${description || 'No description provided.'}
             <form onSubmit={handleSubmitLocal} className="space-y-4">
               {/* Category Selection */}
               <div className="space-y-1.5">
-                <label className="text-slate-400 font-semibold block text-[11px] uppercase tracking-wider">
+                <label className="text-slate-400 font-semibold block text-xs uppercase tracking-wider">
                   Feedback Category
                 </label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 items-stretch">
                   <button
                     type="button"
                     onClick={() => setCategory('governance')}
-                    className={`p-2 rounded-lg border text-left flex flex-col gap-1 transition-colors ${
+                    className={`p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-colors cursor-pointer ${
                       category === 'governance'
                         ? 'bg-cyan-950/60 border-cyan-500/60 text-cyan-300'
                         : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200'
                     }`}
                   >
                     <ShieldAlert className="w-4 h-4" />
-                    <span className="font-semibold text-[11px]">Governance</span>
+                    <span className="font-semibold text-xs">Governance</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => setCategory('sdc')}
-                    className={`p-2 rounded-lg border text-left flex flex-col gap-1 transition-colors ${
+                    className={`p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-colors cursor-pointer ${
                       category === 'sdc'
                         ? 'bg-cyan-950/60 border-cyan-500/60 text-cyan-300'
                         : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200'
                     }`}
                   >
                     <Sliders className="w-4 h-4" />
-                    <span className="font-semibold text-[11px]">SDC Rules</span>
+                    <span className="font-semibold text-xs">SDC Rules</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => setCategory('bug')}
-                    className={`p-2 rounded-lg border text-left flex flex-col gap-1 transition-colors ${
+                    className={`p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-colors cursor-pointer ${
                       category === 'bug'
                         ? 'bg-amber-950/60 border-amber-500/60 text-amber-300'
                         : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200'
                     }`}
                   >
                     <Bug className="w-4 h-4" />
-                    <span className="font-semibold text-[11px]">Bug Report</span>
+                    <span className="font-semibold text-xs">Bug Report</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => setCategory('feature')}
-                    className={`p-2 rounded-lg border text-left flex flex-col gap-1 transition-colors ${
+                    className={`p-2.5 rounded-lg border text-left flex flex-col gap-1 transition-colors cursor-pointer ${
                       category === 'feature'
                         ? 'bg-purple-950/60 border-purple-500/60 text-purple-300'
                         : 'bg-slate-950/60 border-slate-800 text-slate-400 hover:text-slate-200'
                     }`}
                   >
                     <Sparkles className="w-4 h-4" />
-                    <span className="font-semibold text-[11px]">Feature Idea</span>
+                    <span className="font-semibold text-xs">Feature Idea</span>
                   </button>
                 </div>
               </div>
 
               {/* Title */}
-              <div className="space-y-1">
-                <label className="text-slate-400 font-semibold block text-[11px] uppercase tracking-wider">
+              <div className="space-y-1.5">
+                <label className="text-slate-400 font-semibold block text-xs uppercase tracking-wider">
                   Summary / Title
                 </label>
                 <input
@@ -199,13 +199,13 @@ ${description || 'No description provided.'}
                   placeholder="Brief summary of the issue or feedback..."
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
                 />
               </div>
 
               {/* Detailed Description */}
-              <div className="space-y-1">
-                <label className="text-slate-400 font-semibold block text-[11px] uppercase tracking-wider">
+              <div className="space-y-1.5">
+                <label className="text-slate-400 font-semibold block text-xs uppercase tracking-wider">
                   Details / Steps / Feedback
                 </label>
                 <textarea
@@ -213,7 +213,7 @@ ${description || 'No description provided.'}
                   placeholder="Describe your feedback, statutory question, or steps to reproduce..."
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition-colors"
                 />
               </div>
 
@@ -222,7 +222,7 @@ ${description || 'No description provided.'}
                 <button
                   type="button"
                   onClick={handleOpenGitHub}
-                  className="w-full sm:w-auto px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-sm"
+                  className="w-full sm:w-auto px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-sm whitespace-nowrap cursor-pointer"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                   <span>Raise on GitHub Issues</span>
@@ -232,7 +232,7 @@ ${description || 'No description provided.'}
                   <button
                     type="button"
                     onClick={handleCopy}
-                    className="flex-1 sm:flex-initial px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs flex items-center justify-center gap-1.5 border border-slate-700 transition-colors"
+                    className="flex-1 sm:flex-initial px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs flex items-center justify-center gap-1.5 border border-slate-700 transition-colors whitespace-nowrap cursor-pointer"
                   >
                     {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-slate-400" />}
                     <span>{copied ? 'Copied' : 'Copy Markdown'}</span>
@@ -241,7 +241,7 @@ ${description || 'No description provided.'}
                   <button
                     type="submit"
                     disabled={!description.trim()}
-                    className="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-slate-200 font-semibold text-xs flex items-center justify-center gap-1.5 border border-slate-700 transition-colors"
+                    className="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-slate-200 font-semibold text-xs flex items-center justify-center gap-1.5 border border-slate-700 transition-colors whitespace-nowrap cursor-pointer"
                   >
                     <Send className="w-3.5 h-3.5 text-cyan-400" />
                     <span>Save Locally</span>

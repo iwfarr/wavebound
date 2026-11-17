@@ -350,7 +350,7 @@ export const LeastPrivilegeEnclaveHub: React.FC = () => {
       {/* 1. EXECUTIVE BANNER */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-6 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-5">
-          <div className="space-y-1">
+          <div className="space-y-1.5 flex-1">
             <div className="flex items-center gap-2 text-xs font-bold text-[#005EB8] dark:text-sky-400 uppercase tracking-wider">
               <ShieldCheck className="w-4 h-4" />
               <span>Phase 5: Least-Privilege Enclave Manifests</span>
@@ -358,15 +358,15 @@ export const LeastPrivilegeEnclaveHub: React.FC = () => {
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
               Multi-Tenant Cluster Isolation &amp; Audit-and-Alert Webhooks
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
               Zero cluster-admin requirements. Designed specifically for multi-tenant NHS Trust and locked-down university Kubernetes environments where stability and least-privilege RBAC are mandatory.
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={() => setSimulatedAuditOpen(!simulatedAuditOpen)}
-              className="px-3.5 py-1.5 rounded-lg bg-teal-50 dark:bg-teal-950/60 hover:bg-teal-100 dark:hover:bg-teal-900 text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800 text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-colors shadow-xs"
+              className="px-3.5 py-2 rounded-lg bg-teal-50 dark:bg-teal-950/60 hover:bg-teal-100 dark:hover:bg-teal-900 text-teal-800 dark:text-teal-300 border border-teal-200 dark:border-teal-800 text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-colors shadow-xs whitespace-nowrap"
             >
               <Eye className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
               <span>{simulatedAuditOpen ? 'Hide Admission Stream' : 'Simulate Admission Stream'}</span>
@@ -375,7 +375,7 @@ export const LeastPrivilegeEnclaveHub: React.FC = () => {
         </div>
 
         {/* 8 Statutory Least-Privilege Guardrails Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 items-stretch">
           {[
             {
               title: 'Namespaced RBAC Scope',
@@ -420,17 +420,17 @@ export const LeastPrivilegeEnclaveHub: React.FC = () => {
           ].map((item, idx) => (
             <div
               key={idx}
-              className="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-1"
+              className="h-full flex flex-col p-4 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 space-y-1.5"
             >
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-slate-900 dark:text-white text-xs block">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm block">
                   {item.title}
                 </span>
-                <span className="text-[9px] font-mono font-bold text-[#047857] dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950 px-1.5 py-0.2 rounded border border-emerald-200 dark:border-emerald-800">
+                <span className="text-xs font-mono font-bold text-[#047857] dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800 shrink-0 whitespace-nowrap">
                   {item.status}
                 </span>
               </div>
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 {item.desc}
               </p>
             </div>
@@ -441,15 +441,15 @@ export const LeastPrivilegeEnclaveHub: React.FC = () => {
       {/* SIMULATED ADMISSION STREAM DRAWER */}
       {simulatedAuditOpen && (
         <div className="bg-slate-950 rounded-xl border border-slate-800 p-5 space-y-3 font-mono text-xs text-slate-200 animate-in slide-in-from-top-2 duration-150">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-2 text-[11px]">
+          <div className="flex items-center justify-between border-b border-slate-800 pb-2 text-xs">
             <div className="flex items-center gap-2 text-teal-400 font-bold">
               <Terminal className="w-3.5 h-3.5" />
               <span>LIVE ADMISSION STREAM: Namespaced Webhook &amp; Prometheus Metric Feed</span>
             </div>
-            <span className="text-slate-500 text-[10px]">Audit-and-Alert Mode</span>
+            <span className="text-slate-400 text-xs whitespace-nowrap">Audit-and-Alert Mode</span>
           </div>
 
-          <div className="space-y-1.5 text-[11px] text-slate-300">
+          <div className="space-y-1.5 text-xs text-slate-300 tabular-nums">
             <div className="text-slate-400">
               [2026-11-08T06:40:22Z] [Enclave Admission] AdmissionReview request received for Pod/rstudio-{projectId}-session in namespace &apos;{namespace}&apos;
             </div>
@@ -491,7 +491,7 @@ export const LeastPrivilegeEnclaveHub: React.FC = () => {
             </span>
             <button
               onClick={() => setAuditMode(auditMode === 'audit_alert' ? 'hard_blocking' : 'audit_alert')}
-              className={`px-2.5 py-1 rounded text-xs font-semibold border transition-colors cursor-pointer ${
+              className={`px-3 py-1.5 rounded text-xs font-semibold border transition-colors cursor-pointer whitespace-nowrap ${
                 auditMode === 'audit_alert'
                   ? 'bg-emerald-50 text-[#047857] border-emerald-300 dark:bg-emerald-950 dark:text-emerald-300'
                   : 'bg-amber-50 text-[#B45309] border-amber-300 dark:bg-amber-950 dark:text-amber-300'
@@ -503,7 +503,7 @@ export const LeastPrivilegeEnclaveHub: React.FC = () => {
         </div>
 
         {/* Profile Selector Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 items-stretch">
           {ENCLAVE_PROFILES.map((profile) => {
             const isSelected = profile.id === selectedProfileId;
             return (
@@ -515,25 +515,25 @@ export const LeastPrivilegeEnclaveHub: React.FC = () => {
                   setCpuLimit(profile.defaultCpu !== 'N/A' ? profile.defaultCpu : cpuLimit);
                   setScratchSize(profile.defaultScratchSize !== 'N/A' ? profile.defaultScratchSize : scratchSize);
                 }}
-                className={`p-3.5 text-left rounded-xl border transition-all cursor-pointer flex flex-col justify-between space-y-2 ${
+                className={`h-full p-4 text-left rounded-xl border transition-all cursor-pointer flex flex-col justify-between space-y-2.5 ${
                   isSelected
                     ? 'bg-sky-50/50 dark:bg-sky-950/40 border-[#005EB8] ring-1 ring-[#005EB8]'
-                    : 'bg-slate-50/80 dark:bg-slate-800 border-slate-200 dark:border-slate-800 hover:border-slate-300'
+                    : 'bg-slate-50/80 dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-slate-300'
                 }`}
               >
-                <div className="space-y-1">
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white dark:bg-slate-900 text-[#005EB8] dark:text-sky-400 border border-slate-200 dark:border-slate-700">
+                <div className="space-y-1.5">
+                  <span className="text-xs font-mono px-2 py-0.5 rounded bg-white dark:bg-slate-900 text-[#005EB8] dark:text-sky-400 border border-slate-200 dark:border-slate-700 inline-block">
                     {profile.category}
                   </span>
-                  <strong className="text-xs font-semibold text-slate-900 dark:text-white block line-clamp-1">
+                  <strong className="text-sm font-semibold text-slate-900 dark:text-white block line-clamp-1">
                     {profile.name}
                   </strong>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
                     {profile.summary}
                   </p>
                 </div>
 
-                <div className="text-[10px] font-mono text-slate-500 pt-1 border-t border-slate-200/60 dark:border-slate-800">
+                <div className="text-xs font-mono text-slate-500 pt-1.5 border-t border-slate-200/60 dark:border-slate-700/60">
                   {profile.runtime}
                 </div>
               </button>
@@ -542,44 +542,44 @@ export const LeastPrivilegeEnclaveHub: React.FC = () => {
         </div>
 
         {/* Interactive Parameter Controls */}
-        <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-3">
+        <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-3">
           <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block">
             Enclave Runtime Parameters
           </span>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
             <div>
-              <label className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1.5">
                 Namespace Scope
               </label>
               <input
                 type="text"
                 value={namespace}
                 onChange={(e) => setNamespace(e.target.value)}
-                className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded p-1.5 text-xs text-slate-900 dark:text-white font-mono"
+                className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-2.5 py-2 text-xs text-slate-900 dark:text-white font-mono"
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1.5">
                 Project Identifier
               </label>
               <input
                 type="text"
                 value={projectId}
                 onChange={(e) => setProjectId(e.target.value)}
-                className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded p-1.5 text-xs text-slate-900 dark:text-white font-mono"
+                className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-2.5 py-2 text-xs text-slate-900 dark:text-white font-mono"
               />
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1.5">
                 Memory Resource Limit
               </label>
               <select
                 value={memoryLimit}
                 onChange={(e) => setMemoryLimit(e.target.value)}
-                className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded p-1.5 text-xs text-slate-900 dark:text-white font-mono"
+                className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-2.5 py-2 text-xs text-slate-900 dark:text-white font-mono"
               >
                 <option value="4Gi">4Gi (Standard Analytics)</option>
                 <option value="8Gi">8Gi (Cohort Modeling)</option>
@@ -589,13 +589,13 @@ export const LeastPrivilegeEnclaveHub: React.FC = () => {
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1.5">
                 Ephemeral Scratch Size
               </label>
               <select
                 value={scratchSize}
                 onChange={(e) => setScratchSize(e.target.value)}
-                className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded p-1.5 text-xs text-slate-900 dark:text-white font-mono"
+                className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-2.5 py-2 text-xs text-slate-900 dark:text-white font-mono"
               >
                 <option value="20Gi">20Gi Scratch</option>
                 <option value="50Gi">50Gi Scratch</option>
@@ -607,26 +607,26 @@ export const LeastPrivilegeEnclaveHub: React.FC = () => {
         </div>
 
         {/* Generated Manifest Display Area */}
-        <div className="p-5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-3">
-            <div className="space-y-0.5">
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-slate-900 dark:text-white">
+        <div className="p-5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-700 pb-3">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-sm sm:text-base font-bold text-slate-900 dark:text-white">
                   {activeProfile.name}
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#005EB8] text-white font-bold">
+                <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#005EB8] text-white font-bold">
                   {activeProfile.category}
                 </span>
               </div>
-              <span className="text-[11px] font-mono text-slate-500">
+              <span className="text-xs font-mono text-slate-600 dark:text-slate-400">
                 Target Namespace: <strong>{namespace}</strong> · Project: <strong>{projectId}</strong>
               </span>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 shrink-0">
               <button
                 onClick={handleCopy}
-                className="px-3.5 py-1.5 rounded-lg bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-colors shadow-xs"
+                className="px-3.5 py-2 rounded-lg bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-colors shadow-xs whitespace-nowrap"
               >
                 {copiedYaml ? (
                   <>
@@ -643,7 +643,7 @@ export const LeastPrivilegeEnclaveHub: React.FC = () => {
 
               <button
                 onClick={handleDownload}
-                className="px-3.5 py-1.5 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer shadow-xs transition-colors"
+                className="px-3.5 py-2 rounded-lg bg-[#0F294A] hover:bg-[#005EB8] text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer shadow-xs transition-colors whitespace-nowrap"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Download .yaml</span>
@@ -652,7 +652,7 @@ export const LeastPrivilegeEnclaveHub: React.FC = () => {
           </div>
 
           {/* Scoped Dark Terminal View */}
-          <pre className="p-4 bg-slate-950 rounded-xl border border-slate-800 text-slate-200 font-mono text-xs overflow-x-auto leading-relaxed max-h-[420px]">
+          <pre className="p-4 bg-slate-950 rounded-xl border border-slate-800 text-slate-200 font-mono text-xs sm:text-sm overflow-x-auto leading-relaxed max-h-[420px]">
             <code>{generatedYaml}</code>
           </pre>
         </div>

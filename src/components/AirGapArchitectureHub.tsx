@@ -358,11 +358,11 @@ export const AirGapArchitectureHub: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-200">
+    <div className="w-full space-y-8 animate-in fade-in duration-200">
       {/* 1. EXECUTIVE AIR-GAP & DUAL-PLANE OVERVIEW */}
       <div className="bg-[#0c2340] border border-cyan-900/60 rounded-xl p-6 sm:p-8 space-y-6 shadow-xl text-white">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-cyan-900/50 pb-5">
-          <div className="space-y-1">
+          <div className="space-y-1.5 flex-1">
             <div className="flex items-center gap-2 text-xs font-bold text-teal-400 uppercase tracking-wider">
               <WifiOff className="w-4 h-4" />
               <span>Phase 4: Air-Gapped Package Mirror Architecture</span>
@@ -370,53 +370,53 @@ export const AirGapArchitectureHub: React.FC = () => {
             <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
               Internal Registry Infrastructure &amp; Dual-Plane Network Routing
             </h2>
-            <p className="text-xs sm:text-sm text-slate-200 max-w-2xl">
+            <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
               Engineered for patient and population safe and secure data and intelligence environments where researchers operate under zero outbound internet connectivity.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 font-mono text-xs text-cyan-300 bg-[#07192f] px-3 py-1.5 rounded-lg border border-cyan-900/60 shrink-0">
+          <div className="flex items-center gap-2 font-mono text-xs text-cyan-300 bg-[#07192f] px-3 py-1.5 rounded-lg border border-cyan-900/60 shrink-0 whitespace-nowrap tabular-nums">
             <span>SATRE Pillar 2 · DSPT 1.5</span>
           </div>
         </div>
 
         {/* The 3 Core Architectural Tenets Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
           {/* Tenet 1: Zero WAN Egress */}
-          <div className="p-4 rounded-xl bg-slate-950/80 border border-cyan-900/50 space-y-2 text-slate-200">
-            <div className="flex items-center gap-2 text-white font-bold">
-              <div className="w-7 h-7 rounded-lg bg-teal-950/80 text-teal-300 border border-teal-500/40 flex items-center justify-center">
+          <div className="h-full flex flex-col p-5 rounded-xl bg-slate-950/80 border border-cyan-900/50 space-y-2.5 text-slate-200">
+            <div className="flex items-center gap-2.5 text-white font-bold text-sm">
+              <div className="w-7 h-7 rounded-lg bg-teal-950/80 text-teal-300 border border-teal-500/40 flex items-center justify-center shrink-0">
                 <WifiOff className="w-4 h-4" />
               </div>
               <span>1. Zero Outbound Internet Egress</span>
             </div>
-            <p className="text-slate-300 leading-relaxed text-[11px]">
+            <p className="text-slate-300 leading-relaxed text-xs sm:text-sm">
               WAN routes are permanently severed at the eBPF/Calico layer. No researcher pod can resolve or connect to public IP addresses or commercial cloud storage, eliminating exfiltration vectors.
             </p>
           </div>
 
           {/* Tenet 2: Maintained Internal Package Mirrors */}
-          <div className="p-4 rounded-xl bg-slate-950/80 border border-cyan-900/50 space-y-2 text-slate-200">
-            <div className="flex items-center gap-2 text-white font-bold">
-              <div className="w-7 h-7 rounded-lg bg-sky-950/80 text-cyan-300 border border-cyan-500/40 flex items-center justify-center">
+          <div className="h-full flex flex-col p-5 rounded-xl bg-slate-950/80 border border-cyan-900/50 space-y-2.5 text-slate-200">
+            <div className="flex items-center gap-2.5 text-white font-bold text-sm">
+              <div className="w-7 h-7 rounded-lg bg-sky-950/80 text-cyan-300 border border-cyan-500/40 flex items-center justify-center shrink-0">
                 <Server className="w-4 h-4" />
               </div>
               <span>2. Maintained Internal Mirrors</span>
             </div>
-            <p className="text-slate-300 leading-relaxed text-[11px]">
+            <p className="text-slate-300 leading-relaxed text-xs sm:text-sm">
               Internal CRAN, PyPI (Nexus), and Harbor OCI registries host audited, vulnerability-scanned packages. Containers are pre-configured to resolve libraries from internal endpoints only.
             </p>
           </div>
 
           {/* Tenet 3: Direct Analytical Data Plane */}
-          <div className="p-4 rounded-xl bg-slate-950/80 border border-cyan-900/50 space-y-2 text-slate-200">
-            <div className="flex items-center gap-2 text-white font-bold">
-              <div className="w-7 h-7 rounded-lg bg-purple-950/80 text-purple-300 border border-purple-800 flex items-center justify-center">
+          <div className="h-full flex flex-col p-5 rounded-xl bg-slate-950/80 border border-cyan-900/50 space-y-2.5 text-slate-200">
+            <div className="flex items-center gap-2.5 text-white font-bold text-sm">
+              <div className="w-7 h-7 rounded-lg bg-purple-950/80 text-purple-300 border border-purple-800 flex items-center justify-center shrink-0">
                 <Database className="w-4 h-4" />
               </div>
               <span>3. Direct Analytics Data Plane</span>
             </div>
-            <p className="text-slate-300 leading-relaxed text-[11px]">
+            <p className="text-slate-300 leading-relaxed text-xs sm:text-sm">
               Heavy parallel analytical queries (DuckDB, PostgreSQL, Arrow Flight) connect directly over kernel TCP, bypassing userspace Envoy proxies to eliminate connection pool exhaustion under load.
             </p>
           </div>
@@ -424,23 +424,23 @@ export const AirGapArchitectureHub: React.FC = () => {
 
         {/* Dual-Plane Flow Diagram Card */}
         <div className="p-4 sm:p-5 rounded-xl bg-[#07192f] border border-cyan-900/60 space-y-3 text-white">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="font-bold text-cyan-300 text-xs uppercase tracking-wider block">
               Dual-Plane Network Topology Architecture
             </span>
-            <span className="text-[10px] text-slate-400 font-mono">
+            <span className="text-xs text-slate-400 font-mono">
               Direct Data Plane vs. Mediated Control Plane
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch font-mono">
             {/* Plane A: Direct Data Plane */}
-            <div className="p-4 rounded-xl bg-slate-950/90 border border-teal-500/50 space-y-2.5 text-slate-200">
-              <div className="flex items-center gap-2 text-teal-300 font-bold text-xs">
-                <CheckCircle2 className="w-4 h-4 text-teal-400" />
+            <div className="h-full flex flex-col p-4 rounded-xl bg-slate-950/90 border border-teal-500/50 space-y-2.5 text-slate-200">
+              <div className="flex items-center gap-2 text-teal-300 font-bold text-xs sm:text-sm">
+                <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />
                 <span>Plane A: Direct Analytical Data Plane (High Throughput)</span>
               </div>
-              <ul className="text-xs text-slate-200 space-y-1.5 font-sans leading-relaxed">
+              <ul className="text-xs sm:text-sm text-slate-200 space-y-1.5 font-sans leading-relaxed tabular-nums">
                 <li>• <strong className="text-teal-300">Workloads:</strong> DuckDB Parquet scanning, PostgreSQL SQL queries, PyArrow matrix operations.</li>
                 <li>• <strong className="text-teal-300">Routing:</strong> Kernel-level TCP connection direct to lake nodes (Port 5432 / 9000).</li>
                 <li>• <strong className="text-teal-300">Architecture Rationale:</strong> Bypasses userspace Envoy proxies. Prevents TCP socket depletion and ephemeral connection limits during parallel analytical model fitting.</li>
@@ -448,12 +448,12 @@ export const AirGapArchitectureHub: React.FC = () => {
             </div>
 
             {/* Plane B: Mediated Control Plane */}
-            <div className="p-4 rounded-xl bg-slate-950/90 border border-cyan-500/50 space-y-2.5 text-slate-200">
-              <div className="flex items-center gap-2 text-cyan-300 font-bold text-xs">
-                <ShieldCheck className="w-4 h-4 text-cyan-400" />
+            <div className="h-full flex flex-col p-4 rounded-xl bg-slate-950/90 border border-cyan-500/50 space-y-2.5 text-slate-200">
+              <div className="flex items-center gap-2 text-cyan-300 font-bold text-xs sm:text-sm">
+                <ShieldCheck className="w-4 h-4 text-cyan-400 shrink-0" />
                 <span>Plane B: Mediated Control Plane (Lightweight Metadata)</span>
               </div>
-              <ul className="text-xs text-slate-200 space-y-1.5 font-sans leading-relaxed">
+              <ul className="text-xs sm:text-sm text-slate-200 space-y-1.5 font-sans leading-relaxed tabular-nums">
                 <li>• <strong className="text-cyan-300">Workloads:</strong> Session admission validation, SDC airlock checks, PROV-O audit emission.</li>
                 <li>• <strong className="text-cyan-300">Routing:</strong> Scoped gRPC/HTTP proxy to Wavebound OPA Rego PDP daemon (Port 8443).</li>
                 <li>• <strong className="text-cyan-300">Architecture Rationale:</strong> Strictly limited to small JSON payloads (kilobytes). Zero analytics data ever passes through this proxy.</li>
@@ -477,43 +477,43 @@ export const AirGapArchitectureHub: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-300 font-mono">
+            <span className="text-xs text-slate-300 font-mono tabular-nums">
               6 Verified Enclave Manifests
             </span>
           </div>
         </div>
 
         {/* Manifest Tabs Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 items-stretch">
           {AIRGAP_MANIFESTS.map((manifest) => {
             const isSelected = manifest.id === selectedManifestId;
             return (
               <button
                 key={manifest.id}
                 onClick={() => setSelectedManifestId(manifest.id)}
-                className={`p-3 text-left rounded-xl border transition-all cursor-pointer flex flex-col justify-between space-y-2 ${
+                className={`h-full p-3.5 text-left rounded-xl border transition-all cursor-pointer flex flex-col justify-between space-y-2 ${
                   isSelected
                     ? 'bg-slate-950/95 border-[#00A389] ring-2 ring-[#00A389]/60 shadow-md text-white'
                     : 'bg-[#07192f] border-cyan-900/50 hover:border-cyan-500/40 text-slate-300'
                 }`}
               >
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-950 text-cyan-300 border border-cyan-900/60">
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-950 text-cyan-300 border border-cyan-900/60">
                       {manifest.category}
                     </span>
-                    <span className="text-[10px] text-slate-400 font-mono truncate max-w-[120px]">
+                    <span className="text-xs text-slate-400 font-mono truncate max-w-[160px]">
                       {manifest.filename.split('/').pop()}
                     </span>
                   </div>
-                  <strong className="text-xs font-semibold text-white block line-clamp-1">
+                  <strong className="text-sm font-semibold text-white block line-clamp-1">
                     {manifest.name}
                   </strong>
                 </div>
 
-                <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1 border-t border-cyan-900/40">
+                <div className="flex items-center justify-between text-xs text-slate-400 pt-1.5 border-t border-cyan-900/40">
                   <span>{manifest.targetEnv}</span>
-                  <ChevronRight className="w-3.5 h-3.5 text-cyan-400" />
+                  <ChevronRight className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
                 </div>
               </button>
             );
@@ -524,15 +524,15 @@ export const AirGapArchitectureHub: React.FC = () => {
         <div className="p-5 rounded-xl bg-slate-950/90 border border-cyan-900/60 space-y-4 text-white">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cyan-900/50 pb-3">
             <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-white">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-sm sm:text-base font-bold text-white">
                   {selectedManifest.name}
                 </span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#00A389] text-white font-bold">
+                <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#00A389] text-white font-bold">
                   {selectedManifest.category}
                 </span>
               </div>
-              <div className="text-[11px] font-mono text-slate-300 flex items-center gap-2">
+              <div className="text-xs font-mono text-slate-300 flex items-center gap-2 flex-wrap">
                 <span>File: <strong className="text-cyan-200">{selectedManifest.filename}</strong></span>
                 <span>·</span>
                 <span>Target: {selectedManifest.targetEnv}</span>
@@ -542,7 +542,7 @@ export const AirGapArchitectureHub: React.FC = () => {
             <div className="flex items-center gap-2 shrink-0">
               <button
                 onClick={() => handleCopy(`man-${selectedManifest.id}`, selectedManifest.code)}
-                className="px-3 py-1.5 rounded-lg bg-[#07192f] hover:bg-[#123154] text-slate-200 border border-cyan-900/60 text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-colors shadow-xs"
+                className="px-3.5 py-2 rounded-lg bg-[#07192f] hover:bg-[#123154] text-slate-200 border border-cyan-900/60 text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-colors shadow-xs whitespace-nowrap"
               >
                 {copiedId === `man-${selectedManifest.id}` ? (
                   <>
@@ -559,7 +559,7 @@ export const AirGapArchitectureHub: React.FC = () => {
 
               <button
                 onClick={() => handleDownload(selectedManifest.filename, selectedManifest.code)}
-                className="px-3 py-1.5 rounded-lg bg-[#00A389] hover:bg-teal-700 text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer shadow-xs transition-colors"
+                className="px-3.5 py-2 rounded-lg bg-[#00A389] hover:bg-teal-700 text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer shadow-xs transition-colors whitespace-nowrap"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Download</span>
@@ -567,16 +567,16 @@ export const AirGapArchitectureHub: React.FC = () => {
             </div>
           </div>
 
-          <p className="text-xs text-slate-200 leading-relaxed font-sans">
+          <p className="text-sm text-slate-200 leading-relaxed font-sans">
             {selectedManifest.summary}
           </p>
 
           {/* Scoped Dark Terminal for Code Snippet */}
           <div className="space-y-1.5">
-            <span className="text-[11px] font-mono text-slate-400 block">
+            <span className="text-xs font-mono text-slate-400 block">
               Machine-Executable Configuration:
             </span>
-            <pre className="p-4 bg-[#07192f] rounded-xl border border-cyan-900/60 text-cyan-200 font-mono text-xs overflow-x-auto leading-relaxed max-h-[380px]">
+            <pre className="p-4 bg-[#07192f] rounded-xl border border-cyan-900/60 text-cyan-200 font-mono text-xs sm:text-sm overflow-x-auto leading-relaxed max-h-[420px]">
               <code>{selectedManifest.code}</code>
             </pre>
           </div>
@@ -589,66 +589,66 @@ export const AirGapArchitectureHub: React.FC = () => {
           <FolderGit2 className="w-4 h-4 text-cyan-400" />
           <span>Statutory Governance Playbook</span>
         </div>
-        <h3 className="text-xl font-bold text-white tracking-tight">
+        <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
           4-Stage Quarantined Package Ingestion &amp; Diode Workflow
         </h3>
-        <p className="text-xs sm:text-sm text-slate-200 max-w-2xl">
+        <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
           How new R packages and Python wheels enter the air-gapped enclave without breaching the zero-outbound network isolation perimeter.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2 items-stretch">
           {/* Stage 1 */}
-          <div className="p-4 rounded-xl bg-slate-950/80 border border-cyan-900/50 space-y-2 text-slate-200">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-bold text-cyan-300">STAGE 1</span>
-              <span className="text-[10px] font-mono text-slate-400">Research Portal</span>
+          <div className="h-full flex flex-col p-4 rounded-xl bg-slate-950/80 border border-cyan-900/50 space-y-2 text-slate-200">
+            <div className="flex items-center justify-between gap-2">
+              <span className="font-mono text-xs font-bold text-cyan-300 tabular-nums">STAGE 1</span>
+              <span className="text-xs font-mono text-slate-400">Research Portal</span>
             </div>
-            <strong className="text-white block text-xs">
+            <strong className="text-white block text-sm">
               Researcher Package Request
             </strong>
-            <p className="text-[11px] text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               Researcher submits package name, exact version tag, SHA-256 hash, and clinical analytical justification via the Wavebound portal.
             </p>
           </div>
 
           {/* Stage 2 */}
-          <div className="p-4 rounded-xl bg-slate-950/80 border border-cyan-900/50 space-y-2 text-slate-200">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-bold text-amber-300">STAGE 2</span>
-              <span className="text-[10px] font-mono text-slate-400">Quarantine DMZ</span>
+          <div className="h-full flex flex-col p-4 rounded-xl bg-slate-950/80 border border-cyan-900/50 space-y-2 text-slate-200">
+            <div className="flex items-center justify-between gap-2">
+              <span className="font-mono text-xs font-bold text-amber-300 tabular-nums">STAGE 2</span>
+              <span className="text-xs font-mono text-slate-400">Quarantine DMZ</span>
             </div>
-            <strong className="text-white block text-xs">
+            <strong className="text-white block text-sm">
               Automated Vulnerability Scan
             </strong>
-            <p className="text-[11px] text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               Diode runner fetches wheel in an isolated DMZ. Trivy, ClamAV, and Safety scan for known CVEs, malicious post-install hooks, and data-exfiltration logic.
             </p>
           </div>
 
           {/* Stage 3 */}
-          <div className="p-4 rounded-xl bg-slate-950/80 border border-cyan-900/50 space-y-2 text-slate-200">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-bold text-purple-300">STAGE 3</span>
-              <span className="text-[10px] font-mono text-slate-400">IG &amp; Security Review</span>
+          <div className="h-full flex flex-col p-4 rounded-xl bg-slate-950/80 border border-cyan-900/50 space-y-2 text-slate-200">
+            <div className="flex items-center justify-between gap-2">
+              <span className="font-mono text-xs font-bold text-purple-300 tabular-nums">STAGE 3</span>
+              <span className="text-xs font-mono text-slate-400">IG &amp; Security Review</span>
             </div>
-            <strong className="text-white block text-xs">
+            <strong className="text-white block text-sm">
               License &amp; Code Review
             </strong>
-            <p className="text-[11px] text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               Information Governance audits the open-source license (MIT, Apache, GPL) and verifies no network socket connections are initiated on module load.
             </p>
           </div>
 
           {/* Stage 4 */}
-          <div className="p-4 rounded-xl bg-slate-950/80 border border-cyan-900/50 space-y-2 text-slate-200">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-bold text-teal-300">STAGE 4</span>
-              <span className="text-[10px] font-mono text-slate-400">Air-Gapped Mirror</span>
+          <div className="h-full flex flex-col p-4 rounded-xl bg-slate-950/80 border border-cyan-900/50 space-y-2 text-slate-200">
+            <div className="flex items-center justify-between gap-2">
+              <span className="font-mono text-xs font-bold text-teal-300 tabular-nums">STAGE 4</span>
+              <span className="text-xs font-mono text-slate-400">Air-Gapped Mirror</span>
             </div>
-            <strong className="text-white block text-xs">
+            <strong className="text-white block text-sm">
               Cryptographic Ingress Sync
             </strong>
-            <p className="text-[11px] text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               Approved artifact is signed with institutional Cosign key and synchronized across the data diode into the internal CRAN/Nexus mirror storage.
             </p>
           </div>
@@ -661,14 +661,14 @@ export const AirGapArchitectureHub: React.FC = () => {
           <ShieldCheck className="w-4 h-4 text-teal-400" />
           <span>Procurement IT Validation</span>
         </div>
-        <h3 className="text-xl font-bold text-white tracking-tight">
+        <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
           Least-Privilege Multi-Tenant Workload Constraints
         </h3>
-        <p className="text-xs sm:text-sm text-slate-200 max-w-2xl">
+        <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
           Verified alignment with NHS Trust and university IT departments operating locked-down multi-tenant analytical clusters.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 items-stretch">
           {[
             {
               title: 'No Cluster-Admin RoleBindings Required',
@@ -703,17 +703,17 @@ export const AirGapArchitectureHub: React.FC = () => {
           ].map((item, idx) => (
             <div
               key={idx}
-              className="p-3.5 rounded-lg bg-slate-950/80 border border-cyan-900/50 flex items-start justify-between gap-3 text-slate-200"
+              className="h-full p-4 rounded-lg bg-slate-950/80 border border-cyan-900/50 flex items-start justify-between gap-3 text-slate-200"
             >
               <div className="space-y-1">
-                <strong className="text-white font-semibold text-xs block">
+                <strong className="text-white font-semibold text-sm block">
                   {item.title}
                 </strong>
-                <p className="text-[11px] text-slate-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                   {item.desc}
                 </p>
               </div>
-              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#07192f] text-teal-300 border border-teal-500/40 shrink-0">
+              <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-[#07192f] text-teal-300 border border-teal-500/40 shrink-0 whitespace-nowrap">
                 {item.badge}
               </span>
             </div>

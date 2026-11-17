@@ -35,9 +35,9 @@ export const WaveboundLogo: React.FC<WaveboundLogoProps> = ({
   }[size];
 
   const subtextClasses = {
-    xs: 'text-[9px]',
-    sm: 'text-[10px]',
-    md: 'text-[11px]',
+    xs: 'text-xs',
+    sm: 'text-xs',
+    md: 'text-xs',
     lg: 'text-xs',
     xl: 'text-sm',
   }[size];
@@ -133,7 +133,7 @@ export const WaveboundLogo: React.FC<WaveboundLogoProps> = ({
           <span className="font-extrabold tracking-wider text-xs uppercase bg-gradient-to-r from-cyan-300 via-sky-300 to-teal-300 bg-clip-text text-transparent">
             Wavebound
           </span>
-          <span className="text-[10px] text-cyan-400 font-mono font-semibold">v2.4.0</span>
+          <span className="text-xs text-cyan-400 font-mono font-semibold tabular-nums">v2.4.0</span>
         </div>
       </div>
     );
@@ -158,7 +158,7 @@ export const WaveboundLogo: React.FC<WaveboundLogoProps> = ({
           </div>
         </div>
         <div className="text-center sm:text-left space-y-1.5">
-          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-cyan-950/70 border border-slate-300 dark:border-cyan-800 text-[11px] font-mono font-semibold text-slate-800 dark:text-cyan-300 uppercase tracking-wider mb-0.5">
+          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-md bg-slate-100 dark:bg-cyan-950/70 border border-slate-300 dark:border-cyan-800 text-xs font-mono font-semibold text-slate-800 dark:text-cyan-300 uppercase tracking-wider mb-0.5">
             <span className="w-1.5 h-1.5 rounded-full bg-[#005EB8] dark:bg-cyan-400 animate-pulse" />
             Project Wavebound · Ontology-led Governance
           </div>
@@ -168,7 +168,7 @@ export const WaveboundLogo: React.FC<WaveboundLogoProps> = ({
             </span>
           </h1>
           {showSubtitle && (
-            <p className="text-slate-700 dark:text-slate-200 text-xs sm:text-sm font-medium max-w-xl leading-relaxed">
+            <p className="text-slate-700 dark:text-slate-200 text-sm sm:text-base font-medium max-w-3xl leading-relaxed">
               Ontology-led information governance playbook and reference architecture. The IG OWL/RDF model connects decisions and proposed safeguards through a Dual-Wave Policy-as-Code Architecture: <strong>Inward Enclave Security</strong> (access and admission) and <strong>Outward Governance</strong> (output review and public transparency).
             </p>
           )}
@@ -188,7 +188,7 @@ export const WaveboundLogo: React.FC<WaveboundLogoProps> = ({
           >
             Wavebound
           </span>
-          <span className="text-[9px] px-1.5 py-0.5 font-mono font-bold bg-cyan-950/90 text-cyan-300 border border-cyan-700/80 rounded">
+          <span className="text-xs px-1.5 py-0.5 font-mono font-bold bg-cyan-950/90 text-cyan-300 border border-cyan-700/80 rounded">
             PaC
           </span>
         </div>
