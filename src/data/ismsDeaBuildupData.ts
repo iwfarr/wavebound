@@ -384,15 +384,31 @@ export const ISMS_DEA_BUILDUP_ARTEFACTS: IsmsBuildupArtefact[] = [
       'Establishes which infrastructure namespaces and cloud accounts fall inside the governed enforcement perimeter (Decision Gate D-001).',
     optionalRuntimeClaim: 'input.enclave.scope_boundary == "uk_sovereign_tre_prod" & climate_resilience_assessed',
     optionalRegoPreview: `package tre.isms.scope\n\nvalid_scope_boundary {\n  input.enclave.scope_boundary == "uk_sovereign_tre_prod"\n  input.enclave.climate_resilience_assessed == true\n}`,
-    templateMarkdown: `# ISMS Scope Statement (ISO/IEC 27001:2022 Clause 4.3)
+    templateMarkdown: `# ISMS Scope Statement & Organisational Context (ISO/IEC 27001:2022 Clauses 4.1–4.3 + Amd 1:2024)
 
-## 1. Organizational Context & Interested Parties (Clauses 4.1–4.2)
-- Regulators & Statutory Stakeholders: ICO, UKSA RAP, HRA/CAG, Hosting NHS Trusts, Accredited Researchers.
-- Amendment 1:2024 Climate Change Determination: Cloud hosting relies on multi-AZ UK regions with power/cooling SLAs; extreme-weather continuity tested under ICT Continuity (A.5.30).
+## Document Control
+- **Document ID**: ISMS-DOC-04-01 | **Owner**: Executive Sponsor & ISMS Lead | **Review Cadence**: Annual & upon cloud/architecture change
 
-## 2. In-Scope Systems, Locations & Functions (Clause 4.3)
-- Sovereign UK Cloud VPC, analytical compute enclaves, identity provider (SSO/FIDO2 MFA), airlock egress workflows, and engineering/IG support teams.
-- Exclusions: University and researcher corporate laptops (untrusted external endpoints restricted to zero-download pixel VDI streams).`
+## 1. Organisational Context Checklist (Clause 4.1 & Amendment 1:2024)
+- [ ] **External Issues Mapped**: UK regulatory landscape (UK GDPR / DPA 2018, DEA 2017 Part 5 Ch. 5, NHS Act s251, NHS DSPT), UKSA TRE accreditation expectations, and public cloud concentration risk.
+- [ ] **Internal Issues Mapped**: Staffing levels across engineering/IG/SDC teams, shared university/NHS identity federation, budget cycles, and release cadence.
+- [ ] **Amendment 1:2024 Climate Change Assessment**: Formally document whether climate change is a relevant issue (e.g., extreme-weather power/cooling stress on UK multi-AZ cloud datacentres, grid resilience SLAs, regional failover tested under A.5.30).
+- [ ] **Climate Resilience Decision Recorded**: Signed determination retained for Stage 1 Certification Body inspection.
+
+## 2. Interested Parties & Statutory Obligations (Clause 4.2)
+| Interested Party | Statutory / Contractual Expectation | Boundary Controls Mapped |
+|---|---|---|
+| Patients & Public | Caldicott Principle 8 transparency, zero re-identification, NDOO honoured | Data Use Register, SDC Airlock |
+| Hosting NHS Trusts / Custodians | DSPT compliance, s251 / CLDC respect, auditability | Split-file ingress, PROV-O audit trail |
+| UKSA RAP / ICO / HRA | DEA s70–71 evidence, UK GDPR Art 28/32, REC conditions | SoA, SAQ V3.1, DPIA |
+| Accredited Researchers | Reliable air-gapped compute without unapproved egress channels | Pixel VDI, internal mirrors |
+
+## 3. Formal ISMS Boundary Specification (Clause 4.3)
+- [ ] **Physical Locations Listed**: UK sovereign cloud regions/AZs, approved admin operations sites, and zero-download VDI termination zones.
+- [ ] **Logical Systems & Workloads Bounded**: VPC subnets, Kubernetes cluster(s), identity provider (SSO/FIDO2 MFA), airlock staging/release tooling, SIEM logging, and GitOps repositories.
+- [ ] **Interfaces & Dependencies Documented**: Encrypted Trust ingress feeds, honest-broker linkage APIs, and approved airlock egress channels.
+- [ ] **Exclusions Explicitly Justified**: Unmanaged university/corporate researcher laptops excluded on the strict condition they cannot cache data locally (pixel-only VDI only, no clipboard/USB/file download).
+- [ ] **Executive Approval Signed**: Date: ________ | Executive Sponsor: ________`
   },
   {
     id: 'isms-security-policy',
@@ -411,15 +427,29 @@ export const ISMS_DEA_BUILDUP_ARTEFACTS: IsmsBuildupArtefact[] = [
       'Anchors two-person separation rules preventing self-approval across access requests and airlock egress.',
     optionalRuntimeClaim: 'input.export.submitted_by != input.export.approved_by',
     optionalRegoPreview: `two_person_separation {\n  input.export.submitted_by != input.export.approved_by\n  input.export.approved_by_role == "accredited_sdc_officer"\n}`,
-    templateMarkdown: `# Information Security Policy (ISO/IEC 27001:2022 Clause 5.2)
+    templateMarkdown: `# Information Security Policy & Accountability Charter (ISO/IEC 27001:2022 Clauses 5.1–5.3)
 
-## 1. Leadership Commitment
-Signed by Top Management to protect confidentiality, integrity, and availability of sensitive public and clinical data.
+## Document Control
+- **Document ID**: ISMS-POL-05-01 | **Owner**: Executive Sponsor (Top Management) | **Review Cadence**: Annual
 
-## 2. Role Accountability & Segregation (Clause 5.3)
-- Executive Sponsor: Owns risk appetite and chairs Management Reviews.
-- ISMS Lead: Owns Risk Register, SoA, and Certification Body liaison.
-- Control Owners: Operate daily technical, HR, legal, and physical controls.`
+## 1. Planning Checklist (Clauses 5.1–5.2)
+- [ ] **Purpose & Strategy Alignment**: Policy explicitly commits Top Management to confidentiality, integrity, and availability of sensitive population and health data.
+- [ ] **Framework for Objectives**: Policy links directly to measurable Clause 6.2 Information Security Objectives.
+- [ ] **Legal & Continual Improvement Commitments**: Pledges compliance with UK GDPR, DPA 2018, Caldicott Principles, DEA 2017, and continual ISMS improvement.
+- [ ] **Internal Publication**: Policy published in staff handbook/intranet and acknowledged by all platform personnel (Annex A.6.3).
+- [ ] **External Availability**: Sanitized public summary or Data Use Charter available to hosting NHS Trusts, Ethics Committees, and auditors.
+
+## 2. Role Accountability & Segregation of Duties (Clause 5.3)
+| Role | Core Authority & Accountabilities | Segregation Invariant (Must NOT Do) | Named Assignees |
+|---|---|---|---|
+| Executive Sponsor | Risk appetite, budget, Clause 9.3 chair | Cannot suppress audit findings | ____________ |
+| ISMS Lead / SecOps | Risk Register, SoA, SIEM triage, CB liaison | Cannot sign off their own Internal Audit | ____________ |
+| Platform Engineers / SREs | IaC, patching, MFA, backups, enclave build | Cannot self-approve clinical data access or exports | ____________ |
+| SDC Airlock Officers | Independent statistical disclosure review | Cannot review/approve their own research outputs | ____________ |
+| Independent Internal Auditor | Impartial Clause 9.2 audit across Clauses 4–10 | Zero operational control ownership within scope | ____________ |
+
+## 3. Executive Sign-Off
+- [ ] **Executive Sponsor Signature**: ____________ | **Date**: ____________ | **Next Review**: ____________`
   },
   {
     id: 'isms-security-objectives',
@@ -435,17 +465,25 @@ Signed by Top Management to protect confidentiality, integrity, and availability
     platformPreparationRequirement:
       'Track concrete platform KPIs across engineering and governance: e.g., 100% critical CVE remediation within 14 days, 100% FIDO2 MFA coverage, 100% annual researcher IG training completion, and zero unreviewed airlock exports.',
     optionalOpaRuleImpact:
-      'Feeds quarterly KPI health flags (`clause62_kpis_within_target`) into cluster admission gates so SLA breaches pause high-risk workloads.',
+      'Feeds quarterly KPI health flags (\`clause62_kpis_within_target\`) into cluster admission gates so SLA breaches pause high-risk workloads.',
     optionalRuntimeClaim: 'input.governance.clause62_kpis_within_target == true',
     optionalRegoPreview: `objectives_healthy {\n  input.governance.clause62_kpis_within_target == true\n}`,
-    templateMarkdown: `# Information Security Objectives Register (ISO/IEC 27001:2022 Clause 6.2)
+    templateMarkdown: `# Information Security Objectives & Measurable KPI Plan (ISO/IEC 27001:2022 Clause 6.2)
 
-| Objective ID | KPI Metric | Target | Owner | Frequency |
-|---|---|---|---|---|
-| OBJ-01 | Critical CVE remediation SLA | <= 14 days (100%) | Platform SRE Lead | Monthly |
-| OBJ-02 | Onboarding & annual IG training completion | 100% before access | IG Officer / HR | Monthly |
-| OBJ-03 | Privileged & researcher FIDO2 MFA coverage | 100% enforced | IAM Control Owner | Quarterly |
-| OBJ-04 | Airlock output independent dual review rate | 100% of releases | Lead SDC Officer | Per Release |`
+## Planning Checklist
+- [ ] **Aligned to Security Policy**: Each objective traces directly to Clause 5.2 policy commitments and high-priority risks.
+- [ ] **Measurable & Timebound**: Numeric target, data source, calculation method, and deadline defined for every KPI.
+- [ ] **What / What Resources / Who / When / How Evaluated**: All five Clause 6.2 sub-elements recorded below.
+- [ ] **Communicated & Tracked**: Reviewed quarterly and tabled as mandatory input to Clause 9.3 Management Review.
+
+## Objective & Action Matrix
+| ID | Measurable Objective & Target | Data Source / Measurement Method | Required Resources | Owner | Target Date & Cadence |
+|---|---|---|---|---|---|
+| OBJ-01 | Critical CVE remediation <= 14 days (100% SLA); High <= 30 days | Container & OS vulnerability scanner export | Automated image rebuild pipeline | SRE Lead | Monthly review |
+| OBJ-02 | 100% staff & accredited researchers hold current IG training prior to access | LMS export reconciled with IdP active groups | HR / IG automated expiry alerts | IG Officer | Monthly check |
+| OBJ-03 | 100% phishing-resistant FIDO2/hardware MFA across admins & researchers | Identity Provider authentication telemetry | Hardware security keys / IdP policy | IAM Owner | Quarterly audit |
+| OBJ-04 | 100% of airlock releases pass quantitative SDC + dual-reviewer sign-off | Immutable airlock ticketing & provenance ledger | Independent SDC staffing rota | SDC Lead | Per release / Quarterly |
+| OBJ-05 | 100% scheduled PITR backup restore drills pass within RTO/RPO | Isolated DR sandbox restore validation report | Dedicated sandbox test account | SecOps Lead | Semi-annual |`
   },
   {
     id: 'isms-competence-evidence',
@@ -464,11 +502,23 @@ Signed by Top Management to protect confidentiality, integrity, and availability
       'Synchronizes verified competence and Safe Researcher training dates into identity claims checked at workspace launch and airlock sign-off.',
     optionalRuntimeClaim: 'input.governance.clause72_competence_verified == true',
     optionalRegoPreview: `role_competence_verified {\n  input.governance.clause72_competence_verified == true\n}`,
-    templateMarkdown: `# Evidence of Competence & Role Qualifications (ISO/IEC 27001:2022 Clause 7.2)
+    templateMarkdown: `# Role Competence Matrix & Training Evidence Plan (ISO/IEC 27001:2022 Clause 7.2)
 
-- Control Owners & SREs: Role specs + cloud security certifications + annual secure-coding refresher logs.
-- Independent Internal Auditor: ISO/IEC 27001 Internal/Lead Auditor qualification + signed independence declaration.
-- Airlock SDC Officers & Researchers: Verified ONS/DARE Safe Researcher Training + annual NHS IG completion.`
+## Planning Checklist
+- [ ] **Competence Criteria Defined**: Minimum qualifications, certifications, and security/IG training listed per role.
+- [ ] **Pre-Employment Screening Evidence Retained**: BPSS / DBS / reference checks logged prior to privileged access (A.6.1).
+- [ ] **Auditor Competence Verified**: Independent Internal Auditor's ISO/IEC 27001 Auditor certificate & CV filed.
+- [ ] **Annual Refresher Tracking Active**: Automated calendar/LMS alerts prevent silent expiry across admins and researchers.
+- [ ] **Clinical Safety Competence Verified (if Health IT / AI)**: Clinical Safety Officer (CSO) DCB0129/0160 registration logged.
+
+## Competence & Evidence Register
+| Role | Required Qualification / Training | Verification Evidence Stored | Refresh Cadence | Status / Owner |
+|---|---|---|---|---|
+| Platform SRE / Cloud Admin | Cloud security cert / IaC peer-review onboarding | CV + cert PDF in /HR-Competence/SRE/ | Annual | [ ] Pending / SRE Lead |
+| ISMS Lead | ISO/IEC 27001 Implementer or equivalent experience | Certificate + role spec in /HR-Competence/ISMS/ | Annual | [ ] Pending / HR Lead |
+| Independent Internal Auditor | ISO/IEC 27001 Internal/Lead Auditor cert + independence decl. | Auditor cert + signed COI waiver | Per Audit | [ ] Pending / ISMS Lead |
+| SDC Airlock Officers | SDAP / ONS Safe Researcher + SDC Output Checker training | Dated certificate + dual-shadow sign-off | Annual | [ ] Pending / SDC Lead |
+| Researchers (Safe People) | UKSA/ONS Accredited Researcher + NHS DSPT/IG module | Accredited token ID + LMS export | Annual | [ ] Pending / DAC Secretariat |`
   },
   {
     id: 'isms-operational-records',
@@ -487,12 +537,22 @@ Signed by Top Management to protect confidentiality, integrity, and availability
       'Automated CI tests and immutable decision logs supply continuous machine-verifiable Clause 8 records.',
     optionalRuntimeClaim: 'input.enclave.cve_and_egress_verified == true',
     optionalRegoPreview: `operational_controls_active {\n  input.enclave.cve_and_egress_verified == true\n}`,
-    templateMarkdown: `# Operational Evidence Repository Index (Clauses 8.1–8.3)
+    templateMarkdown: `# Operational Planning, Control & Evidence Repository Index (Clauses 8.1–8.3)
 
-- /01-Access-Reviews/: Quarterly privileged & researcher UAR exports with manager sign-off
-- /02-Change-Logs/: Peer-reviewed Git PR history & production deployment tickets
-- /03-Vuln-PenTest/: Monthly Trivy/scanner remediation exports + annual external pen-test report
-- /04-Backup-Continuity/: Quarterly isolated sandbox PITR restore verification logs`
+## Pre-Stage 2 Readiness Checklist (Target: 60–90 Days Operational Run History)
+- [ ] **Change Control Sample Ready (A.8.32)**: >= 10 peer-reviewed production Git PRs/tickets with pre-merge test output & rollback notes.
+- [ ] **User Access Review Completed (A.5.18)**: At least one full signed quarterly UAR across cloud admins, DBAs, and project researchers.
+- [ ] **External Penetration Test Closed (A.8.8)**: Independent CREST/CHECK enclave + VDI + airlock pen-test executed; High/Critical findings remediated and re-tested.
+- [ ] **Vulnerability Remediation Logs Retained**: Monthly Trivy/OS scanner reports proving CVE patching within SLA.
+- [ ] **Outsourced Process Control Documented (Clause 8.1)**: Cloud provider, IdP, and external contractor SLAs & assurance packs filed.
+
+## Indexed Evidence Repository Structure
+- \`/01-Clauses-4-to-7/\` — Signed Scope, Policy, Risk Methodology, Risk Register, SoA, Competence & Awareness logs
+- \`/02-Access-and-JML/\` — Onboarding vetting, NDAs, FIDO2 MFA reports, quarterly UAR sign-offs, offboarding tickets
+- \`/03-Changes-and-Config/\` — Git branch protection exports, approved PRs, CIS hardening baselines
+- \`/04-Vuln-PenTest-SIEM/\` — Automated CVE scans, annual pen-test report, re-test clearance, monthly SIEM review tickets
+- \`/05-Backup-DR-Suppliers/\` — Isolated PITR restore logs, incident tabletop after-action report, vendor SOC 2 / ISO reviews
+- \`/06-DEA-and-Airlock/\` — SAQ V3.1 evidence cross-map, DAC project logs, SDC airlock release tickets`
   },
   {
     id: 'isms-monitoring-results',
@@ -511,10 +571,22 @@ Signed by Top Management to protect confidentiality, integrity, and availability
       'Centralized WORM decision logs stream every authorization allow/deny metric into the monitored Clause 9.1 SIEM telemetry pipeline.',
     optionalRuntimeClaim: 'input.audit.worm_sink_healthy == true',
     optionalRegoPreview: `monitoring_sink_healthy {\n  input.audit.worm_sink_healthy == true\n}`,
-    templateMarkdown: `# Monitoring & Measurement Results Log (ISO/IEC 27001:2022 Clause 9.1)
+    templateMarkdown: `# Monitoring, Measurement & Evaluation Plan (ISO/IEC 27001:2022 Clause 9.1)
 
-- Metric Set: MFA enforcement rate, critical patch MTTR, SIEM alert review SLA, backup success rate.
-- Evidence: Monthly signed SecOps review ticket confirming SIEM alert queues and audit logs were inspected.`
+## Clause 9.1 Planning Checklist
+- [ ] **What & How Defined**: Every technical & governance metric specifies data source, collection frequency, and evaluation threshold.
+- [ ] **Validity Reproducible**: Dashboards & SIEM queries preserve immutable query definitions and timestamps.
+- [ ] **Human Review Evidenced**: Monthly/quarterly reviewer sign-off confirms logs were actively analysed (not merely collected).
+- [ ] **Anomaly Escalation Linked**: Breached thresholds automatically create Clause 10.2 CAPA or incident tickets.
+
+## Core Platform Measurement Schedule
+| Control Area | Metric Monitored | Frequency | Evaluated By | Evidence Stored |
+|---|---|---|---|---|
+| IAM & Perimeter | Failed FIDO2 logins, impossible travel, break-glass events | Daily alert / Monthly roll-up | SecOps Lead | SIEM triage ticket + monthly pack |
+| Patch & Container CVE | Mean time to remediate Critical (<=14d) / High (<=30d) | Weekly scan / Monthly review | SRE Lead | Registry scan export |
+| Network Zero-Egress | Dropped WAN egress packet counts & DNS block alerts | Continuous / Monthly summary | Network Owner | Calico/VPC flow summary |
+| Airlock & SDC | Approved vs. rejected candidate releases & rule triggers | Per release / Quarterly KPI | SDC Lead | Airlock review ledger |
+| Backups & Continuity | Nightly backup completion + semi-annual restore integrity | Daily alert / Semi-annual | DR Owner | Signed restore verification log |`
   },
   {
     id: 'isms-internal-audit-program',
@@ -533,11 +605,22 @@ Signed by Top Management to protect confidentiality, integrity, and availability
       'Independent auditors verify that runtime policy bundles match the signed Statement of Applicability and documented risk tolerances.',
     optionalRuntimeClaim: 'input.governance.internal_audit_current == true',
     optionalRegoPreview: `audit_baseline_valid {\n  input.governance.internal_audit_current == true\n}`,
-    templateMarkdown: `# Internal Audit Report (ISO/IEC 27001:2022 Clause 9.2)
+    templateMarkdown: `# Internal Audit Programme & Report Outline (ISO/IEC 27001:2022 Clause 9.2)
 
-- Scope: Clauses 4–10 & sampled Annex A.5–A.8 controls across the Sovereign Data Platform.
-- Auditor Independence Statement: Confirms zero direct operational authorship of audited controls.
-- Summary of Major NCs (0 remaining), Minor NCs, and Opportunities for Improvement.`
+## Pre-Stage 1 Independence & Coverage Checklist
+- [ ] **3-Year Audit Schedule Set**: Maps annual coverage of all Management Clauses (4–10) and full 93-control Annex A rotation.
+- [ ] **Auditor Independence Confirmed**: Auditor has ZERO operational authorship over controls/policies being audited (attach external consultant SOW or cross-team charter).
+- [ ] **Documented Interviews & Sampling Recorded**: Evidence artifact IDs/ticket numbers cited per sampled control (no vague "looked OK" notes).
+- [ ] **Findings Categorized**: Major Nonconformities (0 allowed pre-Stage 1), Minor Nonconformities, and Opportunities for Improvement (OFIs).
+- [ ] **CAPA Feed Complete**: Every nonconformity logged directly into Clause 10.2 CAPA Register with target closure date.
+
+## Clause-by-Clause Audit Checklist Sample
+| Clause / Control | Audit Question & Evidence Sampled | Sample Reference / Ticket ID | Verdict (Pass / Minor / Major) |
+|---|---|---|---|
+| Clauses 4.1–4.3 | Is scope consistent with live VPCs & Amd 1:2024 climate note recorded? | [Cite Doc ID] | [ ] Pass / [ ] NC |
+| Clauses 6.1–6.2 | Are Risk Register scores repeatable, SoA 93/93 complete & KPIs tracked? | [Cite Sheet Rev] | [ ] Pass / [ ] NC |
+| Clauses 7.2–8.3 | Do change tickets, UARs, pen-tests & restore tests cover >= 60–90 days? | [Cite Folder/Tickets] | [ ] Pass / [ ] NC |
+| Annex A.8 Sample | Verify non-root pods, FIDO2 MFA, Trivy gates & airlock dual sign-off in prod | [Cite Config/Logs] | [ ] Pass / [ ] NC |`
   },
   {
     id: 'isms-mgmt-review-minutes',
@@ -556,13 +639,29 @@ Signed by Top Management to protect confidentiality, integrity, and availability
       'Approves changes to quantitative risk limits or policy exceptions prior to updating production bundles.',
     optionalRuntimeClaim: 'input.governance.mgmt_review_signed_current == true',
     optionalRegoPreview: `mgmt_review_valid {\n  input.governance.mgmt_review_signed_current == true\n}`,
-    templateMarkdown: `# Management Review Minutes (ISO/IEC 27001:2022 Clause 9.3)
+    templateMarkdown: `# Management Review Agenda & Signed Minutes (ISO/IEC 27001:2022 Clause 9.3)
 
-## Required Inputs Reviewed:
-1. Actions from prior reviews & changes in internal/external issues (incl. Amendment 1:2024 climate context)
-2. Clause 6.2 KPI trends, Clause 9.2 Internal Audit results & Clause 10.2 CAPA status
-3. Supplier performance (cloud host, IdP, AI vendors) & Risk Assessment / RTP changes
-## Outputs & Decisions Signed by Executive Sponsor:`
+## Attendees & Quorum Checklist
+- **Date**: ____________ | **Chair**: Executive Sponsor (Top Management)
+- **Attendees**: ISMS Lead, DPO / Caldicott Representative, Engineering Lead, SDC Lead
+- [ ] **Slide Deck / Briefing Pack Archived**: Attached alongside signed minutes.
+
+## Mandatory Clause 9.3 Inputs Checklist
+- [ ] **(a) Prior Actions**: Status of every action from previous Management Reviews confirmed.
+- [ ] **(b) Context & Interested Parties**: Changes in DEA/NHS rules, Trust onboarding, or Amendment 1:2024 climate assumptions reviewed.
+- [ ] **(c) Feedback on Performance**:
+  - [ ] Nonconformities & CAPA trends (Clause 10.2)
+  - [ ] Clause 9.1 monitoring metrics & Clause 6.2 KPI target attainment
+  - [ ] Internal Audit (Clause 9.2) & external Stage 1/2 / UKSA assessment results
+- [ ] **(d) Interested Party Feedback**: NHS Trust / researcher / patient panel feedback & FOIA queries.
+- [ ] **(e) Risk Assessment & RTP Status**: Top residual risks, accepted risk tolerances, and overdue RTP actions.
+- [ ] **(f) Opportunities for Continual Improvement**: Automation, staffing, and tooling investments approved.
+
+## Mandatory Clause 9.3 Outputs (Decisions & Sign-Off)
+| Decision ID | Improvement Action / Resource Allocation / Scope Change Approved | Owner | Target Date |
+|---|---|---|---|
+| MR-ACT-01 | [e.g., Approve budget for Q3 external CREST re-test / automated UAR connector] | [Owner] | [Date] |
+- **Executive Sponsor Signature**: ____________ | **Date**: ____________`
   },
   {
     id: 'isms-capa-log',
@@ -581,11 +680,19 @@ Signed by Top Management to protect confidentiality, integrity, and availability
       'Root-cause fixes in software/governance workflows can translate into new CI regression tests or SHACL checks so the class of nonconformity cannot return.',
     optionalRuntimeClaim: 'input.governance.major_nonconformities_open == 0',
     optionalRegoPreview: `no_open_major_ncs {\n  input.governance.major_nonconformities_open == 0\n}`,
-    templateMarkdown: `# Nonconformity & Corrective Action Log (ISO/IEC 27001:2022 Clause 10.2)
+    templateMarkdown: `# Nonconformity & Corrective Action Plan (ISO/IEC 27001:2022 Clause 10.2)
 
-| CAPA ID | Source (Audit / Incident) | Root Cause Analysis | Corrective Action & Owner | Effectiveness Verified Date |
-|---|---|---|---|---|
-| CAPA-01 | Internal Audit 9.2 | Delayed JML revocation on contractor exit | Automated HR-to-IdP offboarding webhook (IAM Lead) | 2026-09-15 |`
+## CAPA Workflow Checklist (Per Finding)
+- [ ] **Immediate Containment Logged**: What stopped immediate impact (e.g., revoked token, quarantined container)?
+- [ ] **Root-Cause Analysis (5 Whys) Completed**: Underlying systemic cause identified—not just "human error".
+- [ ] **Systemic Corrective Action Assigned**: Change to SOP, automation, CI gate, or training with named owner & due date.
+- [ ] **Effectiveness Verification Completed**: Independent re-check after 30+ days confirms the issue did not recur.
+- [ ] **Risk Register Updated**: Verify whether the finding alters Risk Assessment likelihood/impact scores.
+
+## CAPA Register Schema
+| CAPA ID | Date | Source (Audit / Incident / UAR) | Summary & Containment | Root Cause (RCA) | Systemic Action & Owner | Due Date | Effectiveness Verified (Date & By Whom) |
+|---|---|---|---|---|---|---|---|
+| CAPA-01 | 2026-08-10 | Internal Audit 9.2 | Contractor account remained active 48h post-exit; revoked manually | Manual HR email notification delay | Automated HR-to-IdP offboarding webhook + daily reconciliation (IAM Lead) | 2026-09-01 | Verified 2026-10-05 (Internal Auditor) |`
   },
 
   // --- 2. Risk & Statement of Applicability ---
@@ -606,12 +713,22 @@ Signed by Top Management to protect confidentiality, integrity, and availability
       'Justifies exact numeric guardrails (e.g., k >= 10, dominance <= 80%, short agent token TTLs) enforced in runtime policy.',
     optionalRuntimeClaim: 'input.dataset.min_cell_count >= 10 & input.agent.token_ttl_seconds <= 7200',
     optionalRegoPreview: `risk_treatment_thresholds {\n  input.dataset.min_cell_count >= 10\n  input.dataset.max_dominance_ratio <= 0.80\n}`,
-    templateMarkdown: `# Risk Assessment & Risk Treatment Plan (ISO/IEC 27001:2022 Clauses 6.1.2–6.1.3)
+    templateMarkdown: `# Risk Methodology, Register & Treatment Plan (ISO/IEC 27001:2022 Clauses 6.1.2–6.1.3)
 
-| Risk ID | Threat Scenario | Inherent Score (L×I) | Treatment | Mapped Annex A Control | Residual Score | Owner & Due |
+## Planning Checklist
+- [ ] **Repeatability Criteria Set**: 1–5 Likelihood x 1–5 Impact scale (Confidentiality, Integrity, Availability) explicitly defined.
+- [ ] **Risk Acceptance Threshold Approved**: Top Management approves numeric ceiling (e.g., Residual Risk <= 4 accepted; >= 5 requires RTP).
+- [ ] **All Platform Data Flows Scored**: Ingress de-identification, linkage broker, compute enclave, AI/LLM endpoints, VDI, backups & airlock.
+- [ ] **Risk Owners Sign Residual Risk**: Every named Risk Owner formally signs acceptance of residual scores.
+
+## Starter Platform Risk & Treatment Register
+| Risk ID | Asset / Threat Scenario (CIA) | Inherent (L×I) | Treatment Option | Mapped Annex A Control(s) | Residual (L×I) | Risk Owner & Acceptance Status |
 |---|---|---|---|---|---|---|
-| R-01 | Outbound data exfiltration from enclave | High (16) | Mitigate | A.8.20–A.8.22 Zero-Egress VPC + VDI | Low (3) | SRE Lead (Done) |
-| R-02 | Small-cell disclosure in published table | Medium (12) | Mitigate | A.8.12 Quantitative SDC + Dual Airlock | Low (2) | SDC Lead (Done) |`
+| R-01 | Outbound exfiltration of microdata via WAN or laptop (C) | 4 × 5 = 20 (Critical) | Mitigate | A.8.20–22 Zero-Egress VPC + Pixel VDI + A.8.12 | 1 × 4 = 4 (Low) | SRE Lead / SIRO — [ ] Signed |
+| R-02 | Small-cell re-identification or differencing via exports (C) | 4 × 4 = 16 (High) | Mitigate | A.8.12 Quantitative SDC (k>=10) + Dual Airlock | 1 × 3 = 3 (Low) | SDC Lead — [ ] Signed |
+| R-03 | Compromised PyPI/CRAN package or container vulnerability (C/I) | 3 × 5 = 15 (High) | Mitigate | A.8.8, A.8.28 Quarantined Mirror + Trivy Gate | 1 × 3 = 3 (Low) | Platform SecOps — [ ] Signed |
+| R-04 | AI coding / LLM agent transmitting PID to public SaaS API (C) | 4 × 5 = 20 (Critical) | Mitigate | A.8.12, A.8.20 In-Enclave vLLM / Zero-WAN block | 1 × 3 = 3 (Low) | AI Governance Lead — [ ] Signed |
+| R-05 | Ransomware or accidental corruption of audit/data volumes (I/A) | 3 × 5 = 15 (High) | Mitigate | A.8.13, A.5.30 WORM Backups + Semi-Annual PITR | 1 × 3 = 3 (Low) | DR Owner — [ ] Signed |`
   },
   {
     id: 'isms-soa-register',
@@ -627,18 +744,31 @@ Signed by Top Management to protect confidentiality, integrity, and availability
     platformPreparationRequirement:
       'Do not delete inapplicable controls (e.g., physical datacenter wiring if cloud-hosted)—retain all 93 rows, mark "Inherited from Cloud Provider" or "Excluded" with clear rationale, and link active controls directly to platform evidence paths.',
     optionalOpaRuleImpact:
-      'Treats signed SoA approval currency (`soa_approved_current == true`) as a mandatory release-gate prerequisite.',
+      'Treats signed SoA approval currency (\`soa_approved_current == true\`) as a mandatory release-gate prerequisite.',
     optionalRuntimeClaim: 'input.governance.soa_approved_current & input.governance.soa_revision_id',
     optionalRegoPreview: `soa_governance_verified {\n  input.governance.soa_approved_current == true\n  startswith(input.governance.soa_revision_id, "SOA-2026-")\n}`,
-    templateMarkdown: `# Statement of Applicability (Clause 6.1.3(d)) — 93 Controls
+    templateMarkdown: `# Statement of Applicability Checklist (ISO/IEC 27001:2022 Clause 6.1.3(d) — All 93 Controls)
 
-| Control ID | Title (ISO/IEC 27001:2022) | Applicable | Justification & Evidence Location |
-|---|---|---|---|
-| A.5.15 | Access Control | Yes | SSO + FIDO2 MFA + RBAC; evidence in /01-Access-Reviews/ |
-| A.6.3 | Security Awareness & Training | Yes | Annual IG & Safe Researcher training; evidence in LMS export |
-| A.7.1 | Physical Security Perimeters | Inherited / Yes | Cloud DC Tier-3 SOC 2 / ISO 27001 cert + zero-download VDI |
-| A.8.12 | Data Leakage Prevention | Yes | Quantitative SDC Airlock + VDI clipboard block |
-| A.8.24 | Use of Cryptography | Yes | KMS AES-256-GCM at rest + TLS 1.3 in transit |`
+## Stage 1 Completeness Checklist
+- [ ] **All 93 Controls Retained**: A.5 Organizational (37) + A.6 People (8) + A.7 Physical (14) + A.8 Technological (34) = 93 rows present.
+- [ ] **No Silent Deletions**: Cloud-inherited physical controls explicitly marked "Applicable (Inherited from UK Sovereign Cloud Provider)" or justified exclusion.
+- [ ] **Justification Basis Recorded**: Every row states Legal/Regulatory (L), Business Requirement (B), Contractual (C), or Risk Treatment (R).
+- [ ] **Control Owners & Evidence Linked**: Each implemented row points to a live file/ticket folder path in \`/Evidence/\`.
+- [ ] **Cross-Checked Against Annex A Updates**: Covers new 2022 controls (A.5.7 Threat Intel, A.5.23 Cloud Services, A.5.30 ICT Continuity, A.8.11 Data Masking, A.8.12 DLP, A.8.23 Web Filtering, A.8.28 Secure Coding).
+
+## High-Priority Enclave Control Starter Matrix
+| ID | Annex A Control | Applicable | Basis (L/B/C/R) | Implementation Status | Platform Evidence Location |
+|---|---|---|---|---|---|
+| A.5.7 | Threat intelligence | Yes | L / R | [ ] Implemented | \`/04-Vuln-PenTest-SIEM/threat-feeds/\` |
+| A.5.15–18 | Access control & UARs | Yes | L / C / R | [ ] Implemented | \`/02-Access-and-JML/quarterly-uar/\` |
+| A.5.23 | Info security for cloud services | Yes | L / C / R | [ ] Implemented | \`/05-Backup-DR-Suppliers/cloud-sla/\` |
+| A.5.30 | ICT readiness for continuity | Yes | B / R | [ ] Implemented | \`/05-Backup-DR-Suppliers/pitr-drills/\` |
+| A.6.1–6.6 | Screening, awareness, NDAs | Yes | L / R | [ ] Implemented | \`/02-Access-and-JML/training-ndas/\` |
+| A.7.1–7.14 | Physical security & sanitization | Partial/Inherited | C / R | [ ] Implemented | Cloud SOC 2 + Pixel VDI policy |
+| A.8.8–8.9 | Vulns & config management | Yes | L / R | [ ] Implemented | \`/04-Vuln-PenTest-SIEM/trivy-cis/\` |
+| A.8.11–12 | Data masking & DLP airlock | Yes | L / R | [ ] Implemented | \`/06-DEA-and-Airlock/sdc-airlock/\` |
+| A.8.15–16 | Logging & monitoring | Yes | L / R | [ ] Implemented | \`/04-Vuln-PenTest-SIEM/monthly-review/\` |
+| A.8.20–24 | Network segregation & crypto | Yes | L / R | [ ] Implemented | Zero-egress IaC + KMS key rotation |`
   },
   {
     id: 'isms-asset-supplier-register',
@@ -656,10 +786,21 @@ Signed by Top Management to protect confidentiality, integrity, and availability
       'Drives dataset-tier matching rules preventing Tier 3 cohorts from attaching to workspaces lacking lawful basis or ZDR supplier status.',
     optionalRuntimeClaim: 'input.dataset.tier & input.dataset.zdr_baa_verified',
     optionalRegoPreview: `tier3_lawful_access {\n  input.dataset.tier == "Tier3_Identifiable"\n  input.project.s251_cag_active == true\n}`,
-    templateMarkdown: `# Information Asset & Supplier Register (Annex A.5.9 & A.5.19)
+    templateMarkdown: `# Information Asset & Supplier Assurance Register (Annex A.5.9–12, A.5.19–23)
 
-- Tier 1/2/3 Cohort Inventory: Dataset ID | Sensitivity Tier | Lawful Basis | IAO Owner | Retention Schedule
-- Cloud & Tooling Vendors: UK Sovereign Cloud Host (ISO 27001 + DSPT), Identity Provider, Private LLM (ZDR Verified)`
+## Asset & Supplier Planning Checklist
+- [ ] **All Asset Classes Inventoried**: Clinical/population datasets, KMS encryption keys, Git repos, container images, secrets vaults, VDI pools.
+- [ ] **Classification Scheme Applied (A.5.12)**: Every dataset tagged as Tier 1 (Aggregate/Synthetic), Tier 2 (Pseudonymised), or Tier 3 (Sensitive/s251).
+- [ ] **Named Information Asset Owner (IAO)**: Accountable owner assigned for retention, disposal, and access authorization per asset.
+- [ ] **Sub-Processor Due Diligence Pre-Onboarding (A.5.19–23)**: UK residency, DPA, DSPT/DTAC, SOC 2 Type II or ISO 27001 certificate verified before processing data.
+- [ ] **LLM / AI Vendor Check**: Confirm either self-hosted in-enclave inference OR sovereign private endpoint with contractual Zero Data Retention (ZDR).
+
+## Data & Supplier Inventory Templates
+| Asset / Supplier ID | Name & Type | Classification / Criticality | UK Residency & Lawful / DPA Status | Assurance Cert Expiry | Accountable Owner |
+|---|---|---|---|---|---|
+| ASSET-DS-01 | HES / EHR Pseudonymised Cohort | Tier 2 · Confidential | UK GDPR 6(1)(e)/9(2)(j) · Retained 5y | Reviewed Quarterly | IAO (Health Lead) |
+| SUP-CLD-01 | Sovereign UK Cloud Host | Critical Sub-Processor | UK South/West Regions · Art 28 DPA | ISO 27001 / SOC 2 [Date] | Procurement / ISMS Lead |
+| SUP-IDP-01 | Federated Identity Provider | High Criticality | UK/EU Adequacy · FIDO2 Auth | ISO 27001 [Date] | IAM Control Owner |`
   },
 
   // --- 3. Operational SOPs & Annex A ---
@@ -676,14 +817,26 @@ Signed by Top Management to protect confidentiality, integrity, and availability
     platformPreparationRequirement:
       'Essential for any secure data platform even without OPA: enforce single sign-on with phishing-resistant MFA, track JML revocation tickets, and retain quarterly privileged user access review sign-offs.',
     optionalOpaRuleImpact:
-      'Emits live OIDC identity claims (`ig_and_vetting_valid`, `mfa_fido2_verified`) evaluated before workspace launch.',
+      'Emits live OIDC identity claims (\`ig_and_vetting_valid\`, \`mfa_fido2_verified\`) evaluated before workspace launch.',
     optionalRuntimeClaim: 'input.researcher.ig_and_vetting_valid & input.researcher.mfa_fido2_verified',
     optionalRegoPreview: `safe_person_admitted {\n  input.researcher.ig_and_vetting_valid == true\n  input.researcher.mfa_fido2_verified == true\n}`,
-    templateMarkdown: `# SOP-01: Access Control, Vetting & JML Workflow (Annex A.5.15–18, A.6)
+    templateMarkdown: `# SOP-01: Access Control, Background Vetting & Joiner/Mover/Leaver (JML) Procedure
 
-1. Joiner: HR screening (A.6.1) + signed NDA (A.6.6) + mandatory IG training (A.6.3) prior to SSO provisioning.
-2. Mover / Quarterly Review: Control owner reviews role permissions every 90 days.
-3. Leaver: Revoke SSO sessions and study permissions within SLA upon exit notice.`
+## 1. Joiner Onboarding Pre-Access Gate Checklist (A.6.1, A.6.3, A.6.6)
+- [ ] **Identity & Right-to-Work Vetted**: BPSS/DBS screening completed and filed prior to account creation.
+- [ ] **Confidentiality Undertaking Signed**: Staff NDA or Researcher Data Access Agreement (incl. DEA s67 / DPA s171 notice) countersigned.
+- [ ] **Training Completed First**: Annual security awareness & NHS DSPT / ONS Safe Researcher training passed BEFORE SSO token issuance.
+- [ ] **Phishing-Resistant MFA Bound**: Hardware FIDO2 key or WebAuthn enrolled; legacy SMS MFA disabled.
+- [ ] **Least-Privilege Group Assignment**: Assigned strictly to approved project namespace(s) (no persistent cluster-admin).
+
+## 2. Mover & Quarterly User Access Review Checklist (A.5.18)
+- [ ] **Quarterly UAR Triggered (Every 90 Days)**: Extract full member lists for cloud admins, DBAs, SDC reviewers, and research projects.
+- [ ] **Manager / Project Lead Recertification**: Written confirmation retaining active users and flagging transfers/exits.
+- [ ] **Stale Account Pruning**: Suspend accounts inactive > 45 days; remove deprecated project entitlements immediately.
+
+## 3. Leaver Offboarding Checklist
+- [ ] **Target SLA**: Disable SSO, revoke OIDC refresh tokens, and drop VPN/VDI access within <= 4 hours (<= 1 hour for involuntary exit).
+- [ ] **Reconciliation Evidence Archived**: Retain timestamped IdP revocation ticket linked to HR exit notice.`
   },
   {
     id: 'sop-gitops-change-cve',
@@ -698,14 +851,27 @@ Signed by Top Management to protect confidentiality, integrity, and availability
     platformPreparationRequirement:
       'Certification auditors pull random production changes and inspect Jira/GitHub tickets for independent peer approval, test results, and proof that critical CVEs are patched within defined SLA windows.',
     optionalOpaRuleImpact:
-      'Uses signed CI/Trivy attestations (`cve_and_egress_verified`) in Kubernetes admission controllers.',
+      'Uses signed CI/Trivy attestations (\`cve_and_egress_verified\`) in Kubernetes admission controllers.',
     optionalRuntimeClaim: 'input.enclave.cve_and_egress_verified & input.pod.run_as_non_root',
     optionalRegoPreview: `hardened_pod_admitted {\n  input.enclave.cve_and_egress_verified == true\n  input.pod.run_as_non_root == true\n}`,
-    templateMarkdown: `# SOP-02: Secure Change & Vulnerability Management (A.8.8, A.8.9, A.8.28, A.8.32)
+    templateMarkdown: `# SOP-02: Secure Engineering, Configuration & Vulnerability Management (A.8.8, A.8.9, A.8.28, A.8.32)
 
-1. Change Control: Mandatory PR peer review + automated test pass before production merge.
-2. Vulnerability SLAs: Critical CVEs patched <= 14 days; High CVEs <= 30 days.
-3. Configuration Baselines: CIS hardened container/OS builds with non-root execution.`
+## 1. Change Management & SDLC Checklist (A.8.28, A.8.32)
+- [ ] **Branch Protection Locked**: Direct commits to \`main\` / \`prod\` disabled; minimum 1 independent peer review required.
+- [ ] **Environment Segregation**: Dev/test fixtures use strictly synthetic data—never live production patient microdata (A.8.31).
+- [ ] **CI Automated Gates**: Unit tests, SAST/secret scanning, container CVE scan, and schema checks pass prior to merge.
+- [ ] **Pre-Approved Rollback Plan**: Every production change ticket documents rollback steps and verification owner.
+
+## 2. Hardening & Mirror Hygiene Checklist (A.8.9)
+- [ ] **Container & OS Baselines**: CIS Level 1 benchmarks enforced; researcher containers run \`runAsNonRoot\`, \`readOnlyRootFilesystem: true\`, and drop all Linux capabilities.
+- [ ] **Air-Gapped Package Diode Active**: Internal PyPI/CRAN/Harbor mirrors enforce checksum & quarantine review before release.
+
+## 3. Vulnerability Management SLAs (A.8.8)
+| Severity (CVSS v3) | Remediation SLA | Escalation Path if Breached | Monthly Evidence Export |
+|---|---|---|---|
+| Critical (9.0–10.0) | <= 14 days (emergency hotfix <= 48h if exploited) | SecOps Lead -> Executive Sponsor & Risk Register | \`/04-Vuln-PenTest-SIEM/monthly-cve/\` |
+| High (7.0–8.9) | <= 30 days | Platform Engineering Manager | Monthly scan delta |
+| Medium / Low | <= 90 days / Next maintenance cycle | Tracked in backlog | Quarterly summary |`
   },
   {
     id: 'sop-incident-continuity-crypto',
@@ -723,11 +889,22 @@ Signed by Top Management to protect confidentiality, integrity, and availability
       'Rejects unencrypted persistent volumes and logs emergency break-glass invocations synchronously to SIEM.',
     optionalRuntimeClaim: 'input.storage.aes256_kms_encrypted & input.session.siem_audit_active',
     optionalRegoPreview: `storage_crypto_compliant {\n  input.storage.aes256_kms_encrypted == true\n  input.session.siem_audit_active == true\n}`,
-    templateMarkdown: `# SOP-03: Incident Response, Crypto & Continuity (A.5.24–30, A.8.13, A.8.24)
+    templateMarkdown: `# SOP-03: Incident Response, Cryptography & Continuity Playbook (A.5.24–30, A.8.13, A.8.24)
 
-1. Incident Triage: Isolate impacted workspace, escalate break-glass or breach risk to SIRO & DPO within SLA.
-2. Cryptography: AES-256 at rest (KMS), TLS 1.3 in transit, annual key rotation.
-3. Continuity: Immutable encrypted backups verified via semi-annual isolated sandbox restore drills.`
+## 1. Security Incident & Breach Triage Checklist (A.5.24–5.28)
+- [ ] **Severity Matrix Defined**: P1 (Confirmed Exfiltration / Break-Glass Abuse) triage <= 15 mins; P2 <= 2 hours.
+- [ ] **Forensic Evidence Preservation (A.5.28)**: Snapshot compromised pod/IAM logs to immutable WORM bucket prior to termination.
+- [ ] **Statutory 72-Hour Clock**: Notify DPO / SIRO / Caldicott Guardian immediately to assess ICO & DSPT Data Security & Protection Incident reporting within 72 hours.
+- [ ] **Semi-Annual Tabletop Executed**: Documented scenario (e.g., attempted airlock leak or stolen token) with lessons logged in Clause 10.2 CAPA.
+
+## 2. Cryptographic Key Governance Checklist (A.8.24)
+- [ ] **At-Rest Standard**: AES-256-GCM / KMS CMK enforced on all datasets, EBS/object buckets, backups & audit ledgers.
+- [ ] **In-Transit Standard**: TLS 1.3 / mTLS 1.3 mandatory; legacy TLS 1.0/1.1 & unencrypted HTTP disabled.
+- [ ] **Key Rotation & Destruction**: KMS keys rotated annually; cryptographic erasure procedure tested for decommissioned studies.
+
+## 3. Immutable Backups & DR Restore Drill Checklist (A.8.13, A.5.30)
+- [ ] **WORM Immutability Active**: Object lock prevents deletion even by compromised root admins.
+- [ ] **RTO / RPO Verified Live**: Semi-annual isolated sandbox PITR restore proves dataset + audit ledger recover cleanly within SLA.`
   },
   {
     id: 'sop-airlock-sdc',
@@ -742,14 +919,26 @@ Signed by Top Management to protect confidentiality, integrity, and availability
     platformPreparationRequirement:
       'Whether enforced manually or via tooling, output releases must be strictly auditable: preserve the submitted candidate, disclosure checks performed, both independent reviewer identities, and release hash.',
     optionalOpaRuleImpact:
-      'Compiles quantitative thresholds and dual-reviewer sign-off flags into fail-closed `egress_permitted` release gates.',
+      'Compiles quantitative thresholds and dual-reviewer sign-off flags into fail-closed \`egress_permitted\` release gates.',
     optionalRuntimeClaim: 'input.export.sdc_and_dual_signoff_complete & input.dataset.min_cell_count >= 10',
     optionalRegoPreview: `egress_permitted {\n  input.export.sdc_and_dual_signoff_complete == true\n  input.dataset.min_cell_count >= 10\n}`,
-    templateMarkdown: `# SOP-04: Safe Outputs Airlock & Procedural Hand-offs (Annex A.8.12)
+    templateMarkdown: `# SOP-04: Safe Outputs Airlock & Procedural Approval Hand-Offs (Annex A.8.12)
 
-1. Submission Logged: Researcher submits output + study context to quarantine airlock.
-2. SDC Evaluation: Verify k >= 10 small-cell masking, dominance <= 80%, and prior-release differencing risk.
-3. Independent Approval Hand-off & Audit Record: Two accredited officers sign release manifest stored immutably.`
+## Stage 1 — Quarantine Intake & Provenance Checklist
+- [ ] **Study & Purpose Logged**: Active project ID, approving ethics/RAP reference, and code script SHA-256 captured.
+- [ ] **Output Type Classified**: Frequency table, magnitude mean/total, survival curve, regression, or ML model artefact (Statbarn mapping).
+
+## Stage 2 — Quantitative Disclosure & Context Review Checklist
+- [ ] **No Microdata / Direct Identifiers**: Zero patient IDs, free-text notes, raw timestamps, or full postcodes present.
+- [ ] **Primary Cell Suppression (k >= 10)**: Every frequency cell & model unweighted subgroup N >= 10 (or masked).
+- [ ] **Secondary Complementary Suppression**: Margins/totals cannot be subtracted across rows/columns to recover masked cells.
+- [ ] **Dominance & Residuals Checked**: Top-1 share <= 80%, Top-2 <= 85%; regression DF >= 10; Kaplan-Meier risk set >= 10.
+- [ ] **Cross-Release Differencing Checked**: Compared against researcher's prior approved exports to block nested subset subtraction.
+
+## Stage 3 — Independent Two-Person Hand-Off & Immutable Release Record
+- [ ] **Reviewer 1 (Automated/Primary SDC Officer)**: Signed triage outcome + rationale logged (must NOT be submitter).
+- [ ] **Reviewer 2 (Independent Approving Officer)**: Independently countersigned approval in airlock ticket.
+- [ ] **Cryptographic Release Seal**: Final exported artefact SHA-256 digest & provenance bundle archived to \`/06-DEA-and-Airlock/\`.`
   },
 
   // --- 4. DEA 2017 Accreditation Dossier ---
@@ -766,36 +955,70 @@ Signed by Top Management to protect confidentiality, integrity, and availability
     platformPreparationRequirement:
       'Ensure your ISO/IEC 27001 scope explicitly matches the TRE processing boundary, document Section 67 criminal liability safeguards, and compile live operational proof showing policies are enforced—not merely written.',
     optionalOpaRuleImpact:
-      'Binds verified UKSA Processor accreditation (`dea_rap_accreditation_valid`) alongside ISO 27001 certification status into dataset mount controls.',
+      'Binds verified UKSA Processor accreditation (\`dea_rap_accreditation_valid\`) alongside ISO 27001 certification status into dataset mount controls.',
     optionalRuntimeClaim: 'input.project.dea_rap_accreditation_valid & input.enclave.isms_27001_certified',
     optionalRegoPreview: `dea_processor_mount_allowed {\n  input.enclave.isms_27001_certified == true\n  input.project.dea_rap_accreditation_valid == true\n}`,
-    templateMarkdown: `# DEA 2017 Section 71 Accredited Processor Dossier (UKSA TRE SOP V1.4)
+    templateMarkdown: `# DEA 2017 Section 71 Accredited Processor Planning Dossier (UKSA TRE SOP V1.4)
 
-- Statutory Basis: Digital Economy Act 2017 Part 5 Ch. 5 & UKSA Research Code of Practice.
-- ISO/IEC 27001 Role: Security controls benchmarked to ISO/IEC 27001; active UKAS/ANAB certificate attached alongside direct operational evidence (not treated as an automatic waiver).
-- DEA Section 67 Notice: Criminal sanctions for unlawful disclosure acknowledged across all researcher agreements.`
+## Statutory Scope & Benchmark Checklist
+- [ ] **Gateway Appropriateness Verified**: Confirm datasets fall within DEA Part 5 Ch. 5 (excluding health & adult social care data under s64 unless a separate gateway such as NHS Act s251 / UK GDPR applies).
+- [ ] **UKSA Research Code Alignment**: Processor governance mapped to UKSA Accreditation Policy V1.4 & TRE SOP V1.4.
+- [ ] **ISO/IEC 27001 Benchmark & Non-Waiver Evidence Prepared**: Attach UKAS/ANAB ISO 27001 certificate (or NHS DSPT equivalence where applicable) **AND** complete UKSA's evidence-based security assessment—recognizing certification supports applications rather than granting a blanket bypass.
+- [ ] **Scope Boundary Match**: Confirm ISO/IEC 27001 Scope Statement (Clause 4.3) explicitly covers the exact DEA ingestion, linkage, compute, and airlock infrastructure.
+
+## Legal & Operational Governance Checklist
+- [ ] **Section 67 Criminal Sanctions Notice**: Explicit criminal-liability wording for unlawful re-identification/disclosure embedded in all researcher & staff undertakings.
+- [ ] **Split-File Linkage Separation**: Clear functional & key separation between Data Providers, Trusted Third Party / Linkage Broker, and Compute Enclave.
+- [ ] **Five Safes Operational Evidence Ready**: Completed UKSA TRE SAQ V3.1 workbook linked to live screenshots, config files, UARs, pen-tests, and airlock tickets.`
   },
   {
     id: 'dea-saq-v31-evidence',
-    title: 'UKSA TRE Self-Assessment Questionnaire (SAQ V3.1) Evidence Mapping',
+    title: 'UKSA TRE Self-Assessment Questionnaire (SAQ V3.1) Five Safes Evidence Map',
     category: 'DEA 2017 Accreditation Dossier',
-    clauseRef: 'DEA 2017 s70 Code of Practice · UKSA TRE SAQ V3.1',
-    practicalFormat: 'Completed SAQ V3.1 workbook cross-referenced to Clause 8 / Annex A proof',
+    clauseRef: 'DEA 2017 s70 Code of Practice · UKSA TRE SAQ V3.1 (All 5 Safes)',
+    practicalFormat: 'Completed SAQ V3.1 workbook cross-referenced across all 5 Safes to ISO Clauses & proof',
     ownerRole: 'Information Security Manager & Platform Architect',
     reviewCadence: 'Submitted at accreditation & major platform revisions',
     purpose:
-      'Maps every UKSA Five Safes technical and governance question (Safe People vetting, Safe Projects RAP ID, Safe Settings firewall/VDI isolation, Safe Data split-file linkage, Safe Outputs airlock SDC) to verifiable platform evidence.',
+      'Maps every UKSA Five Safes technical and governance question—Safe People, Safe Projects, Safe Settings, Safe Data, and Safe Outputs—to verifiable platform evidence and ISO/IEC 27001 controls.',
     platformPreparationRequirement:
-      'UKSA assessors inspect actual configuration proof, access logs, and SDC output procedures—never rely on generic marketing assurances inside SAQ V3.1 responses.',
+      'UKSA assessors inspect actual configuration proof, access logs, linkage architecture, and SDC output procedures across all five pillars—never rely on generic assurances inside SAQ V3.1 responses.',
     optionalOpaRuleImpact:
-      'Demonstrates zero divergence between SAQ V3.1 questionnaire answers and live admission/egress policy logic.',
+      'Demonstrates zero divergence between SAQ V3.1 questionnaire answers across all Five Safes and live admission/egress policy logic.',
     optionalRuntimeClaim: 'input.governance.soa_approved_current & input.enclave.cve_and_egress_verified',
     optionalRegoPreview: `saq_technical_controls_active {\n  input.enclave.cve_and_egress_verified == true\n  input.governance.soa_approved_current == true\n}`,
-    templateMarkdown: `# UKSA TRE Accreditation SAQ V3.1 Evidence Map
+    templateMarkdown: `# UKSA TRE Accreditation SAQ V3.1 — Complete Five Safes Planning & Evidence Map
 
-- Safe People: SOP-01 vetting + annual IG training + NDA undertakings.
-- Safe Settings: Zero-egress VPC (A.8.20–22) + hardened compute + FIDO2 MFA.
-- Safe Outputs: SOP-04 Quantitative SDC checks + dual-reviewer airlock logs.`
+## 1. Safe People (Vetting, Accreditation, Training & Revocation)
+- [ ] **Accredited Researcher Check**: Verify active UKSA/ONS Accredited Researcher status & institutional employment prior to project onboarding.
+- [ ] **Background Screening & NDA (Annex A.6.1, A.6.6)**: Record BPSS/DBS screening plus signed Researcher Agreement citing DEA 2017 s67 criminal sanctions.
+- [ ] **Mandatory Annual Training (Annex A.6.3)**: Verify unexpired ONS/DARE Safe Researcher Training + annual IG compliance certificate.
+- [ ] **Joiner/Mover/Leaver Controls (Annex A.5.18)**: Document quarterly UARs and <= 4-hour offboarding token revocation SLAs.
+
+## 2. Safe Projects (Ethics, Public Benefit, DAC & Expiry Enforcement)
+- [ ] **Public Benefit & Feasibility Logged**: Formal DAC/UKSA RAP application verifying non-commercial public-benefit research purpose.
+- [ ] **Statutory Gateway Confirmed**: Document DEA Part 5 Ch. 5 RAP authorisation (and REC / CAG s251 if health-linked under parallel gateway).
+- [ ] **Scope & Expiry Enforcement**: Bind project approval expiry dates and dataset tier entitlements directly to IAM workspace group lifetime.
+- [ ] **Caldicott 8 / Public Transparency**: Publish lay project summary and Data Use Register entry within target SLA.
+
+## 3. Safe Settings (Cyber Security, Zero-Egress VPC, VDI & Monitoring)
+- [ ] **ISMS & Cyber Baseline (ISO 27001 / NCSC CAF / DSPT)**: Attach current certification scope plus latest independent CREST penetration-test remediation log.
+- [ ] **Zero-WAN Egress & Microsegmentation (Annex A.8.20–22)**: Prove outbound public internet routing, raw sockets, and unmanaged DNS are dropped at firewall/CNI layer.
+- [ ] **Pixel-Only VDI & Endpoint Containment (Annex A.7 / A.8.12)**: Confirm clipboard sharing, USB redirection, local disk mapping, and screenshots/downloads are disabled.
+- [ ] **Strong Authentication & Hardened Compute (Annex A.8.2, A.8.5, A.8.8–9)**: Enforce phishing-resistant FIDO2 MFA, non-root read-only containers, and air-gapped internal PyPI/CRAN mirrors.
+- [ ] **Immutable SIEM Audit Logging (Annex A.8.15–16)**: Centralize WORM telemetry of logins, queries, break-glass events, and monthly human triage sign-offs.
+
+## 4. Safe Data (De-Identification, Split-File Linkage, Minimisation & Quality)
+- [ ] **Direct Identifier Removal**: Expunge names, NHS/NI numbers, addresses, and full dates of birth prior to research enclave ingress.
+- [ ] **Split-File / Trusted Third Party Linkage**: Verify KMS-salted HMAC-SHA256 pseudonymisation where demographic keys remain strictly segregated from clinical/research payload.
+- [ ] **Sensitivity Tiering & Minimisation**: Mount strictly approved variables/rows only (Tier 1 Aggregate, Tier 2 Pseudonymous, Tier 3 Special Safeguards).
+- [ ] **Data Quality & Disposal Retention (ISO 5259 / A.8.10)**: Profile completeness/validity upon ingestion and enforce scheduled cryptographic erasure at project close.
+
+## 5. Safe Outputs (Statistical Disclosure Control & Dual Airlock Auditability)
+- [ ] **Quantitative SDC Enforcement**: Apply small-cell suppression (k >= 10), complementary secondary masking, and dominance caps (<= 80%).
+- [ ] **Multi-Model & Residual Checks**: Screen survival curves, regression odds/degrees of freedom, and differential privacy budgets for trained ML models.
+- [ ] **Differencing Prevention**: Cross-check candidate exports against researcher's cumulative project release history.
+- [ ] **Two-Person Independent Hand-Off**: Require dual approval by accredited SDC officers independent of the submitting researcher, preserving tamper-evident release hashes.`
   },
   {
     id: 'dea-rap-project-registry',
@@ -813,10 +1036,17 @@ Signed by Top Management to protect confidentiality, integrity, and availability
       'Feeds project validity & expiry timestamps into runtime authorization so expired studies cannot mount data.',
     optionalRuntimeClaim: 'input.project.dea_rap_accreditation_valid & input.project.ethics_expiry_ns',
     optionalRegoPreview: `safe_project_active {\n  input.project.dea_rap_accreditation_valid == true\n  input.project.ethics_expiry_ns > time.now_ns()\n}`,
-    templateMarkdown: `# DEA 2017 RAP Project & Ethics Entitlement Registry
+    templateMarkdown: `# UKSA RAP Approved Project & Researcher Entitlement Ledger
 
-- Project URI / ID: Registered in Public Data Use Register
-- UKSA RAP Approval Ref & Expiry Date: Tracked for automated offboarding
-- Authorized Dataset Tier & Lawful Basis: DEA 2017 Part 5 Ch. 5 + UK GDPR Art 6(1)(e)/9(2)(j)`
+## Governance & Offboarding Planning Checklist
+- [ ] **Public Benefit Lay Summary Approved**: Plain-English summary verified prior to publishing on the public Data Use Register (FOI s19 & Caldicott 8 ready).
+- [ ] **Lawful Gateway Documented per Project**: Explicitly separate DEA Part 5 Ch. 5 RAP approvals from health-data gateways (UK GDPR Art 6(1)(e)/9(2)(j) + NHS Act s251 CAG / REC).
+- [ ] **Named Researcher & Amendment Tracking**: Every named Accredited Researcher and project scope amendment recorded with approval dates.
+- [ ] **Automated Expiry & Close-Down Trigger**: Calendar + IAM automation suspends compute workspace and initiates data retention/erasure check on expiry date.
+
+## Master Project Registry Template
+| Project URI / ID | Lead CI & Institution | Approval Ref (RAP / REC / CAG) | Authorized Dataset Tiers | Start & Expiry Dates | Named Accredited Researchers | Public Register Status |
+|---|---|---|---|---|---|---|
+| PRJ-2026-001 | [CI / University] | RAP-2026-884 / REC-24-LO-01 | Tier 2 Pseudonymous | 2026-04-01 -> 2028-03-31 | [Name 1, Name 2] | [ ] Published |`
   }
 ];

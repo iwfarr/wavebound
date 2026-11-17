@@ -722,6 +722,18 @@ export const COMPREHENSIVE_RESOURCES: ResourceItem[] = [
 
   // --- Authoritative Resources: AI & LLMs in NHS Healthcare ---
   {
+    id: 'res-mhra-ai-commission-2026',
+    title: 'National Commission into the Regulation of AI in Healthcare: Final Report',
+    organization: 'MHRA National Commission into the Regulation of AI in Healthcare (DHSC / MHRA)',
+    category: 'AI Governance, Alignment & MCP Security',
+    url: 'https://assets.publishing.service.gov.uk/media/6aa2662962ec7fe7bedf52b9/Full_National_Commission_Report_-_Publication__1_.pdf',
+    shortDesc: 'Landmark 10 September 2026 independent report setting out 44 recommendations (all accepted by the UK Government in October 2026) across three pillars: Proportionate Lifecycle Regulation (including staged "L-plate" conditional authorisation for adaptive AI), System-Wide Responsibility (shared manufacturer-provider accountability), and Trust, Transparency & Enforcement.',
+    playbookRelevance: 'Bridges TRE model development, ISO/IEC 42001 AIMS, DCB0129/DCB0160 clinical safety, and UK MDR 2002 SaMD—guiding how analytical & LLM tools graduate from airlock release into supervised conditional deployment and continuous real-world safety/drift monitoring.',
+    isStatutory: true,
+    citation: 'National Commission into the Regulation of AI in Healthcare (Chaired by Prof. A. Denniston & Prof. H. Hughes). Recommendations for a future regulatory framework. London: MHRA / DHSC; 10 September 2026.',
+    tags: ['MHRA', 'National Commission AI Healthcare', '44 Recommendations', 'Lifecycle Regulation', 'L-Plate AI', 'DCB0129', 'SaMD', 'AI Governance']
+  },
+  {
     id: 'res-nhse-generative-ai',
     title: 'NHS England Guidance: Using Generative AI in Health and Social Care',
     organization: 'NHS England & Department of Health and Social Care (DHSC)',

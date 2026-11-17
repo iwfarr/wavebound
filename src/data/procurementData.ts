@@ -390,6 +390,18 @@ export const PROCUREMENT_CONTROLS: ProcurementControl[] = [
     status: 'COMPLIANT',
     criticality: 'MANDATORY',
     caldicottPrinciple: 'Principle 5 (Everyone must understand responsibilities)'
+  },
+  {
+    id: 'MHRA-AIC-01',
+    framework: 'DCB0129 / ISO 42001',
+    section: 'MHRA National Commission (Sept 2026) · 3 Pillars',
+    title: 'Proportionate Lifecycle & Staged "L-Plate" Conditional AI Monitoring',
+    requirement: 'Health AI systems operating under staged conditional ("L-plate") authorisation require continuous post-market performance, drift telemetry, and shared system-wide accountability across Trust CSOs and developers.',
+    waveboundEvidence: '44 Commission recommendations mapped to Wavebound in-enclave drift telemetry, immutable W3C PROV-O safety logs, and CSO kill-switch / DCB0160 rollback controls.',
+    technicalAsset: 'src/components/LLMSecurityEnclave.tsx & src/components/InHouseClinicalSafety.tsx',
+    status: 'COMPLIANT',
+    criticality: 'MANDATORY',
+    caldicottPrinciple: 'Principle 6 (Comply with law) & Principle 8 (Inform patients / no surprises)'
   }
 ];
 
@@ -547,6 +559,22 @@ export const INITIAL_INHOUSE_HAZARDS: ClinicalHazard[] = [
     residualRisk: 'Low',
     csoStatus: 'APPROVED',
     dcb0160DeploymentNote: 'Clinical end-users must be trained that missing lab values are displayed as "Not Tested" rather than "Negative".'
+  },
+  {
+    id: 'HAZ-IH-06',
+    category: 'Adaptive AI Drift & Conditional "L-Plate" Release',
+    hazardDescription: 'Silent model calibration degradation or subgroup sensitivity drift during supervised "L-plate" conditional deployment under the 2026 MHRA AI Commission framework.',
+    potentialCause: 'Local clinical coding practices or patient acuity shifts post-deployment without triggering automated post-market clinical follow-up (PMCF) thresholds.',
+    clinicalHarm: 'Gradual rise in missed deteriorations or inappropriate triage prioritisation across downstream Trust clinical pathways.',
+    initialSeverity: 'Major',
+    initialLikelihood: 'Medium',
+    initialRisk: 'High',
+    clinicalMitigation: 'Continuous post-deployment calibration & drift telemetry integrated with Trust Datix/PMCF feeds; automated model quarantine and deterministic rollback triggered if subgroup sensitivity breaches DCB0160 tolerance.',
+    residualSeverity: 'Considerable',
+    residualLikelihood: 'Very Low',
+    residualRisk: 'Low',
+    csoStatus: 'APPROVED',
+    dcb0160DeploymentNote: 'Designated Trust CSO must define quarterly "L-plate" conditional authorisation review gates and maintain immediate clinical kill-switch authority.'
   }
 ];
 

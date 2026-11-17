@@ -236,7 +236,16 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
       '',
       '## 4. DEA 2017 vs. Formal ISO 27001 Certification Note',
       '- DEA 2017 Part 5 Ch. 5 delegates accreditation rules to the UKSA Research Code of Practice and Accreditation Criteria.',
-      '- UKSA benchmarks processor security against ISO/IEC 27001 controls; holding active certification stands an organization in strong stead, yet is NEVER a blanket waiver—applicants must still complete UKSA evidence-based security assessments (e.g. TRE SAQ V3.1).'
+      '- UKSA benchmarks processor security against ISO/IEC 27001 controls; holding active certification stands an organization in strong stead, yet is NEVER a blanket waiver—applicants must still complete UKSA evidence-based security assessments (e.g. TRE SAQ V3.1).',
+      '',
+      '## 5. Is Wavebound Consistent with DEA 2017?',
+      '- Yes, for DEA Research Code & Accreditation Criteria: Wavebound maps directly to the Five Safes, UKSA SAQ V3.1 controls, W3C PROV-O audit trails, and Research Accreditation Panel (RAP) human governance.',
+      '- Statutory Boundary (DEA s64): Health and adult social care data are excluded from DEA Part 5 Ch. 5 research powers and instead require UK GDPR Art 6/9, Common Law Duty of Confidentiality, NHS Act 2006 s251/CAG, and NHS DSPT.',
+      '- PaC automates gate verification and immutable audit trails but never replaces human RAP accreditation sign-off.',
+      '',
+      '## 6. Where Cyber Security Fits',
+      '- Technical Cyber Security (NCSC Cyber Assessment Framework, Cyber Essentials Plus, NHS DSPT, ISO/IEC 27001:2022 Annex A.8) forms the operational Safe Settings spine inside the ISMS—covering zero-egress VPC/eBPF, pixel-only VDI, FIDO2 MFA, KMS AES-256, container CVE hardening, and SIEM telemetry.',
+      '- It operates alongside—not instead of—Information Governance (legal gateways, Caldicott, ethics) and Statistical Disclosure Control (k >= 10 Safe Outputs airlock).'
     ];
 
     const blob = new Blob([lines.join('\n')], { type: 'text/markdown;charset=utf-8' });
@@ -251,7 +260,7 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
   const subTabs: { id: BuildupSubTab; label: string; icon: React.ReactNode }[] = [
     { id: 'roles', label: '1. Core Roles & Independence', icon: <Users className="w-3.5 h-3.5" /> },
     { id: 'roadmap', label: '2. 6-Phase Roadmap (24 Wks)', icon: <Map className="w-3.5 h-3.5" /> },
-    { id: 'artifacts', label: '3. 11 Mandatory Artifacts & SOPs', icon: <FileText className="w-3.5 h-3.5" /> },
+    { id: 'artifacts', label: `3. ${totalCount} Mandatory Artifacts & SOPs`, icon: <FileText className="w-3.5 h-3.5" /> },
     { id: 'cadence', label: '4. 3-Year Operating Cadence', icon: <Calendar className="w-3.5 h-3.5" /> },
     { id: 'opa_mapper', label: '5. Optional Docs-to-OPA Mapper', icon: <Workflow className="w-3.5 h-3.5" /> }
   ];
@@ -351,6 +360,36 @@ export const IsmsDeaBuildupSection: React.FC<IsmsDeaBuildupSectionProps> = ({
               <strong>Research Accreditation Panel (RAP)</strong>. UKSA models its processor security assessment directly on{' '}
               <strong>ISO/IEC 27001 controls</strong>—for Trusted Research Environments (under UKSA TRE SOP V1.4), active UKAS/ANAB ISO 27001 certification is the standard baseline and stands applicants in strong stead. However, UKSA explicitly warns that{' '}
               <strong>ISO 27001 is NOT a blanket waiver or automatic bypass</strong>: applicants must still complete UKSA&apos;s evidence-based security assessment (SAQ V3.1) and prove live operational controls tailored to the TRE scope.
+            </p>
+          </div>
+        </div>
+
+        {/* DEA 2017 Consistency & Where Cyber Security Fits Overview */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/75 border border-slate-200 dark:border-cyan-900/50 space-y-2">
+            <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[#005EB8] dark:text-cyan-300">
+              <Scale className="w-4 h-4 shrink-0" />
+              <span>DEA 2017 Consistency · Statutory Scope &amp; Alignment</span>
+            </div>
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+              Is this wavebound approach consistent with DEA 2017?
+            </h3>
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              <strong>Yes—for Research Code mechanics, with an explicit statutory boundary for health data.</strong> Wavebound operationalises DEA Part 5 Ch. 5 (s64–73) and the UKSA TRE SAQ V3.1 Five Safes via pre-execution SHACL/OPA gates and immutable W3C PROV-O evidence, while keeping human{' '}
+              <strong>Research Accreditation Panel (RAP)</strong> decisions supreme. Crucially, <strong>DEA s64 excludes health and adult social care data</strong>, which remain governed by UK GDPR Art 6/9, Common Law Duty of Confidentiality, and NHS Act 2006 s251/CAG.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-950/75 border border-slate-200 dark:border-cyan-900/50 space-y-2">
+            <div className="flex items-center gap-2 text-xs font-mono font-semibold text-[#00A389] dark:text-emerald-300">
+              <ShieldCheck className="w-4 h-4 shrink-0" />
+              <span>Architecture Placement · NCSC CAF · DSPT · Annex A.8</span>
+            </div>
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+              Where does Cyber Security fit alongside IG &amp; Statistical Disclosure?
+            </h3>
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              <strong>Cyber Security forms the technical &ldquo;Safe Settings&rdquo; spine of the ISMS</strong>—distinct from Information Governance (legal basis, Caldicott, s251) and Statistical Disclosure Control (<strong>Safe Outputs</strong> k&ge;10 airlock). It maps <strong>NCSC Cyber Assessment Framework (CAF)</strong>, <strong>Cyber Essentials Plus</strong>, <strong>NHS DSPT</strong>, and <strong>ISO/IEC 27001:2022 Annex A.8</strong> onto zero-egress VPC/eBPF boundaries, pixel-only VDI, FIDO2 MFA, KMS AES-256 encryption, read-only rootless pods, and centralised SIEM alerting.
             </p>
           </div>
         </div>

@@ -2,6 +2,7 @@ export interface GlossaryTerm {
   id: string;
   term: string;
   acronym?: string;
+  aliases?: string[];
   category:
     | 'Governance & Frameworks'
     | 'Semantic Web & Ontologies'
@@ -823,7 +824,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     "acronym": "ISMS",
     "category": "Standards & Clinical Safety",
     "shortDefinition": "Risk-based management system defined by ISO/IEC 27001 Clauses 4–10 governing organizational policies, risk treatment, Statement of Applicability, internal audit, and continual improvement.",
-    "fullDefinition": "An Information Security Management System (ISMS) is the formal management framework established under Clauses 4 to 10 of ISO/IEC 27001:2022. Rather than treating cybersecurity as isolated technical fixes, an ISMS mandates leadership accountability (Clause 5), structured risk assessment and risk treatment plans plus a Statement of Applicability (Clause 6), operational competency and documented controls (Clauses 7–8), continuous monitoring and internal audit (Clause 9), and corrective improvement (Clause 10). Within UK Trusted Research Environments, independent ISO/IEC 27001 ISMS certification is a mandatory prerequisite for UKSA Digital Economy Act 2017 Section 71 Accredited Processing Environments.",
+    "fullDefinition": "An Information Security Management System (ISMS) is the formal management framework established under Clauses 4 to 10 of ISO/IEC 27001:2022. Rather than treating cybersecurity as isolated technical fixes, an ISMS mandates leadership accountability (Clause 5), structured risk assessment and risk treatment plans plus a Statement of Applicability (Clause 6), operational competency and documented controls (Clauses 7–8), continuous monitoring and internal audit (Clause 9), and corrective improvement (Clause 10). Under the Digital Economy Act 2017 Section 71 and UKSA TRE SOP V1.4, UKSA benchmarks processor security directly against ISO/IEC 27001 controls—holding active UKAS/ANAB certification stands applicants in strong stead, though UKSA still conducts its own evidence-based security assessment (SAQ V3.1) rather than granting a blanket waiver.",
     "playbookContext": "Wavebound operationalizes ISMS Clauses 6, 8, and 9 using version-controlled W3C SHACL shapes, PySHACL CI checks, OPA Rego enforcement, and append-only W3C PROV-O audit trails.",
     "playbookSection": "Section 0 & Section 1.2 (ISMS & Five Safes Governance)",
     "targetSectionId": "sec-phase-1-2",
@@ -1154,6 +1155,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     "id": "owl2",
     "term": "OWL 2 (Web Ontology Language)",
     "acronym": "OWL 2",
+    "aliases": ["OWL", "Web Ontology Language"],
     "category": "Semantic Web & Ontologies",
     "shortDefinition": "W3C standard ontology language with formal description logics for defining classes, properties, and relationships.",
     "fullDefinition": "OWL 2 provides semantic transparency and rich domain modeling, allowing clinical governance teams, data stewards, and auditors to inspect access hierarchies and data relationships in machine-readable format.",

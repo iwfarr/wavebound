@@ -306,12 +306,6 @@ export const Header: React.FC<HeaderProps> = ({
       icon: <HeartHandshake className="w-4 h-4 text-emerald-300" />
     },
     {
-      id: 'govern-assure',
-      label: 'Evidence Packs & Caldicott 8 Register',
-      desc: 'Standardised compliance evidence & public transparency log in Govern & Assure',
-      icon: <Scale className="w-4 h-4 text-amber-400" />
-    },
-    {
       id: 'glossary',
       label: 'Governance & Architecture Glossary',
       desc: 'Alphabetical A–Z dictionary and visual term-relationship map',
@@ -622,7 +616,7 @@ export const Header: React.FC<HeaderProps> = ({
                 onMouseLeave={handleMouseLeave}
               >
                 <div className="px-2.5 py-1 text-[11px] font-semibold text-cyan-300 border-b border-[#1b3f68]">
-                  Pillar 2 · Foundations, Evidence Pack, Glossary &amp; Resources
+                  Pillar 2 · Foundations, Glossary &amp; Further Resources
                 </div>
                 {evidenceResourcesGroup.map((subItem) => {
                   const isSubActive = activeTab === subItem.id;

@@ -242,6 +242,7 @@ def test_noncompliant_session_rejected():
       '   - Oversight & Patient Contributors need clear journey maps showing why approvals, de-identification, Statbarn output checks, and FOI transparency happen at each milestone.',
       '   - Engineers & Auditors need dependency graphs tracing each legal mandate down to the exact SHACL shape, OPA Rego rule, and provenance log.',
       '• Org-Agnostic Alignment: Whether an environment runs an internal data access board, multi-site federation via DataSHIELD, or RO-Crate workflow packaging, each step anchors back to accountable human roles.',
+      '• Adaptive Clinical AI & Lifecycle Regulation (MHRA National Commission Sept 2026): Following the UK National Commission into the Regulation of AI in Healthcare (accepted Oct 2026, 44 recommendations across Proportionate Lifecycle Regulation, System-Wide Responsibility, and Trust/Transparency), AI/SaMD tools graduating through TRE airlocks align staged conditional "L-plate" deployment under clinical supervision with continuous post-deployment safety & drift monitoring alongside DCB0129, DCB0160, and ISO/IEC 42001.',
       '• Open Interoperability Guidance (DSA — CSVW & OpenAPI 3): As recommended UK public-sector interoperability guidance (non-mandatory for health IG law), tabular dataset metadata pairs cleanly with W3C CSV on the Web (CSVW) alongside DCAT/SHACL schemas, while OpenAPI 3 provides standard machine-readable HTTP contracts for OPA Policy Decision Points (PDPs), data catalogue lookups, and airlock submission APIs.'
     ],
     keyTakeaways: [
@@ -466,10 +467,13 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
     // Terms ordered by length descending so longer phrases match first
     const sortedTerms = [...GLOSSARY_TERMS].sort((a, b) => b.term.length - a.term.length);
 
-    // Create regex matching whole terms or known acronyms
+    // Create regex matching whole terms, known acronyms, or registered aliases (e.g. OWL -> owl2)
     const termNames = sortedTerms.map((t) => t.term.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
     const acronyms = sortedTerms.filter((t) => t.acronym).map((t) => t.acronym!.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
-    const combinedTokens = Array.from(new Set([...termNames, ...acronyms]));
+    const aliases = sortedTerms.flatMap((t) => t.aliases || []).map((al) => al.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
+    const combinedTokens = Array.from(new Set([...termNames, ...acronyms, ...aliases])).sort(
+      (a, b) => b.length - a.length
+    );
 
     const regex = new RegExp(`\\b(${combinedTokens.join('|')})\\b`, 'i');
     const pieces = rawText.split(regex);
@@ -478,7 +482,10 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
 
     return pieces.map((piece, idx) => {
       const matchedTerm = sortedTerms.find(
-        (t) => t.term.toLowerCase() === piece.toLowerCase() || (t.acronym && t.acronym.toLowerCase() === piece.toLowerCase())
+        (t) =>
+          t.term.toLowerCase() === piece.toLowerCase() ||
+          (t.acronym && t.acronym.toLowerCase() === piece.toLowerCase()) ||
+          (t.aliases && t.aliases.some((al) => al.toLowerCase() === piece.toLowerCase()))
       );
 
       if (matchedTerm) {
@@ -727,7 +734,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                       <span>Clinical Safety Officers (CSO) &amp; AI Governance Leads</span>
                     </span>
                     <p className="text-slate-400 leading-normal">
-                      Review <strong>Section 3.2</strong> (AI Workload Bounds &amp; ISO 42001 AIMS), <strong>Section 4.1</strong> (DCB0129 Hazard Log rules), and <strong>Section 4.2</strong> (UK MDR 2002 SaMD airlock clearance) for integrating information risk management with algorithmic model training and egress.
+                      Review <strong>Section 3.2</strong> (AI Workload Bounds, ISO 42001 AIMS &amp; 2026 MHRA National Commission Lifecycle Pillars), <strong>Section 4.1</strong> (DCB0129 Hazard Log rules), and <strong>Section 4.2</strong> (UK MDR 2002 SaMD &amp; staged &ldquo;L-plate&rdquo; airlock clearance) for integrating information risk management with algorithmic model training and egress.
                     </p>
                   </div>
                 </div>
@@ -942,7 +949,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                   <Sparkles className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
                   <div className="text-xs text-slate-300 leading-relaxed">
                     <strong className="text-cyan-300 font-mono uppercase text-[10px] block tracking-wider">Executive Summary:</strong>
-                    {section.executiveSummary}
+                    {renderInteractiveText(section.executiveSummary)}
                   </div>
                 </div>
               )}
@@ -1041,7 +1048,7 @@ export const PlaybookReader: React.FC<PlaybookReaderProps> = ({
                   {section.keyTakeaways.map((takeaway, tIdx) => (
                     <li key={tIdx} className="bg-slate-900/70 p-3 rounded-lg border border-slate-800 flex items-start gap-2">
                       <span className="text-cyan-400 font-bold shrink-0">·</span>
-                      <span>{takeaway}</span>
+                      <span>{renderInteractiveText(takeaway)}</span>
                     </li>
                   ))}
                 </ul>

@@ -272,6 +272,22 @@ ${violations.map((v) => `# - ${v}`).join('\n')}
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </div>
+
+              <div className="p-3 rounded-xl bg-slate-900/90 border border-amber-700/50 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px]">
+                <div className="text-slate-300 leading-relaxed">
+                  <strong className="text-amber-300">MHRA National Commission into the Regulation of AI in Healthcare (Final Report, Sept 2026) · 3 Pillars &amp; 44 Recommendations:</strong>{' '}
+                  Accepted in full by UK Government (Oct 2026). Introduces proportionate lifecycle rules including staged <strong>&ldquo;L-plate&rdquo; conditional authorisation</strong>—allowing supervised AI deployment inside sovereign TRE/clinical enclaves with continuous drift/safety telemetry—paired with <strong>System-Wide Responsibility</strong> across developers, Trusts, CSOs, and regulators.
+                </div>
+                <a
+                  href="https://assets.publishing.service.gov.uk/media/6aa2662962ec7fe7bedf52b9/Full_National_Commission_Report_-_Publication__1_.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-amber-300 hover:text-amber-200 font-mono inline-flex items-center gap-1 shrink-0 hover:underline"
+                >
+                  <span>MHRA Commission PDF</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
             </div>
 
             {/* Architecture Flow Diagram */}
@@ -1164,6 +1180,32 @@ MODEL_NAME="Qwen/Qwen2.5-Coder-32B-Instruct"`}</code>
                   If AI generated code calculates clinical dosages, triages patients, or influences diagnostic outcomes, it is a Medical Device requiring Clinical Safety Officer (CSO) sign-off.
                 </p>
               </div>
+            </div>
+
+            {/* MHRA National Commission Sept 2026 Final Report Companion Card */}
+            <div className="p-4 rounded-xl bg-slate-950/80 border border-amber-700/50 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+              <div className="space-y-1.5">
+                <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-amber-300">
+                  <BookOpen className="w-4 h-4 shrink-0" />
+                  <span className="font-bold">MHRA National Commission into the Regulation of AI in Healthcare</span>
+                  <span aria-hidden="true">·</span>
+                  <span>Final Report (10 Sept 2026)</span>
+                  <span aria-hidden="true">·</span>
+                  <span>44 Recommendations Accepted Oct 2026</span>
+                </div>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Sets a 3-pillar framework—<strong>Proportionate Lifecycle Regulation</strong> (including staged <strong>&ldquo;L-plate&rdquo; conditional authorisation</strong> with live post-deployment drift/safety monitoring), <strong>System-Wide Responsibility</strong> across vendors, NHS Trusts, and Clinical Safety Officers, and <strong>Trust, Transparency &amp; Enforcement</strong>—directly shaping how sovereign AI enclaves govern clinical AI models.
+                </p>
+              </div>
+              <a
+                href="https://assets.publishing.service.gov.uk/media/6aa2662962ec7fe7bedf52b9/Full_National_Commission_Report_-_Publication__1_.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3.5 py-2 rounded-lg bg-amber-950/60 hover:bg-amber-900/60 border border-amber-700/60 text-amber-200 text-xs font-mono font-semibold inline-flex items-center gap-1.5 shrink-0 transition-colors"
+              >
+                <span>Open Full Commission Report (PDF)</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
 

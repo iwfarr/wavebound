@@ -976,11 +976,14 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
 
     // Sort terms by length descending so longer compound terms match first
     const sortedTerms = [...GLOSSARY_TERMS].sort((a, b) => b.term.length - a.term.length);
-    const termNames = sortedTerms.map((t) => t.term.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
-    const acronyms = sortedTerms
-      .filter((t) => t.acronym)
-      .map((t) => t.acronym!.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
-    const combinedTokens = Array.from(new Set([...termNames, ...acronyms]));
+    const rawTokens = sortedTerms.flatMap((t) => [
+      t.term,
+      ...(t.acronym ? [t.acronym] : []),
+      ...(t.aliases ?? [])
+    ]);
+    const combinedTokens = Array.from(new Set(rawTokens))
+      .sort((a, b) => b.length - a.length)
+      .map((tok) => tok.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
 
     const regex = new RegExp(`\\b(${combinedTokens.join('|')})\\b`, 'i');
     const pieces = rawText.split(regex);
@@ -988,10 +991,12 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
     if (pieces.length === 1) return rawText;
 
     return pieces.map((piece, idx) => {
+      const lowerPiece = piece.toLowerCase();
       const matchedTerm = sortedTerms.find(
         (t) =>
-          t.term.toLowerCase() === piece.toLowerCase() ||
-          (t.acronym && t.acronym.toLowerCase() === piece.toLowerCase())
+          t.term.toLowerCase() === lowerPiece ||
+          (t.acronym && t.acronym.toLowerCase() === lowerPiece) ||
+          (t.aliases && t.aliases.some((alias) => alias.toLowerCase() === lowerPiece))
       );
 
       if (matchedTerm) {
@@ -1450,6 +1455,41 @@ export const IGQuickGuide: React.FC<IGQuickGuideProps> = ({
                     <li><strong className="text-amber-300">Automated Token Revocation:</strong> Agent access tokens must be revocable near-instantaneously without long-lived credentials.</li>
                   </ul>
                 </div>
+              </div>
+            </div>
+
+            {/* DEA 2017 Statutory Fit & Cyber Security Boundaries */}
+            <div className="pt-2 border-t border-cyan-900/50 grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div className="p-5 rounded-xl bg-slate-950/80 border border-cyan-800/60 space-y-2.5">
+                <div className="flex items-center gap-2 text-xs font-bold text-cyan-300 uppercase tracking-wider font-mono">
+                  <Scale className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>DEA 2017 Statutory Fit</span>
+                </div>
+                <h4 className="text-sm font-bold text-white">
+                  Is Wavebound Consistent with the Digital Economy Act 2017?
+                </h4>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  {renderGlossaryBadges(
+                    'Yes—for DEA Part 5 Ch. 5 research mechanics and UKSA SAQ V3.1 Five Safes assurance. PaC gates verify Accredited Researcher, Approved Project, and Safe Settings predicates prior to execution while generating W3C PROV-O evidence for RAP audit, without replacing human accreditation panels. Crucially, DEA s64 excludes health and adult social care data; NHS SDEs therefore rely on UK GDPR Art 6/9, Common Law Duty of Confidentiality, and NHS Act s251/CAG.',
+                    'foundations-dea'
+                  )}
+                </p>
+              </div>
+
+              <div className="p-5 rounded-xl bg-slate-950/80 border border-emerald-700/60 space-y-2.5">
+                <div className="flex items-center gap-2 text-xs font-bold text-emerald-300 uppercase tracking-wider font-mono">
+                  <Lock className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Cyber Security Fit · Safe Settings Spine</span>
+                </div>
+                <h4 className="text-sm font-bold text-white">
+                  Where Does Cyber Security Fit Between IG and Disclosure Control?
+                </h4>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  {renderGlossaryBadges(
+                    'Cyber Security anchors Safe Settings inside the ISO/IEC 27001 ISMS—operationalising NCSC Cyber Assessment Framework (CAF), Cyber Essentials Plus, and NHS DSPT through zero-egress VPC/eBPF isolation, pixel-only VDI, FIDO2 MFA, KMS AES-256 encryption, read-only non-root pods, and SIEM logging. It complements legal Information Governance (Caldicott/s251) and Statistical Disclosure Control (Safe Outputs airlock).',
+                    'foundations-cyber'
+                  )}
+                </p>
               </div>
             </div>
           </div>
